@@ -1,0 +1,846 @@
+{
+  "analysis_metadata": {
+    "repository": "https://github.com/playcanvas/engine",
+    "analysis_date": "2025-11-16",
+    "total_functions_analyzed": 1097,
+    "total_files": 1097,
+    "focus_areas": ["rendering", "physics", "entity system", "graphics", "ui", "particle systems"]
+  },
+  "complexity_metrics": {
+    "line_count_weight": 1.0,
+    "if_statement_weight": 1.0,
+    "for_loop_weight": 2.0,
+    "while_loop_weight": 2.0,
+    "switch_statement_weight": 1.0,
+    "nesting_depth_weight": 0.5,
+    "final_score_formula": "line_count + (if_count + for_count*2 + while_count*2 + switch_count) * 10"
+  },
+  "top_20_functions": [
+    {
+      "rank": 1,
+      "function_name": "_updateMeshes",
+      "file_path": "src/framework/components/element/text-element.js",
+      "start_line": 835,
+      "end_line": 1380,
+      "line_count": 546,
+      "complexity_score": 1136,
+      "cyclomatic_complexity": 35,
+      "metrics": {
+        "if_statements": 35,
+        "for_loops": 10,
+        "while_loops": 2,
+        "switch_statements": 0,
+        "max_nesting_depth": 9
+      },
+      "category": "UI/Text Rendering",
+      "subsystem": "Text Element Component",
+      "description": "Complex text mesh generation with RTL support, line wrapping, font auto-fitting, CJK character handling, and markup processing",
+      "key_responsibilities": [
+        "Text symbol parsing and Unicode normalization",
+        "RTL/LTR text reordering with bidirectional support",
+        "Line wrapping and word breaking with width constraints",
+        "Font auto-fitting based on size constraints",
+        "Mesh generation with proper text anchoring",
+        "CJK character special handling",
+        "Trailing whitespace and line break management"
+      ],
+      "complexity_factors": [
+        "Multiple nested conditions for text validation",
+        "Complex character iteration with line breaking",
+        "Multiple validation passes with retry logic",
+        "RTL vs LTR conditional branches"
+      ]
+    },
+    {
+      "rank": 2,
+      "function_name": "SortWorker",
+      "file_path": "src/scene/gsplat/gsplat-sort-worker.js",
+      "start_line": 2,
+      "end_line": 310,
+      "line_count": 309,
+      "complexity_score": 959,
+      "cyclomatic_complexity": 37,
+      "metrics": {
+        "if_statements": 37,
+        "for_loops": 13,
+        "while_loops": 1,
+        "switch_statements": 0,
+        "max_nesting_depth": 7
+      },
+      "category": "Graphics/3D Rendering",
+      "subsystem": "Gaussian Splat Rendering",
+      "description": "Web Worker for depth-based sorting of 3D Gaussian Splat point cloud data with binning and binary search optimization",
+      "key_responsibilities": [
+        "Gaussian splat point cloud sorting",
+        "Camera-based distance calculation",
+        "Binary search implementation for efficient ordering",
+        "Radix sorting with 32-bin algorithm",
+        "Camera position caching optimization",
+        "Depth-based alpha blending support",
+        "2D and 3D sorting variants"
+      ],
+      "complexity_factors": [
+        "Multiple conditional checks for sorting",
+        "Nested loop structure for binning",
+        "Binary search comparison function",
+        "Camera movement optimization with epsilon checks"
+      ]
+    },
+    {
+      "rank": 3,
+      "function_name": "BasisWorker",
+      "file_path": "src/framework/handlers/basis-worker.js",
+      "start_line": 2,
+      "end_line": 438,
+      "line_count": 437,
+      "complexity_score": 847,
+      "cyclomatic_complexity": 22,
+      "metrics": {
+        "if_statements": 22,
+        "for_loops": 8,
+        "while_loops": 0,
+        "switch_statements": 3,
+        "max_nesting_depth": 10
+      },
+      "category": "Graphics/Asset Processing",
+      "subsystem": "Texture Compression Handler",
+      "description": "Web Worker for transcoding Basis Universal compressed textures to GPU-native formats with format mapping",
+      "key_responsibilities": [
+        "Basis format texture decoding",
+        "GPU capability detection and format selection",
+        "Opaque vs alpha texture format mapping",
+        "Multiple compression format support (ETC, DXT, PVRTC, ASTC, ATC)",
+        "Pixel format transformation",
+        "Quality level management",
+        "WebGL texture data creation"
+      ],
+      "complexity_factors": [
+        "Multiple format mapping branches",
+        "Switch statement for format selection",
+        "Nested loops for texture data",
+        "Format validation and conversion"
+      ]
+    },
+    {
+      "rank": 4,
+      "function_name": "initializeComponentData",
+      "file_path": "src/framework/components/element/system.js",
+      "start_line": 88,
+      "end_line": 269,
+      "line_count": 182,
+      "complexity_score": 832,
+      "cyclomatic_complexity": 65,
+      "metrics": {
+        "if_statements": 65,
+        "for_loops": 0,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 5
+      },
+      "category": "UI Components",
+      "subsystem": "Element System",
+      "description": "UI element component initialization with extensive property validation and type conversion",
+      "key_responsibilities": [
+        "Anchor point initialization (4D vector)",
+        "Pivot point setup for rotation",
+        "Margin and offset configuration",
+        "Color, opacity, visibility properties",
+        "Material reference setup",
+        "Type validation and conversion",
+        "Default value assignment",
+        "Layer and canvas initialization"
+      ],
+      "complexity_factors": [
+        "65 conditional branches for validation",
+        "Multiple type-checking conditionals",
+        "Deep if-else chains for setup",
+        "Numeric range validation"
+      ]
+    },
+    {
+      "rank": 5,
+      "function_name": "upload",
+      "file_path": "src/platform/graphics/webgl/webgl-texture.js",
+      "start_line": 445,
+      "end_line": 794,
+      "line_count": 350,
+      "complexity_score": 820,
+      "cyclomatic_complexity": 35,
+      "metrics": {
+        "if_statements": 35,
+        "for_loops": 5,
+        "while_loops": 1,
+        "switch_statements": 0,
+        "max_nesting_depth": 9
+      },
+      "category": "Graphics/GPU Memory",
+      "subsystem": "WebGL Texture Management",
+      "description": "Texture data upload to GPU with format detection, mipmap generation, and format conversion",
+      "key_responsibilities": [
+        "Texture data GPU upload",
+        "Mipmap generation and uploading",
+        "2D, 3D, and 2D array texture support",
+        "Compressed format handling",
+        "Format conversion validation",
+        "Memory allocation with texStorage3D",
+        "Texture dimension handling",
+        "Sub-texture and partial uploads"
+      ],
+      "complexity_factors": [
+        "Multiple branches for texture type detection",
+        "Nested loops for mipmap processing",
+        "Format-specific upload paths",
+        "WebGL state management"
+      ]
+    },
+    {
+      "rank": 6,
+      "function_name": "UnifiedSortWorker",
+      "file_path": "src/scene/gsplat-unified/gsplat-unified-sort-worker.js",
+      "start_line": 1,
+      "end_line": 375,
+      "line_count": 375,
+      "complexity_score": 765,
+      "cyclomatic_complexity": 12,
+      "metrics": {
+        "if_statements": 12,
+        "for_loops": 13,
+        "while_loops": 0,
+        "switch_statements": 1,
+        "max_nesting_depth": 5
+      },
+      "category": "Graphics/3D Rendering",
+      "subsystem": "Gaussian Splat Rendering",
+      "description": "Advanced Web Worker for unified Gaussian Splat sorting with hierarchical clustering and optimization",
+      "key_responsibilities": [
+        "Unified splat data structure handling",
+        "Hierarchical splat sorting",
+        "Cumulative distance calculations",
+        "Dynamic splat clustering",
+        "Early exit optimization",
+        "Fallback sorting mechanisms",
+        "Mixed resolution data support"
+      ],
+      "complexity_factors": [
+        "Nested loop structure for chunk sorting",
+        "Conditional optimization paths",
+        "Switch for algorithm selection",
+        "Binning algorithm implementation"
+      ]
+    },
+    {
+      "rank": 7,
+      "function_name": "_updateText",
+      "file_path": "src/framework/components/element/text-element.js",
+      "start_line": 327,
+      "end_line": 720,
+      "line_count": 394,
+      "complexity_score": 724,
+      "cyclomatic_complexity": 27,
+      "metrics": {
+        "if_statements": 27,
+        "for_loops": 3,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 8
+      },
+      "category": "UI/Text Rendering",
+      "subsystem": "Text Element Component",
+      "description": "Text processing with Unicode normalization, markup parsing, RTL reordering, and symbol handling",
+      "key_responsibilities": [
+        "Unicode NFC normalization",
+        "Multi-byte character boundary parsing",
+        "Markup tag extraction and processing",
+        "RTL text reordering",
+        "Color and styling management",
+        "Symbol-to-glyph mapping",
+        "Edge case handling (null strings, special chars)"
+      ],
+      "complexity_factors": [
+        "Conditional markup processing",
+        "RTL reordering logic",
+        "Symbol mapping and tag association",
+        "Text normalization branches"
+      ]
+    },
+    {
+      "rank": 8,
+      "function_name": "texShadow",
+      "file_path": "src/platform/graphics/graphics-device.js",
+      "start_line": 484,
+      "end_line": 946,
+      "line_count": 463,
+      "complexity_score": 683,
+      "cyclomatic_complexity": 12,
+      "metrics": {
+        "if_statements": 12,
+        "for_loops": 5,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 4
+      },
+      "category": "Graphics/Lighting",
+      "subsystem": "Shadow Mapping System",
+      "description": "Shadow map rendering pipeline with light culling, frustum calculations, and multi-pass rendering",
+      "key_responsibilities": [
+        "Shadow map pipeline setup",
+        "Light culling and frustum computation",
+        "Shadow caster collection",
+        "Render target management",
+        "Depth bias and slope scale calculation",
+        "Multi-pass shadow rendering",
+        "Shadow map filtering",
+        "Resource cleanup"
+      ],
+      "complexity_factors": [
+        "Multiple rendering passes",
+        "Nested loops for light and mesh processing",
+        "Conditional render path selection",
+        "Resource allocation/deallocation"
+      ]
+    },
+    {
+      "rank": 9,
+      "function_name": "update",
+      "file_path": "src/scene/particle-system/cpu-updater.js",
+      "start_line": 164,
+      "end_line": 470,
+      "line_count": 307,
+      "complexity_score": 667,
+      "cyclomatic_complexity": 24,
+      "metrics": {
+        "if_statements": 24,
+        "for_loops": 6,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 8
+      },
+      "category": "Particle System",
+      "subsystem": "CPU Particle Updater",
+      "description": "CPU-based particle system update handling physics, animation, and vertex buffer generation",
+      "key_responsibilities": [
+        "Particle position and velocity updates",
+        "Particle spawning and respawning",
+        "Force application (gravity, velocity)",
+        "Scale, rotation, color updates over lifetime",
+        "Animation curve interpolation",
+        "Mesh deformation for mesh particles",
+        "Vertex buffer data updates",
+        "Local vs world space management"
+      ],
+      "complexity_factors": [
+        "Multiple particle state conditions",
+        "Nested loops for particle iteration",
+        "Animation curve interpolation",
+        "Physics calculations with validation"
+      ]
+    },
+    {
+      "rank": 10,
+      "function_name": "constructor",
+      "file_path": "src/platform/graphics/webgl/webgl-graphics-device.js",
+      "start_line": 125,
+      "end_line": 589,
+      "line_count": 465,
+      "complexity_score": 635,
+      "cyclomatic_complexity": 17,
+      "metrics": {
+        "if_statements": 17,
+        "for_loops": 0,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 10
+      },
+      "category": "Graphics/Device Initialization",
+      "subsystem": "WebGL Graphics Device",
+      "description": "WebGL device initialization with extensive browser compatibility workarounds and state setup",
+      "key_responsibilities": [
+        "WebGL context and canvas setup",
+        "Browser-specific bug detection and workarounds",
+        "Antialiasing configuration with version checks",
+        "Texture unit initialization",
+        "Context loss/restore handler setup",
+        "Profiler and statistics tracking",
+        "Shader uniform scope namespace creation",
+        "Platform-specific configuration (Apple, Firefox)"
+      ],
+      "complexity_factors": [
+        "Browser detection and compatibility checks",
+        "Nested version checking logic",
+        "Platform-specific workarounds",
+        "State initialization with validation"
+      ]
+    },
+    {
+      "rank": 11,
+      "function_name": "bakeInternal",
+      "file_path": "src/framework/lightmapper/lightmapper.js",
+      "start_line": 916,
+      "end_line": 1166,
+      "line_count": 251,
+      "complexity_score": 601,
+      "cyclomatic_complexity": 15,
+      "metrics": {
+        "if_statements": 15,
+        "for_loops": 10,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 8
+      },
+      "category": "Graphics/Lighting",
+      "subsystem": "Lightmap Baking Engine",
+      "description": "Core lightmap baking orchestration with material prep, lighting calculations, and multi-pass rendering",
+      "key_responsibilities": [
+        "Material preparation for baking",
+        "Scene setup and layer composition",
+        "Node bounding box computation",
+        "Lightmap texture allocation",
+        "Light collection and filtering",
+        "Shadow caster preparation",
+        "Direct and indirect lighting calculation",
+        "Progressive baking with quality control"
+      ],
+      "complexity_factors": [
+        "Multiple rendering passes",
+        "Nested loops for node/light processing",
+        "Conditional path selection",
+        "Resource allocation/cleanup"
+      ]
+    },
+    {
+      "rank": 12,
+      "function_name": "DracoWorker",
+      "file_path": "src/framework/parsers/draco-worker.js",
+      "start_line": 1,
+      "end_line": 267,
+      "line_count": 267,
+      "complexity_score": 577,
+      "cyclomatic_complexity": 6,
+      "metrics": {
+        "if_statements": 6,
+        "for_loops": 11,
+        "while_loops": 0,
+        "switch_statements": 3,
+        "max_nesting_depth": 6
+      },
+      "category": "Asset Processing",
+      "subsystem": "Draco Mesh Decompression",
+      "description": "Web Worker for decompressing Draco-compressed 3D mesh geometry with attribute extraction",
+      "key_responsibilities": [
+        "Draco format decoding",
+        "Vertex and index data extraction",
+        "Geometry attribute handling (positions, normals, UVs, colors)",
+        "Mesh metadata processing",
+        "JavaScript array conversion",
+        "Draco library management",
+        "Compression level handling"
+      ],
+      "complexity_factors": [
+        "Multiple loops for attribute extraction",
+        "Switch for attribute type handling",
+        "Conditional data type processing",
+        "Draco API complexity"
+      ]
+    },
+    {
+      "rank": 13,
+      "function_name": "create",
+      "file_path": "src/scene/batching/batch-manager.js",
+      "start_line": 631,
+      "end_line": 856,
+      "line_count": 226,
+      "complexity_score": 566,
+      "cyclomatic_complexity": 16,
+      "metrics": {
+        "if_statements": 16,
+        "for_loops": 9,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 9
+      },
+      "category": "Graphics/Optimization",
+      "subsystem": "Mesh Batching System",
+      "description": "Optimized mesh batch creation combining multiple meshes for improved rendering performance",
+      "key_responsibilities": [
+        "Mesh instance collection",
+        "Batch compatibility validation",
+        "Vertex and index buffer allocation",
+        "Vertex data combining",
+        "Vertex format and semantic management",
+        "Material consolidation",
+        "Batch object creation",
+        "GPU memory layout optimization",
+        "Dynamic and static batching support"
+      ],
+      "complexity_factors": [
+        "Multiple loops for vertex/index processing",
+        "Nested conditionals for mesh validation",
+        "Deep nesting for semantic handling",
+        "Vertex data transformation"
+      ]
+    },
+    {
+      "rank": 14,
+      "function_name": "createAnimation",
+      "file_path": "src/framework/parsers/glb-parser.js",
+      "start_line": 1288,
+      "end_line": 1520,
+      "line_count": 233,
+      "complexity_score": 563,
+      "cyclomatic_complexity": 11,
+      "metrics": {
+        "if_statements": 11,
+        "for_loops": 10,
+        "while_loops": 1,
+        "switch_statements": 0,
+        "max_nesting_depth": 7
+      },
+      "category": "Asset Processing",
+      "subsystem": "glTF Animation Parser",
+      "description": "Conversion of glTF animation data to PlayCanvas animation tracks with interpolation support",
+      "key_responsibilities": [
+        "glTF sampler processing",
+        "Animation curve creation",
+        "Interpolation mode handling (STEP, LINEAR, CUBIC)",
+        "Scene node target mapping",
+        "Animation timing extraction",
+        "Multi-sampler consolidation",
+        "Keyframe deduplication",
+        "Property path management"
+      ],
+      "complexity_factors": [
+        "Multiple loops for sampler processing",
+        "Conditional interpolation handling",
+        "Nested object tracking",
+        "Curve generation logic"
+      ]
+    },
+    {
+      "rank": 15,
+      "function_name": "_preprocess",
+      "file_path": "src/core/preprocessor.js",
+      "start_line": 227,
+      "end_line": 505,
+      "line_count": 279,
+      "complexity_score": 559,
+      "cyclomatic_complexity": 23,
+      "metrics": {
+        "if_statements": 23,
+        "for_loops": 1,
+        "while_loops": 1,
+        "switch_statements": 1,
+        "max_nesting_depth": 10
+      },
+      "category": "Shader Processing",
+      "subsystem": "Shader Preprocessor",
+      "description": "Shader source preprocessing with conditional compilation directives and dynamic define injection",
+      "key_responsibilities": [
+        "Preprocessor directive parsing (#define, #ifdef, #if, #else)",
+        "Conditional block stack management",
+        "Expression evaluation",
+        "Define injection and stripping",
+        "Shader chunk inclusion",
+        "Nested conditional handling",
+        "Error reporting with context",
+        "Dynamic define evaluation"
+      ],
+      "complexity_factors": [
+        "Deep nesting for conditional blocks",
+        "Regex-based directive matching",
+        "Stack-based state management",
+        "Multiple preprocessing operations"
+      ]
+    },
+    {
+      "rank": 16,
+      "function_name": "constructor",
+      "file_path": "src/scene/geometry/cone-base-geometry.js",
+      "start_line": 12,
+      "end_line": 227,
+      "line_count": 216,
+      "complexity_score": 526,
+      "cyclomatic_complexity": 7,
+      "metrics": {
+        "if_statements": 7,
+        "for_loops": 12,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 7
+      },
+      "category": "Geometry",
+      "subsystem": "Primitive Geometry Generator",
+      "description": "Cone geometry generation with proper vertex normals, UVs, and triangle topology",
+      "key_responsibilities": [
+        "Cone mesh creation",
+        "Vertex position generation",
+        "Vertex normal calculation",
+        "UV coordinate generation",
+        "Triangle index buffer creation",
+        "Cone base fill handling",
+        "Solid and wireframe support",
+        "GPU memory layout management"
+      ],
+      "complexity_factors": [
+        "Multiple nested loops for vertex generation",
+        "Conditional normal computation",
+        "Index building logic",
+        "Geometry data layout"
+      ]
+    },
+    {
+      "rank": 17,
+      "function_name": "rawToValue",
+      "file_path": "src/framework/script/script-attributes.js",
+      "start_line": 20,
+      "end_line": 157,
+      "line_count": 138,
+      "complexity_score": 518,
+      "cyclomatic_complexity": 27,
+      "metrics": {
+        "if_statements": 27,
+        "for_loops": 5,
+        "while_loops": 0,
+        "switch_statements": 1,
+        "max_nesting_depth": 7
+      },
+      "category": "Scripting",
+      "subsystem": "Script Attribute System",
+      "description": "Deserialization of raw attribute data to typed JavaScript values with validation",
+      "key_responsibilities": [
+        "Attribute type deserialization",
+        "Type conversion and validation",
+        "Asset reference handling",
+        "Entity reference processing",
+        "Nested object/array processing",
+        "Numeric range validation",
+        "Deprecated format support",
+        "Custom type handler support"
+      ],
+      "complexity_factors": [
+        "27 conditional branches for types",
+        "Multiple type-checking conditions",
+        "Nested loops for collections",
+        "Switch for custom types"
+      ]
+    },
+    {
+      "rank": 18,
+      "function_name": "update",
+      "file_path": "src/scene/gsplat-unified/gsplat-manager.js",
+      "start_line": 520,
+      "end_line": 715,
+      "line_count": 196,
+      "complexity_score": 506,
+      "cyclomatic_complexity": 19,
+      "metrics": {
+        "if_statements": 19,
+        "for_loops": 6,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 6
+      },
+      "category": "Graphics/3D Rendering",
+      "subsystem": "Gaussian Splat Manager",
+      "description": "Unified Gaussian Splat scene data updates with worker communication and rendering state management",
+      "key_responsibilities": [
+        "Splat center position updates",
+        "Sorting worker communication",
+        "Dynamic splat data updates",
+        "Rendering bounds computation",
+        "Camera frustum updates",
+        "Visibility and LOD management",
+        "Vertex buffer updates",
+        "Rendering state management"
+      ],
+      "complexity_factors": [
+        "Data validity checks",
+        "Nested loops for splat updates",
+        "Worker communication",
+        "Rendering state branches"
+      ]
+    },
+    {
+      "rank": 19,
+      "function_name": "draw",
+      "file_path": "src/platform/graphics/webgl/webgl-graphics-device.js",
+      "start_line": 1723,
+      "end_line": 1899,
+      "line_count": 177,
+      "complexity_score": 497,
+      "cyclomatic_complexity": 26,
+      "metrics": {
+        "if_statements": 26,
+        "for_loops": 3,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 9
+      },
+      "category": "Graphics/GPU Commands",
+      "subsystem": "WebGL Draw Command Execution",
+      "description": "Low-level WebGL draw execution with shader, buffer, and texture management",
+      "key_responsibilities": [
+        "Shader program activation",
+        "Vertex and index buffer binding",
+        "Shader uniform commitment",
+        "Shader attribute validation",
+        "Texture unit binding",
+        "Sampler-to-unit assignment",
+        "Draw call execution and validation",
+        "Error handling with fallbacks",
+        "Indexed and non-indexed drawing",
+        "Draw command batching"
+      ],
+      "complexity_factors": [
+        "26 branches for sampler handling",
+        "Nested loops for shader samplers",
+        "Complex error handling",
+        "WebGL state validation"
+      ]
+    },
+    {
+      "rank": 20,
+      "function_name": "light",
+      "file_path": "src/scene/shader-lib/wgsl/chunks/lit/frag/clusteredLight.js",
+      "start_line": 215,
+      "end_line": 500,
+      "line_count": 286,
+      "complexity_score": 496,
+      "cyclomatic_complexity": 21,
+      "metrics": {
+        "if_statements": 21,
+        "for_loops": 0,
+        "while_loops": 0,
+        "switch_statements": 0,
+        "max_nesting_depth": 7
+      },
+      "category": "Shader/Lighting",
+      "subsystem": "Clustered Lighting Shader",
+      "description": "WGSL shader implementation of clustered lighting algorithm for deferred rendering",
+      "key_responsibilities": [
+        "Clustered lighting computation",
+        "Screen-space light cluster calculation",
+        "Multi-light type handling (point, spot, directional)",
+        "Shadow map application",
+        "Light attenuation calculation",
+        "Light culling with cluster bounds",
+        "Specular and diffuse separation",
+        "Post-processing (tone mapping, color grading)"
+      ],
+      "complexity_factors": [
+        "Multiple light type branches",
+        "Complex lighting mathematics",
+        "Nested lighting iteration",
+        "Shadow map sampling"
+      ]
+    }
+  ],
+  "subsystem_breakdown": {
+    "Text Rendering": {
+      "functions_count": 2,
+      "total_lines": 940,
+      "avg_complexity": 930,
+      "functions": ["_updateMeshes", "_updateText"]
+    },
+    "Graphics/Rendering": {
+      "functions_count": 8,
+      "total_lines": 2398,
+      "avg_complexity": 615,
+      "functions": ["upload", "texShadow", "draw", "constructor (WebGL)", "bakeInternal", "light"]
+    },
+    "3D/Gaussian Splats": {
+      "functions_count": 3,
+      "total_lines": 880,
+      "avg_complexity": 743,
+      "functions": ["SortWorker", "UnifiedSortWorker", "update (gsplat-manager)"]
+    },
+    "Asset Processing": {
+      "functions_count": 3,
+      "total_lines": 937,
+      "avg_complexity": 595,
+      "functions": ["BasisWorker", "DracoWorker", "createAnimation"]
+    },
+    "UI Components": {
+      "functions_count": 1,
+      "total_lines": 182,
+      "avg_complexity": 832,
+      "functions": ["initializeComponentData"]
+    },
+    "Particle Systems": {
+      "functions_count": 1,
+      "total_lines": 307,
+      "avg_complexity": 667,
+      "functions": ["update (cpu-updater)"]
+    },
+    "Performance Optimization": {
+      "functions_count": 1,
+      "total_lines": 226,
+      "avg_complexity": 566,
+      "functions": ["create (batch-manager)"]
+    },
+    "Shader Processing": {
+      "functions_count": 1,
+      "total_lines": 279,
+      "avg_complexity": 559,
+      "functions": ["_preprocess"]
+    },
+    "Geometry": {
+      "functions_count": 1,
+      "total_lines": 216,
+      "avg_complexity": 526,
+      "functions": ["constructor (cone-base-geometry)"]
+    },
+    "Scripting": {
+      "functions_count": 1,
+      "total_lines": 138,
+      "avg_complexity": 518,
+      "functions": ["rawToValue"]
+    }
+  },
+  "refactoring_recommendations": [
+    {
+      "priority": "HIGH",
+      "area": "Text Rendering",
+      "recommendation": "Split _updateMeshes into multiple specialized functions",
+      "rationale": "546 lines with 35 if statements indicates mixed responsibilities (layout, wrapping, RTL handling)",
+      "suggested_splits": [
+        "Text layout calculation",
+        "Line breaking algorithm",
+        "RTL reordering logic",
+        "Mesh generation"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "area": "UI Element Initialization",
+      "recommendation": "Extract validation logic into separate functions",
+      "rationale": "65 conditional branches for type checking suggests multiple validation concerns",
+      "suggested_splits": [
+        "Vector property validation",
+        "Material property setup",
+        "Color property validation",
+        "Layer and canvas initialization"
+      ]
+    },
+    {
+      "priority": "MEDIUM",
+      "area": "Texture Upload",
+      "recommendation": "Create format conversion strategy classes",
+      "rationale": "35 if statements managing different texture formats could use strategy pattern",
+      "suggested_approach": "Format-specific handler classes for each compression type"
+    },
+    {
+      "priority": "MEDIUM",
+      "area": "WebGL Device Constructor",
+      "recommendation": "Extract browser compatibility checks into utility module",
+      "rationale": "Multiple nested browser detection logic reduces readability",
+      "suggested_approach": "BrowserCompatibility utility class for version checks"
+    },
+    {
+      "priority": "MEDIUM",
+      "area": "Draw Command Execution",
+      "recommendation": "Create texture/sampler binding abstraction",
+      "rationale": "26 conditional branches for sampler handling could be abstracted",
+      "suggested_approach": "SamplerManager class to handle texture unit binding"
+    }
+  ]
+}

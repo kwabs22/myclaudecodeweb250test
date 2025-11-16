@@ -1,0 +1,273 @@
+{
+  "analysis_metadata": {
+    "project": "GASShooter",
+    "repository_url": "https://github.com/tranek/GASShooter",
+    "total_functions_analyzed": 506,
+    "total_cpp_files": 90,
+    "analysis_date": "2025-11-16"
+  },
+  "top_20_functions": [
+    {
+      "rank": 1,
+      "name": "UGSAttributeSetBase::PostGameplayEffectExecute",
+      "file": "GASShooter/Private/Characters/Abilities/AttributeSets/GSAttributeSetBase.cpp",
+      "line_number": 42,
+      "lines_of_code": 165,
+      "return_type": "void",
+      "cyclomatic_complexity": 23,
+      "description": "Core damage processing function executed after GameplayEffect application. Handles damage distribution across health and shield, bounty calculation, and dead-state validation.",
+      "categories": ["damage_system", "game_mechanics", "attribute_system"],
+      "complexity_factors": {
+        "if_statements": 22,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 100
+      },
+      "key_features": [
+        "Multi-source/target actor extraction",
+        "Shield mitigation before health damage",
+        "Dynamic GameplayEffect creation for bounties",
+        "Dead actor state validation",
+        "Cross-player damage notification"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "UGSAbilitySystemComponent::OnRep_ReplicatedAnimMontageForMesh",
+      "file": "GASShooter/Private/Characters/Abilities/GSAbilitySystemComponent.cpp",
+      "line_number": 728,
+      "lines_of_code": 134,
+      "return_type": "void",
+      "cyclomatic_complexity": 19,
+      "description": "Network replication callback for animation montages on skeletal meshes. Synchronizes montage state between server and clients with position correction and section management.",
+      "categories": ["networking", "animation_system", "replication"],
+      "complexity_factors": {
+        "if_statements": 17,
+        "loops": 1,
+        "switch_cases": 0,
+        "function_calls": 73
+      },
+      "key_features": [
+        "Animation position error correction",
+        "Section-based timeline synchronization",
+        "Replay-aware error threshold adjustment",
+        "Root motion event triggering",
+        "Authority-based conditional execution"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "UGSAT_WaitInteractableTarget::PerformTrace",
+      "file": "GASShooter/Private/Characters/Abilities/AbilityTasks/GSAT_WaitInteractableTarget.cpp",
+      "line_number": 179,
+      "lines_of_code": 103,
+      "return_type": "void",
+      "cyclomatic_complexity": 11,
+      "description": "Ability task performing continuous traces to detect interactable targets. Manages perspective-aware targeting with event broadcasting for target state changes.",
+      "categories": ["ability_system", "targeting", "interactable_system"],
+      "complexity_factors": {
+        "if_statements": 10,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 48
+      },
+      "key_features": [
+        "Perspective-aware start location selection",
+        "Continuous collision tracing",
+        "Target transition detection",
+        "Event broadcasting for new/lost targets",
+        "Debug visualization support"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "UGSAbilitySystemComponent::PlayMontageForMesh",
+      "file": "GASShooter/Source/GASShooter/Private/Characters/Abilities/GSAbilitySystemComponent.cpp",
+      "line_number": 270,
+      "lines_of_code": 79,
+      "return_type": "float",
+      "cyclomatic_complexity": 11,
+      "description": "Plays animation montages on specific skeletal mesh components with network replication support. Handles both authority and predicted clients.",
+      "categories": ["animation_system", "networking", "ability_system"],
+      "complexity_factors": {
+        "if_statements": 10,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 36
+      },
+      "key_features": [
+        "Dual-mesh animation management",
+        "Root motion logging",
+        "Section jumping support",
+        "Client-side prediction handling",
+        "Network replication coordination"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "AGSPlayerController::CreateHUD",
+      "file": "GASShooter/Private/Player/GSPlayerController.cpp",
+      "line_number": 13,
+      "lines_of_code": 74,
+      "return_type": "void",
+      "cyclomatic_complexity": 9,
+      "description": "Initializes player HUD widget with bulk attribute synchronization from PlayerState and current weapon.",
+      "categories": ["ui_system", "player_controller", "hud"],
+      "complexity_factors": {
+        "if_statements": 8,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 73
+      },
+      "key_features": [
+        "Single-creation guard",
+        "PlayerState dependency validation",
+        "Attribute bulk sync (8 attributes)",
+        "Current weapon UI initialization",
+        "Ammo display setup"
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "UGSAT_PlayMontageForMeshAndWaitForEvent::Activate",
+      "file": "GASShooter/Private/Characters/Abilities/AbilityTasks/GSAT_PlayMontageForMeshAndWaitForEvent.cpp",
+      "line_number": 120,
+      "lines_of_code": 73,
+      "return_type": "void",
+      "cyclomatic_complexity": 10,
+      "description": "Ability task combining animation playback with gameplay event waiting for dual-mesh systems.",
+      "categories": ["ability_system", "animation_system", "networking"],
+      "complexity_factors": {
+        "if_statements": 9,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 48
+      },
+      "key_features": [
+        "Event listener binding",
+        "Multi-stage animation setup",
+        "Animation callback binding",
+        "Authority-based root motion config",
+        "Cancellation handling"
+      ]
+    },
+    {
+      "rank": 7,
+      "name": "AGSHeroCharacter::SetCurrentWeapon",
+      "file": "GASShooter/Private/Characters/Heroes/GSHeroCharacter.cpp",
+      "line_number": 963,
+      "lines_of_code": 72,
+      "return_type": "void",
+      "cyclomatic_complexity": 10,
+      "description": "Weapon switching state machine. Handles unequip, equip, UI sync, and ability integration.",
+      "categories": ["weapon_system", "character_system", "ability_system"],
+      "complexity_factors": {
+        "if_statements": 9,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 45
+      },
+      "key_features": [
+        "Active ability cancellation",
+        "Weapon ability management",
+        "UI synchronization",
+        "Ammo delegate binding",
+        "Dual-mesh equip animations"
+      ]
+    },
+    {
+      "rank": 8,
+      "name": "AGSHeroCharacter::AddWeaponToInventory",
+      "file": "GASShooter/Private/Characters/Heroes/GSHeroCharacter.cpp",
+      "line_number": 304,
+      "lines_of_code": 69,
+      "return_type": "bool",
+      "cyclomatic_complexity": 9,
+      "description": "Adds weapons to inventory with duplicate detection and ammo distribution via dynamic GameplayEffects.",
+      "categories": ["weapon_system", "inventory_system", "ability_system"],
+      "complexity_factors": {
+        "if_statements": 8,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 38
+      },
+      "key_features": [
+        "Duplicate weapon detection",
+        "Dynamic GameplayEffect creation",
+        "Ammo modifier application",
+        "Ability initialization",
+        "Optional auto-equip"
+      ]
+    },
+    {
+      "rank": 9,
+      "name": "UGSAT_PlayMontageAndWaitForEvent::Activate",
+      "file": "GASShooter/Private/Characters/Abilities/AbilityTasks/GSAT_PlayMontageAndWaitForEvent.cpp",
+      "line_number": 114,
+      "lines_of_code": 67,
+      "return_type": "void",
+      "cyclomatic_complexity": 9,
+      "description": "Standard character mesh animation playback with event waiting capability.",
+      "categories": ["ability_system", "animation_system"],
+      "complexity_factors": {
+        "if_statements": 8,
+        "loops": 0,
+        "switch_cases": 0,
+        "function_calls": 44
+      },
+      "key_features": [
+        "Event tag binding",
+        "Standard mesh montage setup",
+        "Callback binding",
+        "Authority validation",
+        "Error handling and logging"
+      ]
+    },
+    {
+      "rank": 10,
+      "name": "AGSHeroCharacter::OnRep_PlayerState",
+      "file": "GASShooter/Private/Characters/Heroes/GSHeroCharacter.cpp",
+      "line_number": 828,
+      "lines_of_code": 64,
+      "return_type": "void",
+      "cyclomatic_complexity": 8,
+      "description": "Client-side initialization triggered by PlayerState replication. Sets up ability system and character state.",
+      "categories": ["networking", "replication", "character_system"],
+      "complexity_factors": {
+        "if_statements": 6,
+        "loops": 0,
+        "switch_cases": 1,
+        "function_calls": 38
+      },
+      "key_features": [
+        "ASC component assignment",
+        "Ability actor info init",
+        "Input binding",
+        "Attribute listener registration",
+        "Current weapon state restoration"
+      ]
+    }
+  ],
+  "complexity_summary": {
+    "total_functions_analyzed": 506,
+    "average_cyclomatic_complexity": 9.1,
+    "highest_complexity": {
+      "value": 23,
+      "function": "UGSAttributeSetBase::PostGameplayEffectExecute"
+    },
+    "typical_range": "6-11",
+    "lowest_complexity": {
+      "value": 1,
+      "type": "Constructor functions"
+    }
+  },
+  "thematic_breakdown": {
+    "networking_replication": ["OnRep_ReplicatedAnimMontageForMesh", "OnRep_PlayerState", "AnimMontage_UpdateReplicatedDataForMesh"],
+    "animation_system": ["OnRep_ReplicatedAnimMontageForMesh", "PlayMontageForMesh", "PlayMontageForMeshAndWaitForEvent", "PlayMontageAndWaitForEvent", "AnimNotify_PlaySoundForPerspective"],
+    "weapon_system": ["SetCurrentWeapon", "AddWeaponToInventory"],
+    "ability_system": ["PostGameplayEffectExecute", "PlayMontageForMesh", "PlayMontageForMeshAndWaitForEvent", "WaitInteractableTarget_PerformTrace", "AbilityLocalInputPressed"],
+    "targeting_system": ["WaitInteractableTarget_PerformTrace", "AimWithPlayerController", "SphereTrace_Configure"],
+    "character_initialization": ["PossessedBy", "OnRep_PlayerState"],
+    "ui_system": ["CreateHUD"]
+  }
+}

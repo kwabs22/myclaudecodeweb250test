@@ -1,0 +1,21 @@
+Rank,Function Name,File Path,Line Number,Lines of Code,Return Type,Cyclomatic Complexity,Key Responsibility,Complexity Focus
+1,UGSAttributeSetBase::PostGameplayEffectExecute,GSAttributeSetBase.cpp,42,165,void,23,Damage processing and bounty distribution,Multi-branch damage logic
+2,UGSAbilitySystemComponent::OnRep_ReplicatedAnimMontageForMesh,GSAbilitySystemComponent.cpp,728,134,void,19,Network animation synchronization,State sync with timestamp accuracy
+3,UGSAT_WaitInteractableTarget::PerformTrace,GSAT_WaitInteractableTarget.cpp,179,103,void,11,Interactable target detection,Target tracking and state changes
+4,UGSAbilitySystemComponent::PlayMontageForMesh,GSAbilitySystemComponent.cpp,270,79,float,11,Dual-mesh animation playback,Animation setup with prediction
+5,AGSPlayerController::CreateHUD,GSPlayerController.cpp,13,74,void,9,HUD widget initialization and setup,UI state population
+6,UGSAT_PlayMontageForMeshAndWaitForEvent::Activate,GSAT_PlayMontageForMeshAndWaitForEvent.cpp,120,73,void,10,Animation playback with event waiting,Multi-stage setup and binding
+7,AGSHeroCharacter::SetCurrentWeapon,GSHeroCharacter.cpp,963,72,void,10,Weapon switching and equipping,Lifecycle management
+8,AGSHeroCharacter::AddWeaponToInventory,GSHeroCharacter.cpp,304,69,bool,9,Inventory weapon addition,Conditional weapon handling
+9,UGSAT_PlayMontageAndWaitForEvent::Activate,GSAT_PlayMontageAndWaitForEvent.cpp,114,67,void,9,Standard mesh animation playback,Animation task setup
+10,AGSHeroCharacter::OnRep_PlayerState,GSHeroCharacter.cpp,828,64,void,8,Client-side character initialization,Sequential initialization
+11,AGSGATA_Trace::AimWithPlayerController,GSGATA_Trace.cpp,209,62,void,7,Weapon aiming and targeting,Geometric calculations
+12,UGSAT_MoveSceneCompRelLocation::TickTask,GSAT_MoveSceneCompRelLocation.cpp,37,59,void,9,Component position interpolation,Time-based lerp with curves
+13,AGSHeroCharacter::PossessedBy,GSHeroCharacter.cpp,124,58,void,5,Server-side character initialization,Sequential initialization
+14,UGSAnimNotify_PlaySoundForPerspective::Notify,GSAnimNotify_PlaySoundForPerspective.cpp,16,55,void,8,Perspective-aware sound playback,Audio selection logic
+15,UGSAbilitySystemComponent::AnimMontage_UpdateReplicatedDataForMesh,GSAbilitySystemComponent.cpp,665,55,void,7,Animation state replication update,State extraction
+16,AGSWeapon::AGSWeapon,GSWeapon.cpp,17,54,Constructor,1,Weapon constructor initialization,Sequential init
+17,UGSAT_WaitInteractableTarget::AimWithPlayerController,GSAT_WaitInteractableTarget.cpp,106,53,void,6,Interactable target aiming,Vector calculations
+18,AGSGATA_SphereTrace::Configure,GSAT_SphereTrace.cpp,14,52,void,2,AOE target actor configuration,Simple property assignment
+19,UGSAbilitySystemComponent::AbilityLocalInputPressed,GSAbilitySystemComponent.cpp,84,50,void,9,Input-based ability activation,Tag-based filtering
+20,UGSAbilitySystemComponent::PlayMontage,GSAbilitySystemComponent.cpp,? ,? ,float,8,Standard mesh montage playback,Animation coordination

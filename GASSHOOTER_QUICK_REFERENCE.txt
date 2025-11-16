@@ -1,0 +1,230 @@
+================================================================================
+GASSHOOTER TOP 20 FUNCTIONS - QUICK REFERENCE GUIDE
+================================================================================
+
+TIER 1: ABSOLUTELY CRITICAL (CC > 15)
+================================================================================
+
+1. PostGameplayEffectExecute (CC=23)
+   Location: GSAttributeSetBase.cpp:42
+   Size: 165 lines
+   Focus: DAMAGE SYSTEM - Shield mitigation, bounty distribution, dead validation
+   Why: Called every time damage/heal is applied. Core game loop.
+   
+2. OnRep_ReplicatedAnimMontageForMesh (CC=19)
+   Location: GSAbilitySystemComponent.cpp:728
+   Size: 134 lines
+   Focus: NETWORK SYNC - Animation position correction, section jumping
+   Why: Keeps client animations perfectly synchronized with server timing
+
+================================================================================
+
+TIER 2: HIGHLY COMPLEX GAME MECHANICS (CC 10-14)
+================================================================================
+
+3. PerformTrace (CC=11) - Target detection with perspective awareness
+4. PlayMontageForMesh (CC=11) - Dual-mesh animation setup
+5. SetCurrentWeapon (CC=10) - Weapon switching state machine
+6. PlayMontageForMeshAndWaitForEvent (CC=10) - Event-driven animation
+7. CreateHUD (CC=9) - HUD initialization and attribute setup
+8. AddWeaponToInventory (CC=9) - Ammo distribution via dynamic GE
+
+================================================================================
+
+TIER 3: IMPORTANT SUPPORT FUNCTIONS (CC 6-9)
+================================================================================
+
+9. PlayMontageAndWaitForEvent (CC=9) - Standard mesh animation
+10. AbilityLocalInputPressed (CC=9) - Input-to-ability conversion
+11. OnRep_PlayerState (CC=8) - Client-side character init
+12. AnimNotify_PlaySoundForPerspective (CC=8) - Audio selection
+13. MoveSceneCompRelLocation (CC=9) - Procedural movement
+14. AimWithPlayerController (CC=7) - Weapon spread + aiming
+15. AnimMontage_UpdateReplicatedDataForMesh (CC=7) - State capture
+16. AimWithPlayerController[Interactable] (CC=6) - Target detection aiming
+
+================================================================================
+
+SYSTEM IMPACT ANALYSIS
+================================================================================
+
+NETWORKING (Most Critical for Multiplayer):
+  - OnRep_ReplicatedAnimMontageForMesh (CC=19) *
+  - OnRep_PlayerState (CC=8)
+  - PlayMontageForMesh requires replication
+  - Authority validation in 15+ functions
+
+ANIMATION SYSTEM (Most Complex by Volume):
+  - 7 of top 20 functions deal with animation
+  - Dual-mesh support (first-person + third-person)
+  - Event-driven task system
+  - Network synchronization overhead
+
+WEAPON SYSTEM (Core Gameplay Loop):
+  - SetCurrentWeapon (CC=10) - Weapon lifecycle
+  - AddWeaponToInventory (CC=9) - Acquisition
+  - Integrated with: GAS abilities, UI, ammo tracking, animations
+
+DAMAGE & ABILITY SYSTEM:
+  - PostGameplayEffectExecute (CC=23) - Central hub *
+  - AbilityLocalInputPressed (CC=9) - Input pipeline
+  - Multiple ability tasks (6 total)
+
+================================================================================
+
+DESIGN PATTERNS TO LEARN
+================================================================================
+
+PATTERN 1: Authority Validation
+  if (GetLocalRole() == ROLE_Authority) { /* server code */ }
+  Used in: 15+ critical functions
+  
+PATTERN 2: Perspective-Aware Logic
+  if (IsFirstPersonPerspective()) { } else { }
+  Used in: Animation, aiming, sound selection
+  
+PATTERN 3: State Guards
+  if (initialized) return;
+  Used in: HUD creation, character init, weapon setup
+  
+PATTERN 4: Dynamic GameplayEffect Creation
+  UGameplayEffect* GE = NewObject<UGameplayEffect>();
+  Used in: Bounty distribution, ammo pickup, damage application
+
+================================================================================
+
+FILE ORGANIZATION
+================================================================================
+
+Must-Read Core Files:
+  Character/Abilities/AttributeSets/GSAttributeSetBase.cpp - Damage system
+  Character/Abilities/GSAbilitySystemComponent.cpp - Custom ASC (5K+ lines)
+  Character/Heroes/GSHeroCharacter.cpp - Character controller
+  Weapons/GSWeapon.cpp - Weapon definition
+
+Ability Tasks (Custom GAS Extensions):
+  Character/Abilities/AbilityTasks/GSAT_*.cpp - 6 custom task implementations
+  
+Targeting:
+  Character/Abilities/GSGATA_*.cpp - Target actor implementations
+
+UI:
+  Player/GSPlayerController.cpp - HUD management (74 lines, CC=9)
+  UI/GSHUDWidget.* - Widget implementation
+
+================================================================================
+
+COMPLEXITY METRICS
+================================================================================
+
+Total Functions Analyzed: 506
+Complex Functions (CC > 10): 8
+Very Complex Functions (CC > 15): 2
+
+Average CC: 9.1
+Typical CC: 6-12 for complex game logic
+Simple Init/Getters: CC = 1-2
+
+Distribution:
+  CC 20+: 1 function (damage core)
+  CC 15+: 1 function (anim sync)
+  CC 10-14: 7 functions
+  CC 6-9: 10 functions
+  CC < 6: ~480+ functions
+
+================================================================================
+
+LEARNING ROADMAP
+================================================================================
+
+WEEK 1: Foundation
+  1. Read AGSCharacterBase (character setup)
+  2. Read GSAttributeSetBase (attribute definitions)
+  3. Read UGSAbilitySystemComponent headers (custom ASC)
+
+WEEK 2: Game Systems
+  4. Study PostGameplayEffectExecute (damage system) *CRITICAL*
+  5. Study SetCurrentWeapon + AddWeaponToInventory (weapon lifecycle)
+  6. Study GSGATA_Trace (targeting system)
+
+WEEK 3: Advanced
+  7. Study OnRep_ReplicatedAnimMontageForMesh (network sync) *CRITICAL*
+  8. Study PlayMontageForMesh (dual-mesh animation)
+  9. Study PossessedBy -> OnRep_PlayerState sequence
+  10. Study dynamic GameplayEffect patterns
+
+WEEK 4: Integration
+  11. Trace through weapon pickup -> equip -> fire sequence
+  12. Trace through damage -> bounty -> UI notification
+  13. Trace through animation network replication
+
+================================================================================
+
+QUICK LOOKUP: "I want to understand..."
+================================================================================
+
+"...how damage works"
+  Read: PostGameplayEffectExecute (CC=23) @ GSAttributeSetBase.cpp:42
+
+"...how multiplayer animations stay in sync"
+  Read: OnRep_ReplicatedAnimMontageForMesh (CC=19) @ GSAbilitySystemComponent.cpp:728
+
+"...how weapons are equipped"
+  Read: SetCurrentWeapon (CC=10) @ GSHeroCharacter.cpp:963
+
+"...how ammo is handled"
+  Read: AddWeaponToInventory (CC=9) @ GSHeroCharacter.cpp:304
+
+"...how input becomes ability activation"
+  Read: AbilityLocalInputPressed (CC=9) @ GSAbilitySystemComponent.cpp:84
+
+"...how the HUD gets initial data"
+  Read: CreateHUD (CC=9) @ GSPlayerController.cpp:13
+
+"...how first-person third-person works"
+  Read: PerformTrace (CC=11) + AnimNotify_PlaySoundForPerspective (CC=8)
+
+"...how network initialization happens"
+  Read: PossessedBy (CC=5) -> OnRep_PlayerState (CC=8) @ GSHeroCharacter.cpp
+
+================================================================================
+
+PERFORMANCE HOTSPOTS TO PROFILE
+================================================================================
+
+HIGH FREQUENCY (Every frame or every ability activation):
+  - AbilityLocalInputPressed (per input)
+  - PlayMontageForMesh (per ability start)
+  - AimWithPlayerController (per targeting)
+
+MEDIUM FREQUENCY (Per damage event, per animation):
+  - PostGameplayEffectExecute (every damage/heal)
+  - OnRep_ReplicatedAnimMontageForMesh (per animation sync)
+  - AnimNotify_PlaySoundForPerspective (per animation notify)
+
+LOW FREQUENCY (Per possession, per weapon switch):
+  - PossessedBy, OnRep_PlayerState (spawn/respawn)
+  - SetCurrentWeapon (weapon switch)
+  - AddWeaponToInventory (item pickup)
+
+================================================================================
+
+ADVANCED TOPICS
+================================================================================
+
+Custom GAS Extensions:
+  - Dual-mesh animation support (non-standard)
+  - Dynamic GameplayEffect creation patterns
+  - Custom ability tasks for complex interactions
+
+Network Architecture:
+  - Authority = server decides game state
+  - Replication = clients informed of state
+  - Callbacks = sync server truth with client predictions
+
+Animation Synchronization:
+  - Error threshold for position drift
+  - Section-based timeline jumping
+  - Event queuing for replayed notifies
+
+================================================================================

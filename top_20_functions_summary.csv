@@ -1,0 +1,21 @@
+Rank,Function Name,File Path,Lines,Complexity Score,If Statements,For Loops,While Loops,Switch,Max Nesting,Category,Subsystem
+1,_updateMeshes,src/framework/components/element/text-element.js,546,1136,35,10,2,0,9,UI/Text Rendering,Text Element Component
+2,SortWorker,src/scene/gsplat/gsplat-sort-worker.js,309,959,37,13,1,0,7,Graphics/3D Rendering,Gaussian Splat Rendering
+3,BasisWorker,src/framework/handlers/basis-worker.js,437,847,22,8,0,3,10,Graphics/Asset Processing,Texture Compression Handler
+4,initializeComponentData,src/framework/components/element/system.js,182,832,65,0,0,0,5,UI Components,Element System
+5,upload,src/platform/graphics/webgl/webgl-texture.js,350,820,35,5,1,0,9,Graphics/GPU Memory,WebGL Texture Management
+6,UnifiedSortWorker,src/scene/gsplat-unified/gsplat-unified-sort-worker.js,375,765,12,13,0,1,5,Graphics/3D Rendering,Gaussian Splat Rendering
+7,_updateText,src/framework/components/element/text-element.js,394,724,27,3,0,0,8,UI/Text Rendering,Text Element Component
+8,texShadow,src/platform/graphics/graphics-device.js,463,683,12,5,0,0,4,Graphics/Lighting,Shadow Mapping System
+9,update,src/scene/particle-system/cpu-updater.js,307,667,24,6,0,0,8,Particle System,CPU Particle Updater
+10,constructor,src/platform/graphics/webgl/webgl-graphics-device.js,465,635,17,0,0,0,10,Graphics/Device Initialization,WebGL Graphics Device
+11,bakeInternal,src/framework/lightmapper/lightmapper.js,251,601,15,10,0,0,8,Graphics/Lighting,Lightmap Baking Engine
+12,DracoWorker,src/framework/parsers/draco-worker.js,267,577,6,11,0,3,6,Asset Processing,Draco Mesh Decompression
+13,create,src/scene/batching/batch-manager.js,226,566,16,9,0,0,9,Graphics/Optimization,Mesh Batching System
+14,createAnimation,src/framework/parsers/glb-parser.js,233,563,11,10,1,0,7,Asset Processing,glTF Animation Parser
+15,_preprocess,src/core/preprocessor.js,279,559,23,1,1,1,10,Shader Processing,Shader Preprocessor
+16,constructor,src/scene/geometry/cone-base-geometry.js,216,526,7,12,0,0,7,Geometry,Primitive Geometry Generator
+17,rawToValue,src/framework/script/script-attributes.js,138,518,27,5,0,1,7,Scripting,Script Attribute System
+18,update,src/scene/gsplat-unified/gsplat-manager.js,196,506,19,6,0,0,6,Graphics/3D Rendering,Gaussian Splat Manager
+19,draw,src/platform/graphics/webgl/webgl-graphics-device.js,177,497,26,3,0,0,9,Graphics/GPU Commands,WebGL Draw Command Execution
+20,light,src/scene/shader-lib/wgsl/chunks/lit/frag/clusteredLight.js,286,496,21,0,0,0,7,Shader/Lighting,Clustered Lighting Shader
