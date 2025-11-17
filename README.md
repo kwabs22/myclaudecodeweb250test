@@ -1,16 +1,93 @@
-# 3D Game Development Learning Resources
+# 3D Game Development & Modding Learning Resources
 
-A comprehensive collection of analyses, guides, and resources for learning modern 3D game development through open-source projects.
+A comprehensive collection of analyses, guides, and resources for learning modern 3D game development, game modding, and working with open-source projects.
 
-**Total Documents**: 9 comprehensive guides + 13 supplementary files
-**Total Content**: 150+ pages of analysis
-**Coverage**: AI tools, game engines, automation, and 20 major GitHub projects
+**Total Documents**: 12 comprehensive guides + 13 supplementary files
+**Total Content**: 250+ pages of analysis
+**Coverage**: Game modding, AI tools, game engines, automation, and 20+ major GitHub projects
 
 ---
 
 ## 📚 Document Index
 
-### 1. Core Analysis Documents
+### 1. Game Modding Resources ⚙️🎮
+
+#### [The Complete Guide to Game Modding](./MODDING_GUIDE.md)
+**Size**: 90KB | **Reading Time**: 3-4 hours
+
+Comprehensive guide covering everything you need to know about creating game mods:
+- **What is modding?** History, types, and why to mod
+- **Getting Started**: Step-by-step for beginners
+- **Essential Tools**: BepInEx, Harmony, dnSpy, xEdit, and more
+- **Modding by Engine**: Unity, Unreal, Creation Engine, Minecraft
+- **Advanced Techniques**: IL manipulation, asset bundles, networking
+- **Distribution & Community**: Publishing, building audience
+- **Legal & Ethical**: Copyright, ToS, monetization
+
+**Includes**:
+- 17 essential tools and frameworks
+- Step-by-step modding process (8 phases)
+- Code examples for popular frameworks
+- Common mistakes to avoid
+- Learning path (12-month plan)
+
+**Best For**: Aspiring modders, game developers, anyone interested in extending their favorite games
+
+---
+
+#### [Top 20 Game Modding Repositories](./TOP_20_MODDING_REPOSITORIES.md)
+**Size**: 75KB | **Reading Time**: 2 hours
+
+Curated list of the most important GitHub repositories for game modding:
+- **8 Universal Frameworks**: Harmony, BepInEx, MelonLoader, UE4SS
+- **7 Essential Tools**: dnSpy, FModel, xEdit, Vortex, Ghidra
+- **5 Example Projects**: RimWorld mods, templates, platforms
+
+**Each Repository Includes**:
+- Stars, language, and license
+- Why it's essential for modding
+- What you'll learn
+- Key features and use cases
+- Getting started guide
+- When to use it
+
+**Quick Reference**:
+- Modding tools by game engine
+- Tools by skill level (beginner to advanced)
+- Tools by use case
+
+**Best For**: Modders at all levels, tool selection, understanding the modding ecosystem
+
+---
+
+#### [The Most Modded Games of All Time](./MOST_MODDED_GAMES.md)
+**Size**: 60KB | **Reading Time**: 1.5 hours
+
+In-depth analysis of the 20 most heavily modded video games in history:
+- **Top 20 Rankings**: Skyrim, Minecraft, Doom, Half-Life, and more
+- **Why They Succeeded**: Technical, community, and cultural factors
+- **Historical Impact**: Games created from mods (Counter-Strike, DOTA)
+- **Economic Impact**: Billions generated, careers launched
+- **Future of Modding**: Trends, challenges, opportunities
+
+**Highlights**:
+- Skyrim: 100,000+ mods
+- Minecraft: 62,000+ mods, educational phenomenon
+- Doom: 30+ years of modding, created modding culture
+- Half-Life: Spawned Counter-Strike, Team Fortress
+- Warcraft III: Created the MOBA genre (DOTA)
+
+**Cultural Analysis**:
+- What makes games moddable
+- Developer support strategies
+- Modding's impact on gaming industry
+- Preservation and education
+
+**Best For**: Gaming historians, aspiring modders, understanding industry trends
+
+---
+
+### 2. Core Game Development Analysis Documents
 
 #### [AI Tools Impacting 3D Gaming](./ai-tools-3d-gaming-impact.md)
 **Size**: 14KB | **Reading Time**: 30 minutes
@@ -93,7 +170,7 @@ Deep analysis of 400 functions across 20 major game development projects:
 
 ---
 
-### 2. Specialized Analysis Documents
+### 3. Specialized Analysis Documents
 
 #### [GASShooter Detailed Analysis](./GASSHOOTER_DETAILED_ANALYSIS.md)
 **Size**: 19KB
@@ -139,7 +216,7 @@ Analysis of 4 PlayCanvas plugin repositories:
 
 ---
 
-### 3. Quick Reference Files
+### 4. Quick Reference Files
 
 #### Data Files
 - `GASSHOOTER_TOP_20_FUNCTIONS.json` - Machine-readable GASShooter analysis
@@ -156,6 +233,30 @@ Analysis of 4 PlayCanvas plugin repositories:
 ---
 
 ## 🎯 Quick Start Guides
+
+### For Game Modders
+
+**Start Here:**
+1. Read [The Complete Guide to Game Modding](./MODDING_GUIDE.md) - Getting Started section
+2. Browse [Top 20 Modding Repositories](./TOP_20_MODDING_REPOSITORIES.md) to find tools for your game
+3. Study [Most Modded Games](./MOST_MODDED_GAMES.md) to understand what makes games moddable
+
+**Recommended Path:**
+- Week 1: Install and use existing mods for your game
+- Week 2: Set up modding tools (BepInEx, dnSpy, etc.)
+- Week 3-4: Create your first simple mod (texture replacement or config change)
+- Month 2: Learn Harmony patching and create code mods
+- Month 3+: Build larger projects and contribute to community
+
+**Best Resources:**
+- **Unity Games**: BepInEx + Harmony + dnSpy
+- **Bethesda Games**: Creation Kit + xEdit + SKSE
+- **Minecraft**: Fabric or Forge + Java tutorials
+- **Unreal Games**: UE4SS + FModel
+
+---
+
+### For Game Developers
 
 ### For Beginners
 
@@ -221,9 +322,11 @@ Analysis of 4 PlayCanvas plugin repositories:
 |----------|-------|-------------|
 | **Projects Analyzed** | 20 | ~500,000+ |
 | **Functions Documented** | 400 | ~50,000 |
-| **Documents Created** | 22 | 150+ pages |
-| **Code Examples** | 60+ | 3,000+ lines |
-| **Repositories Linked** | 23 | - |
+| **Documents Created** | 25 | 250+ pages |
+| **Code Examples** | 100+ | 5,000+ lines |
+| **Repositories Linked** | 43+ | - |
+| **Modding Tools Covered** | 20 | - |
+| **Most Modded Games** | 20 | - |
 
 ### Project Breakdown
 
@@ -446,10 +549,18 @@ To add new projects to the analysis:
 - 4 comprehensive guides
 - 5 specialized analyses
 
+**Version 1.1** (2025-11-17)
+- Added comprehensive game modding resources
+- Complete Guide to Game Modding (90KB)
+- Top 20 Modding Repositories guide
+- Most Modded Games of All Time analysis
+- 20+ modding tools and frameworks covered
+- 250+ pages of total content
+
 **Planned Updates:**
-- v1.1: Add Lyra Starter Game analysis
-- v1.2: Include Eternal Crusade analysis
-- v1.3: Add PlayCanvas P2.js and Recast Navigation
+- v1.2: Add Lyra Starter Game analysis
+- v1.3: Include Eternal Crusade analysis
+- v1.4: Add PlayCanvas P2.js and Recast Navigation
 - v2.0: Video tutorials and interactive examples
 
 ---
