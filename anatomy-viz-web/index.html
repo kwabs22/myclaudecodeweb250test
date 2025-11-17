@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Visualization - Educational AR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            overflow: hidden;
+        }
+
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1); /* Mirror effect */
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: scaleX(-1); /* Mirror effect */
+        }
+
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4ecdc4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 10;
+            max-width: 90vw;
+        }
+
+        .btn {
+            background: #4ecdc4;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #45b7af;
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255,107,107,0.5);
+        }
+
+        .btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        #info-panel {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            width: 300px;
+            max-height: 60vh;
+            background: rgba(0,0,0,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+            border: 2px solid #4ecdc4;
+        }
+
+        #info-panel.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-title {
+            font-size: 18px;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #4ecdc4;
+            padding-bottom: 5px;
+        }
+
+        .info-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-section {
+            margin: 15px 0;
+        }
+
+        .info-section h3 {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        #status {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .status-good {
+            color: #4ecdc4;
+        }
+
+        .status-loading {
+            color: #ffa500;
+        }
+
+        .status-error {
+            color: #ff6b6b;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 120px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            #info-panel {
+                width: calc(100vw - 40px);
+                right: 20px;
+                max-height: 50vh;
+            }
+
+            #controls {
+                bottom: 10px;
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+
+        <div id="header">
+            <h1>🦴 Anatomy Visualization</h1>
+            <div class="subtitle">Educational AR - See Your Anatomy in Real-Time</div>
+        </div>
+
+        <div id="status" class="status-loading">
+            <span class="loading-spinner"></span> Initializing...
+        </div>
+
+        <div id="controls">
+            <button class="btn" id="btn-skeleton" onclick="toggleLayer('skeleton')">
+                🦴 Skeleton
+            </button>
+            <button class="btn" id="btn-muscles" onclick="toggleLayer('muscles')">
+                💪 Muscles
+            </button>
+            <button class="btn" id="btn-labels" onclick="toggleLayer('labels')">
+                🏷️ Labels
+            </button>
+            <button class="btn" id="btn-info" onclick="toggleInfo()">
+                📚 Info
+            </button>
+        </div>
+
+        <div id="legend">
+            <div style="font-weight: bold; margin-bottom: 10px;">Legend</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #F5F5DC;"></div>
+                <span>Bones</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255,100,100,0.6);"></div>
+                <span>Muscles (Relaxed)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: rgba(255,50,50,0.9);"></div>
+                <span>Muscles (Active)</span>
+            </div>
+        </div>
+
+        <div id="info-panel">
+            <div class="info-title">Educational Information</div>
+            <div class="info-content" id="info-content">
+                <div class="info-section">
+                    <h3>Welcome to Anatomy Visualization!</h3>
+                    <p>This educational tool shows your skeletal and muscular systems in real-time using AI pose detection.</p>
+                </div>
+                <div class="info-section">
+                    <h3>How to Use:</h3>
+                    <p>1. Allow camera access when prompted<br>
+                    2. Stand in front of camera<br>
+                    3. Toggle layers to explore anatomy<br>
+                    4. Move around to see muscle activation!</p>
+                </div>
+                <div class="info-section">
+                    <h3>Features:</h3>
+                    <p>🦴 <strong>Skeleton:</strong> Major bones overlaid on your body<br>
+                    💪 <strong>Muscles:</strong> Watch them activate as you move<br>
+                    🏷️ <strong>Labels:</strong> Learn anatomical names</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TensorFlow.js and Pose Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+
+    <script>
+        // Configuration
+        const config = {
+            video: {
+                width: 1280,
+                height: 720
+            },
+            layers: {
+                skeleton: true,
+                muscles: false,
+                labels: false
+            }
+        };
+
+        // Global variables
+        let video, canvas, ctx;
+        let detector;
+        let animationId;
+        let currentPose = null;
+
+        // Anatomy data
+        const anatomyData = {
+            bones: [
+                {
+                    id: 'skull',
+                    name: 'Skull (Cranium)',
+                    keypoints: [0],
+                    color: '#F5F5DC',
+                    info: 'Protects the brain. Contains 22 bones fused together.'
+                },
+                {
+                    id: 'spine_upper',
+                    name: 'Cervical & Thoracic Spine',
+                    keypoints: [0, 11, 12],
+                    type: 'line',
+                    color: '#F5F5DC',
+                    info: 'Upper spine: 7 cervical + 12 thoracic vertebrae.'
+                },
+                {
+                    id: 'clavicle_left',
+                    name: 'Left Clavicle (Collarbone)',
+                    keypoints: [11, 11],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Connects the arm to the body. One of the most commonly broken bones.'
+                },
+                {
+                    id: 'clavicle_right',
+                    name: 'Right Clavicle (Collarbone)',
+                    keypoints: [12, 12],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Connects the arm to the body.'
+                },
+                {
+                    id: 'humerus_left',
+                    name: 'Left Humerus (Upper Arm Bone)',
+                    keypoints: [11, 13],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Longest bone in the upper limb. Connects shoulder to elbow.'
+                },
+                {
+                    id: 'humerus_right',
+                    name: 'Right Humerus',
+                    keypoints: [12, 14],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Longest bone in the upper limb.'
+                },
+                {
+                    id: 'radius_ulna_left',
+                    name: 'Left Radius & Ulna (Forearm)',
+                    keypoints: [13, 15],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Two bones of the forearm. Radius (thumb side), Ulna (pinky side).'
+                },
+                {
+                    id: 'radius_ulna_right',
+                    name: 'Right Radius & Ulna',
+                    keypoints: [14, 16],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Two bones of the forearm.'
+                },
+                {
+                    id: 'pelvis',
+                    name: 'Pelvis (Hip Bone)',
+                    keypoints: [23, 24],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Supports spine and protects abdominal organs. Made of ilium, ischium, and pubis.'
+                },
+                {
+                    id: 'femur_left',
+                    name: 'Left Femur (Thigh Bone)',
+                    keypoints: [23, 25],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Longest and strongest bone in the body. Can support 30x body weight!'
+                },
+                {
+                    id: 'femur_right',
+                    name: 'Right Femur',
+                    keypoints: [24, 26],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Longest and strongest bone in the body.'
+                },
+                {
+                    id: 'tibia_fibula_left',
+                    name: 'Left Tibia & Fibula (Lower Leg)',
+                    keypoints: [25, 27],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Tibia (shin bone) is the second longest bone. Fibula is thinner.'
+                },
+                {
+                    id: 'tibia_fibula_right',
+                    name: 'Right Tibia & Fibula',
+                    keypoints: [26, 28],
+                    type: 'bone',
+                    color: '#F5F5DC',
+                    info: 'Lower leg bones. Tibia bears most of the weight.'
+                }
+            ],
+            muscles: [
+                {
+                    id: 'biceps_left',
+                    name: 'Left Biceps Brachii',
+                    keypoints: [11, 13, 15],
+                    activationAngle: { joint: [11, 13, 15], threshold: 100 },
+                    color: 'rgba(255,100,100,0.6)',
+                    activeColor: 'rgba(255,50,50,0.9)',
+                    info: 'Flexes the elbow and supinates the forearm. Two heads: long and short.'
+                },
+                {
+                    id: 'biceps_right',
+                    name: 'Right Biceps Brachii',
+                    keypoints: [12, 14, 16],
+                    activationAngle: { joint: [12, 14, 16], threshold: 100 },
+                    color: 'rgba(255,100,100,0.6)',
+                    activeColor: 'rgba(255,50,50,0.9)',
+                    info: 'Flexes the elbow and supinates the forearm.'
+                },
+                {
+                    id: 'quadriceps_left',
+                    name: 'Left Quadriceps',
+                    keypoints: [23, 25, 27],
+                    activationAngle: { joint: [23, 25, 27], threshold: 160, reverse: true },
+                    color: 'rgba(100,255,100,0.6)',
+                    activeColor: 'rgba(50,255,50,0.9)',
+                    info: 'Extends the knee. Four muscles: rectus femoris, vastus lateralis, vastus medialis, vastus intermedius.'
+                },
+                {
+                    id: 'quadriceps_right',
+                    name: 'Right Quadriceps',
+                    keypoints: [24, 26, 28],
+                    activationAngle: { joint: [24, 26, 28], threshold: 160, reverse: true },
+                    color: 'rgba(100,255,100,0.6)',
+                    activeColor: 'rgba(50,255,50,0.9)',
+                    info: 'Extends the knee. Largest muscle group in the body.'
+                },
+                {
+                    id: 'deltoid_left',
+                    name: 'Left Deltoid',
+                    keypoints: [11, 13],
+                    color: 'rgba(100,100,255,0.6)',
+                    activeColor: 'rgba(50,50,255,0.9)',
+                    info: 'Abducts the arm. Three parts: anterior, middle, posterior.'
+                },
+                {
+                    id: 'deltoid_right',
+                    name: 'Right Deltoid',
+                    keypoints: [12, 14],
+                    color: 'rgba(100,100,255,0.6)',
+                    activeColor: 'rgba(50,50,255,0.9)',
+                    info: 'Abducts the arm (raises it sideways).'
+                }
+            ]
+        };
+
+        // Initialize app
+        async function init() {
+            try {
+                updateStatus('Requesting camera access...', 'loading');
+
+                // Setup video
+                video = document.getElementById('video');
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: config.video.width,
+                        height: config.video.height,
+                        facingMode: 'user'
+                    }
+                });
+                video.srcObject = stream;
+
+                // Setup canvas
+                canvas = document.getElementById('canvas');
+                ctx = canvas.getContext('2d');
+
+                // Wait for video to load
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        resolve();
+                    };
+                });
+
+                updateStatus('Loading pose detection model...', 'loading');
+
+                // Load pose detection model
+                const model = poseDetection.SupportedModels.BlazePose;
+                detector = await poseDetection.createDetector(model, {
+                    runtime: 'tfjs',
+                    modelType: 'lite'
+                });
+
+                updateStatus('✓ Ready! Stand in front of camera', 'good');
+
+                // Start detection loop
+                detectPose();
+
+            } catch (error) {
+                console.error('Initialization error:', error);
+                updateStatus('⚠ Error: ' + error.message, 'error');
+            }
+        }
+
+        // Pose detection loop
+        async function detectPose() {
+            try {
+                // Detect pose
+                const poses = await detector.estimatePoses(video);
+
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (poses.length > 0) {
+                    currentPose = poses[0];
+
+                    // Draw anatomy layers
+                    if (config.layers.skeleton) {
+                        drawSkeleton(currentPose.keypoints);
+                    }
+
+                    if (config.layers.muscles) {
+                        drawMuscles(currentPose.keypoints);
+                    }
+
+                    if (config.layers.labels) {
+                        drawLabels(currentPose.keypoints);
+                    }
+                }
+
+                // Continue loop
+                animationId = requestAnimationFrame(detectPose);
+
+            } catch (error) {
+                console.error('Detection error:', error);
+            }
+        }
+
+        // Draw skeleton
+        function drawSkeleton(keypoints) {
+            anatomyData.bones.forEach(bone => {
+                if (bone.keypoints.length === 1) {
+                    // Draw skull as circle
+                    const kp = keypoints[bone.keypoints[0]];
+                    if (kp.score > 0.3) {
+                        ctx.beginPath();
+                        ctx.arc(kp.x, kp.y, 30, 0, 2 * Math.PI);
+                        ctx.fillStyle = bone.color;
+                        ctx.fill();
+                        ctx.strokeStyle = '#333';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
+                } else if (bone.keypoints.length === 2) {
+                    // Draw bone as thick line
+                    const kp1 = keypoints[bone.keypoints[0]];
+                    const kp2 = keypoints[bone.keypoints[1]];
+
+                    if (kp1.score > 0.3 && kp2.score > 0.3) {
+                        // Draw bone
+                        ctx.beginPath();
+                        ctx.moveTo(kp1.x, kp1.y);
+                        ctx.lineTo(kp2.x, kp2.y);
+                        ctx.strokeStyle = bone.color;
+                        ctx.lineWidth = 12;
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
+
+                        // Draw outline
+                        ctx.strokeStyle = '#888';
+                        ctx.lineWidth = 14;
+                        ctx.stroke();
+
+                        // Draw joints
+                        [kp1, kp2].forEach(kp => {
+                            ctx.beginPath();
+                            ctx.arc(kp.x, kp.y, 8, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#DDD';
+                            ctx.fill();
+                            ctx.strokeStyle = '#888';
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+                        });
+                    }
+                } else if (bone.keypoints.length === 3) {
+                    // Draw spine/torso
+                    const kp1 = keypoints[bone.keypoints[0]];
+                    const kp2 = keypoints[bone.keypoints[1]];
+                    const kp3 = keypoints[bone.keypoints[2]];
+
+                    if (kp1.score > 0.3 && kp2.score > 0.3 && kp3.score > 0.3) {
+                        const midX = (kp2.x + kp3.x) / 2;
+                        const midY = (kp2.y + kp3.y) / 2;
+
+                        ctx.beginPath();
+                        ctx.moveTo(kp1.x, kp1.y);
+                        ctx.lineTo(midX, midY);
+                        ctx.strokeStyle = bone.color;
+                        ctx.lineWidth = 14;
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
+                    }
+                }
+            });
+        }
+
+        // Draw muscles
+        function drawMuscles(keypoints) {
+            anatomyData.muscles.forEach(muscle => {
+                let isActive = false;
+
+                // Check activation
+                if (muscle.activationAngle) {
+                    const angle = calculateAngle(
+                        keypoints[muscle.activationAngle.joint[0]],
+                        keypoints[muscle.activationAngle.joint[1]],
+                        keypoints[muscle.activationAngle.joint[2]]
+                    );
+
+                    if (muscle.activationAngle.reverse) {
+                        isActive = angle > muscle.activationAngle.threshold;
+                    } else {
+                        isActive = angle < muscle.activationAngle.threshold;
+                    }
+                }
+
+                const color = isActive ? muscle.activeColor : muscle.color;
+
+                if (muscle.keypoints.length === 2) {
+                    // Simple muscle (deltoid)
+                    const kp1 = keypoints[muscle.keypoints[0]];
+                    const kp2 = keypoints[muscle.keypoints[1]];
+
+                    if (kp1.score > 0.3 && kp2.score > 0.3) {
+                        // Draw as thick line
+                        ctx.beginPath();
+                        ctx.moveTo(kp1.x, kp1.y);
+                        ctx.lineTo(kp2.x, kp2.y);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 20;
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
+                    }
+                } else if (muscle.keypoints.length === 3) {
+                    // Muscle group (biceps, quadriceps)
+                    const kp1 = keypoints[muscle.keypoints[0]];
+                    const kp2 = keypoints[muscle.keypoints[1]];
+                    const kp3 = keypoints[muscle.keypoints[2]];
+
+                    if (kp1.score > 0.3 && kp2.score > 0.3 && kp3.score > 0.3) {
+                        // Draw as filled shape
+                        const dx = kp3.x - kp1.x;
+                        const dy = kp3.y - kp1.y;
+                        const perpX = -dy * 0.1;
+                        const perpY = dx * 0.1;
+
+                        ctx.beginPath();
+                        ctx.moveTo(kp1.x + perpX, kp1.y + perpY);
+                        ctx.lineTo(kp2.x + perpX, kp2.y + perpY);
+                        ctx.lineTo(kp3.x + perpX, kp3.y + perpY);
+                        ctx.lineTo(kp3.x - perpX, kp3.y - perpY);
+                        ctx.lineTo(kp2.x - perpX, kp2.y - perpY);
+                        ctx.lineTo(kp1.x - perpX, kp1.y - perpY);
+                        ctx.closePath();
+                        ctx.fillStyle = color;
+                        ctx.fill();
+
+                        // Show activation status
+                        if (isActive) {
+                            ctx.strokeStyle = 'rgba(255,255,0,0.8)';
+                            ctx.lineWidth = 3;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Draw labels
+        function drawLabels(keypoints) {
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Draw bone labels
+            anatomyData.bones.forEach(bone => {
+                if (bone.keypoints.length === 2) {
+                    const kp1 = keypoints[bone.keypoints[0]];
+                    const kp2 = keypoints[bone.keypoints[1]];
+
+                    if (kp1.score > 0.3 && kp2.score > 0.3) {
+                        const x = (kp1.x + kp2.x) / 2;
+                        const y = (kp1.y + kp2.y) / 2;
+
+                        // Draw background
+                        const text = bone.name.split('(')[0].trim();
+                        const metrics = ctx.measureText(text);
+                        ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                        ctx.fillRect(x - metrics.width/2 - 5, y - 10, metrics.width + 10, 20);
+
+                        // Draw text
+                        ctx.fillStyle = '#FFD700';
+                        ctx.fillText(text, x, y);
+                    }
+                }
+            });
+        }
+
+        // Calculate angle between three points
+        function calculateAngle(p1, p2, p3) {
+            if (!p1 || !p2 || !p3) return 180;
+
+            const radians = Math.atan2(p3.y - p2.y, p3.x - p2.x) -
+                          Math.atan2(p1.y - p2.y, p1.x - p2.x);
+            let angle = Math.abs(radians * 180.0 / Math.PI);
+
+            if (angle > 180.0) {
+                angle = 360.0 - angle;
+            }
+
+            return angle;
+        }
+
+        // Toggle layers
+        function toggleLayer(layer) {
+            config.layers[layer] = !config.layers[layer];
+
+            const btn = document.getElementById(`btn-${layer}`);
+            if (config.layers[layer]) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+
+        // Toggle info panel
+        function toggleInfo() {
+            const panel = document.getElementById('info-panel');
+            panel.classList.toggle('show');
+        }
+
+        // Update status
+        function updateStatus(message, type) {
+            const status = document.getElementById('status');
+            status.innerHTML = message;
+            status.className = `status-${type}`;
+        }
+
+        // Start on load
+        window.addEventListener('load', init);
+
+        // Default: Enable skeleton
+        document.getElementById('btn-skeleton').classList.add('active');
+    </script>
+</body>
+</html>
