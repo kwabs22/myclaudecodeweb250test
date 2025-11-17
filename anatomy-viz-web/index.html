@@ -218,7 +218,46 @@
             transform: scale(1.1);
         }
 
+        .anatomical-label {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: #4ecdc4;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 2px solid #4ecdc4;
+            pointer-events: none;
+            z-index: 8;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .anatomical-label.bone {
+            border-color: #F5F5DC;
+            color: #F5F5DC;
+        }
+
+        .anatomical-label.joint {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        #aruco-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
         @media (max-width: 768px) {
+            .anatomical-label {
+                font-size: 9px;
+                padding: 3px 6px;
+            }
             #debug-panel {
                 font-size: 10px;
                 max-width: 200px;
@@ -236,6 +275,7 @@
     <div id="container">
         <video id="video" autoplay playsinline></video>
         <canvas id="canvas"></canvas>
+        <canvas id="aruco-overlay"></canvas>
 
         <div id="header">
             <h1>🦴 Anatomy Visualization</h1>
@@ -293,11 +333,17 @@
             <button class="btn" id="btn-skeleton" onclick="toggleLayer('skeleton')">
                 🦴 Skeleton
             </button>
+            <button class="btn" id="btn-labels" onclick="toggleLayer('labels')">
+                📝 Labels
+            </button>
             <button class="btn" id="btn-muscles" onclick="toggleLayer('muscles')">
                 💪 Muscles
             </button>
             <button class="btn" id="btn-keypoints" onclick="toggleLayer('keypoints')">
                 🎯 Keypoints
+            </button>
+            <button class="btn" id="btn-aruco" onclick="toggleLayer('aruco')">
+                🎲 ArUco
             </button>
             <button class="btn" id="btn-ar-place" onclick="toggleARPlacement()">
                 📍 AR Place
@@ -310,6 +356,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady()" type="text/javascript"></script>
 
     <script>
         // Configuration
@@ -317,8 +364,10 @@
             video: { width: 640, height: 480 },
             layers: {
                 skeleton: false,
+                labels: false,
                 muscles: false,
                 keypoints: false,
+                aruco: false,
                 debug: true
             },
             arPlacement: {
@@ -339,6 +388,40 @@
         let lastTime = Date.now();
         let detectionCount = 0;
         let processedFrame = null;
+        let cvReady = false;
+        let detectedMarkers = [];
+
+        // Anatomical labels data (orthopedic terminology)
+        const anatomicalLabels = {
+            // Major joints with medical terminology
+            joints: [
+                { keypoints: [11], name: "L. Glenohumeral", desc: "Shoulder Joint", type: "joint" },
+                { keypoints: [12], name: "R. Glenohumeral", desc: "Shoulder Joint", type: "joint" },
+                { keypoints: [13], name: "L. Elbow", desc: "Humeroulnar Joint", type: "joint" },
+                { keypoints: [14], name: "R. Elbow", desc: "Humeroulnar Joint", type: "joint" },
+                { keypoints: [15], name: "L. Wrist", desc: "Radiocarpal Joint", type: "joint" },
+                { keypoints: [16], name: "R. Wrist", desc: "Radiocarpal Joint", type: "joint" },
+                { keypoints: [23], name: "L. Hip", desc: "Acetabulofemoral", type: "joint" },
+                { keypoints: [24], name: "R. Hip", desc: "Acetabulofemoral", type: "joint" },
+                { keypoints: [25], name: "L. Knee", desc: "Tibiofemoral Joint", type: "joint" },
+                { keypoints: [26], name: "R. Knee", desc: "Tibiofemoral Joint", type: "joint" },
+                { keypoints: [27], name: "L. Ankle", desc: "Talocrural Joint", type: "joint" },
+                { keypoints: [28], name: "R. Ankle", desc: "Talocrural Joint", type: "joint" }
+            ],
+            // Bone segments
+            bones: [
+                { keypoints: [11, 13], name: "L. Humerus", desc: "Upper Arm Bone", type: "bone" },
+                { keypoints: [12, 14], name: "R. Humerus", desc: "Upper Arm Bone", type: "bone" },
+                { keypoints: [13, 15], name: "L. Radius/Ulna", desc: "Forearm Bones", type: "bone" },
+                { keypoints: [14, 16], name: "R. Radius/Ulna", desc: "Forearm Bones", type: "bone" },
+                { keypoints: [23, 25], name: "L. Femur", desc: "Thigh Bone", type: "bone" },
+                { keypoints: [24, 26], name: "R. Femur", desc: "Thigh Bone", type: "bone" },
+                { keypoints: [25, 27], name: "L. Tibia/Fibula", desc: "Lower Leg Bones", type: "bone" },
+                { keypoints: [26, 28], name: "R. Tibia/Fibula", desc: "Lower Leg Bones", type: "bone" },
+                { keypoints: [23, 24], name: "Pelvis", desc: "Hip Girdle", type: "bone" },
+                { keypoints: [11, 12], name: "Clavicles", desc: "Collar Bones", type: "bone" }
+            ]
+        };
 
         // Device orientation tracking for AR
         let deviceOrientation = {
@@ -383,6 +466,12 @@
             html += `<div class="debug-line ${currentPose ? 'debug-good' : 'debug-warning'}">
                 ${currentPose ? '✓ Pose: Detected' : '⚠ Pose: Not Detected'}
             </div>`;
+            html += `<div class="debug-line ${cvReady ? 'debug-good' : 'debug-warning'}">
+                ${cvReady ? '✓ OpenCV: Ready' : '⏳ OpenCV: Loading...'}
+            </div>`;
+            if (detectedMarkers.length > 0) {
+                html += `<div class="debug-line debug-good">🎲 ArUco Markers: ${detectedMarkers.length}</div>`;
+            }
             html += `<div class="debug-line debug-info">Detections: ${detectionCount}</div>`;
             html += `<div class="debug-line debug-info">FPS: ${fps}</div>`;
 
@@ -592,6 +681,130 @@
             addDebug(`Placed ${item.emoji} at (${Math.round(x)}, ${Math.round(y)})`, 'good');
         }
 
+        // OpenCV ready callback
+        function onOpenCvReady() {
+            cvReady = true;
+            addDebug('✓ OpenCV loaded for ArUco detection', 'good');
+        }
+
+        // Detect ArUco markers
+        function detectArucoMarkers() {
+            if (!cvReady || !config.layers.aruco) return;
+
+            try {
+                // Create mat from video
+                const src = cv.imread(video);
+                const gray = new cv.Mat();
+                cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+
+                // ArUco dictionary (DICT_4X4_50)
+                const dictionary = new cv.aruco_Dictionary(cv.DICT_4X4_50);
+                const markerIds = new cv.Mat();
+                const markerCorners = new cv.MatVector();
+                const parameters = new cv.aruco_DetectorParameters();
+
+                // Detect markers
+                cv.detectMarkers(gray, dictionary, markerCorners, markerIds, parameters);
+
+                detectedMarkers = [];
+
+                if (markerIds.rows > 0) {
+                    for (let i = 0; i < markerIds.rows; i++) {
+                        const corners = markerCorners.get(i);
+                        const cornersData = [];
+                        for (let j = 0; j < corners.rows; j++) {
+                            cornersData.push({
+                                x: corners.data32F[j * 2],
+                                y: corners.data32F[j * 2 + 1]
+                            });
+                        }
+                        detectedMarkers.push({
+                            id: markerIds.data32S[i],
+                            corners: cornersData
+                        });
+                    }
+                }
+
+                // Draw markers on aruco overlay
+                const arucoCanvas = document.getElementById('aruco-overlay');
+                if (!arucoCanvas.width) {
+                    arucoCanvas.width = canvas.width;
+                    arucoCanvas.height = canvas.height;
+                }
+                const arucoCtx = arucoCanvas.getContext('2d');
+                arucoCtx.clearRect(0, 0, arucoCanvas.width, arucoCanvas.height);
+
+                detectedMarkers.forEach(marker => {
+                    // Draw marker outline
+                    arucoCtx.beginPath();
+                    arucoCtx.moveTo(marker.corners[0].x, marker.corners[0].y);
+                    for (let i = 1; i < 4; i++) {
+                        arucoCtx.lineTo(marker.corners[i].x, marker.corners[i].y);
+                    }
+                    arucoCtx.closePath();
+                    arucoCtx.strokeStyle = '#00ff00';
+                    arucoCtx.lineWidth = 3;
+                    arucoCtx.stroke();
+
+                    // Draw marker ID
+                    const centerX = marker.corners.reduce((sum, c) => sum + c.x, 0) / 4;
+                    const centerY = marker.corners.reduce((sum, c) => sum + c.y, 0) / 4;
+                    arucoCtx.fillStyle = '#00ff00';
+                    arucoCtx.font = 'bold 20px Arial';
+                    arucoCtx.fillText(`ID: ${marker.id}`, centerX - 25, centerY);
+                });
+
+                // Cleanup
+                src.delete();
+                gray.delete();
+                markerIds.delete();
+                markerCorners.delete();
+
+            } catch (error) {
+                console.error('ArUco detection error:', error);
+            }
+        }
+
+        // Draw anatomical labels
+        function drawAnatomicalLabels(keypoints) {
+            // Remove old labels
+            document.querySelectorAll('.anatomical-label').forEach(el => el.remove());
+
+            if (!config.layers.labels) return;
+
+            // Draw joint labels
+            anatomicalLabels.joints.forEach(label => {
+                if (label.keypoints.length === 1) {
+                    const kp = keypoints[label.keypoints[0]];
+                    if (kp && kp.score > 0.2) {
+                        createLabel(kp.x, kp.y, label.name, label.type);
+                    }
+                }
+            });
+
+            // Draw bone labels (at midpoint)
+            anatomicalLabels.bones.forEach(label => {
+                if (label.keypoints.length === 2) {
+                    const kp1 = keypoints[label.keypoints[0]];
+                    const kp2 = keypoints[label.keypoints[1]];
+                    if (kp1 && kp2 && kp1.score > 0.2 && kp2.score > 0.2) {
+                        const midX = (kp1.x + kp2.x) / 2;
+                        const midY = (kp1.y + kp2.y) / 2;
+                        createLabel(midX, midY, label.name, label.type);
+                    }
+                }
+            });
+        }
+
+        function createLabel(x, y, text, type) {
+            const label = document.createElement('div');
+            label.className = `anatomical-label ${type}`;
+            label.textContent = text;
+            label.style.left = x + 'px';
+            label.style.top = y + 'px';
+            document.getElementById('container').appendChild(label);
+        }
+
         // Initialize
         async function init() {
             try {
@@ -725,6 +938,11 @@
                 // Detect poses on PROCESSED frame
                 const poses = await detector.estimatePoses(processedFrame);
 
+                // Detect ArUco markers (independent of pose detection)
+                if (frameCount % 3 === 0) {  // Every 3 frames to save performance
+                    detectArucoMarkers();
+                }
+
                 // Clear canvas
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -753,6 +971,11 @@
 
                     if (config.layers.muscles) {
                         drawMuscles(scaledKeypoints);
+                    }
+
+                    // Draw anatomical labels
+                    if (config.layers.labels) {
+                        drawAnatomicalLabels(scaledKeypoints);
                     }
 
                     // Update debug every 30 frames
