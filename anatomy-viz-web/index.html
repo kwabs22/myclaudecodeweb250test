@@ -31,6 +31,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        #video.flipped {
             transform: scaleX(-1);
         }
 
@@ -40,6 +43,9 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        #canvas.flipped {
             transform: scaleX(-1);
         }
 
@@ -164,6 +170,54 @@
             z-index: 5;
         }
 
+        .ar-item {
+            position: absolute;
+            font-size: 40px;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            user-select: none;
+            transition: transform 0.2s;
+        }
+
+        .ar-item:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        #ar-controls {
+            position: absolute;
+            top: 70px;
+            right: 180px;
+            background: rgba(0,0,0,0.9);
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+            z-index: 10;
+            display: none;
+        }
+
+        #ar-controls.active {
+            display: block;
+        }
+
+        .ar-item-btn {
+            background: transparent;
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
+            font-size: 28px;
+            padding: 8px 12px;
+            margin: 3px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ar-item-btn:hover, .ar-item-btn.selected {
+            background: #4ecdc4;
+            transform: scale(1.1);
+        }
+
         @media (max-width: 768px) {
             #debug-panel {
                 font-size: 10px;
@@ -171,6 +225,10 @@
             }
             h1 { font-size: 16px; }
             .btn { padding: 8px 12px; font-size: 11px; }
+            #ar-controls {
+                right: 10px;
+                top: 200px;
+            }
         }
     </style>
 </head>
@@ -199,6 +257,32 @@
             </div>
         </div>
 
+        <div id="ar-controls">
+            <div style="font-weight: bold; margin-bottom: 8px; color: #ff6b6b; font-size: 12px;">
+                📍 Pick item to place:
+            </div>
+            <div>
+                <button class="ar-item-btn selected" onclick="selectARItem('🎯')">🎯</button>
+                <button class="ar-item-btn" onclick="selectARItem('⭐')">⭐</button>
+                <button class="ar-item-btn" onclick="selectARItem('❤️')">❤️</button>
+            </div>
+            <div>
+                <button class="ar-item-btn" onclick="selectARItem('🔴')">🔴</button>
+                <button class="ar-item-btn" onclick="selectARItem('🟢')">🟢</button>
+                <button class="ar-item-btn" onclick="selectARItem('🔵')">🔵</button>
+            </div>
+            <div>
+                <button class="ar-item-btn" onclick="selectARItem('💎')">💎</button>
+                <button class="ar-item-btn" onclick="selectARItem('🎨')">🎨</button>
+                <button class="ar-item-btn" onclick="selectARItem('🎪')">🎪</button>
+            </div>
+            <div style="margin-top: 8px;">
+                <button class="btn" style="width: 100%; font-size: 11px;" onclick="clearARItems()">
+                    🗑️ Clear All
+                </button>
+            </div>
+        </div>
+
         <div id="controls">
             <button class="btn active" id="btn-debug" onclick="toggleDebug()">
                 🐛 Debug
@@ -211,6 +295,12 @@
             </button>
             <button class="btn" id="btn-keypoints" onclick="toggleLayer('keypoints')">
                 🎯 Keypoints
+            </button>
+            <button class="btn" id="btn-ar-place" onclick="toggleARPlacement()">
+                📍 AR Place
+            </button>
+            <button class="btn active" id="btn-flip" onclick="toggleFlip()">
+                🔄 Mirror
             </button>
         </div>
     </div>
@@ -227,7 +317,13 @@
                 muscles: false,
                 keypoints: false,
                 debug: true
-            }
+            },
+            arPlacement: {
+                enabled: false,
+                selectedItem: '🎯',
+                items: []
+            },
+            flipped: true  // Mirror mode on by default
         };
 
         // Global variables
@@ -289,6 +385,79 @@
             panel.innerHTML = html;
         }
 
+        // AR Placement functions
+        function toggleFlip() {
+            config.flipped = !config.flipped;
+            video.classList.toggle('flipped');
+            canvas.classList.toggle('flipped');
+            document.getElementById('btn-flip').classList.toggle('active');
+            addDebug(`Mirror mode ${config.flipped ? 'ON' : 'OFF'}`, 'info');
+        }
+
+        function toggleARPlacement() {
+            config.arPlacement.enabled = !config.arPlacement.enabled;
+            const btn = document.getElementById('btn-ar-place');
+            btn.classList.toggle('active');
+
+            const arControls = document.getElementById('ar-controls');
+            arControls.classList.toggle('active');
+
+            addDebug(`AR Placement ${config.arPlacement.enabled ? 'ON - Click to place items' : 'OFF'}`,
+                config.arPlacement.enabled ? 'good' : 'info');
+        }
+
+        function selectARItem(item) {
+            config.arPlacement.selectedItem = item;
+
+            // Update button selection
+            document.querySelectorAll('.ar-item-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.textContent === item) {
+                    btn.classList.add('selected');
+                }
+            });
+
+            addDebug(`Selected ${item} for placement`, 'info');
+        }
+
+        function clearARItems() {
+            config.arPlacement.items = [];
+            document.querySelectorAll('.ar-item').forEach(el => el.remove());
+            addDebug('Cleared all AR items', 'info');
+        }
+
+        function placeARItem(x, y) {
+            if (!config.arPlacement.enabled) return;
+
+            const item = {
+                emoji: config.arPlacement.selectedItem,
+                x: x,
+                y: y,
+                id: Date.now()
+            };
+
+            config.arPlacement.items.push(item);
+
+            // Create DOM element
+            const div = document.createElement('div');
+            div.className = 'ar-item';
+            div.textContent = item.emoji;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.dataset.id = item.id;
+
+            // Double click to remove
+            div.addEventListener('dblclick', (e) => {
+                e.stopPropagation();
+                config.arPlacement.items = config.arPlacement.items.filter(i => i.id !== item.id);
+                div.remove();
+                addDebug(`Removed AR item`, 'info');
+            });
+
+            document.getElementById('container').appendChild(div);
+            addDebug(`Placed ${item.emoji} at (${Math.round(x)}, ${Math.round(y)})`, 'good');
+        }
+
         // Initialize
         async function init() {
             try {
@@ -297,6 +466,13 @@
                 // Setup video
                 video = document.getElementById('video');
                 addDebug('📹 Requesting camera...', 'info');
+
+                // Apply initial flip state
+                if (config.flipped) {
+                    video.classList.add('flipped');
+                    canvas = document.getElementById('canvas');
+                    canvas.classList.add('flipped');
+                }
 
                 // Request HIGHEST quality camera
                 const stream = await navigator.mediaDevices.getUserMedia({
@@ -313,12 +489,20 @@
                 addDebug('✓ Camera access granted', 'good');
 
                 // Setup canvas
-                canvas = document.getElementById('canvas');
+                if (!canvas) canvas = document.getElementById('canvas');
                 ctx = canvas.getContext('2d');
 
                 // Setup preview canvas
                 previewCanvas = document.getElementById('preview-canvas');
                 previewCtx = previewCanvas.getContext('2d');
+
+                // Add click handler for AR placement
+                canvas.addEventListener('click', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    placeARItem(e.clientX, e.clientY);  // Use screen coordinates
+                });
 
                 await new Promise(resolve => {
                     video.onloadedmetadata = () => {
