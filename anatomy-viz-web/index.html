@@ -245,8 +245,19 @@
             html += `<div class="debug-line debug-info">FPS: ${fps}</div>`;
 
             if (currentPose) {
-                const keypoints = currentPose.keypoints.filter(kp => kp.score > 0.3).length;
-                html += `<div class="debug-line debug-good">Keypoints: ${keypoints}/33</div>`;
+                const highConf = currentPose.keypoints.filter(kp => kp.score > 0.5).length;
+                const medConf = currentPose.keypoints.filter(kp => kp.score > 0.2).length;
+                const allKp = currentPose.keypoints.length;
+                html += `<div class="debug-line debug-info">Keypoints (high): ${highConf}/33</div>`;
+                html += `<div class="debug-line debug-info">Keypoints (med): ${medConf}/33</div>`;
+
+                // Show confidence scores
+                const avgConf = currentPose.keypoints.reduce((sum, kp) => sum + kp.score, 0) / 33;
+                html += `<div class="debug-line ${avgConf > 0.3 ? 'debug-good' : 'debug-warning'}">Avg confidence: ${avgConf.toFixed(3)}</div>`;
+
+                // Show max confidence
+                const maxConf = Math.max(...currentPose.keypoints.map(kp => kp.score));
+                html += `<div class="debug-line debug-info">Max confidence: ${maxConf.toFixed(3)}</div>`;
             }
 
             panel.innerHTML = html;
@@ -344,9 +355,15 @@
 
                     // Update debug every 30 frames
                     if (detectionCount % 30 === 0) {
-                        const goodKeypoints = currentPose.keypoints.filter(kp => kp.score > 0.3).length;
+                        const goodKeypoints = currentPose.keypoints.filter(kp => kp.score > 0.2).length;
+                        const avgConf = currentPose.keypoints.reduce((sum, kp) => sum + kp.score, 0) / 33;
+
                         if (goodKeypoints < 10) {
-                            addDebug(`⚠ Only ${goodKeypoints} keypoints visible`, 'warning');
+                            addDebug(`⚠ Only ${goodKeypoints} keypoints - adjust lighting/distance`, 'warning');
+                        } else if (avgConf < 0.3) {
+                            addDebug(`⚠ Low confidence (${avgConf.toFixed(2)}) - move back from camera`, 'warning');
+                        } else {
+                            addDebug(`✓ Good detection! Turn on layers to see AR`, 'good');
                         }
                     }
                 } else {
@@ -370,21 +387,28 @@
         // Draw keypoints
         function drawKeypoints(keypoints) {
             keypoints.forEach((kp, idx) => {
-                if (kp.score > 0.3) {
-                    // Draw circle
-                    ctx.beginPath();
-                    ctx.arc(kp.x, kp.y, 5, 0, 2 * Math.PI);
-                    ctx.fillStyle = 'lime';
-                    ctx.fill();
-                    ctx.strokeStyle = 'white';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
+                // SHOW ALL KEYPOINTS regardless of confidence!
+                // Color based on confidence
+                let color = 'red';  // Low confidence
+                if (kp.score > 0.5) color = 'lime';  // High confidence
+                else if (kp.score > 0.2) color = 'yellow';  // Medium confidence
 
-                    // Draw label
-                    ctx.fillStyle = 'white';
-                    ctx.font = '10px Arial';
-                    ctx.fillText(idx, kp.x + 8, kp.y - 8);
-                }
+                // Draw circle
+                ctx.beginPath();
+                ctx.arc(kp.x, kp.y, 8, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw label with confidence score
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 11px Arial';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 3;
+                ctx.strokeText(`${idx}:${kp.score.toFixed(2)}`, kp.x + 10, kp.y - 10);
+                ctx.fillText(`${idx}:${kp.score.toFixed(2)}`, kp.x + 10, kp.y - 10);
             });
         }
 
@@ -409,7 +433,8 @@
                 const kp1 = keypoints[i];
                 const kp2 = keypoints[j];
 
-                if (kp1.score > 0.3 && kp2.score > 0.3) {
+                // LOWER threshold to 0.1 for mobile
+                if (kp1.score > 0.1 && kp2.score > 0.1) {
                     // Draw bone
                     ctx.beginPath();
                     ctx.moveTo(kp1.x, kp1.y);
@@ -451,7 +476,8 @@
             const kp2 = keypoints[i2];
             const kp3 = keypoints[i3];
 
-            if (kp1.score > 0.3 && kp2.score > 0.3 && kp3.score > 0.3) {
+            // LOWER threshold to 0.1 for mobile
+            if (kp1.score > 0.1 && kp2.score > 0.1 && kp3.score > 0.1) {
                 const angle = calculateAngle(kp1, kp2, kp3);
                 let isActive = reverse ? angle > threshold : angle < threshold;
 
