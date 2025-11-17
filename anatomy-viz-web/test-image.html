@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Test - Dummy Image</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            overflow: hidden;
+        }
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #4ecdc4;
+            max-width: 90vw;
+            max-height: 80vh;
+        }
+        #debug {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 11px;
+            max-width: 300px;
+            border: 2px solid #4ecdc4;
+            z-index: 10;
+        }
+        .debug-line {
+            margin: 5px 0;
+            padding: 5px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+        }
+        .debug-good { color: #4caf50; }
+        .debug-error { color: #f44336; }
+        .debug-info { color: #2196f3; }
+        .debug-warning { color: #ffa500; }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        button {
+            background: #4ecdc4;
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #45b7af; }
+        h1 {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #4ecdc4;
+            font-size: 18px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>🧪 Test Mode</h1>
+        <canvas id="canvas"></canvas>
+        <div id="debug">
+            <div style="font-weight: bold; color: #4ecdc4; margin-bottom: 10px;">📊 Test Results</div>
+            <div id="debug-content">
+                <div class="debug-line debug-info">Loading...</div>
+            </div>
+        </div>
+        <div id="controls">
+            <button onclick="runTest()">🔄 Run Test Again</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+
+    <script>
+        let canvas, ctx, detector;
+        const debugLogs = [];
+
+        function log(msg, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            debugLogs.push({ time, msg, type });
+            updateDebug();
+            console.log(`[${time}] ${msg}`);
+        }
+
+        function updateDebug() {
+            const panel = document.getElementById('debug-content');
+            let html = '';
+            debugLogs.slice(-15).forEach(d => {
+                html += `<div class="debug-line debug-${d.type}">[${d.time}] ${d.msg}</div>`;
+            });
+            panel.innerHTML = html;
+        }
+
+        async function init() {
+            try {
+                log('🚀 Starting test...', 'info');
+
+                canvas = document.getElementById('canvas');
+                ctx = canvas.getContext('2d');
+
+                log('🧠 Loading AI model...', 'info');
+                const model = poseDetection.SupportedModels.BlazePose;
+                detector = await poseDetection.createDetector(model, {
+                    runtime: 'tfjs',
+                    modelType: 'lite'
+                });
+                log('✓ Model loaded!', 'good');
+
+                runTest();
+
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function runTest() {
+            try {
+                log('📸 Creating test image...', 'info');
+
+                // Create a simple stick figure test image
+                const testCanvas = document.createElement('canvas');
+                testCanvas.width = 640;
+                testCanvas.height = 480;
+                const testCtx = testCanvas.getContext('2d');
+
+                // Fill background
+                testCtx.fillStyle = '#f0f0f0';
+                testCtx.fillRect(0, 0, 640, 480);
+
+                // Draw a stick figure person
+                testCtx.strokeStyle = '#000';
+                testCtx.fillStyle = '#000';
+                testCtx.lineWidth = 8;
+                testCtx.lineCap = 'round';
+
+                // Head
+                testCtx.beginPath();
+                testCtx.arc(320, 100, 40, 0, 2 * Math.PI);
+                testCtx.fill();
+
+                // Body
+                testCtx.beginPath();
+                testCtx.moveTo(320, 140);
+                testCtx.lineTo(320, 280);
+                testCtx.stroke();
+
+                // Left arm
+                testCtx.beginPath();
+                testCtx.moveTo(320, 160);
+                testCtx.lineTo(260, 220);
+                testCtx.stroke();
+
+                // Right arm
+                testCtx.beginPath();
+                testCtx.moveTo(320, 160);
+                testCtx.lineTo(380, 220);
+                testCtx.stroke();
+
+                // Left leg
+                testCtx.beginPath();
+                testCtx.moveTo(320, 280);
+                testCtx.lineTo(280, 400);
+                testCtx.stroke();
+
+                // Right leg
+                testCtx.beginPath();
+                testCtx.moveTo(320, 280);
+                testCtx.lineTo(360, 400);
+                testCtx.stroke();
+
+                log('✓ Test image created', 'good');
+
+                // Resize main canvas
+                canvas.width = 640;
+                canvas.height = 480;
+
+                // Draw test image
+                ctx.drawImage(testCanvas, 0, 0);
+
+                log('🔍 Running pose detection...', 'info');
+
+                // Detect pose
+                const poses = await detector.estimatePoses(testCanvas);
+
+                log(`✓ Detection complete!`, 'good');
+                log(`Found ${poses.length} pose(s)`, poses.length > 0 ? 'good' : 'warning');
+
+                if (poses.length > 0) {
+                    const pose = poses[0];
+                    const keypoints = pose.keypoints;
+
+                    // Count confidence levels
+                    const high = keypoints.filter(kp => kp.score > 0.5).length;
+                    const med = keypoints.filter(kp => kp.score > 0.2).length;
+                    const low = keypoints.filter(kp => kp.score > 0.1).length;
+
+                    log(`Keypoints HIGH (>0.5): ${high}/33`, high > 0 ? 'good' : 'warning');
+                    log(`Keypoints MED (>0.2): ${med}/33`, med > 0 ? 'good' : 'warning');
+                    log(`Keypoints LOW (>0.1): ${low}/33`, low > 0 ? 'info' : 'warning');
+
+                    // Calculate average
+                    const avgConf = keypoints.reduce((sum, kp) => sum + kp.score, 0) / 33;
+                    const maxConf = Math.max(...keypoints.map(kp => kp.score));
+
+                    log(`Avg confidence: ${avgConf.toFixed(3)}`, avgConf > 0.3 ? 'good' : 'warning');
+                    log(`Max confidence: ${maxConf.toFixed(3)}`, 'info');
+
+                    // Draw ALL keypoints
+                    log('🎨 Drawing keypoints...', 'info');
+                    let drawnCount = 0;
+
+                    keypoints.forEach((kp, idx) => {
+                        let color = 'red';
+                        if (kp.score > 0.5) color = 'lime';
+                        else if (kp.score > 0.2) color = 'yellow';
+                        else if (kp.score > 0.1) color = 'orange';
+
+                        // Draw dot
+                        ctx.beginPath();
+                        ctx.arc(kp.x, kp.y, 10, 0, 2 * Math.PI);
+                        ctx.fillStyle = color;
+                        ctx.fill();
+                        ctx.strokeStyle = 'white';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Draw label
+                        ctx.fillStyle = 'white';
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 4;
+                        ctx.font = 'bold 14px Arial';
+                        const label = `${idx}:${kp.score.toFixed(2)}`;
+                        ctx.strokeText(label, kp.x + 15, kp.y - 15);
+                        ctx.fillText(label, kp.x + 15, kp.y - 15);
+
+                        drawnCount++;
+                    });
+
+                    log(`✓ Drew ${drawnCount} keypoints`, 'good');
+
+                    // Draw skeleton if we have enough points
+                    if (med >= 10) {
+                        log('🦴 Drawing skeleton...', 'info');
+                        const connections = [
+                            [11, 13], [13, 15], // Left arm
+                            [12, 14], [14, 16], // Right arm
+                            [11, 12], // Shoulders
+                            [11, 23], [12, 24], [23, 24], // Torso
+                            [23, 25], [25, 27], // Left leg
+                            [24, 26], [26, 28]  // Right leg
+                        ];
+
+                        let boneCount = 0;
+                        connections.forEach(([i, j]) => {
+                            const kp1 = keypoints[i];
+                            const kp2 = keypoints[j];
+
+                            if (kp1.score > 0.1 && kp2.score > 0.1) {
+                                ctx.beginPath();
+                                ctx.moveTo(kp1.x, kp1.y);
+                                ctx.lineTo(kp2.x, kp2.y);
+                                ctx.strokeStyle = '#00FF00';
+                                ctx.lineWidth = 5;
+                                ctx.stroke();
+                                boneCount++;
+                            }
+                        });
+
+                        log(`✓ Drew ${boneCount} bones`, 'good');
+                    }
+
+                    log('━━━━━━━━━━━━━━━━━━━━', 'info');
+                    log('✅ TEST PASSED!', 'good');
+                    log('AI model is working!', 'good');
+
+                } else {
+                    log('⚠ No pose detected', 'warning');
+                    log('This is unusual for test image', 'warning');
+                    log('Trying alternative test...', 'info');
+
+                    // Try with actual photo URL
+                    await loadRealPhoto();
+                }
+
+            } catch (error) {
+                log(`❌ Test failed: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function loadRealPhoto() {
+            try {
+                log('📥 Loading real photo...', 'info');
+
+                // Load a test image with a person
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+
+                // Using a placeholder API that provides random person photos
+                img.src = 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=640&h=480&fit=crop';
+
+                img.onload = async () => {
+                    log('✓ Photo loaded', 'good');
+
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    log('🔍 Detecting pose in photo...', 'info');
+                    const poses = await detector.estimatePoses(img);
+
+                    if (poses.length > 0) {
+                        log(`✓ Found ${poses.length} person(s)!`, 'good');
+
+                        const pose = poses[0];
+                        const high = pose.keypoints.filter(kp => kp.score > 0.5).length;
+                        const med = pose.keypoints.filter(kp => kp.score > 0.2).length;
+
+                        log(`HIGH confidence: ${high}/33`, 'good');
+                        log(`MED confidence: ${med}/33`, med > 10 ? 'good' : 'warning');
+
+                        // Draw keypoints
+                        pose.keypoints.forEach((kp, idx) => {
+                            if (kp.score > 0.1) {
+                                let color = kp.score > 0.5 ? 'lime' : kp.score > 0.2 ? 'yellow' : 'orange';
+
+                                ctx.beginPath();
+                                ctx.arc(kp.x, kp.y, 8, 0, 2 * Math.PI);
+                                ctx.fillStyle = color;
+                                ctx.fill();
+                                ctx.strokeStyle = 'white';
+                                ctx.lineWidth = 2;
+                                ctx.stroke();
+                            }
+                        });
+
+                        log('✅ REAL PHOTO TEST PASSED!', 'good');
+                    } else {
+                        log('⚠ No pose in photo', 'warning');
+                    }
+                };
+
+                img.onerror = () => {
+                    log('⚠ Could not load online photo', 'warning');
+                    log('Using stick figure test only', 'info');
+                };
+
+            } catch (error) {
+                log(`Photo test error: ${error.message}`, 'error');
+            }
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
