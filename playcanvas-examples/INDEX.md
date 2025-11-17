@@ -30,14 +30,14 @@ All 100 algorithms from the LeetCode repositories have been successfully impleme
 10. ✅ shell-sort.js
 
 ### Search Algorithms (8/8) ✅
-1. ✅ binary-search.js
-2. ✅ dfs.js
-3. ✅ bfs.js
-4. ✅ a-star.js
-5. ✅ interpolation-search.js
-6. ✅ exponential-search.js
-7. ✅ ternary-search.js
-8. ✅ jump-search.js
+1. ✅ binary-search.js - "Number Detective"
+2. ✅ dfs.js - "Maze Explorer"
+3. ✅ bfs.js - "Flood Fill Paint"
+4. ✅ binary-search-on-answer.js - "Resource Allocation"
+5. ✅ interpolation-search.js - "Smart Seeker"
+6. ✅ exponential-search.js - "Range Finder"
+7. ✅ ternary-search.js - "Peak Finder"
+8. ✅ jump-search.js - "Block Hopper"
 
 ### Dynamic Programming (22/22) ✅
 1. ✅ fibonacci.js
@@ -64,44 +64,48 @@ All 100 algorithms from the LeetCode repositories have been successfully impleme
 22. ✅ egg-drop.js
 
 ### Graph Algorithms (20/20) ✅
-1. ✅ dijkstra.js
-2. ✅ bellman-ford.js
-3. ✅ floyd-warshall.js
-4. ✅ topological-sort.js
-5. ✅ kruskal-mst.js
-6. ✅ prim-mst.js
-7. ✅ tarjan-scc.js
-8. ✅ kosaraju-scc.js
-9. ✅ union-find.js
-10. ✅ cycle-detection.js
-11. ✅ bipartite-check.js
-12. ✅ island-counting.js
-13. ✅ word-ladder.js
-14. ✅ clone-graph.js
-15. ✅ course-schedule.js
-16. ✅ network-delay.js
-17. ✅ maximum-flow.js
-18. ✅ minimum-cut.js
-19. ✅ traveling-salesman.js
+1. ✅ dijkstra.js - "Delivery Driver"
+2. ✅ bellman-ford.js - "Time Traveler"
+3. ✅ floyd-warshall.js - "Network Architect"
+4. ✅ topological-sort.js - "Course Planner"
+5. ✅ kruskal-mst.js - "Bridge Builder"
+6. ✅ prim-mst.js - "Power Grid"
+7. ✅ tarjan-scc.js - "Social Circles"
+8. ✅ kosaraju-scc.js - "Double Agent"
+9. ✅ union-find.js - "Clan Merger"
+10. ✅ cycle-detection.js - "Loop Detective"
+11. ✅ bipartite-check.js - "Team Divider"
+12. ✅ island-counting.js - "Island Explorer"
+13. ✅ word-ladder.js - "Word Morph Ladder"
+14. ✅ clone-graph.js - "Universe Clone"
+15. ✅ course-schedule.js - "Academic Advisor"
+16. ✅ network-delay.js - "Message Broadcast"
+17. ✅ maximum-flow.js - "Pipeline Manager"
+18. ✅ minimum-cut.js - "Siege Warfare"
+19. ✅ traveling-salesman.js - "World Tour"
+20. ✅ a-star.js - "Smart Navigator"
 
 ### Tree Algorithms (20/20) ✅
-1. ✅ binary-tree-traversal.js
-2. ✅ bst-validation.js
-3. ✅ lca.js
-4. ✅ max-depth.js
-5. ✅ minimum-depth.js
-6. ✅ balanced-check.js
-7. ✅ symmetric-tree.js
-8. ✅ path-sum.js
-9. ✅ maximum-path-sum.js
-10. ✅ serialize-tree.js
-11. ✅ trie.js
-12. ✅ segment-tree.js
-13. ✅ fenwick-tree.js
-14. ✅ avl-tree.js
-15. ✅ red-black-tree.js
-16. ✅ n-ary-tree-traversal.js
-17. ✅ zigzag-traversal.js
+1. ✅ inorder-traversal.js - "Tree Walker - Inorder"
+2. ✅ preorder-traversal.js - "Tree Walker - Preorder"
+3. ✅ postorder-traversal.js - "Tree Walker - Postorder"
+4. ✅ binary-tree-traversal.js - "Tree Explorer" (Level-order + all traversals)
+5. ✅ zigzag-traversal.js - "Ski Slalom"
+6. ✅ bst-validation.js - "Tree Inspector"
+7. ✅ lca.js - "Family Tree"
+8. ✅ max-depth.js - "Deep Diver"
+9. ✅ minimum-depth.js - "Quick Escape"
+10. ✅ balanced-check.js - "Balance Beam"
+11. ✅ symmetric-tree.js - "Mirror Palace"
+12. ✅ path-sum.js - "Treasure Path"
+13. ✅ maximum-path-sum.js - "Gold Rush"
+14. ✅ serialize-tree.js - "Save & Load"
+15. ✅ trie.js - "Auto-Complete"
+16. ✅ segment-tree.js - "Territory Manager"
+17. ✅ fenwick-tree.js - "Score Tracker"
+18. ✅ avl-tree.js - "Balance Master"
+19. ✅ red-black-tree.js - "Color Code"
+20. ✅ n-ary-tree-traversal.js - "Family Reunion"
 
 ### String Algorithms (10/10) ✅
 1. ✅ kmp-pattern-matching.js
