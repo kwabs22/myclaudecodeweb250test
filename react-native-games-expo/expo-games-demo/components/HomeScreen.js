@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const games = [
-  // Puzzle Games
+  // Puzzle Games (11 games)
   {
     category: 'Puzzle Games',
     games: [
@@ -13,9 +13,13 @@ const games = [
       { name: 'Tetris', description: 'Classic falling blocks puzzle', route: 'Tetris', color: '#00F0F0' },
       { name: '2048', description: 'Merge tiles to reach 2048', route: 'Game2048', color: '#EDC22E' },
       { name: 'Bubble Pop', description: 'Pop connected bubbles', route: 'BubblePop', color: '#FF69B4' },
+      { name: 'Maze Runner', description: 'Navigate through generated mazes', route: 'MazeRunner', color: '#8E44AD' },
+      { name: 'Jigsaw Puzzle', description: 'Solve the jigsaw puzzle', route: 'JigsawPuzzle', color: '#3498DB' },
+      { name: 'Word Search', description: 'Find hidden words in the grid', route: 'WordSearch', color: '#2ECC71' },
+      { name: 'Sliding Puzzle', description: 'Slide tiles to complete the image', route: 'SlidingPuzzle', color: '#E67E22' },
     ],
   },
-  // Arcade Games
+  // Arcade Games (12 games)
   {
     category: 'Arcade Games',
     games: [
@@ -24,37 +28,64 @@ const games = [
       { name: 'Pong', description: 'Classic paddle game vs AI', route: 'Pong', color: '#FFFFFF' },
       { name: 'Stack Blocks', description: 'Stack blocks as high as you can', route: 'StackBlocks', color: '#E94560' },
       { name: 'Circle Tap', description: 'Tap circles before they disappear', route: 'TapTheCircle', color: '#4ECDC4' },
+      { name: 'Endless Runner', description: 'Jump over obstacles endlessly', route: 'EndlessRunner', color: '#F39C12' },
+      { name: 'Space Shooter', description: 'Shoot asteroids in space', route: 'SpaceShooter', color: '#1E3A8A' },
+      { name: 'Brick Breaker', description: 'Classic breakout game', route: 'BrickBreaker', color: '#E74C3C' },
+      { name: 'Fruit Ninja', description: 'Slice falling fruits', route: 'FruitNinja', color: '#FF6347' },
+      { name: 'Color Switch', description: 'Match colors to pass obstacles', route: 'ColorSwitch', color: '#9B59B6' },
+      { name: 'Ball Bounce', description: 'Keep the ball bouncing', route: 'BallBounce', color: '#3498DB' },
+      { name: 'Coin Collector', description: 'Collect coins and avoid obstacles', route: 'CoinCollector', color: '#F1C40F' },
     ],
   },
-  // Strategy Games
+  // Strategy Games (7 games)
   {
     category: 'Strategy Games',
     games: [
       { name: 'Tic Tac Toe', description: 'Classic X\'s and O\'s', route: 'TicTacToe', color: '#3498DB' },
+      { name: 'Ultimate Tic Tac Toe', description: 'Meta tic-tac-toe with 9 boards', route: 'UltimateTicTacToe', color: '#2980B9' },
+      { name: 'Checkers', description: 'Classic checkers game', route: 'Checkers', color: '#C0392B' },
+      { name: 'Chess', description: 'Simplified chess game', route: 'Chess', color: '#34495E' },
+      { name: 'Battleship', description: 'Sink the enemy fleet', route: 'Battleship', color: '#16A085' },
+      { name: 'Dots and Boxes', description: '2-player grid game', route: 'DotsAndBoxes', color: '#8E44AD' },
+      { name: 'Tower Defense', description: 'Defend against enemy waves', route: 'TowerDefense', color: '#27AE60' },
     ],
   },
-  // Casual Games
+  // Casual Games (9 games)
   {
     category: 'Casual Games',
     games: [
       { name: 'Whack A Mole', description: 'Tap moles as they pop up', route: 'WhackAMole', color: '#654321' },
       { name: 'Coin Clicker', description: 'Idle clicker with upgrades', route: 'Clicker', color: '#F1C40F' },
+      { name: 'Balloon Pop', description: 'Pop rising balloons', route: 'BalloonPop', color: '#FF1493' },
+      { name: 'Emoji Match', description: 'Match emoji pairs in grid', route: 'EmojiMatch', color: '#FFD700' },
+      { name: 'Dice Roller', description: 'Roll dice and track history', route: 'DiceRoller', color: '#27AE60' },
+      { name: 'Rock Paper Scissors', description: 'Classic RPS vs CPU', route: 'RockPaperScissors', color: '#4ECDC4' },
+      { name: 'Coffee Shop', description: 'Build your coffee empire', route: 'CoffeeShopIdle', color: '#8B4513' },
+      { name: 'Garden Merge', description: 'Merge plants to grow garden', route: 'GardenMerge', color: '#2ECC71' },
+      { name: 'Solitaire', description: 'Classic card solitaire', route: 'Solitaire', color: '#0B6623' },
     ],
   },
-  // Multiplayer & Social
+  // Multiplayer & Social (5 games)
   {
     category: 'Multiplayer & Social',
     games: [
       { name: 'Quiz Battle', description: 'Answer trivia questions', route: 'QuizBattle', color: '#9B59B6' },
       { name: 'Simon Says', description: 'Remember the color sequence', route: 'SimonSays', color: '#E74C3C' },
       { name: 'Reaction Time', description: 'Test your reflexes', route: 'ReactionTime', color: '#27AE60' },
+      { name: 'Truth or Dare', description: 'Party game with challenges', route: 'TruthOrDare', color: '#E91E63' },
+      { name: 'Draw & Guess', description: 'Draw and guess words', route: 'DrawingGuess', color: '#8B4789' },
     ],
   },
-  // Educational
+  // Educational (6 games)
   {
     category: 'Educational Games',
     games: [
       { name: 'Math Speed', description: 'Solve math problems quickly', route: 'MathSpeed', color: '#16A085' },
+      { name: 'Type Racer', description: 'Test your typing speed', route: 'TypeRacer', color: '#2C3E50' },
+      { name: 'Geography Quiz', description: 'Test your geography knowledge', route: 'GeographyQuiz', color: '#3498DB' },
+      { name: 'Word Chain', description: 'Build word chains by last letter', route: 'WordChain', color: '#34495E' },
+      { name: 'Memory Training', description: 'Train your memory skills', route: 'MemoryTraining', color: '#9B59B6' },
+      { name: 'Language Flashcards', description: 'Learn Spanish vocabulary', route: 'LanguageFlashcards', color: '#E67E22' },
     ],
   },
 ];
