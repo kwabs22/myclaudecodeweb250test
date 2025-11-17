@@ -1,0 +1,117 @@
+🦴 ANATOMY VISUALIZATION - QUICK START 🦴
+
+═══════════════════════════════════════════════════════════
+
+📱 ON YOUR PHONE (Android/iPhone):
+
+1. Transfer "index.html" to your phone
+   - Email it to yourself
+   - Use Google Drive/Dropbox
+   - AirDrop (iPhone)
+
+2. Open with browser:
+   - Chrome (recommended)
+   - Firefox
+   - Safari
+
+3. Allow camera when asked
+
+4. Stand back so your whole body is visible
+
+5. Click buttons to explore!
+
+═══════════════════════════════════════════════════════════
+
+💻 ON YOUR COMPUTER:
+
+METHOD 1 (Easiest):
+   Just double-click "index.html"
+
+METHOD 2 (Better):
+   cd anatomy-viz-web
+   python -m http.server 8000
+   Then open: http://localhost:8000
+
+═══════════════════════════════════════════════════════════
+
+🎮 CONTROLS:
+
+🦴 Skeleton  - Toggle bones on/off
+💪 Muscles   - Toggle muscles (watch them activate!)
+🏷️ Labels   - Show anatomical names
+📚 Info      - Educational information
+
+═══════════════════════════════════════════════════════════
+
+🎯 TRY THIS:
+
+1. Click "🦴 Skeleton" - see your bones!
+2. Click "💪 Muscles" - add muscles
+3. Bend your elbow - watch biceps turn RED!
+4. Extend your leg - watch quadriceps activate!
+5. Click "🏷️ Labels" - learn bone names
+6. Click "📚 Info" - read educational content
+
+═══════════════════════════════════════════════════════════
+
+⚠️ TROUBLESHOOTING:
+
+Camera not working?
+   → Click lock icon in address bar
+   → Allow camera permission
+   → Refresh page
+
+Slow/laggy?
+   → Close other tabs
+   → Use Chrome browser
+   → Move closer to camera
+
+Not detecting body?
+   → Stand further back
+   → Make sure full body visible
+   → Improve lighting
+
+═══════════════════════════════════════════════════════════
+
+✨ WHAT YOU'LL LEARN:
+
+Bones:
+- Skull, Spine, Ribs
+- Arms: Humerus, Radius, Ulna
+- Legs: Femur, Tibia, Fibula
+- Pelvis, Clavicles
+
+Muscles:
+- Biceps (bend elbow to activate!)
+- Quadriceps (extend leg to activate!)
+- Deltoids (shoulder muscles)
+
+PLUS: Real names, functions, and facts!
+
+═══════════════════════════════════════════════════════════
+
+🔒 PRIVACY:
+
+✓ Everything runs in your browser
+✓ No data sent to internet
+✓ No recording
+✓ 100% private
+
+═══════════════════════════════════════════════════════════
+
+📖 NEED HELP?
+
+See README.md for:
+- Full documentation
+- Customization guide
+- Educational activities
+- Advanced features
+
+═══════════════════════════════════════════════════════════
+
+READY? Open index.html and start exploring! 🚀
+
+Questions? Check README.md
+Having fun? Share with friends! 🎉
+
+═══════════════════════════════════════════════════════════
