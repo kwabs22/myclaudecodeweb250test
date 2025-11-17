@@ -5,8 +5,27 @@
 
 ---
 
-## Table of Contents
+## 🚀 Quick Start Guide
 
+**Brand New? Start Here:**
+1. 📚 [Phase 1: Foundation](#phase-1-foundation-months-1-3---0) - Learn programming (FREE)
+2. 🎮 [Phase 2: Simulation](#phase-2-simulation-mastery-months-4-6---0) - Virtual robots (FREE)
+3. 🔧 [Phase 3: DIY Build](#phase-3-diy-build-months-7-9---60-500) - Physical robot ($60-500)
+4. 💻 [Phase 4: Open Source](#phase-4-contributing-to-open-source-months-10-12---0) - Contribute (FREE)
+5. 🏆 [Phase 5: Advanced](#phase-5-advanced-platforms-year-2---variable) - Pro platforms (Year 2+)
+
+**Essential Resources at a Glance:**
+- 🐍 **Python:** [CS50 Python](https://cs50.harvard.edu/python/) | [Automate Boring Stuff](https://automatetheboringstuff.com/)
+- 🎮 **Simulation:** [MuJoCo](https://mujoco.org/) | [PyBullet](https://pybullet.org/) | [Gazebo](https://gazebosim.org/)
+- 🤖 **ROS2:** [Official Docs](https://docs.ros.org/en/humble/) | [The Construct](https://www.theconstruct.ai/)
+- 🧠 **RL:** [Spinning Up](https://spinningup.openai.com/) | [Hugging Face Course](https://huggingface.co/learn/deep-rl-course/)
+- 💬 **Community:** [ROS Discord](https://discord.gg/ros) | [r/robotics](https://reddit.com/r/robotics)
+
+---
+
+## 📋 Table of Contents
+
+### Core Journey
 1. [Understanding the Landscape](#understanding-the-landscape)
 2. [The Reality Check: Costs](#the-reality-check-costs)
 3. [Journey Plan Overview](#journey-plan-overview)
@@ -15,11 +34,14 @@
 6. [Phase 3: DIY Build (Months 7-9) - $60-500](#phase-3-diy-build-months-7-9---60-500)
 7. [Phase 4: Contributing to Open Source (Months 10-12) - $0](#phase-4-contributing-to-open-source-months-10-12---0)
 8. [Phase 5: Advanced Platforms (Year 2+) - Variable](#phase-5-advanced-platforms-year-2---variable)
+
+### Platform & Resources
 9. [Platform-Specific Pathways](#platform-specific-pathways)
 10. [Funding Strategies](#funding-strategies)
 11. [Common Hurdles and Solutions](#common-hurdles-and-solutions)
 12. [Success Metrics](#success-metrics)
 13. [Community Resources](#community-resources)
+14. [🔗 Quick Reference Links](#quick-reference-links)
 
 ---
 
@@ -246,10 +268,19 @@ Learn to work with robots in simulation before touching hardware
   - Simple walking controller
   - Data logging
 
-- **Free Resources:**
-  - MuJoCo Documentation (mujoco.org)
-  - DeepMind MuJoCo Tutorial (GitHub)
-  - Simulate humanoid models from Unitree, AgiBot
+**📚 Free Resources with Direct Links:**
+- 🌐 **Official Website:** [mujoco.org](https://mujoco.org/)
+- 📖 **Documentation:** [MuJoCo Docs](https://mujoco.readthedocs.io/)
+- 🔧 **Installation Guide:** [Getting Started](https://github.com/google-deepmind/mujoco#getting-started)
+- 💻 **GitHub Repository:** [google-deepmind/mujoco](https://github.com/google-deepmind/mujoco)
+- 🎓 **Python Bindings:** [mujoco-py](https://github.com/openai/mujoco-py) or [dm_control](https://github.com/google-deepmind/dm_control)
+- 📝 **Tutorial Series:** [DeepMind Control Suite](https://github.com/google-deepmind/dm_control)
+- 🤖 **Humanoid Models:**
+  - [Unitree MuJoCo](https://github.com/unitreerobotics/unitree_mujoco)
+  - [AgiBot X1 Simulation](https://github.com/AgibotTech/agibot_x1_infer)
+- 📹 **Video Tutorials:**
+  - [MuJoCo Basics Playlist](https://www.youtube.com/results?search_query=mujoco+tutorial)
+  - [RL with MuJoCo](https://www.youtube.com/results?search_query=reinforcement+learning+mujoco)
 
 **Hands-On Project:**
 - Load Unitree H1 model in MuJoCo
@@ -277,10 +308,19 @@ Learn to work with robots in simulation before touching hardware
   - Inverse kinematics
   - Simple behaviors
 
-**Free Resources:**
-- PyBullet Quickstart Guide
-- Bullet3 GitHub examples
-- YouTube tutorials
+**📚 Free Resources with Direct Links:**
+- 🌐 **Official Website:** [pybullet.org](https://pybullet.org/)
+- 📖 **Quickstart Guide:** [PyBullet Quickstart](https://docs.google.com/document/d/10sXEhzFRSnvFcl3XxNGhnD4N2SedqwdAvK3dsihxVUA/)
+- 💻 **GitHub Repository:** [bulletphysics/bullet3](https://github.com/bulletphysics/bullet3)
+- 🐍 **PyPI Package:** [pybullet](https://pypi.org/project/pybullet/) (install: `pip install pybullet`)
+- 📝 **Code Examples:** [bullet3/examples/pybullet](https://github.com/bulletphysics/bullet3/tree/master/examples/pybullet)
+- 🎓 **Tutorial Notebooks:** [PyBullet Examples](https://github.com/bulletphysics/bullet3/tree/master/examples/pybullet/examples)
+- 🤖 **Humanoid Examples:**
+  - [Humanoid Walking](https://github.com/bulletphysics/bullet3/blob/master/examples/pybullet/examples/humanoidMotionCapture.py)
+  - [Robot Gym Environments](https://github.com/benelot/pybullet-gym)
+- 📹 **Video Tutorials:**
+  - [PyBullet Basics](https://www.youtube.com/results?search_query=pybullet+tutorial)
+  - [Humanoid in PyBullet](https://www.youtube.com/results?search_query=pybullet+humanoid)
 
 #### 3. Gazebo (ROS Integration)
 
@@ -303,10 +343,22 @@ Learn to work with robots in simulation before touching hardware
   - Sensor data processing
   - Visualization in RViz
 
-**Free Resources:**
-- Gazebo Tutorials (gazebosim.org)
-- ROS2 Tutorials (docs.ros.org)
-- The Construct (free ROS2 courses)
+**📚 Free Resources with Direct Links:**
+- 🌐 **Official Website:** [gazebosim.org](https://gazebosim.org/)
+- 📖 **Gazebo Classic Tutorials:** [classic.gazebosim.org/tutorials](https://classic.gazebosim.org/tutorials)
+- 🆕 **Gazebo Sim (New):** [gazebosim.org/docs](https://gazebosim.org/docs)
+- 💻 **GitHub Repository:** [gazebosim/gz-sim](https://github.com/gazebosim/gz-sim)
+- 🤖 **ROS2 Integration:** [ROS2 Gazebo Tutorials](https://docs.ros.org/en/humble/Tutorials/Advanced/Simulators/Gazebo/Gazebo.html)
+- 📝 **URDF in Gazebo:** [URDF Tutorial](https://classic.gazebosim.org/tutorials?tut=ros_urdf)
+- 🎓 **The Construct (Free Courses):**
+  - [ROS2 Basics (Free)](https://www.theconstruct.ai/robotigniteacademy_learnros/ros-courses-library/)
+  - [Gazebo Simulation](https://www.theconstruct.ai/)
+- 📦 **ROS2 Packages:**
+  - [ros_gz](https://github.com/gazebosim/ros_gz) - ROS2/Gazebo bridge
+  - [gazebo_ros_pkgs](https://github.com/ros-simulation/gazebo_ros_pkgs)
+- 📹 **Video Tutorials:**
+  - [Gazebo ROS2 Tutorial](https://www.youtube.com/results?search_query=gazebo+ros2+tutorial)
+  - [Articulated Robotics YouTube](https://www.youtube.com/@ArticulatedRobotics)
 
 #### 4. NVIDIA Isaac Sim (Free for Individuals)
 
@@ -333,10 +385,23 @@ Learn to work with robots in simulation before touching hardware
 - NVIDIA GPU (borrow computer lab if needed)
 - Free educational license
 
-**Free Resources:**
-- NVIDIA Isaac Sim Documentation
-- Isaac Gym examples (GitHub)
-- YouTube tutorials from NVIDIA
+**📚 Free Resources with Direct Links:**
+- 🌐 **Omniverse Platform:** [nvidia.com/omniverse](https://www.nvidia.com/en-us/omniverse/)
+- 🎮 **Isaac Sim:** [developer.nvidia.com/isaac-sim](https://developer.nvidia.com/isaac-sim)
+- 📖 **Documentation:** [Isaac Sim Docs](https://docs.omniverse.nvidia.com/isaacsim/latest/index.html)
+- 💻 **Isaac Gym (Legacy):** [github.com/NVIDIA-Omniverse/IsaacGymEnvs](https://github.com/NVIDIA-Omniverse/IsaacGymEnvs)
+- 🆕 **Isaac Lab (New):** [isaac-sim.github.io/IsaacLab](https://isaac-sim.github.io/IsaacLab/)
+- 📝 **Getting Started:** [Isaac Sim Quickstart](https://docs.omniverse.nvidia.com/isaacsim/latest/introductory_tutorials/tutorial_intro_interface.html)
+- 🎓 **Tutorials:**
+  - [Core API Tutorials](https://docs.omniverse.nvidia.com/isaacsim/latest/core_api_tutorials/index.html)
+  - [RL Training](https://docs.omniverse.nvidia.com/isaacsim/latest/reinforcement_learning_tutorials/index.html)
+- 🤖 **Humanoid RL:**
+  - [Humanoid-Gym](https://github.com/roboterax/humanoid-gym) - Works with Isaac Lab
+  - [Unitree RL Lab](https://github.com/unitreerobotics/unitree_rl_lab)
+- 📹 **Video Tutorials:**
+  - [NVIDIA Isaac Sim Playlist](https://www.youtube.com/playlist?list=PL3jK4xNnlCVf1SzxjCm7ZxDBNl9QYyV8X)
+  - [Isaac Lab Tutorials](https://www.youtube.com/results?search_query=isaac+lab+tutorial)
+- 💡 **Google Colab Alternative:** Free GPU access if no local GPU available
 
 ### ROS 2 Mastery
 
@@ -365,11 +430,32 @@ Learn to work with robots in simulation before touching hardware
   - Navigation2
   - Sensor integration
 
-**Free Resources:**
-- Official ROS2 Documentation
-- The Construct (ROS2 courses, free tier)
-- Articulated Robotics (YouTube)
-- ROS2 For Beginners (Udemy, often free)
+**📚 Free Resources with Direct Links:**
+- 🌐 **Official Website:** [ros.org](https://www.ros.org/)
+- 📖 **ROS2 Documentation:** [docs.ros.org/en/humble](https://docs.ros.org/en/humble/)
+- 🔧 **Installation Guide:** [ROS2 Installation](https://docs.ros.org/en/humble/Installation.html)
+- 📝 **Tutorials:** [ROS2 Tutorials](https://docs.ros.org/en/humble/Tutorials.html)
+- 🎓 **Free Courses:**
+  - [The Construct](https://www.theconstruct.ai/) - Free tier available
+  - [ROS2 Basics Course](https://www.theconstruct.ai/robotigniteacademy_learnros/ros-courses-library/)
+- 📹 **YouTube Channels:**
+  - [Articulated Robotics](https://www.youtube.com/@ArticulatedRobotics) - Excellent beginner series
+  - [The Construct](https://www.youtube.com/@TheConstructsim)
+  - [Robotics Back-End](https://www.youtube.com/@RoboticsBackEnd)
+- 💻 **GitHub Resources:**
+  - [ros2/examples](https://github.com/ros2/examples) - Official examples
+  - [ros2/demos](https://github.com/ros2/demos)
+- 🤖 **Humanoid-Specific:**
+  - [Unitree ROS2](https://github.com/unitreerobotics/unitree_ros2)
+  - [PAL Robotics](https://github.com/pal-robotics)
+- 📦 **Key Packages:**
+  - [ros2_control](https://control.ros.org/humble/index.html) - Robot control
+  - [MoveIt2](https://moveit.picknik.ai/humble/index.html) - Motion planning
+  - [Navigation2](https://navigation.ros.org/) - Navigation stack
+- 💬 **Community:**
+  - [ROS Discourse](https://discourse.ros.org/) - Official forum
+  - [ROS Discord](https://discord.gg/ros) - Real-time chat
+  - [Robotics Stack Exchange](https://robotics.stackexchange.com/questions/tagged/ros2)
 
 ### AI/ML Foundations
 
@@ -384,16 +470,39 @@ Learn to work with robots in simulation before touching hardware
 - Policy Gradients
 - PPO (Proximal Policy Optimization)
 
-**Free Resources:**
-- Andrew Ng's Machine Learning (Coursera, audit free)
-- Deep RL Bootcamp (Berkeley, YouTube)
-- Spinning Up in Deep RL (OpenAI)
-- Hugging Face Deep RL Course (free)
+**📚 Free Resources with Direct Links:**
 
-**Framework:**
-- PyTorch (recommended for RL)
-- Fast.ai course (free)
-- PyTorch tutorials (pytorch.org)
+**🧠 Machine Learning Courses:**
+- [Andrew Ng's ML Course](https://www.coursera.org/learn/machine-learning) - Coursera (audit free)
+- [Fast.ai Practical Deep Learning](https://course.fast.ai/) - Completely free
+- [Deep Learning Specialization](https://www.coursera.org/specializations/deep-learning) - Coursera
+
+**🎮 Reinforcement Learning:**
+- [Spinning Up in Deep RL](https://spinningup.openai.com/) - OpenAI (comprehensive!)
+- [Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures) - Berkeley (YouTube)
+- [Hugging Face Deep RL Course](https://huggingface.co/learn/deep-rl-course/) - Free & interactive
+- [David Silver's RL Course](https://www.davidsilver.uk/teaching/) - DeepMind (videos on YouTube)
+
+**🔥 PyTorch (Recommended for RL):**
+- [Official PyTorch Tutorials](https://pytorch.org/tutorials/)
+- [PyTorch for Deep Learning](https://www.learnpytorch.io/) - Free course
+- [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
+- [PyTorch Examples](https://github.com/pytorch/examples)
+
+**🤖 RL for Robotics:**
+- [Humanoid-Gym Framework](https://github.com/roboterax/humanoid-gym) - Ready to use
+- [Stable-Baselines3](https://stable-baselines3.readthedocs.io/) - RL algorithms
+- [RLlib (Ray)](https://docs.ray.io/en/latest/rllib/index.html) - Scalable RL
+- [CleanRL](https://github.com/vwxyzjn/cleanrl) - Clean RL implementations
+
+**📹 Video Resources:**
+- [Yannic Kilcher](https://www.youtube.com/@YannicKilcher) - Paper explanations
+- [Two Minute Papers](https://www.youtube.com/@TwoMinutePapers) - Latest research
+- [Arxiv Insights](https://www.youtube.com/@ArxivInsights) - Deep dives
+
+**📊 Visualization & Debugging:**
+- [TensorBoard](https://www.tensorflow.org/tensorboard) - Training visualization
+- [Weights & Biases](https://wandb.ai/) - Experiment tracking (free tier)
 
 ### Deliverables (End of Month 6)
 
@@ -1490,6 +1599,172 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 - Virtual attendance
 - Student volunteer programs
 - Networking opportunities
+
+---
+
+## 🔗 Quick Reference Links
+
+### 🎓 Learning Platforms (All Free or Audit-Free)
+
+**Programming:**
+- [CS50 Python](https://cs50.harvard.edu/python/) - Harvard's intro to Python
+- [Automate the Boring Stuff](https://automatetheboringstuff.com/) - Practical Python book
+- [Learn C++](https://www.learncpp.com/) - Comprehensive C++ tutorial
+- [LeetCode](https://leetcode.com/) - Coding practice
+- [Project Euler](https://projecteuler.net/) - Math/programming challenges
+
+**Mathematics:**
+- [3Blue1Brown - Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) - Visual learning
+- [Khan Academy - Linear Algebra](https://www.khanacademy.org/math/linear-algebra)
+- [Khan Academy - Calculus](https://www.khanacademy.org/math/calculus-1)
+- [MIT OCW 18.06](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/) - Linear algebra course
+
+**Robotics:**
+- [Modern Robotics Book](http://hades.mech.northwestern.edu/index.php/Modern_Robotics) - Free textbook
+- [Modern Robotics YouTube](https://www.youtube.com/playlist?list=PLggLP4f-rq02vX0OQQ5vrCxbJrzamYDfx) - Course videos
+- [Underactuated Robotics](https://underactuated.mit.edu/) - MIT course
+
+### 🎮 Simulation Tools
+
+**Simulators:**
+- [MuJoCo](https://mujoco.org/) - Download & docs
+- [PyBullet](https://pybullet.org/) - Quick start guide
+- [Gazebo](https://gazebosim.org/) - ROS integration
+- [Isaac Sim](https://developer.nvidia.com/isaac-sim) - NVIDIA platform
+
+**ROS2:**
+- [ROS2 Humble Docs](https://docs.ros.org/en/humble/)
+- [Install ROS2](https://docs.ros.org/en/humble/Installation.html)
+- [ROS2 Tutorials](https://docs.ros.org/en/humble/Tutorials.html)
+- [The Construct](https://www.theconstruct.ai/) - Interactive courses
+
+### 🧠 AI/ML Resources
+
+**Courses:**
+- [Spinning Up in Deep RL](https://spinningup.openai.com/) - OpenAI's RL guide
+- [Hugging Face Deep RL](https://huggingface.co/learn/deep-rl-course/) - Interactive course
+- [Fast.ai](https://course.fast.ai/) - Practical deep learning
+- [Andrew Ng ML](https://www.coursera.org/learn/machine-learning) - Classic course
+
+**Frameworks:**
+- [PyTorch](https://pytorch.org/) - Deep learning framework
+- [Stable-Baselines3](https://stable-baselines3.readthedocs.io/) - RL algorithms
+- [Humanoid-Gym](https://github.com/roboterax/humanoid-gym) - Humanoid RL framework
+
+### 🤖 Open Source Robot Platforms
+
+**Fully Open Source:**
+- [AgiBot X1](https://github.com/AgibotTech)
+  - [Inference Code](https://github.com/AgibotTech/agibot_x1_infer)
+  - [Training Code](https://github.com/AgibotTech/agibot_x1_train)
+  - [Hardware Design](https://github.com/AgibotTech/agibot_x1_hardware)
+  - [Documentation](https://www.agibot.com/DOCS)
+- [Unitree Robotics](https://github.com/unitreerobotics)
+  - [SDK2](https://github.com/unitreerobotics/unitree_sdk2)
+  - [ROS2 Integration](https://github.com/unitreerobotics/unitree_ros2)
+  - [MuJoCo Simulation](https://github.com/unitreerobotics/unitree_mujoco)
+  - [RL Lab](https://github.com/unitreerobotics/unitree_rl_lab)
+- [PAL Robotics TALOS](https://github.com/pal-robotics)
+- [Berkeley Humanoid Lite](https://github.com/HybridRobotics/Berkeley-Humanoid-Lite)
+- [Poppy Humanoid](https://github.com/poppy-project/poppy-humanoid)
+
+**DIY Budget Robots:**
+- [RoboPrime](https://www.instructables.com/search/?q=roboprime) - $60-100
+- [MIA-1](https://www.instructables.com/MIA-1-Open-Source-Advanced-Hand-Made-Humanoid-Robo/) - Hand-made
+- [Sparky](https://www.instructables.com/Sparky-the-Open-Source-Humanoid-Robot/) - Student-focused
+
+### 💻 Developer Tools
+
+**Version Control:**
+- [Git Tutorial](https://git-scm.com/book/en/v2) - Pro Git book
+- [GitHub Skills](https://skills.github.com/) - Interactive learning
+- [Git-it](https://github.com/jlord/git-it-electron) - Desktop app tutorial
+
+**IDEs & Editors:**
+- [VS Code](https://code.visualstudio.com/) - Popular editor
+- [PyCharm Community](https://www.jetbrains.com/pycharm/download/) - Python IDE
+- [Jupyter](https://jupyter.org/) - Interactive notebooks
+
+**Cloud Computing (Free Tiers):**
+- [Google Colab](https://colab.research.google.com/) - Free GPU/TPU
+- [Kaggle Notebooks](https://www.kaggle.com/code) - Free GPU
+- [GitHub Codespaces](https://github.com/features/codespaces) - 60 hrs/month free
+
+### 💬 Community & Forums
+
+**Discord Servers:**
+- [ROS Discord](https://discord.gg/ros)
+- [Robotics Discord](https://discord.gg/robotics)
+- [Machine Learning Discord](https://discord.gg/machinelearning)
+- Platform-specific: Search "[Platform Name] Discord"
+
+**Forums & Q&A:**
+- [ROS Discourse](https://discourse.ros.org/)
+- [Robotics Stack Exchange](https://robotics.stackexchange.com/)
+- [r/robotics](https://reddit.com/r/robotics)
+- [r/ROS](https://reddit.com/r/ROS)
+- [r/reinforcementlearning](https://reddit.com/r/reinforcementlearning)
+
+**YouTube Channels:**
+- [Articulated Robotics](https://www.youtube.com/@ArticulatedRobotics) - ROS2 tutorials
+- [The Construct](https://www.youtube.com/@TheConstructsim) - ROS courses
+- [Robotics Back-End](https://www.youtube.com/@RoboticsBackEnd) - Tutorials
+- [Two Minute Papers](https://www.youtube.com/@TwoMinutePapers) - Latest AI research
+- [3Blue1Brown](https://www.youtube.com/@3blue1brown) - Math visualizations
+
+### 🏆 Competitions & Challenges
+
+**Robotics Competitions:**
+- [RoboCup](https://www.robocup.org/) - International competition
+- [DARPA Challenges](https://www.darpa.mil/) - When available
+- [First Robotics](https://www.firstinspires.org/) - Student competitions
+
+**Coding Challenges:**
+- [LeetCode](https://leetcode.com/) - Algorithm practice
+- [Advent of Code](https://adventofcode.com/) - December challenge
+- [Kaggle Competitions](https://www.kaggle.com/competitions) - ML challenges
+
+### 💰 Funding Resources
+
+**Grants & Scholarships:**
+- [NSF GRFP](https://www.nsfgrfp.org/) - Graduate research fellowship
+- [IEEE Scholarships](https://www.ieee.org/membership/students/scholarships/index.html)
+- University research grants (check your school)
+
+**Part-Time Work:**
+- [Upwork](https://www.upwork.com/) - Freelance programming
+- [Fiverr](https://www.fiverr.com/) - Small gigs
+- [Tutor.com](https://www.tutor.com/) - Online tutoring
+
+### 📚 Free Textbooks
+
+**Robotics:**
+- [Modern Robotics](http://hades.mech.northwestern.edu/images/7/7f/MR.pdf) - Free PDF
+- [Probabilistic Robotics](http://www.probabilistic-robotics.org/) - Classic text
+- [Planning Algorithms](http://lavalle.pl/planning/) - Free online
+
+**Programming:**
+- [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)
+- [Think Python](https://greenteapress.com/wp/think-python-2e/)
+- [C++ Primer](https://www.learncpp.com/) - Free online version
+
+**Mathematics:**
+- [Linear Algebra Done Right](https://linear.axler.net/) - Available through libraries
+- [Calculus Made Easy](http://calculusmadeeasy.org/) - Classic free book
+
+### 🛠️ Hardware Sourcing (When Ready)
+
+**Electronics:**
+- [AliExpress](https://www.aliexpress.com/) - Cheapest, slow shipping
+- [Amazon](https://www.amazon.com/) - Faster, more expensive
+- [Digi-Key](https://www.digikey.com/) - Professional components
+- [Adafruit](https://www.adafruit.com/) - Learning-friendly
+
+**3D Printing:**
+- [Thingiverse](https://www.thingiverse.com/) - Free STL files
+- [Printables](https://www.printables.com/) - Community designs
+- Local maker spaces (search "[your city] maker space")
+- Library 3D printing services
 
 ---
 
