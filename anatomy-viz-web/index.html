@@ -277,8 +277,11 @@
                 <button class="ar-item-btn" onclick="selectARItem('🎪')">🎪</button>
             </div>
             <div style="margin-top: 8px;">
-                <button class="btn" style="width: 100%; font-size: 11px;" onclick="clearARItems()">
+                <button class="btn" style="width: 100%; font-size: 11px; margin-bottom: 5px;" onclick="clearARItems()">
                     🗑️ Clear All
+                </button>
+                <button class="btn" style="width: 100%; font-size: 11px; background: #ff6b6b;" onclick="recalibrateOrientation()">
+                    🎯 Recalibrate
                 </button>
             </div>
         </div>
@@ -337,6 +340,16 @@
         let detectionCount = 0;
         let processedFrame = null;
 
+        // Device orientation tracking for AR
+        let deviceOrientation = {
+            alpha: 0,  // Z-axis (compass)
+            beta: 0,   // X-axis (front-to-back tilt)
+            gamma: 0,  // Y-axis (left-to-right tilt)
+            initialAlpha: null,
+            initialBeta: null,
+            initialGamma: null
+        };
+
         // Debug messages
         const debugMessages = [];
 
@@ -360,11 +373,23 @@
             // Add current stats
             html += `<div class="debug-line debug-info">━━━━━━━━━━━━━━━━</div>`;
             html += `<div class="debug-line debug-good">✓ Camera: Active</div>`;
+
+            // Motion tracking status
+            const motionActive = deviceOrientation.initialAlpha !== null;
+            html += `<div class="debug-line ${motionActive ? 'debug-good' : 'debug-warning'}">
+                ${motionActive ? '✓ Motion: Tracking' : '⚠ Motion: Inactive'}
+            </div>`;
+
             html += `<div class="debug-line ${currentPose ? 'debug-good' : 'debug-warning'}">
                 ${currentPose ? '✓ Pose: Detected' : '⚠ Pose: Not Detected'}
             </div>`;
             html += `<div class="debug-line debug-info">Detections: ${detectionCount}</div>`;
             html += `<div class="debug-line debug-info">FPS: ${fps}</div>`;
+
+            // AR items count
+            if (config.arPlacement.items.length > 0) {
+                html += `<div class="debug-line debug-info">AR Items: ${config.arPlacement.items.length}</div>`;
+            }
 
             if (currentPose) {
                 const highConf = currentPose.keypoints.filter(kp => kp.score > 0.5).length;
@@ -394,13 +419,19 @@
             addDebug(`Mirror mode ${config.flipped ? 'ON' : 'OFF'}`, 'info');
         }
 
-        function toggleARPlacement() {
+        async function toggleARPlacement() {
             config.arPlacement.enabled = !config.arPlacement.enabled;
             const btn = document.getElementById('btn-ar-place');
             btn.classList.toggle('active');
 
             const arControls = document.getElementById('ar-controls');
             arControls.classList.toggle('active');
+
+            // Request motion sensors when enabling AR for first time
+            if (config.arPlacement.enabled && deviceOrientation.initialAlpha === null) {
+                addDebug('📱 Requesting motion sensors...', 'info');
+                await requestOrientationPermission();
+            }
 
             addDebug(`AR Placement ${config.arPlacement.enabled ? 'ON - Click to place items' : 'OFF'}`,
                 config.arPlacement.enabled ? 'good' : 'info');
@@ -426,6 +457,102 @@
             addDebug('Cleared all AR items', 'info');
         }
 
+        function recalibrateOrientation() {
+            // Reset the initial orientation to current position
+            deviceOrientation.initialAlpha = deviceOrientation.alpha;
+            deviceOrientation.initialBeta = deviceOrientation.beta;
+            deviceOrientation.initialGamma = deviceOrientation.gamma;
+
+            // Update all item positions to current screen positions
+            config.arPlacement.items.forEach(item => {
+                const div = document.querySelector(`.ar-item[data-id="${item.id}"]`);
+                if (div) {
+                    const rect = div.getBoundingClientRect();
+                    item.originalX = rect.left + rect.width / 2;
+                    item.originalY = rect.top + rect.height / 2;
+                }
+            });
+
+            addDebug('🎯 Orientation recalibrated', 'good');
+        }
+
+        // Device orientation handler
+        function handleOrientation(event) {
+            deviceOrientation.alpha = event.alpha || 0;
+            deviceOrientation.beta = event.beta || 0;
+            deviceOrientation.gamma = event.gamma || 0;
+
+            // Set initial orientation on first reading
+            if (deviceOrientation.initialAlpha === null) {
+                deviceOrientation.initialAlpha = deviceOrientation.alpha;
+                deviceOrientation.initialBeta = deviceOrientation.beta;
+                deviceOrientation.initialGamma = deviceOrientation.gamma;
+                addDebug('✓ Device orientation calibrated', 'good');
+            }
+
+            // Update AR item positions based on orientation change
+            updateARPositions();
+        }
+
+        // Update AR item positions based on device movement
+        function updateARPositions() {
+            if (config.arPlacement.items.length === 0) return;
+            if (deviceOrientation.initialAlpha === null) return;
+
+            // Calculate rotation differences
+            const deltaAlpha = deviceOrientation.alpha - deviceOrientation.initialAlpha;
+            const deltaBeta = deviceOrientation.beta - deviceOrientation.initialBeta;
+            const deltaGamma = deviceOrientation.gamma - deviceOrientation.initialGamma;
+
+            // Sensitivity factors (adjust these for better feel)
+            const sensitivityX = 3;  // Left-right movement
+            const sensitivityY = 3;  // Up-down movement
+
+            config.arPlacement.items.forEach(item => {
+                const div = document.querySelector(`.ar-item[data-id="${item.id}"]`);
+                if (!div) return;
+
+                // Calculate new position based on orientation change
+                const offsetX = deltaGamma * sensitivityX;
+                const offsetY = deltaBeta * sensitivityY;
+
+                const newX = item.originalX + offsetX;
+                const newY = item.originalY + offsetY;
+
+                div.style.left = newX + 'px';
+                div.style.top = newY + 'px';
+            });
+        }
+
+        // Request device orientation permission (iOS 13+)
+        async function requestOrientationPermission() {
+            if (typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                try {
+                    const permission = await DeviceOrientationEvent.requestPermission();
+                    if (permission === 'granted') {
+                        window.addEventListener('deviceorientation', handleOrientation);
+                        addDebug('✓ Motion sensors enabled', 'good');
+                        return true;
+                    } else {
+                        addDebug('⚠ Motion permission denied - AR will be screen-locked', 'warning');
+                        return false;
+                    }
+                } catch (error) {
+                    addDebug('⚠ Motion sensors unavailable', 'warning');
+                    return false;
+                }
+            } else if (window.DeviceOrientationEvent) {
+                // Non-iOS devices don't need permission
+                window.addEventListener('deviceorientation', handleOrientation);
+                addDebug('✓ Motion sensors enabled', 'good');
+                return true;
+            } else {
+                addDebug('⚠ Device orientation not supported - AR will be screen-locked', 'warning');
+                return false;
+            }
+        }
+
         function placeARItem(x, y) {
             if (!config.arPlacement.enabled) return;
 
@@ -433,6 +560,13 @@
                 emoji: config.arPlacement.selectedItem,
                 x: x,
                 y: y,
+                originalX: x,  // Store original placement position
+                originalY: y,
+                placementOrientation: {
+                    alpha: deviceOrientation.alpha,
+                    beta: deviceOrientation.beta,
+                    gamma: deviceOrientation.gamma
+                },
                 id: Date.now()
             };
 
