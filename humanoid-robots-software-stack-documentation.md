@@ -19,11 +19,14 @@ Comprehensive documentation of programming languages, frameworks, middleware, an
 11. [Engineered Arts Ameca](#engineered-arts-ameca)
 12. [PAL Robotics TALOS](#pal-robotics-talos)
 13. [AgiBot X1](#agibot-x1)
-14. [Industry-Wide Technologies](#industry-wide-technologies)
-15. [AI/ML Frameworks](#aiml-frameworks)
-16. [Simulation Platforms](#simulation-platforms)
-17. [Communication Protocols & Middleware](#communication-protocols--middleware)
-18. [Real-Time Operating Systems](#real-time-operating-systems)
+14. [Xiaomi CyberOne](#xiaomi-cyberone)
+15. [Clone Robotics](#clone-robotics)
+16. [GitHub Repository Overview](#github-repository-overview)
+17. [Industry-Wide Technologies](#industry-wide-technologies)
+18. [AI/ML Frameworks](#aiml-frameworks)
+19. [Simulation Platforms](#simulation-platforms)
+20. [Communication Protocols & Middleware](#communication-protocols--middleware)
+21. [Real-Time Operating Systems](#real-time-operating-systems)
 
 ---
 
@@ -751,6 +754,295 @@ Disappointed some robotics experts by not embracing ROS, potentially missing out
 - **Likely:** Python for RL training
 - **Likely:** C++ for inference and control
 - **Framework:** Custom AimRT middleware
+
+---
+
+## Xiaomi CyberOne
+
+### Overview
+CyberOne is Xiaomi's humanoid robot unveiled in Beijing in 2022. It is primarily a research demonstration and technology showcase rather than an open development platform.
+
+### Software Development
+
+#### SDK Availability
+- **Status:** No publicly available SDK for CyberOne humanoid robot
+- **Development:** Self-developed by Xiaomi Robotics Lab
+- **Purpose:** Technology exploration and demonstration
+- **Availability:** Not intended as open development platform
+
+### Related Platform: CyberDog (Quadruped)
+
+Note: CyberDog is Xiaomi's quadruped robot, NOT the humanoid CyberOne, but shares the "Cyber" branding.
+
+#### MiRoboticsLab GitHub
+- **Organization:** github.com/MiRoboticsLab
+- **Repositories:** 30+ repositories for CyberDog platform
+- **Key Repositories:**
+  - cyberdog_ros2: Main ROS 2 packages
+  - cyberdog_motor_sdk: Motor control SDK
+  - cyberdog_mivins: Visual-inertial navigation system
+  - Cyberdog_MD: Mechanical design files
+
+### Technical Specifications (CyberOne)
+
+#### Sensors
+- Intel RealSense D455 RGB-D camera (head)
+- Microstrain 3DM-GX5 IMU (torso)
+- Rotary encoders (arms and legs)
+- Custom force/torque sensors
+
+#### Computing
+- Dual Intel i7 Xeon quad-core computers
+- Mi-Sense depth vision module (self-developed)
+
+### Programming Languages
+- **Not Publicly Disclosed:** Specific implementation languages unknown
+- **Likely:** Python and C++ for development
+- **Framework:** Proprietary
+
+### Motors and Actuators
+- Frameless torque motors in joint units
+- Custom-developed joint motors
+- 13 joints with 21 degrees of freedom
+
+### Development Status
+- **Closed Source:** Not available for external development
+- **Purpose:** Technology demonstration
+- **Commercial Availability:** Not for sale
+
+---
+
+## Clone Robotics
+
+### Overview
+Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using proprietary artificial muscle technology called Myofibers.
+
+### Proprietary Technology
+
+#### Cybernet AI Model
+- **Platform:** NVIDIA Jetson Thor GPU
+- **Model:** Cybernet (visuomotor foundation model)
+- **Approach:** End-to-end neural network control
+- **Availability:** Proprietary, not publicly available
+
+### Control System Architecture
+
+#### Sensor System
+- **Depth Cameras:** 4 cameras for vision
+- **Inertial Sensors:** 70 sensors for joint-level feedback
+- **Pressure Sensors:** 320 sensors for muscle force feedback
+- **Integration:** Linked to microcontrollers
+
+#### Processing
+- Microcontrollers send sensor data to GPU
+- NVIDIA Jetson Thor processes Cybernet model
+- Real-time muscle control
+
+### Myofiber Artificial Muscle Technology
+
+#### Innovation (2021)
+- Only artificial muscle achieving unique combination of:
+  - Weight optimization
+  - Power density
+  - Speed
+  - Force-to-weight ratio
+  - Energy efficiency
+
+#### Operation
+- Water pressure-based contraction
+- Biomimetic attachment to skeleton
+- Mimics biological muscle-tendon systems
+
+### Robot Models
+
+#### Protoclone
+- Based on natural human skeleton
+- 1,000+ Myofibers for actuation
+- 200+ degrees of freedom
+- 500+ sensors
+
+#### Clone Alpha
+- Polymer skeleton (206 bone analogues)
+- Hydraulic "vascular system"
+- 500-watt compact pump
+- Preorders accepted
+
+### Software & Programming
+
+#### SDK Availability
+- **Status:** No public GitHub repositories
+- **Software:** Proprietary Cybernet model
+- **Development:** Closed source
+- **Approach:** Internal development only
+
+### Programming Languages
+- **Not Publicly Disclosed:** Specific languages unknown
+- **Neural Network Framework:** Likely PyTorch or TensorFlow
+- **Control Software:** Proprietary
+
+### Development Philosophy
+- Biomimetic design (anatomy first, motion second)
+- Proprietary technology
+- Focus on artificial muscle innovation
+- Closed ecosystem
+
+---
+
+## GitHub Repository Overview
+
+### Fully Open Source Platforms
+
+#### AgiBot X1
+- **Organization:** github.com/AgibotTech
+- **License:** MULAN open source license
+- **Repositories:**
+  - agibot_x1_infer (inference module)
+  - agibot_x1_train (RL training code)
+  - agibot_x1_hardware (mechanical design)
+- **Documentation:** www.agibot.com/DOCS
+- **Status:** Fully open for modification and distribution
+
+#### Unitree H1 & G1
+- **Organization:** github.com/unitreerobotics
+- **Repositories:**
+  - unitree_sdk2 (main SDK for Go2, B2, H1, G1)
+  - unitree_sdk2_python (Python interface)
+  - unitree_ros2 (ROS2 integration)
+  - unitree_mujoco (simulation)
+  - unitree_rl_lab (RL on IsaacLab)
+  - unitree_il_lerobot (imitation learning with LeRobot)
+  - xr_teleoperate (XR device teleoperation)
+- **Status:** Active development, extensive SDK
+
+#### PAL Robotics TALOS
+- **Organization:** github.com/pal-robotics
+- **Repositories:**
+  - talos_robot (main robot repository)
+  - launch_pal (ROS2 launch utilities)
+  - ros2_control implementations
+- **Status:** Open source, community contributions welcome
+- **Documentation:** docs.pal-robotics.com
+
+### Partial Open Source / Community Repositories
+
+#### Boston Dynamics Atlas
+- **OpenHumanoids Project:** github.com/openhumanoids/oh-distro
+  - Developed by MIT and University of Edinburgh
+  - For DARPA Robotics Challenge
+  - Incomplete (Atlas software interface cannot be publicly released)
+- **Boston Dynamics GitHub:** github.com/boston-dynamics
+  - 4 repositories (mainly Spot-focused)
+  - Spot RL Research Kit available
+
+#### Agility Robotics Digit
+- **Community Repositories:**
+  - github.com/GTLIDAR/digit_controller
+  - github.com/grantgib/digit_ros2 (ROS2 workspace for JSON API)
+- **Official:** API access, not full open source
+- **Status:** Developer-friendly but not fully open
+
+#### Fourier Intelligence GR-1 & GR-2
+- **SDK:** Compatible with ROS
+- **GitHub Status:** Limited public repositories
+- **Development Platform:** Open APIs and frameworks (ROS, MuJoCo, Isaac Lab)
+
+### Proprietary / Closed Source Platforms
+
+#### Tesla Optimus
+- **GitHub:** No public repositories
+- **Software:** Fully proprietary
+- **Approach:** Custom stack, no ROS
+- **Reasoning:** Full control, optimization
+
+#### Boston Dynamics (Core Software)
+- **Atlas Software:** Proprietary, not publicly released
+- **Approach:** Commercial, closed ecosystem
+- **Limited Release:** Some Spot tools only
+
+#### Figure AI
+- **Organization:** github.com/figurerobotics (51 repositories)
+- **Official SDK:** Not released
+- **Approach:** Proprietary Helix VLA
+- **Third-Party:** Some community implementations (github.com/pie33000/helix)
+- **Philosophy:** Vertical integration, closed development
+
+#### Sanctuary AI Phoenix
+- **Software:** Proprietary Carbon AI
+- **GitHub:** No public repositories
+- **Approach:** Closed cognitive architecture
+- **Integration:** Can use public LLMs
+
+#### 1X Technologies (NEO & EVE)
+- **Software:** Proprietary Redwood AI model
+- **GitHub:** No public repositories
+- **Approach:** Neural network-based, closed source
+
+#### Xiaomi CyberOne
+- **Humanoid:** No public SDK or repositories
+- **Quadruped (CyberDog):** github.com/MiRoboticsLab (30+ repos)
+- **Approach:** Demonstration platform, not for developers
+
+#### Clone Robotics
+- **Software:** Proprietary Cybernet model
+- **GitHub:** No public repositories
+- **Approach:** Biomimetic proprietary technology
+
+#### Apptronik Apollo
+- **GitHub:** No official public SDK
+- **Approach:** ROS-based with partner development
+- **Platform:** Controlled access for partners
+
+### Research & Academic Platforms
+
+#### Awesome Humanoid Learning
+- **Repository:** github.com/jonyzhang2023/awesome-humanoid-learning
+- **Purpose:** Curated resources for humanoid robot development
+- **Content:** Tracks developments across multiple platforms
+
+#### Poppy Humanoid
+- **Repository:** github.com/poppy-project/poppy-humanoid
+- **Purpose:** Open-source 3D printed humanoid
+- **Focus:** Research and education
+
+#### Berkeley Humanoid Lite
+- **Repository:** github.com/HybridRobotics/Berkeley-Humanoid-Lite
+- **Purpose:** Academic research platform
+
+### Open Source Frameworks & Libraries
+
+#### LeRobot (HuggingFace)
+- **Repository:** github.com/huggingface/lerobot
+- **Purpose:** End-to-end learning for robotics
+- **Integration:** Used with Unitree platforms
+
+#### Humanoid-Gym
+- **Organization:** github.com/roboterax/humanoid-gym
+- **Purpose:** RL framework for humanoid locomotion
+- **Base:** NVIDIA Isaac Gym
+- **Features:** Zero-shot sim-to-real transfer
+
+### Summary by Openness
+
+**Fully Open (Source + Hardware):**
+- AgiBot X1
+- Unitree H1 & G1
+- PAL Robotics TALOS
+
+**Developer-Friendly (APIs/SDKs):**
+- Agility Robotics Digit
+- Fourier GR-1 & GR-2
+- UBTECH Walker
+- Engineered Arts Ameca
+
+**Closed/Proprietary:**
+- Tesla Optimus
+- Boston Dynamics Atlas (core)
+- Figure AI
+- Sanctuary AI
+- 1X Technologies
+- Xiaomi CyberOne
+- Clone Robotics
+- Apptronik Apollo (partner only)
 
 ---
 
