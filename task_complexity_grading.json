@@ -1,0 +1,570 @@
+{
+  "task_grading_framework": {
+    "description": "Task complexity levels mapped to minimum viable models",
+    "version": "1.0",
+    "last_updated": "2025-01-18",
+
+    "complexity_levels": {
+      "level_1_trivial": {
+        "name": "Trivial Tasks",
+        "description": "Simple, single-function operations with clear patterns",
+        "minimum_model": "Qwen2.5-Coder-0.5B",
+        "recommended_model": "Qwen2.5-Coder-1.5B",
+        "min_gpu": "T4",
+        "estimated_cost_per_month": "$15-60",
+        "context_needed": "< 2K tokens",
+        "reasoning_depth": "Minimal",
+        "example_tasks": [
+          {
+            "task": "Add a simple HTML button",
+            "code_example": "Add a 'Save' button to an HTML form",
+            "context_required": "Single HTML file",
+            "success_criteria": "Button appears and has basic styling"
+          },
+          {
+            "task": "Fix obvious syntax error",
+            "code_example": "Missing semicolon or bracket",
+            "context_required": "Single function",
+            "success_criteria": "Code runs without syntax errors"
+          },
+          {
+            "task": "Add console.log statement",
+            "code_example": "Debug by adding logging",
+            "context_required": "Single function",
+            "success_criteria": "Log output appears correctly"
+          },
+          {
+            "task": "Rename a variable",
+            "code_example": "Change 'x' to 'userCount'",
+            "context_required": "Single file",
+            "success_criteria": "All references updated"
+          },
+          {
+            "task": "Add CSS class to element",
+            "code_example": "Add 'btn-primary' class to button",
+            "context_required": "HTML snippet",
+            "success_criteria": "Element has new class"
+          },
+          {
+            "task": "Change string literal",
+            "code_example": "Update error message text",
+            "context_required": "Single line",
+            "success_criteria": "Text updated correctly"
+          },
+          {
+            "task": "Add simple comment",
+            "code_example": "Document what a function does",
+            "context_required": "Single function",
+            "success_criteria": "Clear, helpful comment"
+          }
+        ],
+        "characteristics": {
+          "lines_of_code": "1-10 lines",
+          "files_affected": "1 file",
+          "dependencies": "None",
+          "testing_needed": "Manual visual check",
+          "rollback_risk": "Very low",
+          "time_to_complete": "< 1 minute"
+        }
+      },
+
+      "level_2_simple": {
+        "name": "Simple Tasks",
+        "description": "Single feature implementation, minimal logic",
+        "minimum_model": "Qwen2.5-Coder-1.5B",
+        "recommended_model": "Qwen2.5-Coder-3B",
+        "min_gpu": "T4",
+        "estimated_cost_per_month": "$60-100",
+        "context_needed": "2K - 8K tokens",
+        "reasoning_depth": "Basic",
+        "example_tasks": [
+          {
+            "task": "Add bookmark functionality to website",
+            "code_example": "LocalStorage-based bookmark saving",
+            "context_required": "HTML + JS files (2-3 files)",
+            "success_criteria": "Users can save/retrieve bookmarks",
+            "subtasks": [
+              "Create bookmark button UI",
+              "Handle click event",
+              "Store in LocalStorage",
+              "Retrieve on page load",
+              "Display saved bookmarks"
+            ]
+          },
+          {
+            "task": "Create a simple form validator",
+            "code_example": "Email and password validation",
+            "context_required": "Form HTML and validation logic",
+            "success_criteria": "Shows error messages for invalid inputs"
+          },
+          {
+            "task": "Implement dark mode toggle",
+            "code_example": "CSS variables + localStorage persistence",
+            "context_required": "CSS + JS files",
+            "success_criteria": "Theme switches and persists"
+          },
+          {
+            "task": "Add pagination to list",
+            "code_example": "Next/Previous buttons for items",
+            "context_required": "List rendering code",
+            "success_criteria": "Users can navigate pages"
+          },
+          {
+            "task": "Create modal dialog",
+            "code_example": "Popup with close button",
+            "context_required": "HTML + CSS + minimal JS",
+            "success_criteria": "Modal opens, closes, blocks background"
+          },
+          {
+            "task": "Add search filter to table",
+            "code_example": "Filter table rows by text input",
+            "context_required": "Table HTML + filter logic",
+            "success_criteria": "Rows filter in real-time"
+          },
+          {
+            "task": "Implement tooltip on hover",
+            "code_example": "Show info box on mouse hover",
+            "context_required": "Element + tooltip logic",
+            "success_criteria": "Tooltip appears/disappears correctly"
+          }
+        ],
+        "characteristics": {
+          "lines_of_code": "10-50 lines",
+          "files_affected": "1-3 files",
+          "dependencies": "0-1 libraries",
+          "testing_needed": "Manual + basic unit tests",
+          "rollback_risk": "Low",
+          "time_to_complete": "5-15 minutes"
+        }
+      },
+
+      "level_3_moderate": {
+        "name": "Moderate Tasks",
+        "description": "Multi-component features, moderate business logic",
+        "minimum_model": "Qwen2.5-Coder-3B",
+        "recommended_model": "Qwen2.5-Coder-7B",
+        "min_gpu": "T4 (quantized) or L4",
+        "estimated_cost_per_month": "$100-720",
+        "context_needed": "8K - 32K tokens",
+        "reasoning_depth": "Moderate - understands patterns and best practices",
+        "example_tasks": [
+          {
+            "task": "Build REST API endpoint with authentication",
+            "code_example": "Express.js endpoint with JWT validation",
+            "context_required": "API structure, auth middleware, database models",
+            "success_criteria": "Endpoint works, authenticated, handles errors",
+            "subtasks": [
+              "Define route handler",
+              "Add authentication middleware",
+              "Validate request body",
+              "Query database",
+              "Handle errors properly",
+              "Return formatted response",
+              "Write tests"
+            ]
+          },
+          {
+            "task": "Implement shopping cart with state management",
+            "code_example": "React context or Redux for cart state",
+            "context_required": "React components, state logic",
+            "success_criteria": "Add/remove items, persist state, calculate totals"
+          },
+          {
+            "task": "Create data table with sorting and filtering",
+            "code_example": "Interactive table with multiple features",
+            "context_required": "Table component, filter logic, sort algorithms",
+            "success_criteria": "Users can sort, filter, and see results"
+          },
+          {
+            "task": "Build file upload with validation and preview",
+            "code_example": "Image upload with size/type validation",
+            "context_required": "Upload UI, validation logic, preview rendering",
+            "success_criteria": "Validates files, shows preview, uploads correctly"
+          },
+          {
+            "task": "Implement infinite scroll with API pagination",
+            "code_example": "Load more items as user scrolls",
+            "context_required": "API client, scroll detection, state management",
+            "success_criteria": "Smoothly loads more content, no duplicates"
+          },
+          {
+            "task": "Create notification system",
+            "code_example": "Toast notifications with queue management",
+            "context_required": "Notification component, queue logic, styling",
+            "success_criteria": "Shows notifications, handles multiple, auto-dismisses"
+          },
+          {
+            "task": "Build autocomplete search",
+            "code_example": "Search input with debounced API calls",
+            "context_required": "Input component, API integration, debounce logic",
+            "success_criteria": "Suggests results, handles keyboard nav, selects item"
+          },
+          {
+            "task": "Refactor monolithic function into modules",
+            "code_example": "Break 200-line function into smaller pieces",
+            "context_required": "Original function, understanding of logic flow",
+            "success_criteria": "Maintains behavior, improves readability"
+          }
+        ],
+        "characteristics": {
+          "lines_of_code": "50-200 lines",
+          "files_affected": "3-10 files",
+          "dependencies": "2-5 libraries",
+          "testing_needed": "Unit tests + integration tests",
+          "rollback_risk": "Moderate",
+          "time_to_complete": "15-60 minutes"
+        }
+      },
+
+      "level_4_complex": {
+        "name": "Complex Tasks",
+        "description": "Multi-system integration, complex business logic, architectural decisions",
+        "minimum_model": "Qwen2.5-Coder-7B",
+        "recommended_model": "Qwen2.5-Coder-14B or DeepSeek-Coder-V2-Lite",
+        "min_gpu": "L4 or A10G",
+        "estimated_cost_per_month": "$720-2500",
+        "context_needed": "32K - 128K tokens",
+        "reasoning_depth": "Deep - architectural patterns, security, performance",
+        "example_tasks": [
+          {
+            "task": "Build complete authentication system",
+            "code_example": "OAuth2, JWT, refresh tokens, password reset",
+            "context_required": "Auth flow, security best practices, email integration",
+            "success_criteria": "Secure, follows standards, handles edge cases",
+            "subtasks": [
+              "Design auth architecture",
+              "Implement registration/login",
+              "Add OAuth providers",
+              "Handle password reset",
+              "Implement refresh tokens",
+              "Add rate limiting",
+              "Security audit",
+              "Write comprehensive tests"
+            ]
+          },
+          {
+            "task": "Migrate database schema with zero downtime",
+            "code_example": "Blue-green deployment with schema versioning",
+            "context_required": "Current schema, app code, deployment process",
+            "success_criteria": "Migration succeeds, no downtime, rollback plan"
+          },
+          {
+            "task": "Implement real-time collaborative editing",
+            "code_example": "WebSocket-based multi-user document editing",
+            "context_required": "WebSocket setup, CRDT or OT algorithm, state sync",
+            "success_criteria": "Multiple users edit simultaneously, no conflicts"
+          },
+          {
+            "task": "Build caching layer with invalidation strategy",
+            "code_example": "Redis cache with smart invalidation",
+            "context_required": "Cache patterns, invalidation logic, consistency rules",
+            "success_criteria": "Improves performance, stays consistent, handles failures"
+          },
+          {
+            "task": "Create GraphQL API with complex resolvers",
+            "code_example": "Multi-source data aggregation with N+1 prevention",
+            "context_required": "Schema design, resolver patterns, dataloader",
+            "success_criteria": "Efficient queries, proper error handling, typed"
+          },
+          {
+            "task": "Implement payment processing integration",
+            "code_example": "Stripe integration with webhooks and reconciliation",
+            "context_required": "Payment flow, webhook handling, error recovery",
+            "success_criteria": "Secure, handles failures, reconciles transactions"
+          },
+          {
+            "task": "Build CI/CD pipeline with testing stages",
+            "code_example": "GitHub Actions with test/build/deploy stages",
+            "context_required": "Project structure, test suites, deployment targets",
+            "success_criteria": "Automated testing, safe deployments, rollback capability"
+          },
+          {
+            "task": "Refactor legacy codebase to modern architecture",
+            "code_example": "Monolith to microservices or MVC to component-based",
+            "context_required": "Entire codebase understanding, architectural patterns",
+            "success_criteria": "Maintains functionality, improves maintainability"
+          },
+          {
+            "task": "Implement comprehensive error tracking system",
+            "code_example": "Sentry integration with custom error boundaries",
+            "context_required": "Error sources, logging strategy, monitoring setup",
+            "success_criteria": "Catches all errors, provides context, enables debugging"
+          }
+        ],
+        "characteristics": {
+          "lines_of_code": "200-1000 lines",
+          "files_affected": "10-50 files",
+          "dependencies": "5-15 libraries",
+          "testing_needed": "Unit + integration + E2E tests",
+          "rollback_risk": "High",
+          "time_to_complete": "1-4 hours"
+        }
+      },
+
+      "level_5_expert": {
+        "name": "Expert Tasks",
+        "description": "System-wide changes, performance optimization, security hardening, novel implementations",
+        "minimum_model": "Qwen2.5-Coder-14B",
+        "recommended_model": "Qwen2.5-Coder-32B or DeepSeek-Coder-V2-236B",
+        "min_gpu": "A100 or H100",
+        "estimated_cost_per_month": "$2500-5000+",
+        "context_needed": "128K - 160K tokens (entire codebase)",
+        "reasoning_depth": "Expert - system design, optimization, security expertise",
+        "example_tasks": [
+          {
+            "task": "Design and implement microservices architecture",
+            "code_example": "Break monolith into 10+ services with proper boundaries",
+            "context_required": "Entire application understanding, domain knowledge",
+            "success_criteria": "Scalable, maintainable, well-bounded services",
+            "subtasks": [
+              "Analyze domain boundaries",
+              "Design service contracts",
+              "Implement service mesh",
+              "Add inter-service communication",
+              "Implement distributed tracing",
+              "Set up monitoring",
+              "Create deployment strategy",
+              "Document architecture"
+            ]
+          },
+          {
+            "task": "Optimize database performance for millions of records",
+            "code_example": "Index optimization, query rewriting, sharding strategy",
+            "context_required": "Database schema, query patterns, performance metrics",
+            "success_criteria": "10x performance improvement, maintains consistency"
+          },
+          {
+            "task": "Implement comprehensive security audit and fixes",
+            "code_example": "OWASP Top 10 remediation, penetration testing fixes",
+            "context_required": "Entire codebase, security best practices",
+            "success_criteria": "Passes security audit, no critical vulnerabilities"
+          },
+          {
+            "task": "Build custom machine learning pipeline",
+            "code_example": "Training, versioning, deployment, monitoring of ML models",
+            "context_required": "ML infrastructure, model code, deployment platforms",
+            "success_criteria": "Automated training, versioned models, production-ready"
+          },
+          {
+            "task": "Implement distributed consensus algorithm",
+            "code_example": "Raft or Paxos for distributed system",
+            "context_required": "Distributed systems theory, existing infrastructure",
+            "success_criteria": "Handles network partitions, maintains consistency"
+          },
+          {
+            "task": "Create custom compiler or transpiler",
+            "code_example": "DSL to JavaScript transpiler",
+            "context_required": "Parser theory, AST manipulation, code generation",
+            "success_criteria": "Correctly translates, handles edge cases, optimizes output"
+          },
+          {
+            "task": "Design and implement event sourcing system",
+            "code_example": "CQRS with event store and projections",
+            "context_required": "Domain models, event patterns, consistency requirements",
+            "success_criteria": "Audit trail, temporal queries, eventual consistency"
+          },
+          {
+            "task": "Build custom protocol implementation",
+            "code_example": "WebRTC, WebSocket custom protocol, or binary protocol",
+            "context_required": "Protocol specs, network programming, state machines",
+            "success_criteria": "Spec-compliant, efficient, handles errors"
+          },
+          {
+            "task": "Implement zero-downtime blue-green deployment system",
+            "code_example": "Custom deployment orchestration with health checks",
+            "context_required": "Infrastructure, application architecture, monitoring",
+            "success_criteria": "No downtime, automatic rollback, health verification"
+          },
+          {
+            "task": "Create custom search engine with relevance ranking",
+            "code_example": "Full-text search with custom scoring algorithm",
+            "context_required": "Search theory, indexing strategies, ranking algorithms",
+            "success_criteria": "Fast, relevant results, scalable indexing"
+          }
+        ],
+        "characteristics": {
+          "lines_of_code": "1000+ lines",
+          "files_affected": "50+ files",
+          "dependencies": "15+ libraries",
+          "testing_needed": "Comprehensive test suite + performance testing",
+          "rollback_risk": "Very high",
+          "time_to_complete": "4+ hours to days"
+        }
+      }
+    },
+
+    "task_assessment_questions": {
+      "description": "Questions to determine task complexity level",
+      "questions": [
+        {
+          "question": "How many files need to be read/understood?",
+          "scoring": {
+            "1 file": "level_1_trivial",
+            "2-3 files": "level_2_simple",
+            "4-10 files": "level_3_moderate",
+            "11-50 files": "level_4_complex",
+            "50+ files": "level_5_expert"
+          }
+        },
+        {
+          "question": "How much context understanding is needed?",
+          "scoring": {
+            "Single function": "level_1_trivial",
+            "Single component": "level_2_simple",
+            "Multiple components": "level_3_moderate",
+            "System architecture": "level_4_complex",
+            "Entire codebase": "level_5_expert"
+          }
+        },
+        {
+          "question": "What level of reasoning is required?",
+          "scoring": {
+            "Pattern matching": "level_1_trivial",
+            "Basic logic": "level_2_simple",
+            "Business logic": "level_3_moderate",
+            "Architectural decisions": "level_4_complex",
+            "System design": "level_5_expert"
+          }
+        },
+        {
+          "question": "What's the impact radius?",
+          "scoring": {
+            "Single element": "level_1_trivial",
+            "Single feature": "level_2_simple",
+            "Multiple features": "level_3_moderate",
+            "System-wide": "level_4_complex",
+            "Infrastructure": "level_5_expert"
+          }
+        },
+        {
+          "question": "How critical is correctness?",
+          "scoring": {
+            "UI cosmetic": "level_1_trivial",
+            "Feature functionality": "level_2_simple",
+            "Data integrity": "level_3_moderate",
+            "System stability": "level_4_complex",
+            "Security/compliance": "level_5_expert"
+          }
+        }
+      ]
+    },
+
+    "model_selection_matrix": {
+      "description": "Quick reference for model selection by task level",
+      "recommendations": [
+        {
+          "level": "level_1_trivial",
+          "tasks": "Simple edits, obvious fixes",
+          "budget": {
+            "model": "Qwen2.5-Coder-0.5B",
+            "gpu": "T4",
+            "cost": "$15/mo"
+          },
+          "recommended": {
+            "model": "Qwen2.5-Coder-1.5B",
+            "gpu": "T4",
+            "cost": "$60/mo"
+          },
+          "premium": {
+            "model": "Qwen2.5-Coder-3B",
+            "gpu": "T4",
+            "cost": "$60/mo"
+          }
+        },
+        {
+          "level": "level_2_simple",
+          "tasks": "Single features, basic logic",
+          "budget": {
+            "model": "Qwen2.5-Coder-1.5B",
+            "gpu": "T4",
+            "cost": "$60/mo"
+          },
+          "recommended": {
+            "model": "Qwen2.5-Coder-3B",
+            "gpu": "T4",
+            "cost": "$60/mo"
+          },
+          "premium": {
+            "model": "Qwen2.5-Coder-7B",
+            "gpu": "L4",
+            "cost": "$720/mo"
+          }
+        },
+        {
+          "level": "level_3_moderate",
+          "tasks": "Multi-component features",
+          "budget": {
+            "model": "Qwen2.5-Coder-3B",
+            "gpu": "T4",
+            "cost": "$60/mo"
+          },
+          "recommended": {
+            "model": "Qwen2.5-Coder-7B",
+            "gpu": "L4",
+            "cost": "$720/mo"
+          },
+          "premium": {
+            "model": "DeepSeek-Coder-V2-Lite",
+            "gpu": "L4",
+            "cost": "$720/mo"
+          }
+        },
+        {
+          "level": "level_4_complex",
+          "tasks": "System integration, architecture",
+          "budget": {
+            "model": "Qwen2.5-Coder-7B",
+            "gpu": "L4",
+            "cost": "$720/mo"
+          },
+          "recommended": {
+            "model": "Qwen2.5-Coder-14B",
+            "gpu": "A100",
+            "cost": "$2500/mo"
+          },
+          "premium": {
+            "model": "Qwen2.5-Coder-32B",
+            "gpu": "A100",
+            "cost": "$2880/mo"
+          }
+        },
+        {
+          "level": "level_5_expert",
+          "tasks": "System design, optimization",
+          "budget": {
+            "model": "Qwen2.5-Coder-14B",
+            "gpu": "A100",
+            "cost": "$2500/mo"
+          },
+          "recommended": {
+            "model": "Qwen2.5-Coder-32B",
+            "gpu": "A100",
+            "cost": "$2880/mo"
+          },
+          "premium": {
+            "model": "DeepSeek-Coder-V2-236B",
+            "gpu": "H100",
+            "cost": "$5760/mo"
+          }
+        }
+      ]
+    },
+
+    "cost_optimization_tips": {
+      "on_demand_vs_reserved": {
+        "on_demand": "Pay only when running, good for sporadic usage",
+        "reserved": "Pre-pay for capacity, 40-60% cheaper for 24/7 usage",
+        "recommendation": "Use on-demand for dev, reserved for production"
+      },
+      "usage_patterns": {
+        "8_hours_day": "~33% of 24/7 cost",
+        "business_hours": "~42% of 24/7 cost (8am-6pm weekdays)",
+        "on_demand_only": "~70% savings vs 24/7 for typical dev usage"
+      },
+      "model_sizing": {
+        "tip": "Start with smallest model that works, upgrade only if quality suffers",
+        "example": "Try 1.5B first, upgrade to 7B only if results are poor"
+      }
+    }
+  }
+}
