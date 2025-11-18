@@ -105,6 +105,97 @@ Anthropic introduced Desktop Extensions to make installation as simple as clicki
 ### Manual Installation
 Most MCP servers can be installed via npm, pip, or other package managers. Refer to individual server documentation for specific installation instructions.
 
+## Deployment Options
+
+### Local Deployment (Most Common)
+MCP servers typically run **locally on your machine** alongside your AI application (Claude Desktop, IDEs, etc.). This is the standard deployment model:
+
+**Advantages:**
+- **Privacy**: Your data never leaves your machine
+- **Speed**: No network latency for file operations and local tools
+- **Offline**: Works without internet connection (for local operations)
+- **Security**: No exposure of credentials or data to external services
+- **Free**: No hosting costs
+
+**Common Local MCP Servers:**
+- **Filesystem** - Direct access to local files and directories
+- **Git** - Local repository management
+- **Postgres** - Local database connections
+- **Memory** - Local knowledge graph storage
+- **Sequential Thinking** - Local reasoning processes
+
+**Example Setup (Local):**
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/username/Documents"]
+    }
+  }
+}
+```
+
+### Remote/Cloud Deployment
+Some MCP servers connect to **remote services and APIs** over the internet:
+
+**Advantages:**
+- Access to cloud-based services and data
+- Centralized data management
+- Multi-user collaboration
+- Scalable infrastructure
+
+**Common Remote-Connected MCP Servers:**
+- **GitHub** - Connects to GitHub API
+- **Google Drive** - Accesses cloud storage
+- **Slack** - Connects to Slack workspace
+- **Puppeteer** - Can run on remote browsers
+- **PostgreSQL** - Can connect to remote databases
+
+**Example Setup (Remote API):**
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "your-personal-access-token"
+      }
+    }
+  }
+}
+```
+
+### Hybrid Deployment
+Many workflows combine both local and remote MCP servers:
+
+**Example:**
+- Use **local Filesystem MCP** to read project files
+- Use **remote GitHub MCP** to create pull requests
+- Use **local Git MCP** for version control operations
+- Use **remote Puppeteer MCP** for web automation
+
+### Self-Hosted Servers
+Advanced users can also:
+- Deploy MCP servers on their own infrastructure
+- Run MCP servers in Docker containers
+- Host MCP servers on private cloud instances
+- Create custom MCP servers for internal tools
+
+### Security Considerations
+
+**Local Servers:**
+- Validate file paths and prevent directory traversal
+- Limit access to specific directories
+- Review MCP server code before installation
+
+**Remote Servers:**
+- Use environment variables for API keys (never hardcode)
+- Rotate credentials regularly
+- Use read-only tokens when possible
+- Monitor API usage and rate limits
+
 ## Use Cases
 
 MCP servers enable AI assistants to:
