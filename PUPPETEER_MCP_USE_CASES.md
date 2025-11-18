@@ -451,12 +451,140 @@ scrapeProductReviews('https://example.com/product/widget-pro', 100);
 
 **Use Case**: Automate employee onboarding by filling registration forms on HR platforms, benefits portals, and training systems with employee data.
 
-**Automation Steps**:
-- Read employee data from database
-- Navigate to registration forms
-- Fill all form fields (name, email, salary, etc.)
-- Upload required documents
-- Submit and verify confirmation
+**Implementation Example**:
+```javascript
+// User request: "Automate employee registration across multiple systems"
+
+const puppeteer = require('puppeteer');
+
+async function employeeOnboarding(employeeData) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    const systems = [
+        {
+            name: 'HR System',
+            url: 'https://hr.company.com/register',
+            fields: {
+                name: '#employee-name',
+                email: '#employee-email',
+                salary: '#salary-input',
+                department: '#department-select',
+                startDate: '#start-date'
+            }
+        },
+        {
+            name: 'Benefits Portal',
+            url: 'https://benefits.company.com/enroll',
+            fields: {
+                name: 'input[name="fullname"]',
+                email: 'input[name="email"]',
+                ssn: 'input[name="ssn"]',
+                plan: 'select[name="healthplan"]'
+            }
+        }
+    ];
+
+    const results = [];
+
+    for (const system of systems) {
+        try {
+            console.log(`\nProcessing: ${system.name}...`);
+
+            // Navigate to registration page
+            await page.goto(system.url, { waitUntil: 'networkidle2' });
+
+            // Fill form fields
+            if (system.fields.name) {
+                await page.type(system.fields.name, employeeData.name);
+            }
+            if (system.fields.email) {
+                await page.type(system.fields.email, employeeData.email);
+            }
+            if (system.fields.salary) {
+                await page.type(system.fields.salary, employeeData.salary.toString());
+            }
+            if (system.fields.department) {
+                await page.select(system.fields.department, employeeData.department);
+            }
+            if (system.fields.startDate) {
+                await page.type(system.fields.startDate, employeeData.startDate);
+            }
+
+            // Handle file upload if needed
+            const fileInput = await page.$('input[type="file"]');
+            if (fileInput && employeeData.documents) {
+                await fileInput.uploadFile(employeeData.documents.resume);
+            }
+
+            // Take screenshot before submission
+            await page.screenshot({
+                path: `onboarding_${system.name.replace(/\s/g, '_')}_filled.png`
+            });
+
+            // Submit form
+            await Promise.all([
+                page.click('button[type="submit"]'),
+                page.waitForNavigation({ timeout: 10000 })
+            ]);
+
+            // Verify success
+            const confirmationText = await page.evaluate(() =>
+                document.body.textContent
+            );
+
+            if (confirmationText.includes('successfully') ||
+                confirmationText.includes('confirmed')) {
+                console.log(`✓ ${system.name}: SUCCESS`);
+                results.push({
+                    system: system.name,
+                    status: 'SUCCESS',
+                    timestamp: new Date().toISOString()
+                });
+
+                await page.screenshot({
+                    path: `onboarding_${system.name.replace(/\s/g, '_')}_success.png`
+                });
+            } else {
+                throw new Error('Confirmation message not found');
+            }
+
+        } catch (error) {
+            console.log(`✗ ${system.name}: FAILED - ${error.message}`);
+            results.push({
+                system: system.name,
+                status: 'FAILED',
+                error: error.message,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+
+    // Summary
+    console.log('\n=== ONBOARDING SUMMARY ===');
+    console.log(`Employee: ${employeeData.name}`);
+    results.forEach(r => {
+        console.log(`${r.system}: ${r.status}`);
+    });
+
+    await browser.close();
+    return results;
+}
+
+// Execute
+const newEmployee = {
+    name: 'Jane Smith',
+    email: 'jane.smith@company.com',
+    salary: 85000,
+    department: 'engineering',
+    startDate: '2025-12-01',
+    documents: {
+        resume: './documents/jane_smith_resume.pdf'
+    }
+};
+
+employeeOnboarding(newEmployee);
+```
 
 **Benefits**:
 - Eliminates manual data entry
@@ -470,13 +598,109 @@ scrapeProductReviews('https://example.com/product/widget-pro', 100);
 
 **Use Case**: Regularly visit website pages, measure load times, capture performance metrics, and alert if performance degrades below thresholds.
 
-**Automation Steps**:
-- Navigate to target pages
-- Measure page load time
-- Track resource loading
-- Monitor console errors
-- Log performance metrics
-- Alert on performance issues
+**Implementation Example**:
+```javascript
+// User request: "Monitor website performance and alert on slowdowns"
+
+const puppeteer = require('puppeteer');
+
+async function performanceMonitoring(url, threshold = 3000) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    // Enable performance metrics collection
+    await page.evaluateOnNewDocument(() => {
+        window.performance.mark('start');
+    });
+
+    console.log(`Monitoring performance for: ${url}`);
+    console.log(`Alert threshold: ${threshold}ms\n`);
+
+    // Start performance tracking
+    const startTime = Date.now();
+
+    // Navigate and capture metrics
+    const response = await page.goto(url, {
+        waitUntil: 'networkidle2'
+    });
+
+    const loadTime = Date.now() - startTime;
+
+    // Get performance metrics
+    const metrics = await page.metrics();
+    const performanceData = await page.evaluate(() => {
+        const perf = window.performance;
+        const timing = perf.timing;
+
+        return {
+            dns: timing.domainLookupEnd - timing.domainLookupStart,
+            tcp: timing.connectEnd - timing.connectStart,
+            ttfb: timing.responseStart - timing.requestStart,
+            download: timing.responseEnd - timing.responseStart,
+            domInteractive: timing.domInteractive - timing.navigationStart,
+            domComplete: timing.domComplete - timing.navigationStart,
+            loadComplete: timing.loadEventEnd - timing.navigationStart,
+            resources: perf.getEntriesByType('resource').length
+        };
+    });
+
+    // Check for console errors
+    const consoleErrors = [];
+    page.on('console', msg => {
+        if (msg.type() === 'error') {
+            consoleErrors.push(msg.text());
+        }
+    });
+
+    // Reload to capture any errors
+    await page.reload({ waitUntil: 'networkidle2' });
+
+    // Compile report
+    const report = {
+        url,
+        timestamp: new Date().toISO String(),
+        loadTime,
+        responseCode: response.status(),
+        performanceMetrics: {
+            ...performanceData,
+            scriptsCount: metrics.ScriptCount,
+            jsHeapSize: Math.round(metrics.JSHeapUsedSize / 1024 / 1024) + 'MB',
+            layoutCount: metrics.LayoutCount
+        },
+        consoleErrors: consoleErrors.length,
+        passed: loadTime < threshold
+    };
+
+    // Output results
+    console.log('=== PERFORMANCE REPORT ===');
+    console.log(`Load Time: ${loadTime}ms`);
+    console.log(`Status: ${report.passed ? '✓ PASS' : '✗ FAIL'}`);
+    console.log(`Response Code: ${report.responseCode}`);
+    console.log(`\nTiming Breakdown:`);
+    console.log(`  DNS Lookup: ${performanceData.dns}ms`);
+    console.log(`  TCP Connect: ${performanceData.tcp}ms`);
+    console.log(`  Time to First Byte: ${performanceData.ttfb}ms`);
+    console.log(`  Download: ${performanceData.download}ms`);
+    console.log(`  DOM Interactive: ${performanceData.domInteractive}ms`);
+    console.log(`  DOM Complete: ${performanceData.domComplete}ms`);
+    console.log(`\nResources Loaded: ${performanceData.resources}`);
+    console.log(`Console Errors: ${consoleErrors.length}`);
+
+    // Alert if threshold exceeded
+    if (!report.passed) {
+        console.log(`\n⚠️  ALERT: Page load exceeded threshold!`);
+        console.log(`   Expected: <${threshold}ms`);
+        console.log(`   Actual: ${loadTime}ms`);
+        // Send alert (email, Slack, etc.)
+    }
+
+    await browser.close();
+    return report;
+}
+
+// Execute monitoring
+performanceMonitoring('https://www.example.com', 3000);
+```
 
 **Benefits**:
 - Proactive performance monitoring
