@@ -1,14 +1,41 @@
-# 3D Game Development Learning Resources
+# Learning Resources Repository
 
-A comprehensive collection of analyses, guides, and resources for learning modern 3D game development through open-source projects.
+A comprehensive collection of analyses, guides, and curated resources for learning modern software development, game development, and AI engineering through open-source projects.
 
-**Total Documents**: 9 comprehensive guides + 13 supplementary files
-**Total Content**: 150+ pages of analysis
-**Coverage**: AI tools, game engines, automation, and 20 major GitHub projects
+**Total Documents**: 10 comprehensive guides + 13 supplementary files
+**Total Content**: 200+ pages of analysis
+**Coverage**: AI Engineer roadmap, game engines, automation, and 40+ major GitHub projects
 
 ---
 
 ## 📚 Document Index
+
+### NEW: AI Engineer Roadmap
+
+#### [AI Engineer Roadmap: GitHub Repository Guide](./ai-engineer-roadmap-github-repos.md)
+**Size**: 90KB | **Reading Time**: 2-3 hours
+
+Complete "God Tier" AI Engineer Roadmap with 60+ curated GitHub repositories mapped to each learning phase:
+- **Phase 1**: Mathematics & Programming Fundamentals
+- **Phase 2**: Machine Learning & Deep Learning (PyTorch/TensorFlow)
+- **Phase 3**: Generative AI (LLMs, RAG, LangChain, Vector Databases)
+- **Phase 4**: MLOps & Production (Docker, Kubernetes, Cloud Platforms)
+- **Phase 5**: Advanced Topics (Transformers, Fine-Tuning, PEFT, LoRA)
+- **Phase 6**: Capstone Projects & Portfolio Building
+
+**Includes**:
+- 60+ hand-picked GitHub repositories with stars and descriptions
+- 3 learning paths: Fast Track (12mo), Balanced (18mo), Thorough (24mo)
+- Phase-specific project ideas and capstone requirements
+- Skills checklist for tracking progress
+- Week 1 action plan to start TODAY
+- Certification paths and community resources
+
+**Best For**: Anyone wanting to become an AI Engineer, from complete beginners to developers transitioning into AI
+
+**Based on**: [YouTube: "God Tier" AI Engineer Roadmap](https://www.youtube.com/watch?v=ewLJUvQbOu4)
+
+---
 
 ### 1. Core Analysis Documents
 
