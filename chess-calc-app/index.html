@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Calculation Tree - 12 Moves Deep</title>
+
+    <!-- Chessboard.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chess Calculation Tree</h1>
+            <p>Explore move possibilities up to 12 steps ahead</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel: Chess Board -->
+            <div class="left-panel">
+                <div class="board-container">
+                    <div id="chessboard"></div>
+                </div>
+
+                <div class="board-controls">
+                    <button id="startBtn" class="btn btn-primary">Start Position</button>
+                    <button id="clearBtn" class="btn btn-secondary">Clear Board</button>
+                    <button id="flipBtn" class="btn btn-secondary">Flip Board</button>
+                </div>
+
+                <div class="position-info">
+                    <div class="info-row">
+                        <strong>Turn:</strong> <span id="turnIndicator">White</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>Move:</strong> <span id="moveNumber">1</span>
+                    </div>
+                    <div class="info-row">
+                        <strong>FEN:</strong>
+                        <input type="text" id="fenInput" placeholder="Paste FEN here">
+                        <button id="loadFenBtn" class="btn btn-small">Load</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Move Tree -->
+            <div class="right-panel">
+                <div class="tree-header">
+                    <h2>Move Tree (12 moves deep)</h2>
+                    <div class="tree-controls">
+                        <button id="generateTreeBtn" class="btn btn-primary">Generate Tree</button>
+                        <button id="collapseAllBtn" class="btn btn-secondary">Collapse All</button>
+                        <button id="expandAllBtn" class="btn btn-secondary">Expand All</button>
+                    </div>
+                    <div class="tree-stats">
+                        <span>Depth: <strong id="currentDepth">0</strong></span>
+                        <span>Nodes: <strong id="totalNodes">0</strong></span>
+                    </div>
+                </div>
+
+                <div id="moveTree" class="move-tree">
+                    <div class="tree-placeholder">
+                        Click "Generate Tree" to explore move possibilities
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (required for chessboard.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Chess.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <!-- Chessboard.js -->
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
+    <!-- Main App -->
+    <script src="app.js"></script>
+</body>
+</html>
