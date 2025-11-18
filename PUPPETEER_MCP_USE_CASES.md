@@ -50,12 +50,110 @@ The Puppeteer MCP server provides comprehensive browser automation capabilities 
 
 **Use Case**: Navigate to competitor e-commerce sites, extract product prices, features, and availability. Take screenshots of product pages and compile a competitive analysis report.
 
-**Automation Steps**:
-- Navigate to competitor URLs
-- Extract pricing data from product pages
-- Screenshot key products
-- Compare with historical data
-- Generate comparison report
+**Implementation Example**:
+```javascript
+// User request: "Monitor competitor product pages and extract pricing"
+
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+
+async function competitiveResearch() {
+    const browser = await puppeteer.launch({
+        headless: true
+    });
+
+    const page = await browser.newPage();
+
+    // Define competitor products to monitor
+    const competitors = [
+        {
+            name: 'Competitor A',
+            url: 'https://competitorA.com/product/widget-pro',
+            priceSelector: '.product-price',
+            availabilitySelector: '.stock-status'
+        },
+        {
+            name: 'Competitor B',
+            url: 'https://competitorB.com/items/widget-pro',
+            priceSelector: '#price-tag',
+            availabilitySelector: '.availability'
+        }
+    ];
+
+    const results = [];
+
+    for (const competitor of competitors) {
+        console.log(`Checking ${competitor.name}...`);
+
+        // Navigate to product page
+        await page.goto(competitor.url, {
+            waitUntil: 'networkidle2'
+        });
+
+        // Extract price
+        const price = await page.$eval(competitor.priceSelector,
+            el => el.textContent.trim());
+
+        // Extract availability
+        const availability = await page.$eval(competitor.availabilitySelector,
+            el => el.textContent.trim());
+
+        // Extract product title
+        const title = await page.$eval('h1.product-title',
+            el => el.textContent.trim());
+
+        // Take screenshot
+        const screenshotPath = `./screenshots/${competitor.name}_${Date.now()}.png`;
+        await page.screenshot({
+            path: screenshotPath,
+            fullPage: true
+        });
+
+        // Collect data
+        results.push({
+            competitor: competitor.name,
+            product: title,
+            price: price,
+            availability: availability,
+            url: competitor.url,
+            screenshot: screenshotPath,
+            timestamp: new Date().toISOString()
+        });
+
+        console.log(`✓ ${competitor.name}: ${price} - ${availability}`);
+    }
+
+    // Generate report
+    const report = {
+        reportDate: new Date().toISOString(),
+        products: results,
+        summary: {
+            lowestPrice: Math.min(...results.map(r =>
+                parseFloat(r.price.replace(/[^0-9.]/g, '')))),
+            totalCompetitors: results.length,
+            inStock: results.filter(r =>
+                r.availability.toLowerCase().includes('in stock')).length
+        }
+    };
+
+    // Save report
+    fs.writeFileSync(
+        `competitive_report_${Date.now()}.json`,
+        JSON.stringify(report, null, 2)
+    );
+
+    console.log('\nCompetitive Research Report:');
+    console.log(`- Monitored: ${results.length} competitors`);
+    console.log(`- Lowest Price: $${report.summary.lowestPrice}`);
+    console.log(`- In Stock: ${report.summary.inStock}/${results.length}`);
+
+    await browser.close();
+    return report;
+}
+
+// Execute
+competitiveResearch();
+```
 
 **Benefits**:
 - Real-time competitive intelligence
@@ -69,14 +167,139 @@ The Puppeteer MCP server provides comprehensive browser automation capabilities 
 
 **Use Case**: Test a complete user journey: login, navigate to dashboard, create new record, verify creation, and logout. Capture screenshots at each step for test documentation.
 
-**Automation Steps**:
-- Navigate to application login page
-- Fill username and password fields
-- Click login button
-- Verify successful authentication
-- Navigate through application workflows
-- Assert expected behaviors
-- Screenshot each step for reporting
+**Implementation Example**:
+```javascript
+// User request: "Test the complete employee management workflow"
+
+const puppeteer = require('puppeteer');
+
+async function testWebApplication() {
+    const browser = await puppeteer.launch({
+        headless: false,  // Show browser for demo
+        slowMo: 100      // Slow down for visibility
+    });
+
+    const page = await browser.newPage();
+    const testResults = [];
+
+    try {
+        // Step 1: Navigate to login page
+        console.log('Step 1: Navigating to login page...');
+        await page.goto('https://app.example.com/login');
+        await page.screenshot({ path: 'test_01_login_page.png' });
+        testResults.push({ step: 'Login Page', status: 'PASS' });
+
+        // Step 2: Fill login credentials
+        console.log('Step 2: Filling credentials...');
+        await page.type('#username', 'testuser@example.com');
+        await page.type('#password', 'TestPassword123');
+        await page.screenshot({ path: 'test_02_credentials_filled.png' });
+
+        // Step 3: Click login button
+        console.log('Step 3: Clicking login button...');
+        await Promise.all([
+            page.click('button[type="submit"]'),
+            page.waitForNavigation({ waitUntil: 'networkidle2' })
+        ]);
+
+        // Step 4: Verify successful login
+        console.log('Step 4: Verifying login success...');
+        const dashboardTitle = await page.$eval('h1',
+            el => el.textContent);
+
+        if (dashboardTitle.includes('Dashboard')) {
+            testResults.push({ step: 'Login', status: 'PASS' });
+            await page.screenshot({ path: 'test_03_dashboard.png' });
+        } else {
+            throw new Error('Login failed - Dashboard not found');
+        }
+
+        // Step 5: Navigate to Employees section
+        console.log('Step 5: Navigating to Employees...');
+        await page.click('a[href="/employees"]');
+        await page.waitForSelector('.employee-list', { timeout: 5000 });
+        testResults.push({ step: 'Navigate to Employees', status: 'PASS' });
+
+        // Step 6: Click "Create New Employee"
+        console.log('Step 6: Creating new employee...');
+        await page.click('button.create-employee');
+        await page.waitForSelector('#employee-form');
+
+        // Step 7: Fill employee form
+        console.log('Step 7: Filling employee form...');
+        await page.type('#name', 'John Doe');
+        await page.type('#email', 'john.doe@example.com');
+        await page.type('#salary', '75000');
+        await page.type('#duration', '2');
+        await page.screenshot({ path: 'test_04_form_filled.png' });
+
+        // Step 8: Submit form
+        console.log('Step 8: Submitting form...');
+        await Promise.all([
+            page.click('button#submit-employee'),
+            page.waitForSelector('.success-message', { timeout: 5000 })
+        ]);
+
+        // Step 9: Verify employee was created
+        console.log('Step 9: Verifying employee creation...');
+        const successMessage = await page.$eval('.success-message',
+            el => el.textContent);
+
+        if (successMessage.includes('Employee created successfully')) {
+            testResults.push({ step: 'Create Employee', status: 'PASS' });
+            await page.screenshot({ path: 'test_05_employee_created.png' });
+        } else {
+            throw new Error('Employee creation failed');
+        }
+
+        // Step 10: Verify employee appears in list
+        console.log('Step 10: Checking employee list...');
+        await page.goto('https://app.example.com/employees');
+        const employeeExists = await page.evaluate(() => {
+            return document.body.textContent.includes('John Doe');
+        });
+
+        if (employeeExists) {
+            testResults.push({ step: 'Verify Employee in List', status: 'PASS' });
+        } else {
+            throw new Error('Employee not found in list');
+        }
+
+        // Step 11: Logout
+        console.log('Step 11: Logging out...');
+        await page.click('#logout-button');
+        await page.waitForSelector('#login-form');
+        testResults.push({ step: 'Logout', status: 'PASS' });
+        await page.screenshot({ path: 'test_06_logged_out.png' });
+
+    } catch (error) {
+        console.error(`Test failed: ${error.message}`);
+        testResults.push({
+            step: 'Test Execution',
+            status: 'FAIL',
+            error: error.message
+        });
+        await page.screenshot({ path: 'test_ERROR.png' });
+    }
+
+    // Generate test report
+    console.log('\n=== TEST REPORT ===');
+    testResults.forEach(result => {
+        const icon = result.status === 'PASS' ? '✓' : '✗';
+        console.log(`${icon} ${result.step}: ${result.status}`);
+        if (result.error) console.log(`  Error: ${result.error}`);
+    });
+
+    const passCount = testResults.filter(r => r.status === 'PASS').length;
+    console.log(`\nResults: ${passCount}/${testResults.length} passed`);
+
+    await browser.close();
+    return testResults;
+}
+
+// Execute tests
+testWebApplication();
+```
 
 **Benefits**:
 - Automated regression testing
@@ -90,12 +313,131 @@ The Puppeteer MCP server provides comprehensive browser automation capabilities 
 
 **Use Case**: Visit product pages on Amazon, eBay, and other marketplaces, extract reviews, ratings, and customer feedback for sentiment analysis.
 
-**Automation Steps**:
-- Navigate to product pages
-- Scroll to load all reviews
-- Extract review text, ratings, dates
-- Handle pagination
-- Export to structured format
+**Implementation Example**:
+```javascript
+// User request: "Scrape product reviews from e-commerce sites"
+
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+
+async function scrapeProductReviews(productUrl, maxReviews = 50) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+
+    console.log(`Scraping reviews from: ${productUrl}`);
+
+    await page.goto(productUrl, { waitUntil: 'networkidle2' });
+
+    const reviews = [];
+
+    // Scroll and load reviews
+    let previousHeight = 0;
+    let scrollAttempts = 0;
+    const maxScrollAttempts = 10;
+
+    while (reviews.length < maxReviews && scrollAttempts < maxScrollAttempts) {
+        // Extract reviews from current page
+        const newReviews = await page.evaluate(() => {
+            const reviewElements = document.querySelectorAll('.review-item');
+            const extracted = [];
+
+            reviewElements.forEach(reviewEl => {
+                // Extract review data
+                const ratingEl = reviewEl.querySelector('.star-rating');
+                const textEl = reviewEl.querySelector('.review-text');
+                const authorEl = reviewEl.querySelector('.review-author');
+                const dateEl = reviewEl.querySelector('.review-date');
+
+                if (ratingEl && textEl) {
+                    extracted.push({
+                        rating: parseInt(ratingEl.getAttribute('data-rating')) || 0,
+                        text: textEl.textContent.trim(),
+                        author: authorEl ? authorEl.textContent.trim() : 'Anonymous',
+                        date: dateEl ? dateEl.textContent.trim() : '',
+                        helpful: reviewEl.querySelector('.helpful-count')?.textContent || '0'
+                    });
+                }
+            });
+
+            return extracted;
+        });
+
+        // Add new unique reviews
+        newReviews.forEach(review => {
+            if (!reviews.some(r => r.text === review.text)) {
+                reviews.push(review);
+            }
+        });
+
+        console.log(`Collected ${reviews.length} reviews...`);
+
+        // Scroll to load more
+        await page.evaluate(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        // Wait for new content to load
+        await page.waitForTimeout(2000);
+
+        // Check if we've scrolled to the bottom
+        const currentHeight = await page.evaluate(() => document.body.scrollHeight);
+        if (currentHeight === previousHeight) {
+            scrollAttempts++;
+        } else {
+            scrollAttempts = 0;
+        }
+        previousHeight = currentHeight;
+
+        // Try clicking "Load More" button if exists
+        const loadMoreButton = await page.$('button.load-more-reviews');
+        if (loadMoreButton) {
+            await loadMoreButton.click();
+            await page.waitForTimeout(2000);
+            scrollAttempts = 0;
+        }
+    }
+
+    // Analyze reviews
+    const analysis = {
+        totalReviews: reviews.length,
+        averageRating: (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(2),
+        ratingDistribution: {
+            5: reviews.filter(r => r.rating === 5).length,
+            4: reviews.filter(r => r.rating === 4).length,
+            3: reviews.filter(r => r.rating === 3).length,
+            2: reviews.filter(r => r.rating === 2).length,
+            1: reviews.filter(r => r.rating === 1).length
+        },
+        positiveReviews: reviews.filter(r => r.rating >= 4).length,
+        negativeReviews: reviews.filter(r => r.rating <= 2).length
+    };
+
+    // Save results
+    const output = {
+        productUrl,
+        scrapedAt: new Date().toISOString(),
+        analysis,
+        reviews: reviews.slice(0, maxReviews)
+    };
+
+    fs.writeFileSync(
+        `reviews_${Date.now()}.json`,
+        JSON.stringify(output, null, 2)
+    );
+
+    console.log('\n=== REVIEW ANALYSIS ===');
+    console.log(`Total Reviews: ${analysis.totalReviews}`);
+    console.log(`Average Rating: ${analysis.averageRating}/5`);
+    console.log(`Positive (4-5★): ${analysis.positiveReviews}`);
+    console.log(`Negative (1-2★): ${analysis.negativeReviews}`);
+
+    await browser.close();
+    return output;
+}
+
+// Execute
+scrapeProductReviews('https://example.com/product/widget-pro', 100);
+```
 
 **Benefits**:
 - Comprehensive market insights
