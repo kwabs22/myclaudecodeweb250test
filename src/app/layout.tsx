@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Game Dev Trending Topics',
-  description: 'Discover trending topics in game development',
+  title: 'Social Trends Hub - Trending Topics Across Social Media',
+  description: 'Discover trending topics, hashtags, and viral content across Twitter/X, TikTok, Reddit, and Instagram',
 };
 
 export default function RootLayout({

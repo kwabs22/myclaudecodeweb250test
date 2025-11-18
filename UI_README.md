@@ -1,28 +1,28 @@
-# Game Dev Trending Topics UI
+# Social Media Trending Topics UI
 
-A modern, responsive trending topics interface built with Next.js, React, TypeScript, and Tailwind CSS. This UI showcases trending game development topics, repositories, and popular functions with a sleek dark/light mode toggle.
+A modern, responsive trending topics interface built with Next.js, React, TypeScript, and Tailwind CSS. This UI showcases trending topics across Twitter/X, TikTok, Reddit, and Instagram, along with social media repositories and viral hashtags, featuring a sleek dark/light mode toggle.
 
 ## 🚀 Features
 
 ### Core Components
 
 1. **Trending Topics Widget** (`TrendingTopicsWidget`)
-   - Sidebar widget displaying trending game development topics
+   - Sidebar widget displaying trending social media topics and hashtags
    - Filterable by trend direction (All, Rising, Falling)
    - Real-time status indicators
    - Smooth animations and transitions
    - Responsive design
 
 2. **Trending Repository Cards** (`TrendingRepoCard`)
-   - Display trending GitHub repositories
+   - Display trending social media-related GitHub repositories
    - Shows stars, language, and daily growth
    - Trend indicators with percentage changes
    - Hover effects and transitions
 
-3. **Popular Functions Table**
-   - Displays most-used functions across game engines
-   - Filterable and sortable
-   - Complexity and usage metrics
+3. **Viral Hashtags Table**
+   - Displays most-used hashtags across Twitter/X, TikTok, Reddit, and Instagram
+   - Platform indicators
+   - Popularity metrics and post counts
    - Color-coded categories
 
 4. **Dark/Light Mode**
@@ -64,7 +64,8 @@ myclaudecodeweb250test/
 ├── tailwind.config.ts
 ├── postcss.config.js
 ├── next.config.js
-├── TRENDING_UI_LEARNING_RESOURCES.md  # Learning resources
+├── TRENDING_UI_LEARNING_RESOURCES.md  # UI/UX learning resources
+├── SOCIAL_MEDIA_TRENDING_RESOURCES.md # Social media API & repo resources
 └── UI_README.md (this file)
 ```
 

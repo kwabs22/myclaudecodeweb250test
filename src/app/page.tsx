@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import TrendingTopicsWidget from '@/components/TrendingTopicsWidget';
 import TrendingRepoCard from '@/components/TrendingRepoCard';
-import { trendingTopics, trendingRepositories, trendingFunctions } from '@/data/trendingTopics';
-import { Gamepad2, Github, Code2, Moon, Sun } from 'lucide-react';
+import { trendingTopics, trendingRepositories, trendingHashtags } from '@/data/trendingTopics';
+import { TrendingUp, Github, Hash, Moon, Sun } from 'lucide-react';
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -23,14 +23,14 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
-                  <Gamepad2 className="w-6 h-6 text-white" />
+                  <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    Game Dev Hub
+                    Social Trends Hub
                   </h1>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Discover trending topics in game development
+                    Discover what's trending across social media platforms
                   </p>
                 </div>
               </div>
@@ -58,11 +58,11 @@ export default function Home() {
               {/* Welcome Section */}
               <section className="bg-gradient-to-br from-blue-600 to-purple-700 rounded-xl p-8 text-white shadow-lg">
                 <h2 className="text-3xl font-bold mb-3">
-                  Welcome to Game Dev Trending Topics
+                  Welcome to Social Trends Hub
                 </h2>
                 <p className="text-blue-100 mb-4">
-                  Stay up-to-date with the latest trends in game development. Explore trending
-                  topics, repositories, and popular functions across major game engines.
+                  Stay up-to-date with what's trending across Twitter/X, TikTok, Reddit, and Instagram.
+                  Explore viral hashtags, trending repositories, and popular topics in real-time.
                 </p>
                 <div className="grid grid-cols-3 gap-4 mt-6">
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
@@ -71,11 +71,11 @@ export default function Home() {
                   </div>
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
                     <p className="text-3xl font-bold">{trendingRepositories.length}</p>
-                    <p className="text-sm text-blue-100 mt-1">Hot Repos</p>
+                    <p className="text-sm text-blue-100 mt-1">Social Repos</p>
                   </div>
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
-                    <p className="text-3xl font-bold">{trendingFunctions.length}</p>
-                    <p className="text-sm text-blue-100 mt-1">Top Functions</p>
+                    <p className="text-3xl font-bold">{trendingHashtags.length}</p>
+                    <p className="text-sm text-blue-100 mt-1">Viral Hashtags</p>
                   </div>
                 </div>
               </section>
@@ -85,9 +85,12 @@ export default function Home() {
                 <div className="flex items-center gap-2 mb-4">
                   <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    Trending Repositories
+                    Social Media Repositories
                   </h2>
                 </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Open-source projects for building social media trending features
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {trendingRepositories.map((repo) => (
                     <TrendingRepoCard key={repo.id} repo={repo} />
@@ -95,70 +98,73 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* Trending Functions */}
+              {/* Viral Hashtags */}
               <section>
                 <div className="flex items-center gap-2 mb-4">
-                  <Code2 className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Hash className="w-5 h-5 text-gray-700 dark:text-gray-300" />
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    Popular Functions
+                    Viral Hashtags Across Platforms
                   </h2>
                 </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Most-used hashtags trending on Twitter/X, TikTok, Reddit, and Instagram
+                </p>
                 <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead className="bg-gray-50 dark:bg-gray-900">
                         <tr>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Function
+                            Hashtag
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Project
+                            Platform
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Category
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Complexity
+                            Popularity
                           </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Usage
+                            Posts
                           </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {trendingFunctions.map((func) => (
+                        {trendingHashtags.map((hashtag) => (
                           <tr
-                            key={func.id}
+                            key={hashtag.id}
                             className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                           >
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <code className="text-sm font-mono text-blue-600 dark:text-blue-400">
-                                {func.name}()
-                              </code>
+                              <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                                #{hashtag.name}
+                              </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                              {func.project}
+                              {hashtag.project}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span className="px-2 py-1 text-xs rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
-                                {func.category}
+                                {hashtag.category}
                               </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span
                                 className={`px-2 py-1 text-xs rounded-full ${
-                                  func.complexity === 'High'
+                                  hashtag.complexity === 'High'
                                     ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-                                    : func.complexity === 'Medium'
+                                    : hashtag.complexity === 'Medium'
                                     ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300'
                                     : 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
                                 }`}
                               >
-                                {func.complexity}
+                                {hashtag.complexity}
                               </span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                              {func.usageCount.toLocaleString()}
+                              {hashtag.usageCount.toLocaleString()}
                             </td>
                           </tr>
                         ))}
@@ -183,7 +189,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center text-sm text-gray-500 dark:text-gray-400">
               <p>Built with Next.js, React, TypeScript, and Tailwind CSS</p>
-              <p className="mt-2">Game Development Trending Topics &copy; 2025</p>
+              <p className="mt-2">Social Media Trending Topics &copy; 2025</p>
             </div>
           </div>
         </footer>
