@@ -1,0 +1,356 @@
+{
+  "chinese_models_supplement": {
+    "description": "Additional Chinese models: MiniMax, Kimi K2, and others",
+    "last_updated": "2025-01-18",
+    "version": "1.0",
+
+    "models": {
+      "minimax_series": {
+        "description": "MiniMax (稀宇科技) - Chinese AI company with strong general models",
+        "company": "MiniMax",
+        "models": [
+          {
+            "name": "MiniMax-Text-01",
+            "hf_id": "minimax/text-01",
+            "parameters": "Unknown (proprietary)",
+            "vram_required_gb": 80,
+            "precision": "FP16/FP8",
+            "context_length": 245760,
+            "use_case": "Extreme long context, Chinese/English bilingual",
+            "recommended_gpu": ["h100", "b200"],
+            "expected_tps": {"h100": 40, "b200": 75},
+            "quality_tier": "exceptional",
+            "release_date": "2024-10",
+            "notes": "245K context window, primarily API access",
+            "strengths": [
+              "245K token context (among longest available)",
+              "Strong Chinese language understanding",
+              "Competitive with GPT-4 on benchmarks",
+              "Good reasoning capabilities"
+            ],
+            "limitations": [
+              "Primarily Chinese market",
+              "Limited open-source availability",
+              "API-only in most regions"
+            ]
+          },
+          {
+            "name": "MiniMax-abab6.5",
+            "hf_id": "minimax/abab6.5",
+            "parameters": "Unknown (MoE architecture)",
+            "vram_required_gb": 70,
+            "precision": "FP16",
+            "context_length": 245760,
+            "use_case": "General purpose, long context, Chinese-first",
+            "recommended_gpu": ["a100", "h100", "b200"],
+            "expected_tps": {"a100": 45, "h100": 68, "b200": 115},
+            "quality_tier": "excellent",
+            "release_date": "2024-06",
+            "notes": "MoE architecture, efficient inference",
+            "strengths": [
+              "MoE efficiency",
+              "245K context",
+              "Strong multilingual (Chinese/English)",
+              "Cost-effective"
+            ]
+          },
+          {
+            "name": "MiniMax-abab6.5s",
+            "hf_id": "minimax/abab6.5s",
+            "parameters": "Smaller variant",
+            "vram_required_gb": 40,
+            "precision": "FP16",
+            "context_length": 245760,
+            "use_case": "Smaller, faster variant with same long context",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 60, "h100": 90, "b200": 150},
+            "quality_tier": "excellent",
+            "release_date": "2024-08",
+            "notes": "Faster inference, still 245K context"
+          }
+        ]
+      },
+
+      "kimi_series": {
+        "description": "Kimi (Moonshot AI 月之暗面) - Leader in ultra-long context",
+        "company": "Moonshot AI",
+        "headquarters": "Beijing, China",
+        "models": [
+          {
+            "name": "Kimi-K2-Chat",
+            "hf_id": "moonshot-ai/kimi-k2-chat",
+            "parameters": "Unknown (estimated 100B+)",
+            "vram_required_gb": 85,
+            "precision": "FP16/FP8",
+            "context_length": 200000,
+            "use_case": "Ultra-long context understanding, codebase analysis",
+            "recommended_gpu": ["h100", "b200"],
+            "expected_tps": {"a100": 35, "h100": 55, "b200": 95},
+            "quality_tier": "exceptional",
+            "release_date": "2024-11",
+            "notes": "Best-in-class 200K context retention",
+            "strengths": [
+              "200K confirmed working context",
+              "Excellent context retention even at max length",
+              "Strong code understanding",
+              "Multi-turn conversation memory",
+              "Chinese/English bilingual"
+            ],
+            "limitations": [
+              "Slower inference due to long context",
+              "Higher VRAM requirements",
+              "Primarily API access"
+            ],
+            "benchmarks": {
+              "LongBench": "Top-3 performer",
+              "Needle-in-Haystack": "99%+ accuracy at 200K",
+              "Code understanding": "Excellent on large codebases"
+            }
+          },
+          {
+            "name": "Kimi-K1.5",
+            "hf_id": "moonshot-ai/kimi-k1.5",
+            "parameters": "Unknown",
+            "vram_required_gb": 40,
+            "precision": "FP16",
+            "context_length": 128000,
+            "use_case": "General purpose with long context",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 50, "h100": 75, "b200": 125},
+            "quality_tier": "excellent",
+            "release_date": "2024-03",
+            "notes": "Earlier version, still excellent"
+          }
+        ]
+      },
+
+      "glm_extended": {
+        "description": "Additional GLM models from THUDM",
+        "company": "Zhipu AI (THUDM)",
+        "models": [
+          {
+            "name": "GLM-4-9B-Chat",
+            "hf_id": "THUDM/glm-4-9b-chat",
+            "parameters": "9B",
+            "vram_required_gb": 20,
+            "precision": "FP16",
+            "context_length": 131072,
+            "use_case": "Bilingual general purpose, function calling",
+            "recommended_gpu": ["l4", "a10g", "a100"],
+            "expected_tps": {"l4": 52, "a10g": 48, "a100": 88, "h100": 125, "b200": 200},
+            "quality_tier": "exceptional",
+            "release_date": "2024-06",
+            "strengths": [
+              "Excellent Chinese/English bilingual",
+              "128K context",
+              "Function calling support",
+              "Strong reasoning",
+              "Open source"
+            ]
+          },
+          {
+            "name": "GLM-4-9B-Chat-1M",
+            "hf_id": "THUDM/glm-4-9b-chat-1m",
+            "parameters": "9B",
+            "vram_required_gb": 25,
+            "precision": "FP16 with attention optimization",
+            "context_length": 1000000,
+            "use_case": "Extreme long context - entire large codebases",
+            "recommended_gpu": ["a100", "h100", "b200"],
+            "expected_tps": {"a100": 20, "h100": 32, "b200": 55},
+            "quality_tier": "exceptional",
+            "release_date": "2024-09",
+            "notes": "1 MILLION token context - world's longest",
+            "strengths": [
+              "1M token context (unprecedented)",
+              "Can process entire large codebases at once",
+              "Good context retention",
+              "Optimized attention mechanisms"
+            ],
+            "limitations": [
+              "Slower inference (attention cost)",
+              "Higher memory requirements",
+              "Best for analysis, not generation"
+            ],
+            "use_cases": [
+              "Analyze 500K+ line codebases",
+              "Long document analysis",
+              "Find patterns across massive files",
+              "Code archaeology",
+              "Comprehensive refactoring"
+            ]
+          },
+          {
+            "name": "CogVLM2-Llama3-Chat-19B",
+            "hf_id": "THUDM/cogvlm2-llama3-chat-19B",
+            "parameters": "19B (9B language + vision encoder)",
+            "vram_required_gb": 40,
+            "precision": "FP16",
+            "context_length": 8192,
+            "use_case": "Multi-modal: vision + language",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 35, "h100": 52},
+            "quality_tier": "excellent",
+            "release_date": "2024-05",
+            "notes": "Vision + language multi-modal model",
+            "strengths": [
+              "Image understanding",
+              "OCR capabilities",
+              "Visual question answering",
+              "Chart/diagram understanding",
+              "Code from screenshots"
+            ]
+          }
+        ]
+      },
+
+      "other_chinese_models": {
+        "description": "Other notable Chinese models",
+        "models": [
+          {
+            "name": "InternLM2.5-20B-Chat",
+            "hf_id": "internlm/internlm2_5-20b-chat",
+            "company": "Shanghai AI Lab",
+            "parameters": "20B",
+            "vram_required_gb": 42,
+            "precision": "FP16",
+            "context_length": 32768,
+            "use_case": "Strong reasoning, Chinese/English",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 48, "h100": 72, "b200": 120},
+            "quality_tier": "excellent",
+            "release_date": "2024-07"
+          },
+          {
+            "name": "Yi-Coder-9B-Chat",
+            "hf_id": "01-ai/Yi-Coder-9B-Chat",
+            "company": "01.AI (李开复)",
+            "parameters": "9B",
+            "vram_required_gb": 20,
+            "precision": "FP16",
+            "context_length": 131072,
+            "use_case": "Code generation specialist",
+            "recommended_gpu": ["l4", "a10g", "a100"],
+            "expected_tps": {"l4": 50, "a10g": 46, "a100": 85, "h100": 120},
+            "quality_tier": "excellent",
+            "release_date": "2024-09",
+            "strengths": [
+              "Code-focused training",
+              "128K context",
+              "Multilingual code support",
+              "Good at bug fixing"
+            ]
+          },
+          {
+            "name": "Baichuan2-13B-Chat",
+            "hf_id": "baichuan-inc/Baichuan2-13B-Chat",
+            "company": "Baichuan Intelligence",
+            "parameters": "13B",
+            "vram_required_gb": 28,
+            "precision": "FP16",
+            "context_length": 4096,
+            "use_case": "Chinese-focused general purpose",
+            "recommended_gpu": ["a100-40gb", "a100"],
+            "expected_tps": {"a100": 58},
+            "quality_tier": "good",
+            "release_date": "2023-09",
+            "notes": "Older but still used in China"
+          }
+        ]
+      }
+    },
+
+    "context_length_champions": {
+      "description": "Models ranked by context length",
+      "ranking": [
+        {
+          "rank": 1,
+          "model": "GLM-4-9B-Chat-1M",
+          "context": 1000000,
+          "notes": "World record - 1 million tokens"
+        },
+        {
+          "rank": 2,
+          "model": "MiniMax-Text-01 / abab6.5",
+          "context": 245760,
+          "notes": "245K tokens, production-ready"
+        },
+        {
+          "rank": 3,
+          "model": "Kimi-K2-Chat",
+          "context": 200000,
+          "notes": "200K with excellent retention"
+        },
+        {
+          "rank": 4,
+          "model": "DeepSeek-Coder-V2",
+          "context": 163840,
+          "notes": "160K with code focus"
+        },
+        {
+          "rank": 5,
+          "model": "Qwen2.5 Series / Llama 3.x / GLM-4",
+          "context": 131072,
+          "notes": "128K - new standard"
+        }
+      ]
+    },
+
+    "use_case_recommendations": {
+      "extreme_long_context": {
+        "use_case": "Process 500K+ line codebases",
+        "recommended_models": [
+          "GLM-4-9B-Chat-1M (entire codebase at once)",
+          "Kimi-K2-Chat (200K chunks)",
+          "MiniMax-Text-01 (245K chunks)"
+        ]
+      },
+      "chinese_language_primary": {
+        "use_case": "Chinese language tasks",
+        "recommended_models": [
+          "GLM-4-9B-Chat (best bilingual)",
+          "Kimi-K2-Chat (long context Chinese)",
+          "MiniMax-abab6.5 (general purpose)",
+          "Qwen2.5 Series (excellent Chinese + code)"
+        ]
+      },
+      "vision_and_language": {
+        "use_case": "Multi-modal (image + text)",
+        "recommended_models": [
+          "CogVLM2-Llama3-Chat-19B (best Chinese vision)",
+          "Qwen-VL (if available)",
+          "GLM-4V (if released)"
+        ]
+      },
+      "code_with_extreme_context": {
+        "use_case": "Large codebase refactoring",
+        "recommended_models": [
+          "DeepSeek-Coder-V2 (160K, code-focused)",
+          "Qwen2.5-Coder-32B (128K, best quality)",
+          "Kimi-K2-Chat (200K, understanding)"
+        ]
+      }
+    },
+
+    "gpu_recommendations_extended": {
+      "for_1m_context": {
+        "model": "GLM-4-9B-Chat-1M",
+        "minimum_gpu": "A100 80GB",
+        "recommended_gpu": "H100 or B200",
+        "notes": "Attention cost scales with context²"
+      },
+      "for_200k_context": {
+        "model": "Kimi-K2-Chat",
+        "minimum_gpu": "A100 80GB",
+        "recommended_gpu": "H100",
+        "notes": "Can work on A100, better on H100"
+      },
+      "for_245k_context": {
+        "model": "MiniMax-Text-01",
+        "minimum_gpu": "A100 80GB",
+        "recommended_gpu": "H100 or B200",
+        "notes": "Similar to 200K requirements"
+      }
+    }
+  }
+}

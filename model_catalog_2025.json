@@ -198,6 +198,19 @@
             "notes": "Often outperforms larger models, best 7B available"
           },
           {
+            "name": "GLM-4-9B-Chat",
+            "hf_id": "THUDM/glm-4-9b-chat",
+            "parameters": "9B",
+            "vram_required_gb": 20,
+            "precision": "FP16",
+            "context_length": 131072,
+            "use_case": "Chinese/English bilingual, function calling, 128K context",
+            "expected_tps": {"l4": 52, "a10g": 48, "a100": 88, "h100": 125, "b200": 200},
+            "quality_tier": "exceptional",
+            "release_date": "2024-06",
+            "notes": "Excellent bilingual model from Zhipu AI"
+          },
+          {
             "name": "Llama-3.1-8B-Instruct",
             "hf_id": "meta-llama/Llama-3.1-8B-Instruct",
             "parameters": "8B",
@@ -436,6 +449,111 @@
         ]
       },
 
+      "ultra_long_context_models": {
+        "description": "Models with 160K+ context windows for massive codebase analysis",
+        "recommended_gpu": ["a100", "h100", "b200"],
+        "models": [
+          {
+            "name": "GLM-4-9B-Chat-1M",
+            "hf_id": "THUDM/glm-4-9b-chat-1m",
+            "parameters": "9B",
+            "vram_required_gb": 25,
+            "precision": "FP16 with attention optimization",
+            "context_length": 1000000,
+            "use_case": "WORLD RECORD: 1M token context - entire large codebases",
+            "recommended_gpu": ["a100", "h100", "b200"],
+            "expected_tps": {"a100": 20, "h100": 32, "b200": 55},
+            "quality_tier": "exceptional",
+            "release_date": "2024-09",
+            "notes": "1 MILLION token context - can process 500K+ line codebases at once"
+          },
+          {
+            "name": "MiniMax-Text-01",
+            "hf_id": "minimax/text-01",
+            "parameters": "Unknown (proprietary)",
+            "vram_required_gb": 80,
+            "precision": "FP16/FP8",
+            "context_length": 245760,
+            "use_case": "245K context, Chinese/English bilingual, extreme long context",
+            "recommended_gpu": ["h100", "b200"],
+            "expected_tps": {"h100": 40, "b200": 75},
+            "quality_tier": "exceptional",
+            "release_date": "2024-10",
+            "notes": "245K context window from MiniMax (Chinese AI company)"
+          },
+          {
+            "name": "MiniMax-abab6.5",
+            "hf_id": "minimax/abab6.5",
+            "parameters": "Unknown (MoE architecture)",
+            "vram_required_gb": 70,
+            "precision": "FP16",
+            "context_length": 245760,
+            "use_case": "245K context with MoE efficiency, Chinese-first",
+            "recommended_gpu": ["a100", "h100", "b200"],
+            "expected_tps": {"a100": 45, "h100": 68, "b200": 115},
+            "quality_tier": "excellent",
+            "release_date": "2024-06",
+            "notes": "MoE architecture, efficient inference, 245K context"
+          },
+          {
+            "name": "MiniMax-abab6.5s",
+            "hf_id": "minimax/abab6.5s",
+            "parameters": "Smaller MoE variant",
+            "vram_required_gb": 40,
+            "precision": "FP16",
+            "context_length": 245760,
+            "use_case": "Faster variant with same 245K context",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 60, "h100": 90, "b200": 150},
+            "quality_tier": "excellent",
+            "release_date": "2024-08",
+            "notes": "Smaller, faster variant maintaining 245K context"
+          },
+          {
+            "name": "Kimi-K2-Chat",
+            "hf_id": "moonshot-ai/kimi-k2-chat",
+            "parameters": "100B+ (estimated)",
+            "vram_required_gb": 85,
+            "precision": "FP16/FP8",
+            "context_length": 200000,
+            "use_case": "Best-in-class 200K context retention, codebase analysis",
+            "recommended_gpu": ["h100", "b200"],
+            "expected_tps": {"a100": 35, "h100": 55, "b200": 95},
+            "quality_tier": "exceptional",
+            "release_date": "2024-11",
+            "notes": "99%+ accuracy at 200K context (needle-in-haystack), from Moonshot AI"
+          },
+          {
+            "name": "Kimi-K1.5",
+            "hf_id": "moonshot-ai/kimi-k1.5",
+            "parameters": "Unknown",
+            "vram_required_gb": 40,
+            "precision": "FP16",
+            "context_length": 128000,
+            "use_case": "General purpose with long context from Moonshot AI",
+            "recommended_gpu": ["a100-40gb", "a100", "h100"],
+            "expected_tps": {"a100": 50, "h100": 75, "b200": 125},
+            "quality_tier": "excellent",
+            "release_date": "2024-03",
+            "notes": "Earlier Kimi version, still excellent"
+          },
+          {
+            "name": "DeepSeek-Coder-V2-Instruct-236B",
+            "hf_id": "deepseek-ai/DeepSeek-Coder-V2-Instruct",
+            "parameters": "236B (21B active)",
+            "vram_required_gb": 100,
+            "precision": "FP16",
+            "context_length": 163840,
+            "use_case": "160K context for code, advanced generation, MoE",
+            "recommended_gpu": ["h100", "b200"],
+            "expected_tps": {"h100": 40, "b200": 75},
+            "quality_tier": "exceptional",
+            "release_date": "2024-06",
+            "notes": "MoE, only 21B active, 160K context for code"
+          }
+        ]
+      },
+
       "specialized_models_2025": {
         "description": "Latest specialized models for specific tasks",
         "models": [
@@ -451,20 +569,6 @@
             "expected_tps": {"h100": 30, "b200": 60},
             "quality_tier": "exceptional",
             "release_date": "2024-09"
-          },
-          {
-            "name": "DeepSeek-Coder-V2-Instruct-236B",
-            "hf_id": "deepseek-ai/DeepSeek-Coder-V2-Instruct",
-            "parameters": "236B (21B active)",
-            "vram_required_gb": 100,
-            "precision": "FP16",
-            "context_length": 163840,
-            "use_case": "Advanced code generation, 160K context, MoE",
-            "recommended_gpu": ["h100", "b200"],
-            "expected_tps": {"h100": 40, "b200": 75},
-            "quality_tier": "exceptional",
-            "release_date": "2024-06",
-            "notes": "MoE, only 21B active"
           },
           {
             "name": "Phi-3.5-MoE-Instruct",
