@@ -4,7 +4,7 @@ Quick reference to all documents in this collection.
 
 ---
 
-## 📁 Main Documents (4 files)
+## 📁 Main Documents (6 files)
 
 ### Core Guides
 
@@ -14,7 +14,7 @@ Quick reference to all documents in this collection.
 | **QUICK_START.md** | 11KB | Guide | 5-minute quickstart by skill level |
 | **FILE_INDEX.md** | This file | Reference | Complete file listing |
 
-### Analysis Documents
+### Game Development Analysis
 
 | File | Size | Reading Time | Topic |
 |------|------|--------------|-------|
@@ -22,6 +22,13 @@ Quick reference to all documents in this collection.
 | **easybpy-concepts-for-playcanvas.md** | 33KB | 60 min | Blender automation → PlayCanvas |
 | **github-projects-to-learn-from.md** | 20KB | 45 min | 20 project descriptions |
 | **top-20-functions-analysis.md** | 35KB | 90 min | 400 functions across 20 projects |
+
+### AI Benchmark Analysis (NEW)
+
+| File | Size | Reading Time | Topic |
+|------|------|--------------|-------|
+| **VENDING_MACHINE_IMPACT_ANALYSIS.md** | 45KB | 120 min | Economic impact of AI vending agents + autonomous vehicles |
+| **BENCHMARK_INDUSTRY_ADAPTATION.md** | 35KB | 90 min | Adapting Vending-Bench to 10+ other industries |
 
 ---
 
@@ -129,6 +136,12 @@ myclaudecodeweb250test/
 ### "I want data for my own analysis"
 → ***.json** or ***.csv** files
 
+### "I want to understand AI vending machine benchmarks"
+→ **VENDING_MACHINE_IMPACT_ANALYSIS.md**
+
+### "I want to create benchmarks for other industries"
+→ **BENCHMARK_INDUSTRY_ADAPTATION.md**
+
 ---
 
 ## 📈 File Metrics
@@ -137,14 +150,15 @@ myclaudecodeweb250test/
 
 | Metric | Value |
 |--------|-------|
-| **Total Files** | 22 |
-| **Total Size** | ~180KB |
-| **Total Pages** | ~150 pages |
-| **Total Words** | ~75,000 words |
-| **Reading Time** | ~8 hours |
-| **Code Examples** | 60+ |
+| **Total Files** | 24 |
+| **Total Size** | ~260KB |
+| **Total Pages** | ~210 pages |
+| **Total Words** | ~105,000 words |
+| **Reading Time** | ~12 hours |
+| **Code Examples** | 80+ |
 | **Projects Covered** | 20 |
 | **Functions Analyzed** | 400 |
+| **Industries Analyzed** | 11 |
 
 ### By Category
 
