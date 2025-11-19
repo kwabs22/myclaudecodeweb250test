@@ -1,6 +1,6 @@
-# Piano Roll Music Theory Guide: 50 Essential Concepts
+# Piano Roll Music Theory Guide: 87 Essential Concepts
 
-A comprehensive guide to music theory specifically designed for working in piano roll editors found in DAWs like FL Studio, Ableton Live, Logic Pro, and more.
+A comprehensive guide to music theory specifically designed for working in piano roll editors found in DAWs like FL Studio, Ableton Live, Logic Pro, and more. Includes general music theory concepts plus instrument-specific sections for guitar and piano.
 
 ## Table of Contents
 1. [Basic Music Fundamentals](#basic-music-fundamentals)
@@ -13,6 +13,8 @@ A comprehensive guide to music theory specifically designed for working in piano
 8. [Voice Leading and Harmony](#voice-leading-and-harmony)
 9. [Rhythm Techniques](#rhythm-techniques)
 10. [Advanced Concepts](#advanced-concepts)
+11. [Guitar-Specific Learning](#guitar-specific-learning)
+12. [Piano-Specific Learning](#piano-specific-learning)
 
 ---
 
@@ -372,6 +374,298 @@ A comprehensive guide to music theory specifically designed for working in piano
 **Concept:** Borrowing chords from parallel modes/keys (e.g., using minor iv in major key).
 **Piano Roll Application:** In C major, use chords from C minor: Fm, Ab, Bb.
 **Practical Tip:** iv chord in major (C-Fm) = emotional, Beatles-esque sound. Common in pop and rock.
+
+---
+
+## Guitar-Specific Learning
+
+### 52. Guitar Fretboard Layout
+**Concept:** Guitar strings (standard tuning, low to high): E-A-D-G-B-E. Each fret = one semitone.
+**Piano Roll Application:** Translate guitar tabs to piano roll by knowing string pitches:
+- 6th string (E): E2
+- 5th string (A): A2
+- 4th string (D): D3
+- 3rd string (G): G3
+- 2nd string (B): B3
+- 1st string (E): E4
+
+**Practical Tip:** When programming guitar parts in piano roll, think in terms of fret positions. Open strings are important for authentic voicings.
+
+### 53. CAGED System
+**Concept:** Five chord shapes that cover entire fretboard: C, A, G, E, D shapes. Same chord shape moves up/down neck.
+**Piano Roll Application:** Understanding CAGED helps you voice chords like a guitarist would:
+- E shape: root on 6th string (wider voicing)
+- A shape: root on 5th string
+- D shape: root on 4th string (no 5th string played)
+
+**Practical Tip:** Program guitar chords by stacking notes as they appear in guitar voicings, not piano voicings. Guitar chords often skip strings.
+
+### 54. Guitar Chord Voicings
+**Concept:** Guitars voice chords differently than keyboards due to string tuning and hand limitations.
+**Piano Roll Application:** Common guitar voicings:
+- Open C major: C3-E3-G3-C4-E4 (spanning 2 octaves)
+- Barre E shape F major: F2-C3-F3-A3-C4-F4
+- Open G major: G2-B2-D3-G3-B3-G4
+
+**Practical Tip:** Guitar voicings often double roots and omit 5ths. Use wider intervals (10ths instead of 3rds) for authentic guitar sound.
+
+### 55. Power Chord Shapes on Guitar
+**Concept:** Root + 5th (+ octave) played on adjacent strings. Foundation of rock/metal guitar.
+**Piano Roll Application:**
+- 6th string root: E2-B2-E3 (E5 power chord)
+- 5th string root: A2-E3-A3 (A5 power chord)
+
+**Practical Tip:** When programming distorted guitar, use just root and 5th in lower register. Add octave for thickness.
+
+### 56. Guitar Scale Patterns (Box Positions)
+**Concept:** Scales laid out in "boxes" or patterns on the fretboard. 5 positions for pentatonic, 7 for major/minor.
+**Piano Roll Application:** Understanding positions helps create realistic guitar solos:
+- Position 1 (Minor Pentatonic in A): mostly on frets 5-8
+- Position 2: shifts up to frets 7-10
+
+**Practical Tip:** Guitar players think vertically (across strings) not horizontally (along one string). Program melodies using 2-3 notes per string pattern.
+
+### 57. String Bends
+**Concept:** Pushing/pulling string to raise pitch (usually 1-2 semitones). Signature guitar technique.
+**Piano Roll Application:** Use pitch bend automation or modulation wheel:
+- Whole step bend: start on D, bend to E
+- Half step bend: start on E, bend to F
+
+**Practical Tip:** Pre-bend (bend before playing), bend and release, and vibrato (slight rapid bends) add realism to programmed guitar.
+
+### 58. Hammer-Ons and Pull-Offs
+**Concept:** Legato technique where notes are played without picking. Creates smooth, fluid sound.
+**Piano Roll Application:**
+- Hammer-on: first note higher velocity, second note lower velocity, no gap
+- Pull-off: reverse direction, descending notes
+
+**Practical Tip:** Reduce velocity (60-80) on hammered/pulled notes. Slightly overlap note timing for legato effect.
+
+### 59. Guitar Strumming Patterns
+**Concept:** Chords played in rhythmic patterns with up/down strokes. Each string struck slightly offset.
+**Piano Roll Application:** Strum = notes don't start simultaneously:
+- Downstroke: lowest notes first, ascending (3-5ms apart)
+- Upstroke: highest notes first, descending
+
+**Practical Tip:** Use negative note delay or humanize function. Downstrokes emphasize bass, upstrokes emphasize treble.
+
+### 60. Alternate Tunings
+**Concept:** Non-standard string tunings create different chord voicings and tones.
+**Piano Roll Application:** Common alternate tunings:
+- Drop D: D-A-D-G-B-E (6th string down to D2)
+- Open G: D-G-D-G-B-D (open strings = G chord)
+- DADGAD: D-A-D-G-A-D (folk/Celtic sound)
+
+**Practical Tip:** When programming in alternate tunings, translate accordingly. Drop D gives access to lower D for heavy riffs.
+
+### 61. Guitar-Friendly Keys
+**Concept:** Keys with open strings are easier and ring better on guitar: E, A, D, G, C.
+**Piano Roll Application:** Program in these keys for most authentic guitar sound. Open strings add resonance.
+**Practical Tip:** E minor/major, A minor/major, and D minor/major are guitar favorites. Use open string notes for drones.
+
+### 62. Two-Hand Tapping
+**Concept:** Using both hands on fretboard to play rapid arpeggios and wide intervals.
+**Piano Roll Application:** Create patterns with large interval jumps:
+- Low note (picked): E2
+- High note (tapped): G4
+- Mid note (pulled-off): B3
+
+**Practical Tip:** Velocities: picked note (100-127), tapped note (90-110), pulled notes (70-90).
+
+### 63. Palm Muting
+**Concept:** Muting strings with picking hand palm creates percussive, tight sound.
+**Piano Roll Application:** Shorten note length dramatically (staccato) and reduce velocity slightly.
+**Practical Tip:** Combine with power chords for classic metal rhythm. Notes should be 1/16 or shorter with dead space between.
+
+### 64. Artificial Harmonics
+**Concept:** Creating harmonic tones by lightly touching string at specific frets while picking.
+**Piano Roll Application:** Play notes 1-2 octaves higher than fretted position. Add shimmer/bell tone.
+**Practical Tip:** Most common at 12th fret (octave), 7th fret (octave + 5th), and 5th fret (two octaves).
+
+### 65. Slide Guitar Techniques
+**Concept:** Using slide (metal/glass tube) creates smooth glissando between notes.
+**Piano Roll Application:** Use portamento/glide function. Notes slide continuously rather than step.
+**Practical Tip:** Often played in open tunings. Slide vibrato = slight wobble at end of phrases. Popular in blues and country.
+
+---
+
+## Piano-Specific Learning
+
+### 66. Piano Keyboard Layout
+**Concept:** Piano has 88 keys. Pattern of 7 white + 5 black keys repeats each octave. C is always left of two-black-key group.
+**Piano Roll Application:** Piano roll directly mirrors piano keyboard - easiest 1:1 translation.
+**Practical Tip:** Middle C (C4) is center of piano. Most pop/rock piano sits in C3-C6 range.
+
+### 67. Left Hand vs. Right Hand Roles
+**Concept:** Typically: left hand plays bass/chords, right hand plays melody/top notes.
+**Piano Roll Application:** Split programming:
+- Left hand: C1-C4 (bass lines, chord roots, chord shells)
+- Right hand: C4-C7 (melody, chord tops, runs)
+
+**Practical Tip:** Think like a pianist - what can two hands physically play? Avoid programming impossible stretches (>octave span per hand).
+
+### 68. Piano Chord Voicings
+**Concept:** Piano voicings differ from guitar - more vertical stacking, use of 10ths (octave + 3rd).
+**Piano Roll Application:** Root position vs shell voicings:
+- Full voicing: C2-C3-E3-G3-C4 (left hand root, right hand triad)
+- Shell voicing: C2-E3-Bb3 (C7 - root, 3rd, 7th only)
+
+**Practical Tip:** Don't muddy low register - keep intervals wider below C3. Above C4, closer intervals sound clear.
+
+### 69. Stride Piano
+**Concept:** Left hand alternates bass notes (1-2 beats) with chords (3-4 beats). Classic jazz/ragtime style.
+**Piano Roll Application:** Pattern in 4/4:
+- Beat 1: Root note (C2)
+- Beat 2: 5th or 10th (G2 or E3)
+- Beat 3: Chord (E3-G3-C4)
+- Beat 4: Same chord or variation
+
+**Practical Tip:** Creates bouncy, energetic feel. Left hand "strides" across keyboard. Common in boogie-woogie and early jazz.
+
+### 70. Octave Playing
+**Concept:** Playing same note in multiple octaves for power and thickness.
+**Piano Roll Application:** Right hand melody doubled in octaves:
+- Single: C5-D5-E5
+- Octaves: C4+C5, D4+D5, E4+E5
+
+**Practical Tip:** Requires hand span - typically pinky + thumb. Adds drama and volume. Common in classical climaxes and gospel.
+
+### 71. Broken Chords and Arpeggios
+**Concept:** Playing chord notes sequentially rather than simultaneously.
+**Piano Roll Application:** C major broken chord patterns:
+- Ascending: C3-E3-G3-C4
+- Alberti bass: C3-G3-E3-G3 (classical accompaniment)
+- Rolling: C3-E3-G3-E3-C3-E3-G3-E3
+
+**Practical Tip:** Creates movement without changing harmony. Essential for piano accompaniment patterns.
+
+### 72. Two-Hand Independence
+**Concept:** Each hand plays different rhythm, melody, or pattern simultaneously.
+**Piano Roll Application:** Layer two patterns:
+- Left hand: Steady quarter note bass line
+- Right hand: Syncopated melody or off-beat chords
+
+**Practical Tip:** Program each hand separately. Test that patterns are physically playable. Advanced pianists can handle complex polyrhythms.
+
+### 73. Piano Pedaling (Sustain)
+**Concept:** Sustain pedal extends note duration, blends harmonies, adds resonance.
+**Piano Roll Application:** Use MIDI CC64 (sustain pedal) or extend note lengths:
+- No pedal: Notes release immediately (staccato)
+- With pedal: Notes ring together until pedal release
+
+**Practical Tip:** Change pedal with each chord change to avoid muddiness. Half-pedaling = subtle sustain (MIDI value 40-60).
+
+### 74. Block Chords vs. Rolled Chords
+**Concept:** Block = all notes simultaneously. Rolled = notes played rapidly in succession (arpeggiated).
+**Piano Roll Application:**
+- Block chord: C3, E3, G3 all start at same grid position
+- Rolled chord: C3, E3 (+5ms), G3 (+10ms) for upward roll
+
+**Practical Tip:** Roll chords for romantic, flowing feel. Block chords for rhythmic, percussive sound. Jazz often uses rolled voicings.
+
+### 75. Crossover and Crossunder Technique
+**Concept:** One hand crosses over/under the other to access different register or play scale runs.
+**Piano Roll Application:** Usually right hand crosses over left for low melodic notes, or left crosses over for high accompaniment.
+**Practical Tip:** When programming, ensure notes don't overlap in impossible ways. Crossovers work best for single-note lines, not chords.
+
+### 76. Grace Notes and Ornaments
+**Concept:** Quick decorative notes: grace notes, trills, mordents, turns.
+**Piano Roll Application:**
+- Grace note: Very short note (1/32 or shorter) just before main note, low velocity
+- Trill: Rapid alternation between two adjacent notes
+- Mordent: Main note, upper/lower neighbor, back to main
+
+**Practical Tip:** Grace notes add classical/jazz flavor. Keep them quiet (velocity 50-70) and very short.
+
+### 77. Glissando
+**Concept:** Sliding hand rapidly across keys (usually white keys only).
+**Piano Roll Application:** Create chromatic or diatonic run:
+- White key gliss in C major: C-D-E-F-G-A-B-C (ascending/descending)
+- Black key gliss: pentatonic scale (C#-D#-F#-G#-A#)
+
+**Practical Tip:** Start each note slightly offset (2-5ms apart). Increase velocity toward end for realistic acceleration.
+
+### 78. Tremolo
+**Concept:** Rapid repetition of single note or alternating between two notes.
+**Piano Roll Application:**
+- Single note tremolo: C5 repeated as fast as 1/32 or 1/64 notes
+- Interval tremolo: C5-G5 alternating rapidly
+
+**Practical Tip:** Creates tension and drama. Slight velocity variation prevents robotic sound. Common in romantic/cinematic piano.
+
+### 79. Parallel Chords (Planing)
+**Concept:** Moving a chord shape up/down in parallel motion (all voices move by same interval).
+**Piano Roll Application:** Take C-E-G shape, move entire shape up chromatically:
+- Bar 1: C4-E4-G4
+- Bar 2: C#4-F4-G#4
+- Bar 3: D4-F#4-A4
+
+**Practical Tip:** Creates impressionistic, Debussy-like sound. Breaks traditional voice leading rules but sounds lush.
+
+### 80. Contrary Motion
+**Concept:** Hands move in opposite directions (one up, one down).
+**Piano Roll Application:**
+- Left hand descends: C3-B2-A2-G2
+- Right hand ascends: E4-F4-G4-A4
+
+**Practical Tip:** Creates balance and sophistication. Classical composers use extensively. Sounds complex but easier to play than it looks.
+
+### 81. Chopin Waltz Accompaniment
+**Concept:** Left hand pattern for 3/4 waltz time: bass note on beat 1, chord on beats 2-3.
+**Piano Roll Application:** In 3/4 time, C major:
+- Beat 1: C2 (root bass note)
+- Beats 2-3: E3-G3-C4 (chord)
+
+**Practical Tip:** Classic romantic piano sound. Bass note emphasizes downbeat, chords create lilting dance feel.
+
+### 82. Gospel Piano Runs
+**Concept:** Rapid scalar or chromatic runs connecting chords, heavily used in gospel/R&B.
+**Piano Roll Application:** Ascending run from C4 to C5 using major scale + chromatic passing tones:
+- C4-D4-Eb4-E4-F4-G4-Ab4-A4-Bb4-B4-C5 (mix of scale and chromatic)
+
+**Practical Tip:** Runs typically lead into downbeat. Increase velocity toward end. Often ends on chord tone.
+
+### 83. Comping (Jazz Piano)
+**Concept:** Rhythmic, syncopated chord voicings that "comp" (accompany) soloist.
+**Piano Roll Application:** Play 7th chord shells (3rd and 7th) on off-beats:
+- Beat 2+: G3-B3 (for Cmaj7, playing 5th and 7th)
+- Beat 4+: E3-B3 (3rd and 7th)
+
+**Practical Tip:** Leave space - don't play on every beat. Syncopate and accent off-beats. Omit roots if bass is present.
+
+### 84. Montuno Pattern (Latin Piano)
+**Concept:** Syncopated, repetitive ostinato used in salsa, Latin jazz.
+**Piano Roll Application:** 2-bar pattern in C:
+- C4-E4-G4 (on 1, on 2-and, on 4)
+- Repeat with slight rhythmic variations
+
+**Practical Tip:** Right hand plays pattern, left hand plays bass tumbao. Creates infectious groove. Stay in middle register (C4-C5).
+
+### 85. Two-Note Voicings (Shell Voicings)
+**Concept:** Playing only essential chord tones (typically 3rd and 7th) instead of full chord.
+**Piano Roll Application:** Cmaj7 shell voicings:
+- Root position: E3-B3 (3rd and 7th)
+- Inversion: B3-E4
+
+**Practical Tip:** Less is more in jazz. Shell voicings leave room for bass and other instruments. Add color tones (9th, 13th) occasionally.
+
+### 86. Sustain, Sostenuto, and Una Corda Pedals
+**Concept:** Piano has 3 pedals: sustain (right), sostenuto (middle), una corda/soft (left).
+**Piano Roll Application:**
+- CC64: Sustain (most important)
+- CC66: Sostenuto (sustains only notes already held)
+- CC67: Soft pedal (reduces volume and changes timbre)
+
+**Practical Tip:** Most MIDI controllers only send CC64. Sostenuto allows bass note to ring while playing staccato melody above.
+
+### 87. Velocity Layering and Dynamics
+**Concept:** Piano is dynamic instrument - from pppp (very quiet) to ffff (very loud). Velocity affects timbre, not just volume.
+**Piano Roll Application:** Dynamic range:
+- pp (40-60): Soft, warm tone
+- mf (70-90): Medium, conversational
+- ff (100-127): Bright, powerful, more overtones
+
+**Practical Tip:** Vary velocity for musical expression. Classical piano requires huge dynamic range. Avoid constant velocity.
 
 ---
 
