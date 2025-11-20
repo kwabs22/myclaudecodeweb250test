@@ -6,12 +6,13 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Table of Contents
 1. [Autopilot & Flight Control Systems](#autopilot--flight-control-systems)
-2. [Ground Control Stations](#ground-control-stations)
-3. [Computer Vision & Object Detection](#computer-vision--object-detection)
-4. [Simulators](#simulators)
-5. [Mapping & Photogrammetry](#mapping--photogrammetry)
-6. [Communication Protocols](#communication-protocols)
-7. [Autonomous Navigation](#autonomous-navigation)
+2. [FPV Racing Drones](#fpv-racing-drones)
+3. [Ground Control Stations](#ground-control-stations)
+4. [Computer Vision & Object Detection](#computer-vision--object-detection)
+5. [Simulators](#simulators)
+6. [Mapping & Photogrammetry](#mapping--photogrammetry)
+7. [Communication Protocols](#communication-protocols)
+8. [Autonomous Navigation](#autonomous-navigation)
 
 ---
 
@@ -64,9 +65,117 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ---
 
+## FPV Racing Drones
+
+### 5. BetaFlight
+**Repository:** [betaflight/betaflight](https://github.com/betaflight/betaflight)
+- **Description:** World's leading open-source flight controller firmware for FPV racing drones
+- **Language:** C
+- **Key Features:**
+  - Optimized for high-performance racing and freestyle
+  - Industry-standard for FPV drone racing (used in Red Bull events, DRL, etc.)
+  - Supports wide range of flight controller hardware
+  - Real-time PID tuning and optimization
+  - BetaFlight Configurator GUI for easy setup
+  - Advanced filtering and motor control
+  - Blackbox logging for flight analysis
+  - Active community with 21 language translations
+- **Release Cycle:** Two major releases per year (June & December)
+- **Use Case:** FPV racing, freestyle, high-performance acrobatic flight
+
+**Red Bull Connection:** The flight controller technology powering many racing drones, including those in Red Bull's drone racing events and their custom 350+ km/h F1 chase drone.
+
+### 6. RotorFlight
+**Repository:** [rotorflight/rotorflight](https://github.com/rotorflight/rotorflight)
+- **Description:** Flight control software for single-rotor helicopters (fork of BetaFlight)
+- **Language:** C
+- **Key Features:**
+  - Specialized for helicopters instead of multi-rotors
+  - Based on BetaFlight architecture
+  - Advanced swashplate mixing
+  - Governor and tail control
+- **Use Case:** RC helicopter racing and 3D aerobatics
+
+### 7. INAV
+**Repository:** [iNavFlight/inav](https://github.com/iNavFlight/inav)
+- **Description:** Navigation-focused flight controller firmware (BetaFlight fork)
+- **Language:** C
+- **Key Features:**
+  - GPS navigation and waypoint missions
+  - Return-to-home functionality
+  - Long-range FPV capabilities
+  - Fixed-wing and multi-rotor support
+  - Mission planning integration
+- **Use Case:** Long-range FPV, autonomous waypoint navigation
+
+### 8. EmuFlight
+**Repository:** [emuflight/EmuFlight](https://github.com/emuflight/EmuFlight)
+- **Description:** Community-driven BetaFlight fork focused on smooth flight
+- **Language:** C
+- **Key Features:**
+  - Enhanced filtering algorithms
+  - Smooth flight characteristics
+  - Experimental features from community
+  - Compatible with BetaFlight hardware
+- **Use Case:** Freestyle, cinematic FPV
+
+### 9. AlienWhoopF7
+**Repository:** [brucesdad13/AlienWhoopF7](https://github.com/brucesdad13/AlienWhoopF7)
+- **Description:** Best-in-class brushed flight controller for micro FPV racing
+- **Key Features:**
+  - Optimized for tiny whoops and micro drones
+  - Brushed motor support
+  - Integrated BetaFlight
+  - Perfect for indoor racing
+- **Use Case:** Tiny whoop racing, indoor FPV
+
+### 10. AIgle Racer
+**Repository:** [vguillet/AIgle_Racer](https://github.com/vguillet/AIgle_Racer)
+- **Description:** Open-source hardware racing drone with AI/RL capabilities
+- **Key Features:**
+  - Complete open-source hardware design
+  - Demonstration reinforcement learning software
+  - Designed for autonomous drone racing competitions
+  - Research-oriented platform
+- **Use Case:** Autonomous racing research, AI competitions
+
+### Racing Drone Simulators
+
+**DRL Simulator**
+- **Platform:** Steam (Proprietary)
+- **Description:** Official Drone Racing League simulator
+- **Note:** Not open source, but popular for training
+
+**LiftOff / Velocidrone / DCL**
+- **Type:** Commercial FPV simulators
+- **Use:** Professional racing training and practice
+
+---
+
+## Red Bull Racing Drone Technology
+
+**Red Bull F1 Chase Drone (2024):**
+- **Developer:** Dutch Drone Gods + Red Bull Advanced Technologies
+- **Top Speed:** 350 km/h (217 mph)
+- **Weight:** 985 grams (2.2 lbs)
+- **Cameras:** Dual 4K cameras
+- **Acceleration:** 0-100 km/h in <2 seconds, 100-300 km/h in 2 seconds
+- **G-Forces:** Up to 6G
+- **Materials:** Carbon fiber, fiberglass, 3D polymers
+- **Note:** Proprietary technology, no open-source release
+
+**Technology Used:**
+- Likely uses BetaFlight or custom firmware
+- Advanced FPV control systems
+- High-performance brushless motors
+- Custom carbon fiber frames
+- Professional-grade video transmission
+
+---
+
 ## Ground Control Stations
 
-### 5. QGroundControl
+### 11. QGroundControl
 **Repository:** [mavlink/qgroundcontrol](https://github.com/mavlink/qgroundcontrol)
 - **Description:** Cross-platform ground control station
 - **Platforms:** Android, iOS, Mac OS, Linux, Windows
@@ -78,7 +187,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Video streaming support
 - **Use Case:** Universal GCS for PX4 and ArduPilot drones
 
-### 6. Mission Planner
+### 12. Mission Planner
 **Repository:** [ArduPilot/MissionPlanner](https://github.com/ArduPilot/MissionPlanner)
 - **Stars:** 1.6k+
 - **Platform:** Windows (with Mono support for Linux/Mac)
@@ -90,7 +199,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Log analysis
 - **Use Case:** ArduPilot-based drone operations
 
-### 7. ASV Drones GCS
+### 13. ASV Drones GCS
 **Repository:** [asv-soft/asv-drones](https://github.com/asv-soft/asv-drones)
 - **Description:** Open-source ground control station for ArduPilot and PX4
 - **Key Features:**
@@ -102,7 +211,7 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Computer Vision & Object Detection
 
-### 8. Drone Detection & Tracking (YOLOv3 + GOTURN)
+### 14. Drone Detection & Tracking (YOLOv3 + GOTURN)
 **Repository:** [tau-adl/Detection_Tracking_JetsonTX2](https://github.com/tau-adl/Detection_Tracking_JetsonTX2)
 - **Description:** Real-time drone visual detection and tracking on Jetson TX2
 - **Algorithms:** YOLOv3 for detection, GOTURN for tracking
@@ -112,7 +221,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Optimized for embedded systems (Jetson TX2)
 - **Use Case:** Counter-drone systems, drone-based surveillance
 
-### 9. Drone Detection YOLOv11x
+### 15. Drone Detection YOLOv11x
 **Repository:** [doguilmak/Drone-Detection-YOLOv11x](https://github.com/doguilmak/Drone-Detection-YOLOv11x)
 - **Description:** Real-time drone detection using latest YOLOv11x
 - **Key Features:**
@@ -123,7 +232,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Trained on custom UAV dataset
 - **Use Case:** Drone detection in complex environments
 
-### 10. DroTrack
+### 16. DroTrack
 **Repository:** [cruiseresearchgroup/DroTrack](https://github.com/cruiseresearchgroup/DroTrack)
 - **Description:** High-speed drone-based object tracking under uncertainty
 - **Performance:** Up to 1000 fps
@@ -133,7 +242,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Real-time performance
 - **Use Case:** High-speed tracking applications, sports analysis
 
-### 11. VisDrone Dataset
+### 17. VisDrone Dataset
 **Repository:** [VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)
 - **Description:** Comprehensive dataset for drone-based detection and tracking
 - **Contents:** Images, videos, and annotations
@@ -147,7 +256,7 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Simulators
 
-### 12. RotorS Simulator
+### 18. RotorS Simulator
 **Repository:** [ethz-asl/rotors_simulator](https://github.com/ethz-asl/rotors_simulator)
 - **Description:** UAV Gazebo simulator from ETH Zurich
 - **Platform:** ROS + Gazebo
@@ -158,7 +267,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Sensor simulation
 - **Use Case:** Academic research, algorithm development
 
-### 13. UAV Simulator (Lightweight)
+### 19. UAV Simulator (Lightweight)
 **Repository:** [Zhefan-Xu/uav_simulator](https://github.com/Zhefan-Xu/uav_simulator)
 - **Description:** Lightweight Gazebo/ROS-based simulator
 - **Language:** C++
@@ -170,7 +279,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Easy setup
 - **Use Case:** Quick prototyping, algorithm testing
 
-### 14. SJTU Drone
+### 20. SJTU Drone
 **Repository:** [NovoG93/sjtu_drone](https://github.com/NovoG93/sjtu_drone)
 - **Description:** ROS/ROS 2 Gazebo quadcopter simulator
 - **Platform:** ROS 2 (Ubuntu 22.04) + Gazebo 11
@@ -180,7 +289,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Modern ROS compatibility
 - **Use Case:** ROS 2 development, education
 
-### 15. AirSim
+### 21. AirSim
 **Repository:** [microsoft/AirSim](https://github.com/microsoft/AirSim)
 - **Description:** Open-source simulator for autonomous vehicles
 - **Engine:** Unreal Engine / Unity
@@ -192,7 +301,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Deep learning integration
 - **Use Case:** AI/ML training, realistic simulation, computer vision
 
-### 16. Autonomous Drone SITL
+### 22. Autonomous Drone SITL
 **Repository:** [pratik7229/Autonomous_Drone_using_SITL_ROS_and-gazebo_simulation](https://github.com/pratik7229/Autonomous_Drone_using_SITL_ROS_and-gazebo_simulation)
 - **Description:** Comprehensive drone programming tutorial
 - **Technologies:** SITL, ROS, mavros, Gazebo
@@ -206,7 +315,7 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Mapping & Photogrammetry
 
-### 17. OpenDroneMap (WebODM)
+### 23. OpenDroneMap (WebODM)
 **Repository:** [OpenDroneMap/WebODM](https://github.com/OpenDroneMap/WebODM)
 - **Stars:** 3,452+ | **Last Updated:** Nov 2025
 - **Description:** User-friendly, commercial-grade drone imagery processing
@@ -223,7 +332,7 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Communication Protocols
 
-### 18. MAVLink
+### 24. MAVLink
 **Repository:** [mavlink/mavlink](https://github.com/mavlink/mavlink)
 - **Description:** Micro Air Vehicle Message Marshalling Library
 - **Key Features:**
@@ -233,7 +342,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Standard for drone communication
 - **Use Case:** Drone-GCS communication, telemetry
 
-### 19. MAVROS
+### 25. MAVROS
 **Repository:** [mavlink/mavros](https://github.com/mavlink/mavros)
 - **Description:** MAVLink to ROS gateway
 - **Key Features:**
@@ -247,7 +356,7 @@ A curated collection of the best open-source repositories for drone technology, 
 
 ## Autonomous Navigation
 
-### 20. Autonomous Drone Delivery
+### 26. Autonomous Drone Delivery
 **Repository:** [szebedy/autonomous-drone](https://github.com/szebedy/autonomous-drone)
 - **Description:** Autonomous delivery system for Intel Aero RTF with PX4
 - **Platform:** ROS + Gazebo simulation / Real hardware
@@ -258,7 +367,7 @@ A curated collection of the best open-source repositories for drone technology, 
   - Full simulation and real-world support
 - **Use Case:** Autonomous delivery, waypoint navigation
 
-### 21. GAAS (Generalized Autonomy Aviation System)
+### 27. GAAS (Generalized Autonomy Aviation System)
 **Repository:** [generalized-intelligence/GAAS](https://github.com/generalized-intelligence/GAAS)
 - **Description:** Open-source program for fully autonomous VTOL and drones
 - **Key Features:**
@@ -284,6 +393,7 @@ A curated collection of the best open-source repositories for drone technology, 
 | Category | Number of Projects | Key Technologies |
 |----------|-------------------|------------------|
 | Autopilot Systems | 4 | PX4, ArduPilot, Paparazzi, DroneKit |
+| FPV Racing | 6 | BetaFlight, INAV, RotorFlight, EmuFlight |
 | Ground Control | 3 | Qt, .NET, MAVLink |
 | Computer Vision | 4 | YOLO, GOTURN, Deep Learning |
 | Simulators | 5 | Gazebo, ROS, Unreal Engine |
@@ -291,7 +401,9 @@ A curated collection of the best open-source repositories for drone technology, 
 | Communication | 2 | MAVLink, ROS |
 | Autonomous Nav | 2 | SLAM, Visual Odometry, Planning |
 
-**Total Repositories:** 21+ specialized drone technology projects
+**Total Repositories:** 27+ specialized drone technology projects
+
+**Note:** Includes Red Bull F1 Chase Drone technology reference and FPV racing ecosystem
 
 ---
 

@@ -895,6 +895,138 @@ Phase 1 → AirSim → Phase 4 → Phase 5
 **Best for:** Quick iteration, ML training
 **Projects:** Reinforcement learning, sim-to-real transfer
 
+### Path E: FPV Racing (Red Bull Style)
+```
+Phase 1 (Modified) → BetaFlight Setup → FPV Simulator → Hardware Build → Racing Practice
+```
+**Best for:** Racing enthusiasts, hobbyists, FPV pilots
+**Projects:** High-speed racing, freestyle acrobatics, competitive flying
+
+**Modified Phase 1 for FPV Racing:**
+
+**Duration:** 2-4 weeks
+**Goal:** Set up FPV racing development environment
+
+**System Setup:**
+```bash
+# Install BetaFlight Configurator
+# Download from: https://github.com/betaflight/betaflight-configurator/releases
+
+# For Linux
+sudo apt install dfu-util
+chmod +x betaflight-configurator_*.AppImage
+./betaflight-configurator_*.AppImage
+
+# For macOS/Windows: Download and install from GitHub releases
+```
+
+**FPV Simulator Setup:**
+- **DRL Simulator** (Steam) - Official Drone Racing League simulator
+- **Liftoff** - Professional FPV simulator with realistic physics
+- **Velocidrone** - Competitive racing simulator
+- **FPV Air 2** - Free alternative for beginners
+
+**Recommended Starter Hardware:**
+```
+Flight Controller:
+- BetaFlight F4/F7 board (~$30-50)
+- SpeedyBee F405 V3
+- Mamba F722
+
+Frame:
+- 5" freestyle frame (~$30-60)
+- TBS Source One (open source)
+- GEPRC frames
+
+Motors:
+- 2207 2400-2600KV (~$60-80 for 4)
+
+ESC:
+- 4-in-1 45-50A ESC (~$40-60)
+
+Camera + VTX:
+- Runcam Racer/Phoenix (~$30)
+- VTX 25-600mW (~$20-30)
+
+FPV Goggles:
+- Entry: Eachine EV800D (~$80)
+- Mid: Skyzone 04X (~$400)
+- Pro: DJI Goggles V2 (~$600)
+
+Radio:
+- RadioMaster TX16S (~$200)
+- FrSky Taranis (~$250)
+
+Total Entry Cost: $400-600
+Racing Setup: $800-1500
+```
+
+**BetaFlight Configuration Basics:**
+```
+1. Flash latest BetaFlight firmware
+2. Configure ports (UART for receiver, MSP, etc.)
+3. Set up receiver (SBUS/CRSF)
+4. Configure motors (correct direction and order)
+5. Set up modes (ARM, ANGLE, HORIZON, ACRO)
+6. Tune PIDs (start with defaults)
+7. Configure OSD
+8. Set up Blackbox logging
+9. Configure failsafe
+```
+
+**Learning Path:**
+1. **Week 1-2:** Simulator practice
+   - Learn LOS (Line of Sight) first
+   - Progress to FPV in simulator
+   - Master basic maneuvers (hovering, forward flight, turns)
+
+2. **Week 3-4:** Advanced simulator
+   - Practice racing through gates
+   - Learn freestyle moves (flips, rolls, dives)
+   - Build muscle memory
+
+3. **Week 5-6:** Hardware build
+   - Assemble racing drone
+   - Configure BetaFlight
+   - Test all components
+
+4. **Week 7-8:** Real flight practice
+   - Start in ANGLE mode (stabilized)
+   - Progress to HORIZON mode
+   - Finally ACRO mode (full manual - racing mode)
+   - Start low and slow!
+
+**Safety for FPV Racing:**
+- Always use propeller guards when learning
+- Fly in open areas away from people
+- Have spotter when wearing goggles
+- Check local regulations (FCC/CE compliance)
+- Join local FPV club for guidance
+- Never fly near airports or restricted areas
+
+**Red Bull F1 Drone Specs (Advanced Reference):**
+```
+Speed: 350 km/h (217 mph)
+Weight: 985g
+Acceleration: 0-100 km/h in <2 sec
+Materials: Carbon fiber, fiberglass, 3D polymers
+G-Forces: Up to 6G
+```
+
+**Progression to Red Bull Level:**
+This is professional/expert level requiring:
+- Years of practice
+- Custom built, high-performance drones
+- Advanced piloting skills
+- Professional-grade equipment
+- Team support and sponsorship
+
+**FPV Racing Resources:**
+- **YouTube Channels:** Joshua Bardwell, UAVFutures, Mr. Steele
+- **Communities:** r/Multicopter, FPV Discord servers
+- **Racing Leagues:** MultiGP, DRL, local racing clubs
+- **Tools:** BetaFlight Blackbox Explorer, PID tuning guides
+
 ---
 
 ## Resources & Learning Materials
