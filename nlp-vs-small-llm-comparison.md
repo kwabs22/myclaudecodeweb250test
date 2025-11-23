@@ -9,11 +9,16 @@ This document provides a detailed comparison between traditional NLP approaches 
 ## Table of Contents
 
 1. [Traditional NLP Repositories](#traditional-nlp-repositories)
-2. [Small Language Models (0.5-0.6B Parameters)](#small-language-models-05-06b-parameters)
-3. [Comparison Matrix](#comparison-matrix)
-4. [Performance Benchmarks](#performance-benchmarks)
-5. [Use Case Recommendations](#use-case-recommendations)
-6. [Conclusion](#conclusion)
+2. [Training Goals: Traditional NLP vs LLMs](#training-goals-traditional-nlp-vs-llms)
+3. [Training Implementation Plans](#training-implementation-plans)
+   - [Implementation Plan 1: Traditional NLP Training](#implementation-plan-1-traditional-nlp-training)
+   - [Implementation Plan 2: Training 125M LLM from Scratch](#implementation-plan-2-training-125m-llm-from-scratch)
+   - [Implementation Plan 3: Fine-Tuning 1B LLM with LoRA](#implementation-plan-3-fine-tuning-1b-llm-with-lora)
+4. [Small Language Models (0.5-0.6B Parameters)](#small-language-models-05-06b-parameters)
+5. [Comparison Matrix](#comparison-matrix)
+6. [Performance Benchmarks](#performance-benchmarks)
+7. [Use Case Recommendations](#use-case-recommendations)
+8. [Conclusion](#conclusion)
 
 ---
 
@@ -300,6 +305,1547 @@ Multilingual NLP library with extensive language support.
 - **Word2Vec**: Predictive model, local context
 - **GloVe**: Count-based, global statistics
 - **FastText**: Handles OOV words via subwords
+
+---
+
+## Training Goals: Traditional NLP vs LLMs
+
+### Fundamental Philosophical Difference
+
+The most critical distinction between traditional NLP and LLMs lies in their **training objectives** and **philosophical approach** to language understanding.
+
+---
+
+### Traditional NLP Training Goals: Task-Specific Optimization
+
+Traditional NLP systems are built with **narrow, task-specific objectives**:
+
+#### Core Philosophy: Supervised Learning with Explicit Features
+
+**Goal:** Learn a specific mapping from input → output for a well-defined task
+
+**Training Objectives by Task:**
+
+1. **Named Entity Recognition (NER)**
+   - **Goal:** Classify each token as PERSON, ORG, LOC, MISC, or O (outside)
+   - **Objective Function:** Cross-entropy loss over token-level classifications
+   - **Success Metric:** F1 score on entity boundaries and types
+   - **Data Needs:** 1,000-10,000 annotated sentences
+
+2. **Part-of-Speech Tagging**
+   - **Goal:** Assign grammatical category to each word (NOUN, VERB, ADJ, etc.)
+   - **Objective Function:** Sequence labeling loss (CRF, HMM)
+   - **Success Metric:** Per-token accuracy (>95% expected)
+   - **Data Needs:** 10,000-50,000 annotated sentences
+
+3. **Sentiment Analysis**
+   - **Goal:** Classify text as positive/negative/neutral
+   - **Objective Function:** Cross-entropy loss over sentiment classes
+   - **Success Metric:** Accuracy, precision/recall per class
+   - **Data Needs:** 5,000-20,000 labeled reviews/documents
+
+4. **Text Classification**
+   - **Goal:** Assign predefined categories (news topics, spam/ham, etc.)
+   - **Objective Function:** Multi-class or multi-label cross-entropy
+   - **Success Metric:** Accuracy, macro/micro F1
+   - **Data Needs:** 1,000-10,000 labeled documents per class
+
+5. **Dependency Parsing**
+   - **Goal:** Build syntactic tree showing word relationships
+   - **Objective Function:** Structured prediction loss (arc-factored)
+   - **Success Metric:** Unlabeled/Labeled Attachment Score (UAS/LAS)
+   - **Data Needs:** 10,000-50,000 parsed sentences
+
+**Key Characteristics:**
+- ✅ **Explicit task definition** - You know exactly what you're optimizing for
+- ✅ **Hand-crafted features** - Linguistic knowledge encoded (word shapes, POS tags, n-grams)
+- ✅ **Interpretable** - Can explain why model made a decision
+- ✅ **Data efficient** - Can work with 1,000s of examples
+- ❌ **No generalization** - Sentiment model can't do NER
+- ❌ **Feature engineering required** - Need domain expertise
+- ❌ **Brittle** - Breaks on out-of-domain data
+
+---
+
+### LLM Training Goals: General-Purpose Language Modeling
+
+LLMs are built with a **universal, task-agnostic objective**:
+
+#### Core Philosophy: Self-Supervised Next Token Prediction
+
+**Goal:** Learn the statistical structure of language itself, enabling zero-shot generalization
+
+**Primary Training Objective:**
+
+**Next Token Prediction (Causal Language Modeling)**
+```
+Given: "The cat sat on the"
+Predict: "mat" (or any plausible continuation)
+
+Objective: Minimize perplexity = exp(average negative log-likelihood)
+Loss = -Σ log P(token_i | token_1, ..., token_{i-1})
+```
+
+**What This Learns (Emergent Capabilities):**
+
+1. **Syntax** - Grammatical structure emerges from predicting valid continuations
+2. **Semantics** - Meaning emerges from predicting contextually appropriate words
+3. **World Knowledge** - Facts encoded in billions of tokens
+4. **Reasoning** - Multi-step inference emerges at scale
+5. **Task Understanding** - Instruction following emerges from diverse training data
+
+**Secondary Objectives (for instruction-tuned models):**
+
+1. **Supervised Fine-Tuning (SFT)**
+   - **Goal:** Learn to follow instructions and format responses
+   - **Data:** 10K-100K instruction-response pairs
+   - **Objective:** Next token prediction on high-quality responses
+
+2. **Preference Optimization (RLHF/DPO)**
+   - **Goal:** Align outputs with human preferences
+   - **Data:** Pairwise preference comparisons
+   - **Objective:** Maximize probability of preferred responses
+
+**Key Characteristics:**
+- ✅ **Universal objective** - Same model for all tasks
+- ✅ **Zero-shot generalization** - Can do tasks never seen in training
+- ✅ **Few-shot learning** - Adapts to new tasks from examples
+- ✅ **Emergent abilities** - Reasoning, planning arise at scale
+- ✅ **No feature engineering** - Learns representations end-to-end
+- ❌ **Data hungry** - Needs billions of tokens for pre-training
+- ❌ **Computationally expensive** - Requires GPUs, weeks of training
+- ❌ **Less interpretable** - Black box decision making
+
+---
+
+### Side-by-Side Comparison: Training Goals
+
+| Dimension | Traditional NLP | Small LLMs |
+|-----------|----------------|------------|
+| **Primary Goal** | Task-specific performance | General language understanding |
+| **Training Objective** | Supervised loss per task | Next token prediction |
+| **Data Requirements** | 1K-50K labeled examples | 1B-100B+ tokens (mostly unlabeled) |
+| **Generalization** | Within-task only | Cross-task, zero-shot |
+| **Knowledge Source** | Task labels + features | Raw text (self-supervised) |
+| **Optimization Target** | Specific metric (F1, accuracy) | Perplexity, cross-entropy |
+| **Feature Engineering** | Required (manual) | Automatic (learned) |
+| **Success Criteria** | High accuracy on test set | Low perplexity, downstream task performance |
+| **Adaptability** | Retrain for new task | Prompt or fine-tune |
+
+---
+
+### Example: Building a Sentiment Analyzer
+
+**Traditional NLP Approach:**
+```
+1. Collect 10,000 reviews labeled positive/negative
+2. Engineer features:
+   - Bag of words (TF-IDF)
+   - POS tags
+   - Sentiment lexicon matches
+   - Negation handling
+3. Train Naive Bayes or SVM
+4. Optimize for accuracy on held-out test set
+5. Result: Model that ONLY does sentiment analysis
+```
+
+**LLM Approach:**
+```
+1. Pre-train on billions of tokens (general language)
+   - No sentiment labels needed
+   - Learns "good" and "bad" from context
+2. Optional: Fine-tune on 1,000 sentiment examples
+3. Or: Just prompt: "Classify sentiment: [review]"
+4. Result: Model that does sentiment + 100 other tasks
+```
+
+---
+
+## Training Implementation Plans
+
+This section provides detailed, step-by-step implementation plans for three distinct training scenarios:
+
+1. **Traditional NLP Training** - Task-specific supervised learning
+2. **125M LLM from Scratch** - Pre-training a small language model
+3. **1B LLM Fine-tuning** - Adapting an existing model with PEFT/LoRA
+
+---
+
+## Implementation Plan 1: Traditional NLP Training
+
+### Scenario: Train a Named Entity Recognition (NER) Model with spaCy
+
+**Goal:** Build a production-ready NER model to extract custom entities (e.g., PRODUCT, COMPANY, PRICE) from domain-specific text.
+
+**Timeline:** 1-2 weeks
+**Resources:** CPU sufficient, 8GB RAM minimum
+**Cost:** $500-$2,000 (primarily annotation)
+
+---
+
+### Phase 1: Data Preparation (3-5 days)
+
+#### Step 1.1: Data Collection
+```bash
+# Collect raw text from your domain
+# Target: 5,000-10,000 documents
+- Web scraping (if applicable)
+- Internal documents
+- Public datasets (CoNLL, OntoNotes as starting point)
+```
+
+#### Step 1.2: Annotation
+```bash
+# Use annotation tools
+Tools: Prodigy, Label Studio, Doccano
+
+# Annotation requirements:
+- 2,000-5,000 annotated sentences minimum
+- 10-15 examples per entity type minimum
+- Multiple annotators for quality (Cohen's kappa > 0.8)
+
+Time estimate:
+- Professional annotator: 100-200 sentences/hour
+- 2,000 sentences = 10-20 hours of annotation
+```
+
+**Example annotation format (spaCy):**
+```python
+TRAIN_DATA = [
+    ("Apple Inc. released iPhone 15 for $999", {
+        "entities": [(0, 10, "COMPANY"), (20, 29, "PRODUCT"), (34, 38, "PRICE")]
+    }),
+    ("Microsoft Azure costs $200 per month", {
+        "entities": [(0, 9, "COMPANY"), (10, 15, "PRODUCT"), (22, 26, "PRICE")]
+    })
+]
+```
+
+#### Step 1.3: Train/Val/Test Split
+```python
+# Split data: 70% train, 15% validation, 15% test
+import random
+random.shuffle(TRAIN_DATA)
+
+n = len(TRAIN_DATA)
+train_data = TRAIN_DATA[:int(0.7*n)]
+dev_data = TRAIN_DATA[int(0.7*n):int(0.85*n)]
+test_data = TRAIN_DATA[int(0.85*n):]
+```
+
+---
+
+### Phase 2: Model Setup (1 day)
+
+#### Step 2.1: Install Dependencies
+```bash
+pip install spacy==3.7.2
+pip install spacy-transformers  # Optional: for transformer models
+python -m spacy download en_core_web_sm  # Base model
+```
+
+#### Step 2.2: Create Project Structure
+```bash
+mkdir ner_project
+cd ner_project
+python -m spacy project clone tutorials/ner_demo .
+
+# Directory structure:
+ner_project/
+├── data/
+│   ├── train.spacy
+│   ├── dev.spacy
+│   └── test.spacy
+├── configs/
+│   └── config.cfg
+├── scripts/
+│   └── convert.py
+├── training/
+└── project.yml
+```
+
+#### Step 2.3: Configure Training Pipeline
+```bash
+# Create config file
+python -m spacy init config config.cfg --lang en --pipeline ner --optimize efficiency
+```
+
+**config.cfg (key sections):**
+```ini
+[training]
+train_corpus = "corpus.train"
+dev_corpus = "corpus.dev"
+max_epochs = 30
+patience = 5
+dropout = 0.2
+batch_size = 32
+
+[nlp]
+pipeline = ["tok2vec", "ner"]
+
+[components.tok2vec]
+@architectures = "spacy.Tok2Vec.v2"
+# Embedding layer for feature extraction
+
+[components.ner]
+@architectures = "spacy.TransitionBasedParser.v2"
+# Transition-based NER model
+```
+
+---
+
+### Phase 3: Feature Engineering (1-2 days)
+
+Traditional NLP requires manual feature engineering:
+
+#### Feature Types:
+
+1. **Token-level features:**
+```python
+- Token text (lowercased)
+- Token shape (e.g., "iPhone" → "Xxxxx")
+- Prefix/suffix (first/last 3 characters)
+- Is digit, is punct, is title
+- POS tag from pre-trained tagger
+```
+
+2. **Context features:**
+```python
+- Previous/next 2 tokens
+- Previous/next POS tags
+- Word embeddings (Word2Vec, GloVe)
+```
+
+3. **Lexicon features:**
+```python
+- Matches in company name gazetteer
+- Matches in product name list
+- Currency symbols for PRICE entities
+```
+
+**Implementation in spaCy:**
+```python
+# Custom feature function
+from spacy.tokens import Doc
+
+def add_custom_features(doc):
+    # Add gazetteer matches
+    company_list = {"Apple", "Microsoft", "Google"}
+    for token in doc:
+        token._.is_company_name = token.text in company_list
+    return doc
+
+# Register as pipeline component
+nlp.add_pipe("custom_features", before="ner")
+```
+
+---
+
+### Phase 4: Training (1-2 days)
+
+#### Step 4.1: Train Model
+```bash
+python -m spacy train config.cfg \
+    --output ./training \
+    --paths.train ./data/train.spacy \
+    --paths.dev ./data/dev.spacy \
+    --gpu-id -1  # CPU training
+```
+
+**Training process:**
+```
+Epoch 1/30: Loss: 245.32, F1: 0.45
+Epoch 5/30: Loss: 89.21, F1: 0.73
+Epoch 10/30: Loss: 42.15, F1: 0.82
+Epoch 15/30: Loss: 28.44, F1: 0.86
+Epoch 20/30: Loss: 19.22, F1: 0.88
+Early stopping at epoch 25 (no improvement)
+```
+
+**Training time:**
+- CPU: 2-4 hours for 2,000 sentences, 30 epochs
+- Single GPU: 30-60 minutes
+
+#### Step 4.2: Hyperparameter Tuning
+```python
+# Key hyperparameters to tune:
+- Learning rate: [0.0001, 0.001, 0.01]
+- Dropout: [0.1, 0.2, 0.3]
+- Batch size: [16, 32, 64]
+- Max epochs: [20, 30, 50]
+
+# Use grid search or random search
+# Optimize for F1 score on validation set
+```
+
+---
+
+### Phase 5: Evaluation (1 day)
+
+#### Step 5.1: Evaluate on Test Set
+```bash
+python -m spacy evaluate ./training/model-best ./data/test.spacy
+```
+
+**Output:**
+```
+Token accuracy: 99.2%
+NER Precision: 87.3%
+NER Recall: 84.1%
+NER F1: 85.7%
+
+Per-entity performance:
+COMPANY: P=92.1%, R=89.3%, F1=90.7%
+PRODUCT: P=85.2%, R=81.4%, F1=83.3%
+PRICE: P=84.5%, R=82.1%, F1=83.3%
+```
+
+#### Step 5.2: Error Analysis
+```python
+# Analyze false positives and false negatives
+from spacy.scorer import Scorer
+
+def analyze_errors(nlp, test_data):
+    errors = {"FP": [], "FN": []}
+
+    for text, annot in test_data:
+        doc = nlp(text)
+        gold_entities = set(annot["entities"])
+        pred_entities = set((e.start_char, e.end_char, e.label_) for e in doc.ents)
+
+        # False positives
+        for ent in pred_entities - gold_entities:
+            errors["FP"].append((text, ent))
+
+        # False negatives
+        for ent in gold_entities - pred_entities:
+            errors["FN"].append((text, ent))
+
+    return errors
+
+# Common error patterns:
+# - Boundary errors: "iPhone 15" vs "iPhone"
+# - Type confusion: PRODUCT vs COMPANY
+# - Out-of-vocabulary entities
+```
+
+---
+
+### Phase 6: Deployment (1 day)
+
+#### Step 6.1: Package Model
+```bash
+python -m spacy package ./training/model-best ./packages --name my_ner_model --version 1.0.0
+cd packages/en_my_ner_model-1.0.0
+pip install dist/en_my_ner_model-1.0.0.tar.gz
+```
+
+#### Step 6.2: Production Inference
+```python
+import spacy
+
+# Load model
+nlp = spacy.load("en_my_ner_model")
+
+# Inference
+text = "Apple released iPhone 15 for $999"
+doc = nlp(text)
+
+for ent in doc.ents:
+    print(f"{ent.text}: {ent.label_}")
+
+# Performance:
+# - Latency: 5-10ms per document (CPU)
+# - Throughput: 100-200 docs/second (single CPU core)
+# - Memory: 200-500MB
+```
+
+---
+
+### Resources Required: Traditional NLP Training
+
+| Resource | Specification | Cost |
+|----------|--------------|------|
+| **Compute** | CPU (4+ cores) | $0 (local) or $50-100 (cloud) |
+| **Storage** | 1-5GB | Minimal |
+| **RAM** | 8-16GB | Standard |
+| **GPU** | Optional | Not needed |
+| **Data Annotation** | 2,000-5,000 examples | $500-$2,000 |
+| **Developer Time** | 1-2 weeks | Primary cost |
+| **Total** | - | **$1,000-$5,000** |
+
+---
+
+## Implementation Plan 2: Training 125M LLM from Scratch
+
+### Scenario: Pre-train a 125M Parameter Language Model
+
+**Goal:** Build a domain-specific small language model from scratch (e.g., for medical, legal, or code domains).
+
+**Timeline:** 4-8 weeks
+**Resources:** 1-8 GPUs (A100 or better)
+**Cost:** $5,000-$50,000
+
+---
+
+### Phase 1: Architecture Design (1 week)
+
+#### Step 1.1: Choose Architecture
+
+**Reference: GPT-2 125M Architecture**
+```python
+Configuration:
+- Parameters: 125M
+- Layers: 12
+- Hidden size: 768
+- Attention heads: 12
+- Context window: 2048 tokens
+- Vocabulary size: 50,257
+- Total parameters: 124,439,808
+
+Architecture breakdown:
+- Token embeddings: 50,257 × 768 = 38.6M params
+- Position embeddings: 2,048 × 768 = 1.6M params
+- 12 transformer blocks: ~84M params
+  - Each block: ~7M params
+    - Multi-head attention: ~2.4M
+    - Feed-forward network: ~4.7M
+    - Layer norms: minimal
+```
+
+#### Step 1.2: Implementation Choice
+
+**Option A: From-Scratch PyTorch**
+```python
+# Following Andrej Karpathy's approach
+git clone https://github.com/karpathy/nanoGPT
+cd nanoGPT
+
+# Advantages: Full control, educational
+# Disadvantages: More work, fewer optimizations
+```
+
+**Option B: Hugging Face Transformers**
+```python
+from transformers import GPT2Config, GPT2LMHeadModel
+
+config = GPT2Config(
+    vocab_size=50257,
+    n_positions=2048,
+    n_embd=768,
+    n_layer=12,
+    n_head=12,
+    n_inner=3072,
+    activation_function="gelu_new",
+    resid_pdrop=0.1,
+    embd_pdrop=0.1,
+    attn_pdrop=0.1,
+    layer_norm_epsilon=1e-5,
+    initializer_range=0.02,
+)
+
+model = GPT2LMHeadModel(config)
+print(f"Model parameters: {model.num_parameters():,}")
+# Output: 124,439,808
+```
+
+**Recommended: Option B** (Hugging Face) for production
+**Educational: Option A** (nanoGPT) for learning
+
+---
+
+### Phase 2: Data Preparation (2-3 weeks)
+
+#### Step 2.1: Dataset Collection
+
+**Target:** 1-10 billion tokens
+
+**Data Sources:**
+
+1. **General Domain (Web Text):**
+```bash
+# FineWeb-Edu (350B tokens, filtered for quality)
+# RedPajama (1.2T tokens, diverse sources)
+# The Pile (800GB, 22 diverse datasets)
+
+# Download sample
+git clone https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu
+```
+
+2. **Domain-Specific:**
+```python
+Medical: PubMed (30M articles), MIMIC-III
+Legal: FreeLaw Project, Caselaw Access Project
+Code: The Stack (3TB), GitHub public repos
+Finance: SEC filings, financial news
+```
+
+**Storage Requirements:**
+```
+1B tokens ≈ 4-5GB of text
+10B tokens ≈ 40-50GB
+100B tokens ≈ 400-500GB
+```
+
+#### Step 2.2: Data Cleaning
+
+**Quality Filters:**
+```python
+import re
+
+def clean_text(text):
+    # 1. Remove boilerplate
+    text = remove_navigation_menus(text)
+    text = remove_ads(text)
+
+    # 2. Language filtering (keep English)
+    if detect_language(text) != "en":
+        return None
+
+    # 3. Quality heuristics
+    if len(text) < 100:  # Too short
+        return None
+
+    if mean_word_length(text) < 3:  # Gibberish
+        return None
+
+    if symbol_to_word_ratio(text) > 0.3:  # Too many symbols
+        return None
+
+    # 4. Deduplication
+    text_hash = compute_minhash(text)
+    if text_hash in seen_hashes:
+        return None
+
+    # 5. Toxicity filtering (optional)
+    if toxicity_score(text) > 0.8:
+        return None
+
+    return text
+
+# Apply to full dataset
+cleaned_data = [clean_text(doc) for doc in raw_data]
+cleaned_data = [d for d in cleaned_data if d is not None]
+```
+
+**Deduplication:**
+```bash
+# Use MinHashLSH for near-duplicate detection
+pip install datasketch
+
+# Expected reduction: 10-30% of data
+# Critical for preventing memorization
+```
+
+#### Step 2.3: Tokenization
+
+**Train Custom Tokenizer (BPE):**
+```python
+from tokenizers import Tokenizer, models, trainers, pre_tokenizers
+
+# Initialize BPE tokenizer
+tokenizer = Tokenizer(models.BPE())
+tokenizer.pre_tokenizer = pre_tokenizers.ByteLevel()
+
+# Train on sample of data
+trainer = trainers.BpeTrainer(
+    vocab_size=50257,  # Match GPT-2
+    special_tokens=["<|endoftext|>", "<|padding|>"],
+    min_frequency=2
+)
+
+# Train (takes several hours on large corpus)
+files = ["data/shard_*.txt"]
+tokenizer.train(files, trainer)
+
+# Save
+tokenizer.save("tokenizer.json")
+```
+
+**Tokenize Full Dataset:**
+```python
+# Convert text to token IDs
+import numpy as np
+
+def tokenize_dataset(texts, tokenizer):
+    all_tokens = []
+    for text in texts:
+        tokens = tokenizer.encode(text).ids
+        all_tokens.extend(tokens)
+        all_tokens.append(tokenizer.token_to_id("<|endoftext|>"))
+
+    # Save as memory-mapped array for efficient loading
+    tokens_array = np.array(all_tokens, dtype=np.uint16)
+    np.save("train_tokens.npy", tokens_array)
+
+    return len(all_tokens)
+
+total_tokens = tokenize_dataset(cleaned_data, tokenizer)
+print(f"Total tokens: {total_tokens:,}")
+# Target: 1-10 billion
+```
+
+---
+
+### Phase 3: Training Setup (1 week)
+
+#### Step 3.1: Hardware Requirements
+
+**Minimum (Single GPU):**
+```
+GPU: 1× A100 40GB or A100 80GB
+RAM: 64GB
+Storage: 500GB SSD
+Network: High bandwidth for dataset loading
+
+Training time: 2-4 weeks
+Cost: ~$3/hour × 672 hours = $2,000-2,500
+```
+
+**Recommended (Multi-GPU):**
+```
+GPU: 4-8× A100 40GB/80GB
+RAM: 256GB+
+Storage: 1-2TB NVMe SSD
+Network: High-speed interconnect (NVLink, InfiniBand)
+
+Training time: 3-7 days
+Cost: ~$12-24/hour × 168 hours = $2,000-4,000
+```
+
+#### Step 3.2: Training Configuration
+
+**Key Hyperparameters:**
+```python
+training_config = {
+    # Model
+    "vocab_size": 50257,
+    "n_layer": 12,
+    "n_head": 12,
+    "n_embd": 768,
+    "context_length": 2048,
+
+    # Training
+    "batch_size": 64,  # Per GPU
+    "gradient_accumulation_steps": 8,  # Effective batch = 512
+    "learning_rate": 6e-4,
+    "weight_decay": 0.1,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "grad_clip": 1.0,
+
+    # Schedule
+    "warmup_steps": 2000,
+    "lr_decay": "cosine",
+    "max_steps": 100000,  # ~50B tokens at batch 512
+
+    # Optimization
+    "dtype": "bfloat16",  # Mixed precision
+    "compile": True,  # torch.compile for 30% speedup
+}
+```
+
+**Optimizer:**
+```python
+import torch
+
+optimizer = torch.optim.AdamW(
+    model.parameters(),
+    lr=training_config["learning_rate"],
+    betas=(training_config["beta1"], training_config["beta2"]),
+    weight_decay=training_config["weight_decay"]
+)
+
+# Learning rate schedule
+from torch.optim.lr_scheduler import CosineAnnealingLR
+
+scheduler = CosineAnnealingLR(
+    optimizer,
+    T_max=training_config["max_steps"],
+    eta_min=6e-5  # Final LR
+)
+```
+
+#### Step 3.3: Distributed Training Setup
+
+**Multi-GPU (DDP - Distributed Data Parallel):**
+```python
+import torch.distributed as dist
+from torch.nn.parallel import DistributedDataParallel as DDP
+
+# Initialize process group
+dist.init_process_group(backend="nccl")
+local_rank = int(os.environ["LOCAL_RANK"])
+torch.cuda.set_device(local_rank)
+
+# Wrap model
+model = model.to(local_rank)
+model = DDP(model, device_ids=[local_rank])
+
+# Launch with torchrun
+# torchrun --nproc_per_node=8 train.py
+```
+
+---
+
+### Phase 4: Pre-training (3-4 weeks on 1 GPU, 3-7 days on 8 GPUs)
+
+#### Step 4.1: Training Loop
+
+**Core Training Script:**
+```python
+import torch
+from torch.utils.data import DataLoader, Dataset
+
+class TokenDataset(Dataset):
+    def __init__(self, token_file, context_length):
+        self.tokens = np.load(token_file, mmap_mode='r')
+        self.context_length = context_length
+
+    def __len__(self):
+        return len(self.tokens) // self.context_length
+
+    def __getitem__(self, idx):
+        start = idx * self.context_length
+        end = start + self.context_length + 1
+        chunk = self.tokens[start:end]
+        x = torch.tensor(chunk[:-1], dtype=torch.long)
+        y = torch.tensor(chunk[1:], dtype=torch.long)
+        return x, y
+
+# Create dataloader
+dataset = TokenDataset("train_tokens.npy", context_length=2048)
+dataloader = DataLoader(
+    dataset,
+    batch_size=64,
+    shuffle=True,
+    num_workers=4,
+    pin_memory=True
+)
+
+# Training loop
+model.train()
+step = 0
+for epoch in range(1000):  # Effectively infinite
+    for batch_idx, (x, y) in enumerate(dataloader):
+        x, y = x.cuda(), y.cuda()
+
+        # Forward pass
+        with torch.cuda.amp.autocast(dtype=torch.bfloat16):
+            logits = model(x).logits
+            loss = F.cross_entropy(
+                logits.view(-1, logits.size(-1)),
+                y.view(-1)
+            )
+
+        # Backward pass
+        loss = loss / gradient_accumulation_steps
+        loss.backward()
+
+        # Update every N steps
+        if (batch_idx + 1) % gradient_accumulation_steps == 0:
+            torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+            optimizer.step()
+            scheduler.step()
+            optimizer.zero_grad()
+
+            step += 1
+
+            # Logging
+            if step % 100 == 0:
+                perplexity = torch.exp(loss).item()
+                print(f"Step {step}: Loss={loss.item():.4f}, PPL={perplexity:.2f}")
+
+            # Checkpointing
+            if step % 5000 == 0:
+                torch.save({
+                    'step': step,
+                    'model_state_dict': model.state_dict(),
+                    'optimizer_state_dict': optimizer.state_dict(),
+                }, f"checkpoint_{step}.pt")
+```
+
+#### Step 4.2: Monitor Training
+
+**Key Metrics:**
+```
+Step 1000: Loss=6.234, PPL=508.23, LR=1.2e-4
+Step 5000: Loss=4.567, PPL=96.31, LR=3.6e-4
+Step 10000: Loss=3.891, PPL=49.14, LR=5.4e-4
+Step 20000: Loss=3.234, PPL=25.37, LR=6.0e-4
+Step 50000: Loss=2.567, PPL=13.03, LR=5.1e-4
+Step 100000: Loss=2.123, PPL=8.35, LR=2.4e-4
+
+Expected final perplexity: 8-15 (depending on data quality)
+```
+
+**Training Progress:**
+```bash
+# Monitor GPU utilization
+nvidia-smi -l 1
+
+# Expected: 95%+ GPU utilization, 35-40GB memory on A100
+
+# Monitor with Weights & Biases
+wandb login
+# Add to training script:
+import wandb
+wandb.init(project="125m-llm-pretraining")
+wandb.log({"loss": loss, "perplexity": ppl, "lr": lr})
+```
+
+#### Step 4.3: Compute Requirements
+
+**Token Throughput:**
+```
+Single A100 40GB:
+- ~5,000-8,000 tokens/second
+- 1B tokens in 35-55 hours
+- 10B tokens in 350-550 hours (14-23 days)
+
+8× A100 40GB:
+- ~40,000-64,000 tokens/second
+- 10B tokens in 43-69 hours (2-3 days)
+- 50B tokens in 217-345 hours (9-14 days)
+```
+
+**FLOPs Calculation:**
+```
+FLOPs per token ≈ 6 × num_parameters
+125M params × 6 = 750 MFLOPs per token
+
+For 10B tokens:
+10B × 750M = 7.5e18 FLOPs = 7.5 PFLOPs
+
+A100 achieves ~312 TFLOPS (bf16)
+Training time: 7.5e15 / 312e12 = 24,000 seconds = 6.7 hours (theoretical)
+Actual: 2-3× longer due to I/O, overhead = 14-20 hours per A100
+```
+
+---
+
+### Phase 5: Evaluation (1 week)
+
+#### Step 5.1: Intrinsic Evaluation
+
+**Perplexity on Held-Out Test Set:**
+```python
+def evaluate_perplexity(model, test_dataloader):
+    model.eval()
+    total_loss = 0
+    total_tokens = 0
+
+    with torch.no_grad():
+        for x, y in test_dataloader:
+            x, y = x.cuda(), y.cuda()
+            logits = model(x).logits
+            loss = F.cross_entropy(
+                logits.view(-1, logits.size(-1)),
+                y.view(-1),
+                reduction='sum'
+            )
+            total_loss += loss.item()
+            total_tokens += y.numel()
+
+    avg_loss = total_loss / total_tokens
+    perplexity = np.exp(avg_loss)
+    return perplexity
+
+test_ppl = evaluate_perplexity(model, test_loader)
+print(f"Test Perplexity: {test_ppl:.2f}")
+# Target: <15 for good model
+```
+
+#### Step 5.2: Downstream Task Evaluation
+
+**Zero-Shot Benchmarks:**
+```python
+# Use EleutherAI's lm-evaluation-harness
+pip install lm-eval
+
+# Evaluate on multiple tasks
+lm_eval --model hf \
+    --model_args pretrained=./checkpoint_100000 \
+    --tasks hellaswag,arc_easy,arc_challenge,piqa \
+    --device cuda:0 \
+    --batch_size 16
+
+# Expected results for 125M model:
+# HellaSwag: 30-35% (random: 25%)
+# ARC-Easy: 40-45% (random: 25%)
+# ARC-Challenge: 22-26% (random: 25%)
+# PIQA: 65-70% (random: 50%)
+```
+
+#### Step 5.3: Qualitative Evaluation
+
+**Text Generation:**
+```python
+from transformers import pipeline
+
+generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
+
+prompt = "The future of artificial intelligence is"
+output = generator(prompt, max_length=100, do_sample=True, top_p=0.9)
+print(output[0]['generated_text'])
+
+# Evaluate:
+# - Coherence: Does it make sense?
+# - Fluency: Grammatically correct?
+# - Relevance: Stays on topic?
+# - Diversity: Multiple samples different?
+```
+
+---
+
+### Phase 6: Instruction Tuning (Optional, 1 week)
+
+**Convert base model to instruction-following:**
+
+```python
+# Use dataset like Alpaca, Dolly, or custom instructions
+from datasets import load_dataset
+
+dataset = load_dataset("tatsu-lab/alpaca")
+
+# Format as instruction-response pairs
+def format_instruction(example):
+    if example["input"]:
+        return f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:\n{example['output']}"
+    else:
+        return f"### Instruction:\n{example['instruction']}\n\n### Response:\n{example['output']}"
+
+# Fine-tune with lower learning rate
+optimizer = AdamW(model.parameters(), lr=1e-5)
+
+# Train for 3-5 epochs on 10K-50K instructions
+# Time: 4-8 hours on single A100
+```
+
+---
+
+### Resources Required: 125M LLM from Scratch
+
+| Resource | Specification | Cost |
+|----------|--------------|------|
+| **Compute** | 1× A100 40GB × 500 hours | $1,500-2,000 |
+| **Compute (Faster)** | 8× A100 40GB × 70 hours | $2,000-5,000 |
+| **Storage** | 500GB-1TB SSD | $50-100 |
+| **Data** | 10B tokens (web scraping or datasets) | $0-500 |
+| **Bandwidth** | Dataset download | $50-200 |
+| **Developer Time** | 4-8 weeks | Primary cost |
+| **Total** | - | **$5,000-$20,000** |
+
+---
+
+## Implementation Plan 3: Fine-Tuning 1B LLM with LoRA
+
+### Scenario: Adapt Pre-trained 1B Model to Specific Task/Domain
+
+**Goal:** Fine-tune Qwen2-1.5B or TinyLLaMA-1.1B for domain-specific task (e.g., customer support, medical Q&A, code generation).
+
+**Timeline:** 3-7 days
+**Resources:** 1× GPU (24GB VRAM minimum)
+**Cost:** $200-$2,000
+
+---
+
+### Phase 1: Setup and Preparation (1 day)
+
+#### Step 1.1: Install Dependencies
+
+```bash
+# Core libraries
+pip install torch==2.1.0 transformers==4.36.0
+pip install peft==0.7.0  # Parameter-Efficient Fine-Tuning
+pip install datasets==2.15.0
+pip install accelerate==0.25.0
+pip install bitsandbytes==0.41.0  # For quantization
+pip install wandb  # Experiment tracking
+
+# Optional: TRL for advanced training
+pip install trl==0.7.4
+```
+
+#### Step 1.2: Choose Base Model
+
+**Option A: Qwen2-1.5B (Recommended for general tasks)**
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "Qwen/Qwen2-1.5B"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    device_map="auto",
+    torch_dtype=torch.bfloat16,
+)
+
+print(f"Parameters: {model.num_parameters():,}")
+# 1,543,569,408 parameters
+```
+
+**Option B: TinyLLaMA-1.1B (More memory efficient)**
+```python
+model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+# 1,100,048,384 parameters
+```
+
+#### Step 1.3: Prepare Dataset
+
+**Format: Instruction-Response Pairs**
+```python
+from datasets import Dataset
+
+# Example: Customer support dataset
+data = [
+    {
+        "instruction": "How do I reset my password?",
+        "input": "",
+        "output": "To reset your password: 1) Click 'Forgot Password' on the login page, 2) Enter your email address, 3) Check your email for a reset link, 4) Click the link and create a new password."
+    },
+    {
+        "instruction": "What is your refund policy?",
+        "input": "",
+        "output": "We offer a 30-day money-back guarantee. If you're not satisfied, contact support within 30 days of purchase for a full refund."
+    },
+    # ... 1,000-10,000 more examples
+]
+
+dataset = Dataset.from_list(data)
+dataset = dataset.train_test_split(test_size=0.1)
+
+print(f"Train: {len(dataset['train'])} examples")
+print(f"Test: {len(dataset['test'])} examples")
+```
+
+**Format Data for Training:**
+```python
+def format_prompt(example):
+    if example["input"]:
+        prompt = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+
+### Instruction:
+{example['instruction']}
+
+### Input:
+{example['input']}
+
+### Response:
+{example['output']}"""
+    else:
+        prompt = f"""Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+{example['instruction']}
+
+### Response:
+{example['output']}"""
+
+    return {"text": prompt}
+
+dataset = dataset.map(format_prompt)
+```
+
+---
+
+### Phase 2: LoRA Configuration (1 day)
+
+#### Step 2.1: Understanding LoRA
+
+**What LoRA Does:**
+```
+Instead of updating all 1.5B parameters, LoRA:
+1. Freezes the original model weights
+2. Injects small "adapter" matrices into attention layers
+3. Only trains these adapters (~0.5-2% of total parameters)
+
+Full Fine-Tuning: Update 1.5B params = 6GB+ memory
+LoRA: Update 8-20M params = 1-2GB memory
+
+Benefits:
+✓ 10-100× less memory
+✓ 3-10× faster training
+✓ Multiple adapters for different tasks
+✓ Minimal quality loss vs full fine-tuning
+```
+
+#### Step 2.2: LoRA Configuration
+
+```python
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+
+# LoRA hyperparameters
+lora_config = LoraConfig(
+    r=16,  # Rank: higher = more capacity, more params
+           # Typical range: 8-64
+           # 8: ultra-efficient, 16: balanced, 32-64: max quality
+
+    lora_alpha=32,  # Scaling factor
+                    # Rule of thumb: 2× rank
+
+    target_modules=[
+        "q_proj",  # Query projection in attention
+        "k_proj",  # Key projection
+        "v_proj",  # Value projection
+        "o_proj",  # Output projection
+        # Optionally add:
+        # "gate_proj", "up_proj", "down_proj"  # FFN layers
+    ],
+
+    lora_dropout=0.05,  # Regularization
+    bias="none",  # Don't adapt bias terms
+    task_type="CAUSAL_LM"  # Causal language modeling
+)
+
+# Calculate LoRA parameters
+# For r=16, 4 target modules, 1.5B model:
+# Per layer: (hidden_dim × r) × 2 × 4 modules
+# Qwen2-1.5B: hidden_dim=1536, 28 layers
+# LoRA params ≈ (1536 × 16) × 2 × 4 × 28 = 11M params
+# That's 0.73% of 1.5B!
+
+print(f"LoRA trainable parameters: {lora_config.r * ...}")
+```
+
+#### Step 2.3: Apply LoRA to Model
+
+**Option A: Full Precision (24GB+ VRAM)**
+```python
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+
+# Output:
+# trainable params: 11,534,336 || all params: 1,555,103,744 || trainable%: 0.74%
+```
+
+**Option B: 4-bit Quantization (12GB VRAM - Recommended)**
+```python
+from transformers import BitsAndBytesConfig
+
+# Quantize base model to 4-bit
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_use_double_quant=True,  # Nested quantization
+    bnb_4bit_quant_type="nf4",  # Normal Float 4-bit
+    bnb_4bit_compute_dtype=torch.bfloat16  # Compute in bf16
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    quantization_config=bnb_config,
+    device_map="auto",
+)
+
+# Prepare for training
+model = prepare_model_for_kbit_training(model)
+model = get_peft_model(model, lora_config)
+
+# Memory usage:
+# 1.5B model in 4-bit: ~1.5GB
+# LoRA adapters in bf16: ~23MB
+# Optimizer states: ~46MB
+# Activations/gradients: ~4-8GB
+# Total: ~6-10GB (fits on RTX 3090/4090!)
+```
+
+---
+
+### Phase 3: Training (2-3 days)
+
+#### Step 3.1: Training Configuration
+
+```python
+from transformers import TrainingArguments, Trainer
+
+training_args = TrainingArguments(
+    # Output
+    output_dir="./lora-qwen2-1.5b",
+
+    # Training
+    num_train_epochs=3,
+    per_device_train_batch_size=4,  # Adjust based on VRAM
+    gradient_accumulation_steps=4,  # Effective batch = 16
+    learning_rate=2e-4,  # Higher than full fine-tuning
+    lr_scheduler_type="cosine",
+    warmup_ratio=0.03,
+
+    # Optimization
+    optim="paged_adamw_8bit",  # Memory-efficient optimizer
+    weight_decay=0.001,
+    max_grad_norm=0.3,
+
+    # Mixed precision
+    bf16=True,  # Use bfloat16 (A100, H100)
+    # fp16=True,  # Use for older GPUs (V100, T4)
+
+    # Logging
+    logging_steps=10,
+    logging_dir="./logs",
+    report_to="wandb",
+
+    # Checkpointing
+    save_strategy="steps",
+    save_steps=100,
+    save_total_limit=3,
+
+    # Evaluation
+    evaluation_strategy="steps",
+    eval_steps=100,
+    load_best_model_at_end=True,
+)
+```
+
+#### Step 3.2: Custom Trainer
+
+```python
+from trl import SFTTrainer  # Supervised Fine-Tuning Trainer
+
+trainer = SFTTrainer(
+    model=model,
+    args=training_args,
+    train_dataset=dataset["train"],
+    eval_dataset=dataset["test"],
+    tokenizer=tokenizer,
+    dataset_text_field="text",  # Column containing formatted prompts
+    max_seq_length=2048,  # Context window
+    packing=False,  # Pack multiple samples (advanced)
+)
+```
+
+#### Step 3.3: Start Training
+
+```python
+# Train!
+trainer.train()
+
+# Training output:
+"""
+Epoch 1/3
+Step 100: loss=1.234, lr=1.8e-4, time=2.3s/it
+Step 200: loss=0.987, lr=2.0e-4, time=2.1s/it
+Step 300: loss=0.765, lr=1.9e-4, time=2.2s/it
+
+Epoch 2/3
+Step 400: loss=0.543, lr=1.5e-4, time=2.1s/it
+Step 500: loss=0.421, lr=1.1e-4, time=2.2s/it
+
+Epoch 3/3
+Step 600: loss=0.345, lr=0.7e-4, time=2.1s/it
+Step 700: loss=0.298, lr=0.3e-4, time=2.2s/it
+
+Training complete!
+Best checkpoint: step 700
+"""
+```
+
+**Training Time Estimates:**
+
+```
+Dataset: 5,000 examples
+Batch size: 4, Gradient accumulation: 4 (effective=16)
+Epochs: 3
+Total steps: (5000/16) × 3 = 938 steps
+
+Single RTX 4090 (24GB):
+- ~2-3 seconds/step
+- Total: 938 × 2.5s = 2,345s = 39 minutes/epoch
+- 3 epochs: ~2 hours
+
+Single A100 (40GB):
+- ~1.5-2 seconds/step
+- 3 epochs: ~1.5 hours
+
+Single T4 (16GB, with 4-bit quantization):
+- ~4-5 seconds/step
+- 3 epochs: ~3-4 hours
+```
+
+---
+
+### Phase 4: Evaluation and Merging (1 day)
+
+#### Step 4.1: Evaluate Fine-Tuned Model
+
+```python
+# Load best checkpoint
+from peft import PeftModel
+
+base_model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    device_map="auto",
+    torch_dtype=torch.bfloat16
+)
+
+model = PeftModel.from_pretrained(
+    base_model,
+    "./lora-qwen2-1.5b/checkpoint-700"
+)
+
+# Test generation
+def generate_response(instruction, input_text=""):
+    if input_text:
+        prompt = f"""Below is an instruction that describes a task, paired with an input. Write a response.
+
+### Instruction:
+{instruction}
+
+### Input:
+{input_text}
+
+### Response:
+"""
+    else:
+        prompt = f"""Below is an instruction that describes a task. Write a response.
+
+### Instruction:
+{instruction}
+
+### Response:
+"""
+
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=256,
+        temperature=0.7,
+        top_p=0.9,
+        do_sample=True
+    )
+
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    return response.split("### Response:")[-1].strip()
+
+# Test
+print(generate_response("How do I reset my password?"))
+```
+
+#### Step 4.2: Merge LoRA Adapters (Optional)
+
+**For deployment, merge adapters into base model:**
+```python
+# Merge LoRA weights into base model
+merged_model = model.merge_and_unload()
+
+# Save merged model
+merged_model.save_pretrained("./merged-qwen2-1.5b-customer-support")
+tokenizer.save_pretrained("./merged-qwen2-1.5b-customer-support")
+
+# Now you have a standalone model (no PEFT dependency)
+# Size: Same as base model (~3GB)
+```
+
+**Advantages of Merging:**
+- Faster inference (no adapter overhead)
+- Simpler deployment (single model)
+- Compatible with optimization tools (ONNX, TensorRT)
+
+**Advantages of Keeping Separate:**
+- Can swap adapters for different tasks
+- Smaller storage (base + multiple 50MB adapters vs multiple 3GB models)
+- Easy to update/retrain adapters
+
+---
+
+### Phase 5: Deployment (1-2 days)
+
+#### Step 5.1: Inference Optimization
+
+**Quantize for Production:**
+```python
+# Using GPTQ or AWQ for 4-bit inference
+from transformers import AutoGPTQForCausalLM
+
+# Quantize merged model
+quantized_model = AutoGPTQForCausalLM.from_pretrained(
+    "./merged-qwen2-1.5b-customer-support",
+    quantization_config={"bits": 4}
+)
+
+# Result:
+# Model size: 3GB → 750MB
+# Inference speed: 2× faster on CPU
+# Quality: <2% degradation
+```
+
+#### Step 5.2: Production Serving
+
+**Option A: FastAPI Server**
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+# Load model once at startup
+model = AutoModelForCausalLM.from_pretrained(...)
+tokenizer = AutoTokenizer.from_pretrained(...)
+
+class Query(BaseModel):
+    instruction: str
+    input: str = ""
+
+@app.post("/generate")
+async def generate(query: Query):
+    response = generate_response(query.instruction, query.input)
+    return {"response": response}
+
+# Run: uvicorn server:app --host 0.0.0.0 --port 8000
+```
+
+**Option B: vLLM (High Throughput)**
+```python
+from vllm import LLM, SamplingParams
+
+llm = LLM(model="./merged-qwen2-1.5b", dtype="bfloat16")
+sampling_params = SamplingParams(temperature=0.7, max_tokens=256)
+
+outputs = llm.generate(prompts, sampling_params)
+# Throughput: 10-50× higher than HuggingFace for batch inference
+```
+
+**Performance Metrics:**
+```
+Single RTX 4090:
+- Latency: 50-150ms per query (256 tokens)
+- Throughput: 20-40 queries/second (batch=8)
+- Memory: 4-6GB
+
+Single A100:
+- Latency: 30-100ms per query
+- Throughput: 40-80 queries/second
+- Memory: 4-6GB
+```
+
+---
+
+### Resources Required: Fine-Tuning 1B LLM with LoRA
+
+| Resource | Specification | Cost |
+|----------|--------------|------|
+| **Compute** | 1× RTX 4090 / A100 × 10 hours | $0-50 (local) or $30-100 (cloud) |
+| **Storage** | 50GB (base model + adapters) | Minimal |
+| **Data Annotation** | 1,000-10,000 examples | $500-$3,000 |
+| **Developer Time** | 3-7 days | Primary cost |
+| **Total** | - | **$500-$5,000** |
+
+---
+
+## Training Comparison Summary
+
+| Aspect | Traditional NLP | 125M from Scratch | 1B Fine-Tuning (LoRA) |
+|--------|----------------|-------------------|---------------------|
+| **Timeline** | 1-2 weeks | 4-8 weeks | 3-7 days |
+| **Hardware** | CPU (sufficient) | 1-8× A100 GPUs | 1× GPU (12GB+) |
+| **Data Required** | 1K-10K labeled | 1B-10B tokens | 1K-10K examples |
+| **Training Time** | 2-4 hours | 3-30 days | 2-8 hours |
+| **Compute Cost** | $50-100 | $5,000-$20,000 | $30-500 |
+| **Total Cost** | $1,000-$5,000 | $10,000-$50,000 | $500-$5,000 |
+| **Expertise** | ML + NLP | Deep Learning + distributed | ML + LLM basics |
+| **Result** | Task-specific model | General-purpose LLM | Domain-adapted LLM |
+| **Generalization** | None | Cross-task | Cross-task (domain-specific) |
+| **Deployment** | CPU, fast | GPU recommended | GPU recommended |
+| **Maintenance** | Retrain for new tasks | Pre-train once, adapt many | Fine-tune adapters |
 
 ---
 
@@ -959,7 +2505,7 @@ As small LLMs continue improving, the line between "traditional" and "modern" NL
 
 ---
 
-**Document Version:** 1.0
+**Document Version:** 2.0
 **Last Updated:** November 2025
 **Author:** Compiled from web research and technical documentation
 **License:** MIT (for this comparison document)
