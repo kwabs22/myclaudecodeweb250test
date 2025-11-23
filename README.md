@@ -2,9 +2,9 @@
 
 A comprehensive collection of analyses, guides, and resources for learning modern 3D game development through open-source projects.
 
-**Total Documents**: 9 comprehensive guides + 13 supplementary files
-**Total Content**: 150+ pages of analysis
-**Coverage**: AI tools, game engines, automation, and 20 major GitHub projects
+**Total Documents**: 10 comprehensive guides + 13 supplementary files
+**Total Content**: 175+ pages of analysis
+**Coverage**: AI tools, game engines, automation, narrative systems, and 35+ major GitHub projects
 
 ---
 
@@ -90,6 +90,34 @@ Deep analysis of 400 functions across 20 major game development projects:
 5. PostGameplayEffectExecute (GAS) - 176 lines
 
 **Best For**: Advanced programmers, architecture study, code quality analysis
+
+---
+
+#### [Story Generation: Methodologies and Tools](./story-generation-methodologies-and-tools.md)
+**Size**: 35KB | **Reading Time**: 1.5 hours
+
+Comprehensive guide to narrative generation systems and interactive storytelling:
+- **6 Core Methodologies** (Grammar-based, Node-based, Storylets, Templates, LLM, Emergent)
+- **15+ Major Tools** analyzed (Ink, Yarn Spinner, Tracery, Twine, Ren'Py, Inform 7)
+- Complete comparison matrix and learning paths
+- Both open-source and commercial solutions
+
+**What You'll Learn**:
+- Different approaches to computational storytelling
+- Choosing the right tool for your project
+- Industry-standard narrative design workflows
+- Procedural and AI-driven story generation
+- Integration with game engines
+
+**Coverage**:
+- Interactive narrative frameworks (Ink, Yarn Spinner, Twine)
+- Grammar-based generation (Tracery)
+- Visual novel engines (Ren'Py)
+- Professional tools (articy:draft, ChatMapper)
+- AI-driven systems (LLM-based, emergent narratives)
+- Learning paths for writers, programmers, and designers
+
+**Best For**: Narrative designers, game writers, programmers building story systems, anyone interested in interactive storytelling
 
 ---
 
@@ -213,24 +241,44 @@ Analysis of 4 PlayCanvas plugin repositories:
 
 ---
 
+### For Narrative Designers & Writers
+
+**Start Here:**
+1. Read [Story Generation: Methodologies and Tools](./story-generation-methodologies-and-tools.md)
+2. Start with **Twine** for interactive fiction basics
+3. Learn **Ink** or **Yarn Spinner** for game integration
+
+**Recommended Tools:**
+- **Twine** - Beginner-friendly interactive fiction
+- **Ink** - Professional branching narratives
+- **Yarn Spinner** - Dialogue systems for games
+- **Tracery** - Procedural text generation
+
+**Key Project** (from main list):
+- **SUQS** - Production quest system example
+
+---
+
 ## 📊 Statistics & Metrics
 
 ### Analysis Coverage
 
 | Category | Count | Total Lines |
 |----------|-------|-------------|
-| **Projects Analyzed** | 20 | ~500,000+ |
+| **Game Engine Projects** | 20 | ~500,000+ |
+| **Story Generation Tools** | 15+ | Varies |
 | **Functions Documented** | 400 | ~50,000 |
-| **Documents Created** | 22 | 150+ pages |
+| **Documents Created** | 23 | 175+ pages |
 | **Code Examples** | 60+ | 3,000+ lines |
-| **Repositories Linked** | 23 | - |
+| **Repositories Linked** | 38+ | - |
 
 ### Project Breakdown
 
-| Engine | Projects | Language | Complexity |
+| Category | Projects | Language | Complexity |
 |--------|----------|----------|------------|
 | **Unreal Engine** | 8 | C++ | High |
 | **PlayCanvas** | 12 | JS/TS | Medium-High |
+| **Narrative Tools** | 15+ | Varies | Low-High |
 
 ### Complexity Distribution
 
@@ -281,6 +329,15 @@ Analysis of 4 PlayCanvas plugin repositories:
 - SuperSplat → serializePlyCompressed, Gaussian Splatting
 - PlayCanvas Spine → Mesh batching
 
+**Narrative & Story Systems:**
+- Story Generation Guide → 6 methodologies, 15+ tools
+- Ink → Branching interactive narratives
+- Yarn Spinner → Dialogue trees and conversations
+- Tracery → Grammar-based text generation
+- Twine → Choice-based interactive fiction
+- Ren'Py → Visual novel engine
+- SUQS → Quest and narrative systems
+
 ### By Skill Level
 
 **Beginner (0-1 year experience):**
@@ -319,6 +376,12 @@ Analysis of 4 PlayCanvas plugin repositories:
 
 **Want to automate workflows?**
 → EasyBPY Concepts for PlayCanvas, SUQS
+
+**Want to design narrative systems?**
+→ Story Generation Guide, SUQS, Ink, Yarn Spinner, Twine
+
+**Want to learn interactive storytelling?**
+→ Story Generation Methodologies (all 6 approaches and 15+ tools)
 
 ---
 
