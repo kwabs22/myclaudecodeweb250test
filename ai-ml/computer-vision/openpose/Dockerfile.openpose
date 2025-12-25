@@ -1,0 +1,83 @@
+# Dockerfile for OpenPose with Jupyter Notebook on GPU
+# Build: docker build -f Dockerfile.openpose -t openpose-jupyter .
+# Run: docker run --gpus all -p 8888:8888 -v $(pwd):/workspace openpose-jupyter
+
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+
+# Prevent interactive prompts during build
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    git \
+    cmake \
+    wget \
+    libopencv-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
+    libgoogle-glog-dev \
+    libboost-all-dev \
+    libhdf5-dev \
+    libatlas-base-dev \
+    jupyter-notebook \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clone OpenPose repository
+WORKDIR /opt
+RUN git clone --depth 1 https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
+
+# Build OpenPose with Python support
+WORKDIR /opt/openpose
+RUN mkdir build
+
+WORKDIR /opt/openpose/build
+RUN cmake \
+    -DBUILD_PYTHON=ON \
+    -DUSE_CUDNN=ON \
+    -DGPU_MODE=CUDA \
+    .. && \
+    make -j$(nproc)
+
+# Setup Python path for OpenPose
+ENV PYTHONPATH="/opt/openpose/build/python:${PYTHONPATH}"
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir \
+    numpy \
+    opencv-python \
+    opencv-contrib-python \
+    scipy \
+    matplotlib \
+    jupyter \
+    jupyterlab \
+    dtaidistance \
+    pandas \
+    scikit-learn \
+    tqdm \
+    ipywidgets
+
+# Create workspace directory
+WORKDIR /workspace
+
+# Copy utility scripts if they exist
+COPY pose_search.py /workspace/ 2>/dev/null || true
+COPY openpose_notebook_template.ipynb /workspace/ 2>/dev/null || true
+
+# Expose Jupyter port
+EXPOSE 8888
+
+# Set up Jupyter configuration
+RUN jupyter notebook --generate-config && \
+    echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.allow_root = True" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+
+# Default command: Start Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
+# Optional: For interactive shell instead of Jupyter
+# CMD ["/bin/bash"]

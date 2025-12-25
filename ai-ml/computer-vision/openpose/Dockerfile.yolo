@@ -1,0 +1,73 @@
+# Dockerfile for YOLO Pose with Jupyter Notebook on GPU (Easier Setup)
+# Build: docker build -f Dockerfile.yolo -t yolo-jupyter .
+# Run: docker run --gpus all -p 8888:8888 -v $(pwd):/workspace yolo-jupyter
+
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    wget \
+    git \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip
+RUN pip3 install --upgrade pip
+
+# Install PyTorch with CUDA support
+RUN pip3 install --no-cache-dir \
+    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Install Ultralytics YOLO and dependencies
+RUN pip3 install --no-cache-dir \
+    ultralytics \
+    opencv-python \
+    opencv-contrib-python \
+    numpy \
+    scipy \
+    matplotlib \
+    jupyter \
+    jupyterlab \
+    dtaidistance \
+    pandas \
+    scikit-learn \
+    tqdm \
+    ipywidgets \
+    pillow \
+    seaborn
+
+# Create workspace directory
+WORKDIR /workspace
+
+# Copy utility scripts
+COPY pose_search.py /workspace/
+COPY openpose_notebook_template.ipynb /workspace/
+COPY requirements.txt /workspace/ 2>/dev/null || true
+
+# Create directories for videos and outputs
+RUN mkdir -p /workspace/videos /workspace/output
+
+# Expose Jupyter port
+EXPOSE 8888
+
+# Configure Jupyter
+RUN jupyter notebook --generate-config && \
+    echo "c.NotebookApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.allow_root = True" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.token = ''" >> ~/.jupyter/jupyter_notebook_config.py && \
+    echo "c.NotebookApp.password = ''" >> ~/.jupyter/jupyter_notebook_config.py
+
+# Download YOLO Pose model (optional - will auto-download on first use)
+RUN python3 -c "from ultralytics import YOLO; model = YOLO('yolov8n-pose.pt')"
+
+# Start Jupyter Notebook
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
