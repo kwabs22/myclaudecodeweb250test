@@ -5,8 +5,7 @@
 > were never pushed. The missing files have now been added to their category folders. Running
 > `./verify_merge.sh` shows every unique file from every branch is present, except two older chess-branch
 > versions of `learning-resources/chess/assess_task.py` and `model_catalog_2025.json`, which the newer
-> gradio-planning-interface versions supersede. All source branches are recorded as parents of the
-> completion merge commit, so `git branch -r --merged` lists them.
+> gradio-planning-interface versions supersede.
 
 **Date**: 2025-12-25
 **Status**: SUCCESS
