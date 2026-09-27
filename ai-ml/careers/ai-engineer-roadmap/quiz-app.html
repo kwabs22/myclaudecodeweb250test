@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Phase 1 Quiz - 1000 Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div id="app" class="container mx-auto p-6 max-w-4xl">
+        <!-- Loading State -->
+        <div id="loading" class="flex items-center justify-center h-screen">
+            <div class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                <p class="mt-4 text-gray-600">Loading 1000 questions...</p>
+            </div>
+        </div>
+
+        <!-- Main Quiz Container (hidden initially) -->
+        <div id="quiz-container" class="hidden">
+            <!-- Header -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6 fade-in">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    🚀 AI Engineer Phase 1 Quiz
+                </h1>
+                <p class="text-gray-600" id="subtitle">Master the fundamentals with 1000 questions</p>
+
+                <!-- Progress Bar -->
+                <div class="mt-4">
+                    <div class="flex justify-between text-sm text-gray-600 mb-1">
+                        <span id="progress-text">Question 1 of 1000</span>
+                        <span id="score-text">0/0 Correct (0%)</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="bg-white rounded-lg shadow-lg p-4 mb-6 flex gap-4 flex-wrap items-center fade-in">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                    </svg>
+                    <span class="font-medium text-gray-700">Filters:</span>
+                </div>
+
+                <select id="topic-filter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="all">All Topics</option>
+                    <option value="linear_algebra">Linear Algebra (200)</option>
+                    <option value="calculus">Calculus (150)</option>
+                    <option value="probability_statistics">Probability & Statistics (150)</option>
+                    <option value="python">Python (200)</option>
+                    <option value="sql">SQL (150)</option>
+                    <option value="data_structures_algorithms">DSA (150)</option>
+                </select>
+
+                <select id="difficulty-filter" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="all">All Difficulties</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+
+                <button id="stats-button" class="ml-auto px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    Statistics
+                </button>
+            </div>
+
+            <!-- Statistics Panel -->
+            <div id="stats-panel" class="bg-white rounded-lg shadow-lg p-6 mb-6 hidden fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">📊 Your Statistics</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6" id="stats-summary"></div>
+                <div id="stats-by-topic"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div id="question-card" class="bg-white rounded-lg shadow-lg p-8 mb-6 fade-in">
+                <!-- Question badges -->
+                <div class="flex items-center gap-3 mb-6" id="question-badges"></div>
+
+                <!-- Question text -->
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6" id="question-text"></h2>
+
+                <!-- Options -->
+                <div class="space-y-3 mb-6" id="options-container"></div>
+
+                <!-- Explanation -->
+                <div id="explanation" class="hidden"></div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex justify-between items-center">
+                <button id="prev-button" class="flex items-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Previous
+                </button>
+
+                <div class="text-gray-600" id="nav-position">1 / 1000</div>
+
+                <button id="next-button" class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    Next
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let allQuestions = [];
+        let filteredQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let showingExplanation = false;
+        let selectedAnswer = null;
+
+        // Load questions
+        fetch('phase1-question-bank-full.json')
+            .then(res => res.json())
+            .then(data => {
+                allQuestions = data.questions;
+                filteredQuestions = allQuestions;
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('quiz-container').classList.remove('hidden');
+                renderQuestion();
+                updateProgress();
+            })
+            .catch(err => {
+                console.error('Error loading questions:', err);
+                document.getElementById('loading').innerHTML = '<div class="text-center text-red-600">Error loading questions. Please refresh the page.</div>';
+            });
+
+        // Filter questions
+        function filterQuestions() {
+            const topic = document.getElementById('topic-filter').value;
+            const difficulty = document.getElementById('difficulty-filter').value;
+
+            filteredQuestions = allQuestions.filter(q => {
+                const topicMatch = topic === 'all' || q.topic === topic;
+                const difficultyMatch = difficulty === 'all' || q.difficulty === difficulty;
+                return topicMatch && difficultyMatch;
+            });
+
+            currentIndex = 0;
+            selectedAnswer = null;
+            showingExplanation = false;
+            renderQuestion();
+            updateProgress();
+        }
+
+        // Render current question
+        function renderQuestion() {
+            const question = filteredQuestions[currentIndex];
+            if (!question) return;
+
+            // Badges
+            const difficultyColors = {
+                beginner: 'bg-green-100 text-green-700',
+                intermediate: 'bg-yellow-100 text-yellow-700',
+                advanced: 'bg-red-100 text-red-700'
+            };
+
+            document.getElementById('question-badges').innerHTML = `
+                <span class="px-3 py-1 rounded-full text-sm font-medium ${difficultyColors[question.difficulty]}">
+                    ${question.difficulty}
+                </span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium capitalize">
+                    ${question.topic.replace(/_/g, ' ')}
+                </span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                    ${question.subtopic.replace(/_/g, ' ')}
+                </span>
+            `;
+
+            // Question text
+            document.getElementById('question-text').textContent = question.question;
+
+            // Options
+            const optionsHtml = question.options.map((option, index) => {
+                const isSelected = selectedAnswer === index;
+                const isCorrect = index === question.correct_answer;
+                const showCorrect = showingExplanation && isCorrect;
+                const showIncorrect = showingExplanation && isSelected && !isCorrect;
+
+                let classes = 'w-full p-4 text-left rounded-lg border-2 transition-all ';
+                if (showCorrect) classes += 'border-green-500 bg-green-50';
+                else if (showIncorrect) classes += 'border-red-500 bg-red-50';
+                else if (isSelected) classes += 'border-blue-500 bg-blue-50';
+                else classes += 'border-gray-200 hover:border-blue-300 hover:bg-gray-50 cursor-pointer';
+
+                if (showingExplanation) classes += ' cursor-not-allowed';
+
+                return `
+                    <button onclick="selectAnswer(${index})" class="${classes}" ${showingExplanation ? 'disabled' : ''}>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">${option}</span>
+                            ${showCorrect ? '<span class="text-green-600">✓</span>' : ''}
+                            ${showIncorrect ? '<span class="text-red-600">✗</span>' : ''}
+                        </div>
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('options-container').innerHTML = optionsHtml;
+
+            // Explanation
+            const explanationDiv = document.getElementById('explanation');
+            if (showingExplanation) {
+                const isCorrect = selectedAnswer === question.correct_answer;
+                explanationDiv.className = `p-4 rounded-lg ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`;
+                explanationDiv.innerHTML = `
+                    <h3 class="font-semibold text-gray-800 mb-2">
+                        ${isCorrect ? '✅ Correct!' : '❌ Incorrect'}
+                    </h3>
+                    <p class="text-gray-700">${question.explanation}</p>
+                    ${question.hints && question.hints.length > 0 ? `
+                        <div class="mt-3 pt-3 border-t border-gray-200">
+                            <p class="text-sm text-gray-600">
+                                <span class="font-medium">Hint:</span> ${question.hints[0]}
+                            </p>
+                        </div>
+                    ` : ''}
+                `;
+                explanationDiv.classList.remove('hidden');
+            } else {
+                explanationDiv.classList.add('hidden');
+            }
+
+            // Update navigation
+            document.getElementById('prev-button').disabled = currentIndex === 0;
+            document.getElementById('next-button').disabled = currentIndex === filteredQuestions.length - 1;
+            document.getElementById('nav-position').textContent = `${currentIndex + 1} / ${filteredQuestions.length}`;
+        }
+
+        // Select answer
+        function selectAnswer(answerIndex) {
+            if (showingExplanation) return;
+
+            selectedAnswer = answerIndex;
+            showingExplanation = true;
+
+            const question = filteredQuestions[currentIndex];
+            userAnswers[question.id] = {
+                selected: answerIndex,
+                correct: answerIndex === question.correct_answer,
+                question: question
+            };
+
+            renderQuestion();
+            updateProgress();
+        }
+
+        // Navigation
+        function nextQuestion() {
+            if (currentIndex < filteredQuestions.length - 1) {
+                currentIndex++;
+                selectedAnswer = null;
+                showingExplanation = false;
+                renderQuestion();
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                selectedAnswer = null;
+                showingExplanation = false;
+                renderQuestion();
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Update progress
+        function updateProgress() {
+            const answeredQuestions = Object.values(userAnswers);
+            const correct = answeredQuestions.filter(a => a.correct).length;
+            const total = answeredQuestions.length;
+            const percentage = total > 0 ? ((correct / total) * 100).toFixed(1) : 0;
+
+            document.getElementById('progress-text').textContent = `Question ${currentIndex + 1} of ${filteredQuestions.length}`;
+            document.getElementById('score-text').textContent = `${correct}/${total} Correct (${percentage}%)`;
+            document.getElementById('progress-bar').style.width = `${((currentIndex + 1) / filteredQuestions.length) * 100}%`;
+        }
+
+        // Toggle statistics
+        function toggleStats() {
+            const statsPanel = document.getElementById('stats-panel');
+            const isHidden = statsPanel.classList.contains('hidden');
+
+            if (isHidden) {
+                renderStats();
+                statsPanel.classList.remove('hidden');
+            } else {
+                statsPanel.classList.add('hidden');
+            }
+        }
+
+        // Render statistics
+        function renderStats() {
+            const answeredQuestions = Object.values(userAnswers);
+            const correct = answeredQuestions.filter(a => a.correct).length;
+            const total = answeredQuestions.length;
+            const percentage = total > 0 ? ((correct / total) * 100).toFixed(1) : 0;
+
+            // Summary
+            document.getElementById('stats-summary').innerHTML = `
+                <div class="bg-blue-50 p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-blue-600">${correct}</div>
+                    <div class="text-sm text-gray-600">Correct</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-red-600">${total - correct}</div>
+                    <div class="text-sm text-gray-600">Incorrect</div>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-green-600">${percentage}%</div>
+                    <div class="text-sm text-gray-600">Accuracy</div>
+                </div>
+            `;
+
+            // By topic
+            const byTopic = {};
+            answeredQuestions.forEach(answer => {
+                const topic = answer.question.topic;
+                if (!byTopic[topic]) {
+                    byTopic[topic] = { correct: 0, total: 0 };
+                }
+                byTopic[topic].total++;
+                if (answer.correct) byTopic[topic].correct++;
+            });
+
+            const topicHtml = Object.entries(byTopic).map(([topic, data]) => {
+                const topicPercentage = ((data.correct / data.total) * 100).toFixed(1);
+                return `
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 text-sm text-gray-600 capitalize">
+                            ${topic.replace(/_/g, ' ')}
+                        </div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: ${topicPercentage}%"></div>
+                        </div>
+                        <div class="w-24 text-sm text-gray-700">
+                            ${data.correct}/${data.total} (${topicPercentage}%)
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('stats-by-topic').innerHTML = `
+                <h3 class="text-lg font-semibold text-gray-700 mb-3">Performance by Topic</h3>
+                <div class="space-y-2">${topicHtml}</div>
+            `;
+        }
+
+        // Event listeners
+        document.getElementById('topic-filter').addEventListener('change', filterQuestions);
+        document.getElementById('difficulty-filter').addEventListener('change', filterQuestions);
+        document.getElementById('stats-button').addEventListener('click', toggleStats);
+        document.getElementById('prev-button').addEventListener('click', prevQuestion);
+        document.getElementById('next-button').addEventListener('click', nextQuestion);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+            if (e.key >= '1' && e.key <= '4' && !showingExplanation) {
+                selectAnswer(parseInt(e.key) - 1);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,13 @@
 # Repository Merge - COMPLETE ✅
 
+> **Correction (2026-09-27):** the original merge below was not lossless. A content-hash audit of every
+> `claude/*` branch found 112 files (103 distinct) missing from the merged tree, and the "31 safety tags"
+> were never pushed. The missing files have now been added to their category folders. Running
+> `./verify_merge.sh` shows every unique file from every branch is present, except two older chess-branch
+> versions of `learning-resources/chess/assess_task.py` and `model_catalog_2025.json`, which the newer
+> gradio-planning-interface versions supersede. All source branches are recorded as parents of the
+> completion merge commit, so `git branch -r --merged` lists them.
+
 **Date**: 2025-12-25
 **Status**: SUCCESS
 **Method**: Plan C (Manual, Zero Data Loss)

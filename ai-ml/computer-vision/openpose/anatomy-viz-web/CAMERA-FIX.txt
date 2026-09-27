@@ -1,0 +1,155 @@
+🚨 CAMERA PERMISSION TROUBLESHOOTING 🚨
+
+═══════════════════════════════════════════════════════════
+
+ISSUE: "Permission is immediately denied"
+
+This happens because browsers block camera access for security.
+Let's fix it!
+
+═══════════════════════════════════════════════════════════
+
+✅ SOLUTION 1: Use Local Server (BEST FIX)
+
+Browsers need "localhost" or "https" to allow camera.
+
+STEPS:
+
+1. Open terminal/command prompt
+
+2. Navigate to folder:
+   cd anatomy-viz-web
+
+3. Start server:
+
+   Python (if you have it):
+   python -m http.server 8000
+
+   OR Python 3:
+   python3 -m http.server 8000
+
+   OR Node.js:
+   npx http-server -p 8000
+
+4. Open browser:
+   http://localhost:8000
+
+5. Allow camera when asked!
+
+═══════════════════════════════════════════════════════════
+
+✅ SOLUTION 2: Chrome Specific Settings
+
+If using Chrome directly with file://
+
+1. Close ALL Chrome windows
+
+2. Reopen Chrome with flag:
+
+   Windows:
+   chrome.exe --allow-file-access-from-files --unsafely-treat-insecure-origin-as-secure="file://"
+
+   Mac:
+   open -a "Google Chrome" --args --allow-file-access-from-files
+
+   Linux:
+   google-chrome --allow-file-access-from-files
+
+3. Open index.html
+
+4. Camera should work now!
+
+═══════════════════════════════════════════════════════════
+
+✅ SOLUTION 3: Firefox Settings
+
+1. Open Firefox
+2. Type in address bar: about:config
+3. Accept warning
+4. Search for: media.navigator.permission.disabled
+5. Set to TRUE
+6. Open index.html
+7. Camera should work!
+
+═══════════════════════════════════════════════════════════
+
+✅ SOLUTION 4: Use Online Version (EASIEST!)
+
+I'll create an online version you can upload to:
+- GitHub Pages (free)
+- Netlify (free)
+- Vercel (free)
+- Any web hosting
+
+Then access via https:// (camera will work!)
+
+═══════════════════════════════════════════════════════════
+
+✅ SOLUTION 5: Quick Test Server (No Installation)
+
+1. Go to: https://www.webrtc-experiment.com/
+2. Test camera there
+3. If works → problem is file:// access
+4. If doesn't work → browser/camera issue
+
+═══════════════════════════════════════════════════════════
+
+📱 ON MOBILE (Android/iPhone):
+
+ANDROID:
+1. Chrome Settings → Site Settings → Camera
+2. Find the file/site
+3. Change to "Allow"
+4. Refresh page
+
+IPHONE:
+1. Settings → Safari → Camera
+2. Enable camera access
+3. Settings → Privacy → Camera → Safari → ON
+
+═══════════════════════════════════════════════════════════
+
+🔍 CHECK WHAT'S WRONG:
+
+1. What browser are you using?
+   □ Chrome
+   □ Firefox
+   □ Safari
+   □ Edge
+   □ Other: _______
+
+2. How are you opening it?
+   □ Double-clicking file
+   □ File:// in address bar
+   □ Local server (http://localhost)
+   □ On phone
+
+3. What do you see?
+   □ Popup asking for permission (then denied)
+   □ No popup at all
+   □ Error message: _______
+
+═══════════════════════════════════════════════════════════
+
+🎯 RECOMMENDED FIX (Works 99% of time):
+
+cd anatomy-viz-web
+python3 -m http.server 8000
+
+Then open: http://localhost:8000
+
+Camera will work! ✅
+
+═══════════════════════════════════════════════════════════
+
+🆘 STILL NOT WORKING?
+
+Tell me:
+1. Your browser and version
+2. Your operating system
+3. Phone or computer?
+4. What method you tried
+
+I'll provide specific solution!
+
+═══════════════════════════════════════════════════════════

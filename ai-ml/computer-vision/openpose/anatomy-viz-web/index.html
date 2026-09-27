@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Visualization - Educational AR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            overflow: hidden;
+        }
+
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #video.flipped {
+            transform: scaleX(-1);
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #canvas.flipped {
+            transform: scaleX(-1);
+        }
+
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 15px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: #4ecdc4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        #debug-panel {
+            position: absolute;
+            top: 70px;
+            left: 10px;
+            background: rgba(0,0,0,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            z-index: 10;
+            max-width: 300px;
+            border: 2px solid #4ecdc4;
+        }
+
+        .debug-line {
+            margin: 5px 0;
+            padding: 5px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+        }
+
+        .debug-good { color: #4caf50; }
+        .debug-warning { color: #ffa500; }
+        .debug-error { color: #f44336; }
+        .debug-info { color: #2196f3; }
+
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            padding: 15px 20px;
+            border-radius: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 10;
+            max-width: 90vw;
+        }
+
+        #preview {
+            position: absolute;
+            bottom: 140px;
+            right: 10px;
+            width: 160px;
+            height: 120px;
+            border: 2px solid #4ecdc4;
+            border-radius: 8px;
+            z-index: 10;
+            background: #000;
+        }
+
+        #preview canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn {
+            background: #4ecdc4;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #45b7af;
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255,107,107,0.5);
+        }
+
+        #fps-counter {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            background: rgba(0,0,0,0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4ecdc4;
+            z-index: 10;
+            border: 2px solid #4ecdc4;
+        }
+
+        .keypoint-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: lime;
+            border-radius: 50%;
+            border: 1px solid white;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        .ar-item {
+            position: absolute;
+            font-size: 40px;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            user-select: none;
+            transition: transform 0.2s;
+        }
+
+        .ar-item:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        #ar-controls {
+            position: absolute;
+            top: 70px;
+            right: 180px;
+            background: rgba(0,0,0,0.9);
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+            z-index: 10;
+            display: none;
+        }
+
+        #ar-controls.active {
+            display: block;
+        }
+
+        .ar-item-btn {
+            background: transparent;
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
+            font-size: 28px;
+            padding: 8px 12px;
+            margin: 3px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ar-item-btn:hover, .ar-item-btn.selected {
+            background: #4ecdc4;
+            transform: scale(1.1);
+        }
+
+        .anatomical-label {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: #4ecdc4;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            border: 2px solid #4ecdc4;
+            pointer-events: none;
+            z-index: 8;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .anatomical-label.bone {
+            border-color: #F5F5DC;
+            color: #F5F5DC;
+        }
+
+        .anatomical-label.joint {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        #aruco-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        @media (max-width: 768px) {
+            .anatomical-label {
+                font-size: 9px;
+                padding: 3px 6px;
+            }
+            #debug-panel {
+                font-size: 10px;
+                max-width: 200px;
+            }
+            h1 { font-size: 16px; }
+            .btn { padding: 8px 12px; font-size: 11px; }
+            #ar-controls {
+                right: 10px;
+                top: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+        <canvas id="aruco-overlay"></canvas>
+
+        <div id="header">
+            <h1>🦴 Anatomy Visualization</h1>
+        </div>
+
+        <div id="debug-panel">
+            <div style="font-weight: bold; margin-bottom: 10px; color: #4ecdc4;">📊 Debug Info</div>
+            <div id="debug-content">
+                <div class="debug-line debug-info">Starting...</div>
+            </div>
+        </div>
+
+        <div id="fps-counter">FPS: 0</div>
+
+        <div id="preview">
+            <canvas id="preview-canvas"></canvas>
+            <div style="position: absolute; bottom: 5px; left: 5px; font-size: 10px; background: rgba(0,0,0,0.8); padding: 3px 6px; border-radius: 3px;">
+                AI sees this ⬆️
+            </div>
+        </div>
+
+        <div id="ar-controls">
+            <div style="font-weight: bold; margin-bottom: 8px; color: #ff6b6b; font-size: 12px;">
+                📍 Pick item to place:
+            </div>
+            <div>
+                <button class="ar-item-btn selected" onclick="selectARItem('🎯')">🎯</button>
+                <button class="ar-item-btn" onclick="selectARItem('⭐')">⭐</button>
+                <button class="ar-item-btn" onclick="selectARItem('❤️')">❤️</button>
+            </div>
+            <div>
+                <button class="ar-item-btn" onclick="selectARItem('🔴')">🔴</button>
+                <button class="ar-item-btn" onclick="selectARItem('🟢')">🟢</button>
+                <button class="ar-item-btn" onclick="selectARItem('🔵')">🔵</button>
+            </div>
+            <div>
+                <button class="ar-item-btn" onclick="selectARItem('💎')">💎</button>
+                <button class="ar-item-btn" onclick="selectARItem('🎨')">🎨</button>
+                <button class="ar-item-btn" onclick="selectARItem('🎪')">🎪</button>
+            </div>
+            <div style="margin-top: 8px;">
+                <button class="btn" style="width: 100%; font-size: 11px; margin-bottom: 5px;" onclick="clearARItems()">
+                    🗑️ Clear All
+                </button>
+                <button class="btn" style="width: 100%; font-size: 11px; background: #ff6b6b;" onclick="recalibrateOrientation()">
+                    🎯 Recalibrate
+                </button>
+            </div>
+        </div>
+
+        <div id="controls">
+            <button class="btn active" id="btn-debug" onclick="toggleDebug()">
+                🐛 Debug
+            </button>
+            <button class="btn" id="btn-skeleton" onclick="toggleLayer('skeleton')">
+                🦴 Skeleton
+            </button>
+            <button class="btn" id="btn-labels" onclick="toggleLayer('labels')">
+                📝 Labels
+            </button>
+            <button class="btn" id="btn-muscles" onclick="toggleLayer('muscles')">
+                💪 Muscles
+            </button>
+            <button class="btn" id="btn-keypoints" onclick="toggleLayer('keypoints')">
+                🎯 Keypoints
+            </button>
+            <button class="btn" id="btn-aruco" onclick="toggleLayer('aruco')">
+                🎲 ArUco
+            </button>
+            <button class="btn" id="btn-ar-place" onclick="toggleARPlacement()">
+                📍 AR Place
+            </button>
+            <button class="btn active" id="btn-flip" onclick="toggleFlip()">
+                🔄 Mirror
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady()" type="text/javascript"></script>
+
+    <script>
+        // Configuration
+        const config = {
+            video: { width: 640, height: 480 },
+            layers: {
+                skeleton: false,
+                labels: false,
+                muscles: false,
+                keypoints: false,
+                aruco: false,
+                debug: true
+            },
+            arPlacement: {
+                enabled: false,
+                selectedItem: '🎯',
+                items: []
+            },
+            flipped: true  // Mirror mode on by default
+        };
+
+        // Global variables
+        let video, canvas, ctx;
+        let previewCanvas, previewCtx;
+        let detector;
+        let currentPose = null;
+        let frameCount = 0;
+        let fps = 0;
+        let lastTime = Date.now();
+        let detectionCount = 0;
+        let processedFrame = null;
+        let cvReady = false;
+        let detectedMarkers = [];
+
+        // Anatomical labels data (orthopedic terminology)
+        const anatomicalLabels = {
+            // Major joints with medical terminology
+            joints: [
+                { keypoints: [11], name: "L. Glenohumeral", desc: "Shoulder Joint", type: "joint" },
+                { keypoints: [12], name: "R. Glenohumeral", desc: "Shoulder Joint", type: "joint" },
+                { keypoints: [13], name: "L. Elbow", desc: "Humeroulnar Joint", type: "joint" },
+                { keypoints: [14], name: "R. Elbow", desc: "Humeroulnar Joint", type: "joint" },
+                { keypoints: [15], name: "L. Wrist", desc: "Radiocarpal Joint", type: "joint" },
+                { keypoints: [16], name: "R. Wrist", desc: "Radiocarpal Joint", type: "joint" },
+                { keypoints: [23], name: "L. Hip", desc: "Acetabulofemoral", type: "joint" },
+                { keypoints: [24], name: "R. Hip", desc: "Acetabulofemoral", type: "joint" },
+                { keypoints: [25], name: "L. Knee", desc: "Tibiofemoral Joint", type: "joint" },
+                { keypoints: [26], name: "R. Knee", desc: "Tibiofemoral Joint", type: "joint" },
+                { keypoints: [27], name: "L. Ankle", desc: "Talocrural Joint", type: "joint" },
+                { keypoints: [28], name: "R. Ankle", desc: "Talocrural Joint", type: "joint" }
+            ],
+            // Bone segments
+            bones: [
+                { keypoints: [11, 13], name: "L. Humerus", desc: "Upper Arm Bone", type: "bone" },
+                { keypoints: [12, 14], name: "R. Humerus", desc: "Upper Arm Bone", type: "bone" },
+                { keypoints: [13, 15], name: "L. Radius/Ulna", desc: "Forearm Bones", type: "bone" },
+                { keypoints: [14, 16], name: "R. Radius/Ulna", desc: "Forearm Bones", type: "bone" },
+                { keypoints: [23, 25], name: "L. Femur", desc: "Thigh Bone", type: "bone" },
+                { keypoints: [24, 26], name: "R. Femur", desc: "Thigh Bone", type: "bone" },
+                { keypoints: [25, 27], name: "L. Tibia/Fibula", desc: "Lower Leg Bones", type: "bone" },
+                { keypoints: [26, 28], name: "R. Tibia/Fibula", desc: "Lower Leg Bones", type: "bone" },
+                { keypoints: [23, 24], name: "Pelvis", desc: "Hip Girdle", type: "bone" },
+                { keypoints: [11, 12], name: "Clavicles", desc: "Collar Bones", type: "bone" }
+            ]
+        };
+
+        // Device orientation tracking for AR
+        let deviceOrientation = {
+            alpha: 0,  // Z-axis (compass)
+            beta: 0,   // X-axis (front-to-back tilt)
+            gamma: 0,  // Y-axis (left-to-right tilt)
+            initialAlpha: null,
+            initialBeta: null,
+            initialGamma: null
+        };
+
+        // Debug messages
+        const debugMessages = [];
+
+        function addDebug(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push({ time: timestamp, message, type });
+            if (debugMessages.length > 10) debugMessages.shift();
+            updateDebugPanel();
+        }
+
+        function updateDebugPanel() {
+            if (!config.layers.debug) return;
+
+            const panel = document.getElementById('debug-content');
+            let html = '';
+
+            debugMessages.forEach(msg => {
+                html += `<div class="debug-line debug-${msg.type}">[${msg.time}] ${msg.message}</div>`;
+            });
+
+            // Add current stats
+            html += `<div class="debug-line debug-info">━━━━━━━━━━━━━━━━</div>`;
+            html += `<div class="debug-line debug-good">✓ Camera: Active</div>`;
+
+            // Motion tracking status
+            const motionActive = deviceOrientation.initialAlpha !== null;
+            html += `<div class="debug-line ${motionActive ? 'debug-good' : 'debug-warning'}">
+                ${motionActive ? '✓ Motion: Tracking' : '⚠ Motion: Inactive'}
+            </div>`;
+
+            html += `<div class="debug-line ${currentPose ? 'debug-good' : 'debug-warning'}">
+                ${currentPose ? '✓ Pose: Detected' : '⚠ Pose: Not Detected'}
+            </div>`;
+            html += `<div class="debug-line ${cvReady ? 'debug-good' : 'debug-warning'}">
+                ${cvReady ? '✓ OpenCV: Ready' : '⏳ OpenCV: Loading...'}
+            </div>`;
+            if (detectedMarkers.length > 0) {
+                html += `<div class="debug-line debug-good">🎲 ArUco Markers: ${detectedMarkers.length}</div>`;
+            }
+            html += `<div class="debug-line debug-info">Detections: ${detectionCount}</div>`;
+            html += `<div class="debug-line debug-info">FPS: ${fps}</div>`;
+
+            // AR items count
+            if (config.arPlacement.items.length > 0) {
+                html += `<div class="debug-line debug-info">AR Items: ${config.arPlacement.items.length}</div>`;
+            }
+
+            if (currentPose) {
+                const highConf = currentPose.keypoints.filter(kp => kp.score > 0.5).length;
+                const medConf = currentPose.keypoints.filter(kp => kp.score > 0.2).length;
+                const allKp = currentPose.keypoints.length;
+                html += `<div class="debug-line debug-info">Keypoints (high): ${highConf}/33</div>`;
+                html += `<div class="debug-line debug-info">Keypoints (med): ${medConf}/33</div>`;
+
+                // Show confidence scores
+                const avgConf = currentPose.keypoints.reduce((sum, kp) => sum + kp.score, 0) / 33;
+                html += `<div class="debug-line ${avgConf > 0.3 ? 'debug-good' : 'debug-warning'}">Avg confidence: ${avgConf.toFixed(3)}</div>`;
+
+                // Show max confidence
+                const maxConf = Math.max(...currentPose.keypoints.map(kp => kp.score));
+                html += `<div class="debug-line debug-info">Max confidence: ${maxConf.toFixed(3)}</div>`;
+            }
+
+            panel.innerHTML = html;
+        }
+
+        // AR Placement functions
+        function toggleFlip() {
+            config.flipped = !config.flipped;
+            video.classList.toggle('flipped');
+            canvas.classList.toggle('flipped');
+            document.getElementById('btn-flip').classList.toggle('active');
+            addDebug(`Mirror mode ${config.flipped ? 'ON' : 'OFF'}`, 'info');
+        }
+
+        async function toggleARPlacement() {
+            config.arPlacement.enabled = !config.arPlacement.enabled;
+            const btn = document.getElementById('btn-ar-place');
+            btn.classList.toggle('active');
+
+            const arControls = document.getElementById('ar-controls');
+            arControls.classList.toggle('active');
+
+            // Request motion sensors when enabling AR for first time
+            if (config.arPlacement.enabled && deviceOrientation.initialAlpha === null) {
+                addDebug('📱 Requesting motion sensors...', 'info');
+                await requestOrientationPermission();
+            }
+
+            addDebug(`AR Placement ${config.arPlacement.enabled ? 'ON - Click to place items' : 'OFF'}`,
+                config.arPlacement.enabled ? 'good' : 'info');
+        }
+
+        function selectARItem(item) {
+            config.arPlacement.selectedItem = item;
+
+            // Update button selection
+            document.querySelectorAll('.ar-item-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.textContent === item) {
+                    btn.classList.add('selected');
+                }
+            });
+
+            addDebug(`Selected ${item} for placement`, 'info');
+        }
+
+        function clearARItems() {
+            config.arPlacement.items = [];
+            document.querySelectorAll('.ar-item').forEach(el => el.remove());
+            addDebug('Cleared all AR items', 'info');
+        }
+
+        function recalibrateOrientation() {
+            // Reset the initial orientation to current position
+            deviceOrientation.initialAlpha = deviceOrientation.alpha;
+            deviceOrientation.initialBeta = deviceOrientation.beta;
+            deviceOrientation.initialGamma = deviceOrientation.gamma;
+
+            // Update all item positions to current screen positions
+            config.arPlacement.items.forEach(item => {
+                const div = document.querySelector(`.ar-item[data-id="${item.id}"]`);
+                if (div) {
+                    const rect = div.getBoundingClientRect();
+                    item.originalX = rect.left + rect.width / 2;
+                    item.originalY = rect.top + rect.height / 2;
+                }
+            });
+
+            addDebug('🎯 Orientation recalibrated', 'good');
+        }
+
+        // Device orientation handler
+        function handleOrientation(event) {
+            deviceOrientation.alpha = event.alpha || 0;
+            deviceOrientation.beta = event.beta || 0;
+            deviceOrientation.gamma = event.gamma || 0;
+
+            // Set initial orientation on first reading
+            if (deviceOrientation.initialAlpha === null) {
+                deviceOrientation.initialAlpha = deviceOrientation.alpha;
+                deviceOrientation.initialBeta = deviceOrientation.beta;
+                deviceOrientation.initialGamma = deviceOrientation.gamma;
+                addDebug('✓ Device orientation calibrated', 'good');
+            }
+
+            // Update AR item positions based on orientation change
+            updateARPositions();
+        }
+
+        // Update AR item positions based on device movement
+        function updateARPositions() {
+            if (config.arPlacement.items.length === 0) return;
+            if (deviceOrientation.initialAlpha === null) return;
+
+            // Calculate rotation differences
+            const deltaAlpha = deviceOrientation.alpha - deviceOrientation.initialAlpha;
+            const deltaBeta = deviceOrientation.beta - deviceOrientation.initialBeta;
+            const deltaGamma = deviceOrientation.gamma - deviceOrientation.initialGamma;
+
+            // Sensitivity factors (adjust these for better feel)
+            const sensitivityX = 3;  // Left-right movement
+            const sensitivityY = 3;  // Up-down movement
+
+            config.arPlacement.items.forEach(item => {
+                const div = document.querySelector(`.ar-item[data-id="${item.id}"]`);
+                if (!div) return;
+
+                // Calculate new position based on orientation change
+                const offsetX = deltaGamma * sensitivityX;
+                const offsetY = deltaBeta * sensitivityY;
+
+                const newX = item.originalX + offsetX;
+                const newY = item.originalY + offsetY;
+
+                div.style.left = newX + 'px';
+                div.style.top = newY + 'px';
+            });
+        }
+
+        // Request device orientation permission (iOS 13+)
+        async function requestOrientationPermission() {
+            if (typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                try {
+                    const permission = await DeviceOrientationEvent.requestPermission();
+                    if (permission === 'granted') {
+                        window.addEventListener('deviceorientation', handleOrientation);
+                        addDebug('✓ Motion sensors enabled', 'good');
+                        return true;
+                    } else {
+                        addDebug('⚠ Motion permission denied - AR will be screen-locked', 'warning');
+                        return false;
+                    }
+                } catch (error) {
+                    addDebug('⚠ Motion sensors unavailable', 'warning');
+                    return false;
+                }
+            } else if (window.DeviceOrientationEvent) {
+                // Non-iOS devices don't need permission
+                window.addEventListener('deviceorientation', handleOrientation);
+                addDebug('✓ Motion sensors enabled', 'good');
+                return true;
+            } else {
+                addDebug('⚠ Device orientation not supported - AR will be screen-locked', 'warning');
+                return false;
+            }
+        }
+
+        function placeARItem(x, y) {
+            if (!config.arPlacement.enabled) return;
+
+            const item = {
+                emoji: config.arPlacement.selectedItem,
+                x: x,
+                y: y,
+                originalX: x,  // Store original placement position
+                originalY: y,
+                placementOrientation: {
+                    alpha: deviceOrientation.alpha,
+                    beta: deviceOrientation.beta,
+                    gamma: deviceOrientation.gamma
+                },
+                id: Date.now()
+            };
+
+            config.arPlacement.items.push(item);
+
+            // Create DOM element
+            const div = document.createElement('div');
+            div.className = 'ar-item';
+            div.textContent = item.emoji;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.dataset.id = item.id;
+
+            // Double click to remove
+            div.addEventListener('dblclick', (e) => {
+                e.stopPropagation();
+                config.arPlacement.items = config.arPlacement.items.filter(i => i.id !== item.id);
+                div.remove();
+                addDebug(`Removed AR item`, 'info');
+            });
+
+            document.getElementById('container').appendChild(div);
+            addDebug(`Placed ${item.emoji} at (${Math.round(x)}, ${Math.round(y)})`, 'good');
+        }
+
+        // OpenCV ready callback
+        function onOpenCvReady() {
+            cvReady = true;
+            addDebug('✓ OpenCV loaded for ArUco detection', 'good');
+        }
+
+        // Detect ArUco markers
+        function detectArucoMarkers() {
+            if (!cvReady || !config.layers.aruco) return;
+
+            try {
+                // Create mat from video
+                const src = cv.imread(video);
+                const gray = new cv.Mat();
+                cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+
+                // ArUco dictionary (DICT_4X4_50)
+                const dictionary = new cv.aruco_Dictionary(cv.DICT_4X4_50);
+                const markerIds = new cv.Mat();
+                const markerCorners = new cv.MatVector();
+                const parameters = new cv.aruco_DetectorParameters();
+
+                // Detect markers
+                cv.detectMarkers(gray, dictionary, markerCorners, markerIds, parameters);
+
+                detectedMarkers = [];
+
+                if (markerIds.rows > 0) {
+                    for (let i = 0; i < markerIds.rows; i++) {
+                        const corners = markerCorners.get(i);
+                        const cornersData = [];
+                        for (let j = 0; j < corners.rows; j++) {
+                            cornersData.push({
+                                x: corners.data32F[j * 2],
+                                y: corners.data32F[j * 2 + 1]
+                            });
+                        }
+                        detectedMarkers.push({
+                            id: markerIds.data32S[i],
+                            corners: cornersData
+                        });
+                    }
+                }
+
+                // Draw markers on aruco overlay
+                const arucoCanvas = document.getElementById('aruco-overlay');
+                if (!arucoCanvas.width) {
+                    arucoCanvas.width = canvas.width;
+                    arucoCanvas.height = canvas.height;
+                }
+                const arucoCtx = arucoCanvas.getContext('2d');
+                arucoCtx.clearRect(0, 0, arucoCanvas.width, arucoCanvas.height);
+
+                detectedMarkers.forEach(marker => {
+                    // Draw marker outline
+                    arucoCtx.beginPath();
+                    arucoCtx.moveTo(marker.corners[0].x, marker.corners[0].y);
+                    for (let i = 1; i < 4; i++) {
+                        arucoCtx.lineTo(marker.corners[i].x, marker.corners[i].y);
+                    }
+                    arucoCtx.closePath();
+                    arucoCtx.strokeStyle = '#00ff00';
+                    arucoCtx.lineWidth = 3;
+                    arucoCtx.stroke();
+
+                    // Draw marker ID
+                    const centerX = marker.corners.reduce((sum, c) => sum + c.x, 0) / 4;
+                    const centerY = marker.corners.reduce((sum, c) => sum + c.y, 0) / 4;
+                    arucoCtx.fillStyle = '#00ff00';
+                    arucoCtx.font = 'bold 20px Arial';
+                    arucoCtx.fillText(`ID: ${marker.id}`, centerX - 25, centerY);
+                });
+
+                // Cleanup
+                src.delete();
+                gray.delete();
+                markerIds.delete();
+                markerCorners.delete();
+
+            } catch (error) {
+                console.error('ArUco detection error:', error);
+            }
+        }
+
+        // Draw anatomical labels
+        function drawAnatomicalLabels(keypoints) {
+            // Remove old labels
+            document.querySelectorAll('.anatomical-label').forEach(el => el.remove());
+
+            if (!config.layers.labels) return;
+
+            // Draw joint labels
+            anatomicalLabels.joints.forEach(label => {
+                if (label.keypoints.length === 1) {
+                    const kp = keypoints[label.keypoints[0]];
+                    if (kp && kp.score > 0.2) {
+                        createLabel(kp.x, kp.y, label.name, label.type);
+                    }
+                }
+            });
+
+            // Draw bone labels (at midpoint)
+            anatomicalLabels.bones.forEach(label => {
+                if (label.keypoints.length === 2) {
+                    const kp1 = keypoints[label.keypoints[0]];
+                    const kp2 = keypoints[label.keypoints[1]];
+                    if (kp1 && kp2 && kp1.score > 0.2 && kp2.score > 0.2) {
+                        const midX = (kp1.x + kp2.x) / 2;
+                        const midY = (kp1.y + kp2.y) / 2;
+                        createLabel(midX, midY, label.name, label.type);
+                    }
+                }
+            });
+        }
+
+        function createLabel(x, y, text, type) {
+            const label = document.createElement('div');
+            label.className = `anatomical-label ${type}`;
+            label.textContent = text;
+            label.style.left = x + 'px';
+            label.style.top = y + 'px';
+            document.getElementById('container').appendChild(label);
+        }
+
+        // Initialize
+        async function init() {
+            try {
+                addDebug('🚀 Initializing app...', 'info');
+
+                // Setup video
+                video = document.getElementById('video');
+                addDebug('📹 Requesting camera...', 'info');
+
+                // Apply initial flip state
+                if (config.flipped) {
+                    video.classList.add('flipped');
+                    canvas = document.getElementById('canvas');
+                    canvas.classList.add('flipped');
+                }
+
+                // Request HIGHEST quality camera
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 1920, min: 640 },
+                        height: { ideal: 1080, min: 480 },
+                        facingMode: 'user',
+                        frameRate: { ideal: 30, min: 15 },
+                        aspectRatio: { ideal: 16/9 }
+                    }
+                });
+
+                video.srcObject = stream;
+                addDebug('✓ Camera access granted', 'good');
+
+                // Setup canvas
+                if (!canvas) canvas = document.getElementById('canvas');
+                ctx = canvas.getContext('2d');
+
+                // Setup preview canvas
+                previewCanvas = document.getElementById('preview-canvas');
+                previewCtx = previewCanvas.getContext('2d');
+
+                // Add click handler for AR placement
+                canvas.addEventListener('click', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    placeARItem(e.clientX, e.clientY);  // Use screen coordinates
+                });
+
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+
+                        // Preview canvas shows what AI processes
+                        previewCanvas.width = 640;
+                        previewCanvas.height = 480;
+
+                        addDebug(`✓ Camera: ${video.videoWidth}x${video.videoHeight}`, 'good');
+                        addDebug(`✓ AI processes: 640x480`, 'info');
+                        resolve();
+                    };
+                });
+
+                addDebug('🧠 Loading AI model...', 'info');
+
+                // Load pose model
+                const model = poseDetection.SupportedModels.BlazePose;
+                detector = await poseDetection.createDetector(model, {
+                    runtime: 'tfjs',
+                    modelType: 'lite'
+                });
+
+                addDebug('✓ AI model loaded', 'good');
+                addDebug('👤 Stand in frame!', 'warning');
+
+                // Start detection
+                detectPose();
+
+            } catch (error) {
+                addDebug(`❌ Error: ${error.message}`, 'error');
+                console.error('Init error:', error);
+            }
+        }
+
+        // Preprocess frame for better detection
+        function preprocessFrame() {
+            // Create a processed version at 640x480
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 640;
+            tempCanvas.height = 480;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            // Draw scaled video
+            tempCtx.drawImage(video, 0, 0, 640, 480);
+
+            // Get image data
+            const imageData = tempCtx.getImageData(0, 0, 640, 480);
+            const data = imageData.data;
+
+            // Enhance contrast and sharpness
+            for (let i = 0; i < data.length; i += 4) {
+                // Increase contrast
+                const factor = 1.3;
+                data[i] = Math.min(255, ((data[i] - 128) * factor) + 128);     // R
+                data[i+1] = Math.min(255, ((data[i+1] - 128) * factor) + 128); // G
+                data[i+2] = Math.min(255, ((data[i+2] - 128) * factor) + 128); // B
+            }
+
+            tempCtx.putImageData(imageData, 0, 0);
+
+            // Show in preview what AI sees
+            previewCtx.drawImage(tempCanvas, 0, 0);
+
+            return tempCanvas;
+        }
+
+        // Main detection loop
+        async function detectPose() {
+            try {
+                // Calculate FPS
+                frameCount++;
+                const now = Date.now();
+                if (now - lastTime > 1000) {
+                    fps = frameCount;
+                    frameCount = 0;
+                    lastTime = now;
+                    document.getElementById('fps-counter').textContent = `FPS: ${fps}`;
+                }
+
+                // Preprocess frame for better detection
+                processedFrame = preprocessFrame();
+
+                // Detect poses on PROCESSED frame
+                const poses = await detector.estimatePoses(processedFrame);
+
+                // Detect ArUco markers (independent of pose detection)
+                if (frameCount % 3 === 0) {  // Every 3 frames to save performance
+                    detectArucoMarkers();
+                }
+
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (poses.length > 0) {
+                    currentPose = poses[0];
+                    detectionCount++;
+
+                    // Scale keypoints from 640x480 to actual canvas size
+                    const scaleX = canvas.width / 640;
+                    const scaleY = canvas.height / 480;
+
+                    const scaledKeypoints = currentPose.keypoints.map(kp => ({
+                        ...kp,
+                        x: kp.x * scaleX,
+                        y: kp.y * scaleY
+                    }));
+
+                    // Draw layers with scaled keypoints
+                    if (config.layers.keypoints) {
+                        drawKeypoints(scaledKeypoints);
+                    }
+
+                    if (config.layers.skeleton) {
+                        drawSkeleton(scaledKeypoints);
+                    }
+
+                    if (config.layers.muscles) {
+                        drawMuscles(scaledKeypoints);
+                    }
+
+                    // Draw anatomical labels
+                    if (config.layers.labels) {
+                        drawAnatomicalLabels(scaledKeypoints);
+                    }
+
+                    // Update debug every 30 frames
+                    if (detectionCount % 30 === 0) {
+                        const goodKeypoints = currentPose.keypoints.filter(kp => kp.score > 0.2).length;
+                        const avgConf = currentPose.keypoints.reduce((sum, kp) => sum + kp.score, 0) / 33;
+
+                        if (goodKeypoints < 10) {
+                            addDebug(`⚠ Only ${goodKeypoints} keypoints - adjust lighting/distance`, 'warning');
+                        } else if (avgConf < 0.3) {
+                            addDebug(`⚠ Low confidence (${avgConf.toFixed(2)}) - move back from camera`, 'warning');
+                        } else {
+                            addDebug(`✓ Good detection! Turn on layers to see AR`, 'good');
+                        }
+                    }
+                } else {
+                    currentPose = null;
+                    if (detectionCount > 30 && detectionCount % 60 === 0) {
+                        addDebug('⚠ No pose detected - move into frame', 'warning');
+                    }
+                }
+
+                updateDebugPanel();
+
+                // Continue loop
+                requestAnimationFrame(detectPose);
+
+            } catch (error) {
+                addDebug(`❌ Detection error: ${error.message}`, 'error');
+                console.error('Detection error:', error);
+            }
+        }
+
+        // Draw keypoints
+        function drawKeypoints(keypoints) {
+            keypoints.forEach((kp, idx) => {
+                // SHOW ALL KEYPOINTS regardless of confidence!
+                // Color based on confidence
+                let color = 'red';  // Low confidence
+                if (kp.score > 0.5) color = 'lime';  // High confidence
+                else if (kp.score > 0.2) color = 'yellow';  // Medium confidence
+
+                // Draw circle
+                ctx.beginPath();
+                ctx.arc(kp.x, kp.y, 8, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw label with confidence score
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 11px Arial';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 3;
+                ctx.strokeText(`${idx}:${kp.score.toFixed(2)}`, kp.x + 10, kp.y - 10);
+                ctx.fillText(`${idx}:${kp.score.toFixed(2)}`, kp.x + 10, kp.y - 10);
+            });
+        }
+
+        // Draw skeleton
+        function drawSkeleton(keypoints) {
+            const connections = [
+                // Spine
+                [0, 1], [1, 2], [2, 3], [3, 7],
+                // Left arm
+                [11, 13], [13, 15],
+                // Right arm
+                [12, 14], [14, 16],
+                // Torso
+                [11, 12], [11, 23], [12, 24], [23, 24],
+                // Left leg
+                [23, 25], [25, 27],
+                // Right leg
+                [24, 26], [26, 28]
+            ];
+
+            connections.forEach(([i, j]) => {
+                const kp1 = keypoints[i];
+                const kp2 = keypoints[j];
+
+                // LOWER threshold to 0.1 for mobile
+                if (kp1.score > 0.1 && kp2.score > 0.1) {
+                    // Draw bone
+                    ctx.beginPath();
+                    ctx.moveTo(kp1.x, kp1.y);
+                    ctx.lineTo(kp2.x, kp2.y);
+                    ctx.strokeStyle = '#F5F5DC';
+                    ctx.lineWidth = 10;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+
+                    // Draw joints
+                    [kp1, kp2].forEach(kp => {
+                        ctx.beginPath();
+                        ctx.arc(kp.x, kp.y, 6, 0, 2 * Math.PI);
+                        ctx.fillStyle = '#DDD';
+                        ctx.fill();
+                        ctx.strokeStyle = '#888';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    });
+                }
+            });
+        }
+
+        // Draw muscles
+        function drawMuscles(keypoints) {
+            // Biceps (left)
+            drawMuscle(keypoints, [11, 13, 15], 100, 'rgba(255,100,100,0.6)');
+            // Biceps (right)
+            drawMuscle(keypoints, [12, 14, 16], 100, 'rgba(255,100,100,0.6)');
+            // Quads (left)
+            drawMuscle(keypoints, [23, 25, 27], 160, 'rgba(100,255,100,0.6)', true);
+            // Quads (right)
+            drawMuscle(keypoints, [24, 26, 28], 160, 'rgba(100,255,100,0.6)', true);
+        }
+
+        function drawMuscle(keypoints, indices, threshold, color, reverse = false) {
+            const [i1, i2, i3] = indices;
+            const kp1 = keypoints[i1];
+            const kp2 = keypoints[i2];
+            const kp3 = keypoints[i3];
+
+            // LOWER threshold to 0.1 for mobile
+            if (kp1.score > 0.1 && kp2.score > 0.1 && kp3.score > 0.1) {
+                const angle = calculateAngle(kp1, kp2, kp3);
+                let isActive = reverse ? angle > threshold : angle < threshold;
+
+                const finalColor = isActive ? color.replace('100', '255') : color;
+
+                // Draw muscle shape
+                const dx = kp3.x - kp1.x;
+                const dy = kp3.y - kp1.y;
+                const perpX = -dy * 0.08;
+                const perpY = dx * 0.08;
+
+                ctx.beginPath();
+                ctx.moveTo(kp1.x + perpX, kp1.y + perpY);
+                ctx.lineTo(kp2.x + perpX, kp2.y + perpY);
+                ctx.lineTo(kp3.x + perpX, kp3.y + perpY);
+                ctx.lineTo(kp3.x - perpX, kp3.y - perpY);
+                ctx.lineTo(kp2.x - perpX, kp2.y - perpY);
+                ctx.lineTo(kp1.x - perpX, kp1.y - perpY);
+                ctx.closePath();
+                ctx.fillStyle = finalColor;
+                ctx.fill();
+
+                if (isActive) {
+                    ctx.strokeStyle = 'rgba(255,255,0,0.8)';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function calculateAngle(p1, p2, p3) {
+            const radians = Math.atan2(p3.y - p2.y, p3.x - p2.x) -
+                          Math.atan2(p1.y - p2.y, p1.x - p2.x);
+            let angle = Math.abs(radians * 180.0 / Math.PI);
+            if (angle > 180.0) angle = 360.0 - angle;
+            return angle;
+        }
+
+        // Toggle functions
+        function toggleLayer(layer) {
+            config.layers[layer] = !config.layers[layer];
+            const btn = document.getElementById(`btn-${layer}`);
+            btn.classList.toggle('active');
+            addDebug(`${layer} ${config.layers[layer] ? 'ON' : 'OFF'}`, 'info');
+        }
+
+        function toggleDebug() {
+            config.layers.debug = !config.layers.debug;
+            document.getElementById('debug-panel').style.display =
+                config.layers.debug ? 'block' : 'none';
+            document.getElementById('btn-debug').classList.toggle('active');
+        }
+
+        // Start
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

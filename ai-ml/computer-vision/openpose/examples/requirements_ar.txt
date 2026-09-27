@@ -1,0 +1,16 @@
+# Requirements for AR Examples
+# Install with: pip install -r requirements_ar.txt
+
+# Core dependencies
+opencv-python>=4.8.0
+mediapipe>=0.10.0
+numpy>=1.24.0
+
+# Optional: For advanced OpenGL examples
+PyOpenGL>=3.1.6
+PyOpenGL_accelerate>=3.1.6
+pygame>=2.5.0
+
+# Optional: For Three.js-like Python 3D
+vtk>=9.2.0
+pyvista>=0.42.0

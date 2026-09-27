@@ -1,8 +1,8 @@
 # Claude Code Web Testing Repository
 
 **Repository merged from 30 Claude Code branches**
-**Date**: 2025-12-25
-**Total files**: 297
+**Date**: 2025-12-25 (completed 2026-09-27, see [`MERGE_COMPLETE.md`](./MERGE_COMPLETE.md))
+**Total files**: 400+
 **Categories**: 5 main areas
 
 ---
@@ -59,8 +59,9 @@ This repository contains research, tools, and documentation from **30 different 
 
 ### Technologies
 - **MCP (Model Context Protocol)** - Blender & Puppeteer integration
-- **Computer Vision** - OpenPose, AR, Dockerfiles
-- **Marketing** - Autonomous AI agents
+- **Computer Vision** - OpenPose research, pose search, AR examples, anatomy visualisation web app
+- **Marketing** - Autonomous AI agents (plan, compute/API costs, on-prem requirements)
+- **NLP** - NLP vs small LLM comparison
 
 **Try**: `ai-ml/careers/ai-engineer-roadmap/QuizApp.jsx`
 
@@ -69,8 +70,9 @@ This repository contains research, tools, and documentation from **30 different 
 ## 🎨 Creative & Media (10+ files)
 
 - **Memes** - Complete dictionary + country-specific collections
-- **Music** - 50 production repos + theory library (C++ header)
-- **Social Media** - Trending resource tracking
+- **Music** - 50 production repos, theory library (C++ header), piano/guitar theory question sets, VST example plugin
+- **Social Media** - Trending resource tracking + `trending-topics-ui` Next.js widget
+- **Story Generation** - Methodologies and tools
 
 **Explore**: `creative-media/memes/MEME_DICTIONARY.md`
 
@@ -95,8 +97,9 @@ This repository contains research, tools, and documentation from **30 different 
 
 ### Other Tools
 - Gradio GPU planning
-- API examples
+- API examples and authentication analysis
 - Model benchmarking
+- Git branch-merging checklist
 
 **Read**: `development-tools/claude-code/CLAUDE_CODE_SUBAGENT_PATTERNS.md`
 
@@ -104,8 +107,8 @@ This repository contains research, tools, and documentation from **30 different 
 
 ## 🏭 Industry Research (5+ files)
 
-- **Robotics** - Drone implementation
-- **Business** - Vending machine analysis & benchmarking
+- **Robotics** - Drone implementation, humanoid robots (technical, software stack, business scenarios, student journeys)
+- **Business** - Vending machine analysis & benchmarking, lead generation research
 
 ---
 

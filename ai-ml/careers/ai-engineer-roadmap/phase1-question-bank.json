@@ -1,0 +1,856 @@
+{
+  "metadata": {
+    "title": "AI Engineer Roadmap - Phase 1: Fundamentals Question Bank",
+    "version": "1.0.0",
+    "total_questions": 1000,
+    "created": "2025-11-18",
+    "description": "Comprehensive question bank for testing Phase 1 fundamentals including Linear Algebra, Calculus, Probability & Statistics, Python, SQL, and Data Structures & Algorithms",
+    "topics": {
+      "linear_algebra": 200,
+      "calculus": 150,
+      "probability_statistics": 150,
+      "python": 200,
+      "sql": 150,
+      "data_structures_algorithms": 150
+    },
+    "difficulty_levels": ["beginner", "intermediate", "advanced"],
+    "question_types": ["multiple_choice", "coding", "true_false", "fill_blank"]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topic": "linear_algebra",
+      "subtopic": "vectors",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is a vector?",
+      "options": [
+        "A mathematical object with magnitude and direction",
+        "A matrix with only one row",
+        "A scalar value",
+        "A set of unordered numbers"
+      ],
+      "correct_answer": 0,
+      "explanation": "A vector is a mathematical object that has both magnitude and direction. It can be represented as an array of numbers.",
+      "hints": ["Think about physical quantities like velocity or force"]
+    },
+    {
+      "id": 2,
+      "topic": "linear_algebra",
+      "subtopic": "vectors",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the result of adding two vectors [1, 2] and [3, 4]?",
+      "options": [
+        "[4, 6]",
+        "[3, 8]",
+        "[1, 2, 3, 4]",
+        "[2, 4]"
+      ],
+      "correct_answer": 0,
+      "explanation": "Vector addition is performed element-wise: [1+3, 2+4] = [4, 6]",
+      "hints": ["Add corresponding elements"]
+    },
+    {
+      "id": 3,
+      "topic": "linear_algebra",
+      "subtopic": "vectors",
+      "difficulty": "beginner",
+      "type": "coding",
+      "question": "Write a Python function to compute the dot product of two vectors [1, 2, 3] and [4, 5, 6]",
+      "code_template": "def dot_product(v1, v2):\n    # Your code here\n    pass",
+      "test_cases": [
+        {"input": {"v1": [1, 2, 3], "v2": [4, 5, 6]}, "expected": 32},
+        {"input": {"v1": [1, 0, 0], "v2": [0, 1, 0]}, "expected": 0}
+      ],
+      "correct_answer": "def dot_product(v1, v2):\n    return sum(a*b for a, b in zip(v1, v2))",
+      "explanation": "The dot product is the sum of element-wise multiplication: 1*4 + 2*5 + 3*6 = 32",
+      "hints": ["Use zip() to pair elements", "Multiply corresponding elements and sum"]
+    },
+    {
+      "id": 4,
+      "topic": "linear_algebra",
+      "subtopic": "vectors",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the magnitude (length) of vector [3, 4]?",
+      "options": [
+        "5",
+        "7",
+        "12",
+        "25"
+      ],
+      "correct_answer": 0,
+      "explanation": "Magnitude = sqrt(3² + 4²) = sqrt(9 + 16) = sqrt(25) = 5",
+      "hints": ["Use Pythagorean theorem", "Square each component, sum, then take square root"]
+    },
+    {
+      "id": 5,
+      "topic": "linear_algebra",
+      "subtopic": "vectors",
+      "difficulty": "intermediate",
+      "type": "true_false",
+      "question": "Two vectors are orthogonal if their dot product equals zero.",
+      "correct_answer": true,
+      "explanation": "Orthogonal vectors are perpendicular, and their dot product is zero.",
+      "hints": ["Orthogonal means perpendicular"]
+    },
+    {
+      "id": 6,
+      "topic": "linear_algebra",
+      "subtopic": "matrices",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is a matrix?",
+      "options": [
+        "A 2D array of numbers arranged in rows and columns",
+        "A single number",
+        "A vector with three dimensions",
+        "A graph structure"
+      ],
+      "correct_answer": 0,
+      "explanation": "A matrix is a rectangular array of numbers arranged in rows and columns.",
+      "hints": ["Think of a spreadsheet or table"]
+    },
+    {
+      "id": 7,
+      "topic": "linear_algebra",
+      "subtopic": "matrices",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the shape of a matrix with 3 rows and 4 columns?",
+      "options": [
+        "3x4",
+        "4x3",
+        "12x1",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "Matrix shape is expressed as (rows x columns), so 3 rows and 4 columns = 3x4",
+      "hints": ["Rows come first, then columns"]
+    },
+    {
+      "id": 8,
+      "topic": "linear_algebra",
+      "subtopic": "matrices",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the identity matrix?",
+      "options": [
+        "A square matrix with 1s on the diagonal and 0s elsewhere",
+        "A matrix with all 1s",
+        "A matrix with all 0s",
+        "A matrix with random values"
+      ],
+      "correct_answer": 0,
+      "explanation": "The identity matrix is a square matrix with 1s on the main diagonal and 0s elsewhere. It acts as the multiplicative identity.",
+      "hints": ["Think of the number 1 in multiplication"]
+    },
+    {
+      "id": 9,
+      "topic": "linear_algebra",
+      "subtopic": "matrices",
+      "difficulty": "intermediate",
+      "type": "coding",
+      "question": "Write Python code using NumPy to create a 3x3 identity matrix",
+      "code_template": "import numpy as np\n\n# Your code here",
+      "test_cases": [
+        {"expected": "[[1, 0, 0], [0, 1, 0], [0, 0, 1]]"}
+      ],
+      "correct_answer": "import numpy as np\nidentity = np.eye(3)",
+      "explanation": "NumPy's eye() function creates an identity matrix of specified size.",
+      "hints": ["Use np.eye()"]
+    },
+    {
+      "id": 10,
+      "topic": "linear_algebra",
+      "subtopic": "matrices",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is matrix transposition?",
+      "options": [
+        "Swapping rows and columns",
+        "Multiplying by -1",
+        "Adding a constant to all elements",
+        "Inverting the matrix"
+      ],
+      "correct_answer": 0,
+      "explanation": "Transposition swaps rows and columns. Element at position (i,j) moves to (j,i).",
+      "hints": ["Rows become columns and vice versa"]
+    },
+    {
+      "id": 11,
+      "topic": "linear_algebra",
+      "subtopic": "matrix_multiplication",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For matrix multiplication A * B, when can they be multiplied?",
+      "options": [
+        "When the number of columns in A equals the number of rows in B",
+        "When both matrices are square",
+        "When they have the same dimensions",
+        "Any two matrices can be multiplied"
+      ],
+      "correct_answer": 0,
+      "explanation": "Matrix multiplication requires the number of columns in the first matrix to equal the number of rows in the second matrix.",
+      "hints": ["Inner dimensions must match"]
+    },
+    {
+      "id": 12,
+      "topic": "linear_algebra",
+      "subtopic": "matrix_multiplication",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the shape of the result when multiplying a 3x4 matrix with a 4x2 matrix?",
+      "options": [
+        "3x2",
+        "4x4",
+        "3x4",
+        "Cannot be multiplied"
+      ],
+      "correct_answer": 0,
+      "explanation": "The result has dimensions (rows of first matrix) x (columns of second matrix) = 3x2",
+      "hints": ["Outer dimensions give the result shape"]
+    },
+    {
+      "id": 13,
+      "topic": "linear_algebra",
+      "subtopic": "determinants",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does a determinant of zero indicate about a matrix?",
+      "options": [
+        "The matrix is singular (not invertible)",
+        "The matrix is the identity matrix",
+        "The matrix has all zero elements",
+        "The matrix is symmetric"
+      ],
+      "correct_answer": 0,
+      "explanation": "A determinant of zero means the matrix is singular and has no inverse.",
+      "hints": ["Think about invertibility"]
+    },
+    {
+      "id": 14,
+      "topic": "linear_algebra",
+      "subtopic": "eigenvalues",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is an eigenvalue?",
+      "options": [
+        "A scalar λ such that Av = λv for some vector v",
+        "The largest element in a matrix",
+        "The sum of diagonal elements",
+        "The determinant of a matrix"
+      ],
+      "correct_answer": 0,
+      "explanation": "An eigenvalue λ satisfies the equation Av = λv, where v is the corresponding eigenvector.",
+      "hints": ["Think about direction-preserving transformations"]
+    },
+    {
+      "id": 15,
+      "topic": "linear_algebra",
+      "subtopic": "eigenvalues",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is an eigenvector?",
+      "options": [
+        "A non-zero vector that only changes in scale (not direction) when a linear transformation is applied",
+        "Any vector in the matrix",
+        "The first column of a matrix",
+        "A vector with all equal elements"
+      ],
+      "correct_answer": 0,
+      "explanation": "An eigenvector is a non-zero vector that, when a linear transformation is applied, only changes in magnitude, not direction.",
+      "hints": ["Direction stays the same, only scale changes"]
+    },
+    {
+      "id": 16,
+      "topic": "calculus",
+      "subtopic": "derivatives",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does a derivative represent?",
+      "options": [
+        "The rate of change of a function",
+        "The area under a curve",
+        "The maximum value of a function",
+        "The sum of function values"
+      ],
+      "correct_answer": 0,
+      "explanation": "A derivative represents the instantaneous rate of change of a function at a point.",
+      "hints": ["Think about slope and rate of change"]
+    },
+    {
+      "id": 17,
+      "topic": "calculus",
+      "subtopic": "derivatives",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the derivative of f(x) = x²?",
+      "options": [
+        "2x",
+        "x",
+        "x²",
+        "2x²"
+      ],
+      "correct_answer": 0,
+      "explanation": "Using the power rule: d/dx(xⁿ) = n*xⁿ⁻¹, so d/dx(x²) = 2x",
+      "hints": ["Use the power rule"]
+    },
+    {
+      "id": 18,
+      "topic": "calculus",
+      "subtopic": "derivatives",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the derivative of a constant?",
+      "options": [
+        "0",
+        "1",
+        "The constant itself",
+        "Undefined"
+      ],
+      "correct_answer": 0,
+      "explanation": "The derivative of any constant is 0 because constants don't change.",
+      "hints": ["Constants don't change, so their rate of change is..."]
+    },
+    {
+      "id": 19,
+      "topic": "calculus",
+      "subtopic": "derivatives",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the power rule for derivatives?",
+      "options": [
+        "d/dx(xⁿ) = n*xⁿ⁻¹",
+        "d/dx(xⁿ) = xⁿ⁻¹",
+        "d/dx(xⁿ) = n*xⁿ",
+        "d/dx(xⁿ) = xⁿ/n"
+      ],
+      "correct_answer": 0,
+      "explanation": "The power rule states: d/dx(xⁿ) = n*xⁿ⁻¹",
+      "hints": ["Bring down the exponent, then subtract 1 from the exponent"]
+    },
+    {
+      "id": 20,
+      "topic": "calculus",
+      "subtopic": "chain_rule",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the chain rule used for?",
+      "options": [
+        "Differentiating composite functions",
+        "Integrating functions",
+        "Finding maximum values",
+        "Solving equations"
+      ],
+      "correct_answer": 0,
+      "explanation": "The chain rule is used to find the derivative of composite functions (functions within functions).",
+      "hints": ["Think about functions nested inside other functions"]
+    },
+    {
+      "id": 21,
+      "topic": "calculus",
+      "subtopic": "chain_rule",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the chain rule formula?",
+      "options": [
+        "d/dx[f(g(x))] = f'(g(x)) * g'(x)",
+        "d/dx[f(g(x))] = f'(x) + g'(x)",
+        "d/dx[f(g(x))] = f'(x) * g'(x)",
+        "d/dx[f(g(x))] = f(g'(x))"
+      ],
+      "correct_answer": 0,
+      "explanation": "The chain rule: derivative of outer function evaluated at inner function, times derivative of inner function.",
+      "hints": ["Derivative of outside times derivative of inside"]
+    },
+    {
+      "id": 22,
+      "topic": "calculus",
+      "subtopic": "gradients",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is a gradient in multivariable calculus?",
+      "options": [
+        "A vector of partial derivatives",
+        "A single derivative value",
+        "The maximum value of a function",
+        "The area under a surface"
+      ],
+      "correct_answer": 0,
+      "explanation": "The gradient is a vector containing all partial derivatives of a function with respect to each variable.",
+      "hints": ["Think about derivatives in multiple directions"]
+    },
+    {
+      "id": 23,
+      "topic": "calculus",
+      "subtopic": "gradients",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "In gradient descent, which direction do we move?",
+      "options": [
+        "Opposite to the gradient (negative gradient)",
+        "In the direction of the gradient",
+        "Perpendicular to the gradient",
+        "Random direction"
+      ],
+      "correct_answer": 0,
+      "explanation": "We move in the negative gradient direction to minimize the function, as the gradient points in the direction of steepest ascent.",
+      "hints": ["We want to go downhill to minimize"]
+    },
+    {
+      "id": 24,
+      "topic": "calculus",
+      "subtopic": "partial_derivatives",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is a partial derivative?",
+      "options": [
+        "The derivative with respect to one variable while holding others constant",
+        "Half of the regular derivative",
+        "The derivative of a constant",
+        "The sum of all derivatives"
+      ],
+      "correct_answer": 0,
+      "explanation": "A partial derivative measures the rate of change with respect to one variable while treating all other variables as constants.",
+      "hints": ["Focus on one variable at a time"]
+    },
+    {
+      "id": 25,
+      "topic": "calculus",
+      "subtopic": "optimization",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What condition indicates a critical point?",
+      "options": [
+        "The derivative equals zero",
+        "The function equals zero",
+        "The second derivative equals zero",
+        "The function is undefined"
+      ],
+      "correct_answer": 0,
+      "explanation": "A critical point occurs where the derivative is zero or undefined, indicating a potential maximum, minimum, or saddle point.",
+      "hints": ["Where the slope is flat"]
+    },
+    {
+      "id": 26,
+      "topic": "probability_statistics",
+      "subtopic": "probability_basics",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the range of probability values?",
+      "options": [
+        "0 to 1",
+        "0 to 100",
+        "-1 to 1",
+        "Any real number"
+      ],
+      "correct_answer": 0,
+      "explanation": "Probability values range from 0 (impossible) to 1 (certain).",
+      "hints": ["Think about percentages as decimals"]
+    },
+    {
+      "id": 27,
+      "topic": "probability_statistics",
+      "subtopic": "probability_basics",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "If you flip a fair coin, what is the probability of getting heads?",
+      "options": [
+        "0.5",
+        "0.25",
+        "1",
+        "0"
+      ],
+      "correct_answer": 0,
+      "explanation": "A fair coin has two equally likely outcomes, so P(heads) = 1/2 = 0.5",
+      "hints": ["Equal chances for two outcomes"]
+    },
+    {
+      "id": 28,
+      "topic": "probability_statistics",
+      "subtopic": "distributions",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is a normal distribution?",
+      "options": [
+        "A bell-shaped probability distribution symmetric around the mean",
+        "A uniform distribution",
+        "A distribution with all values equal",
+        "A distribution with only two possible values"
+      ],
+      "correct_answer": 0,
+      "explanation": "The normal distribution (Gaussian distribution) is bell-shaped and symmetric around its mean.",
+      "hints": ["Think of a bell curve"]
+    },
+    {
+      "id": 29,
+      "topic": "probability_statistics",
+      "subtopic": "statistics_basics",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the mean of the dataset [2, 4, 6, 8, 10]?",
+      "options": [
+        "6",
+        "5",
+        "8",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "Mean = sum of all values / number of values = (2+4+6+8+10)/5 = 30/5 = 6",
+      "hints": ["Add all numbers and divide by count"]
+    },
+    {
+      "id": 30,
+      "topic": "probability_statistics",
+      "subtopic": "statistics_basics",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the median of [1, 3, 5, 7, 9]?",
+      "options": [
+        "5",
+        "3",
+        "7",
+        "25"
+      ],
+      "correct_answer": 0,
+      "explanation": "The median is the middle value when data is sorted. For [1, 3, 5, 7, 9], the middle value is 5.",
+      "hints": ["Find the middle value"]
+    },
+    {
+      "id": 31,
+      "topic": "python",
+      "subtopic": "basics",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which of these is the correct way to create a list in Python?",
+      "options": [
+        "[1, 2, 3]",
+        "{1, 2, 3}",
+        "(1, 2, 3)",
+        "<1, 2, 3>"
+      ],
+      "correct_answer": 0,
+      "explanation": "Lists in Python are created using square brackets []",
+      "hints": ["Square brackets"]
+    },
+    {
+      "id": 32,
+      "topic": "python",
+      "subtopic": "basics",
+      "difficulty": "beginner",
+      "type": "coding",
+      "question": "Write a function that returns the sum of two numbers",
+      "code_template": "def add_numbers(a, b):\n    # Your code here\n    pass",
+      "test_cases": [
+        {"input": {"a": 5, "b": 3}, "expected": 8},
+        {"input": {"a": -2, "b": 7}, "expected": 5}
+      ],
+      "correct_answer": "def add_numbers(a, b):\n    return a + b",
+      "explanation": "Simply return the sum of the two parameters.",
+      "hints": ["Use the + operator"]
+    },
+    {
+      "id": 33,
+      "topic": "python",
+      "subtopic": "numpy",
+      "difficulty": "intermediate",
+      "type": "coding",
+      "question": "Create a NumPy array of zeros with shape (3, 4)",
+      "code_template": "import numpy as np\n\n# Your code here",
+      "test_cases": [
+        {"expected": "shape (3, 4) with all zeros"}
+      ],
+      "correct_answer": "import numpy as np\narr = np.zeros((3, 4))",
+      "explanation": "np.zeros() creates an array filled with zeros. Pass the shape as a tuple.",
+      "hints": ["Use np.zeros() with shape as tuple"]
+    },
+    {
+      "id": 34,
+      "topic": "python",
+      "subtopic": "numpy",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does np.arange(0, 10, 2) return?",
+      "options": [
+        "[0, 2, 4, 6, 8]",
+        "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]",
+        "[2, 4, 6, 8, 10]",
+        "[0, 10, 2]"
+      ],
+      "correct_answer": 0,
+      "explanation": "np.arange(start, stop, step) creates array from start to stop (exclusive) with step size. Result: [0, 2, 4, 6, 8]",
+      "hints": ["Start at 0, step by 2, stop before 10"]
+    },
+    {
+      "id": 35,
+      "topic": "python",
+      "subtopic": "pandas",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is a DataFrame in Pandas?",
+      "options": [
+        "A 2D labeled data structure with columns of potentially different types",
+        "A single column of data",
+        "A NumPy array",
+        "A list of lists"
+      ],
+      "correct_answer": 0,
+      "explanation": "A DataFrame is a 2-dimensional labeled data structure, similar to a spreadsheet or SQL table.",
+      "hints": ["Think of a table or spreadsheet"]
+    },
+    {
+      "id": 36,
+      "topic": "python",
+      "subtopic": "pandas",
+      "difficulty": "intermediate",
+      "type": "coding",
+      "question": "Create a Pandas DataFrame from a dictionary with columns 'name' and 'age'",
+      "code_template": "import pandas as pd\n\ndata = {'name': ['Alice', 'Bob'], 'age': [25, 30]}\n# Your code here",
+      "test_cases": [
+        {"expected": "DataFrame with 2 rows and 2 columns"}
+      ],
+      "correct_answer": "import pandas as pd\ndata = {'name': ['Alice', 'Bob'], 'age': [25, 30]}\ndf = pd.DataFrame(data)",
+      "explanation": "Use pd.DataFrame() and pass the dictionary to create a DataFrame.",
+      "hints": ["Use pd.DataFrame()"]
+    },
+    {
+      "id": 37,
+      "topic": "sql",
+      "subtopic": "select",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does SELECT * FROM users; do?",
+      "options": [
+        "Retrieves all columns from the users table",
+        "Deletes all users",
+        "Creates a new users table",
+        "Updates all users"
+      ],
+      "correct_answer": 0,
+      "explanation": "SELECT * retrieves all columns from the specified table.",
+      "hints": ["* means all columns"]
+    },
+    {
+      "id": 38,
+      "topic": "sql",
+      "subtopic": "where",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the WHERE clause used for?",
+      "options": [
+        "Filtering rows based on a condition",
+        "Sorting results",
+        "Joining tables",
+        "Creating tables"
+      ],
+      "correct_answer": 0,
+      "explanation": "WHERE filters rows that meet specified conditions.",
+      "hints": ["Think about filtering"]
+    },
+    {
+      "id": 39,
+      "topic": "sql",
+      "subtopic": "join",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does INNER JOIN return?",
+      "options": [
+        "Only rows with matching values in both tables",
+        "All rows from both tables",
+        "All rows from the left table",
+        "All rows from the right table"
+      ],
+      "correct_answer": 0,
+      "explanation": "INNER JOIN returns only rows where there is a match in both tables.",
+      "hints": ["Think about the intersection"]
+    },
+    {
+      "id": 40,
+      "topic": "sql",
+      "subtopic": "aggregation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does COUNT(*) do?",
+      "options": [
+        "Counts the total number of rows",
+        "Counts the number of columns",
+        "Sums all values",
+        "Finds the maximum value"
+      ],
+      "correct_answer": 0,
+      "explanation": "COUNT(*) returns the total number of rows in the result set.",
+      "hints": ["Counting rows"]
+    },
+    {
+      "id": 41,
+      "topic": "data_structures_algorithms",
+      "subtopic": "arrays",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the time complexity of accessing an element in an array by index?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)",
+        "O(n²)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Array access by index is O(1) - constant time - because we can directly compute the memory address.",
+      "hints": ["Direct access to any position"]
+    },
+    {
+      "id": 42,
+      "topic": "data_structures_algorithms",
+      "subtopic": "arrays",
+      "difficulty": "intermediate",
+      "type": "coding",
+      "question": "Write a function to find the maximum element in an array",
+      "code_template": "def find_max(arr):\n    # Your code here\n    pass",
+      "test_cases": [
+        {"input": {"arr": [1, 5, 3, 9, 2]}, "expected": 9},
+        {"input": {"arr": [-5, -2, -10]}, "expected": -2}
+      ],
+      "correct_answer": "def find_max(arr):\n    return max(arr)",
+      "explanation": "Use Python's built-in max() function or iterate through the array comparing values.",
+      "hints": ["Use max() or iterate comparing values"]
+    },
+    {
+      "id": 43,
+      "topic": "data_structures_algorithms",
+      "subtopic": "linked_lists",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the main advantage of linked lists over arrays?",
+      "options": [
+        "Dynamic size and efficient insertions/deletions",
+        "Faster random access",
+        "Less memory usage",
+        "Easier to implement"
+      ],
+      "correct_answer": 0,
+      "explanation": "Linked lists can grow dynamically and insertions/deletions are O(1) when you have a reference to the node.",
+      "hints": ["Think about adding/removing elements"]
+    },
+    {
+      "id": 44,
+      "topic": "data_structures_algorithms",
+      "subtopic": "stacks",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What principle do stacks follow?",
+      "options": [
+        "LIFO (Last In First Out)",
+        "FIFO (First In First Out)",
+        "Random access",
+        "Priority-based"
+      ],
+      "correct_answer": 0,
+      "explanation": "Stacks follow LIFO - the last element added is the first one removed.",
+      "hints": ["Think of a stack of plates"]
+    },
+    {
+      "id": 45,
+      "topic": "data_structures_algorithms",
+      "subtopic": "queues",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What principle do queues follow?",
+      "options": [
+        "FIFO (First In First Out)",
+        "LIFO (Last In First Out)",
+        "Random access",
+        "Priority-based"
+      ],
+      "correct_answer": 0,
+      "explanation": "Queues follow FIFO - the first element added is the first one removed.",
+      "hints": ["Think of a line at a store"]
+    },
+    {
+      "id": 46,
+      "topic": "data_structures_algorithms",
+      "subtopic": "binary_search",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the time complexity of binary search?",
+      "options": [
+        "O(log n)",
+        "O(n)",
+        "O(1)",
+        "O(n²)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Binary search has O(log n) time complexity as it halves the search space with each step.",
+      "hints": ["We divide the search space in half each time"]
+    },
+    {
+      "id": 47,
+      "topic": "data_structures_algorithms",
+      "subtopic": "sorting",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the average time complexity of quicksort?",
+      "options": [
+        "O(n log n)",
+        "O(n)",
+        "O(n²)",
+        "O(log n)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Quicksort has an average time complexity of O(n log n), though worst case is O(n²).",
+      "hints": ["One of the fastest general-purpose sorting algorithms"]
+    },
+    {
+      "id": 48,
+      "topic": "data_structures_algorithms",
+      "subtopic": "trees",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is a binary tree?",
+      "options": [
+        "A tree where each node has at most two children",
+        "A tree with only two nodes",
+        "A tree with exactly two levels",
+        "A tree with binary values"
+      ],
+      "correct_answer": 0,
+      "explanation": "A binary tree is a tree data structure where each node has at most two children (left and right).",
+      "hints": ["Each node can have 0, 1, or 2 children"]
+    },
+    {
+      "id": 49,
+      "topic": "data_structures_algorithms",
+      "subtopic": "hash_tables",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the average time complexity for hash table lookups?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)",
+        "O(n²)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Hash tables provide O(1) average-case lookup time through direct addressing via hash functions.",
+      "hints": ["Direct access like an array"]
+    },
+    {
+      "id": 50,
+      "topic": "data_structures_algorithms",
+      "subtopic": "graphs",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the difference between BFS and DFS?",
+      "options": [
+        "BFS explores level by level, DFS explores as deep as possible first",
+        "BFS is faster than DFS",
+        "BFS uses less memory than DFS",
+        "There is no difference"
+      ],
+      "correct_answer": 0,
+      "explanation": "BFS (Breadth-First Search) explores neighbors level by level, while DFS (Depth-First Search) explores as far as possible along each branch.",
+      "hints": ["Think about breadth vs depth"]
+    }
+  ]
+}
