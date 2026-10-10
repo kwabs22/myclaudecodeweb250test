@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complexity Landscape</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="A 3D scatter of the most complex functions in the PlayCanvas engine and GASShooter: length, cyclomatic complexity and nesting depth.">
+<script>try{var t=localStorage.getItem('atlas-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f6fa;--panel:#fff;--ink:#161b26;--muted:#576179;--line:#dde2ec;--link:#2646c4;--chip:#e8ecf5;--focus:#2646c4;
+--font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#151a25;--ink:#e6eaf3;--muted:#9aa4ba;--line:#262d3c;--link:#93a8ff;--chip:#1d2434;--focus:#93a8ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#151a25;--ink:#e6eaf3;--muted:#9aa4ba;--line:#262d3c;--link:#93a8ff;--chip:#1d2434;--focus:#93a8ff;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,select:focus-visible,tr[tabindex]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bar{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.bar a{font-weight:600;text-decoration:none}
+.bar span{color:var(--muted);font:12px var(--mono)}
+main{max-width:1240px;margin:0 auto;padding:22px 16px 56px}
+h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em}
+.lede{margin:0 0 16px;max-width:70ch;color:var(--muted);font-size:16px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.seg button{font:500 13px var(--font);padding:7px 12px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+label.sel{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select{font:500 13px var(--font);padding:6px 8px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.views{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.views button{font:500 12px var(--mono);padding:5px 9px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 12px;font:12px var(--mono);color:var(--muted)}
+.stats b{color:var(--ink);font-weight:500}
+.insight{margin:0 0 12px;max-width:84ch;font-size:14px;color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.stage{position:relative;height:clamp(420px,66vh,640px);border-radius:12px;overflow:hidden;border:1px solid #232a3d;background:radial-gradient(120% 90% at 50% 40%,#131a2e 0%,#0a0d16 62%);color:#e7ebf5}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;white-space:nowrap;font:11px var(--mono);color:#96a0b8;text-shadow:0 0 5px #0a0d16}
+.lab.ax{font:600 12px var(--font);color:#c9d1e6}
+.pin{position:absolute;left:0;top:0;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 3px rgba(255,255,255,.15);pointer-events:none}
+.tip{position:absolute;left:0;top:0;max-width:280px;padding:4px 8px;border-radius:6px;background:#05070d;border:1px solid #232a3d;font:12px var(--font);pointer-events:none;z-index:3}
+.legend{position:absolute;left:10px;top:10px;display:flex;flex-direction:column;gap:3px;font:11.5px var(--font);max-width:46%}
+.legend span{display:flex;align-items:center;gap:6px;color:#c9d1e6}
+.legend i{width:9px;height:9px;border-radius:50%;flex:none}
+.hint{position:absolute;right:10px;bottom:8px;margin:0;font:11px var(--mono);color:#96a0b8;pointer-events:none}
+.msg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:#96a0b8;margin:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:200px}
+.panel .proj{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center}
+.panel .proj i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.panel h2{margin:4px 0 2px;font:600 17px/1.25 var(--mono);overflow-wrap:anywhere}
+.panel .file{margin:0 0 10px;font:11.5px var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.meters{display:grid;gap:8px;margin:0 0 12px}
+.meter{display:grid;grid-template-columns:96px 1fr 44px;gap:8px;align-items:center;font-size:13px}
+.meter .track{height:8px;border-radius:4px;background:var(--chip);overflow:hidden}
+.meter .fill{display:block;height:100%;background:var(--c)}
+.meter output{font:12px var(--mono);text-align:right}
+.panel p.d{margin:0 0 10px;font-size:14px}
+.panel h3{margin:12px 0 4px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.panel ul{margin:0;padding-left:18px;font-size:13.5px}
+.tablewrap{margin-top:22px;overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td.name{font-family:var(--mono);font-size:12.5px;white-space:normal;overflow-wrap:anywhere;min-width:200px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+th button{font:600 12px var(--font);background:none;border:0;color:var(--muted);cursor:pointer;padding:0}
+th button[aria-sort]{color:var(--ink)}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr[aria-selected="true"]{background:var(--chip)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c)}
+.notes{margin-top:24px;max-width:78ch;color:var(--muted);font-size:14px}
+.notes h2{font-size:17px;color:var(--ink);margin:0 0 6px}
+.notes code{font:12.5px var(--mono);background:var(--chip);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}.legend{max-width:60%}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script type="importmap">{"imports":{"three":"../../assets/vendor/three.module.min.js"}}</script>
+</head>
+<body>
+<div class="bar"><a href="../../index.html">&larr; Session Atlas</a><span>game-development/complexity-explorer</span></div>
+<main>
+  <h1>Complexity Landscape</h1>
+  <p class="lede">Each point is one of the most complex functions found in two code bases. Left to right is length, bottom to top is cyclomatic complexity, and the third axis shows nesting depth or grouping. Stems drop to the floor so depth is easier to read.</p>
+  <div class="controls">
+    <div class="seg" id="dataset" role="group" aria-label="Data set">
+      <button type="button" data-ds="pc" aria-pressed="true">PlayCanvas engine (JavaScript)</button>
+      <button type="button" data-ds="gas" aria-pressed="false">GASShooter (C++)</button>
+      <button type="button" data-ds="both" aria-pressed="false">Compare both</button>
+    </div>
+    <label class="sel">Depth axis <select id="zmode"></select></label>
+    <div class="views" role="group" aria-label="Camera"><span>View</span>
+      <button type="button" data-view="home">3D</button><button type="button" data-view="front">Length × complexity</button><button type="button" data-view="top">Top</button><button type="button" data-view="side">Side</button>
+    </div>
+  </div>
+  <p class="stats" id="stats"></p>
+  <p class="insight" id="insight" aria-live="polite"></p>
+  <div class="layout">
+    <div class="stage" id="stage">
+      <canvas id="c" role="img" aria-label="3D scatter plot of the functions. The table below lists the same data."></canvas>
+      <div class="labels" id="labels" aria-hidden="true"></div>
+      <div class="pin" id="pin" hidden></div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="legend" id="legend"></div>
+      <p class="hint" aria-hidden="true">Drag to rotate · scroll or pinch to zoom · click a point</p>
+      <p class="msg" id="msg" hidden></p>
+    </div>
+    <aside class="panel" id="detail" aria-live="polite"></aside>
+  </div>
+  <div class="tablewrap"><table id="tbl"><caption class="sr" hidden></caption><thead></thead><tbody></tbody></table></div>
+  <section class="notes">
+    <h2>How the numbers are defined</h2>
+    <p id="formula">Loading…</p>
+    <p>Sources: <a href="../playcanvas/playcanvas_top_functions.json">playcanvas_top_functions.json</a>, <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.csv">GASSHOOTER_TOP_20_FUNCTIONS.csv</a> and <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.json">.json</a>. The two analyses used different tools, so compare shapes rather than exact values. GASShooter's rank 20 function has no line count in the source data, so it appears in the table but not on the chart.</p>
+  </section>
+</main>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "../../assets/vendor/OrbitControls.js";
+THREE.ColorManagement.enabled = false;
+
+const PALETTE = ["#f2705e", "#7c8dff", "#e8aa2c", "#2fb8a6", "#d868b8", "#82c45a", "#58b8e8", "#b99cff", "#c9b37a"];
+const PROJECT_COLOR = { PlayCanvas: "#f2705e", GASShooter: "#58b8e8" };
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (id) => document.getElementById(id);
+const stage = $("stage"), canvas = $("c"), labelsEl = $("labels"), pinEl = $("pin"), tipEl = $("tip"), msgEl = $("msg");
+
+/* ---------------------------------------------------------------- data */
+
+function parseCsv(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++; row.push(cell); cell = ""; if (row.length > 1 || row[0]) rows.push(row); row = []; }
+    else cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const head = rows.shift();
+  return rows.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ""])));
+}
+const pcGroup = (c) => { const g = c.split("/")[0].trim(); return /^UI/.test(g) ? "UI" : /^Shader/.test(g) ? "Shader" : g; };
+
+function normalisePlayCanvas(d) {
+  return d.top_20_functions.map((f) => ({
+    project: "PlayCanvas", rank: f.rank, name: f.function_name, file: `${f.file_path}:${f.start_line}–${f.end_line}`,
+    lines: f.line_count, cyc: f.cyclomatic_complexity, score: f.complexity_score, nesting: f.metrics.max_nesting_depth,
+    ifs: f.metrics.if_statements, loops: f.metrics.for_loops + f.metrics.while_loops, switches: f.metrics.switch_statements,
+    group: pcGroup(f.category), sub: f.subsystem, desc: f.description, bullets: f.key_responsibilities || [], factors: f.complexity_factors || [],
+  }));
+}
+function normaliseGas(rows, json) {
+  const themes = json.thematic_breakdown;
+  return rows.map((r) => {
+    const rank = +r.Rank, short = r["Function Name"].split("::").pop();
+    const j = json.top_20_functions.find((x) => x.rank === rank);
+    const theme = Object.keys(themes).find((k) => themes[k].some((n) => n === short || short.includes(n) || n.includes(short)));
+    const lines = parseInt(r["Lines of Code"], 10);
+    const f = j && j.complexity_factors;
+    return {
+      project: "GASShooter", rank, name: r["Function Name"], file: `${r["File Path"]}:${r["Line Number"]}`,
+      lines: Number.isFinite(lines) ? lines : null, cyc: +r["Cyclomatic Complexity"], score: null, nesting: null,
+      ifs: f ? f.if_statements : null, loops: f ? f.loops : null, switches: f ? f.switch_cases : null,
+      group: theme ? theme.replace(/_/g, " ") : "other", sub: r["Complexity Focus"], desc: j ? j.description : r["Key Responsibility"],
+      bullets: j ? j.key_features : [r["Key Responsibility"]], factors: [r["Complexity Focus"]],
+    };
+  });
+}
+
+let DATA = null, formulaText = "";
+async function load() {
+  const [pc, gasJson, gasCsv] = await Promise.all([
+    fetch("../playcanvas/playcanvas_top_functions.json").then((r) => r.json()),
+    fetch("../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.json").then((r) => r.json()),
+    fetch("../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.csv").then((r) => r.text()),
+  ]);
+  formulaText = `PlayCanvas: ${pc.complexity_metrics.final_score_formula}. The analysis looked at ${pc.analysis_metadata.total_functions_analyzed.toLocaleString()} functions. GASShooter: cyclomatic complexity from ${gasJson.analysis_metadata.total_functions_analyzed} functions across ${gasJson.analysis_metadata.total_cpp_files} C++ files (average ${gasJson.complexity_summary.average_cyclomatic_complexity}).`;
+  return { pc: normalisePlayCanvas(pc), gas: normaliseGas(parseCsv(gasCsv), gasJson) };
+}
+
+/* ---------------------------------------------------------------- state */
+
+let dsKey = "pc", zKey = "nesting", sel = null, hovered = null;
+const recordsFor = (k) => (k === "pc" ? DATA.pc : k === "gas" ? DATA.gas : [...DATA.pc, ...DATA.gas]);
+const zOptions = { pc: [["nesting", "Maximum nesting depth"], ["group", "Category"]], gas: [["group", "Theme"]], both: [["project", "Project"]] };
+
+function groupsOf(recs) {
+  const n = new Map(); recs.forEach((r) => n.set(r.group, (n.get(r.group) || 0) + 1));
+  return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([g]) => g);
+}
+function colourFn(recs) {
+  if (dsKey === "both") return (r) => PROJECT_COLOR[r.project];
+  const gs = groupsOf(recs); return (r) => PALETTE[gs.indexOf(r.group) % PALETTE.length];
+}
+const niceStep = (raw) => { const p = 10 ** Math.floor(Math.log10(raw)); const m = raw / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p; };
+const scaleFor = (maxVal, target) => { const step = niceStep(maxVal / target); return { step, max: Math.ceil(maxVal / step) * step }; };
+const ticksOf = (sc) => Array.from({ length: Math.round(sc.max / sc.step) + 1 }, (_, i) => i * sc.step);
+const median = (a) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+function pearson(xs, ys) {
+  const n = xs.length, mx = xs.reduce((a, b) => a + b) / n, my = ys.reduce((a, b) => a + b) / n;
+  let sxy = 0, sxx = 0, syy = 0; xs.forEach((x, i) => { sxy += (x - mx) * (ys[i] - my); sxx += (x - mx) ** 2; syy += (ys[i] - my) ** 2; });
+  return sxy / Math.sqrt(sxx * syy);
+}
+
+/* ---------------------------------------------------------------- scene */
+
+const W = { x: 12, y: 8, z: 8 };
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+catch (e) { msgEl.hidden = false; msgEl.textContent = "The 3D view needs WebGL, which this browser has turned off. The table below has all the data."; }
+
+let scene, camera, controls, uniforms, geo, labels = [], plotted = [], axisObjs = [], size, boost, dimArr, tween = null;
+const centre = new THREE.Vector3(W.x / 2, W.y / 2.4, W.z / 2);
+let userMoved = false;
+const dist = () => 26 * Math.max(1, 1.3 / (camera ? camera.aspect : 1.6));
+const homePos = () => centre.clone().add(new THREE.Vector3(0.9, 0.62, 1.25).setLength(dist()));
+const views = {
+  home: () => homePos(),
+  front: () => centre.clone().add(new THREE.Vector3(0, 0, dist() + 1)),
+  top: () => centre.clone().add(new THREE.Vector3(0.001, dist() + 1, 0.001)),
+  side: () => centre.clone().add(new THREE.Vector3(dist() + 1, 0, 0)),
+};
+
+function initThree() {
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(42, 1, 0.5, 400);
+  camera.position.copy(homePos());
+  controls = new OrbitControls(camera, canvas);
+  controls.target.copy(centre); controls.enableDamping = !reduced; controls.dampingFactor = 0.08;
+  controls.minDistance = 8; controls.maxDistance = 100;
+  controls.addEventListener("start", () => { userMoved = true; });
+  uniforms = { uScale: { value: 600 } };
+  new ResizeObserver(resize).observe(canvas); resize();
+  requestAnimationFrame(frame);
+}
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
+  renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  if (!userMoved && !tween) camera.position.copy(homePos());
+  uniforms.uScale.value = renderer.domElement.height / (2 * Math.tan((42 * Math.PI) / 360));
+}
+
+const vert = `attribute vec3 aColor; attribute float aSize; attribute float aBoost; attribute float aDim; uniform float uScale; varying vec3 vC; varying float vD;
+void main(){ vec4 mv = modelViewMatrix*vec4(position,1.0); gl_PointSize = max(6.0, aSize*(1.0+aBoost)*uScale/-mv.z); gl_Position = projectionMatrix*mv; vC=aColor; vD=aDim; }`;
+const frag = `precision mediump float; varying vec3 vC; varying float vD;
+void main(){ vec2 p = gl_PointCoord*2.0-1.0; float d = length(p); if(d>1.0) discard; float e = smoothstep(1.0,0.82,d); vec3 c = mix(vC, vec3(1.0), smoothstep(0.65,0.0,d)*0.45); gl_FragColor = vec4(c, e*vD); }`;
+
+function clearScene() {
+  axisObjs.forEach((o) => { scene.remove(o); o.geometry && o.geometry.dispose(); });
+  axisObjs = []; labels.forEach((l) => l.el.remove()); labels = [];
+}
+function addLabel(text, p, cls = "", grp = "", left = false) { const el = document.createElement("div"); el.className = "lab " + cls; el.textContent = text; labelsEl.appendChild(el); labels.push({ el, p, grp, left }); }
+function addLines(pts, color, opacity) {
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3));
+  const l = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity })); scene.add(l); axisObjs.push(l); return l;
+}
+
+function rebuild() {
+  clearScene();
+  const recs = recordsFor(dsKey);
+  plotted = recs.filter((r) => r.lines != null);
+  const xs = scaleFor(Math.max(...plotted.map((r) => r.lines)), 5), ys = scaleFor(Math.max(...plotted.map((r) => r.cyc)), 4);
+  const xMax = xs.max, yMax = ys.max;
+  const colour = colourFn(recs);
+  let zOf, zTicks = [], zTitle;
+  if (zKey === "nesting") {
+    const vals = plotted.map((r) => r.nesting); const lo = Math.min(...vals) - 1, hi = Math.max(...vals) + 1;
+    zOf = (r) => ((r.nesting - lo) / (hi - lo)) * W.z; zTitle = "Nesting depth";
+    for (let v = Math.ceil(lo); v <= hi; v++) if ((v - lo) / (hi - lo) > 0 && (v - lo) / (hi - lo) < 1) zTicks.push([String(v), ((v - lo) / (hi - lo)) * W.z]);
+  } else {
+    const keyOf = zKey === "project" ? (r) => r.project : (r) => r.group;
+    const lanes = [...new Set(plotted.map(keyOf))]; const n = lanes.length;
+    zOf = (r) => ((lanes.indexOf(keyOf(r)) + 0.5) / n) * W.z; zTitle = zKey === "project" ? "Project" : "Category";
+    lanes.forEach((g, i) => zTicks.push([g, ((i + 0.5) / n) * W.z]));
+  }
+  const X = (v) => (v / xMax) * W.x, Y = (v) => (v / yMax) * W.y;
+
+  /* grids on the floor and two walls */
+  const xt = ticksOf(xs), yt = ticksOf(ys);
+  const grid = [];
+  xt.forEach((v) => { grid.push(X(v), 0, 0, X(v), 0, W.z); grid.push(X(v), 0, 0, X(v), W.y, 0); });
+  yt.forEach((v) => { grid.push(0, Y(v), 0, W.x, Y(v), 0); grid.push(0, Y(v), 0, 0, Y(v), W.z); });
+  [0, ...zTicks.map((t) => t[1]), W.z].forEach((z) => { grid.push(0, 0, z, W.x, 0, z); grid.push(0, 0, z, 0, W.y, z); });
+  addLines(grid, 0x44506e, 0.38);
+  xt.forEach((v) => addLabel(String(Math.round(v)), new THREE.Vector3(X(v), -0.2, W.z + 0.7)));
+  yt.forEach((v) => addLabel(String(Math.round(v)), new THREE.Vector3(-0.5, Y(v), W.z + 0.1)));
+  const zLen = Math.max(...zTicks.map((t) => t[0].length));
+  zTicks.forEach(([t, z]) => addLabel(t, new THREE.Vector3(W.x + 0.7, -0.2, z), "", "z", true));
+  addLabel("Lines of code →", new THREE.Vector3(W.x / 2, -0.9, W.z + 1.6), "ax");
+  addLabel("Cyclomatic complexity ↑", new THREE.Vector3(-0.5, W.y + 0.8, W.z), "ax");
+  addLabel(zTitle, new THREE.Vector3(W.x + 1.2 + 0.2 * zLen, -0.2, W.z / 2), "ax");
+
+  /* points + stems */
+  const N = plotted.length, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+  size = new Float32Array(N).fill(0.62); boost = new Float32Array(N); dimArr = new Float32Array(N).fill(1);
+  const stems = [];
+  plotted.forEach((r, i) => {
+    r.pos = new THREE.Vector3(X(r.lines), Y(r.cyc), zOf(r)); r.i = i; r.color = colour(r);
+    pos.set([r.pos.x, r.pos.y, r.pos.z], i * 3); const c = new THREE.Color(r.color); col.set([c.r, c.g, c.b], i * 3);
+    stems.push(r.pos.x, r.pos.y, r.pos.z, r.pos.x, 0, r.pos.z);
+  });
+  addLines(stems, 0x7c8bb0, 0.35);
+  geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3)); geo.setAttribute("aColor", new THREE.BufferAttribute(col, 3));
+  geo.setAttribute("aSize", new THREE.BufferAttribute(size, 1)); geo.setAttribute("aBoost", new THREE.BufferAttribute(boost, 1)); geo.setAttribute("aDim", new THREE.BufferAttribute(dimArr, 1));
+  const pts = new THREE.Points(geo, new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag, transparent: true, depthWrite: false }));
+  pts.frustumCulled = false; scene.add(pts); axisObjs.push(pts);
+
+  renderLegend(recs, colour); renderStats(recs); renderTable(recs);
+  const keep = sel && recs.includes(sel) ? sel : recs[0]; select(keep.lines == null ? plotted[0] : keep);
+}
+
+/* ---------------------------------------------------------------- UI pieces */
+
+function renderLegend(recs, colour) {
+  const lg = $("legend"); lg.textContent = "";
+  const keys = dsKey === "both" ? ["PlayCanvas", "GASShooter"] : groupsOf(recs);
+  keys.forEach((k) => { const s = document.createElement("span"), i = document.createElement("i"); i.style.background = dsKey === "both" ? PROJECT_COLOR[k] : colour(recs.find((r) => r.group === k)); s.append(i, k); lg.append(s); });
+}
+const corr = (recs) => { const p = recs.filter((r) => r.lines != null); return pearson(p.map((x) => x.lines), p.map((x) => x.cyc)); };
+function describe(recs) {
+  const p = recs.filter((r) => r.lines != null), r = corr(recs), top = [...p].sort((a, b) => b.cyc - a.cyc)[0];
+  const how = Math.abs(r) < 0.3 ? "barely predicts" : Math.abs(r) < 0.7 ? "partly predicts" : "closely tracks";
+  return `In ${recs[0].project}'s top 20, length ${how} complexity (r = ${r.toFixed(2)}). The most complex function, ${top.name.split("::").pop()}, scores ${top.cyc} in ${top.lines} lines.`;
+}
+function renderStats(recs) {
+  const p = recs.filter((r) => r.lines != null);
+  const rText = dsKey === "both" ? `PlayCanvas ${corr(DATA.pc).toFixed(2)} · GASShooter ${corr(DATA.gas).toFixed(2)}` : corr(recs).toFixed(2);
+  $("stats").innerHTML = `<span>functions plotted <b>${p.length}</b></span><span>median length <b>${Math.round(median(p.map((x) => x.lines)))} lines</b></span><span>highest complexity <b>${Math.max(...p.map((x) => x.cyc))}</b></span><span>length vs complexity correlation r = <b>${rText}</b></span>`;
+  $("insight").textContent = dsKey === "both" ? `${describe(DATA.pc)} ${describe(DATA.gas)}` : describe(recs);
+  $("formula").textContent = formulaText;
+}
+const COLS = [["rank", "#", true], ["name", "Function", false], ["project", "Project", false], ["lines", "Lines", true], ["cyc", "Cyclomatic", true], ["nesting", "Nesting", true], ["group", "Category", false]];
+let sortKey = "rank", sortDir = 1, currentRecs = [];
+function renderTable(recs) {
+  currentRecs = recs;
+  const head = $("tbl").tHead; head.textContent = ""; const tr = head.insertRow();
+  COLS.forEach(([k, label, num]) => {
+    if (k === "project" && dsKey !== "both") return; if (k === "nesting" && dsKey === "gas") return;
+    const th = document.createElement("th"); if (num) th.className = "num"; const b = document.createElement("button"); b.type = "button"; b.textContent = label + (sortKey === k ? (sortDir > 0 ? " ▲" : " ▼") : "");
+    if (sortKey === k) th.setAttribute("aria-sort", sortDir > 0 ? "ascending" : "descending");
+    b.onclick = () => { sortDir = sortKey === k ? -sortDir : 1; sortKey = k; renderTable(currentRecs); }; th.append(b); tr.append(th);
+  });
+  const body = $("tbl").tBodies[0]; body.textContent = "";
+  const colour = colourFn(recs);
+  [...recs].sort((a, b) => { const x = a[sortKey], y = b[sortKey]; return (x == null) - (y == null) || (typeof x === "string" ? x.localeCompare(y) : x - y) * sortDir; }).forEach((r) => {
+    const row = body.insertRow(); row.tabIndex = 0; row.dataset.key = r.project + r.rank; row.setAttribute("aria-selected", String(r === sel));
+    const cell = (t, cls) => { const c = row.insertCell(); c.textContent = t; if (cls) c.className = cls; return c; };
+    cell(r.rank, "num"); const n = cell(r.name, "name"); const d = document.createElement("span"); d.className = "dot"; d.style.setProperty("--c", colour(r)); n.prepend(d);
+    if (dsKey === "both") cell(r.project);
+    cell(r.lines ?? "n/a", "num"); cell(r.cyc, "num"); if (dsKey !== "gas") cell(r.nesting ?? "–", "num"); cell(r.group);
+    const go = () => { if (r.lines == null) { showDetail(r); sel = r; markRows(); return; } select(r); };
+    row.onclick = go; row.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+  });
+}
+function markRows() { document.querySelectorAll("#tbl tbody tr").forEach((tr) => tr.setAttribute("aria-selected", String(sel && tr.dataset.key === sel.project + sel.rank))); }
+
+function showDetail(r) {
+  const p = $("detail"); p.textContent = ""; p.style.setProperty("--c", r.color || PROJECT_COLOR[r.project]);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const proj = el("div", "proj"); proj.append(el("i"), `${r.project} · rank ${r.rank} · ${r.group}`);
+  p.append(proj, el("h2", "", r.name), el("p", "file", r.file));
+  const maxCyc = Math.max(...recordsFor(dsKey === "both" ? "both" : dsKey).map((x) => x.cyc));
+  const maxLines = Math.max(...recordsFor(dsKey === "both" ? "both" : dsKey).map((x) => x.lines || 0));
+  const m = el("div", "meters");
+  const meter = (label, v, max) => { const row = el("div", "meter"); const tr = el("span", "track"); const f = el("span", "fill"); f.style.width = `${Math.min(100, (v / max) * 100)}%`; tr.append(f); const o = document.createElement("output"); o.textContent = v; row.append(el("span", "", label), tr, o); m.append(row); };
+  if (r.lines != null) meter("Lines", r.lines, maxLines); meter("Cyclomatic", r.cyc, maxCyc);
+  if (r.nesting != null) meter("Nesting depth", r.nesting, 10);
+  if (r.ifs != null) meter("if statements", r.ifs, Math.max(r.ifs, 40));
+  if (r.loops != null) meter("Loops", r.loops, Math.max(r.loops, 12));
+  p.append(m, el("p", "d", r.desc || ""));
+  if (r.bullets.length) { p.append(el("h3", "", r.project === "PlayCanvas" ? "Responsibilities" : "Key features")); const ul = el("ul"); r.bullets.forEach((b) => ul.append(el("li", "", b))); p.append(ul); }
+  if (r.factors.length && r.project === "PlayCanvas") { p.append(el("h3", "", "Why it is complex")); const ul = el("ul"); r.factors.forEach((b) => ul.append(el("li", "", b))); p.append(ul); }
+}
+
+function select(r) { sel = r; showDetail(r); markRows(); if (!geo) return; plotted.forEach((x) => (boost[x.i] = 0)); boost[r.i] = 0.55; geo.attributes.aBoost.needsUpdate = true; pinEl.hidden = false; pinEl.style.borderColor = r.color; }
+
+/* ---------------------------------------------------------------- interaction */
+
+const v3 = new THREE.Vector3();
+function pick(cx, cy) {
+  const rect = canvas.getBoundingClientRect(), mx = cx - rect.left, my = cy - rect.top; let best = null, bs = Infinity;
+  for (const r of plotted) { v3.copy(r.pos).project(camera); if (v3.z > 1) continue; const sx = (v3.x * 0.5 + 0.5) * rect.width, sy = (-v3.y * 0.5 + 0.5) * rect.height; const d = Math.hypot(sx - mx, sy - my); if (d <= 14 && d + v3.z * 30 < bs) { best = r; bs = d + v3.z * 30; } }
+  return best;
+}
+canvas.addEventListener("pointermove", (e) => {
+  if (e.pointerType !== "mouse" || e.buttons) return; const h = pick(e.clientX, e.clientY);
+  if (hovered && hovered !== sel) boost[hovered.i] = 0; hovered = h;
+  if (h) { if (h !== sel) boost[h.i] = 0.4; tipEl.hidden = false; tipEl.textContent = `${h.name.split("::").pop()} · ${h.lines} lines · complexity ${h.cyc}`; const rect = stage.getBoundingClientRect(); tipEl.style.transform = `translate(${Math.max(8, Math.min(e.clientX - rect.left + 14, rect.width - 260))}px, ${Math.max(8, e.clientY - rect.top - 34)}px)`; canvas.style.cursor = "pointer"; } else { tipEl.hidden = true; canvas.style.cursor = ""; }
+  geo.attributes.aBoost.needsUpdate = true;
+});
+canvas.addEventListener("pointerleave", () => { tipEl.hidden = true; if (hovered && hovered !== sel) { boost[hovered.i] = 0; geo.attributes.aBoost.needsUpdate = true; } hovered = null; });
+let down = null;
+canvas.addEventListener("pointerdown", (e) => (down = { x: e.clientX, y: e.clientY, t: performance.now() }));
+canvas.addEventListener("pointerup", (e) => { if (!down) return; const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y), quick = performance.now() - down.t < 600; down = null; if (moved > 6 || !quick) return; const r = pick(e.clientX, e.clientY); if (r) select(r); });
+
+function flyTo(pos) {
+  if (reduced) { camera.position.copy(pos); controls.target.copy(centre); return; }
+  tween = { t0: performance.now(), dur: 650, fromP: camera.position.clone(), fromT: controls.target.clone(), toP: pos.clone() };
+}
+document.querySelectorAll("[data-view]").forEach((b) => (b.onclick = () => flyTo(views[b.dataset.view]())));
+function setDataset(k) {
+  dsKey = k; document.querySelectorAll("[data-ds]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.ds === k)));
+  const z = $("zmode"); z.textContent = ""; zOptions[k].forEach(([v, t]) => { const o = document.createElement("option"); o.value = v; o.textContent = t; z.append(o); });
+  zKey = zOptions[k][0][0]; z.value = zKey; z.disabled = zOptions[k].length < 2; sortKey = "rank"; sortDir = 1; sel = null; if (scene) rebuild();
+}
+document.querySelectorAll("[data-ds]").forEach((b) => (b.onclick = () => setDataset(b.dataset.ds)));
+$("zmode").onchange = (e) => { zKey = e.target.value; rebuild(); };
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (tween) { const t = Math.min(1, (now - tween.t0) / tween.dur), e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2; camera.position.lerpVectors(tween.fromP, tween.toP, e); controls.target.lerpVectors(tween.fromT, centre, e); if (t >= 1) tween = null; }
+  controls.update(); renderer.render(scene, camera);
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  const placed = [];
+  for (const L of labels) {
+    v3.copy(L.p).project(camera); const sx = (v3.x * 0.5 + 0.5) * w, sy = (-v3.y * 0.5 + 0.5) * h; let show = v3.z < 1;
+    if (show && L.grp === "z") { show = !placed.some((q) => Math.abs(q.x - sx) < 70 && Math.abs(q.y - sy) < 14); if (show) placed.push({ x: sx, y: sy }); }
+    L.el.style.opacity = show ? 1 : 0; L.el.style.transform = `translate(${sx}px, ${sy}px) translate(${L.left ? "0" : "-50%"}, -50%)`;
+  }
+  if (sel && sel.pos && !pinEl.hidden) { v3.copy(sel.pos).project(camera); pinEl.style.opacity = v3.z < 1 ? 1 : 0; pinEl.style.transform = `translate(${(v3.x * 0.5 + 0.5) * w}px, ${(-v3.y * 0.5 + 0.5) * h}px)`; }
+}
+
+/* ---------------------------------------------------------------- start */
+
+load().then((d) => { DATA = d; if (renderer) initThree(); setDataset("pc"); if (!renderer) { sel = null; renderStats(recordsFor("pc")); renderTable(recordsFor("pc")); showDetail(DATA.pc[0]); } })
+  .catch((err) => { msgEl.hidden = false; msgEl.textContent = "The data could not be loaded. Serve the site over http(s) rather than opening the file directly."; console.error(err); });
+</script>
+</body>
+</html>
