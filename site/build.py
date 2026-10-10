@@ -594,7 +594,7 @@ def render_home(repo):
 </section>
 <section class="block about">
   <h2>About this site</h2>
-  <p>The files come from 30 Claude Code sessions. Merging those branches, auditing the merge for lost files and building this site all happened in one session, which was part of a $100 free-credit test of Claude Code.</p>
+  <p>The files come from 30 Claude Code sessions run in Q4 2025 as part of a $250 credit test. Merging those branches, auditing the merge for lost files and building this site happened in one later session, which was part of a $100 free-credit test.</p>
   <p><a href="MERGE_COMPLETE.html">How the branches were merged</a> · <a href="BRANCH_CLEANUP_CHECKLIST.html">Branch and chat cleanup checklist</a> · <a href="README.html">Repository README</a></p>
 </section>
 <script type="application/json" id="tree-data">{inline(data)}</script>
