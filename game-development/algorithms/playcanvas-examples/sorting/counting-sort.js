@@ -26,7 +26,7 @@ CountingSort.prototype.initialize = function() {
     this.createVisualization();
 };
 
-SelectionSort.prototype.generateArray = function() {
+CountingSort.prototype.generateArray = function() {
     this.array = [];
     for (let i = 0; i < this.arraySize; i++) {
         this.array.push(Math.floor(Math.random() * this.maxValue) + 1);

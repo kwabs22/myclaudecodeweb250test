@@ -41,7 +41,7 @@ Dijkstra.prototype.initialize = function() {
 };
 
 // Create example city graph
-BinarySearch.prototype.createExampleGraph = function() {
+Dijkstra.prototype.createExampleGraph = function() {
     // Define nodes (city locations)
     const nodePositions = {
         'Home': { x: 0, y: 0, z: 0 },

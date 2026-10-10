@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algorithm Lab</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Run the PlayCanvas algorithm game scripts in the browser: pick one, change its settings, watch it and read its log.">
+<script>try{var t=localStorage.getItem('atlas-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f6fa;--panel:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--faint:#898781;--line:#e1e0d9;--axis:#c3c2b7;--chip:#e8ecf5;--link:#2646c4;--focus:#2646c4;--ok:#006300;--bad:#b3261e;
+--font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--ok:#0ca30c;--bad:#f2766d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--ok:#0ca30c;--bad:#f2766d;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,canvas:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bar{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.bar a{font-weight:600;text-decoration:none}
+.bar span{color:var(--muted);font:12px var(--mono)}
+main{max-width:1240px;margin:0 auto;padding:22px 16px 56px}
+h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em}
+.lede{margin:0 0 16px;max-width:70ch;color:var(--muted);font-size:16px}
+.pick{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 12px}
+.pick select{font:500 14px var(--font);padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);min-width:min(320px,100%)}
+.pick button{font:500 13px var(--font);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.views{display:inline-flex;gap:4px;margin-left:4px}
+.views button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.status{display:inline-flex;gap:8px;align-items:center;font:12px var(--mono);color:var(--muted);margin-left:auto}
+.status b{font-weight:500;padding:1px 8px;border-radius:999px;background:var(--chip);color:var(--ink)}
+.status b.ok{color:var(--ok)}.status b.bad{color:var(--bad)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.stagewrap{position:relative;border-radius:12px;overflow:hidden;border:1px solid #232a3d;background:#0a0d16}
+#host{aspect-ratio:16/10;max-height:70vh;width:100%}
+#host canvas{width:100%;height:100%;display:block;outline:none}
+#host.empty{background:repeating-linear-gradient(135deg,#0a0d16 0 14px,#0d111c 14px 28px)}
+.over{position:absolute;left:12px;bottom:10px;margin:0;font:12px/1.4 var(--mono);color:#b8c1d8;pointer-events:none;max-width:85%;text-shadow:0 0 6px #0a0d16}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.panel h2{margin:0 0 2px;font-size:19px;letter-spacing:-.01em}
+.panel .sub{margin:0 0 10px;color:var(--muted);font-size:14px}
+.panel h3{margin:14px 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.keys{display:flex;flex-wrap:wrap;gap:5px}
+.keys kbd{font:12px var(--mono);padding:1px 7px;border-radius:5px;border:1px solid var(--axis);background:var(--chip)}
+.attrs{display:grid;gap:8px}
+.attr{display:grid;grid-template-columns:1fr 92px;gap:8px;align-items:center;font-size:13px}
+.attr label{overflow-wrap:anywhere}
+.attr small{display:block;color:var(--faint);font-size:11.5px}
+.attr input[type=number],.attr input[type=text]{width:100%;font:13px var(--mono);padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.logwrap{margin-top:14px}
+.logwrap h2{margin:0 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+#log{height:170px;overflow:auto;border-radius:10px;border:1px solid var(--line);background:var(--panel);padding:8px 10px;font:12px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+#log div.err{color:var(--bad)}#log div.warn{color:var(--muted)}
+.src{margin-top:18px;font-size:13px;color:var(--muted);max-width:90ch}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}.status{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script src="../../../../assets/vendor/playcanvas-1.77.0.min.js"></script>
+</head>
+<body>
+<div class="bar"><a href="../../../../index.html">&larr; Session Atlas</a><span>game-development/algorithms/playcanvas-examples/lab</span></div>
+<main>
+  <h1>Algorithm Lab</h1>
+  <p class="lede">Each script turns a classic algorithm into a small game. Pick one to run it here in the PlayCanvas engine. Many draw their own scene; the rest play out in the log, so keep an eye on both.</p>
+  <div class="pick">
+    <select id="script" aria-label="Script"></select>
+    <button type="button" id="prev">Previous</button><button type="button" id="next">Next</button><button type="button" id="restart">Restart</button>
+    <span class="views" role="group" aria-label="Camera"><button type="button" data-cam="front">Front</button><button type="button" data-cam="angled" aria-pressed="true">Angled</button><button type="button" data-cam="top">Top</button></span>
+    <span class="status" id="status" aria-live="polite"><b>Loading</b></span>
+  </div>
+  <div class="layout">
+    <div>
+      <div class="stagewrap"><div id="host"></div><p class="over" id="over"></p></div>
+      <div class="logwrap"><h2>Log</h2><div id="log" role="log" tabindex="0" aria-label="Script log"></div></div>
+    </div>
+    <aside class="panel" id="info" aria-live="polite"></aside>
+  </div>
+  <p class="src">Scripts live in <a href="../README.html">playcanvas-examples</a> and run unmodified. The page supplies a camera, a light and a root object, and fakes the one prefab asset that bubble sort expects from the PlayCanvas editor, and replaces the physics raycast some scripts use for clicking with a simple bounding-box test. Engine: PlayCanvas 1.77 (the last release with the model component these scripts use).</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  var ROOT = "../../../../";
+  var camMode = "angled", camEntity = null, app = null, current = null, overrides = {}, capture = false, runId = 0, resizeObs = null;
+  var scripts = [];
+
+  /* ---------------- log capture */
+  var logEl = $("log");
+  ["log", "info", "warn", "error"].forEach(function (lvl) {
+    var orig = console[lvl];
+    console[lvl] = function () {
+      if (capture) addLog(lvl, Array.prototype.map.call(arguments, function (a) { try { return typeof a === "string" ? a : (a instanceof Error ? a.message : JSON.stringify(a)); } catch (e) { return String(a); } }).join(" "));
+      return orig.apply(console, arguments);
+    };
+  });
+  function addLog(lvl, text) {
+    var d = el("div", lvl === "error" ? "err" : lvl === "warn" ? "warn" : "", text);
+    logEl.append(d); while (logEl.childNodes.length > 300) logEl.removeChild(logEl.firstChild); logEl.scrollTop = logEl.scrollHeight;
+  }
+  window.addEventListener("error", function (e) { if (capture) { addLog("error", e.message); setStatus("Error", "bad"); } });
+
+  function setStatus(text, cls, extra) {
+    var s = $("status"); s.textContent = ""; var b = el("b", cls || "", text); s.append(b); if (extra) s.append(extra);
+  }
+
+  /* ---------------- script list */
+  function nice(name) { return name.replace(/\.js$/, "").replace(/-/g, " "); }
+  function loadList() {
+    return fetch(ROOT + "data/tree.json").then(function (r) { return r.json(); }).then(function (d) {
+      var re = /^game-development\/algorithms\/playcanvas-examples\/([^/]+)\/([^/]+\.js)$/;
+      d.nodes.forEach(function (n) { var m = re.exec(n.p); if (m) scripts.push({ path: n.p, group: m[1], name: m[2] }); });
+      scripts.sort(function (a, b) { return a.group.localeCompare(b.group) || a.name.localeCompare(b.name); });
+      var sel = $("script"), groups = {};
+      scripts.forEach(function (s, i) {
+        if (!groups[s.group]) { groups[s.group] = el("optgroup"); groups[s.group].label = nice(s.group).replace(/^./, function (c) { return c.toUpperCase(); }); sel.append(groups[s.group]); }
+        var o = el("option", "", nice(s.name)); o.value = String(i); groups[s.group].append(o);
+      });
+    });
+  }
+
+  /* ---------------- teardown and run */
+  function stop() {
+    capture = false;
+    if (resizeObs) { resizeObs.disconnect(); resizeObs = null; }
+    if (app) { try { app.destroy(); } catch (e) {} app = null; }
+    $("host").textContent = "";
+  }
+
+  function header(text) {
+    var m = /\/\*\*([\s\S]*?)\*\//.exec(text), out = { title: "", algorithm: "", game: "" };
+    if (!m) return out;
+    var lines = m[1].split("\n").map(function (l) { return l.replace(/^\s*\*\s?/, "").trim(); }).filter(Boolean);
+    out.title = lines[0] || "";
+    lines.forEach(function (l) { var a = /^Algorithm:\s*(.*)$/i.exec(l), g = /^Game:\s*(.*)$/i.exec(l); if (a) out.algorithm = a[1]; if (g) out.game = g[1]; });
+    return out;
+  }
+
+  function run(index, keepOverrides) {
+    var id = ++runId, s = scripts[index]; current = index;
+    if (!keepOverrides) overrides = {};
+    stop(); logEl.textContent = ""; setStatus("Loading");
+    return fetch(ROOT + s.path).then(function (r) { if (!r.ok) throw new Error("Could not load " + s.path); return r.text(); }).then(function (text) {
+      if (id !== runId) return;
+      var scriptText = text, head = header(text), name = null, ScriptType = null, instance = null;
+      var canvas = document.createElement("canvas"); canvas.tabIndex = 0; $("host").append(canvas);
+      capture = true;
+      app = new pc.Application(canvas, { mouse: new pc.Mouse(canvas), keyboard: new pc.Keyboard(window), touch: new pc.TouchDevice(canvas), graphicsDeviceOptions: { antialias: true } });
+      app.setCanvasFillMode(pc.FILLMODE_NONE); app.setCanvasResolution(pc.RESOLUTION_AUTO);
+      var fit = function () { var r = $("host").getBoundingClientRect(); if (app && r.width) app.resizeCanvas(Math.round(r.width), Math.round(r.height)); };
+      resizeObs = new ResizeObserver(fit); resizeObs.observe($("host")); fit();
+      app.scene.ambientLight = new pc.Color(0.4, 0.4, 0.46);
+      /* Several scripts pick objects with a physics raycast but never add colliders, and no physics engine is loaded here.
+         Stand in a ray-versus-bounding-box test over everything with a model. */
+      app.systems.rigidbody.raycastFirst = function (start, end) {
+        var ray = new pc.Ray(start.clone(), end.clone().sub(start).normalize()), hit = new pc.Vec3(), best = null, bestD = Infinity;
+        app.root.find(function (n) { return n.model && n.model.meshInstances; }).forEach(function (n) {
+          n.model.meshInstances.forEach(function (mi) {
+            if (mi.aabb && mi.aabb.intersectsRay(ray, hit)) { var d = hit.distance(start); if (d < bestD) { bestD = d; best = { entity: n, point: hit.clone(), normal: new pc.Vec3(0, 1, 0) }; } }
+          });
+        });
+        return best;
+      };
+      var cam = new pc.Entity("Camera"); cam.addComponent("camera", { clearColor: new pc.Color(0.04, 0.05, 0.09), fov: 45, farClip: 300 }); camEntity = cam; placeCamera(); app.root.addChild(cam);
+      var light = new pc.Entity("Light"); light.addComponent("light", { type: "directional", intensity: 1.1 }); light.setEulerAngles(45, 30, 0); app.root.addChild(light);
+
+      /* Let the script register itself, and learn the name it used. */
+      var origCreate = pc.createScript;
+      pc.createScript = function (n, a) { name = n; ScriptType = origCreate.call(pc, n, a); return ScriptType; };
+      try { (new Function(text))(); } catch (err) { pc.createScript = origCreate; throw err; } finally { pc.createScript = origCreate; }
+      if (!ScriptType) throw new Error("The file did not register a script.");
+
+      var host = new pc.Entity("Game"); host.addComponent("script"); instance = host.script.create(name);
+      var defs = (ScriptType.attributes && ScriptType.attributes.index) || {}, needsAsset = [];
+      Object.keys(defs).forEach(function (k) {
+        var d = defs[k];
+        if (d.type === "asset" || d.type === "entity") {
+          needsAsset.push(k);
+          if (d.type === "asset") Object.defineProperty(instance, k, { configurable: true, writable: true, value: stubAsset() });
+        } else if (overrides[k] != null) instance[k] = overrides[k];
+      });
+      host.script.on("error", function (sc, err, method) { addLog("error", "Error in " + method + ": " + (err && err.message ? err.message : err)); setStatus("Error", "bad"); });
+      app.root.addChild(host); app.start();
+      renderInfo(s, head, text, defs, needsAsset);
+
+      var t0 = performance.now();
+      var tick = function () {
+        if (id !== runId || !app) return;
+        var visuals = app.root.find(function (n) { return n.model || n.render; }).length;
+        var bad = logEl.querySelector(".err");
+        if (!bad) { var st = $("status").firstChild; if (st && st.textContent !== "Running") setStatus("Running", "ok"); }
+        var sp = $("status"); while (sp.childNodes.length > 1) sp.removeChild(sp.lastChild); sp.append(" ", visuals + " objects on screen");
+        $("over").textContent = (visuals === 0 ? "This one has no scene of its own. It plays out in the log below. " : "") + keyHint(scriptText);
+        $("host").classList.toggle("empty", visuals === 0);
+        if (performance.now() - t0 < 4000) setTimeout(tick, 500);
+      };
+      setTimeout(tick, 300);
+    }).catch(function (err) {
+      if (id !== runId) return;
+      addLog("error", err.message); setStatus("Could not run", "bad");
+      renderInfo(s, { title: nice(s.name), algorithm: "", game: "" }, "", {}, []);
+    });
+  }
+
+  function placeCamera() {
+    if (!camEntity) return;
+    if (camMode === "front") { camEntity.setPosition(0, 1.5, 15); camEntity.lookAt(0, 0, 0); }
+    else if (camMode === "top") { camEntity.setPosition(0, 17, 0); camEntity.setEulerAngles(-90, 0, 0); }
+    else { camEntity.setPosition(0, 8, 13); camEntity.lookAt(0, 0, 0); }
+    document.querySelectorAll("[data-cam]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.cam === camMode)); });
+  }
+  function stubAsset() {
+    return { resource: { instantiate: function () { var e = new pc.Entity("Piece"); e.addComponent("model", { type: "sphere" }); return e; } } };
+  }
+  function keyHint(text) {
+    var keys = unique((text.match(/pc\.KEY_[A-Z0-9_]+/g) || []).map(function (k) { return k.slice(7); }));
+    var parts = []; if (keys.length) parts.push("keys: " + keys.slice(0, 8).join(" ").toLowerCase());
+    if (/EVENT_MOUSE/.test(text)) parts.push("click the canvas"); return parts.length ? "Try " + parts.join(", ") : "Watch the log for what happens";
+  }
+  function unique(a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); }
+
+  /* ---------------- info panel */
+  function renderInfo(s, head, text, defs, needsAsset) {
+    var p = $("info"); p.textContent = "";
+    p.append(el("h2", "", head.game ? head.game.replace(/^"|"$/g, "").split('" - ')[0].replace(/^"/, "") : (head.title || nice(s.name))));
+    p.append(el("p", "sub", head.algorithm ? "Algorithm: " + head.algorithm : (head.title || "")));
+    var gameText = head.game.replace(/^"[^"]*"\s*-\s*/, ""); if (gameText) p.append(el("p", "", gameText));
+    var keys = unique((text.match(/pc\.KEY_[A-Z0-9_]+/g) || []).map(function (k) { return k.slice(7); }));
+    if (keys.length || /EVENT_MOUSE/.test(text)) {
+      p.append(el("h3", "", "Controls")); var k = el("div", "keys");
+      keys.slice(0, 12).forEach(function (x) { k.append(el("kbd", "", x.toLowerCase().replace(/_/g, " "))); }); if (/EVENT_MOUSE/.test(text)) k.append(el("kbd", "", "mouse"));
+      p.append(k); p.append(el("p", "note", "Click the canvas first so it receives the keys."));
+    }
+    var names = Object.keys(defs).filter(function (n) { return needsAsset.indexOf(n) < 0; });
+    if (names.length) {
+      p.append(el("h3", "", "Settings")); var box = el("div", "attrs");
+      names.forEach(function (n) {
+        var d = defs[n], row = el("div", "attr"), lab = el("label"); lab.htmlFor = "a_" + n; lab.append(n); if (d.description) lab.append(el("small", "", d.description));
+        var inp = document.createElement("input"); inp.id = "a_" + n;
+        if (d.type === "boolean") { inp.type = "checkbox"; inp.checked = overrides[n] != null ? !!overrides[n] : !!d.default; inp.onchange = function () { overrides[n] = inp.checked; run(current, true); }; }
+        else if (d.type === "number") { inp.type = "number"; inp.step = "any"; inp.value = overrides[n] != null ? overrides[n] : (d.default != null ? d.default : 0); inp.onchange = function () { overrides[n] = parseFloat(inp.value); run(current, true); }; }
+        else { inp.type = "text"; inp.value = overrides[n] != null ? overrides[n] : (d.default != null ? d.default : ""); inp.onchange = function () { overrides[n] = inp.value; run(current, true); }; }
+        row.append(lab, inp); box.append(row);
+      });
+      p.append(box);
+    }
+    if (needsAsset.length) p.append(el("p", "note", "This script expects " + needsAsset.join(", ") + " from the PlayCanvas editor. " + (needsAsset.some(function (n) { return defs[n].type === "asset"; }) ? "A stand-in sphere is used here." : "It is left empty here.")));
+    p.append(el("p", "note")); var a = el("a", "", "Read the source"); a.href = "../" + s.group + "/" + s.name + ".html"; p.lastChild.append(a);
+  }
+
+  /* ---------------- wiring */
+  function go(i) { i = (i + scripts.length) % scripts.length; $("script").value = String(i); run(i); }
+  $("script").onchange = function () { run(+$("script").value); };
+  document.querySelectorAll("[data-cam]").forEach(function (b) { b.onclick = function () { camMode = b.dataset.cam; placeCamera(); }; });
+  $("prev").onclick = function () { go(current - 1); }; $("next").onclick = function () { go(current + 1); }; $("restart").onclick = function () { run(current, true); };
+
+  if (typeof pc === "undefined") { setStatus("Engine missing", "bad"); addLog("error", "The PlayCanvas engine did not load."); return; }
+  loadList().then(function () { var start = scripts.map(function (s) { return s.name; }).indexOf("bubble-sort.js"); go(start > -1 ? start : 0); })
+    .catch(function (e) { setStatus("Could not load the list", "bad"); addLog("error", String(e)); });
+})();
+</script>
+</body>
+</html>

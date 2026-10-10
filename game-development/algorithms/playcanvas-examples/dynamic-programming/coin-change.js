@@ -32,7 +32,9 @@ CoinChange.attributes.add('showDPTable', {
 
 // Initialize
 CoinChange.prototype.initialize = function() {
-    this.coins = this.coinDenominations || [1, 5, 10, 25];
+    // A 'json' attribute arrives as { denominations: [...] }; also accept a plain array.
+    const denominations = this.coinDenominations;
+    this.coins = Array.isArray(denominations) ? denominations : ((denominations && denominations.denominations) || [1, 5, 10, 25]);
     this.dp = [];
     this.coinCombination = [];
     this.playerCoins = [];

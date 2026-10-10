@@ -49,7 +49,7 @@ AstronomyViewer.prototype.initialize = function() {
     };
 };
 
-HistoryTimeline.prototype.update = function(dt) {
+AstronomyViewer.prototype.update = function(dt) {
     this.timeElapsed += dt * this.orbitSpeed;
 
     // Update planetary positions
