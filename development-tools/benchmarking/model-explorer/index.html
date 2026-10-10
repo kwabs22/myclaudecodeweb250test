@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPU Fit Finder</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Pick a GPU and see which of the catalogued open models fit in its memory, with estimated speed and context length.">
+<script>try{var t=localStorage.getItem('atlas-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Site tokens + the reference chart palette (slot 1 blue; de-emphasis grey) */
+:root{--bg:#f4f6fa;--panel:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--faint:#898781;--line:#e1e0d9;--axis:#c3c2b7;--chip:#e8ecf5;--link:#2646c4;--focus:#2646c4;
+--series:#2a78d6;--on-series:#fff;--off:#d2d1c9;--good:#006300;--bad:#52514e;
+--font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--series:#3987e5;--on-series:#0b0b0b;--off:#3e3e3b;--good:#0ca30c;--bad:#c3c2b7;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--series:#3987e5;--on-series:#0b0b0b;--off:#3e3e3b;--good:#0ca30c;--bad:#c3c2b7;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,.row:focus-visible,tr[tabindex]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bar{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.bar a{font-weight:600;text-decoration:none}
+.bar span{color:var(--muted);font:12px var(--mono)}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 56px}
+h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em}
+.lede{margin:0 0 18px;max-width:70ch;color:var(--muted);font-size:16px}
+.step{margin:0 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.gpus{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.gpus button{display:grid;gap:0;text-align:left;font:500 13px var(--font);padding:6px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.gpus button small{font:11px var(--mono);color:var(--muted)}
+.gpus button[aria-pressed="true"]{border-color:var(--series);box-shadow:inset 0 0 0 1px var(--series)}
+.gpuinfo{margin:0 0 16px;color:var(--muted);font-size:14px;max-width:90ch}
+.gpuinfo b{color:var(--ink)}
+.filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 12px}
+.filters label{display:inline-flex;gap:7px;align-items:center;font-size:13px;color:var(--muted)}
+.filters input[type=search],.filters select{font:500 13px var(--font);padding:6px 9px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.filters input[type=search]{width:170px}
+.chips{display:inline-flex;gap:5px;align-items:center;font-size:13px;color:var(--muted)}
+.chips button,.seg button{font:500 12.5px var(--font);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg{display:inline-flex;margin-left:auto}
+.seg button{border-radius:0;border-right-width:0}
+.seg button:first-child{border-radius:9px 0 0 9px}.seg button:last-child{border-radius:0 9px 9px 0;border-right-width:1px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.summary{margin:0 0 14px;font-size:15px;max-width:88ch}
+.summary b{font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px 10px}
+.head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;margin:0 0 8px}
+.head h2{margin:0;font-size:16px}
+.key{display:flex;gap:14px;font-size:12.5px;color:var(--muted)}
+.key i{display:inline-block;width:12px;height:8px;margin-right:6px;border-radius:0 3px 3px 0}
+/* bar chart: rows are a grid; the plot column is column 2 */
+.chart{--name-w:230px;--end-w:158px;position:relative}
+.axis,.row{display:grid;grid-template-columns:var(--name-w) minmax(0,1fr) var(--end-w);align-items:center;column-gap:10px}
+.axis{font:11px var(--mono);color:var(--faint);height:20px}
+.axis .ticks{position:relative;height:100%}
+.axis .ticks span{position:absolute;top:2px;transform:translateX(-50%);white-space:nowrap}
+.axis .ticks span:first-child{transform:none}.axis .ticks span:last-child{transform:translateX(-100%)}
+.axis .endhead{display:flex;justify-content:flex-end;gap:14px;font:11px var(--font);color:var(--muted)}
+.axis .endhead span{width:62px;text-align:right}
+.rows{position:relative}
+.lines{position:absolute;top:0;bottom:0;left:calc(var(--name-w) + 10px);right:calc(var(--end-w) + 10px);pointer-events:none}
+.lines i{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.lines i.ref{background:var(--ink);width:2px;margin-left:-1px}
+.lines i.alt{background:var(--axis);top:0;height:7px}
+.lines b{position:absolute;top:-17px;transform:translateX(-50%);font:500 11px var(--mono);white-space:nowrap;background:var(--panel);padding:0 4px;color:var(--ink)}
+.row{height:27px;cursor:default;border-radius:6px}
+.row:hover,.row:focus-visible,.row.on{background:color-mix(in srgb,var(--chip) 70%,transparent)}
+.row .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+.row .nm small{color:var(--faint);font:11px var(--mono);margin-left:6px}
+.row.no .nm{color:var(--muted)}
+.track{position:relative;height:100%}
+.fill{position:absolute;left:0;top:50%;height:14px;margin-top:-7px;background:var(--series);border-radius:0 4px 4px 0;min-width:2px}
+.row.no .fill{background:var(--off)}
+.val{position:absolute;top:50%;transform:translateY(-50%);font:12px var(--mono);white-space:nowrap;margin-left:3px;padding:0 4px;border-radius:3px;color:var(--ink);background:var(--panel)}
+.row:hover .val,.row:focus-visible .val{background:color-mix(in srgb,var(--chip) 70%,var(--panel))}
+.val.in{margin-left:0;padding:0 6px 0 0;background:none;transform:translate(-100%,-50%);color:var(--on-series)}
+.row.no .val.in{color:var(--ink)}
+.row.no .val{color:var(--muted)}
+.off::after{content:"";position:absolute;right:14px;top:-1px;bottom:-1px;width:2px;background:var(--panel);transform:skewX(-30deg)}
+.end{display:flex;justify-content:flex-end;gap:14px;font:12px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.end span{width:62px;text-align:right}
+.note{margin:10px 0 2px;font-size:12.5px;color:var(--muted);max-width:90ch}
+.tip{position:fixed;z-index:20;left:0;top:0;max-width:340px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--axis);box-shadow:0 10px 30px rgba(0,0,0,.2);font-size:13px;pointer-events:none}
+.tip .v{font-weight:600;font-size:14px}
+.tip .id{font:11px var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.tip dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:8px 0 0}
+.tip dt{color:var(--muted)}.tip dd{margin:0;font-variant-numeric:tabular-nums}
+.tip p{margin:8px 0 0;color:var(--muted)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td.nm{white-space:normal;min-width:200px}
+th button{font:600 12px var(--font);background:none;border:0;color:var(--muted);cursor:pointer;padding:0}
+th[aria-sort] button{color:var(--ink)}
+.pill{display:inline-flex;gap:5px;align-items:center;font:500 12px var(--font);padding:1px 8px;border-radius:999px;background:var(--chip)}
+.pill.ok{color:var(--good)}.pill.no{color:var(--bad)}
+.empty{padding:28px 8px;text-align:center;color:var(--muted)}
+.src{margin-top:22px;font-size:13px;color:var(--muted);max-width:86ch}
+@media (max-width:760px){.chart{--name-w:128px;--end-w:0px}.axis .endhead,.end{display:none}.row .nm small{display:none}.axis,.row{column-gap:8px}.lines{left:calc(var(--name-w) + 8px);right:8px}.seg{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bar"><a href="../../../index.html">&larr; Session Atlas</a><span>development-tools/benchmarking/model-explorer</span></div>
+<main>
+  <h1>GPU Fit Finder</h1>
+  <p class="lede">Pick a GPU and see which of the catalogued open models fit in its memory. Bars show the memory each model needs; the line marks what your GPU has.</p>
+
+  <p class="step">1 · Choose a GPU</p>
+  <div class="gpus" id="gpus" role="group" aria-label="GPU"></div>
+  <p class="gpuinfo" id="gpuinfo"></p>
+
+  <p class="step">2 · Narrow the list</p>
+  <div class="filters">
+    <label>Search <input id="q" type="search" placeholder="Model name" autocomplete="off"></label>
+    <span class="chips" id="tiers" role="group" aria-label="Quality tier">Quality</span>
+    <label>Min context <select id="ctx"><option value="0">Any</option><option value="32000">32k</option><option value="128000">128k</option><option value="200000">200k</option><option value="1000000">1M</option></select></label>
+    <label>Family <select id="cls"><option value="">All</option></select></label>
+    <label>Sort <select id="sort"><option value="vram">Memory needed</option><option value="tps">Speed on this GPU</option><option value="ctx">Context length</option><option value="name">Name</option><option value="date">Release date</option></select></label>
+    <label><input type="checkbox" id="onlyfit"> Only models that fit</label>
+    <span class="seg" role="group" aria-label="View"><button type="button" data-view="chart" aria-pressed="true">Chart</button><button type="button" data-view="table" aria-pressed="false">Table</button></span>
+  </div>
+  <p class="summary" id="summary" aria-live="polite"></p>
+
+  <section class="card" id="chartcard">
+    <div class="head"><h2>Memory needed per model (GB)</h2><div class="key"><span><i style="background:var(--series)"></i>Fits</span><span><i style="background:var(--off)"></i>Too large</span></div></div>
+    <div class="chart" id="chart"></div>
+    <p class="note" id="note"></p>
+  </section>
+  <div class="tablewrap" id="tablewrap" hidden><table id="tbl"><thead></thead><tbody></tbody></table></div>
+  <p class="src">Source: <a href="../../../learning-resources/chess/model_catalog_2025.json">model_catalog_2025.json</a> and <a href="../../../learning-resources/chess/chinese_models_supplement.json">chinese_models_supplement.json</a>. Memory, speed and context figures are the catalog's own estimates, not measurements. Models the catalog lists in more than one group appear once. A model "fits" when its listed memory is no more than the GPU's memory; splitting a model across several GPUs is not considered.</p>
+</main>
+<div class="tip" id="tip" hidden></div>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var AXIS_MAX = 200;
+  var CLS = { tiny_models: "Tiny (under 3B)", small_models_7b_9b: "Small (7–9B)", medium_models_10b_30b: "Medium (10–30B)", large_models_70b: "Large (70B)", ultra_large_models: "Ultra large", ultra_long_context_models: "Long context", specialized_models_2025: "Specialized", quantized_flagship_models: "Quantized flagships", minimax_series: "MiniMax", kimi_series: "Kimi", glm_extended: "GLM", other_chinese_models: "Other Chinese models" };
+  var TIERS = ["exceptional", "excellent", "good"];
+  var state = { gpu: "a10g", q: "", tiers: { exceptional: true, excellent: true, good: true }, ctx: 0, cls: "", sort: "vram", onlyFit: false, view: "chart", tsort: null, tdir: 1 };
+  var GPUS = {}, MODELS = [];
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function fmtCtx(n) { if (n >= 1e6) return (n / 1e6) + "M"; return n % 1024 === 0 && n < 500000 ? (n / 1024) + "k" : Math.round(n / 1000) + "k"; }
+  function parseB(p) { var m = /^([\d.]+)\s*B/.exec(p || ""); return m ? m[1] + "B" : ""; }
+
+  function load() {
+    return Promise.all([
+      fetch("../../../learning-resources/chess/model_catalog_2025.json").then(function (r) { return r.json(); }),
+      fetch("../../../learning-resources/chess/chinese_models_supplement.json").then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      var cat = res[0].model_catalog, sup = res[1].chinese_models_supplement, byName = {};
+      GPUS = cat.gpu_types;
+      /* The catalog lists some models in more than one group; keep one row per name and merge what the copies add. */
+      function add(m) {
+        var key = m.name.toLowerCase(), have = byName[key];
+        if (!have) { byName[key] = m; MODELS.push(m); return; }
+        Object.keys(m.tps).forEach(function (g) { if (have.tps[g] == null) have.tps[g] = m.tps[g]; });
+        if (!have.notes) have.notes = m.notes; if (!have.use) have.use = m.use;
+      }
+      Object.keys(cat.models).forEach(function (k) {
+        cat.models[k].models.forEach(function (m) { add(norm(m, k, cat.models[k].recommended_gpu)); });
+      });
+      Object.keys(sup.models).forEach(function (k) {
+        sup.models[k].models.forEach(function (m) { add(norm(m, k, m.recommended_gpu)); });
+      });
+    });
+  }
+  function norm(m, cls, rec) {
+    return { name: m.name, hf: m.hf_id, params: m.parameters, vram: m.vram_required_gb, prec: m.precision, ctx: m.context_length, tps: m.expected_tps || {}, tier: m.quality_tier, date: m.release_date || "", use: m.use_case, notes: m.notes || "", cls: cls, rec: rec || m.recommended_gpu || [], strengths: m.strengths || [] };
+  }
+
+  /* ---------------- filtering and derived values */
+  function gpu() { return GPUS[state.gpu]; }
+  function fits(m) { return m.vram <= gpu().vram_gb; }
+  function visible() {
+    var q = state.q.trim().toLowerCase();
+    var list = MODELS.filter(function (m) {
+      return (!q || m.name.toLowerCase().indexOf(q) >= 0) && state.tiers[m.tier] !== false && m.ctx >= state.ctx && (!state.cls || m.cls === state.cls) && (!state.onlyFit || fits(m));
+    });
+    var s = state.sort;
+    list.sort(function (a, b) {
+      if (s === "name") return a.name.localeCompare(b.name);
+      if (s === "ctx") return b.ctx - a.ctx || a.vram - b.vram;
+      if (s === "date") return b.date.localeCompare(a.date) || a.vram - b.vram;
+      if (s === "tps") { var x = a.tps[state.gpu], y = b.tps[state.gpu]; return (y == null) - (x == null) || (y || 0) - (x || 0) || a.vram - b.vram; }
+      return a.vram - b.vram || a.name.localeCompare(b.name);
+    });
+    return list;
+  }
+
+  /* ---------------- GPU picker */
+  function renderGpus() {
+    var box = $("gpus"); box.textContent = "";
+    Object.keys(GPUS).forEach(function (k) {
+      var b = el("button"); b.type = "button"; b.setAttribute("aria-pressed", String(k === state.gpu));
+      b.append(el("span", "", GPUS[k].name.replace("NVIDIA ", "")), el("small", "", GPUS[k].vram_gb + " GB"));
+      b.onclick = function () { state.gpu = k; renderGpus(); render(); };
+      box.append(b);
+    });
+    var g = gpu(), info = $("gpuinfo"); info.textContent = "";
+    var strong = el("b", "", g.name); info.append(strong, " · " + g.vram_gb + " GB · " + g.architecture + ", " + g.release_year + " · " + g.cost_tier + " cost tier. " + g.recommended_for + ".");
+  }
+
+  /* ---------------- chart */
+  function renderChart(list) {
+    var chart = $("chart"); chart.textContent = "";
+    var g = gpu();
+    var axis = el("div", "axis"); axis.append(el("span", ""));
+    var ticks = el("div", "ticks");
+    [0, 50, 100, 150, 200].forEach(function (t) { var s = el("span", "", t + (t === 200 ? "+" : "")); s.style.left = (t / AXIS_MAX * 100) + "%"; ticks.append(s); });
+    axis.append(ticks); var eh = el("div", "endhead"); eh.append(el("span", "", "Context"), el("span", "", "tok/s")); axis.append(eh); chart.append(axis);
+    var rows = el("div", "rows"); var lines = el("div", "lines");
+    [50, 100, 150, 200].forEach(function (t) { var i = el("i"); i.style.left = (t / AXIS_MAX * 100) + "%"; lines.append(i); });
+    Object.keys(GPUS).forEach(function (k) { if (k !== state.gpu && GPUS[k].vram_gb <= AXIS_MAX) { var a = el("i", "alt"); a.style.left = (GPUS[k].vram_gb / AXIS_MAX * 100) + "%"; lines.append(a); } });
+    var ref = el("i", "ref"); ref.style.left = (Math.min(g.vram_gb, AXIS_MAX) / AXIS_MAX * 100) + "%"; lines.append(ref);
+    var lab = el("b", "", g.name.replace("NVIDIA ", "") + " · " + g.vram_gb + " GB"); lab.style.left = ref.style.left; lines.append(lab);
+    rows.append(lines);
+    if (!list.length) { rows.append(el("div", "empty", "No models match these filters.")); }
+    list.forEach(function (m) {
+      var f = fits(m), row = el("div", "row" + (f ? "" : " no")); row.tabIndex = 0; row.dataset.name = m.name;
+      var nm = el("div", "nm", m.name); nm.title = m.name; nm.append(el("small", "", parseB(m.params))); row.append(nm);
+      var track = el("div", "track"); var w = Math.min(m.vram, AXIS_MAX) / AXIS_MAX * 100; var clipped = m.vram > AXIS_MAX;
+      var fill = el("div", "fill" + (clipped ? " off" : "")); fill.style.width = w + "%"; track.append(fill);
+      var val = el("span", "val" + (w > 88 ? " in" : ""), m.vram + " GB"); val.style.left = w + "%"; track.append(val); row.append(track);
+      var end = el("div", "end"); var t = m.tps[state.gpu]; end.append(el("span", "", fmtCtx(m.ctx)), el("span", "", t != null ? String(t) : "–")); row.append(end);
+      var show = function (e) { showTip(m, e, row); }; row.addEventListener("pointermove", show); row.addEventListener("focus", function () { showTip(m, null, row); });
+      row.addEventListener("pointerleave", hideTip); row.addEventListener("blur", hideTip);
+      rows.append(row);
+    });
+    chart.append(rows);
+    var missing = list.filter(function (m) { return m.tps[state.gpu] == null; }).length;
+    $("note").textContent = "Bars run to " + AXIS_MAX + " GB; longer bars show their real value inside the bar. Context is in thousands of tokens. " + (missing && list.length ? "The catalog has no speed estimate for " + missing + " of these models on " + g.name.replace("NVIDIA ", "") + " (shown as –)." : "");
+  }
+
+  /* ---------------- tooltip (names come from JSON: textContent only) */
+  function showTip(m, e, row) {
+    var tip = $("tip"); tip.textContent = "";
+    tip.append(el("div", "v", m.name), el("div", "id", m.hf));
+    var dl = el("dl"), add = function (k, v) { dl.append(el("dt", "", k), el("dd", "", v)); };
+    add("Memory needed", m.vram + " GB (" + m.prec + ")"); add("Parameters", m.params); add("Context", m.ctx.toLocaleString() + " tokens");
+    add("Quality tier", m.tier); add("Released", m.date || "unknown");
+    add("Speed here", m.tps[state.gpu] != null ? m.tps[state.gpu] + " tok/s (est.)" : "no estimate");
+    add("Fits " + gpu().name.replace("NVIDIA ", ""), fits(m) ? "yes" : "no, needs " + (m.vram - gpu().vram_gb) + " GB more");
+    tip.append(dl); if (m.use) tip.append(el("p", "", m.use)); if (m.notes) tip.append(el("p", "", m.notes));
+    tip.hidden = false;
+    var r = row.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var x = e ? e.clientX + 16 : r.left + 40, y = e ? e.clientY + 16 : r.bottom + 4;
+    x = Math.max(8, Math.min(x, innerWidth - w - 8)); if (y + h > innerHeight - 8) y = Math.max(8, (e ? e.clientY : r.top) - h - 12);
+    tip.style.transform = "translate(" + x + "px," + y + "px)";
+  }
+  function hideTip() { $("tip").hidden = true; }
+
+  /* ---------------- table view */
+  var COLS = [["name", "Model", false], ["cls", "Family", false], ["params", "Parameters", false], ["vram", "Memory GB", true], ["ctx", "Context", true], ["tier", "Quality", false], ["tps", "Est. tok/s", true], ["fit", "Fits", false]];
+  function cellVal(m, k) { return k === "tps" ? m.tps[state.gpu] : k === "fit" ? (fits(m) ? 1 : 0) : m[k]; }
+  function renderTable(list) {
+    var head = $("tbl").tHead; head.textContent = ""; var tr = head.insertRow();
+    COLS.forEach(function (c) {
+      var th = document.createElement("th"); if (c[2]) th.className = "n"; var b = el("button", "", c[1] + (state.tsort === c[0] ? (state.tdir > 0 ? " ▲" : " ▼") : "")); b.type = "button";
+      if (state.tsort === c[0]) th.setAttribute("aria-sort", state.tdir > 0 ? "ascending" : "descending");
+      b.onclick = function () { state.tdir = state.tsort === c[0] ? -state.tdir : 1; state.tsort = c[0]; render(); }; th.append(b); tr.append(th);
+    });
+    var rows = list.slice();
+    if (state.tsort) rows.sort(function (a, b) { var x = cellVal(a, state.tsort), y = cellVal(b, state.tsort); return ((x == null) - (y == null)) || (typeof x === "string" ? x.localeCompare(y) : x - y) * state.tdir; });
+    var body = $("tbl").tBodies[0]; body.textContent = "";
+    rows.forEach(function (m) {
+      var r = body.insertRow(); var cell = function (t, cls) { var c = r.insertCell(); c.textContent = t; if (cls) c.className = cls; return c; };
+      cell(m.name, "nm"); cell(CLS[m.cls] || m.cls); cell(m.params); cell(m.vram, "n"); cell(m.ctx.toLocaleString(), "n"); cell(m.tier);
+      cell(m.tps[state.gpu] != null ? m.tps[state.gpu] : "–", "n");
+      var f = fits(m), c = r.insertCell(), p = el("span", "pill " + (f ? "ok" : "no"), (f ? "✓ Fits" : "✕ Too large")); c.append(p);
+    });
+    if (!rows.length) { var r = body.insertRow(), c = r.insertCell(); c.colSpan = COLS.length; c.className = "empty"; c.textContent = "No models match these filters."; }
+  }
+
+  /* ---------------- summary + orchestration */
+  function render() {
+    var list = visible(), g = gpu(), short = g.name.replace("NVIDIA ", "");
+    var fit = list.filter(fits);
+    var withTps = fit.filter(function (m) { return m.tps[state.gpu] != null; }).sort(function (a, b) { return b.tps[state.gpu] - a.tps[state.gpu]; });
+    var longest = fit.slice().sort(function (a, b) { return b.ctx - a.ctx; })[0], biggest = fit.slice().sort(function (a, b) { return b.vram - a.vram; })[0];
+    var sum = $("summary"); sum.textContent = "";
+    var b1 = el("b", "", fit.length + " of " + list.length); sum.append("On the " + short + " (" + g.vram_gb + " GB), ", b1, " models shown fit.");
+    if (fit.length) {
+      sum.append(" Largest that fits: ", el("b", "", biggest.name + " (" + biggest.vram + " GB)"), ".");
+      sum.append(" Longest context: ", el("b", "", longest.name + " (" + fmtCtx(longest.ctx) + ")"), ".");
+      if (withTps.length) sum.append(" Fastest: ", el("b", "", withTps[0].name + " (" + withTps[0].tps[state.gpu] + " tok/s)"), ".");
+    }
+    $("chartcard").hidden = state.view !== "chart"; $("tablewrap").hidden = state.view !== "table";
+    if (state.view === "chart") renderChart(list); else renderTable(list);
+    hideTip();
+  }
+
+  function initControls() {
+    var chips = $("tiers");
+    TIERS.forEach(function (t) {
+      var n = MODELS.filter(function (m) { return m.tier === t; }).length; var b = el("button", "", t + " (" + n + ")"); b.type = "button"; b.setAttribute("aria-pressed", "true");
+      b.onclick = function () { state.tiers[t] = !state.tiers[t]; b.setAttribute("aria-pressed", String(state.tiers[t])); render(); }; chips.append(b);
+    });
+    var sel = $("cls"), seen = [];
+    MODELS.forEach(function (m) { if (seen.indexOf(m.cls) < 0) { seen.push(m.cls); var o = el("option", "", CLS[m.cls] || m.cls); o.value = m.cls; sel.append(o); } });
+    $("q").oninput = function (e) { state.q = e.target.value; render(); };
+    $("ctx").onchange = function (e) { state.ctx = +e.target.value; render(); };
+    sel.onchange = function (e) { state.cls = e.target.value; render(); };
+    $("sort").onchange = function (e) { state.sort = e.target.value; render(); };
+    $("onlyfit").onchange = function (e) { state.onlyFit = e.target.checked; render(); };
+    document.querySelectorAll("[data-view]").forEach(function (b) { b.onclick = function () { state.view = b.dataset.view; document.querySelectorAll("[data-view]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); render(); }; });
+  }
+
+  load().then(function () { initControls(); renderGpus(); render(); }).catch(function (err) {
+    $("summary").textContent = "The catalog could not be loaded. Serve the site over http(s) rather than opening the file directly.";
+    if (window.console) console.error(err);
+  });
+})();
+</script>
+</body>
+</html>
