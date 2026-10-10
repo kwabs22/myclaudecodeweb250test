@@ -40,6 +40,7 @@ select{font:500 13px var(--font);padding:6px 8px;border-radius:7px;border:1px so
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
 .labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .lab{position:absolute;left:0;top:0;white-space:nowrap;font:11px var(--mono);color:#96a0b8;text-shadow:0 0 5px #0a0d16}
+.lab.pt{font:600 11px var(--font);color:#e7ebf5}
 .lab.ax{font:600 12px var(--font);color:#c9d1e6}
 .pin{position:absolute;left:0;top:0;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 3px rgba(255,255,255,.15);pointer-events:none}
 .tip{position:absolute;left:0;top:0;max-width:280px;padding:4px 8px;border-radius:6px;background:#05070d;border:1px solid #232a3d;font:12px var(--font);pointer-events:none;z-index:3}
@@ -113,7 +114,7 @@ tbody tr:hover,tbody tr[aria-selected="true"]{background:var(--chip)}
   <section class="notes">
     <h2>How the numbers are defined</h2>
     <p id="formula">Loading…</p>
-    <p>Sources: <a href="../playcanvas/playcanvas_top_functions.json">playcanvas_top_functions.json</a>, <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.csv">GASSHOOTER_TOP_20_FUNCTIONS.csv</a> and <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.json">.json</a>. The two analyses used different tools, so compare shapes rather than exact values. GASShooter's rank 20 function has no line count in the source data, so it appears in the table but not on the chart.</p>
+    <p>Sources: <a href="../playcanvas/playcanvas_top_functions.json">playcanvas_top_functions.json</a>, <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.csv">GASSHOOTER_TOP_20_FUNCTIONS.csv</a> and <a href="../gasshooter/GASSHOOTER_TOP_20_FUNCTIONS.json">.json</a>. Colours: the three largest categories get their own colour and the rest are grey, so the chart stays readable for colour-blind viewers; the table lists every category. The two analyses used different tools, so compare shapes rather than exact values. GASShooter's rank 20 function has no line count in the source data, so it appears in the table but not on the chart.</p>
   </section>
 </main>
 <script type="module">
@@ -121,8 +122,9 @@ import * as THREE from "three";
 import { OrbitControls } from "../../assets/vendor/OrbitControls.js";
 THREE.ColorManagement.enabled = false;
 
-const PALETTE = ["#f2705e", "#7c8dff", "#e8aa2c", "#2fb8a6", "#d868b8", "#82c45a", "#58b8e8", "#b99cff", "#c9b37a"];
-const PROJECT_COLOR = { PlayCanvas: "#f2705e", GASShooter: "#58b8e8" };
+/* Categorical slots 1-3 of the reference palette (dark steps), validated all-pairs on this panel. Everything past three is grey. */
+const SLOT = ["#3987e5", "#d95926", "#199e70"], OTHER = "#8a93a8";
+const PROJECT_COLOR = { PlayCanvas: SLOT[0], GASShooter: SLOT[1] };
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (id) => document.getElementById(id);
 const stage = $("stage"), canvas = $("c"), labelsEl = $("labels"), pinEl = $("pin"), tipEl = $("tip"), msgEl = $("msg");
@@ -194,7 +196,7 @@ function groupsOf(recs) {
 }
 function colourFn(recs) {
   if (dsKey === "both") return (r) => PROJECT_COLOR[r.project];
-  const gs = groupsOf(recs); return (r) => PALETTE[gs.indexOf(r.group) % PALETTE.length];
+  const gs = groupsOf(recs).slice(0, 3); return (r) => { const i = gs.indexOf(r.group); return i < 0 ? OTHER : SLOT[i]; };
 }
 const niceStep = (raw) => { const p = 10 ** Math.floor(Math.log10(raw)); const m = raw / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p; };
 const scaleFor = (maxVal, target) => { const step = niceStep(maxVal / target); return { step, max: Math.ceil(maxVal / step) * step }; };
@@ -248,7 +250,7 @@ function resize() {
 const vert = `attribute vec3 aColor; attribute float aSize; attribute float aBoost; attribute float aDim; uniform float uScale; varying vec3 vC; varying float vD;
 void main(){ vec4 mv = modelViewMatrix*vec4(position,1.0); gl_PointSize = max(6.0, aSize*(1.0+aBoost)*uScale/-mv.z); gl_Position = projectionMatrix*mv; vC=aColor; vD=aDim; }`;
 const frag = `precision mediump float; varying vec3 vC; varying float vD;
-void main(){ vec2 p = gl_PointCoord*2.0-1.0; float d = length(p); if(d>1.0) discard; float e = smoothstep(1.0,0.82,d); vec3 c = mix(vC, vec3(1.0), smoothstep(0.65,0.0,d)*0.45); gl_FragColor = vec4(c, e*vD); }`;
+void main(){ vec2 p = gl_PointCoord*2.0-1.0; float d = length(p); if(d>1.0) discard; float e = smoothstep(1.0,0.82,d); vec3 c = mix(vC, vec3(1.0), smoothstep(0.65,0.0,d)*0.35); c = mix(vec3(0.04,0.05,0.09), c, smoothstep(0.98,0.8,d)); gl_FragColor = vec4(c, e*vD); }`;
 
 function clearScene() {
   axisObjs.forEach((o) => { scene.remove(o); o.geometry && o.geometry.dispose(); });
@@ -297,7 +299,7 @@ function rebuild() {
 
   /* points + stems */
   const N = plotted.length, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
-  size = new Float32Array(N).fill(0.62); boost = new Float32Array(N); dimArr = new Float32Array(N).fill(1);
+  size = new Float32Array(N).fill(0.7); boost = new Float32Array(N); dimArr = new Float32Array(N).fill(1);
   const stems = [];
   plotted.forEach((r, i) => {
     r.pos = new THREE.Vector3(X(r.lines), Y(r.cyc), zOf(r)); r.i = i; r.color = colour(r);
@@ -311,6 +313,7 @@ function rebuild() {
   const pts = new THREE.Points(geo, new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag, transparent: true, depthWrite: false }));
   pts.frustumCulled = false; scene.add(pts); axisObjs.push(pts);
 
+  [...plotted].sort((a, b) => b.cyc - a.cyc).slice(0, 3).forEach((r) => addLabel(r.name.split("::").pop().slice(0, 26), r.pos.clone().add(new THREE.Vector3(0, 0.6, 0)), "pt"));
   renderLegend(recs, colour); renderStats(recs); renderTable(recs);
   const keep = sel && recs.includes(sel) ? sel : recs[0]; select(keep.lines == null ? plotted[0] : keep);
 }
@@ -319,8 +322,10 @@ function rebuild() {
 
 function renderLegend(recs, colour) {
   const lg = $("legend"); lg.textContent = "";
-  const keys = dsKey === "both" ? ["PlayCanvas", "GASShooter"] : groupsOf(recs);
-  keys.forEach((k) => { const s = document.createElement("span"), i = document.createElement("i"); i.style.background = dsKey === "both" ? PROJECT_COLOR[k] : colour(recs.find((r) => r.group === k)); s.append(i, k); lg.append(s); });
+  let items;
+  if (dsKey === "both") items = [["PlayCanvas", PROJECT_COLOR.PlayCanvas], ["GASShooter", PROJECT_COLOR.GASShooter]];
+  else { const gs = groupsOf(recs); items = gs.slice(0, 3).map((g, i) => [g, SLOT[i]]); if (gs.length > 3) items.push([`Other (${gs.length - 3} categories)`, OTHER]); }
+  items.forEach(([k, c]) => { const s = document.createElement("span"), i = document.createElement("i"); i.style.background = c; s.append(i, k); lg.append(s); });
 }
 const corr = (recs) => { const p = recs.filter((r) => r.lines != null); return pearson(p.map((x) => x.lines), p.map((x) => x.cyc)); };
 function describe(recs) {
