@@ -19,4 +19,17 @@ build_next() {   # <project dir inside the repo> <output folder name>
   echo "built $dir/$name"
 }
 
+build_expo() {   # <project dir inside the repo> <output folder name>
+  local dir="$1" name="$2" work
+  work="$(mktemp -d)"
+  cp -r "$dir/." "$work/"
+  ( cd "$work" && npm install --no-audit --no-fund --loglevel=error \
+      && EXPO_BASE_URL="$BASE/$dir/$name" CI=1 EXPO_NO_TELEMETRY=1 npx expo export --platform web )
+  mkdir -p "_site/$dir/$name"
+  cp -r "$work/dist/." "_site/$dir/$name/"
+  rm -rf "$work"
+  echo "built $dir/$name"
+}
+
 build_next creative-media/social-media/trending-topics-ui demo
+build_expo game-development/react-native/react-native-games-expo/expo-games-demo web

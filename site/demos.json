@@ -3,5 +3,10 @@
     "title": "Social Trends Hub",
     "url": "creative-media/social-media/trending-topics-ui/demo/",
     "description": "The Next.js trending-topics widget, running as a static export: trending topics, repositories and hashtags with a dark mode toggle."
+  },
+  {
+    "title": "Expo Games Collection",
+    "url": "game-development/react-native/react-native-games-expo/expo-games-demo/web/",
+    "description": "All 50 React Native games running in the browser: puzzle, arcade, strategy, casual, party and educational. Best on a phone-sized window."
   }
 ]

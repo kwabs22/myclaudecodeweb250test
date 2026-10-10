@@ -238,3 +238,9 @@ MIT License - Feel free to use this code for learning and your own projects!
 ---
 
 **Happy Gaming! 🎮**
+
+## Run in the browser
+
+The web packages Expo needs (`react-dom`, `react-native-web`, `@expo/metro-runtime`) are in `package.json`, so
+`npm run web` works. `npx expo export --platform web` writes a static copy to `dist/`; the Session Atlas site publishes
+one at `expo-games-demo/web/` (set `EXPO_BASE_URL` to the folder it is served from, as `app.config.js` expects).

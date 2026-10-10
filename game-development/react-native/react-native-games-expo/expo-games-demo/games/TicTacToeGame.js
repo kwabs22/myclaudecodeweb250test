@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   board: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: CELL_SIZE * 3 + 20,
+    width: CELL_SIZE * 3 + 25, // 3 cells + their margins (15) + board padding (10)
     backgroundColor: '#fff',
     padding: 5,
     borderRadius: 10,

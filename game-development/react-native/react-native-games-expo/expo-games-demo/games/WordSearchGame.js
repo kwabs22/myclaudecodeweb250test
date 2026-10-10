@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const WORDS = ['REACT', 'NATIVE', 'EXPO', 'GAME', 'CODE', 'APP'];
 const GRID_SIZE = 10;

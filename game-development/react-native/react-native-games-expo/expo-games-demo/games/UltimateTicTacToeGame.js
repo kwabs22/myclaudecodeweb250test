@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   smallBoard: {
-    width: CELL_SIZE * 3 + 10,
-    height: CELL_SIZE * 3 + 10,
+    width: CELL_SIZE * 3 + 16, // 3 cells + their margins (6) + padding (10)
+    height: CELL_SIZE * 3 + 16,
     backgroundColor: '#0f3460',
     margin: 5,
     padding: 5,
