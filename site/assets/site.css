@@ -223,6 +223,7 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .app-cat { font: 500 11px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .app-title { font-weight: 600; }
 .app-path { font: 11.5px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.about p { max-width: 68ch; margin: 0 0 8px; color: var(--muted); }
 .areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
 .area { padding: 14px 16px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
 .area h3 { margin: 0 0 6px; font-size: 18px; }

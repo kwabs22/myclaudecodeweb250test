@@ -4,6 +4,7 @@
 **Date**: 2025-12-25 (completed 2026-09-27, see [`MERGE_COMPLETE.md`](./MERGE_COMPLETE.md))
 **Total files**: 400+
 **Categories**: 5 main areas
+**Origin**: the merge of the branches, the audit that checked it, and the [Session Atlas](https://kwabs22.github.io/myclaudecodeweb250test/) site were produced in one Claude Code session that was part of a $100 free-credit test.
 
 ---
 

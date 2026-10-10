@@ -37,6 +37,7 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "kwabs22/myclaudecodeweb250test")
 REPO_URL = f"https://github.com/{REPO}"
 SITE_NAME = "Session Atlas"
 EXCLUDE_TOP = {"site", ".github", "_site"}
+EXCLUDE_FILES = {".gitignore"}  # root file only; site plumbing, not content
 VIEWER_MAX_BYTES = 300_000
 MERMAID_SRC = "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
 
@@ -94,7 +95,7 @@ def git_files():
         ["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, check=True
     ).stdout.decode()
     files = [p for p in out.split("\0") if p]
-    return sorted(p for p in files if p.split("/")[0] not in EXCLUDE_TOP)
+    return sorted(p for p in files if p.split("/")[0] not in EXCLUDE_TOP and p not in EXCLUDE_FILES)
 
 
 def category_of(path):
@@ -590,6 +591,11 @@ def render_home(repo):
 <section class="block">
   <h2>Areas</h2>
   <ul class="areas">{''.join(area_cards)}</ul>
+</section>
+<section class="block about">
+  <h2>About this site</h2>
+  <p>The files come from 30 Claude Code sessions. Merging those branches, auditing the merge for lost files and building this site all happened in one session, which was part of a $100 free-credit test of Claude Code.</p>
+  <p><a href="MERGE_COMPLETE.html">How the branches were merged</a> · <a href="BRANCH_CLEANUP_CHECKLIST.html">Branch and chat cleanup checklist</a> · <a href="README.html">Repository README</a></p>
 </section>
 <script type="application/json" id="tree-data">{inline(data)}</script>
 <script type="application/json" id="cats-data">{inline(cats_json)}</script>
