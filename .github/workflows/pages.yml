@@ -22,8 +22,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - run: pip install -r site/requirements.txt
       - run: python site/build.py
+      - name: Build demos that need a toolchain
+        run: bash site/build_demos.sh
+        env:
+          SITE_BASE: /${{ github.event.repository.name }}
+      - name: Check links
+        run: python site/check_links.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

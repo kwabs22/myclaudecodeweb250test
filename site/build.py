@@ -208,6 +208,19 @@ class Repo:
             self.nodes.append(node)
             self.meta[f] = node
 
+        # Demos that are built at deploy time (see build_demos.sh) rather than tracked as files.
+        self.extras = []
+        demos = HERE / "demos.json"
+        if demos.exists():
+            for d in json.loads(demos.read_text(encoding="utf-8")):
+                p = d["url"].rstrip("/")
+                node = {
+                    "p": p, "u": d["url"], "k": "app", "c": category_of(p), "d": posixpath.dirname(p),
+                    "s": d.get("size", 24000), "t": d["title"], "x": d.get("description", ""),
+                }
+                self.nodes.append(node)
+                self.extras.append(node)
+
     def children(self, d):
         if d not in self._kids:
             prefix = d + "/" if d else ""
@@ -476,7 +489,7 @@ def render_dir_index(repo, md, d):
             for sd in subdirs if repo.count_under(sd)
         )
         body.append(f'<section class="listing"><h2>Folders</h2><ul class="folders">{cards}</ul></section>')
-    shown = [repo.meta[f] for f in files if f in repo.meta]
+    shown = [repo.meta[f] for f in files if f in repo.meta] + [n for n in repo.extras if n["d"] == d]
     order = {"doc": 0, "app": 1, "code": 2}
     shown.sort(key=lambda n: (order[n["k"]], n["p"]))
     if shown:

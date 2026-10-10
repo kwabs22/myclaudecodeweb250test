@@ -14,6 +14,17 @@ python site/build.py
 python -m http.server -d _site 8000   # then open http://localhost:8000
 ```
 
+## Demos that need a build step
+
+`site/demos.json` lists demos that are built at deploy time rather than tracked as files, and `build_demos.sh` builds them
+into `_site/` (it needs Node). The Next.js trending-topics widget is the first: `STATIC_EXPORT=1 npm run build` exports it,
+and `NEXT_BASE_PATH` sets the folder it is served from. `check_links.py` fails the build if a page links to something missing
+(`known-broken-links.txt` lists accepted exceptions).
+
+```bash
+python site/build.py && bash site/build_demos.sh && python site/check_links.py
+```
+
 ## Publishing
 
 `.github/workflows/pages.yml` builds and deploys on every push to `main`.
