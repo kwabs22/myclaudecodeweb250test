@@ -25,6 +25,13 @@ and `NEXT_BASE_PATH` sets the folder it is served from. `check_links.py` fails t
 python site/build.py && bash site/build_demos.sh && python site/check_links.py
 ```
 
+## Which session made which file
+
+`provenance.json` records, for each file, the original Claude Code session that produced it. The map's **By session** mode and
+the "From:" line on each file's card read it. `make_provenance.py` builds it from git history (same contents, then same path,
+then same file name; the earliest session wins) using `provenance-sessions.json`, the session titles and dates. It needs the old
+`claude/*` branches, so run it once while they exist and commit the result. Files not in the data count as the latest session.
+
 ## Publishing
 
 `.github/workflows/pages.yml` builds and deploys on every push to `main`.

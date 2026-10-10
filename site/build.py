@@ -221,6 +221,26 @@ class Repo:
                 self.nodes.append(node)
                 self.extras.append(node)
 
+        # Which original session produced each file (site/make_provenance.py). Unknown files belong to the last session.
+        self.sessions = []
+        prov = HERE / "provenance.json"
+        if prov.exists():
+            pd = json.loads(prov.read_text(encoding="utf-8"))
+            ids = [x["id"] for x in pd["sessions"]]
+            last = ids.index("repo-state-overview") if "repo-state-overview" in ids else len(ids) - 1
+            for n in self.nodes:
+                sid = pd["files"].get(n["p"])
+                n["v"] = ids.index(sid) if sid in ids else last
+            used = sorted({n["v"] for n in self.nodes})
+            remap = {old: new for new, old in enumerate(used)}
+            for n in self.nodes:
+                n["v"] = remap[n["v"]]
+            self.sessions = [
+                {"id": pd["sessions"][old]["id"], "title": pd["sessions"][old]["title"], "date": pd["sessions"][old]["date"],
+                 "files": sum(1 for n in self.nodes if n["v"] == remap[old])}
+                for old in used
+            ]
+
     def children(self, d):
         if d not in self._kids:
             prefix = d + "/" if d else ""
@@ -577,16 +597,20 @@ def render_home(repo):
 
     cats_json = {k: {"label": v[0], "color": v[1], "desc": v[2]} for k, v in CATEGORIES.items()}
     data = {"nodes": repo.nodes}
+    has_prov = bool(repo.sessions)
     inline = lambda obj: json.dumps(obj, separators=(",", ":")).replace("</", "<\\/")
 
     body = f"""
 <section class="hero">
   <p class="eyebrow">{n_doc + n_app + n_code} files from 30 Claude Code sessions</p>
   <h1>{SITE_NAME}</h1>
-  <p class="lede">A map of everything the sessions produced. Each point is a file, grouped by the folder it lives in. Diamonds are pages you can run in the browser.</p>
+  <p class="lede">A map of everything the sessions produced. Each point is a file, grouped by the folder it lives in. Diamonds are pages you can run in the browser. Switch to <b>By session</b> to watch the repository get built, one chat at a time.</p>
 </section>
 <section class="mapwrap" aria-label="3D map of the repository">
-  <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
+  <div class="chiprow">
+    <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
+    {'<div class="modes" role="group" aria-label="Colour points by"><button type="button" data-mode="folder" aria-pressed="true">By folder</button><button type="button" data-mode="session" aria-pressed="false">By session</button></div>' if has_prov else ''}
+  </div>
   <div class="stage" id="stage">
     <canvas id="map" role="img" aria-label="3D map of {len(repo.nodes)} files grouped by folder. The lists below hold the same content."></canvas>
     <div class="labels" id="labels" aria-hidden="true"></div>
@@ -596,6 +620,7 @@ def render_home(repo):
     <p class="nogl" id="nogl" hidden>The 3D map needs WebGL, which this browser has turned off. The lists below cover the same files.</p>
     <aside class="card" id="card" aria-live="polite"></aside>
   </div>
+  {'<div class="timeline" id="timeline" hidden><div class="tl-head"><button type="button" id="tl-play" class="tl-btn">Play</button><input type="range" id="tl-range" min="0" max="' + str(len(repo.sessions) - 1) + '" value="' + str(len(repo.sessions) - 1) + '" aria-label="Session"><span class="tl-key"><i class="now"></i>this session<i class="past"></i>earlier<i class="later"></i>later</span></div><p class="tl-label" id="tl-label" aria-live="polite"></p><div class="tl-bars" id="tl-bars" role="group" aria-label="Files produced by each session, oldest first"></div></div>' if has_prov else ''}
 </section>
 <section class="block">
   <h2>Pages you can run</h2>
@@ -612,6 +637,7 @@ def render_home(repo):
 </section>
 <script type="application/json" id="tree-data">{inline(data)}</script>
 <script type="application/json" id="cats-data">{inline(cats_json)}</script>
+<script type="application/json" id="prov-data">{inline(repo.sessions)}</script>
 <script type="importmap">{{"imports":{{"three":"./assets/vendor/three.module.min.js"}}}}</script>
 <script type="module" src="assets/hub.js"></script>
 """

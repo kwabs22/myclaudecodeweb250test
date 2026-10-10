@@ -9,6 +9,7 @@ THREE.ColorManagement.enabled = false; // hex colours go to the shader unchanged
 
 const data = JSON.parse(document.getElementById("tree-data").textContent);
 const CATS = JSON.parse(document.getElementById("cats-data").textContent);
+const PROV = JSON.parse((document.getElementById("prov-data") || { textContent: "[]" }).textContent);
 const stage = document.getElementById("stage");
 const canvas = document.getElementById("map");
 const labelsEl = document.getElementById("labels");
@@ -98,6 +99,8 @@ const catColor = {};
 Object.entries(CATS).forEach(([k, v]) => (catColor[k] = new THREE.Color(v.color)));
 
 let filter = "";
+let mode = "folder";
+let step = 0;
 let selected = null;
 let hovered = null;
 
@@ -168,6 +171,7 @@ function init() {
   const size = new Float32Array(N);
   const shape = new Float32Array(N);
   const dim = new Float32Array(N).fill(1);
+  const baseBoost = new Float32Array(N);
   const boost = new Float32Array(N);
   nodes.forEach((n, i) => {
     pos.set([n.pos.x, n.pos.y, n.pos.z], i * 3);
@@ -240,10 +244,26 @@ function init() {
   function paintLines() {
     segs.forEach((s, i) => {
       const on = !filter || s.cat === filter;
-      const c = BG.clone().lerp(catColor[s.cat], on ? s.k : s.k * 0.12);
+      const c = mode === "session" ? BG.clone().lerp(SESS_LATER, on ? s.k * 0.45 : s.k * 0.08) : BG.clone().lerp(catColor[s.cat], on ? s.k : s.k * 0.12);
       lineCol.set([c.r, c.g, c.b, c.r, c.g, c.b], i * 6);
     });
     lgeo.attributes.color.needsUpdate = true;
+  }
+  /* Colour modes: by folder (identity) or by session (this session / earlier / later). Slots 1 and 2 of the validated palette. */
+  const SESS_NOW = new THREE.Color("#d95926"), SESS_PAST = new THREE.Color("#3987e5"), SESS_LATER = new THREE.Color("#8a93a8");
+  function applyColors() {
+    nodes.forEach((n) => {
+      const i = n.i;
+      let c, d = 1, b = 0;
+      if (mode === "session") {
+        if (n.v === step) { c = SESS_NOW; b = 0.35; } else if (n.v < step) { c = SESS_PAST; d = 0.85; } else { c = SESS_LATER; d = 0.1; }
+      } else c = catColor[n.c];
+      if (filter && n.c !== filter) d *= 0.15;
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+      dim[i] = d; baseBoost[i] = b; boost[i] = b + (n === selected ? 0.5 : 0);
+    });
+    geo.attributes.aColor.needsUpdate = true; geo.attributes.aDim.needsUpdate = true; geo.attributes.aBoost.needsUpdate = true;
+    paintLines();
   }
   paintLines();
 
@@ -309,9 +329,7 @@ function init() {
   function setFilter(cat) {
     filter = cat;
     chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.cat === cat)));
-    nodes.forEach((n) => (dim[n.i] = !cat || n.c === cat ? 1 : 0.13));
-    geo.attributes.aDim.needsUpdate = true;
-    paintLines();
+    applyColors();
     if (cat) {
       const d = dirs.get(cat) || dirs.get("_about");
       flyTo(d.pos, Math.max(d.R * 2.3, 40));
@@ -331,6 +349,7 @@ function init() {
     let bestScore = Infinity;
     for (const n of nodes) {
       if (filter && n.c !== filter) continue;
+      if (mode === "session" && n.v > step) continue;
       v.copy(n.pos).project(camera);
       if (v.z > 1) continue;
       const sx = (v.x * 0.5 + 0.5) * rect.width;
@@ -348,10 +367,10 @@ function init() {
     return best;
   }
   function setHover(n, x, y) {
-    if (hovered && hovered !== n) boost[hovered.i] = hovered === selected ? 0.5 : 0;
+    if (hovered && hovered !== n) boost[hovered.i] = baseBoost[hovered.i] + (hovered === selected ? 0.5 : 0);
     hovered = n;
     if (n) {
-      boost[n.i] = 0.7;
+      boost[n.i] = baseBoost[n.i] + 0.7;
       tipEl.textContent = n.t;
       tipEl.hidden = false;
       const rect = stage.getBoundingClientRect();
@@ -382,9 +401,9 @@ function init() {
   });
 
   function select(n) {
-    if (selected) boost[selected.i] = 0;
+    if (selected) boost[selected.i] = baseBoost[selected.i];
     selected = n;
-    boost[n.i] = 0.5;
+    boost[n.i] = baseBoost[n.i] + 0.5;
     geo.attributes.aBoost.needsUpdate = true;
     showCard(n, true);
     pinEl.hidden = false;
@@ -431,6 +450,43 @@ function init() {
   }
   requestAnimationFrame(frame);
 
+  /* Session timeline */
+  const tl = document.getElementById("timeline");
+  if (PROV.length && tl) {
+    const range = document.getElementById("tl-range"), play = document.getElementById("tl-play"), bars = document.getElementById("tl-bars"), label = document.getElementById("tl-label");
+    const modeBtns = [...document.querySelectorAll(".modes button")];
+    const total = PROV.reduce((a, x) => a + x.files, 0), maxFiles = Math.max(...PROV.map((x) => x.files));
+    let timer = null;
+    const fmt = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    PROV.forEach((x, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.style.setProperty("--h", Math.max(5, (x.files / maxFiles) * 100) + "%");
+      b.title = `${x.title} · ${x.files} files`; b.setAttribute("aria-label", `Session ${i + 1}: ${x.title}, ${x.files} files`);
+      b.onclick = () => { pause(); setStep(i); }; bars.append(b);
+    });
+    function setStep(i) {
+      step = i; range.value = String(i);
+      [...bars.children].forEach((b, j) => (b.className = j === i ? "now" : j > i ? "later" : ""));
+      const so = PROV.slice(0, i + 1).reduce((a, x) => a + x.files, 0), strong = document.createElement("b");
+      strong.textContent = `Session ${i + 1} of ${PROV.length}: ${PROV[i].title}`;
+      label.textContent = ""; label.append(strong, ` · ${fmt(PROV[i].date)} · adds ${PROV[i].files} files · ${so} of ${total} so far`);
+      applyColors();
+    }
+    function pause() { if (timer) clearInterval(timer); timer = null; play.textContent = "Play"; }
+    function startPlay() {
+      if (step >= PROV.length - 1) setStep(0);
+      play.textContent = "Pause";
+      timer = setInterval(() => { if (step >= PROV.length - 1) pause(); else setStep(step + 1); }, 900);
+    }
+    play.onclick = () => (timer ? pause() : startPlay());
+    range.oninput = () => { pause(); setStep(+range.value); };
+    function setMode(m) {
+      mode = m; modeBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === m))); tl.hidden = m !== "session";
+      if (m === "session") { setStep(reduced ? PROV.length - 1 : 0); if (!reduced) startPlay(); } else { pause(); applyColors(); }
+    }
+    modeBtns.forEach((b) => (b.onclick = () => setMode(b.dataset.mode)));
+  }
+
   const first = nodes.find((n) => n.p === "README.md") || nodes[0];
   select(first);
 }
@@ -453,6 +509,12 @@ function showCard(n, hasPin) {
   p.className = "p";
   p.textContent = n.p;
   cardEl.append(k, h, p);
+  if (PROV.length && n.v != null && PROV[n.v]) {
+    const q = document.createElement("p");
+    q.className = "sess";
+    q.textContent = `From: ${PROV[n.v].title} · ${PROV[n.v].date}`;
+    cardEl.append(q);
+  }
   if (n.x) {
     const x = document.createElement("p");
     x.className = "x";
