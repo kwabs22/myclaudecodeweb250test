@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task Triage</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Describe a coding task or answer six questions to find its complexity level from 1 to 8 and the smallest model or setup the catalog suggests.">
+<script>try{var t=localStorage.getItem('atlas-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f6fa;--panel:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--faint:#898781;--line:#e1e0d9;--axis:#c3c2b7;--chip:#e8ecf5;--link:#2646c4;--focus:#2646c4;
+--s1:#2a78d6;--s2:#eb6834;--on-s:#fff;--none:#898781;
+--font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--s1:#3987e5;--s2:#d95926;--on-s:#0b0b0b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--s1:#3987e5;--s2:#d95926;--on-s:#0b0b0b;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,[role=tab]:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bar{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.bar a{font-weight:600;text-decoration:none}
+.bar span{color:var(--muted);font:12px var(--mono)}
+main{max-width:1120px;margin:0 auto;padding:22px 16px 56px}
+h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em}
+.lede{margin:0 0 20px;max-width:68ch;color:var(--muted);font-size:16px}
+.ladder{list-style:none;margin:0 0 6px;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.ladder button{width:100%;display:grid;gap:2px;justify-items:start;text-align:left;font:inherit;padding:9px 10px 8px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;position:relative;min-height:74px}
+.ladder .num{font:600 20px/1 var(--font)}
+.ladder .nm{font-size:12.5px;color:var(--muted);line-height:1.2}
+.ladder .tag{position:absolute;right:7px;top:7px;font:500 10px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ladder button::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--c)}
+.ladder button[aria-current="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.ladder button.mine{background:color-mix(in srgb,var(--c) 14%,var(--panel))}
+.legendline{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0 0 20px;font-size:12.5px;color:var(--muted)}
+.legendline i{display:inline-block;width:12px;height:8px;margin-right:6px;border-radius:2px;background:var(--c)}
+.layout{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:16px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+[role=tablist]{display:inline-flex;margin:0 0 12px;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+[role=tab]{font:500 13px var(--font);padding:7px 12px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+[role=tab]:last-child{border-right:0}
+[role=tab][aria-selected="true"]{background:var(--ink);color:var(--bg)}
+label.big{display:block;margin:0 0 6px;font-weight:600}
+textarea{width:100%;min-height:96px;resize:vertical;font:15px/1.45 var(--font);padding:10px 12px;border-radius:9px;border:1px solid var(--axis);background:var(--bg);color:var(--ink)}
+.eg{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;align-items:center;font-size:12.5px;color:var(--muted)}
+.eg button{font:500 12.5px var(--font);padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.why{margin:12px 0 0;font-size:13.5px;color:var(--muted)}
+.why b{color:var(--ink);font-weight:600}
+.why mark{background:var(--chip);color:var(--ink);padding:0 4px;border-radius:3px;font:12.5px var(--mono)}
+fieldset{border:0;margin:0 0 12px;padding:0}
+legend{padding:0;font-weight:600;font-size:14px;margin:0 0 4px}
+.opts{display:grid;gap:2px}
+.opts label{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;padding:3px 6px;border-radius:6px;cursor:pointer}
+.opts label:hover{background:var(--chip)}
+.opts input{margin-top:3px}
+.score h3{margin:14px 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.sb{display:grid;grid-template-columns:78px 1fr;gap:4px 10px;align-items:center;font-size:12.5px}
+.sb .tr{position:relative;height:16px}
+.sb .tr i{position:absolute;left:0;top:50%;margin-top:-6px;height:12px;background:var(--s1);border-radius:0 4px 4px 0}
+.sb .tr b{position:absolute;top:50%;transform:translateY(-50%);font:12px var(--mono);padding-left:6px;font-weight:400}
+.sbnote{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+.res{position:sticky;top:12px}
+.res h2{margin:0 0 2px;font-size:24px;letter-spacing:-.02em}
+.res .kicker{margin:0 0 4px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center}
+.res .kicker i{width:10px;height:10px;border-radius:2px;background:var(--c)}
+.res p.d{margin:0 0 12px;color:var(--muted)}
+dl.facts{display:grid;grid-template-columns:max-content 1fr;gap:5px 14px;margin:0 0 14px}
+dl.facts dt{color:var(--muted)}dl.facts dd{margin:0;font-weight:500}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.tier{border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px}
+.tier.rec{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
+.tier b{display:block;font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.tier span{display:block;overflow-wrap:anywhere}
+.tier small{display:block;color:var(--muted);font:12px var(--mono);margin-top:2px}
+.res h3{margin:14px 0 4px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.res ul{margin:0;padding-left:18px;font-size:14px}
+.res li{margin:2px 0}
+.res .alert{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:9px;background:var(--chip);margin:0 0 12px;font-weight:600}
+.next{margin-top:14px;font-size:14px}
+.src{margin-top:22px;font-size:13px;color:var(--muted);max-width:86ch}
+@media (max-width:860px){.res{position:static}.layout{grid-template-columns:minmax(0,1fr)}.ladder{grid-template-columns:repeat(4,minmax(0,1fr))}.tiers{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bar"><a href="../../../index.html">&larr; Session Atlas</a><span>development-tools/benchmarking/task-assessor</span></div>
+<main>
+  <h1>Task Triage</h1>
+  <p class="lede">Find how hard a coding task is on an eight-level scale, and the smallest model or setup the catalog suggests for it. Describe the task in a sentence, or answer six questions.</p>
+  <ol class="ladder" id="ladder" aria-label="Complexity levels"></ol>
+  <div class="legendline"><span style="--c:var(--s1)"><i></i>Levels 1–5: one model</span><span style="--c:var(--s2)"><i></i>Levels 6–7: several models working together</span><span style="--c:var(--none)"><i></i>Level 8: needs a human to define the goal first</span></div>
+
+  <div class="layout">
+    <section class="card" aria-label="Describe the task">
+      <div role="tablist" aria-label="How to assess"><button role="tab" id="tab-text" aria-selected="true" aria-controls="p-text" type="button">Describe it</button><button role="tab" id="tab-q" aria-selected="false" aria-controls="p-q" type="button">Answer six questions</button></div>
+      <div id="p-text" role="tabpanel" aria-labelledby="tab-text">
+        <label class="big" for="task">What needs doing?</label>
+        <textarea id="task" spellcheck="true">Build authentication system with OAuth</textarea>
+        <div class="eg" id="eg"><span>Try:</span></div>
+        <p class="why" id="why" aria-live="polite"></p>
+      </div>
+      <div id="p-q" role="tabpanel" aria-labelledby="tab-q" hidden>
+        <div id="questions"></div>
+        <div class="score"><h3>Score by question</h3><div class="sb" id="sb"></div><p class="sbnote" id="sbnote" aria-live="polite"></p></div>
+      </div>
+    </section>
+    <section class="card res" id="result" aria-live="polite"></section>
+  </div>
+  <p class="src">Rules ported from <a href="../../../learning-resources/chess/assess_task.py">assess_task.py</a>. Levels, models and costs come from <a href="../../../learning-resources/chess/task_complexity_grading.json">task_complexity_grading.json</a> and <a href="../../../learning-resources/chess/ultra_complexity_levels_6_8.json">ultra_complexity_levels_6_8.json</a>. The keyword check is a quick heuristic over a short word list, so treat the level as a starting point. Costs are the catalog's monthly estimates. To see whether a model fits a GPU, open the <a href="../model-explorer/">GPU Fit Finder</a>.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  var KEYS = ["level_1_trivial", "level_2_simple", "level_3_moderate", "level_4_complex", "level_5_expert", "level_6_mega_complex", "level_7_research_grade", "level_8_currently_impossible"];
+  var SHORT = ["Trivial", "Simple", "Moderate", "Complex", "Expert", "Mega-complex", "Research-grade", "Impossible today"];
+  var COLOR = function (n) { return n <= 5 ? "var(--s1)" : n <= 7 ? "var(--s2)" : "var(--none)"; };
+  var STD, ULTRA;
+  var state = { mode: "text", viewed: 4, mine: 4, why: null, answers: [1, 1, 1, 1, 1, 1], avg: null };
+
+  /* ---------------------------------------------------------------- port of assess_by_keywords */
+  function hits(t, list) { return list.filter(function (k) { return t.indexOf(k) >= 0; }); }
+  function assessByKeywords(text) {
+    var t = text.toLowerCase(), words = t.split(/\s+/).filter(Boolean).length, m, notes = [];
+    var impossible = ["perfect", "user-friendly", "better", "successful startup", "profitable business", "predict", "make money", "enterprise-ready"];
+    var vague = hits(t, ["best", "better", "good", "perfect", "optimal"]);
+    var impHits = hits(t, impossible);
+    if (impHits.length || vague.length >= 2) {
+      var specific = hits(t, ["button", "api", "feature", "function"]);
+      if (!specific.length) return { level: 8, matched: impHits.length ? impHits : vague, note: "Vague or subjective goals, with nothing concrete named." };
+      notes.push("It sounds vague (" + (impHits.length ? impHits : vague).join(", ") + "), but it names something concrete (" + specific.join(", ") + "), so the check moved on.");
+    }
+    if ((m = hits(t, ["novel", "consensus algorithm", "custom language", "programming language", "from scratch", "new protocol", "research", "distributed systems framework", "formally verify", "theorem proving"])).length) return { level: 7, matched: m, note: notes.join(" ") };
+    if ((m = hits(t, ["migrate entire", "500k loc", "enterprise platform", "multiple services", "ai-powered ide", "automated audit", "orchestration", "multi-model", "100+ files", "entire codebase"])).length) return { level: 6, matched: m, note: notes.join(" ") };
+    m = hits(t, ["add button", "fix typo", "rename variable", "add comment", "change text", "add class", "remove", "simple fix", "console.log"]);
+    if (m.length) { if (words < 10) return { level: 1, matched: m, note: notes.join(" ") }; notes.push("It matched the trivial list (" + m.join(", ") + "), but a description of 10 or more words is not treated as trivial."); }
+    if ((m = hits(t, ["architecture", "microservices", "refactor entire", "optimize database", "security audit", "distributed", "design system", "implement protocol", "zero downtime", "machine learning pipeline", "event sourcing"])).length) return { level: 5, matched: m, note: notes.join(" ") };
+    if ((m = hits(t, ["authentication system", "payment", "real-time", "websocket", "graphql", "migration", "caching layer", "ci/cd", "oauth", "error tracking", "monitoring", "infrastructure"])).length) return { level: 4, matched: m, note: notes.join(" ") };
+    if ((m = hits(t, ["api", "rest", "endpoint", "state management", "data table", "infinite scroll", "file upload", "search", "notification", "refactor function", "autocomplete", "validation"])).length) return { level: 3, matched: m, note: notes.join(" ") };
+    m = hits(t, ["add feature", "bookmark", "form", "validation", "dark mode", "modal", "pagination", "filter", "tooltip", "toggle"]);
+    return { level: 2, matched: m, note: m.length ? notes.join(" ") : notes.concat(["No keyword matched, so it defaults to Level 2."]).join(" ") };
+  }
+
+  /* ---------------------------------------------------------------- port of interactive_assessment */
+  var QUESTIONS = [
+    { short: "Files", q: "How many files need to be read or understood?", opts: ["1 file", "2–3 files", "4–10 files", "11–50 files", "50+ files"], scores: [1, 2, 3, 4, 5] },
+    { short: "Context", q: "How much context understanding is needed?", opts: ["Single function", "Single component", "Multiple components", "System architecture", "Entire codebase"], scores: [1, 2, 3, 4, 5] },
+    { short: "Reasoning", q: "What level of reasoning is required?", opts: ["Pattern matching (copy similar code)", "Basic logic (if/else, loops)", "Business logic (validation, state)", "Architectural decisions", "System design"], scores: [1, 2, 3, 4, 5] },
+    { short: "Impact", q: "What is the impact radius?", opts: ["Single UI element", "Single feature", "Multiple features", "System-wide", "Infrastructure"], scores: [1, 2, 3, 4, 5] },
+    { short: "Scale", q: "What is the project scale?", opts: ["Single feature in existing app", "Multiple features", "Entire new module or service", "Multiple services or systems", "Entire enterprise platform"], scores: [1, 2, 3, 5, 7] },
+    { short: "Novelty", q: "How novel is this task?", opts: ["Well-established pattern (copy existing)", "Standard implementation", "Some customization needed", "Significant new design", "Never done before, research required"], scores: [1, 2, 3, 5, 8] }
+  ];
+  function levelFromAverage(avg) { return avg <= 1.5 ? 1 : avg <= 2.5 ? 2 : avg <= 3.5 ? 3 : avg <= 4.5 ? 4 : avg <= 5.5 ? 5 : avg <= 6.5 ? 6 : avg <= 7.5 ? 7 : 8; }
+  function assessAnswers(ans) { var total = ans.reduce(function (s, a, i) { return s + QUESTIONS[i].scores[a]; }, 0); var avg = total / 6; return { level: levelFromAverage(avg), avg: avg }; }
+
+  /* ---------------------------------------------------------------- UI */
+  function info(n) { return n <= 5 ? STD.complexity_levels[KEYS[n - 1]] : ULTRA.complexity_levels[KEYS[n - 1]]; }
+
+  function renderLadder() {
+    var ol = $("ladder"); ol.textContent = "";
+    KEYS.forEach(function (k, i) {
+      var n = i + 1, li = el("li"), b = el("button"); b.type = "button"; b.style.setProperty("--c", COLOR(n));
+      b.append(el("span", "num", String(n)), el("span", "nm", SHORT[i]));
+      if (n === state.mine) { b.classList.add("mine"); b.append(el("span", "tag", "your task")); }
+      if (n === state.viewed) b.setAttribute("aria-current", "true");
+      b.onclick = function () { state.viewed = n; renderLadder(); renderResult(); };
+      li.append(b); ol.append(li);
+    });
+  }
+
+  function bullets(title, items) { var f = document.createDocumentFragment(); if (!items || !items.length) return f; f.append(el("h3", "", title)); var ul = el("ul"); items.forEach(function (t) { ul.append(el("li", "", t)); }); f.append(ul); return f; }
+  function facts(rows) { var dl = el("dl", "facts"); rows.forEach(function (r) { if (r[1]) dl.append(el("dt", "", r[0]), el("dd", "", r[1])); }); return dl; }
+
+  function renderResult() {
+    var n = state.viewed, d = info(n), box = $("result"); box.textContent = ""; box.style.setProperty("--c", COLOR(n));
+    var k = el("p", "kicker"); k.append(el("i"), "Level " + n + (n === state.mine ? " · your task" : " · browsing")); box.append(k, el("h2", "", d.name), el("p", "d", d.description));
+    if (n <= 5) {
+      box.append(facts([["Smallest model", d.minimum_model], ["Recommended", d.recommended_model], ["GPU", d.min_gpu], ["Cost per month", d.estimated_cost_per_month], ["Context needed", d.context_needed]]));
+      var row = STD.model_selection_matrix.recommendations.filter(function (r) { return r.level === KEYS[n - 1]; })[0];
+      if (row) {
+        var tiers = el("div", "tiers");
+        [["Budget", row.budget, false], ["Recommended", row.recommended, true], ["Premium", row.premium, false]].forEach(function (t) {
+          var c = el("div", "tier" + (t[2] ? " rec" : "")); c.append(el("b", "", t[0]), el("span", "", t[1].model), el("small", "", t[1].gpu + " · " + t[1].cost)); tiers.append(c);
+        });
+        box.append(tiers);
+      }
+      box.append(bullets("Similar tasks", d.example_tasks.slice(0, 3).map(function (t) { return t.task; })));
+    } else if (n === 8) {
+      box.append(el("div", "alert", "This level is currently out of reach for AI as stated."));
+      box.append(bullets("Why", d.why_impossible && d.why_impossible.slice(0, 5)));
+      var how = d.how_to_make_possible || {}, items = Object.keys(how).slice(0, 4).map(function (key) { return key.replace(/_/g, " ").replace(/^./, function (c) { return c.toUpperCase(); }) + ": " + how[key]; });
+      box.append(bullets("How to make it possible", items));
+      box.append(el("p", "next", "AI can still handle specific, well-defined subtasks. Break the goal into concrete requirements first."));
+    } else {
+      box.append(facts([["Approach", d.approach], ["Architecture", d.architecture], ["Minimum setup", d.minimum_setup], ["Recommended setup", d.recommended_setup], ["Cost per month", d.estimated_cost_per_month], ["Timeline", d.timeline], ["People involved", d.human_involvement]]));
+      box.append(bullets("Example tasks", (d.example_tasks || []).slice(0, 2).map(function (t) { return t.task + (t.estimated_cost ? " (" + t.estimated_cost + (t.timeline ? ", " + t.timeline : "") + ")" : ""); })));
+      box.append(bullets("Next steps", ["Break the task into parts that can run in parallel", "Design a pipeline that hands work between models", "Put human review at the critical stages"]));
+    }
+  }
+
+  function applyText() {
+    var text = $("task").value;
+    var why = $("why"); why.textContent = "";
+    if (!text.trim()) { state.why = null; why.textContent = "Describe a task to see its level."; return; }
+    var r = assessByKeywords(text); state.mine = r.level; state.viewed = r.level;
+    why.append(el("b", "", "Level " + r.level + "."));
+    if (r.matched.length) { why.append(" Matched: "); r.matched.forEach(function (m, i) { if (i) why.append(" "); why.append(el("mark", "", m)); }); }
+    if (r.note) why.append(" " + r.note);
+    renderLadder(); renderResult();
+  }
+
+  function buildQuestions() {
+    var host = $("questions"); host.textContent = "";
+    QUESTIONS.forEach(function (q, qi) {
+      var fs = el("fieldset"), lg = el("legend", "", (qi + 1) + ". " + q.q); fs.append(lg); var opts = el("div", "opts");
+      q.opts.forEach(function (o, oi) {
+        var lab = el("label"), inp = document.createElement("input"); inp.type = "radio"; inp.name = "q" + qi; inp.id = "q" + qi + "_" + oi; inp.value = String(oi); inp.checked = state.answers[qi] === oi;
+        inp.onchange = function () { state.answers[qi] = oi; applyQuestions(); }; lab.append(inp, el("span", "", o)); opts.append(lab);
+      });
+      fs.append(opts); host.append(fs);
+    });
+  }
+  function applyQuestions() {
+    var r = assessAnswers(state.answers); state.mine = r.level; state.viewed = r.level; state.avg = r.avg;
+    var sb = $("sb"); sb.textContent = "";
+    QUESTIONS.forEach(function (q, i) {
+      var v = q.scores[state.answers[i]], tr = el("div", "tr"), bar = el("i"), val = el("b", "", String(v)); bar.style.width = (v / 8 * 100) + "%"; val.style.left = (v / 8 * 100) + "%"; tr.append(bar, val); sb.append(el("span", "", q.short), tr);
+    });
+    var top = QUESTIONS.reduce(function (t, q) { return t + q.scores[q.scores.length - 1]; }, 0) / 6;
+    $("sbnote").textContent = "Average " + r.avg.toFixed(2) + " gives Level " + r.level + ". The highest possible average is " + top.toFixed(2) + ", so these questions never reach Levels 7 or 8; describe the task to get those.";
+    renderLadder(); renderResult();
+  }
+
+  function setMode(m) {
+    state.mode = m; $("tab-text").setAttribute("aria-selected", String(m === "text")); $("tab-q").setAttribute("aria-selected", String(m === "q"));
+    $("p-text").hidden = m !== "text"; $("p-q").hidden = m !== "q"; if (m === "text") applyText(); else applyQuestions();
+  }
+
+  function init() {
+    ["Add bookmarks to website", "Fix typo in the README", "Build authentication system with OAuth", "Migrate entire enterprise platform 500K LOC", "Make my app better"].forEach(function (t) {
+      var b = el("button", "", t); b.type = "button"; b.onclick = function () { $("task").value = t; applyText(); }; $("eg").append(b);
+    });
+    $("task").addEventListener("input", applyText); $("tab-text").onclick = function () { setMode("text"); }; $("tab-q").onclick = function () { setMode("q"); };
+    buildQuestions(); applyText();
+  }
+
+  Promise.all([
+    fetch("../../../learning-resources/chess/task_complexity_grading.json").then(function (r) { return r.json(); }),
+    fetch("../../../learning-resources/chess/ultra_complexity_levels_6_8.json").then(function (r) { return r.json(); })
+  ]).then(function (res) { STD = res[0].task_grading_framework; ULTRA = res[1].ultra_complexity_framework; init(); })
+    .catch(function (e) { $("result").textContent = "The level data could not be loaded. Serve the site over http(s) rather than opening the file directly."; if (window.console) console.error(e); });
+})();
+</script>
+</body>
+</html>
