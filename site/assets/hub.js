@@ -100,6 +100,7 @@ Object.entries(CATS).forEach(([k, v]) => (catColor[k] = new THREE.Color(v.color)
 
 let filter = "";
 let mode = "overview";
+let typeFilter = "";
 let step = 0;
 let selected = null;
 let hovered = null;
@@ -173,6 +174,7 @@ function init() {
   const shape = new Float32Array(N);
   const dim = new Float32Array(N).fill(1);
   const baseBoost = new Float32Array(N);
+  const baseSize = new Float32Array(N);
   const boost = new Float32Array(N);
   nodes.forEach((n, i) => {
     pos.set([n.pos.x, n.pos.y, n.pos.z], i * 3);
@@ -180,6 +182,7 @@ function init() {
     col.set([c.r, c.g, c.b], i * 3);
     const base = 0.5 + 0.22 * Math.log10(Math.max(n.s, 300) / 300);
     size[i] = Math.min(base, 1.15) * (n.k === "app" ? 1.7 : 1) * SIZE_MULT;
+    baseSize[i] = size[i];
     shape[i] = n.k === "app" ? 1 : 0;
     n.i = i;
   });
@@ -261,11 +264,13 @@ function init() {
       if (mode === "session") {
         if (n.v === step) { c = SESS_NOW; b = 0.35; } else if (n.v < step) { c = SESS_PAST; d = 0.85; } else { c = SESS_LATER; d = 0.1; }
       } else c = catColor[n.c];
+      if (mode === "run") { if (n.k !== "app") d = 0.07; else if (typeFilter && n.ty !== typeFilter) d = 0.12; else b = 0.3; }
+      size[i] = baseSize[i] * (mode === "run" && n.k === "app" ? 2.6 : 1);
       if (filter && n.c !== filter) d *= 0.15;
       col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
       dim[i] = d; baseBoost[i] = b; boost[i] = b + (n === selected ? 0.5 : 0);
     });
-    geo.attributes.aColor.needsUpdate = true; geo.attributes.aDim.needsUpdate = true; geo.attributes.aBoost.needsUpdate = true;
+    geo.attributes.aSize.needsUpdate = true; geo.attributes.aColor.needsUpdate = true; geo.attributes.aDim.needsUpdate = true; geo.attributes.aBoost.needsUpdate = true;
     paintLines();
   }
   paintLines();
@@ -353,6 +358,7 @@ function init() {
     for (const n of nodes) {
       if (filter && n.c !== filter) continue;
       if (mode === "session" && n.v > step) continue;
+      if (mode === "run" && (n.k !== "app" || (typeFilter && n.ty !== typeFilter))) continue;
       v.copy(n.pos).project(camera);
       if (v.z > 1) continue;
       const sx = (v.x * 0.5 + 0.5) * rect.width;
@@ -415,6 +421,12 @@ function init() {
     boost[n.i] = baseBoost[n.i] + 0.5;
     geo.attributes.aBoost.needsUpdate = true;
     showCard(n, true);
+    if (mode === "run") {
+      const back = document.createElement("button");
+      back.type = "button"; back.className = "dir"; back.textContent = "All runnable pages";
+      back.onclick = showRunList;
+      cardEl.append(back);
+    }
     pinEl.hidden = false;
     pinEl.style.borderColor = CATS[n.c].color;
   }
@@ -809,6 +821,38 @@ function init() {
     if (!n.isRoot && n.expanded) { const close = el("button", "dir", "Close"); close.type = "button"; close.onclick = () => ovToggle(n); cardEl.append(close); }
   }
 
+  /* ================================================================== runnable pages, listed beside the map */
+  const typeBar = document.getElementById("typechips");
+  const apps = nodes.filter((n) => n.k === "app");
+  function showRunList() {
+    const shown = apps.filter((n) => !typeFilter || n.ty === typeFilter);
+    cardEl.style.setProperty("--c", "#8a93a8");
+    cardEl.textContent = "";
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    const k = el("div", "k"); k.append(el("i"), "Pages you can run");
+    cardEl.append(k, el("h3", "", `${shown.length} ${typeFilter || "page"}${shown.length === 1 ? "" : "s"}`), el("p", "x", "Diamonds on the map. Click one to see where it lives, or open it straight from here."));
+    const ul = el("ul", "runlist");
+    shown.forEach((n) => {
+      const li = el("li"); li.style.setProperty("--c", CATS[n.c].color);
+      const loc = el("button", "loc"); loc.type = "button";
+      loc.append(el("b", "ty", n.ty), el("span", "rt", n.t));
+      loc.onclick = () => { select(n); flyTo(n.pos, 40); };
+      const go = el("a", "open", "Open"); go.href = n.u;
+      li.append(loc, go);
+      ul.append(li);
+    });
+    cardEl.append(ul);
+    if (selected) { boost[selected.i] = baseBoost[selected.i]; geo.attributes.aBoost.needsUpdate = true; selected = null; }
+    pinEl.hidden = true;
+  }
+  if (typeBar) typeBar.addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    typeFilter = b.dataset.type;
+    typeBar.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    applyColors();
+    if (mode === "run") showRunList();
+  });
+
   /* ================================================================== modes */
   const modeBtns = [...document.querySelectorAll(".modes button")];
   const hintEl = document.getElementById("hint");
@@ -816,6 +860,7 @@ function init() {
   const HINTS = {
     overview: "Click an area or a folder to open it · drag to rotate · scroll to zoom",
     folder: "Every file as a point · drag to rotate · scroll or pinch to zoom · click a point",
+    run: "Diamonds are pages you can run · pick a type, click a diamond, or open one from the list",
     session: "Watch the repository grow, one chat at a time · drag to rotate · click a point",
   };
   function setMode(m) {
@@ -829,6 +874,7 @@ function init() {
     ovPoints.visible = !cloud;
     ovLines.visible = !cloud;
     if (tl) tl.hidden = m !== "session";
+    if (typeBar) typeBar.hidden = m !== "run";
     tipEl.hidden = true;
     if (tlApi && m !== "session") tlApi.pause();
     if (m === "overview") {
@@ -841,9 +887,10 @@ function init() {
       chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.cat === "")));
       applyColors();
       if (prev === "overview") flyTo(centre, homeDist, homeDir);
-      if (!selected) select(nodes.find((n) => n.p === "README.md") || nodes[0]);
+      if (m === "run") { showRunList(); flyTo(centre, homeDist, homeDir); }
+      else if (!selected) select(nodes.find((n) => n.p === "README.md") || nodes[0]);
       else showCard(selected, true);
-      pinEl.hidden = false;
+      pinEl.hidden = m === "run" && !selected;
       if (m === "session" && tlApi) { tlApi.setStep(reduced ? PROV.length - 1 : 0); if (!reduced) tlApi.startPlay(); }
     }
   }

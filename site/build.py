@@ -683,13 +683,14 @@ def render_home(repo):
 <section class="hero">
   <p class="eyebrow">{n_doc + n_app + n_code} files from 30 Claude Code sessions</p>
   <h1>{SITE_NAME}</h1>
-  <p class="lede">A map of everything the sessions produced. The <b>Overview</b> shows the areas around this repo's README; click one to open its folders. <b>All files</b> plots every file as a point, and diamonds are pages you can run in the browser. <b>By session</b> replays the build, one chat at a time.</p>
+  <p class="lede">A map of everything the sessions produced. The <b>Overview</b> shows the areas around this repo's README; click one to open its folders. <b>All files</b> plots every file as a point. <b>Runnable pages</b> lights up the diamonds you can open in the browser, filtered by type. <b>By session</b> replays the build, one chat at a time.</p>
 </section>
 <section class="mapwrap" aria-label="3D map of the repository">
   <div class="chiprow">
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
-    <div class="modes" role="group" aria-label="View"><button type="button" data-mode="overview" aria-pressed="true">Overview</button><button type="button" data-mode="folder" aria-pressed="false">All files</button>{'<button type="button" data-mode="session" aria-pressed="false">By session</button>' if has_prov else ''}</div>
+    <div class="modes" role="group" aria-label="View"><button type="button" data-mode="overview" aria-pressed="true">Overview</button><button type="button" data-mode="folder" aria-pressed="false">All files</button><button type="button" data-mode="run" aria-pressed="false">Runnable pages</button>{'<button type="button" data-mode="session" aria-pressed="false">By session</button>' if has_prov else ''}</div>
   </div>
+  <div class="typechips" id="typechips" role="group" aria-label="Filter runnable pages by type" hidden>{type_chips}</div>
   <div class="mapgrid">
   <div class="stage" id="stage">
     <canvas id="map" role="img" aria-label="3D map of {len(repo.nodes)} files grouped by folder. The lists below hold the same content."></canvas>
@@ -703,11 +704,10 @@ def render_home(repo):
   </div>
   {'<div class="timeline" id="timeline" hidden><div class="tl-head"><button type="button" id="tl-play" class="tl-btn">Play</button><input type="range" id="tl-range" min="0" max="' + str(len(repo.sessions) - 1) + '" value="' + str(len(repo.sessions) - 1) + '" aria-label="Session"><span class="tl-key"><i class="now"></i>this session<i class="past"></i>earlier<i class="later"></i>later</span></div><p class="tl-label" id="tl-label" aria-live="polite"></p><div class="tl-bars" id="tl-bars" role="group" aria-label="Files produced by each session, oldest first"></div></div>' if has_prov else ''}
 </section>
-<section class="block">
-  <h2>Pages you can run</h2>
-  <div class="typechips" id="typechips" role="group" aria-label="Filter by type">{type_chips}</div>
+<details class="block runfallback">
+  <summary>Pages you can run, as a plain list</summary>
   <ul class="apps">{app_cards}</ul>
-</section>
+</details>
 <section class="block">
   <h2>Areas</h2>
   <ul class="areas">{''.join(area_cards)}</ul>
