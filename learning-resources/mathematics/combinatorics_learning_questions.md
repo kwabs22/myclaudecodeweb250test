@@ -1,5 +1,7 @@
 # 100 Combinatorics Learning Questions
 
+> **Answers and a quiz:** the [answers](combinatorics_answers.md) are written out in full, and the [Combinatorics Quiz](quiz/index.html) turns these questions into flashcards.
+
 A comprehensive set of questions for learning combinatorics, organized by topic and difficulty level.
 
 ## Table of Contents

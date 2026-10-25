@@ -42,5 +42,9 @@
  "creative-media/music/theory-quiz/index.html": {
   "type": "Quiz",
   "blurb": "200 guitar and piano theory questions as flashcards: reveal the answer, mark what you knew, then redo the ones you missed."
+ },
+ "learning-resources/mathematics/quiz/index.html": {
+  "type": "Quiz",
+  "blurb": "100 combinatorics problems as flashcards, with worked answers checked by brute force."
  }
 }
