@@ -73,6 +73,8 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
+          // Without this the stack's card grows to fit its content on the web, so long lists never scroll.
+          cardStyle: { flex: 1 },
           headerStyle: {
             backgroundColor: '#6200ee',
           },

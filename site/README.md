@@ -44,3 +44,8 @@ checks out the full history (`fetch-depth: 0`) so these can be worked out; on a 
 
 `.github/workflows/pages.yml` builds and deploys on every push to `main`.
 One-time setup: repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+## Back bar and overview map
+
+- `atlas_bar.py` adds a slim "Session Atlas" bar to every runnable page (Next.js pages get it from a script after load so hydration is not disturbed), and unlocks scrolling on the Expo export.
+- The home map opens in **Overview**: About this repo at the centre, areas around it, each edge labelled with its file count. Clicking an area or folder (or a filter chip) opens its structure. **All files** and **By session** are the other two views.

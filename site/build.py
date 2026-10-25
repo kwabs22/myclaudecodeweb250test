@@ -683,12 +683,12 @@ def render_home(repo):
 <section class="hero">
   <p class="eyebrow">{n_doc + n_app + n_code} files from 30 Claude Code sessions</p>
   <h1>{SITE_NAME}</h1>
-  <p class="lede">A map of everything the sessions produced. Each point is a file, grouped by the folder it lives in. Diamonds are pages you can run in the browser. Switch to <b>By session</b> to watch the repository get built, one chat at a time.</p>
+  <p class="lede">A map of everything the sessions produced. The <b>Overview</b> shows the areas around this repo's README; click one to open its folders. <b>All files</b> plots every file as a point, and diamonds are pages you can run in the browser. <b>By session</b> replays the build, one chat at a time.</p>
 </section>
 <section class="mapwrap" aria-label="3D map of the repository">
   <div class="chiprow">
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
-    {'<div class="modes" role="group" aria-label="Colour points by"><button type="button" data-mode="folder" aria-pressed="true">By folder</button><button type="button" data-mode="session" aria-pressed="false">By session</button></div>' if has_prov else ''}
+    <div class="modes" role="group" aria-label="View"><button type="button" data-mode="overview" aria-pressed="true">Overview</button><button type="button" data-mode="folder" aria-pressed="false">All files</button>{'<button type="button" data-mode="session" aria-pressed="false">By session</button>' if has_prov else ''}</div>
   </div>
   <div class="mapgrid">
   <div class="stage" id="stage">
@@ -696,7 +696,7 @@ def render_home(repo):
     <div class="labels" id="labels" aria-hidden="true"></div>
     <div class="pin" id="pin" hidden></div>
     <div class="tip" id="tip" hidden></div>
-    <p class="hint" aria-hidden="true">Drag to rotate · scroll or pinch to zoom · click a point</p>
+    <p class="hint" id="hint" aria-hidden="true">Drag to rotate · scroll or pinch to zoom · click a point</p>
     <p class="nogl" id="nogl" hidden>The 3D map needs WebGL, which this browser has turned off. The lists below cover the same files.</p>
   </div>
   <aside class="card" id="card" aria-live="polite"></aside>
@@ -776,6 +776,8 @@ def main():
     shutil.copytree(ASSETS, OUT / "assets")
     (OUT / "assets" / "code.css").write_text(pygments_css(), encoding="utf-8")
     (OUT / ".nojekyll").write_text("")
+    import atlas_bar
+    print(f"back bar added to {atlas_bar.run(OUT)} runnable pages")
 
     pages = sum(1 for _ in OUT.rglob("*.html"))
     print(f"{len(repo.nodes)} files on the map, {pages} html pages, {len(repo.dirs) - 1} folders")

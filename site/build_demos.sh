@@ -33,3 +33,5 @@ build_expo() {   # <project dir inside the repo> <output folder name>
 
 build_next creative-media/social-media/trending-topics-ui demo
 build_expo game-development/react-native/react-native-games-expo/expo-games-demo web
+
+python3 site/atlas_bar.py _site   # now that the built demos exist
