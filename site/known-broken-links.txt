@@ -1,1 +1,1 @@
-industry-research/business/vending-machine/README.md   # linked from FILE_INDEX.md; the original branch never had this file
+# Links that are known to have no target in the repository. Empty on purpose: the check fails on any new one.

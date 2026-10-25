@@ -85,7 +85,7 @@ This repository contains research, tools, and documentation from **30 different 
 - **Mathematics** - Combinatorics learning
 - **Chess** (19 files) - Chess calculator + GPU benchmarking tools
 
-**Play**: `learning-resources/chess/chess-calc-app/index.html`
+**Play**: `learning-resources/chess-calc-app/index.html`
 
 ---
 

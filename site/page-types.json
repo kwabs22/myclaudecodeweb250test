@@ -19,7 +19,7 @@
   "type": "Test page",
   "blurb": "A test mode that shows the anatomy viewer on a dummy image instead of a live camera."
  },
- "learning-resources/chess/chess-calc-app/index.html": {
+ "learning-resources/chess-calc-app/index.html": {
   "type": "Tool",
   "blurb": "Set up a chess position and generate the tree of possible moves, 12 deep."
  },

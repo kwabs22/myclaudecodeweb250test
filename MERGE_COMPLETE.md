@@ -183,7 +183,7 @@ Total files: 297
 1. **Browse from root README**: `README.md`
 2. **Explore game dev**: `game-development/README.md`
 3. **Try interactive content**:
-   - Chess: `learning-resources/chess/chess-calc-app/`
+   - Chess: `learning-resources/chess-calc-app/`
    - Quiz: `ai-ml/careers/ai-engineer-roadmap/QuizApp.jsx`
    - Games: `game-development/react-native/`
 
