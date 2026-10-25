@@ -2,9 +2,9 @@
 
 A comprehensive collection of analyses, guides, and resources for learning modern 3D game development through open-source projects.
 
-**Total Documents**: 9 comprehensive guides + 13 supplementary files
-**Total Content**: 150+ pages of analysis
-**Coverage**: AI tools, game engines, automation, and 20 major GitHub projects
+**Total Documents**: 10 comprehensive guides + 13 supplementary files
+**Total Content**: 175+ pages of analysis
+**Coverage**: AI tools, game engines, automation, narrative systems, and 35+ major GitHub projects
 
 ---
 
@@ -12,7 +12,7 @@ A comprehensive collection of analyses, guides, and resources for learning moder
 
 ### 1. Core Analysis Documents
 
-#### [AI Tools Impacting 3D Gaming](./ai-tools/ai-tools-3d-gaming-impact.md)
+#### [AI Tools Impacting 3D Gaming](ai-tools/ai-tools-3d-gaming-impact.md)
 **Size**: 14KB | **Reading Time**: 30 minutes
 
 Analysis of three AI-powered repositories and their impact on game development:
@@ -29,7 +29,7 @@ Analysis of three AI-powered repositories and their impact on game development:
 
 ---
 
-#### [EasyBPY Concepts for PlayCanvas](./blender/easybpy-concepts-for-playcanvas.md)
+#### [EasyBPY Concepts for PlayCanvas](blender/easybpy-concepts-for-playcanvas.md)
 **Size**: 33KB | **Reading Time**: 1 hour
 
 Comprehensive mapping of Blender automation concepts to PlayCanvas web game engine:
@@ -50,7 +50,7 @@ Comprehensive mapping of Blender automation concepts to PlayCanvas web game engi
 
 ---
 
-#### [GitHub Projects to Learn From](./github-projects-to-learn-from.md)
+#### [GitHub Projects to Learn From](github-projects-to-learn-from.md)
 **Size**: 20KB | **Reading Time**: 45 minutes
 
 Curated list of 20 open-source game development projects:
@@ -73,7 +73,7 @@ Curated list of 20 open-source game development projects:
 
 ---
 
-#### [Top 20 Functions Analysis](./top-20-functions-analysis.md)
+#### [Top 20 Functions Analysis](top-20-functions-analysis.md)
 **Size**: 35KB | **Reading Time**: 1.5 hours
 
 Deep analysis of 400 functions across 20 major game development projects:
@@ -93,9 +93,37 @@ Deep analysis of 400 functions across 20 major game development projects:
 
 ---
 
+#### [Story Generation: Methodologies and Tools](../creative-media/story-generation/story-generation-methodologies-and-tools.md)
+**Size**: 35KB | **Reading Time**: 1.5 hours
+
+Comprehensive guide to narrative generation systems and interactive storytelling:
+- **6 Core Methodologies** (Grammar-based, Node-based, Storylets, Templates, LLM, Emergent)
+- **15+ Major Tools** analyzed (Ink, Yarn Spinner, Tracery, Twine, Ren'Py, Inform 7)
+- Complete comparison matrix and learning paths
+- Both open-source and commercial solutions
+
+**What You'll Learn**:
+- Different approaches to computational storytelling
+- Choosing the right tool for your project
+- Industry-standard narrative design workflows
+- Procedural and AI-driven story generation
+- Integration with game engines
+
+**Coverage**:
+- Interactive narrative frameworks (Ink, Yarn Spinner, Twine)
+- Grammar-based generation (Tracery)
+- Visual novel engines (Ren'Py)
+- Professional tools (articy:draft, ChatMapper)
+- AI-driven systems (LLM-based, emergent narratives)
+- Learning paths for writers, programmers, and designers
+
+**Best For**: Narrative designers, game writers, programmers building story systems, anyone interested in interactive storytelling
+
+---
+
 ### 2. Specialized Analysis Documents
 
-#### [GASShooter Detailed Analysis](./gasshooter/GASSHOOTER_DETAILED_ANALYSIS.md)
+#### [GASShooter Detailed Analysis](gasshooter/GASSHOOTER_DETAILED_ANALYSIS.md)
 **Size**: 19KB
 
 Complete breakdown of the GASShooter project:
@@ -106,7 +134,7 @@ Complete breakdown of the GASShooter project:
 
 ---
 
-#### [GASShooter Executive Summary](./gasshooter/GASSHOOTER_EXECUTIVE_SUMMARY.md)
+#### [GASShooter Executive Summary](gasshooter/GASSHOOTER_EXECUTIVE_SUMMARY.md)
 **Size**: 11KB
 
 High-level overview:
@@ -117,7 +145,7 @@ High-level overview:
 
 ---
 
-#### [PlayCanvas Complexity Analysis](./playcanvas/PlayCanvas_Complexity_Analysis.md)
+#### [PlayCanvas Complexity Analysis](playcanvas/PlayCanvas_Complexity_Analysis.md)
 **Size**: 21KB
 
 Technical deep-dive into PlayCanvas Engine:
@@ -128,7 +156,7 @@ Technical deep-dive into PlayCanvas Engine:
 
 ---
 
-#### [PlayCanvas Function Analysis](./playcanvas/PlayCanvas_Function_Analysis.md)
+#### [PlayCanvas Function Analysis](playcanvas/PlayCanvas_Function_Analysis.md)
 **Size**: 19KB
 
 Analysis of 4 PlayCanvas plugin repositories:
@@ -160,7 +188,7 @@ Analysis of 4 PlayCanvas plugin repositories:
 ### For Beginners
 
 **Start Here:**
-1. Read [GitHub Projects to Learn From](./github-projects-to-learn-from.md) - Beginner section
+1. Read [GitHub Projects to Learn From](github-projects-to-learn-from.md) - Beginner section
 2. Clone **Action Roguelike** or **PlayCanvas Tween**
 3. Follow the "How to Deconstruct" guide in the projects document
 
@@ -174,8 +202,8 @@ Analysis of 4 PlayCanvas plugin repositories:
 ### For Intermediate Developers
 
 **Start Here:**
-1. Read [Top 20 Functions Analysis](./top-20-functions-analysis.md) - Introduction
-2. Study [EasyBPY Concepts for PlayCanvas](./blender/easybpy-concepts-for-playcanvas.md)
+1. Read [Top 20 Functions Analysis](top-20-functions-analysis.md) - Introduction
+2. Study [EasyBPY Concepts for PlayCanvas](blender/easybpy-concepts-for-playcanvas.md)
 3. Pick 2-3 projects from the intermediate path
 
 **Recommended Focus:**
@@ -188,7 +216,7 @@ Analysis of 4 PlayCanvas plugin repositories:
 ### For Advanced Developers
 
 **Start Here:**
-1. Deep dive into [Top 20 Functions Analysis](./top-20-functions-analysis.md)
+1. Deep dive into [Top 20 Functions Analysis](top-20-functions-analysis.md)
 2. Review specialized analyses (GASShooter, PlayCanvas Complexity)
 3. Contribute to the projects
 
@@ -202,8 +230,8 @@ Analysis of 4 PlayCanvas plugin repositories:
 ### For Technical Artists
 
 **Start Here:**
-1. Read [AI Tools Impacting 3D Gaming](./ai-tools/ai-tools-3d-gaming-impact.md)
-2. Study [EasyBPY Concepts for PlayCanvas](./blender/easybpy-concepts-for-playcanvas.md)
+1. Read [AI Tools Impacting 3D Gaming](ai-tools/ai-tools-3d-gaming-impact.md)
+2. Study [EasyBPY Concepts for PlayCanvas](blender/easybpy-concepts-for-playcanvas.md)
 3. Set up Blender automation with EasyBPY
 
 **Key Projects:**
@@ -213,24 +241,44 @@ Analysis of 4 PlayCanvas plugin repositories:
 
 ---
 
+### For Narrative Designers & Writers
+
+**Start Here:**
+1. Read [Story Generation: Methodologies and Tools](../creative-media/story-generation/story-generation-methodologies-and-tools.md)
+2. Start with **Twine** for interactive fiction basics
+3. Learn **Ink** or **Yarn Spinner** for game integration
+
+**Recommended Tools:**
+- **Twine** - Beginner-friendly interactive fiction
+- **Ink** - Professional branching narratives
+- **Yarn Spinner** - Dialogue systems for games
+- **Tracery** - Procedural text generation
+
+**Key Project** (from main list):
+- **SUQS** - Production quest system example
+
+---
+
 ## 📊 Statistics & Metrics
 
 ### Analysis Coverage
 
 | Category | Count | Total Lines |
 |----------|-------|-------------|
-| **Projects Analyzed** | 20 | ~500,000+ |
+| **Game Engine Projects** | 20 | ~500,000+ |
+| **Story Generation Tools** | 15+ | Varies |
 | **Functions Documented** | 400 | ~50,000 |
-| **Documents Created** | 22 | 150+ pages |
+| **Documents Created** | 23 | 175+ pages |
 | **Code Examples** | 60+ | 3,000+ lines |
-| **Repositories Linked** | 23 | - |
+| **Repositories Linked** | 38+ | - |
 
 ### Project Breakdown
 
-| Engine | Projects | Language | Complexity |
+| Category | Projects | Language | Complexity |
 |--------|----------|----------|------------|
 | **Unreal Engine** | 8 | C++ | High |
 | **PlayCanvas** | 12 | JS/TS | Medium-High |
+| **Narrative Tools** | 15+ | Varies | Low-High |
 
 ### Complexity Distribution
 
@@ -281,6 +329,15 @@ Analysis of 4 PlayCanvas plugin repositories:
 - SuperSplat → serializePlyCompressed, Gaussian Splatting
 - PlayCanvas Spine → Mesh batching
 
+**Narrative & Story Systems:**
+- Story Generation Guide → 6 methodologies, 15+ tools
+- Ink → Branching interactive narratives
+- Yarn Spinner → Dialogue trees and conversations
+- Tracery → Grammar-based text generation
+- Twine → Choice-based interactive fiction
+- Ren'Py → Visual novel engine
+- SUQS → Quest and narrative systems
+
 ### By Skill Level
 
 **Beginner (0-1 year experience):**
@@ -319,6 +376,12 @@ Analysis of 4 PlayCanvas plugin repositories:
 
 **Want to automate workflows?**
 → EasyBPY Concepts for PlayCanvas, SUQS
+
+**Want to design narrative systems?**
+→ Story Generation Guide, SUQS, Ink, Yarn Spinner, Twine
+
+**Want to learn interactive storytelling?**
+→ Story Generation Methodologies (all 6 approaches and 15+ tools)
 
 ---
 
@@ -363,13 +426,13 @@ These documents can be used in:
 ### For Studios
 
 **Pipeline Automation:**
-→ [EasyBPY Concepts for PlayCanvas](./blender/easybpy-concepts-for-playcanvas.md)
+→ [EasyBPY Concepts for PlayCanvas](blender/easybpy-concepts-for-playcanvas.md)
 
 **Code Review Standards:**
-→ [Top 20 Functions Analysis](./top-20-functions-analysis.md) - Complexity patterns
+→ [Top 20 Functions Analysis](top-20-functions-analysis.md) - Complexity patterns
 
 **Training New Hires:**
-→ [GitHub Projects to Learn From](./github-projects-to-learn-from.md)
+→ [GitHub Projects to Learn From](github-projects-to-learn-from.md)
 
 **Architecture Decisions:**
 → Specialized analysis documents
@@ -377,7 +440,7 @@ These documents can be used in:
 ### For Indie Developers
 
 **Asset Creation:**
-→ [AI Tools Impacting 3D Gaming](./ai-tools/ai-tools-3d-gaming-impact.md)
+→ [AI Tools Impacting 3D Gaming](ai-tools/ai-tools-3d-gaming-impact.md)
 
 **System Implementation:**
 → Copy patterns from analyzed functions
@@ -548,7 +611,7 @@ For questions about:
 4. **Creator**: Study patterns → Build own project → Share back
 
 **Recommended First Action:**
-→ Read [GitHub Projects to Learn From](./github-projects-to-learn-from.md) and clone your first project today!
+→ Read [GitHub Projects to Learn From](github-projects-to-learn-from.md) and clone your first project today!
 
 ---
 

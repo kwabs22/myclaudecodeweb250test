@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Music Theory Quiz</title>
+<style>
+:root{--bg:#f6f7fb;--panel:#fff;--ink:#14161f;--muted:#5d6479;--line:#d9dde8;--accent:#3a63d8;--good:#17794a;--bad:#b3341f;--chip:#eef1f8;--font:system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--good:#5fd49b;--bad:#ff8f7a;--chip:#1f2535}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--good:#5fd49b;--bad:#ff8f7a;--chip:#1f2535}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--font)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:8px 0 6px}
+.lede{color:var(--muted);margin:0 0 18px}
+fieldset{border:0;padding:0;margin:0 0 14px}
+legend,.lab{font:600 12px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select{font:inherit}
+.pill{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);max-width:100%}
+.go{padding:10px 22px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
+.go:disabled{opacity:.5;cursor:default}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:18px}
+.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin-bottom:12px}
+.bar{height:6px;background:var(--chip);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--accent);width:0}
+.q{font-size:clamp(19px,3.4vw,24px);line-height:1.3;margin:0 0 18px;font-weight:600}
+.a{border-top:1px dashed var(--line);padding-top:14px;margin-top:6px;font-size:17px}
+.a b{display:block;font:600 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.actions button{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;font-weight:600}
+.actions .yes{border-color:var(--good);color:var(--good)}
+.actions .no{border-color:var(--bad);color:var(--bad)}
+.actions .show{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.score{font-size:46px;font-weight:800;margin:4px 0}
+.missed{margin:12px 0 0;padding-left:20px}
+.missed li{margin:6px 0}
+.hint{color:var(--muted);font-size:13px;margin-top:14px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <h1>Music Theory Quiz</h1>
+  <p class="lede">200 questions for guitar and piano players, from the two question sets in this folder. Read the question, say your answer out loud or in your head, reveal the answer, then mark whether you had it. Missed questions are listed at the end so you can go again with just those.</p>
+
+  <div id="setup">
+    <fieldset><legend>Instrument</legend>
+      <div class="row" id="decks" role="group" aria-label="Instrument">
+        <button class="pill" type="button" data-deck="" aria-pressed="true">Both</button>
+        <button class="pill" type="button" data-deck="guitar" aria-pressed="false">Guitar</button>
+        <button class="pill" type="button" data-deck="piano" aria-pressed="false">Piano</button>
+      </div>
+    </fieldset>
+    <div class="row" style="gap:18px;margin-bottom:16px">
+      <label><span class="lab">Topic</span><select id="section"></select></label>
+      <label><span class="lab">How many</span><select id="count"><option value="10">10 questions</option><option value="25">25 questions</option><option value="0">All of them</option></select></label>
+    </div>
+    <button class="go" id="start" type="button">Start</button>
+    <p class="hint" id="avail" aria-live="polite"></p>
+  </div>
+
+  <section class="card" id="play" hidden aria-live="polite">
+    <div class="meta"><span id="pos"></span><span id="topic"></span></div>
+    <div class="bar" aria-hidden="true"><i id="fill"></i></div>
+    <p class="q" id="question"></p>
+    <div class="a" id="answer" hidden><b>Answer</b><span id="answertext"></span></div>
+    <div class="actions" id="actions"></div>
+    <p class="hint">Keys: Space shows the answer, then 1 for got it, 2 for missed.</p>
+  </section>
+
+  <section class="card" id="done" hidden>
+    <p class="lab">Finished</p>
+    <p class="score" id="score"></p>
+    <p id="verdict"></p>
+    <ol class="missed" id="missed"></ol>
+    <div class="actions">
+      <button class="show" id="again" type="button">New round</button>
+      <button id="redo" type="button">Go again with the missed ones</button>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var ALL = [], state = { deck: "", queue: [], i: 0, right: 0, missed: [], shown: false };
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+
+  function sections() {
+    var s = $("section"), cur = s.value; s.textContent = "";
+    var o = el("option", "", "All topics"); o.value = ""; s.append(o);
+    var seen = {};
+    ALL.forEach(function (q) { if ((!state.deck || q.deck === state.deck) && !seen[q.section]) { seen[q.section] = 1; var p = el("option", "", q.section); p.value = q.section; s.append(p); } });
+    s.value = seen[cur] ? cur : "";
+    avail();
+  }
+  function pool() { return ALL.filter(function (q) { return (!state.deck || q.deck === state.deck) && (!$("section").value || q.section === $("section").value); }); }
+  function avail() { var n = pool().length; $("avail").textContent = n + " question" + (n === 1 ? "" : "s") + " match."; $("start").disabled = !n; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  function begin(list) {
+    state.queue = list; state.i = 0; state.right = 0; state.missed = [];
+    $("setup").hidden = true; $("done").hidden = true; $("play").hidden = false; show();
+  }
+  function show() {
+    var q = state.queue[state.i]; state.shown = false;
+    $("pos").textContent = "Question " + (state.i + 1) + " of " + state.queue.length;
+    $("topic").textContent = (q.deck === "guitar" ? "Guitar" : "Piano") + " · " + q.section;
+    $("fill").style.width = (state.i / state.queue.length * 100) + "%";
+    $("question").textContent = q.q; $("answer").hidden = true;
+    var a = $("actions"); a.textContent = "";
+    var b = el("button", "show", "Show answer"); b.type = "button"; b.onclick = reveal; a.append(b); b.focus();
+  }
+  function reveal() {
+    var q = state.queue[state.i]; state.shown = true;
+    $("answertext").textContent = q.a; $("answer").hidden = false;
+    var a = $("actions"); a.textContent = "";
+    var y = el("button", "yes", "Got it (1)"), n = el("button", "no", "Missed it (2)");
+    y.type = n.type = "button"; y.onclick = function () { mark(true); }; n.onclick = function () { mark(false); };
+    a.append(y, n); y.focus();
+  }
+  function mark(ok) {
+    var q = state.queue[state.i];
+    if (ok) state.right++; else state.missed.push(q);
+    state.i++;
+    if (state.i >= state.queue.length) finish(); else show();
+  }
+  function finish() {
+    $("play").hidden = true; $("done").hidden = false;
+    var n = state.queue.length, pct = Math.round(state.right / n * 100);
+    $("score").textContent = state.right + " / " + n;
+    $("verdict").textContent = !state.missed.length ? "Every one. Try a harder topic or the other instrument." : pct >= 70 ? "Solid. These are the ones to look at again:" : "Good practice. These are worth another pass:";
+    var ol = $("missed"); ol.textContent = "";
+    state.missed.forEach(function (q) { var li = el("li"); li.append(el("strong", "", q.q), el("br"), q.a); ol.append(li); });
+    $("redo").hidden = !state.missed.length;
+  }
+
+  $("decks").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    state.deck = b.dataset.deck;
+    [].forEach.call($("decks").children, function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    sections();
+  });
+  $("section").onchange = avail;
+  $("start").onclick = function () { var n = +$("count").value, p = shuffle(pool()); begin(n ? p.slice(0, n) : p); };
+  $("again").onclick = function () { $("done").hidden = true; $("setup").hidden = false; avail(); };
+  $("redo").onclick = function () { begin(shuffle(state.missed)); };
+  document.addEventListener("keydown", function (e) {
+    if ($("play").hidden || e.target.tagName === "SELECT") return;
+    if (e.key === " " && !state.shown) { e.preventDefault(); reveal(); }
+    else if (state.shown && (e.key === "1" || e.key === "2")) mark(e.key === "1");
+  });
+
+  fetch("questions.json").then(function (r) { return r.json(); }).then(function (d) { ALL = d; sections(); })
+    .catch(function () { $("avail").textContent = "Could not load the questions."; });
+})();
+</script>
+</body>
+</html>

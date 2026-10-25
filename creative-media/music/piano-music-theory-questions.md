@@ -1,5 +1,7 @@
 # 100 Piano Music Theory Questions
 
+> **Take it as a quiz:** these questions are also in the [Music Theory Quiz](theory-quiz/index.html), which shuffles them, tracks what you knew and lists what you missed.
+
 A comprehensive set of questions to test and reinforce your understanding of music theory concepts as they apply to piano playing and programming piano parts in a DAW.
 
 ---

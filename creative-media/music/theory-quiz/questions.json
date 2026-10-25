@@ -1,0 +1,1202 @@
+[
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "What are the notes of the guitar strings in standard tuning, from lowest to highest?",
+  "a": "E-A-D-G-B-E (6th string to 1st string)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "If you play the 5th fret of the 6th string (low E), what note are you playing?",
+  "a": "A (same pitch as the open 5th string)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "How many semitones does moving up one fret represent?",
+  "a": "1 semitone (half step)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "What note is located at the 12th fret of any string?",
+  "a": "The same note as the open string, one octave higher"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "In standard tuning, which two adjacent strings are NOT tuned a perfect 4th apart?",
+  "a": "The G (3rd) and B (2nd) strings - they are a major 3rd apart (4 semitones instead of 5)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "What is the MIDI note number range for a standard 6-string guitar in standard tuning?",
+  "a": "E2 (MIDI note 40) to approximately E6 (MIDI note 88), depending on how many frets the guitar has"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "If you're in Drop D tuning, what note is the 6th string tuned to?",
+  "a": "D (one whole step down from E)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "What interval is created when you play the same fret on two adjacent strings (except G and B strings)?",
+  "a": "Perfect 4th"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "In an open G tuning (D-G-D-G-B-D), what chord do you get when strumming all open strings?",
+  "a": "G major chord"
+ },
+ {
+  "deck": "guitar",
+  "section": "Basic Guitar Knowledge",
+  "q": "What are the five shapes in the CAGED system?",
+  "a": "C, A, G, E, and D chord shapes that can be moved up and down the neck"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "How many positions/patterns are there for the minor pentatonic scale across the fretboard?",
+  "a": "5 positions (one for each note of the pentatonic scale)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "In the A minor pentatonic scale (A-C-D-E-G), what is the \"blue note\" that creates the blues scale?",
+  "a": "Eb (D#) - the flatted 5th"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "If you're playing position 1 of A minor pentatonic starting at the 5th fret, which frets will you primarily use?",
+  "a": "Frets 5-8 (with most notes on frets 5 and 7)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "What scale degree pattern defines the major scale?",
+  "a": "W-W-H-W-W-W-H (Whole-Whole-Half-Whole-Whole-Whole-Half)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "In the \"3 notes per string\" scale pattern, how many positions are needed to cover the major scale across the entire neck?",
+  "a": "7 positions (one starting on each scale degree)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "What mode would you be playing if you use the C major scale pattern but resolve to D?",
+  "a": "D Dorian mode"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "If you play only the white keys on piano (C-D-E-F-G-A-B-C) on guitar starting from the 8th fret of the 6th string, what key are you in?",
+  "a": "C major (or A minor)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "What is the formula for the harmonic minor scale?",
+  "a": "W-H-W-W-H-W+H-H (or 2-1-2-2-1-3-1 in semitones)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "Which scale has the pattern: whole step - whole step - whole step - whole step - whole step - whole step?",
+  "a": "Whole tone scale"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Scales and Patterns",
+  "q": "In E minor pentatonic (E-G-A-B-D), which notes from the full E natural minor scale are omitted?",
+  "a": "F# and C (the 2nd and 6th scale degrees)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "What three notes make up an E major power chord (E5) when played with root on the 6th string?",
+  "a": "E (root), B (perfect 5th), E (octave)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "In a barre chord using the E major shape moved to the 3rd fret, what chord are you playing?",
+  "a": "G major"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "What notes comprise an open C major chord in standard voicing (X-3-2-0-1-0)?",
+  "a": "C-E-G-C-E (from 5th string to 1st string, with 6th string muted)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "Why do power chords work well with distortion?",
+  "a": "They contain no 3rd, avoiding dissonant overtones; only root and 5th create clean, powerful sound"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "If you play strings 4-3-2 at frets 7-7-7, what chord are you playing?",
+  "a": "D major triad (D-A-D-F#)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "What is a \"cowboy chord\"?",
+  "a": "An open position chord (typically C, A, G, E, D, Am, Em, Dm) played in first position"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "In the CAGED system, which shape would you use to play a C major chord with the root on the 5th string, 3rd fret?",
+  "a": "A shape (moved to the 3rd fret)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "What is the difference between Cmaj7 and C7 chords?",
+  "a": "Cmaj7 has a major 7th (B), while C7 has a minor 7th (Bb)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "If you play a sus4 chord and resolve it, which note moves and where does it go?",
+  "a": "The 4th moves down by one semitone to the 3rd (e.g., in Csus4, F moves down to E)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Chords and Voicings",
+  "q": "What notes would you play for a shell voicing of Gmaj7 (just 3rd and 7th)?",
+  "a": "B (major 3rd) and F# (major 7th)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "When programming a downstroke strum in piano roll, in what order should the notes trigger?",
+  "a": "Lowest to highest (bass strings first, treble strings last), with 3-5ms spacing"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "What velocity range is appropriate for the second note in a hammer-on?",
+  "a": "60-80 (lower than the picked note which would be 100-127)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "How do you represent a whole-step bend in piano roll?",
+  "a": "Start on one note, use pitch bend automation to raise it 2 semitones, or play the target note with pitch bend from below"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "What note length setting creates an authentic palm-muted sound in piano roll?",
+  "a": "Very short/staccato (typically 1/16 note or shorter with gaps between notes)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "When programming a pull-off from B to A, how should the velocities compare?",
+  "a": "First note (B) should have higher velocity (picked), second note (A) should have lower velocity (pulled-off)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "How far apart should notes be spaced when programming a realistic guitar strum?",
+  "a": "3-5 milliseconds between each string"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "For two-hand tapping, what is the typical velocity relationship between picked, tapped, and pulled-off notes?",
+  "a": "Picked (100-127), tapped (90-110), pulled-off (70-90)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "When creating a slide guitar part with portamento, should you use stepped pitches or continuous glide?",
+  "a": "Continuous glide/portamento for smooth sliding between pitches"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "How do you create realistic artificial harmonics in piano roll?",
+  "a": "Play notes 1-2 octaves higher than the fretted position, often at 12th fret (octave), 7th fret (octave+5th), or 5th fret (2 octaves)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Guitar Techniques in Piano Roll",
+  "q": "What's the best way to humanize programmed guitar strums?",
+  "a": "Slight timing variations, varied note spacing (3-5ms), subtle velocity differences, occasional ghost notes"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "Why are the keys of E, A, D, G, and C considered \"guitar-friendly\"?",
+  "a": "They utilize open strings, allowing for easier fingering, fuller resonance, and characteristic guitar tone"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "What is the musical interval between the 5th fret of the 6th string and the 7th fret of the 5th string?",
+  "a": "Perfect 5th (A to E)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "If you're playing in E minor and want to add a modal interchange chord from E major, what chord could you borrow?",
+  "a": "A major (IV from E major) or C# minor (vi from E major), among others"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "In a I-IV-V progression in the key of A, what chords would you play?",
+  "a": "A major - D major - E major"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "What is the relationship between the A minor pentatonic scale and the C major pentatonic scale?",
+  "a": "They contain the same notes (they are relative scales - Am is the relative minor of C major)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "If you're playing a 12-bar blues in E, what are the three main chords?",
+  "a": "E7 (I), A7 (IV), and B7 (V)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "What interval creates the distinctive sound of a major chord versus a minor chord?",
+  "a": "The 3rd - major 3rd (4 semitones) sounds happy, minor 3rd (3 semitones) sounds sad"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "In Drop D tuning, what advantage does the low D provide for playing power chords?",
+  "a": "You can play power chords on the bottom 3 strings with just one finger barred across one fret"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "If you're playing in the Dorian mode starting on A (A Dorian), what major scale shares the same notes?",
+  "a": "G major (A Dorian is the 2nd mode of G major)"
+ },
+ {
+  "deck": "guitar",
+  "section": "Applied Guitar Music Theory",
+  "q": "When programming a guitar solo in A minor, which notes from the A blues scale create the most tension and typically resolve downward?",
+  "a": "The blue note (Eb/D#) creates tension and typically resolves down to D; the G can also create tension resolving down to F or E"
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "What is a pinch harmonic and how would you represent it in piano roll?",
+  "a": "A pinch harmonic is created by lightly touching the string with the thumb while picking, producing a high-pitched squeal. In piano roll, use very high notes (2-3 octaves above fretted position) with short duration and pitch bend vibrato."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "Explain the difference between natural vibrato and mechanical vibrato on guitar.",
+  "a": "Natural vibrato = slight pitch variations created by finger movement (±1/4 to 1/2 semitone). Mechanical vibrato = tremolo/whammy bar creates wider pitch variations. Program with pitch bend automation: subtle (±50 cents) for natural, wider for whammy bar."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "What is sweep picking and how does it affect note timing in piano roll?",
+  "a": "Sweep picking is a technique where you use one continuous pick motion across multiple strings. Notes should be very close together in timing (1-3ms apart) with consistent velocity (90-110) to create the fluid, fast arpeggiated sound."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "How do you program a realistic guitar pick scrape in piano roll?",
+  "a": "Create a descending chromatic or atonal run with very short note durations, low velocity (30-50), and rapid timing. Often starts high and descends to low strings, with increasing velocity at the end."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "What is economy picking and how does it differ from alternate picking?",
+  "a": "Economy picking = pick moves in same direction when crossing strings (more efficient). Alternate picking = strict down-up-down-up pattern. In piano roll, economy picking might have slight timing variations on string crosses, while alternate is more metronomic."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "How would you program a chicken picking (hybrid picking) pattern in piano roll?",
+  "a": "Combination of picked notes (higher velocity 100-120) and plucked notes (medium velocity 80-100). Country/funk style uses syncopated rhythms with sharp staccato notes and occasional ghost notes (velocity 40-60)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "What is a pre-bend and how do you create it in piano roll?",
+  "a": "Bend the string before picking so the note starts at target pitch. In piano roll: use pitch bend automation set to +2 semitones (or desired interval) before note trigger, then optionally release during or after the note."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "Explain the \"rake\" technique and its velocity characteristics.",
+  "a": "Rake = quick muted notes leading to a target note, creating percussive attack. Program as 2-4 very short muted notes (velocity 20-40, very short duration) immediately before the main note (velocity 100-127)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "What is tapping harmonics and what MIDI note range represents it?",
+  "a": "Tapping at harmonic nodes (12th, 7th, 5th fret positions) produces bell-like tones. Use MIDI notes 2-3 octaves above normal fretted position, often with modulation and delay effects. Very short attack with some sustain."
+ },
+ {
+  "deck": "guitar",
+  "section": "Advanced Guitar Techniques",
+  "q": "How do you differentiate between a dive bomb and a scoop in pitch bend programming?",
+  "a": "Dive bomb = pitch bend downward from played note (start at 0, bend down to -12 or more semitones). Scoop = start below target pitch and bend up into it (start at -2 to -5 semitones, bend to 0)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What makes the Phrygian mode sound \"Spanish\" or \"exotic\"?",
+  "a": "The flatted 2nd scale degree (b2) creates a distinctive half-step between root and 2nd, characteristic of flamenco and Spanish music. In E Phrygian: E-F-G-A-B-C-D."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "How would you use the Lydian mode over a IV chord to create a \"dreamy\" sound?",
+  "a": "The #4 (or #11) in Lydian creates floating, ethereal quality. Over F major in key of C, use F Lydian (F-G-A-B-C-D-E) emphasizing the B natural for the characteristic sound."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What is the Mixolydian mode and over which chord type is it commonly used?",
+  "a": "Major scale with b7. Formula: W-W-H-W-W-H-W. Used over dominant 7th chords (e.g., G Mixolydian over G7). Creates bluesy, rock sound. The b7 provides dominant function."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What scale would you use to solo over a half-diminished chord (m7b5)?",
+  "a": "Locrian mode (7th mode of major scale). For Bm7b5, use B Locrian (B-C-D-E-F-G-A) which has b2, b3, b5, and b7 - matching the chord tones."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "Explain the difference between melodic minor ascending and the Dorian mode.",
+  "a": "Melodic minor has raised 6th and 7th vs natural minor. Dorian has raised 6th only. A melodic minor ascending: A-B-C-D-E-F#-G#. A Dorian: A-B-C-D-E-F#-G."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What is the Phrygian dominant scale and in what genres is it commonly used?",
+  "a": "5th mode of harmonic minor. Has b2, major 3rd, and b6. Formula: H-W+H-H-W-H-W. Creates Middle Eastern, metal, and flamenco sounds. E Phrygian dominant: E-F-G#-A-B-C-D."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "How do you form a diminished scale and what is its symmetrical property?",
+  "a": "Alternating half and whole steps. Two types: half-whole (H-W-H-W...) and whole-half (W-H-W-H...). Symmetrical = repeats every minor 3rd (3 frets), so only 3 unique diminished scales exist."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What is the altered scale (Super Locrian) and when would you use it?",
+  "a": "7th mode of melodic minor. Contains all altered tones: b9, #9, #11, b13. Used over altered dominant chords (7alt, 7#5, 7b9). Creates maximum tension before resolution."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "What makes the harmonic major scale unique?",
+  "a": "Major scale with b6. Creates exotic sound similar to harmonic minor but from major scale. C harmonic major: C-D-E-F-G-Ab-B. The W+H interval (G-Ab-B) creates distinctive sound."
+ },
+ {
+  "deck": "guitar",
+  "section": "Modes and Advanced Scales",
+  "q": "Which scale shares all the same notes as C major but starts on A?",
+  "a": "A natural minor (Aeolian mode). This is the relative minor relationship - all white keys. A-B-C-D-E-F-G."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What notes comprise a Cmaj9 chord and how would you voice it on guitar?",
+  "a": "C-E-G-B-D (root, 3rd, 5th, 7th, 9th). Guitar voicing often omits 5th: C-E-B-D or E-B-D-G (from low to high), using easier fingerings."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What is a slash chord and how is C/E different from C major?",
+  "a": "Slash chord = chord with specific bass note. C/E means C major chord with E in bass (first inversion). Written as E-G-C from low to high instead of C-E-G."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "How do you construct an add9 chord and how does it differ from a 9th chord?",
+  "a": "Add9 = triad + 9th, no 7th. Cadd9: C-E-G-D. A 9th chord (Cmaj9 or C9) includes the 7th. Add9 has brighter, more open sound without 7th."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What is a 6/9 chord and in what style is it commonly used?",
+  "a": "Major triad + 6th + 9th, no 7th. C6/9: C-E-G-A-D. Jazz, bossa nova, and pop use it for sophisticated, non-dominant endings. Sweet, stable sound."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "Explain the function of a secondary dominant chord.",
+  "a": "Dominant chord that resolves to a chord other than tonic. In C major, D7 (V7/V) resolves to G (V). Creates temporary key change feeling, adds harmonic interest."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What is a tritone substitution and how does it work?",
+  "a": "Replace V7 with bII7 (dominant chord a tritone away). In C major, replace G7 with Db7, both resolve to Cmaj. They share the same 3rd and 7th (enharmonically)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "How do you voice a drop 2 chord voicing on guitar?",
+  "a": "Take close position chord, drop 2nd note from top down an octave. Cmaj7 close: C-E-G-B becomes E-C-G-B (drop 2). Creates wider, fuller voicing common in jazz."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What is a quartal voicing and how does it differ from tertian harmony?",
+  "a": "Built in 4ths instead of 3rds. C quartal: C-F-Bb-Eb (stacked 4ths). Sounds open, modern, ambiguous. Jazz and fusion use extensively. Tertian = traditional 3rd-based triads/7ths."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "What makes a dominant 13th chord different from other 13th chords?",
+  "a": "Dominant 13th (G13) has minor 7th, making it dominant function. Contains: G-B-D-F-A-C-E (R-3-5-b7-9-11-13). Major 13th (Gmaj13) has major 7th. Typically omit 11th."
+ },
+ {
+  "deck": "guitar",
+  "section": "Chord Theory and Extensions",
+  "q": "How do you create a sus2 to major resolution on guitar?",
+  "a": "Replace 3rd with 2nd, then resolve to major 3rd. Csus2 (C-D-G) → C major (C-E-G). The D resolves up to E. Creates tension and release, common in rock/pop."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "What is a gallop rhythm and how do you program it in guitar parts?",
+  "a": "Metal rhythm: two quick notes followed by longer note. Pattern: 8th-16th-16th (or 16th-16th-8th). Program with power chords, palm muting, tight timing. Example: E-E-E (long-short-short)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "How do you create a reggae guitar skank rhythm in piano roll?",
+  "a": "Staccato chords on off-beats (the \"and\" of each beat). Mute strings heavily (very short notes, 1/16 or shorter), medium velocity (60-80). Typically on beats 2 and 4 in 4/4."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "What is a polymetric pattern and give an example for guitar?",
+  "a": "Two different meters played simultaneously. Example: 3/4 pattern over 4/4 time signature. Creates interesting rhythmic tension. Tool and King Crimson use extensively."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "Explain the difference between swing at 66% and straight 16th notes.",
+  "a": "Straight 16ths = evenly spaced. Swing (66% or 2:1 ratio) = first of each pair is twice as long. At 66%, first note gets 2/3 of beat, second gets 1/3. Creates triplet feel."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "What is a hemiola and how would you create it on guitar?",
+  "a": "Rhythmic pattern suggesting 3/2 time over 6/8 (or vice versa). Example: 6/8 time with accents every 3 beats creates 3/4 feel. Common in Spanish and Latin music."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "How do you program a realistic funk guitar rhythm with ghost notes?",
+  "a": "Syncopated 16th note pattern with accents on off-beats. Ghost notes (velocity 20-40) between accented notes (velocity 90-120). Tight, percussive, palm-muted sound. Staccato."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "What is a displaced accent and how does it create groove?",
+  "a": "Accent on unexpected beat. Instead of accenting 1 and 3, accent \"&\" of 2 or other off-beats. Creates syncopation and forward motion. Common in funk and jazz."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "How do you create a latin clave-based guitar rhythm?",
+  "a": "Follow 3-2 or 2-3 clave pattern. 3-2 Son clave timing: beats 1, 2.5, 4, 1.5, 3. Program guitar chords or bass notes on clave hits with slight anticipation for authentic feel."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "What is the shuffle feel and what's the mathematical ratio?",
+  "a": "Triplet-based feel where 8th notes are played as first and third note of triplet. Ratio is 2:1 (first note twice as long). Different from straight 16ths. Blues, jazz standard."
+ },
+ {
+  "deck": "guitar",
+  "section": "Rhythm and Timing",
+  "q": "How do you program a realistic palm-muted breakdown rhythm for metal?",
+  "a": "Tight 16th or 32nd notes on low strings with very short duration (staccato), medium-low velocity (70-90), following kick drum pattern. Often uses syncopation and rests for impact."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "What chord progression defines the 12-bar blues and what are the chords in E?",
+  "a": "I-I-I-I-IV-IV-I-I-V-IV-I-V (or I). In E: E7-E7-E7-E7-A7-A7-E7-E7-B7-A7-E7-B7. Each numeral represents one bar."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "What makes a jazz ii-V-I progression sound more sophisticated than I-IV-V?",
+  "a": "Uses diatonic chord function with 7th chords, creates stronger voice leading. In C: Dm7-G7-Cmaj7. The tritone in G7 (B-F) resolves to 3rd and 7th of Cmaj7."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "How would you voice a Hendrix-style dominant 7#9 chord?",
+  "a": "E7#9 (Hendrix chord): E-G#-D-G (low to high). Contains both major 3rd (G#) and minor 3rd (enharmonic to #9). Creates bluesy, funky dissonance. Play with distortion."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "What scale and approach notes work best over a flamenco progression in E Phrygian?",
+  "a": "E Phrygian (E-F-G-A-B-C-D) or E Phrygian dominant (E-F-G#-A-B-C-D). Emphasize b2 (F) and major 3rd (G#). Use rapid chromatic runs and ornaments."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "In country guitar, what are the characteristics of a chicken-picked lick?",
+  "a": "Hybrid picking (pick + fingers), fast 16th note patterns, string skipping, open string drones. Bright, percussive sound. Often in Mixolydian or major pentatonic with chromatic approaches."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "How do you program a realistic metal gallop with triplet variation?",
+  "a": "Combination of 16th note gallops and 16th note triplets. Palm-muted low string power chords, tight timing. Velocities 95-120. Example: 16th-16th-8th followed by triplet on next beat."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "What defines a bossa nova guitar comp pattern?",
+  "a": "Syncopated pattern in 2/4 or 4/4 with emphasis on off-beats. Soft fingerstyle or light pick. Jazz voicings (maj7, m7, 6/9). Pattern: bass note on 1, chord on 2&, bass on 3, chord on 4."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "In blues-rock, how do you create the \"Eric Clapton\" tone programmatically?",
+  "a": "Combination of technique and effects: string bends with vibrato, minor pentatonic + blues scale, medium velocity (75-95), slight pitch bend vibrato at phrase ends, use of the b5 (blue note)."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "What makes a surf rock guitar rhythm distinctive?",
+  "a": "Fast tremolo picking on single notes or dyads, reverb-heavy sound, staccato notes, often in minor keys. Rapid 16th or 32nd notes with consistent velocity (90-100). Think Dick Dale."
+ },
+ {
+  "deck": "guitar",
+  "section": "Genre-Specific and Performance Questions",
+  "q": "How would you program a progressive rock odd-meter riff like Tool or Dream Theater?",
+  "a": "Use time signatures like 7/8, 11/8, or 13/16. Palm-muted power chords with polymetric patterns. Accent pattern creates groove (e.g., 7/8 as 3+2+2). Tight timing, medium-high velocity (90-110)."
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "How many keys does a standard piano have?",
+  "a": "88 keys (52 white keys and 36 black keys)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What is the name of the white key immediately to the left of any group of two black keys?",
+  "a": "C (the \"landmark\" note for finding your position on the keyboard)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What is Middle C in scientific pitch notation, and what is its MIDI note number?",
+  "a": "C4 in scientific pitch notation, MIDI note 60"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What pattern of black keys helps you locate the note F on the piano?",
+  "a": "F is immediately to the left of the group of three black keys"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "How many octaves does a standard 88-key piano span?",
+  "a": "Just over 7 octaves (A0 to C8)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What is the interval between any white key and the black key immediately to its right?",
+  "a": "One semitone (half step) - the black key is the sharp of the white key"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "Which two pairs of white keys have no black key between them?",
+  "a": "E-F and B-C (these are natural semitones)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What is the typical playing range for most pop and rock piano parts?",
+  "a": "C3 to C6 (three octaves centered around middle C)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "If you play C and E together, how many semitones apart are they?",
+  "a": "4 semitones (a major 3rd)"
+ },
+ {
+  "deck": "piano",
+  "section": "Basic Piano Knowledge",
+  "q": "What are the white keys on a piano named in order?",
+  "a": "C-D-E-F-G-A-B, then the pattern repeats"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "What is the fingering pattern for a C major scale in the right hand?",
+  "a": "1-2-3-1-2-3-4-5 (thumb crosses under after finger 3)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "How many sharps or flats are in the key of C major?",
+  "a": "Zero - C major has no sharps or flats (all white keys)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "What is the relative minor of C major?",
+  "a": "A minor (shares the same key signature, starts on the 6th degree)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "In the key of G major, which note is sharped?",
+  "a": "F# (the 7th degree of the scale)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "What scale uses only the black keys on the piano?",
+  "a": "F# major pentatonic (or Gb major pentatonic) - also the enharmonic Db major pentatonic"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "What is the formula for the harmonic minor scale in whole and half steps?",
+  "a": "W-H-W-W-H-W+H-H (whole-half-whole-whole-half-whole&half-half)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "If you start on D and play only white keys, what mode are you playing?",
+  "a": "D Dorian (the 2nd mode of C major)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "What interval is created by playing C and G together?",
+  "a": "Perfect 5th (7 semitones)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "How many notes are in a pentatonic scale?",
+  "a": "5 notes (penta = five)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Scales and Theory",
+  "q": "In a chromatic scale starting on C, what is the 7th note?",
+  "a": "F# or Gb (C-C#-D-D#-E-F-F#...)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What three notes make up a C major triad in root position?",
+  "a": "C-E-G (root, major 3rd, perfect 5th)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What is the difference between a C major chord and a C minor chord?",
+  "a": "The 3rd - C major has E (major 3rd), C minor has Eb (minor 3rd)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What four notes comprise a Cmaj7 chord?",
+  "a": "C-E-G-B (root, major 3rd, perfect 5th, major 7th)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What is a \"shell voicing\" for a C7 chord?",
+  "a": "Playing just the essential tones: C (root), E (3rd), and Bb (7th), often omitting the 5th"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "If you play C-F-G, what type of chord is this?",
+  "a": "Csus4 (suspended 4th chord - replaces the 3rd with the 4th)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "In a first inversion C major chord, which note is in the bass?",
+  "a": "E (the 3rd becomes the lowest note: E-G-C)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What is a \"10th\" interval, and why is it important in piano voicing?",
+  "a": "An octave plus a 3rd (17 semitones); important because it creates fuller sound than a 3rd when voiced in bass register"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What notes would you play for a rootless Cmaj9 voicing (common in jazz)?",
+  "a": "E-G-B-D (3rd, 5th, 7th, 9th - omitting the root C)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "What is the difference between a rolled chord and a blocked chord?",
+  "a": "Rolled = notes played in quick succession (arpeggiated); Blocked = all notes played simultaneously"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Chords and Voicings",
+  "q": "In stride piano, what does the left hand typically play on beats 1 and 3?",
+  "a": "Bass notes (root or root and 5th of the chord)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "When programming an Alberti bass pattern in C major, what is the note order?",
+  "a": "C-G-E-G (root-5th-3rd-5th, repeated)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "What MIDI CC number controls the sustain pedal?",
+  "a": "CC64 (values 0-63 = off, 64-127 = on)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "What velocity range represents piano (soft) playing?",
+  "a": "Approximately 40-60 (pp to p dynamic range)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "How should you program a realistic glissando in piano roll?",
+  "a": "Rapid succession of notes (white or black keys) with slight timing offset (2-5ms apart) and increasing velocity"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "For a Chopin-style waltz accompaniment in 3/4 time, what is the left hand pattern?",
+  "a": "Bass note on beat 1, chord on beats 2 and 3"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "When programming a piano tremolo, what note duration should you use?",
+  "a": "Very short notes (1/32 or 1/64) repeated rapidly, with slight velocity variation"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "How do you create a realistic rolled chord ascending in piano roll?",
+  "a": "Offset each note by 5-15ms, starting with lowest note, ending with highest"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "What velocity value typically represents fortissimo (very loud) playing?",
+  "a": "100-127 (ff to fff dynamic range)"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "For authentic two-hand independence, what should you avoid in piano roll programming?",
+  "a": "Impossible stretches (more than an octave per hand), overlapping hands in impossible ways, or patterns that require more than 10 fingers"
+ },
+ {
+  "deck": "piano",
+  "section": "Piano Technique in Piano Roll",
+  "q": "How should sustain pedal be used when changing chords to avoid muddiness?",
+  "a": "Release pedal briefly during chord changes (syncopated pedaling), then re-engage after new chord starts"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "In a ii-V-I progression in C major, what are the three chords?",
+  "a": "Dm7 (ii) - G7 (V) - Cmaj7 (I)"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "What is the purpose of using a Vsus4 to V resolution?",
+  "a": "Creates tension and release; the 4th resolves down to the 3rd, strengthening the pull to the I chord"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "In stride piano, what interval is typically played on beat 2 of the left hand?",
+  "a": "A 10th (octave + 3rd) or sometimes just a chord"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "What is the I-V-vi-IV progression in the key of F major?",
+  "a": "F - C - Dm - Bb"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "Why should you avoid playing small intervals (2nds, 3rds) in the bass register (below C3)?",
+  "a": "They create muddy, unclear sound due to low frequency overtones clashing"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "What is \"comping\" in jazz piano?",
+  "a": "Rhythmic, syncopated chord accompaniment that supports a soloist, typically using shell voicings on off-beats"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "In gospel piano, where do runs typically occur in relation to the beat?",
+  "a": "Leading into the downbeat (usually on beat 4, resolving to beat 1)"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "What is the characteristic of a Lydian mode that makes it sound \"dreamy\"?",
+  "a": "The raised 4th (#4 or #11), which creates an augmented 4th from the root"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "When using parallel motion (planing), why does it work despite breaking traditional voice leading rules?",
+  "a": "Creates impressionistic, colorful sound; uniform motion prevents individual voices from standing out, creating a cohesive harmonic wash"
+ },
+ {
+  "deck": "piano",
+  "section": "Applied Piano Music Theory",
+  "q": "In a montuno pattern (Latin piano), which hand typically plays the repetitive syncopated figure?",
+  "a": "Right hand (while left hand plays bass tumbao pattern)"
+ },
+ {
+  "deck": "piano",
+  "section": "Bonus: Advanced Concepts (5 Challenge Questions)",
+  "q": "What is the difference between sostenuto pedal (CC66) and sustain pedal (CC64)?",
+  "a": "Sostenuto sustains only notes already being held when pedal is pressed; sustain pedal sustains all notes played while pedal is down"
+ },
+ {
+  "deck": "piano",
+  "section": "Bonus: Advanced Concepts (5 Challenge Questions)",
+  "q": "In a diminished 7th chord, what is the interval between each consecutive note?",
+  "a": "Minor 3rd (3 semitones) - creates a symmetrical chord structure"
+ },
+ {
+  "deck": "piano",
+  "section": "Bonus: Advanced Concepts (5 Challenge Questions)",
+  "q": "What makes a \"Neapolitan sixth\" chord unique in classical harmony?",
+  "a": "It's a major chord built on the lowered 2nd scale degree, typically used in first inversion"
+ },
+ {
+  "deck": "piano",
+  "section": "Bonus: Advanced Concepts (5 Challenge Questions)",
+  "q": "How do you voice a quartal chord, and what genre commonly uses it?",
+  "a": "Stack notes in 4ths (e.g., C-F-Bb-Eb); common in jazz and modern classical music"
+ },
+ {
+  "deck": "piano",
+  "section": "Bonus: Advanced Concepts (5 Challenge Questions)",
+  "q": "What is the relationship between C Lydian and G major scale?",
+  "a": "They share the same notes - C Lydian is the 4th mode of G major"
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "What is a drop 3 voicing and how does it differ from drop 2?",
+  "a": "Drop 3 = take close position chord, drop 3rd note from top down an octave. Cmaj7 close: C-E-G-B becomes G-C-E-B (drop 3). Wider spread than drop 2, often used in solo piano."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "How do you voice a So What chord (Dm11) like Bill Evans?",
+  "a": "Stacked 4ths/5ths: D-G-C-F-A or E-A-D-G-C. Quartal voicing with omitted 3rd. Creates open, modern jazz sound. Use both hands - left plays lower notes, right plays upper."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "What is a cluster chord and in what context would you use it?",
+  "a": "Adjacent notes played together (e.g., C-D-E or C-Db-D). Creates dissonance/tension. Used in modern classical, jazz, and cinematic music for dramatic effect or texture."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "How do you voice a rootless A section voicing for a ii-V-I in C?",
+  "a": "Dm7: C-E-F-A (3-5-6-8). G7: B-E-F-A (3-6-7-9). Cmaj7: B-E-G-A (7-3-5-6). Left hand plays roots, right hand plays guide tones and extensions without roots."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "What is the difference between close and open position voicing?",
+  "a": "Close position = all notes within an octave (C-E-G-B in one octave). Open position = notes spread beyond an octave (C3-G3-E4-B4). Open position sounds fuller, less muddy."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "How would you voice a Kenny Barron-style Maj7#11 chord?",
+  "a": "Use both hands: Left hand - root and 7th (C-B). Right hand - 3rd, #11, 9th (E-F#-D). Creates lush, sophisticated sound. The #11 adds Lydian color."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "What is a spread voicing and how do you create one?",
+  "a": "Voicing with intervals larger than an octave between some voices. Example: C3-G3-E4-B4-D5 for Cmaj9. Creates spacious, orchestral sound. Common in solo piano and ballads."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "Explain the upper structure triad concept in jazz piano.",
+  "a": "Play a triad in right hand over left hand root/shell. For G13: G (root) + D major triad (D-F#-A-C# = 5-7-9-13). Creates colorful extensions efficiently."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "How do you voice a diminished 7th chord to create maximum tension?",
+  "a": "Use all four notes close together (e.g., C-Eb-Gb-A) for compact tension. Or spread across hands for dramatic effect. Symmetrical = can resolve to multiple keys."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Piano Voicings",
+  "q": "What is the McCoy Tyner quartal voicing style?",
+  "a": "Stacked perfect 4ths in left hand, melodic line in right. Example: left hand plays D-G-C-F, right hand improvises. Creates powerful, modal jazz sound. Omits 3rds."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "What is the bebop scale and how does it create smooth lines over changes?",
+  "a": "Major or dominant scale with added chromatic passing tone. C bebop major: C-D-E-F-G-G#-A-B. The 8-note scale aligns chord tones on downbeats when playing 8th notes."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "How do you practice two-octave scales with proper fingering for both hands?",
+  "a": "Right hand usually 1-2-3-1-2-3-4-5 (thumb crosses under 3). Left hand often 5-4-3-2-1-3-2-1 (crosses over). Practice hands separately first, then together."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "What modal interchange options exist when playing in C major?",
+  "a": "Borrow from C minor, C Dorian, C Mixolydian, etc. Common borrowed chords: Fm, Ab, Bb, Eb from C minor. Creates emotional depth while staying in \"C.\""
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "In what order should you practice the modes for maximum understanding?",
+  "a": "Start with most common: Ionian (major), Aeolian (minor), then Dorian, Mixolydian, Phrygian, Lydian, finally Locrian. Focus on characteristic note of each mode."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "How do you use the melodic minor scale in jazz improvisation?",
+  "a": "Use same scale ascending and descending (unlike classical). Creates access to altered dominant sounds. A melodic minor over E7alt provides all alterations (b9, #9, #11, b13)."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "What is the symmetrical augmented scale and over what chord is it used?",
+  "a": "Repeating pattern of half-whole-half steps. C augmented: C-Db-E-F-Ab-A. Used over augmented triads. Symmetrical = only 4 unique augmented scales total."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "How do you approach chord-scale relationships in modern jazz?",
+  "a": "Match scale to chord quality: Major 7 = Ionian or Lydian, m7 = Dorian or Aeolian, 7 = Mixolydian or altered, m7b5 = Locrian. Consider harmonic context."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "What is the blues scale and how does it differ from minor pentatonic?",
+  "a": "Minor pentatonic + b5 (blue note). C blues: C-Eb-F-Gb-G-Bb. The Gb creates characteristic blues tension and can be approached/resolved chromatically."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "How do you create a convincing gospel piano run connecting I to IV?",
+  "a": "Use chromatic approach notes and scale tones. C to F: C-D-Eb-E-F or C-Db-D-E-F. Start slow, accelerate into the IV chord. End on chord tone. Increase velocity."
+ },
+ {
+  "deck": "piano",
+  "section": "Scales, Modes, and Improvisation",
+  "q": "What is the Lydian Chromatic Concept and how does it apply to piano?",
+  "a": "George Russell's theory: Lydian is the \"unity\" of a chord. Any chord can be approached through its Lydian mode. Creates outside/inside harmonic possibilities."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "How do you program an authentic New Orleans second-line piano rhythm?",
+  "a": "Syncopated 16th notes with bass line walking on 1-3, chords on off-beats. Left hand: root-5th pattern with syncopation. Right hand: punctuated chords and runs. Swing feel."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "What defines a classical Baroque-style left hand pattern (Alberti bass)?",
+  "a": "Broken chord pattern: lowest-highest-middle-highest. In C: C-G-E-G repeated. Provides harmonic rhythm and motion. Mozart and Haydn used extensively. Keeps steady pulse."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "How do you create an authentic boogie-woogie bass line?",
+  "a": "8-to-the-bar pattern using walking bass with triplets or straight 8ths. Common pattern: root-3rd-5th-6th or root-3rd-5th-b7. Stays in lower register (C2-C3). Driving rhythm."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "What is the clave son pattern and how does it apply to piano montuno?",
+  "a": "3-2 clave: X..X...X.X...X.. (or 2-3 reverse). Montuno follows this rhythmic pattern. Right hand plays syncopated chord pattern, left hand plays tumbao (bass pattern) aligned with clave."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "How do you program realistic rubato in a romantic piano piece?",
+  "a": "Gradual tempo changes before important notes/chords. Slight ritardando at phrase endings, accelerando building tension. Use tempo automation or manual note placement off grid."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "What characterizes a Fats Waller stride piano left hand pattern?",
+  "a": "Strong bass notes on 1 & 3 (often using 10ths), mid-range chords on 2 & 4. Left hand \"strides\" across keyboard. Bouncy, rhythmic feel. Right hand improvises/states melody."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "How do you create an authentic ragtime syncopation?",
+  "a": "Right hand plays syncopated melody (notes on off-beats, especially before beat 1). Left hand maintains steady boom-chick (bass-chord) pattern. Creates \"ragged time\" feel."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "What is the característ ica left hand pattern in Brazilian bossa nova piano?",
+  "a": "Syncopated bass line emphasizing beats 1, 2&, 3, 4. Often plays root on 1, 5th on 2&, root on 3, chromatic approach on 4&. Creates samba-influenced groove."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "How do you program a convincing church/gospel two-hand rhythmic pattern?",
+  "a": "Both hands play chords rhythmically together with syncopation. Heavy use of sus4 resolutions, major-minor voice movement. Emphasis on 2 & 4. Often uses triplet feels and fills."
+ },
+ {
+  "deck": "piano",
+  "section": "Rhythm, Groove, and Style-Specific Patterns",
+  "q": "What defines a classical waltz accompaniment pattern beyond just 3/4 time?",
+  "a": "Bass note on beat 1 (root or root+5th), chord on beats 2-3. Often oom-pah-pah feel. Right hand may add melody or countermelody. Chopin adds harmonic sophistication."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "How do you program a realistic piano glissando with dynamics?",
+  "a": "Rapid succession of notes (white or black keys only), starting slow and accelerating. Velocity starts medium (60-70), increases to high (100-120). Spacing: start 10ms apart, end 2ms apart."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "What is the difference between a trill and a tremolo in classical piano?",
+  "a": "Trill = rapid alternation between two adjacent notes (e.g., C-D-C-D). Tremolo = rapid repetition of single note OR alternation between two notes of any interval. Both create sustained effect."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "How do you create a convincing grace note (acciaccatura) in MIDI?",
+  "a": "Very short note (1/64 or shorter) just before main note (1-10ms before), low velocity (40-60), usually one semitone above or below target. Quickly resolves to main note."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "What is a Viennese trill and how does it differ from a regular trill?",
+  "a": "Starts on upper auxiliary note, then main note alternation. Regular trill starts on main note. Viennese: D-C-D-C-D-C vs regular C-D-C-D-C-D. Classical performance practice."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "How do you program sympathetic resonance using MIDI CC?",
+  "a": "Use sostenuto pedal (CC66) to hold bass notes while playing melody staccato above. Or extend certain note lengths while sustain pedal is modulated. Creates harp-like shimmer effect."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "What is the una corda pedal effect and how is it different from just reducing velocity?",
+  "a": "Una corda (soft pedal, CC67) shifts hammers to strike fewer strings, changing timbre to softer, mellower tone. Velocity reduction only changes volume, not timbral quality."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "How do you create a piano cluster glissando like in contemporary classical music?",
+  "a": "Multiple adjacent notes (forearm cluster) sliding chromatically up or down. Program as chromatic runs with 3-5 simultaneous notes moving in parallel. High velocity, chaotic feel."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "What is inside-the-piano extended technique and how could you represent it?",
+  "a": "Plucking strings, hitting strings with mallets, etc. In MIDI: use unusual velocity ranges, very short/long notes, pitch bends, and combine with non-piano sounds. Experimental timbres."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "How do you program a realistic piano string dampening effect?",
+  "a": "Very short note durations (staccato) with release time at 0. Velocity 40-70 for muted effect. Or automation of sustain pedal to create choked notes. Percussive, muted timbre."
+ },
+ {
+  "deck": "piano",
+  "section": "Advanced Techniques and Effects",
+  "q": "What is half-pedaling and how do you represent it in MIDI?",
+  "a": "Sustain pedal partially depressed (CC64 value 40-60 instead of 0-127). Creates subtle sustain without full resonance. Allows harmonic clarity while maintaining some connection between notes."
+ },
+ {
+  "deck": "piano",
+  "section": "Final Advanced Concepts",
+  "q": "What is a Neapolitan sixth chord and how would you voice it on piano?",
+  "a": "bII major chord in first inversion. In C major: Db major chord (Db-F-Ab) with F in bass. Voicing: F2-Db3-F3-Ab3. Resolves powerfully to V or I. Classical dramatic device."
+ },
+ {
+  "deck": "piano",
+  "section": "Final Advanced Concepts",
+  "q": "How do you voice and resolve an Italian augmented sixth chord?",
+  "a": "In C major: Ab-C-F# (bVI, I, #IV). Resolves outward to G (V). Left hand: Ab2, right hand: C-F#. Both voices move outward by half-step to G. Creates powerful dominant preparation."
+ },
+ {
+  "deck": "piano",
+  "section": "Final Advanced Concepts",
+  "q": "What is a French augmented sixth chord and how does it function?",
+  "a": "bVI-I-II-#IV. In C: Ab-C-D-F#. Creates dominant preparation. Resolves to V (G). More dissonant than Italian aug 6th due to added D (major 2nd)."
+ },
+ {
+  "deck": "piano",
+  "section": "Final Advanced Concepts",
+  "q": "How do you use parallel dominant 13th chords (planing) for modern jazz sound?",
+  "a": "Move entire 13th chord shape chromatically. C13 shape (C-E-G-Bb-D-A) moved up to Db13, D13, etc. Breaks voice leading rules but creates lush, cinematic harmony."
+ },
+ {
+  "deck": "piano",
+  "section": "Final Advanced Concepts",
+  "q": "What is the difference between functional and non-functional harmony in piano performance?",
+  "a": "Functional = chords have directional pull (V→I, ii→V). Non-functional = chords chosen for color/texture (modal, planing). Functional uses voice leading; non-functional uses parallel motion or stepwise bass."
+ }
+]

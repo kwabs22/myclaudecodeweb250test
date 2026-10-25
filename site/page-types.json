@@ -1,12 +1,46 @@
 {
-  "ai-ml/careers/ai-engineer-roadmap/quiz-app.html": {"type": "Quiz", "blurb": "1,000 questions from the phase 1 question bank, with a statistics panel."},
-  "ai-ml/careers/ai-engineer-roadmap/phase2-quiz-app.html": {"type": "Quiz", "blurb": "1,000 machine-learning questions from the phase 2 question bank."},
-  "ai-ml/computer-vision/openpose/anatomy-viz-web/index.html": {"type": "AR viewer", "blurb": "A 3D anatomy viewer that reads ArUco markers through your camera. Needs a camera and a printed marker."},
-  "ai-ml/computer-vision/openpose/anatomy-viz-web/test-camera.html": {"type": "Test page", "blurb": "Checks that the browser can open your camera."},
-  "ai-ml/computer-vision/openpose/anatomy-viz-web/test-image.html": {"type": "Test page", "blurb": "A test mode that shows the anatomy viewer on a dummy image instead of a live camera."},
-  "learning-resources/chess/chess-calc-app/index.html": {"type": "Tool", "blurb": "Set up a chess position and generate the tree of possible moves, 12 deep."},
-  "development-tools/benchmarking/model-explorer/index.html": {"type": "Tool", "blurb": "Pick a GPU and see which catalogued open models fit in its memory."},
-  "development-tools/benchmarking/task-assessor/index.html": {"type": "Tool", "blurb": "Describe a coding task or answer six questions to get a complexity level from 1 to 8."},
-  "game-development/algorithms/playcanvas-examples/lab/index.html": {"type": "Playground", "blurb": "Run any of the 100 PlayCanvas algorithm game scripts, change their settings and read their log."},
-  "game-development/complexity-explorer/index.html": {"type": "Visualisation", "blurb": "A 3D scatter of the most complex functions in the PlayCanvas engine and GASShooter."}
+ "ai-ml/careers/ai-engineer-roadmap/quiz-app.html": {
+  "type": "Quiz",
+  "blurb": "1,000 questions from the phase 1 question bank, with a statistics panel."
+ },
+ "ai-ml/careers/ai-engineer-roadmap/phase2-quiz-app.html": {
+  "type": "Quiz",
+  "blurb": "1,000 machine-learning questions from the phase 2 question bank."
+ },
+ "ai-ml/computer-vision/openpose/anatomy-viz-web/index.html": {
+  "type": "AR viewer",
+  "blurb": "A 3D anatomy viewer that reads ArUco markers through your camera. Needs a camera and a printed marker."
+ },
+ "ai-ml/computer-vision/openpose/anatomy-viz-web/test-camera.html": {
+  "type": "Test page",
+  "blurb": "Checks that the browser can open your camera."
+ },
+ "ai-ml/computer-vision/openpose/anatomy-viz-web/test-image.html": {
+  "type": "Test page",
+  "blurb": "A test mode that shows the anatomy viewer on a dummy image instead of a live camera."
+ },
+ "learning-resources/chess/chess-calc-app/index.html": {
+  "type": "Tool",
+  "blurb": "Set up a chess position and generate the tree of possible moves, 12 deep."
+ },
+ "development-tools/benchmarking/model-explorer/index.html": {
+  "type": "Tool",
+  "blurb": "Pick a GPU and see which catalogued open models fit in its memory."
+ },
+ "development-tools/benchmarking/task-assessor/index.html": {
+  "type": "Tool",
+  "blurb": "Describe a coding task or answer six questions to get a complexity level from 1 to 8."
+ },
+ "game-development/algorithms/playcanvas-examples/lab/index.html": {
+  "type": "Playground",
+  "blurb": "Run any of the 100 PlayCanvas algorithm game scripts, change their settings and read their log."
+ },
+ "game-development/complexity-explorer/index.html": {
+  "type": "Visualisation",
+  "blurb": "A 3D scatter of the most complex functions in the PlayCanvas engine and GASShooter."
+ },
+ "creative-media/music/theory-quiz/index.html": {
+  "type": "Quiz",
+  "blurb": "200 guitar and piano theory questions as flashcards: reveal the answer, mark what you knew, then redo the ones you missed."
+ }
 }

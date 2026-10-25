@@ -423,6 +423,53 @@ def make_markdown(repo):
             block.children = out
 
     md.core.ruler.push("link_file_mentions", link_file_mentions)
+
+    BARE_URL = re.compile(r"https?://[^\s<>\"'\]]+")
+
+    def link_bare_urls(state):
+        """Plain https:// addresses in running text become links (CommonMark leaves them as text)."""
+        from markdown_it.token import Token
+        for block in state.tokens:
+            if block.type != "inline" or not block.children:
+                continue
+            out, in_link = [], 0
+            for t in block.children:
+                if t.type == "link_open":
+                    in_link += 1
+                elif t.type == "link_close":
+                    in_link -= 1
+                if in_link or t.type != "text" or "http" not in t.content:
+                    out.append(t)
+                    continue
+                pos = 0
+                for m in BARE_URL.finditer(t.content):
+                    url = m.group(0)
+                    while url and (url[-1] in ".,;:!?*" or (url[-1] == ")" and url.count("(") < url.count(")"))):
+                        url = url[:-1]
+                    if len(url) < 12:
+                        continue
+                    if m.start() > pos:
+                        pre = Token("text", "", 0)
+                        pre.content = t.content[pos:m.start()]
+                        out.append(pre)
+                    a = Token("link_open", "a", 1)
+                    a.attrSet("href", url)
+                    out.append(a)
+                    label = Token("text", "", 0)
+                    label.content = url
+                    out.append(label)
+                    out.append(Token("link_close", "a", -1))
+                    pos = m.start() + len(url)
+                if pos == 0:
+                    out.append(t)
+                    continue
+                if pos < len(t.content):
+                    post = Token("text", "", 0)
+                    post.content = t.content[pos:]
+                    out.append(post)
+            block.children = out
+
+    md.core.ruler.push("link_bare_urls", link_bare_urls)
     return md
 
 
