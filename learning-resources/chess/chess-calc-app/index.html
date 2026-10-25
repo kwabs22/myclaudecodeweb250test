@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Calculation Tree - 12 Moves Deep</title>
+    <title>Chess Calculation Tree</title>
 
     <!-- Chessboard.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
@@ -15,7 +15,7 @@
     <div class="container">
         <header>
             <h1>Chess Calculation Tree</h1>
-            <p>Explore move possibilities up to 12 steps ahead</p>
+            <p>Explore move possibilities up to 12 half-moves ahead (3 by default; deeper trees get huge)</p>
         </header>
 
         <div class="main-content">
@@ -49,8 +49,9 @@
             <!-- Right Panel: Move Tree -->
             <div class="right-panel">
                 <div class="tree-header">
-                    <h2>Move Tree (12 moves deep)</h2>
+                    <h2>Move Tree</h2>
                     <div class="tree-controls">
+                        <label class="depth-pick">Depth (half-moves) <select id="depthSelect"><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select></label>
                         <button id="generateTreeBtn" class="btn btn-primary">Generate Tree</button>
                         <button id="collapseAllBtn" class="btn btn-secondary">Collapse All</button>
                         <button id="expandAllBtn" class="btn btn-secondary">Expand All</button>

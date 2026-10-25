@@ -1,3 +1,8 @@
+// chess.js 0.10.x has no moveNumber(); the full-move counter is the last field of the FEN
+function fullMoveNumber(game) {
+    return parseInt(game.fen().split(' ')[5], 10) || 1;
+}
+
 // Chess Calculation Tree Application
 // Explores move possibilities up to 12 moves deep
 
@@ -7,7 +12,11 @@ class ChessCalculationTree {
         this.board = null;
         this.moveTree = null;
         this.currentNode = null;
-        this.maxDepth = 12;
+        // Depth is in plies (half-moves). From the start position the tree has ~20^depth leaves, so the page
+        // builds only as many nodes as the budget allows and says so when it stops early.
+        this.maxDepth = 3;
+        this.nodeBudget = 30000;
+        this.truncated = false;
         this.totalNodesGenerated = 0;
 
         this.init();
@@ -113,7 +122,7 @@ class ChessCalculationTree {
         $('#turnIndicator').text(turn).removeClass('white black').addClass(turn.toLowerCase());
 
         // Update move number
-        const moveNumber = this.chess.moveNumber();
+        const moveNumber = fullMoveNumber(this.chess);
         $('#moveNumber').text(moveNumber);
 
         // Update FEN placeholder
@@ -128,6 +137,8 @@ class ChessCalculationTree {
         // Use setTimeout to allow UI to update
         setTimeout(() => {
             this.totalNodesGenerated = 0;
+            this.truncated = false;
+            this.maxDepth = parseInt($('#depthSelect').val(), 10) || 3;
             const startTime = Date.now();
 
             // Generate tree from current position
@@ -144,6 +155,10 @@ class ChessCalculationTree {
 
     buildTreeNode(fen, depth, parentMove) {
         if (depth >= this.maxDepth) return null;
+        if (this.totalNodesGenerated >= this.nodeBudget) {
+            this.truncated = true;
+            return null;
+        }
 
         // Create a temporary chess instance for this position
         const tempChess = new Chess(fen);
@@ -159,7 +174,7 @@ class ChessCalculationTree {
             move: parentMove,
             children: [],
             turn: tempChess.turn(),
-            moveNumber: tempChess.moveNumber()
+            moveNumber: fullMoveNumber(tempChess)
         };
 
         this.totalNodesGenerated++;
@@ -184,7 +199,7 @@ class ChessCalculationTree {
                     move: move,
                     children: [],
                     turn: tempChess.turn(),
-                    moveNumber: tempChess.moveNumber()
+                    moveNumber: fullMoveNumber(tempChess)
                 });
             }
 
@@ -314,6 +329,8 @@ class ChessCalculationTree {
 
     clearTree() {
         this.moveTree = null;
+        this.totalNodesGenerated = 0;
+        this.truncated = false;
         $('#moveTree').html('<div class="tree-placeholder">Click "Generate Tree" to explore move possibilities</div>');
         this.updateTreeStats();
     }
@@ -321,7 +338,7 @@ class ChessCalculationTree {
     updateTreeStats() {
         const depth = this.moveTree ? this.maxDepth : 0;
         $('#currentDepth').text(depth);
-        $('#totalNodes').text(this.totalNodesGenerated);
+        $('#totalNodes').text(this.totalNodesGenerated + (this.truncated ? '+ (stopped at the ' + this.nodeBudget + ' node limit, try a lower depth)' : ''));
     }
 
     collapseAll() {

@@ -73,7 +73,7 @@ The tree is color-coded and indented to show the relationship between moves.
 
 ### Performance Notes
 
-Generating a 12-move-deep tree can create **thousands or millions** of nodes depending on the position:
+Generating a deep tree can create **thousands or millions** of nodes depending on the position:
 
 - **Early game positions** (many pieces): ~100,000+ positions
 - **Endgame positions** (few pieces): ~1,000-10,000 positions
@@ -107,7 +107,7 @@ Works in all modern browsers:
 ## Future Enhancements
 
 Possible improvements:
-- Configurable depth (currently fixed at 12)
+- Depth is selectable (1 to 12 half-moves, default 3); generation stops at 30,000 nodes and says so
 - Engine evaluation integration
 - Position search/filter
 - Save/load trees
