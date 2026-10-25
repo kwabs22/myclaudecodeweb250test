@@ -411,3 +411,14 @@ For issues or questions:
 **Built with ❤️ using modern web technologies**
 
 Last Updated: January 2025
+
+## Expanded dashboard
+
+The home page now has four parts, all driven by sample data in `src/data/trendingTopics.ts` (not a live feed):
+
+- **Platforms compared**: posts, share, 14-day trend, biggest topic and top hashtag for Twitter/X, TikTok, Reddit and Instagram.
+- **Trending topics**: search, category filter and sort. Opening a topic shows its 14-day score chart, platform split, tone of posts, peak hour, sample top posts and related topics.
+- **Viral hashtags**: filter by platform, sort by volume or 7-day change.
+- **Repositories**: unchanged.
+
+`TrendingTopicsWidget` is still in `src/components` for use on other pages.
