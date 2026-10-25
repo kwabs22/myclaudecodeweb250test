@@ -43,6 +43,13 @@ h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing
 .panel h3{margin:14px 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .keys{display:flex;flex-wrap:wrap;gap:5px}
 .keys kbd{font:12px var(--mono);padding:1px 7px;border-radius:5px;border:1px solid var(--axis);background:var(--chip)}
+.actions{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.actions button{font:600 12.5px var(--ui, system-ui);padding:5px 10px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
+.actions button:hover{border-color:currentColor}
+.callbox{display:flex;gap:6px;margin:4px 0 6px}
+.callbox select{max-width:46%;min-width:0}
+.callbox input{flex:1;min-width:0;font:12.5px var(--mono);padding:5px 8px;border:1px solid var(--axis);border-radius:7px;background:var(--chip);color:inherit}
+.callbox button{font:600 12.5px system-ui;padding:5px 12px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
 .attrs{display:grid;gap:8px}
 .attr{display:grid;grid-template-columns:1fr 92px;gap:8px;align-items:center;font-size:13px}
 .attr label{overflow-wrap:anywhere}
@@ -63,7 +70,7 @@ h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing
 <div class="bar"><a href="../../../../index.html">&larr; Session Atlas</a><span>game-development/algorithms/playcanvas-examples/lab</span></div>
 <main>
   <h1>Algorithm Lab</h1>
-  <p class="lede">Each script turns a classic algorithm into a small game. Pick one to run it here in the PlayCanvas engine. Many draw their own scene; the rest play out in the log, so keep an eye on both.</p>
+  <p class="lede">Each script turns a classic algorithm into a small game. Pick one to run it here in the PlayCanvas engine. Many draw their own scene; the rest play out in the log. Most scripts only define methods for the PlayCanvas editor to call, so the panel on the right has buttons for them, and a box to call methods that take arguments.</p>
   <div class="pick">
     <select id="script" aria-label="Script"></select>
     <button type="button" id="prev">Previous</button><button type="button" id="next">Next</button><button type="button" id="restart">Restart</button>
@@ -126,7 +133,13 @@ h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing
   function stop() {
     capture = false;
     if (resizeObs) { resizeObs.disconnect(); resizeObs = null; }
-    if (app) { try { app.destroy(); } catch (e) {} app = null; }
+    if (app) {
+      /* destroy() leaves the WebGL context alive until the garbage collector gets to it, and browsers cap live contexts */
+      var gl = app.graphicsDevice && app.graphicsDevice.gl, lose = gl && gl.getExtension && gl.getExtension("WEBGL_lose_context");
+      try { app.destroy(); } catch (e) {}
+      if (lose) { try { lose.loseContext(); } catch (e) {} }
+      app = null;
+    }
     $("host").textContent = "";
   }
 
@@ -185,6 +198,7 @@ h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing
       host.script.on("error", function (sc, err, method) { addLog("error", "Error in " + method + ": " + (err && err.message ? err.message : err)); setStatus("Error", "bad"); });
       app.root.addChild(host); app.start();
       renderInfo(s, head, text, defs, needsAsset);
+      var started = renderActions(instance, ScriptType, id);
 
       var t0 = performance.now();
       var tick = function () {
@@ -203,6 +217,62 @@ h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing
       addLog("error", err.message); setStatus("Could not run", "bad");
       renderInfo(s, { title: nice(s.name), algorithm: "", game: "" }, "", {}, []);
     });
+  }
+
+  /* Nearly every script only defines methods like startSort() or reset() for the PlayCanvas editor's buttons to call, and
+     never calls them itself. Offer each one as a button, and start the first start-like one so the page is not blank. */
+  var LIFECYCLE = /^(initialize|postInitialize|update|postUpdate|swap|constructor)$/, INTERNAL = /^(create|update|draw|render|swap)/;
+  var AUTO = /^(start|begin|run|solve|play|execute|animate)/i;
+  function words(n) { var t = n.replace(/([A-Z])/g, " $1").toLowerCase().trim(); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function renderActions(instance, ScriptType, id) {
+    var names = Object.keys(ScriptType.prototype).filter(function (n) {
+      return typeof ScriptType.prototype[n] === "function" && ScriptType.prototype[n].length === 0 && !LIFECYCLE.test(n) && !INTERNAL.test(n);
+    });
+    var box = $("info");
+    if (names.length) {
+      var h = el("h3", "", "Actions"), row = el("div", "actions");
+      names.forEach(function (n) {
+        var b = el("button", "", words(n)); b.type = "button";
+        b.onclick = function () { callMethod(instance, n, []); };
+        row.append(b);
+      });
+      box.insertBefore(row, box.children[3] || null); box.insertBefore(h, row);
+    }
+    /* Plain algorithm classes (trie.insert(word), segment tree query(l, r)) have no demo of their own: give them a call box. */
+    var withArgs = Object.keys(ScriptType.prototype).filter(function (n) {
+      return typeof ScriptType.prototype[n] === "function" && ScriptType.prototype[n].length > 0 && !LIFECYCLE.test(n) && !INTERNAL.test(n);
+    });
+    if (withArgs.length) {
+      var form = el("form", "callbox"), sel = el("select"), inp = document.createElement("input");
+      var sig = function (n) { var m = /\(([^)]*)\)/.exec(ScriptType.prototype[n].toString()); return m ? m[1].replace(/\s+/g, " ").trim() : ""; };
+      withArgs.forEach(function (n) { var o = el("option", "", n + "(" + sig(n) + ")"); o.value = n; sel.append(o); });
+      inp.type = "text"; inp.setAttribute("aria-label", "Arguments, as JSON values separated by commas");
+      var hint = function () { inp.placeholder = sig(sel.value); };
+      sel.onchange = hint; hint();
+      var go = el("button", "", "Call"); go.type = "submit";
+      form.onsubmit = function (e) {
+        e.preventDefault(); var vals;
+        try { vals = JSON.parse("[" + inp.value + "]"); } catch (err) { addLog("error", "Arguments must be JSON values, e.g. \"apple\", 3, [1,2]"); return; }
+        callMethod(instance, sel.value, vals);
+      };
+      form.append(sel, inp, go);
+      var h2 = el("h3", "", "Call a method"), p2 = el("p", "note", "Arguments are JSON values separated by commas, for example \"apple\" or [1,2,3], 5. Results appear in the log.");
+      var at = box.children[3] || null; box.insertBefore(h2, at); box.insertBefore(form, at); box.insertBefore(p2, at);
+    }
+    var auto = names.filter(function (n) { return AUTO.test(n); })[0];
+    if (auto) setTimeout(function () {
+      if (id !== runId || !app) return;
+      try { instance[auto](); } catch (err) { addLog("error", auto + ": " + err.message); setStatus("Error", "bad"); }
+    }, 150);
+    return auto;
+  }
+
+  function callMethod(instance, n, args) {
+    capture = true;
+    try {
+      var r = instance[n].apply(instance, args);
+      addLog("", n + "(" + args.map(function (a) { return JSON.stringify(a); }).join(", ") + ")" + (r === undefined ? "" : " returned " + JSON.stringify(r)));
+    } catch (err) { addLog("error", n + ": " + err.message); setStatus("Error", "bad"); }
   }
 
   function placeCamera() {

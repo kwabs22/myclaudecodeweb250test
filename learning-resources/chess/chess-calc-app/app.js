@@ -27,6 +27,8 @@ class ChessCalculationTree {
         const config = {
             draggable: true,
             position: 'start',
+            // the default theme loads PNGs from chessboardjs.com; these are bundled SVGs (see pieces/LICENSE.txt)
+            pieceTheme: 'pieces/{piece}.svg',
             onDragStart: this.onDragStart.bind(this),
             onDrop: this.onDrop.bind(this),
             onSnapEnd: this.onSnapEnd.bind(this)

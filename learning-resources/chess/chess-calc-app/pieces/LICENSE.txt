@@ -1,0 +1,1 @@
+Chess piece artwork by Colin M.L. Burnett (Cburnett) and Rfc1394 via Wikimedia Commons, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/). Taken from the cm-chessboard sprite (MIT), split into one file per piece.
