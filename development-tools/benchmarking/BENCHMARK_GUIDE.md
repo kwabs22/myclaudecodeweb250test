@@ -1,5 +1,7 @@
 # GPU Benchmarking Guide
 
+> **Try it in the browser:** the [Model Explorer](model-explorer/index.html) and [Task Triage](task-assessor/index.html) pages use the same data as this guide. The scripts it refers to are in the [toolkit](toolkit/README.md).
+
 Complete guide to benchmarking Modal GPU performance against industry standards.
 
 ## 🎯 Overview

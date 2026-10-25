@@ -1,5 +1,7 @@
 # Beyond 32B: Ultra-Complex Task Framework
 
+> **Try it in the browser:** the [Model Explorer](model-explorer/index.html) and [Task Triage](task-assessor/index.html) pages use the same data as this guide. The scripts it refers to are in the [toolkit](toolkit/README.md).
+
 ## 🚀 Level 6+: Tasks Beyond Single Model Capability
 
 ### When Single Models Aren't Enough

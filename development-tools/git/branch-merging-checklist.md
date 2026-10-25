@@ -1,5 +1,7 @@
 # Branch Merging Checklist
 
+> A general checklist. The checklists for this repository's own merge are in [Branch & Chat Cleanup Checklist](../../BRANCH_CLEANUP_CHECKLIST.md) and the [merge guide](../../MERGE_COMPLETE.md).
+
 Here's a comprehensive checklist for safely merging branches:
 
 ## 1. **Pre-Merge Preparation**

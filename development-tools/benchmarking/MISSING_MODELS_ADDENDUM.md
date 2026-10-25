@@ -1,5 +1,7 @@
 # Missing Models Addendum - Chinese Models & Qwen-Coder Variants
 
+> **Try it in the browser:** the [Model Explorer](model-explorer/index.html) and [Task Triage](task-assessor/index.html) pages use the same data as this guide. The scripts it refers to are in the [toolkit](toolkit/README.md).
+
 ## 🇨🇳 Missing: GLM-4 Series (Zhipu AI)
 
 **GLM-4** is a major Chinese model family that was overlooked!

@@ -1,6 +1,8 @@
 # API Authentication Requirements Analysis
 
-This document analyzes the authentication requirements for all 70 APIs documented in this repository.
+This document analyzes the authentication requirements for the 70 APIs in [popular-api-call-examples.md](popular-api-call-examples.md) (20) and [information-api-call-examples.md](information-api-call-examples.md) (50).
+
+The 44 further apps in [additional-popular-app-apis.md](additional-popular-app-apis.md) were added later and are not counted here. That document gives the authentication method for each one, and most of them need OAuth.
 
 ---
 

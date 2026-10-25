@@ -5,6 +5,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 1. REST Countries API
+
+**Documentation:** [restcountries.com](https://restcountries.com/)
 **Category:** Geographic Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -22,6 +24,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 2. Open Library API
+
+**Documentation:** [openlibrary.org/developers/api](https://openlibrary.org/developers/api)
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -39,6 +43,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 3. PoetryDB API
+
+**Documentation:** [poetrydb.org](https://poetrydb.org/)
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -56,6 +62,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 4. Free Dictionary API
+
+**Documentation:** [dictionaryapi.dev](https://dictionaryapi.dev/)
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -73,6 +81,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 5. Words API
+
+**Documentation:** [www.wordsapi.com/docs](https://www.wordsapi.com/docs/)
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -90,6 +100,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 6. Merriam-Webster API
+
+**Documentation:** [dictionaryapi.com](https://dictionaryapi.com/)
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -107,6 +119,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 7. Dog Facts API
+
+**Documentation:** [dukengn.github.io/Dog-facts-API](https://dukengn.github.io/Dog-facts-API/)
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -124,6 +138,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 8. Cat Facts API
+
+**Documentation:** [catfact.ninja](https://catfact.ninja/)
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -141,6 +157,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 9. Zoo Animals API
+
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -158,6 +176,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 10. eBird API
+
+**Documentation:** [documenter.getpostman.com/view/664302/S1ENwy59](https://documenter.getpostman.com/view/664302/S1ENwy59)
 **Category:** Animals & Nature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -175,6 +195,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 11. FishWatch API
+
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
 **Category:** Animals & Marine Life
 
 **Pseudo Search Terms / API Call Examples:**
@@ -192,6 +214,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 12. Metropolitan Museum of Art API
+
+**Documentation:** [metmuseum.github.io](https://metmuseum.github.io/)
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -209,6 +233,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 13. Rijksmuseum API
+
+**Documentation:** [data.rijksmuseum.nl](https://data.rijksmuseum.nl/)
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -226,6 +252,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 14. Harvard Art Museums API
+
+**Documentation:** [github.com/harvardartmuseums/api-docs](https://github.com/harvardartmuseums/api-docs)
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -243,6 +271,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 15. Art Institute of Chicago API
+
+**Documentation:** [api.artic.edu/docs](https://api.artic.edu/docs/)
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -260,6 +290,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 16. CoinGecko API
+
+**Documentation:** [docs.coingecko.com](https://docs.coingecko.com/)
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -277,6 +309,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 17. CoinMarketCap API
+
+**Documentation:** [coinmarketcap.com/api/documentation/v1](https://coinmarketcap.com/api/documentation/v1/)
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -294,6 +328,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 18. Open Food Facts API
+
+**Documentation:** [openfoodfacts.github.io/openfoodfacts-server/api](https://openfoodfacts.github.io/openfoodfacts-server/api/)
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -311,6 +347,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 19. TheMealDB API
+
+**Documentation:** [www.themealdb.com/api.php](https://www.themealdb.com/api.php)
 **Category:** Food & Recipes
 
 **Pseudo Search Terms / API Call Examples:**
@@ -328,6 +366,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 20. TheCocktailDB API
+
+**Documentation:** [www.thecocktaildb.com/api.php](https://www.thecocktaildb.com/api.php)
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -345,6 +385,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 21. Open Brewery DB API
+
+**Documentation:** [www.openbrewerydb.org/documentation](https://www.openbrewerydb.org/documentation)
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -362,6 +404,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 22. Fruityvice API
+
+**Documentation:** [fruityvice.com](https://fruityvice.com/)
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -379,6 +423,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 23. Spoonacular API
+
+**Documentation:** [spoonacular.com/food-api/docs](https://spoonacular.com/food-api/docs)
 **Category:** Food & Recipes
 
 **Pseudo Search Terms / API Call Examples:**
@@ -396,6 +442,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 24. Bible API
+
+**Documentation:** [bible-api.com](https://bible-api.com/)
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -413,6 +461,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 25. Quran Cloud API
+
+**Documentation:** [alquran.cloud/api](https://alquran.cloud/api)
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -430,6 +480,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 26. Bhagavad Gita API
+
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -447,6 +499,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 27. Public Holidays API
+
+**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -464,6 +518,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 28. Nager.Date API
+
+**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -481,6 +537,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 29. OpenAQ API
+
+**Documentation:** [docs.openaq.org](https://docs.openaq.org/)
 **Category:** Environment & Air Quality
 
 **Pseudo Search Terms / API Call Examples:**
@@ -498,6 +556,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 30. UK Carbon Intensity API
+
+**Documentation:** [carbon-intensity.github.io/api-definitions](https://carbon-intensity.github.io/api-definitions/)
 **Category:** Environment & Energy
 
 **Pseudo Search Terms / API Call Examples:**
@@ -515,6 +575,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 31. IQAir API
+
+**Documentation:** [www.iqair.com/air-pollution-data-api](https://www.iqair.com/air-pollution-data-api)
 **Category:** Environment & Air Quality
 
 **Pseudo Search Terms / API Call Examples:**
@@ -532,6 +594,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 32. Open Trivia Database API
+
+**Documentation:** [opentdb.com/api_config.php](https://opentdb.com/api_config.php)
 **Category:** Entertainment & Trivia
 
 **Pseudo Search Terms / API Call Examples:**
@@ -549,6 +613,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 33. JokeAPI
+
+**Documentation:** [v2.jokeapi.dev](https://v2.jokeapi.dev/)
 **Category:** Entertainment & Humor
 
 **Pseudo Search Terms / API Call Examples:**
@@ -566,6 +632,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 34. Random Useless Facts API
+
+**Documentation:** [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/)
 **Category:** Entertainment & Trivia
 
 **Pseudo Search Terms / API Call Examples:**
@@ -583,6 +651,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 35. Gutendex API
+
+**Documentation:** [gutendex.com](https://gutendex.com/)
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -600,6 +670,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 36. Google Books API
+
+**Documentation:** [developers.google.com/books](https://developers.google.com/books)
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -617,6 +689,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 37. GeoNames API
+
+**Documentation:** [www.geonames.org/export/web-services.html](https://www.geonames.org/export/web-services.html)
 **Category:** Geographic Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -634,6 +708,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 38. Numbers API
+
+**Documentation:** [numbersapi.com](http://numbersapi.com/)
 **Category:** Mathematics & Facts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -651,6 +727,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 39. Wizard World API
+
+**Documentation:** [wizard-world-api.herokuapp.com/swagger/index.html](https://wizard-world-api.herokuapp.com/swagger/index.html)
 **Category:** Entertainment & Fiction
 
 **Pseudo Search Terms / API Call Examples:**
@@ -668,6 +746,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 40. PunkAPI
+
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -685,6 +765,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 41. Edamam Nutrition API
+
+**Documentation:** [developer.edamam.com](https://developer.edamam.com/)
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -702,6 +784,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 42. Chess.com API
+
+**Documentation:** [www.chess.com/news/view/published-data-api](https://www.chess.com/news/view/published-data-api)
 **Category:** Games & Sports
 
 **Pseudo Search Terms / API Call Examples:**
@@ -719,6 +803,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 43. Lichess API
+
+**Documentation:** [lichess.org/api](https://lichess.org/api)
 **Category:** Games & Sports
 
 **Pseudo Search Terms / API Call Examples:**
@@ -736,6 +822,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 44. Calendarific API
+
+**Documentation:** [calendarific.com/api-documentation](https://calendarific.com/api-documentation)
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -753,6 +841,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 45. Checkiday API
+
+**Documentation:** [apilayer.com/marketplace/checkiday-api](https://apilayer.com/marketplace/checkiday-api)
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -770,6 +860,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 46. xeno-canto API
+
+**Documentation:** [xeno-canto.org/explore/api](https://xeno-canto.org/explore/api)
 **Category:** Animals & Nature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -787,6 +879,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 47. Coinbase API
+
+**Documentation:** [docs.cdp.coinbase.com](https://docs.cdp.coinbase.com/)
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -804,6 +898,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 48. Europeana API
+
+**Documentation:** [pro.europeana.eu/page/apis](https://pro.europeana.eu/page/apis)
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -821,6 +917,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 49. Chuck Norris Jokes API
+
+**Documentation:** [api.chucknorris.io](https://api.chucknorris.io/)
 **Category:** Entertainment & Humor
 
 **Pseudo Search Terms / API Call Examples:**
@@ -838,6 +936,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 ---
 
 ## 50. Bored API
+
+**Documentation:** [bored-api.appbrewery.com](https://bored-api.appbrewery.com/)
 **Category:** Entertainment & Activities
 
 **Pseudo Search Terms / API Call Examples:**

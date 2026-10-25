@@ -1,5 +1,7 @@
 # Model Selection Guide for Modal GPUs
 
+> **Try it in the browser:** the [Model Explorer](model-explorer/index.html) and [Task Triage](task-assessor/index.html) pages use the same data as this guide. The scripts it refers to are in the [toolkit](toolkit/README.md).
+
 Complete guide to selecting and testing LLM models on Modal infrastructure.
 
 ## 🎯 Quick Selection by GPU Type

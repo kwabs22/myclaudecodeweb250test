@@ -1,5 +1,7 @@
 # GPU Planning Interface with Blaxel and Modal Labs
 
+> The code described here is in [`benchmarking/toolkit`](../benchmarking/toolkit/README.md). Run the commands below from that folder.
+
 A Gradio-based planning interface that uses **Blaxel** and **Modal Labs** as GPU providers with automatic fallback capabilities.
 
 ## 🚀 Features

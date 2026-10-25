@@ -131,7 +131,7 @@ th[aria-sort] button{color:var(--ink)}
     <p class="note" id="note"></p>
   </section>
   <div class="tablewrap" id="tablewrap" hidden><table id="tbl"><thead></thead><tbody></tbody></table></div>
-  <p class="src">Source: <a href="../../../learning-resources/chess/model_catalog_2025.json">model_catalog_2025.json</a> and <a href="../../../learning-resources/chess/chinese_models_supplement.json">chinese_models_supplement.json</a>. Memory, speed and context figures are the catalog's own estimates, not measurements. Models the catalog lists in more than one group appear once. A model "fits" when its listed memory is no more than the GPU's memory; splitting a model across several GPUs is not considered.</p>
+  <p class="src">Source: <a href="../toolkit/model_catalog_2025.json">model_catalog_2025.json</a> and <a href="../toolkit/chinese_models_supplement.json">chinese_models_supplement.json</a>. Memory, speed and context figures are the catalog's own estimates, not measurements. Models the catalog lists in more than one group appear once. A model "fits" when its listed memory is no more than the GPU's memory; splitting a model across several GPUs is not considered.</p>
 </main>
 <div class="tip" id="tip" hidden></div>
 <script>
@@ -150,8 +150,8 @@ th[aria-sort] button{color:var(--ink)}
 
   function load() {
     return Promise.all([
-      fetch("../../../learning-resources/chess/model_catalog_2025.json").then(function (r) { return r.json(); }),
-      fetch("../../../learning-resources/chess/chinese_models_supplement.json").then(function (r) { return r.json(); })
+      fetch("../toolkit/model_catalog_2025.json").then(function (r) { return r.json(); }),
+      fetch("../toolkit/chinese_models_supplement.json").then(function (r) { return r.json(); })
     ]).then(function (res) {
       var cat = res[0].model_catalog, sup = res[1].chinese_models_supplement, byName = {};
       GPUS = cat.gpu_types;

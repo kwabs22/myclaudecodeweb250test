@@ -106,7 +106,7 @@ dl.facts dt{color:var(--muted)}dl.facts dd{margin:0;font-weight:500}
     </section>
     <section class="card res" id="result" aria-live="polite"></section>
   </div>
-  <p class="src">Rules ported from <a href="../../../learning-resources/chess/assess_task.py">assess_task.py</a>. Levels, models and costs come from <a href="../../../learning-resources/chess/task_complexity_grading.json">task_complexity_grading.json</a> and <a href="../../../learning-resources/chess/ultra_complexity_levels_6_8.json">ultra_complexity_levels_6_8.json</a>. The keyword check is a quick heuristic over a short word list, so treat the level as a starting point. Costs are the catalog's monthly estimates. To see whether a model fits a GPU, open the <a href="../model-explorer/">GPU Fit Finder</a>.</p>
+  <p class="src">Rules ported from <a href="../toolkit/assess_task.py">assess_task.py</a>. Levels, models and costs come from <a href="../toolkit/task_complexity_grading.json">task_complexity_grading.json</a> and <a href="../toolkit/ultra_complexity_levels_6_8.json">ultra_complexity_levels_6_8.json</a>. The keyword check is a quick heuristic over a short word list, so treat the level as a starting point. Costs are the catalog's monthly estimates. To see whether a model fits a GPU, open the <a href="../model-explorer/">GPU Fit Finder</a>.</p>
 </main>
 <script>
 (function () {
@@ -246,8 +246,8 @@ dl.facts dt{color:var(--muted)}dl.facts dd{margin:0;font-weight:500}
   }
 
   Promise.all([
-    fetch("../../../learning-resources/chess/task_complexity_grading.json").then(function (r) { return r.json(); }),
-    fetch("../../../learning-resources/chess/ultra_complexity_levels_6_8.json").then(function (r) { return r.json(); })
+    fetch("../toolkit/task_complexity_grading.json").then(function (r) { return r.json(); }),
+    fetch("../toolkit/ultra_complexity_levels_6_8.json").then(function (r) { return r.json(); })
   ]).then(function (res) { STD = res[0].task_grading_framework; ULTRA = res[1].ultra_complexity_framework; init(); })
     .catch(function (e) { $("result").textContent = "The level data could not be loaded. Serve the site over http(s) rather than opening the file directly."; if (window.console) console.error(e); });
 })();

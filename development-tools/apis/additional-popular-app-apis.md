@@ -22,6 +22,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Social Media APIs
 
 ### 1. Instagram API (Meta)
+
+**Documentation:** [developers.facebook.com/docs/instagram-platform](https://developers.facebook.com/docs/instagram-platform/)
 **Category:** Social Media
 **Authentication:** OAuth 2.0 (requires Facebook Developer account)
 **Difficulty:** HARD (strict approval process)
@@ -41,6 +43,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 2. Facebook Graph API (Meta)
+
+**Documentation:** [developers.facebook.com/docs/graph-api](https://developers.facebook.com/docs/graph-api/)
 **Category:** Social Media
 **Authentication:** OAuth 2.0
 **Difficulty:** HARD (complex approval process)
@@ -60,6 +64,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 3. YouTube Data API
+
+**Documentation:** [developers.google.com/youtube/v3](https://developers.google.com/youtube/v3)
 **Category:** Video & Social Media
 **Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
@@ -79,6 +85,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 4. Reddit API
+
+**Documentation:** [www.reddit.com/dev/api](https://www.reddit.com/dev/api/)
 **Category:** Social Media & Forums
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -98,6 +106,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 5. Discord API
+
+**Documentation:** [discord.com/developers/docs](https://discord.com/developers/docs)
 **Category:** Communication & Social
 **Authentication:** OAuth 2.0 / Bot Token
 **Difficulty:** EASY
@@ -117,6 +127,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 6. TikTok API
+
+**Documentation:** [developers.tiktok.com](https://developers.tiktok.com/)
 **Category:** Social Media & Video
 **Authentication:** OAuth 2.0
 **Difficulty:** HARD (complex, outdated docs)
@@ -136,6 +148,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 7. LinkedIn API
+
+**Documentation:** [learn.microsoft.com/en-us/linkedin](https://learn.microsoft.com/en-us/linkedin/)
 **Category:** Professional Social Network
 **Authentication:** OAuth 2.0
 **Difficulty:** HARD (requires Partner Program for full access)
@@ -155,6 +169,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 8. Pinterest API
+
+**Documentation:** [developers.pinterest.com/docs/api/v5](https://developers.pinterest.com/docs/api/v5/)
 **Category:** Social Media & Visual Discovery
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -174,6 +190,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 9. WhatsApp Business API
+
+**Documentation:** [developers.facebook.com/docs/whatsapp](https://developers.facebook.com/docs/whatsapp/)
 **Category:** Messaging
 **Authentication:** API Key / OAuth
 **Difficulty:** MEDIUM
@@ -193,6 +211,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 10. Telegram Bot API
+
+**Documentation:** [core.telegram.org/bots/api](https://core.telegram.org/bots/api)
 **Category:** Messaging
 **Authentication:** Bot Token
 **Difficulty:** EASY
@@ -212,6 +232,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 11. Snapchat API
+
+**Documentation:** [developers.snap.com](https://developers.snap.com/)
 **Category:** Social Media
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM-HARD
@@ -233,6 +255,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Productivity & Collaboration APIs
 
 ### 12. Notion API
+
+**Documentation:** [developers.notion.com](https://developers.notion.com/)
 **Category:** Productivity & Documentation
 **Authentication:** OAuth 2.0 / Integration Token
 **Difficulty:** EASY-MEDIUM
@@ -252,6 +276,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 13. Trello API
+
+**Documentation:** [developer.atlassian.com/cloud/trello/rest](https://developer.atlassian.com/cloud/trello/rest/)
 **Category:** Project Management
 **Authentication:** OAuth / API Key
 **Difficulty:** EASY
@@ -271,6 +297,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 14. Asana API
+
+**Documentation:** [developers.asana.com/docs](https://developers.asana.com/docs)
 **Category:** Project Management
 **Authentication:** OAuth 2.0 / Personal Access Token
 **Difficulty:** MEDIUM
@@ -290,6 +318,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 15. Zoom API
+
+**Documentation:** [developers.zoom.us/docs/api](https://developers.zoom.us/docs/api/)
 **Category:** Video Conferencing
 **Authentication:** OAuth 2.0 / JWT (deprecated)
 **Difficulty:** MEDIUM
@@ -309,6 +339,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 16. Google Drive API
+
+**Documentation:** [developers.google.com/drive/api](https://developers.google.com/drive/api)
 **Category:** Cloud Storage
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -328,6 +360,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 17. Dropbox API
+
+**Documentation:** [www.dropbox.com/developers/documentation](https://www.dropbox.com/developers/documentation)
 **Category:** Cloud Storage
 **Authentication:** OAuth 2.0
 **Difficulty:** EASY-MEDIUM
@@ -347,6 +381,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 18. Microsoft Teams API
+
+**Documentation:** [learn.microsoft.com/en-us/graph/teams-concept-overview](https://learn.microsoft.com/en-us/graph/teams-concept-overview)
 **Category:** Collaboration
 **Authentication:** OAuth 2.0 (Microsoft Graph)
 **Difficulty:** MEDIUM-HARD
@@ -366,6 +402,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 19. Google Docs/Sheets API
+
+**Documentation:** [developers.google.com/sheets/api](https://developers.google.com/sheets/api)
 **Category:** Productivity & Documents
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -385,6 +423,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 20. OneDrive API
+
+**Documentation:** [learn.microsoft.com/en-us/onedrive/developer](https://learn.microsoft.com/en-us/onedrive/developer/)
 **Category:** Cloud Storage
 **Authentication:** OAuth 2.0 (Microsoft Graph)
 **Difficulty:** MEDIUM
@@ -404,6 +444,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 21. Monday.com API
+
+**Documentation:** [developer.monday.com/api-reference](https://developer.monday.com/api-reference)
 **Category:** Project Management
 **Authentication:** API Key / OAuth 2.0
 **Difficulty:** EASY-MEDIUM
@@ -425,6 +467,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## E-commerce & Payment APIs
 
 ### 22. Shopify API
+
+**Documentation:** [shopify.dev/docs/api](https://shopify.dev/docs/api)
 **Category:** E-commerce
 **Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
@@ -444,6 +488,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 23. PayPal API
+
+**Documentation:** [developer.paypal.com/api/rest](https://developer.paypal.com/api/rest/)
 **Category:** Payments
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -463,6 +509,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 24. Square API
+
+**Documentation:** [developer.squareup.com/reference/square](https://developer.squareup.com/reference/square)
 **Category:** Payments & POS
 **Authentication:** OAuth 2.0 / Access Token
 **Difficulty:** MEDIUM
@@ -482,6 +530,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 25. eBay API
+
+**Documentation:** [developer.ebay.com/develop/apis](https://developer.ebay.com/develop/apis)
 **Category:** E-commerce Marketplace
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM-HARD
@@ -501,6 +551,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 26. Etsy API
+
+**Documentation:** [developers.etsy.com/documentation](https://developers.etsy.com/documentation/)
 **Category:** E-commerce Marketplace
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -520,6 +572,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 27. Amazon Product Advertising API
+
+**Documentation:** [webservices.amazon.com/paapi5/documentation](https://webservices.amazon.com/paapi5/documentation/)
 **Category:** E-commerce
 **Authentication:** Access Key + Secret
 **Difficulty:** MEDIUM-HARD
@@ -539,6 +593,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 28. Venmo API
+
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
 **Category:** Payments (Limited/Private)
 **Authentication:** OAuth 2.0
 **Difficulty:** HARD (Limited public access)
@@ -560,6 +616,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Transportation & Food Delivery APIs
 
 ### 29. Uber API
+
+**Documentation:** [developer.uber.com/docs](https://developer.uber.com/docs)
 **Category:** Transportation
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -579,6 +637,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 30. Lyft API
+
+**Documentation:** [developer.lyft.com](https://developer.lyft.com/)
 **Category:** Transportation
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -598,6 +658,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 31. DoorDash Drive API
+
+**Documentation:** [developer.doordash.com/en-US/docs/drive/overview](https://developer.doordash.com/en-US/docs/drive/overview/)
 **Category:** Food Delivery
 **Authentication:** API Key
 **Difficulty:** MEDIUM
@@ -617,6 +679,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 32. Grubhub API (Limited)
+
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
 **Category:** Food Delivery
 **Authentication:** Partner Access
 **Difficulty:** HARD (Limited access)
@@ -638,6 +702,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Local Business & Review APIs
 
 ### 33. Yelp Fusion API
+
+**Documentation:** [docs.developer.yelp.com](https://docs.developer.yelp.com/)
 **Category:** Local Business & Reviews
 **Authentication:** API Key
 **Difficulty:** EASY
@@ -657,6 +723,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 34. Foursquare Places API
+
+**Documentation:** [docs.foursquare.com/developer](https://docs.foursquare.com/developer/)
 **Category:** Local Business & Location
 **Authentication:** API Key
 **Difficulty:** EASY-MEDIUM
@@ -676,6 +744,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 35. Google Places API
+
+**Documentation:** [developers.google.com/maps/documentation/places/web-service](https://developers.google.com/maps/documentation/places/web-service)
 **Category:** Local Business & Location
 **Authentication:** API Key
 **Difficulty:** EASY-MEDIUM
@@ -697,6 +767,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Gaming & Entertainment APIs
 
 ### 36. Twitch API
+
+**Documentation:** [dev.twitch.tv/docs/api](https://dev.twitch.tv/docs/api/)
 **Category:** Live Streaming & Gaming
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
@@ -716,6 +788,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 37. Steam Web API
+
+**Documentation:** [steamcommunity.com/dev](https://steamcommunity.com/dev)
 **Category:** Gaming
 **Authentication:** API Key
 **Difficulty:** EASY
@@ -735,6 +809,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 38. Apple Music API
+
+**Documentation:** [developer.apple.com/documentation/applemusicapi](https://developer.apple.com/documentation/applemusicapi)
 **Category:** Music Streaming
 **Authentication:** JWT Token (MusicKit)
 **Difficulty:** MEDIUM-HARD
@@ -754,6 +830,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 39. SoundCloud API
+
+**Documentation:** [developers.soundcloud.com/docs/api/guide](https://developers.soundcloud.com/docs/api/guide)
 **Category:** Music & Audio
 **Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM (Limited new registrations)
@@ -773,6 +851,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 40. PlayStation Network API (Unofficial)
+
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
 **Category:** Gaming
 **Authentication:** OAuth 2.0 (Sony Account)
 **Difficulty:** HARD (Unofficial)
@@ -794,6 +874,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ## Business & CRM APIs
 
 ### 41. Salesforce API
+
+**Documentation:** [developer.salesforce.com/docs/apis](https://developer.salesforce.com/docs/apis)
 **Category:** CRM
 **Authentication:** OAuth 2.0
 **Difficulty:** HARD
@@ -813,6 +895,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 42. HubSpot API
+
+**Documentation:** [developers.hubspot.com/docs/api/overview](https://developers.hubspot.com/docs/api/overview)
 **Category:** CRM & Marketing
 **Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
@@ -832,6 +916,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 43. Zendesk API
+
+**Documentation:** [developer.zendesk.com/api-reference](https://developer.zendesk.com/api-reference/)
 **Category:** Customer Support
 **Authentication:** OAuth 2.0 / API Token
 **Difficulty:** MEDIUM
@@ -851,6 +937,8 @@ This document lists popular app APIs that were not included in the original 20 p
 ---
 
 ### 44. Intercom API
+
+**Documentation:** [developers.intercom.com/docs](https://developers.intercom.com/docs/)
 **Category:** Customer Messaging
 **Authentication:** OAuth 2.0 / Access Token
 **Difficulty:** MEDIUM
