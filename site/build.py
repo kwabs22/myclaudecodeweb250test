@@ -85,6 +85,42 @@ CODE_EXT = {
     ".json", ".csv", ".txt", ".yml", ".yaml", ".toml", ".ipynb", ".gitignore", ".env", ".example",
 }
 KIND_LABEL = {"doc": "Document", "app": "Runnable page", "code": "Code or data"}
+TYPE_ORDER = ["Games", "Quiz", "Playground", "Visualisation", "Tool", "AR viewer", "Web app", "Test page"]
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def fmt_date(iso):
+    y, m, d = iso.split("-")
+    return f"{int(d)} {MONTHS[int(m) - 1]} {y}"
+
+
+def stamp_text(node):
+    if not node.get("ds"):
+        return ""
+    return f"Started {fmt_date(node['ds'])} · Updated {fmt_date(node['du'])}"
+
+
+def git_history():
+    """path -> {"A": [dates it was added], "M": [dates it was modified]}. Empty when the clone is shallow."""
+    if subprocess.run(["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, capture_output=True, text=True).stdout.strip() == "true":
+        print("warning: shallow clone, last-updated dates fall back to the session date", file=sys.stderr)
+        return {}
+    out = subprocess.run(["git", "log", "--no-merges", "--no-renames", "--name-status", "--format=@%cs"],
+                         cwd=ROOT, capture_output=True, text=True, check=True).stdout
+    hist, cur = {}, None
+    for line in out.splitlines():
+        if line.startswith("@"):
+            cur = line[1:]
+        elif line.strip():
+            status, _, path = line.partition("\t")
+            if status[:1] in ("A", "M"):
+                hist.setdefault(path, {"A": [], "M": []})[status[0]].append(cur)
+    return hist
+
+
+def guess_type(node):
+    t = node["t"].lower()
+    return "Quiz" if "quiz" in t else "Test page" if "test" in t else "Games" if "game" in t else "Web app"
 
 
 # ----------------------------------------------------------------------------- files
@@ -217,6 +253,7 @@ class Repo:
                 node = {
                     "p": p, "u": d["url"], "k": "app", "c": category_of(p), "d": posixpath.dirname(p),
                     "s": d.get("size", 24000), "t": d["title"], "x": d.get("description", ""),
+                    "ty": d.get("type", "Web app"), "_from": d.get("dates_from"),
                 }
                 self.nodes.append(node)
                 self.extras.append(node)
@@ -240,6 +277,37 @@ class Repo:
                  "files": sum(1 for n in self.nodes if n["v"] == remap[old])}
                 for old in used
             ]
+
+        # What kind of runnable page each one is, with a one-line description (site/page-types.json).
+        types = json.loads((HERE / "page-types.json").read_text(encoding="utf-8")) if (HERE / "page-types.json").exists() else {}
+        for n in self.nodes:
+            if n["k"] != "app" or n in self.extras:
+                continue
+            info = types.get(n["p"], {})
+            n["ty"] = info.get("type") or guess_type(n)
+            if info.get("blurb"):
+                n["x"] = info["blurb"]
+
+        # Dates. Started: the original session's date (commit dates are the merge's, not the author's), or the first
+        # commit for files made after the merge. Updated: the last commit that modified the file, else the start date.
+        hist = git_history()
+        for n in self.nodes:
+            if n in self.extras:
+                continue
+            h = hist.get(n["p"], {"A": [], "M": []})
+            sess = self.sessions[n["v"]] if self.sessions else None
+            started = (min(h["A"]) if h["A"] else (sess["date"] if sess else None)) if (not sess or sess["id"] == "repo-state-overview") else sess["date"]
+            if not started:
+                continue
+            mods = [d for d in h["M"] if d > started]
+            n["ds"], n["du"] = started, (max(mods) if mods else started)
+        for n in self.extras:
+            src = n.pop("_from", None)
+            if not src:
+                continue
+            under = [m for m in self.nodes if m not in self.extras and m["p"].startswith(src + "/") and m.get("ds")]
+            if under:
+                n["ds"], n["du"] = min(m["ds"] for m in under), max(m["du"] for m in under)
 
     def children(self, d):
         if d not in self._kids:
@@ -472,7 +540,7 @@ def file_row(root, node):
     return (
         f'<li class="row" data-cat="{esc(node["c"])}"><a href="{esc(root + node["u"])}">'
         f'<span class="row-title">{esc(node["t"])}</span>'
-        f'<span class="row-meta"><b class="kind {kind}">{KIND_LABEL[kind]}</b> {esc(posixpath.basename(node["p"]))} · {fmt_size(node["s"])}</span>'
+        f'<span class="row-meta"><b class="kind {kind}">{esc(node.get("ty") or KIND_LABEL[kind])}</b> {esc(posixpath.basename(node["p"]))} · {fmt_size(node["s"])}{" · Updated " + fmt_date(node["du"]) if node.get("du") else ""}</span>'
         f"{snip}</a></li>"
     )
 
@@ -526,7 +594,8 @@ def render_markdown(repo, md, path):
     content = md.render(read_text(path), env)
     node = repo.meta[path]
     edit = f'<a class="src-link" href="{esc(REPO_URL)}/blob/main/{esc(path)}">View on GitHub</a>'
-    body = f'<article class="prose">{content}</article><p class="src">{edit}</p>'
+    st = stamp_text(node)
+    body = (f'<p class="stamp">{esc(st)}</p>' if st else "") + f'<article class="prose">{content}</article><p class="src">{edit}</p>'
     write(out_path, page(repo, out_path, f"{node['t']} · {SITE_NAME}", body,
                          current_dir=posixpath.dirname(path), crumbs=crumbs_html(root, path, False),
                          mermaid=env.get("mermaid", False)))
@@ -574,10 +643,20 @@ def render_home(repo):
             f'<i></i>{esc(label)} <small>{total}</small></button>'
         )
 
-    apps = sorted((n for n in repo.nodes if n["k"] == "app"), key=lambda n: n["p"])
+    apps = sorted((n for n in repo.nodes if n["k"] == "app"),
+                  key=lambda n: (TYPE_ORDER.index(n["ty"]) if n["ty"] in TYPE_ORDER else 99, n["t"].lower()))
+    type_counts = {}
+    for n in apps:
+        type_counts[n["ty"]] = type_counts.get(n["ty"], 0) + 1
+    type_chips = f'<button type="button" data-type="" aria-pressed="true">All <small>{len(apps)}</small></button>' + "".join(
+        f'<button type="button" data-type="{esc(t)}" aria-pressed="false">{esc(t)} <small>{type_counts[t]}</small></button>'
+        for t in TYPE_ORDER if t in type_counts
+    )
     app_cards = "".join(
-        f'<li style="--dot:{CATEGORIES[n["c"]][1]}"><a href="{esc(n["u"])}"><span class="app-cat">{esc(CATEGORIES[n["c"]][0])}</span>'
-        f'<span class="app-title">{esc(n["t"])}</span><span class="app-path">{esc(n["p"])}</span></a></li>'
+        f'<li data-type="{esc(n["ty"])}" style="--dot:{CATEGORIES[n["c"]][1]}"><a href="{esc(n["u"])}" title="{esc(n["p"])}">'
+        f'<span class="app-top"><b class="ty">{esc(n["ty"])}</b><span class="app-cat">{esc(CATEGORIES[n["c"]][0])}</span></span>'
+        f'<span class="app-title">{esc(n["t"])}</span><span class="app-blurb">{esc(n["x"])}</span>'
+        f'<span class="app-dates">{"<span>Started " + fmt_date(n["ds"]) + "</span><span>Updated " + fmt_date(n["du"]) + "</span>" if n.get("ds") else ""}</span></a></li>'
         for n in apps
     )
 
@@ -611,6 +690,7 @@ def render_home(repo):
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
     {'<div class="modes" role="group" aria-label="Colour points by"><button type="button" data-mode="folder" aria-pressed="true">By folder</button><button type="button" data-mode="session" aria-pressed="false">By session</button></div>' if has_prov else ''}
   </div>
+  <div class="mapgrid">
   <div class="stage" id="stage">
     <canvas id="map" role="img" aria-label="3D map of {len(repo.nodes)} files grouped by folder. The lists below hold the same content."></canvas>
     <div class="labels" id="labels" aria-hidden="true"></div>
@@ -618,12 +698,14 @@ def render_home(repo):
     <div class="tip" id="tip" hidden></div>
     <p class="hint" aria-hidden="true">Drag to rotate · scroll or pinch to zoom · click a point</p>
     <p class="nogl" id="nogl" hidden>The 3D map needs WebGL, which this browser has turned off. The lists below cover the same files.</p>
-    <aside class="card" id="card" aria-live="polite"></aside>
+  </div>
+  <aside class="card" id="card" aria-live="polite"></aside>
   </div>
   {'<div class="timeline" id="timeline" hidden><div class="tl-head"><button type="button" id="tl-play" class="tl-btn">Play</button><input type="range" id="tl-range" min="0" max="' + str(len(repo.sessions) - 1) + '" value="' + str(len(repo.sessions) - 1) + '" aria-label="Session"><span class="tl-key"><i class="now"></i>this session<i class="past"></i>earlier<i class="later"></i>later</span></div><p class="tl-label" id="tl-label" aria-live="polite"></p><div class="tl-bars" id="tl-bars" role="group" aria-label="Files produced by each session, oldest first"></div></div>' if has_prov else ''}
 </section>
 <section class="block">
   <h2>Pages you can run</h2>
+  <div class="typechips" id="typechips" role="group" aria-label="Filter by type">{type_chips}</div>
   <ul class="apps">{app_cards}</ul>
 </section>
 <section class="block">

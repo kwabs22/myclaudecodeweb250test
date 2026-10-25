@@ -207,7 +207,7 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .chip small { color: var(--muted); font: 11px var(--font-mono); }
 .chip[aria-pressed="true"] { border-color: var(--dot, var(--ink)); box-shadow: inset 0 0 0 1px var(--dot, var(--ink)); }
 .stage {
-  position: relative; height: clamp(440px, 64vh, 660px); overflow: hidden; border-radius: 12px;
+  position: relative; height: clamp(300px, 46vh, 440px); overflow: hidden; border-radius: 12px;
   background: radial-gradient(120% 90% at 50% 40%, #131a2e 0%, var(--map-bg) 62%);
   border: 1px solid var(--map-line); color: var(--map-ink);
 }
@@ -220,11 +220,13 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .tip { position: absolute; left: 0; top: 0; max-width: 260px; padding: 4px 8px; border-radius: 6px; background: #05070d; border: 1px solid var(--map-line); color: var(--map-ink); font: 12px var(--font-ui); pointer-events: none; z-index: 3; }
 .hint { position: absolute; right: 12px; bottom: 10px; margin: 0; font: 11px var(--font-mono); color: var(--map-muted); pointer-events: none; }
 .nogl { position: absolute; inset: 0; margin: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--map-muted); }
+.mapgrid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 12px; align-items: start; }
 .card {
-  position: absolute; left: 12px; bottom: 12px; width: min(360px, calc(100% - 24px));
-  padding: 12px 14px; border-radius: 10px; background: rgba(8, 11, 20, 0.88); border: 1px solid var(--map-line);
-  backdrop-filter: blur(8px);
+  padding: 14px 16px; border-radius: 12px; background: #080b14; border: 1px solid var(--map-line); color: var(--map-ink);
+  max-height: clamp(300px, 46vh, 440px); overflow: auto;
 }
+.card .stamp { margin: 6px 0 0; font: 11.5px var(--font-mono); color: var(--map-muted); }
+.card .ty { font: 600 11px var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 8px; border-radius: 999px; background: #1a2236; color: #dfe5f5; }
 .card .k { display: flex; align-items: center; gap: 8px; font: 500 11px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--map-muted); }
 .card .k i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
 .card h3 { margin: 4px 0 2px; font-size: 17px; line-height: 1.25; letter-spacing: -0.01em; color: var(--map-ink); overflow-wrap: anywhere; }
@@ -242,7 +244,17 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .apps a:hover { border-color: var(--dot); }
 .app-cat { font: 500 11px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .app-title { font-weight: 600; }
-.app-path { font: 11.5px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.app-top { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+.app-top .app-cat { text-align: right; }
+.app-blurb { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+.app-dates { display: grid; margin-top: 4px; font: 11.5px var(--font-mono); color: var(--muted); }
+.ty { flex: none; white-space: nowrap; font: 600 11px var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--chip-bg); border: 1px solid var(--line); color: var(--ink); }
+.typechips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.typechips button { font: 500 13px var(--font-ui); padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.typechips button small { color: var(--muted); font: 11px var(--font-mono); margin-left: 3px; }
+.typechips button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.typechips button[aria-pressed="true"] small { color: inherit; opacity: .7; }
+.stamp { margin: 0 0 12px; font: 12px var(--font-mono); color: var(--muted); }
 .about p { max-width: 68ch; margin: 0 0 8px; color: var(--muted); }
 .areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
 .area { padding: 14px 16px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
@@ -262,12 +274,13 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
   .top { flex-wrap: nowrap; gap: 10px; }
   .search { flex: 1 1 100px; min-width: 0; margin-left: 0; }
 }
+@media (max-width: 900px) {
+  .mapgrid { grid-template-columns: minmax(0, 1fr); }
+  .card { max-height: none; }
+}
 @media (max-width: 640px) {
   .brand span { font-size: 16px; }
-  .card { position: static; width: auto; margin: 0; border-radius: 0 0 12px 12px; border-width: 1px 0 0; background: #080b14; }
-  .stage { display: flex; flex-direction: column; height: auto; }
-  .stage canvas { position: relative; height: clamp(360px, 58vh, 520px); }
-  .labels { height: clamp(360px, 58vh, 520px); bottom: auto; }
+  .stage { height: clamp(300px, 52vh, 420px); }
   .hint { top: 8px; bottom: auto; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }

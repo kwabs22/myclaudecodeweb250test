@@ -457,7 +457,7 @@ function init() {
     const modeBtns = [...document.querySelectorAll(".modes button")];
     const total = PROV.reduce((a, x) => a + x.files, 0), maxFiles = Math.max(...PROV.map((x) => x.files));
     let timer = null;
-    const fmt = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    const fmt = niceDate;
     PROV.forEach((x, i) => {
       const b = document.createElement("button");
       b.type = "button"; b.style.setProperty("--h", Math.max(5, (x.files / maxFiles) * 100) + "%");
@@ -493,9 +493,15 @@ function init() {
 
 /* ------------------------------------------------------------------ card */
 
+function niceDate(iso) {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const [y, m, d] = iso.split("-");
+  return `${+d} ${months[+m - 1]} ${y}`;
+}
+
 function showCard(n, hasPin) {
   const meta = CATS[n.c];
-  const kind = { doc: "Document", app: "Runnable page", code: "Code or data" }[n.k];
+  const kind = n.k === "app" ? n.ty || "Runnable page" : { doc: "Document", code: "Code or data" }[n.k];
   const verb = { doc: "Read", app: "Open page", code: "View code" }[n.k];
   cardEl.style.setProperty("--c", meta.color);
   cardEl.textContent = "";
@@ -512,8 +518,14 @@ function showCard(n, hasPin) {
   if (PROV.length && n.v != null && PROV[n.v]) {
     const q = document.createElement("p");
     q.className = "sess";
-    q.textContent = `From: ${PROV[n.v].title} · ${PROV[n.v].date}`;
+    q.textContent = `From: ${PROV[n.v].title}`;
     cardEl.append(q);
+  }
+  if (n.ds) {
+    const dts = document.createElement("p");
+    dts.className = "stamp";
+    dts.textContent = `Started ${niceDate(n.ds)} · Updated ${niceDate(n.du)}`;
+    cardEl.append(dts);
   }
   if (n.x) {
     const x = document.createElement("p");

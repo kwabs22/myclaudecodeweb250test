@@ -120,6 +120,18 @@
     });
   }
 
+  /* filter the runnable-page cards by type */
+  var typeChips = document.getElementById("typechips");
+  if (typeChips) {
+    var cards = document.querySelectorAll(".apps li[data-type]");
+    typeChips.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var t = b.getAttribute("data-type");
+      typeChips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      cards.forEach(function (c) { c.hidden = !!t && c.getAttribute("data-type") !== t; });
+    });
+  }
+
   /* Mermaid diagrams (script is only added to pages that contain one) */
   function mermaidTheme() {
     var t = root.dataset.theme;

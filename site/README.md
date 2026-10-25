@@ -32,6 +32,14 @@ the "From:" line on each file's card read it. `make_provenance.py` builds it fro
 then same file name; the earliest session wins) using `provenance-sessions.json`, the session titles and dates. It needs the old
 `claude/*` branches, so run it once while they exist and commit the result. Files not in the data count as the latest session.
 
+## Page types and dates
+
+`page-types.json` gives each runnable page a type (Quiz, Games, Playground, Visualisation, Tool, AR viewer, Web app, Test page)
+and a one-line description. Demos built at deploy time set `type` and `dates_from` in `demos.json`. A page that is not listed gets a
+type guessed from its title. Dates come from git: **Started** is the original session's date (commit dates only show when the files
+were merged), or the first commit for files made after the merge; **Updated** is the last commit that modified the file. The deploy
+checks out the full history (`fetch-depth: 0`) so these can be worked out; on a shallow clone Updated falls back to Started.
+
 ## Publishing
 
 `.github/workflows/pages.yml` builds and deploys on every push to `main`.
