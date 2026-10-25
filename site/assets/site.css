@@ -308,3 +308,9 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .runlist .open { padding: 4px 10px; margin-right: 6px; border-radius: 6px; background: var(--c); color: #0a0d16; font-weight: 700; font-size: 12px; text-decoration: none; }
 .runfallback > summary { cursor: pointer; font-weight: 600; margin-bottom: 10px; }
 .card .dir { all: unset; cursor: pointer; margin-left: 12px; color: var(--map-muted); font-size: 13px; text-decoration: underline; }
+
+.metrics { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+.metrics button { font: 500 13px var(--font-ui); padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.metrics button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.lab.ovn.ovtop { color: #ffd166; font-weight: 800; }
+.card .note { margin: 8px 0 0; font-size: 12px; color: var(--map-muted); }

@@ -580,6 +580,29 @@ function init() {
   const fileList = (n) => n.dir.files;
   const plural = (c, w) => `${c} ${w}${c === 1 ? "" : "s"}`;
 
+  /* What the map measures: files (default), pages you can read or run, or links written in the documents. */
+  let metric = "files";
+  const WORD = { files: "file", pages: "page", links: "link" };
+  const own = (d) => (metric === "files" ? d.files.length : metric === "pages" ? d.files.filter((f) => f.k === "doc" || f.k === "app").length : d.files.reduce((s, f) => s + (f.lk || 0), 0));
+  const tot = (d) => own(d) + d.kids.reduce((s, k) => s + tot(k), 0);
+  const valueOf = (n) => (n.isRoot ? own(n.dir) : tot(n.dir));
+  const allDirs = [...dirs.values()].filter((d) => d.path && d.path !== "_about");
+  let rankOf = new Map();
+  function ranking(under) {
+    return allDirs.filter((d) => !under || d.path === under || d.path.startsWith(under + "/")).map((d) => ({ d, v: own(d) })).filter((r) => r.v > 0).sort((a, b) => b.v - a.v);
+  }
+  function refreshMetric() {
+    rankOf = new Map();
+    if (metric !== "files") ranking("").slice(0, 5).forEach((r, i) => rankOf.set(r.d.path, i + 1));
+    ovMap.forEach((n) => (n.count = valueOf(n)));
+  }
+  function ovNodeFor(d) {
+    const i = d.path.lastIndexOf("/");
+    const parent = i < 0 ? ovRoot : ovNodeFor(dirs.get(d.path.slice(0, i)));
+    kidNodes(parent);
+    return ovNode(d, parent);
+  }
+
   function frame2(out) {
     const w1 = new THREE.Vector3().crossVectors(out, UP);
     if (w1.lengthSq() < 0.05) w1.set(1, 0, 0);
@@ -632,6 +655,7 @@ function init() {
 
   function ovRebuild() {
     ovItems.length = 0;
+    refreshMetric();
     ovLabelList.forEach((L) => L.el.remove());
     ovLabelList = [];
     const segs2 = [];
@@ -649,14 +673,15 @@ function init() {
     const bright = (n) => n.isRoot || n.expanded || (n.parent && !n.parent.isRoot && n.parent.expanded) || (n.area && !anyOpen);
     const visit = (n) => {
       const b = bright(n) ? 1 : 0.32;
-      ovItems.push({ kind: "dir", owner: n, node: n, pos: n.pos, size: n.isRoot ? 2.6 : 0.7 + 0.2 * Math.log2(n.count + 1), shape: n.expanded || (n.isRoot && n.expanded) ? 2 : 0, dim: b, color: catColor[n.cat] });
-      addLabel2(n.name, n.pos, n.area || n.isRoot ? "ovn big" : "ovn", CATS[n.cat].color, b === 1 ? 1 : 0.45);
+      ovItems.push({ kind: "dir", owner: n, node: n, pos: n.pos, size: n.isRoot ? 2.6 : 0.7 + 0.2 * Math.log2(n.count + 1), shape: n.expanded || (n.isRoot && n.expanded) ? 2 : 0, dim: rankOf.has(n.dir.path) ? 1 : b, mark: rankOf.has(n.dir.path), color: catColor[n.cat] });
+      const rk = rankOf.get(n.dir.path);
+      addLabel2(rk ? `#${rk} ${n.name} · ${own(n.dir)}` : n.name, n.pos, (n.area || n.isRoot ? "ovn big" : "ovn") + (rk ? " ovtop" : ""), CATS[n.cat].color, b === 1 || rk ? 1 : 0.45);
       if (n.isRoot || n.expanded) {
         if (!n.isRoot || true) placeKids(n);
         kidNodes(n).forEach((c) => {
           const mid = n.pos.clone().lerp(c.pos, 0.5);
           segs2.push({ a: n.pos, b: c.pos, color: catColor[c.cat], t: bright(c) ? 0.55 : 0.18 });
-          addLabel2(plural(c.count, "file"), mid, "ove", null, bright(c) ? 1 : 0.4);
+          addLabel2(plural(c.count, WORD[metric]), mid, "ove", null, bright(c) ? 1 : 0.4);
           visit(c);
         });
         if (n.expanded) {
@@ -676,7 +701,7 @@ function init() {
       oCol.set([it.color.r, it.color.g, it.color.b], i * 3);
       oSize[i] = it.size; oShape[i] = it.shape; oDim[i] = it.dim;
       const sel = ovSel && ((ovSel.kind === "dir" && it.node === ovSel.node) || (ovSel.kind === "file" && it.file === ovSel.file));
-      oBoost[i] = sel ? 0.25 : 0;
+      oBoost[i] = sel ? 0.25 : it.mark ? 0.4 : 0;
       it.i = i;
     });
     if (ovSel && ovSel.kind === "dir" && ovSel.node.isRoot && ovRoot.expanded) { /* root files drawn as items above */ }
@@ -739,11 +764,11 @@ function init() {
   }
   function ovHover(cx, cy) {
     const it = cx < 0 ? null : ovPick(cx, cy);
-    if (ovHovered && ovHovered !== it) oBoost[ovHovered.i] = ovIsSel(ovHovered) ? 0.25 : 0;
+    if (ovHovered && ovHovered !== it) oBoost[ovHovered.i] = ovIsSel(ovHovered) ? 0.25 : ovHovered.mark ? 0.4 : 0;
     ovHovered = it;
     if (it) {
       oBoost[it.i] = 0.45;
-      tipEl.textContent = it.kind === "dir" ? `${it.node.name} · ${plural(it.node.count, "file")} · click to ${it.node.expanded && !it.node.isRoot ? "close" : "open"}` : it.file.t;
+      tipEl.textContent = it.kind === "dir" ? `${it.node.name} · ${plural(it.node.count, WORD[metric])}${rankOf.has(it.node.dir.path) ? ` · #${rankOf.get(it.node.dir.path)} for ${metric}` : ""} · click to ${it.node.expanded && !it.node.isRoot ? "close" : "open"}` : it.file.t;
       tipEl.hidden = false;
       const rect = stage.getBoundingClientRect();
       tipEl.style.transform = `translate(${Math.max(8, Math.min(cx - rect.left + 14, rect.width - 220))}px, ${Math.max(8, cy - rect.top - 34)}px)`;
@@ -775,6 +800,18 @@ function init() {
     else showCard(sel.file, true);
     if (refit) ovFit(true, sel.kind === "dir" ? (sel.node.expanded ? sel.node : sel.node.parent) : undefined);
   }
+  function ovGoto(d) {
+    const n = ovNodeFor(d);
+    ovOpen(n);
+    ovSelect({ kind: "dir", node: n }, true);
+  }
+  const metricsEl = document.getElementById("metrics");
+  const metricBtns = metricsEl ? [...metricsEl.querySelectorAll("button")] : [];
+  metricBtns.forEach((b) => (b.onclick = () => {
+    metric = b.dataset.metric;
+    metricBtns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    ovSelect(ovSel || { kind: "dir", node: ovRoot });
+  }));
   function ovChip(cat) {
     if (cat === "") {
       ovMap.forEach((n) => ovCollapse(n));
@@ -799,12 +836,22 @@ function init() {
     const ks = kidNodes(n), fs = fileList(n);
     const blurb = n.isRoot
       ? `Research, tools and documentation from 30 Claude Code sessions, merged into one repository. These ${fs.length} files explain what is here and how it was put together.`
-      : n.area ? meta.desc : `${plural(n.count, "file")}${ks.length ? ` in ${plural(ks.length, "subfolder")}` : ""}.`;
+      : n.area ? meta.desc : `${plural(n.count, WORD[metric])}${ks.length ? ` in ${plural(ks.length, "subfolder")}` : ""}.`;
     cardEl.append(el("p", "x", blurb));
+    if (metric !== "files") {
+      const top = ranking(n.isRoot ? "" : n.dir.path).slice(0, 6);
+      if (top.length) {
+        cardEl.append(el("p", "sub", `Most ${metric}${n.isRoot ? "" : " in here"}`));
+        const ul = el("ul", "inside");
+        top.forEach((r, i) => { const li = el("li"), b = el("button", "", `${i + 1}. ${r.d.path.split("/").pop()}`); b.type = "button"; b.title = r.d.path; b.append(el("small", "", plural(r.v, WORD[metric]))); b.onclick = () => ovGoto(r.d); li.append(b); ul.append(li); });
+        cardEl.append(ul);
+        cardEl.append(el("p", "note", metric === "links" ? "Counts links written in each folder's own documents, not links to it." : "Pages are the documents and runnable pages in each folder itself."));
+      }
+    }
     if (ks.length) {
       cardEl.append(el("p", "sub", n.isRoot ? "Areas" : "Subfolders"));
       const ul = el("ul", "inside");
-      ks.slice(0, 9).forEach((c) => { const li = el("li"), b = el("button", "", c.name); b.type = "button"; b.append(el("small", "", plural(c.count, "file"))); b.onclick = () => ovToggle(c); li.append(b); ul.append(li); });
+      ks.slice(0, 9).forEach((c) => { const li = el("li"), b = el("button", "", c.name); b.type = "button"; b.append(el("small", "", plural(c.count, WORD[metric]))); b.onclick = () => ovToggle(c); li.append(b); ul.append(li); });
       if (ks.length > 9) ul.append(el("li", "more", `and ${ks.length - 9} more`));
       cardEl.append(ul);
     }
@@ -875,6 +922,7 @@ function init() {
     ovLines.visible = !cloud;
     if (tl) tl.hidden = m !== "session";
     if (typeBar) typeBar.hidden = m !== "run";
+    if (metricsEl) metricsEl.hidden = m !== "overview";
     tipEl.hidden = true;
     if (tlApi && m !== "session") tlApi.pause();
     if (m === "overview") {

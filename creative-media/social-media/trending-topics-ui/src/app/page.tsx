@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TopicExplorer from '@/components/TopicExplorer';
 import PlatformOverview from '@/components/PlatformOverview';
 import HashtagTable from '@/components/HashtagTable';
+import { MockDataBanner, RealSources } from '@/components/MockDataNotice';
 import TrendingRepoCard from '@/components/TrendingRepoCard';
 import { trendingTopics, trendingRepositories, trendingHashtags } from '@/data/trendingTopics';
 import { TrendingUp, Github, Hash, Moon, Sun, Layers, Flame } from 'lucide-react';
@@ -52,6 +53,8 @@ export default function Home() {
             </div>
           </div>
         </header>
+
+        <MockDataBanner />
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -122,7 +125,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Open-source projects for building social media trending features
+                Open-source projects for building social media trending features. Star counts are sample figures; check each repository on GitHub for the current number.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {trendingRepositories.map((repo) => (
@@ -131,6 +134,8 @@ export default function Home() {
               </div>
             </section>
 
+
+            <RealSources />
           </div>
         </main>
 
@@ -139,7 +144,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center text-sm text-gray-500 dark:text-gray-400">
               <p>Built with Next.js, React, TypeScript, and Tailwind CSS</p>
-              <p className="mt-2">Social Media Trending Topics &copy; 2025</p>
+              <p className="mt-2">Social Media Trending Topics &copy; 2025. All data shown is sample data.</p>
             </div>
           </div>
         </footer>

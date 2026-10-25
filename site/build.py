@@ -206,6 +206,7 @@ class Repo:
         for f in self.files:
             self.by_name.setdefault(posixpath.basename(f), []).append(f)
         self.repaired = 0
+        self.links = {}  # markdown source -> [links in total, links to other sites]
         self.nodes = []  # files shown on the map
         self.meta = {}
         self.has_viewer = set()
@@ -363,6 +364,9 @@ def make_markdown(repo):
         tok = tokens[idx]
         href = tok.attrGet("href")
         if href:
+            tally = repo.links.setdefault(env["src"], [0, 0])
+            tally[0] += 1
+            tally[1] += bool(re.match(r"^(https?:)?//", href))
             new, broken = rewrite_href(repo, href, env["src"])
             tok.attrSet("href", new)
             if broken:
@@ -675,6 +679,8 @@ def render_home(repo):
         )
 
     cats_json = {k: {"label": v[0], "color": v[1], "desc": v[2]} for k, v in CATEGORIES.items()}
+    for n in repo.nodes:
+        n["lk"], n["le"] = repo.links.get(n["p"], [0, 0])
     data = {"nodes": repo.nodes}
     has_prov = bool(repo.sessions)
     inline = lambda obj: json.dumps(obj, separators=(",", ":")).replace("</", "<\\/")
@@ -690,6 +696,7 @@ def render_home(repo):
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
     <div class="modes" role="group" aria-label="View"><button type="button" data-mode="overview" aria-pressed="true">Overview</button><button type="button" data-mode="folder" aria-pressed="false">All files</button><button type="button" data-mode="run" aria-pressed="false">Runnable pages</button>{'<button type="button" data-mode="session" aria-pressed="false">By session</button>' if has_prov else ''}</div>
   </div>
+  <div class="metrics" id="metrics" role="group" aria-label="Mark folders by"><span>Mark folders with the most</span><button type="button" data-metric="files" aria-pressed="true">Files</button><button type="button" data-metric="pages" aria-pressed="false">Pages</button><button type="button" data-metric="links" aria-pressed="false">Links</button></div>
   <div class="typechips" id="typechips" role="group" aria-label="Filter runnable pages by type" hidden>{type_chips}</div>
   <div class="mapgrid">
   <div class="stage" id="stage">
