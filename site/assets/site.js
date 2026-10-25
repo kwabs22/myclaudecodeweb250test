@@ -132,6 +132,42 @@
     });
   }
 
+  /* Contents lists in the documents often link to a heading by a shortened or differently numbered name. When the exact anchor
+     is missing, fall back to the heading whose id ends with, starts with or contains it, and mark links with no match. */
+  var prose = document.querySelector(".prose");
+  if (prose) {
+    var headings = [].slice.call(prose.querySelectorAll("[id]"));
+    var resolve = function (hash) {
+      var id = decodeURIComponent(hash.slice(1));
+      if (!id) return null;
+      var exact = document.getElementById(id);
+      if (exact) return exact;
+      var tests = [
+        function (h) { return h.id.replace(/^-+/, "") === id; },
+        function (h) { return h.id.replace(/^\d+-/, "") === id; },
+        function (h) { return h.id.indexOf(id + "-") === 0; },
+        function (h) { return h.id.slice(-id.length - 1) === "-" + id; },
+        function (h) { return h.id.indexOf(id) >= 0; }
+      ];
+      for (var i = 0; i < tests.length; i++) {
+        var hit = headings.filter(tests[i])[0];
+        if (hit) return hit;
+      }
+      return null;
+    };
+    prose.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var target = resolve(a.getAttribute("href"));
+      if (!target) { a.classList.add("broken"); a.title = "This section is not in the document"; return; }
+      if (target.id !== decodeURIComponent(a.getAttribute("href").slice(1))) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          try { history.replaceState(null, "", "#" + target.id); } catch (err) {}
+        });
+      }
+    });
+  }
+
   /* Mermaid diagrams (script is only added to pages that contain one) */
   function mermaidTheme() {
     var t = root.dataset.theme;

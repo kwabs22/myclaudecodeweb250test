@@ -344,7 +344,7 @@ def make_markdown(repo):
         return pyg_highlight(code, lexer, HtmlFormatter(nowrap=True))
 
     md = MarkdownIt("commonmark", {"highlight": highlight, "html": True}).enable(["table", "strikethrough"])
-    md.use(anchors_plugin, min_level=2, max_level=4, slug_func=slugify, permalink=False)
+    md.use(anchors_plugin, min_level=1, max_level=6, slug_func=slugify, permalink=False)
 
     default_fence = md.renderer.rules["fence"]
 
@@ -378,12 +378,59 @@ def make_markdown(repo):
         return self.renderToken(tokens, idx, options, env)
 
     md.add_render_rule("link_open", link_open)
+
+    FILE_NAME = re.compile(r"^[\w][\w./-]*\.(?:html|md|py|js|jsx|tsx?|json|sh|txt|css)$")
+
+    def link_file_mentions(state):
+        """`quiz-app.html` or **quiz-app.html** in running text: link it when the file exists in the repository."""
+        from markdown_it.token import Token
+        src = state.env.get("src")
+        if not src:
+            return
+        for block in state.tokens:
+            if block.type != "inline" or not block.children:
+                continue
+            out, in_link, i, kids = [], 0, 0, block.children
+            while i < len(kids):
+                t = kids[i]
+                if t.type == "link_open":
+                    in_link += 1
+                elif t.type == "link_close":
+                    in_link -= 1
+                target = None
+                if not in_link and t.type == "code_inline" and FILE_NAME.match(t.content):
+                    target = t.content
+                    group = [t]
+                elif (not in_link and t.type == "strong_open" and i + 2 < len(kids) and kids[i + 1].type == "text"
+                      and kids[i + 2].type == "strong_close" and FILE_NAME.match(kids[i + 1].content)):
+                    target = kids[i + 1].content
+                    group = kids[i:i + 3]
+                if target:
+                    saved = repo.repaired
+                    new, broken = rewrite_href(repo, target, src)
+                    repo.repaired = saved
+                    if not broken and not re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", new):
+                        a = Token("link_open", "a", 1)
+                        a.attrSet("href", target)
+                        a.attrSet("class", "mention")
+                        out.append(a)
+                        out.extend(group)
+                        out.append(Token("link_close", "a", -1))
+                        i += len(group)
+                        continue
+                out.append(t)
+                i += 1
+            block.children = out
+
+    md.core.ruler.push("link_file_mentions", link_file_mentions)
     return md
 
 
 def slugify(s):
-    s = re.sub(r"[^\w\s-]", "", s.lower(), flags=re.UNICODE)
-    return re.sub(r"[\s]+", "-", s.strip())
+    # GitHub's rule, which the documents' own contents lists were written against: drop punctuation and emoji, then
+    # turn every space into a hyphen (so "A & B" becomes "a--b" and a trailing emoji leaves a trailing hyphen)
+    s = re.sub(r"[^\w\s-]", "", s.strip().lower(), flags=re.UNICODE)
+    return re.sub(r"\s", "-", s)
 
 
 def rewrite_href(repo, href, src):
@@ -591,11 +638,19 @@ def render_dir_index(repo, md, d):
                          current_dir=d, crumbs=crumbs_html(root, d, True), mermaid=mermaid))
 
 
+# "**Repository**: owner/name" lines in the research lists name a GitHub project without linking to it
+REPO_LINE = re.compile(r"^(\s*(?:[-*]\s*)?\*\*(?:Repository|Repo|GitHub)(?::\*\*|\*\*:?)\s*)`?([A-Za-z0-9][\w.-]*/[\w.-]+)`?[ \t]*$", re.M | re.I)
+
+
 def render_markdown(repo, md, path):
     out_path = path[:-3] + ".html"
     root = root_prefix(out_path)
     env = {"src": path}
-    content = md.render(read_text(path), env)
+    source = REPO_LINE.sub(lambda m: f"{m.group(1)}[{m.group(2)}](https://github.com/{m.group(2)})", read_text(path))
+    content = md.render(source, env)
+    # A heading that ends in an emoji gets a trailing hyphen under GitHub's rule, but contents lists usually link
+    # without it, so give those headings a second anchor.
+    content = re.sub(r'(<h[1-6][^>]*\bid="([^"]*?)-+")', lambda m: f'<a id="{m.group(2)}"></a>' + m.group(1), content)
     node = repo.meta[path]
     edit = f'<a class="src-link" href="{esc(REPO_URL)}/blob/main/{esc(path)}">View on GitHub</a>'
     st = stamp_text(node)
