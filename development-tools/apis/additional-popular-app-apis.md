@@ -23,9 +23,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 1. Instagram API (Meta)
 
-**Documentation:** [developers.facebook.com/docs/instagram-platform](https://developers.facebook.com/docs/instagram-platform/)
+**Documentation:** [developers.facebook.com/docs/instagram-platform](https://developers.facebook.com/docs/instagram-platform/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 (requires Facebook Developer account)">OAuth 2.0</span>  
 **Category:** Social Media
-**Authentication:** OAuth 2.0 (requires Facebook Developer account)
 **Difficulty:** HARD (strict approval process)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -44,9 +44,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 2. Facebook Graph API (Meta)
 
-**Documentation:** [developers.facebook.com/docs/graph-api](https://developers.facebook.com/docs/graph-api/)
+**Documentation:** [developers.facebook.com/docs/graph-api](https://developers.facebook.com/docs/graph-api/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Social Media
-**Authentication:** OAuth 2.0
 **Difficulty:** HARD (complex approval process)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -65,9 +65,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 3. YouTube Data API
 
-**Documentation:** [developers.google.com/youtube/v3](https://developers.google.com/youtube/v3)
+**Documentation:** [developers.google.com/youtube/v3](https://developers.google.com/youtube/v3)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / API Key">OAuth 2.0 / API Key</span>  
 **Category:** Video & Social Media
-**Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -86,9 +86,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 4. Reddit API
 
-**Documentation:** [www.reddit.com/dev/api](https://www.reddit.com/dev/api/)
+**Documentation:** [www.reddit.com/dev/api](https://www.reddit.com/dev/api/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Social Media & Forums
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -107,9 +107,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 5. Discord API
 
-**Documentation:** [discord.com/developers/docs](https://discord.com/developers/docs)
+**Documentation:** [discord.com/developers/docs](https://discord.com/developers/docs)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / Bot Token">OAuth 2.0 / Bot Token</span>  
 **Category:** Communication & Social
-**Authentication:** OAuth 2.0 / Bot Token
 **Difficulty:** EASY
 
 **Pseudo Search Terms / API Call Examples:**
@@ -128,9 +128,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 6. TikTok API
 
-**Documentation:** [developers.tiktok.com](https://developers.tiktok.com/)
+**Documentation:** [developers.tiktok.com](https://developers.tiktok.com/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Social Media & Video
-**Authentication:** OAuth 2.0
 **Difficulty:** HARD (complex, outdated docs)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -149,9 +149,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 7. LinkedIn API
 
-**Documentation:** [learn.microsoft.com/en-us/linkedin](https://learn.microsoft.com/en-us/linkedin/)
+**Documentation:** [learn.microsoft.com/en-us/linkedin](https://learn.microsoft.com/en-us/linkedin/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Professional Social Network
-**Authentication:** OAuth 2.0
 **Difficulty:** HARD (requires Partner Program for full access)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -170,9 +170,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 8. Pinterest API
 
-**Documentation:** [developers.pinterest.com/docs/api/v5](https://developers.pinterest.com/docs/api/v5/)
+**Documentation:** [developers.pinterest.com/docs/api/v5](https://developers.pinterest.com/docs/api/v5/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Social Media & Visual Discovery
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -191,9 +191,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 9. WhatsApp Business API
 
-**Documentation:** [developers.facebook.com/docs/whatsapp](https://developers.facebook.com/docs/whatsapp/)
+**Documentation:** [developers.facebook.com/docs/whatsapp](https://developers.facebook.com/docs/whatsapp/)  
+**Auth:** <span class="auth auth-oauth" title="API Key / OAuth">API Key / OAuth</span>  
 **Category:** Messaging
-**Authentication:** API Key / OAuth
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -212,9 +212,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 10. Telegram Bot API
 
-**Documentation:** [core.telegram.org/bots/api](https://core.telegram.org/bots/api)
+**Documentation:** [core.telegram.org/bots/api](https://core.telegram.org/bots/api)  
+**Auth:** <span class="auth auth-token" title="Bot Token">Bot Token</span>  
 **Category:** Messaging
-**Authentication:** Bot Token
 **Difficulty:** EASY
 
 **Pseudo Search Terms / API Call Examples:**
@@ -233,9 +233,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 11. Snapchat API
 
-**Documentation:** [developers.snap.com](https://developers.snap.com/)
+**Documentation:** [developers.snap.com](https://developers.snap.com/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Social Media
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM-HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -256,9 +256,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 12. Notion API
 
-**Documentation:** [developers.notion.com](https://developers.notion.com/)
+**Documentation:** [developers.notion.com](https://developers.notion.com/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / Integration Token">OAuth 2.0 / Integration Token</span>  
 **Category:** Productivity & Documentation
-**Authentication:** OAuth 2.0 / Integration Token
 **Difficulty:** EASY-MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -277,9 +277,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 13. Trello API
 
-**Documentation:** [developer.atlassian.com/cloud/trello/rest](https://developer.atlassian.com/cloud/trello/rest/)
+**Documentation:** [developer.atlassian.com/cloud/trello/rest](https://developer.atlassian.com/cloud/trello/rest/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth / API Key">OAuth / API Key</span>  
 **Category:** Project Management
-**Authentication:** OAuth / API Key
 **Difficulty:** EASY
 
 **Pseudo Search Terms / API Call Examples:**
@@ -298,9 +298,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 14. Asana API
 
-**Documentation:** [developers.asana.com/docs](https://developers.asana.com/docs)
+**Documentation:** [developers.asana.com/docs](https://developers.asana.com/docs)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / Personal Access Token">OAuth 2.0 / Personal Access Token</span>  
 **Category:** Project Management
-**Authentication:** OAuth 2.0 / Personal Access Token
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -319,9 +319,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 15. Zoom API
 
-**Documentation:** [developers.zoom.us/docs/api](https://developers.zoom.us/docs/api/)
+**Documentation:** [developers.zoom.us/docs/api](https://developers.zoom.us/docs/api/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / JWT (deprecated)">OAuth 2.0 / JWT</span>  
 **Category:** Video Conferencing
-**Authentication:** OAuth 2.0 / JWT (deprecated)
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -340,9 +340,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 16. Google Drive API
 
-**Documentation:** [developers.google.com/drive/api](https://developers.google.com/drive/api)
+**Documentation:** [developers.google.com/drive/api](https://developers.google.com/drive/api)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Cloud Storage
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -361,9 +361,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 17. Dropbox API
 
-**Documentation:** [www.dropbox.com/developers/documentation](https://www.dropbox.com/developers/documentation)
+**Documentation:** [www.dropbox.com/developers/documentation](https://www.dropbox.com/developers/documentation)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Cloud Storage
-**Authentication:** OAuth 2.0
 **Difficulty:** EASY-MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -382,9 +382,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 18. Microsoft Teams API
 
-**Documentation:** [learn.microsoft.com/en-us/graph/teams-concept-overview](https://learn.microsoft.com/en-us/graph/teams-concept-overview)
+**Documentation:** [learn.microsoft.com/en-us/graph/teams-concept-overview](https://learn.microsoft.com/en-us/graph/teams-concept-overview)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 (Microsoft Graph)">OAuth 2.0</span>  
 **Category:** Collaboration
-**Authentication:** OAuth 2.0 (Microsoft Graph)
 **Difficulty:** MEDIUM-HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -403,9 +403,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 19. Google Docs/Sheets API
 
-**Documentation:** [developers.google.com/sheets/api](https://developers.google.com/sheets/api)
+**Documentation:** [developers.google.com/sheets/api](https://developers.google.com/sheets/api)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Productivity & Documents
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -424,9 +424,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 20. OneDrive API
 
-**Documentation:** [learn.microsoft.com/en-us/onedrive/developer](https://learn.microsoft.com/en-us/onedrive/developer/)
+**Documentation:** [learn.microsoft.com/en-us/onedrive/developer](https://learn.microsoft.com/en-us/onedrive/developer/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 (Microsoft Graph)">OAuth 2.0</span>  
 **Category:** Cloud Storage
-**Authentication:** OAuth 2.0 (Microsoft Graph)
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -445,9 +445,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 21. Monday.com API
 
-**Documentation:** [developer.monday.com/api-reference](https://developer.monday.com/api-reference)
+**Documentation:** [developer.monday.com/api-reference](https://developer.monday.com/api-reference)  
+**Auth:** <span class="auth auth-oauth" title="API Key / OAuth 2.0">API Key / OAuth 2.0</span>  
 **Category:** Project Management
-**Authentication:** API Key / OAuth 2.0
 **Difficulty:** EASY-MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -468,9 +468,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 22. Shopify API
 
-**Documentation:** [shopify.dev/docs/api](https://shopify.dev/docs/api)
+**Documentation:** [shopify.dev/docs/api](https://shopify.dev/docs/api)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / API Key">OAuth 2.0 / API Key</span>  
 **Category:** E-commerce
-**Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -489,9 +489,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 23. PayPal API
 
-**Documentation:** [developer.paypal.com/api/rest](https://developer.paypal.com/api/rest/)
+**Documentation:** [developer.paypal.com/api/rest](https://developer.paypal.com/api/rest/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Payments
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -510,9 +510,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 24. Square API
 
-**Documentation:** [developer.squareup.com/reference/square](https://developer.squareup.com/reference/square)
+**Documentation:** [developer.squareup.com/reference/square](https://developer.squareup.com/reference/square)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / Access Token">OAuth 2.0 / Access Token</span>  
 **Category:** Payments & POS
-**Authentication:** OAuth 2.0 / Access Token
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -531,9 +531,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 25. eBay API
 
-**Documentation:** [developer.ebay.com/develop/apis](https://developer.ebay.com/develop/apis)
+**Documentation:** [developer.ebay.com/develop/apis](https://developer.ebay.com/develop/apis)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** E-commerce Marketplace
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM-HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -552,9 +552,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 26. Etsy API
 
-**Documentation:** [developers.etsy.com/documentation](https://developers.etsy.com/documentation/)
+**Documentation:** [developers.etsy.com/documentation](https://developers.etsy.com/documentation/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** E-commerce Marketplace
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -573,9 +573,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 27. Amazon Product Advertising API
 
-**Documentation:** [webservices.amazon.com/paapi5/documentation](https://webservices.amazon.com/paapi5/documentation/)
+**Documentation:** [webservices.amazon.com/paapi5/documentation](https://webservices.amazon.com/paapi5/documentation/)  
+**Auth:** <span class="auth auth-keysecret" title="Access Key + Secret">Access Key + Secret</span>  
 **Category:** E-commerce
-**Authentication:** Access Key + Secret
 **Difficulty:** MEDIUM-HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -594,9 +594,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 28. Venmo API
 
-**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Payments (Limited/Private)
-**Authentication:** OAuth 2.0
 **Difficulty:** HARD (Limited public access)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -617,9 +617,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 29. Uber API
 
-**Documentation:** [developer.uber.com/docs](https://developer.uber.com/docs)
+**Documentation:** [developer.uber.com/docs](https://developer.uber.com/docs)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Transportation
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -638,9 +638,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 30. Lyft API
 
-**Documentation:** [developer.lyft.com](https://developer.lyft.com/)
+**Documentation:** [developer.lyft.com](https://developer.lyft.com/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Transportation
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -659,9 +659,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 31. DoorDash Drive API
 
-**Documentation:** [developer.doordash.com/en-US/docs/drive/overview](https://developer.doordash.com/en-US/docs/drive/overview/)
+**Documentation:** [developer.doordash.com/en-US/docs/drive/overview](https://developer.doordash.com/en-US/docs/drive/overview/)  
+**Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Food Delivery
-**Authentication:** API Key
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -680,9 +680,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 32. Grubhub API (Limited)
 
-**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives  
+**Auth:** <span class="auth auth-partner" title="Partner Access">Partner Access</span>  
 **Category:** Food Delivery
-**Authentication:** Partner Access
 **Difficulty:** HARD (Limited access)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -703,9 +703,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 33. Yelp Fusion API
 
-**Documentation:** [docs.developer.yelp.com](https://docs.developer.yelp.com/)
+**Documentation:** [docs.developer.yelp.com](https://docs.developer.yelp.com/)  
+**Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Local Business & Reviews
-**Authentication:** API Key
 **Difficulty:** EASY
 
 **Pseudo Search Terms / API Call Examples:**
@@ -724,9 +724,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 34. Foursquare Places API
 
-**Documentation:** [docs.foursquare.com/developer](https://docs.foursquare.com/developer/)
+**Documentation:** [docs.foursquare.com/developer](https://docs.foursquare.com/developer/)  
+**Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Local Business & Location
-**Authentication:** API Key
 **Difficulty:** EASY-MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -745,9 +745,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 35. Google Places API
 
-**Documentation:** [developers.google.com/maps/documentation/places/web-service](https://developers.google.com/maps/documentation/places/web-service)
+**Documentation:** [developers.google.com/maps/documentation/places/web-service](https://developers.google.com/maps/documentation/places/web-service)  
+**Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Local Business & Location
-**Authentication:** API Key
 **Difficulty:** EASY-MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -768,9 +768,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 36. Twitch API
 
-**Documentation:** [dev.twitch.tv/docs/api](https://dev.twitch.tv/docs/api/)
+**Documentation:** [dev.twitch.tv/docs/api](https://dev.twitch.tv/docs/api/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Live Streaming & Gaming
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -789,9 +789,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 37. Steam Web API
 
-**Documentation:** [steamcommunity.com/dev](https://steamcommunity.com/dev)
+**Documentation:** [steamcommunity.com/dev](https://steamcommunity.com/dev)  
+**Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Gaming
-**Authentication:** API Key
 **Difficulty:** EASY
 
 **Pseudo Search Terms / API Call Examples:**
@@ -810,9 +810,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 38. Apple Music API
 
-**Documentation:** [developer.apple.com/documentation/applemusicapi](https://developer.apple.com/documentation/applemusicapi)
+**Documentation:** [developer.apple.com/documentation/applemusicapi](https://developer.apple.com/documentation/applemusicapi)  
+**Auth:** <span class="auth auth-token" title="JWT Token (MusicKit)">JWT Token</span>  
 **Category:** Music Streaming
-**Authentication:** JWT Token (MusicKit)
 **Difficulty:** MEDIUM-HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -831,9 +831,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 39. SoundCloud API
 
-**Documentation:** [developers.soundcloud.com/docs/api/guide](https://developers.soundcloud.com/docs/api/guide)
+**Documentation:** [developers.soundcloud.com/docs/api/guide](https://developers.soundcloud.com/docs/api/guide)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Music & Audio
-**Authentication:** OAuth 2.0
 **Difficulty:** MEDIUM (Limited new registrations)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -852,9 +852,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 40. PlayStation Network API (Unofficial)
 
-**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives
+**Documentation:** no official public API; see the [public-apis directory](https://github.com/public-apis/public-apis) for alternatives  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 (Sony Account)">OAuth 2.0</span>  
 **Category:** Gaming
-**Authentication:** OAuth 2.0 (Sony Account)
 **Difficulty:** HARD (Unofficial)
 
 **Pseudo Search Terms / API Call Examples:**
@@ -875,9 +875,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 41. Salesforce API
 
-**Documentation:** [developer.salesforce.com/docs/apis](https://developer.salesforce.com/docs/apis)
+**Documentation:** [developer.salesforce.com/docs/apis](https://developer.salesforce.com/docs/apis)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** CRM
-**Authentication:** OAuth 2.0
 **Difficulty:** HARD
 
 **Pseudo Search Terms / API Call Examples:**
@@ -896,9 +896,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 42. HubSpot API
 
-**Documentation:** [developers.hubspot.com/docs/api/overview](https://developers.hubspot.com/docs/api/overview)
+**Documentation:** [developers.hubspot.com/docs/api/overview](https://developers.hubspot.com/docs/api/overview)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / API Key">OAuth 2.0 / API Key</span>  
 **Category:** CRM & Marketing
-**Authentication:** OAuth 2.0 / API Key
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -917,9 +917,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 43. Zendesk API
 
-**Documentation:** [developer.zendesk.com/api-reference](https://developer.zendesk.com/api-reference/)
+**Documentation:** [developer.zendesk.com/api-reference](https://developer.zendesk.com/api-reference/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / API Token">OAuth 2.0 / API Token</span>  
 **Category:** Customer Support
-**Authentication:** OAuth 2.0 / API Token
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**
@@ -938,9 +938,9 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 44. Intercom API
 
-**Documentation:** [developers.intercom.com/docs](https://developers.intercom.com/docs/)
+**Documentation:** [developers.intercom.com/docs](https://developers.intercom.com/docs/)  
+**Auth:** <span class="auth auth-oauth" title="OAuth 2.0 / Access Token">OAuth 2.0 / Access Token</span>  
 **Category:** Customer Messaging
-**Authentication:** OAuth 2.0 / Access Token
 **Difficulty:** MEDIUM
 
 **Pseudo Search Terms / API Call Examples:**

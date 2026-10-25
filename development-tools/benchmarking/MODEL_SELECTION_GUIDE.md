@@ -4,6 +4,56 @@
 
 Complete guide to selecting and testing LLM models on Modal infrastructure.
 
+## 🆕 October 2026 update: how far things have come
+
+The tables further down are the guide as written in November 2025. They are kept as they were, so you can set them beside the current picture below.
+
+Two things changed the most. **Mixture-of-experts models** keep most of their weights idle on each token, so a model with 100 billion or more parameters can answer about as fast as a dense 5 to 20 billion one, provided its weights fit in memory. And **4-bit formats** are now built into the releases (OpenAI ships its models in MXFP4), so a model no longer has to be shrunk by a third party before it fits.
+
+### Then and now, tier by tier
+
+| GPU tier | Best pick in this guide (Nov 2025) | Current candidates (Oct 2026) | What changed |
+|---|---|---|---|
+| **16 GB** (T4) | Phi-2 2.7B, Mistral-7B-GPTQ | Qwen3.5-9B (about 5.6 GB at 4-bit), Gemma 4 E4B, gpt-oss-20b (21B total, 3.6B active, fits 16 GB) | A 20B-class model fits in 16 GB. Check that your serving stack supports its 4-bit format on a T4 |
+| **24 GB** (A10G, L4) | Mistral-7B-Instruct, Llama-3-8B | Gemma 4 26B MoE (3.8B active), Gemma 3 27B (about 16 GB at 4-bit), Qwen3 32B (about 16 GB of weights at 4-bit) | 25 to 32B models on a single mid-range card |
+| **40 GB** (A100 40GB) | Mixtral-8x7B-AWQ, Llama-2-70B-AWQ | Gemma 4 31B dense, Qwen3 32B at 8-bit | The 70B AWQ picks above are two generations old. Dense 30B-class models are the sensible choice here now |
+| **80 GB** (A100 80GB, H100) | Mixtral-8x7B, Llama-2-70B-AWQ, CodeLlama-34B | gpt-oss-120b (117B total, 5.1B active, about 61 GB checkpoint), Llama 4 Scout (109B total, 17B active, about 55 GB at 4-bit) | A 100B-plus model on one card |
+| **141 to 180 GB** (H200, B200) | not covered | Qwen3 235B-A22B (about 132 GB at 4-bit), DeepSeek-V4-Flash (284B total, 13B active, about 160 GB download, tight on one B200) | Frontier-scale open weights on one or two GPUs |
+| **Multi-GPU node** | not covered | DeepSeek-V4-Pro (1.6T total, 49B active, about 865 GB download), Qwen3.5-397B-A17B | Trillion-parameter models with open weights |
+
+### The current models
+
+| Model | Maker | Size (total / active) | Context | Licence | Released |
+|---|---|---|---|---|---|
+| gpt-oss-20b | OpenAI | 21B / 3.6B | 128K | Apache 2.0 | 2025 |
+| gpt-oss-120b | OpenAI | 117B / 5.1B | 128K | Apache 2.0 | 2025 |
+| Gemma 4 E2B, E4B | Google | 2.3B and 4.5B effective | 128K | Apache 2.0 | Apr 2026 |
+| Gemma 4 26B MoE | Google | 26B / 3.8B | 256K | Apache 2.0 | Apr 2026 |
+| Gemma 4 31B | Google | 30.7B dense | 256K | Apache 2.0 | Apr 2026 |
+| Qwen3.5-397B-A17B | Alibaba | 397B / 17B | n/a | Apache 2.0 (reported; check the card) | Feb 2026 |
+| DeepSeek-V4-Flash | DeepSeek | 284B / 13B | 1M | MIT | Apr 2026 (preview) |
+| DeepSeek-V4-Pro | DeepSeek | 1.6T / 49B | 1M | MIT | Apr 2026 (preview) |
+| Llama 4 Scout | Meta | 109B / 17B | 10M (claimed) | Llama 4 community licence | 2025 |
+| Qwen3 235B-A22B | Alibaba | 235B / 22B | 32K native, 128K extended | Apache 2.0 | 2025 |
+
+"n/a" means I did not find a figure I trust, not that there is none. The newest names, such as GLM-5.2 (reported as the strongest open-weight model on the Artificial Analysis index in mid 2026, about 9 points behind the best closed model) and Kimi K3, come from blog posts that disagree with each other. They are left out of the tables until their model cards can be checked.
+
+### Memory arithmetic
+
+Weights need about **parameters × bits ÷ 8** bytes: a 30B model is about 15 GB at 4-bit and about 30 GB at 8-bit. Add the KV cache, which grows with context length, plus a few GB of overhead. For a mixture-of-experts model use the **total** parameter count for memory and the **active** count for speed. The 24 GB and 40 GB rows above partly rest on this rule (Gemma 4's 26B and 31B at 4-bit and 8-bit), not on a published figure.
+
+### What is not here
+
+- **Speed.** The tables below give tokens per second for the 2025 models. I found no trustworthy figures for the 2026 models on Modal GPUs, so none are given. Measure them with the [toolkit](toolkit/README.md).
+- **Prices.** A third-party comparison site listed Modal at about $3.95/hour for an H100, $4.54 for an H200 and $6.25 for a B200 in September 2026. Those figures conflicted with other pages and Modal's own pricing page was not checked, so confirm at [modal.com/pricing](https://modal.com/pricing). Which GPU types Modal currently offers also needs checking, since the T4 and L4 were not confirmed as available.
+- **Quality ranking.** Treat leaderboard positions in blog posts as provisional and check the [Artificial Analysis](https://artificialanalysis.ai/) index or the model cards.
+
+Sources: [DeepSeek V4 write-up](https://simonwillison.net/2026/apr/24/deepseek-v4), [Gemma 4 launch coverage](https://the-decoder.com/googles-gemma-4-is-now-available-with-apache-2-0-licensing-for-the-first-time/), [OpenAI's gpt-oss vLLM guide](https://developers.openai.com/cookbook/articles/gpt-oss/run-vllm), [VRAM tier guide](https://www.spheron.network/blog/best-open-source-llms-self-host-2026-vram-guide/), [Hugging Face local-models roundup](https://huggingface.co/blog/daya-shankar/open-source-llm-models-to-run-locally).
+
+---
+
+## 📜 Original guide (November 2025)
+
 ## 🎯 Quick Selection by GPU Type
 
 ### T4 (16GB VRAM) - Budget Option

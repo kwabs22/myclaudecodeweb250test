@@ -6,7 +6,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 1. Google Maps API
 
-**Documentation:** [developers.google.com/maps/documentation](https://developers.google.com/maps/documentation)
+**Documentation:** [developers.google.com/maps/documentation](https://developers.google.com/maps/documentation)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free tier available)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Geolocation & Mapping
 
 **Pseudo Search Terms / API Call Examples:**
@@ -24,7 +25,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 2. OpenWeatherMap / Weatherstack
 
-**Documentation:** [openweathermap.org/api](https://openweathermap.org/api)
+**Documentation:** [openweathermap.org/api](https://openweathermap.org/api)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free tier available)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Weather
 
 **Pseudo Search Terms / API Call Examples:**
@@ -42,7 +44,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 3. Stripe API
 
-**Documentation:** [docs.stripe.com/api](https://docs.stripe.com/api)
+**Documentation:** [docs.stripe.com/api](https://docs.stripe.com/api)  
+**Auth:** <span class="auth auth-key" title="Requires API key and account">API key</span>  
 **Category:** Finance & Payments
 
 **Pseudo Search Terms / API Call Examples:**
@@ -61,7 +64,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 4. Twilio API
 
-**Documentation:** [www.twilio.com/docs/usage/api](https://www.twilio.com/docs/usage/api)
+**Documentation:** [www.twilio.com/docs/usage/api](https://www.twilio.com/docs/usage/api)  
+**Auth:** <span class="auth auth-keysecret" title="Requires account credentials and API key">Key + secret</span>  
 **Category:** Communication
 
 **Pseudo Search Terms / API Call Examples:**
@@ -80,7 +84,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 5. GitHub API
 
-**Documentation:** [docs.github.com/en/rest](https://docs.github.com/en/rest)
+**Documentation:** [docs.github.com/en/rest](https://docs.github.com/en/rest)  
+**Auth:** <span class="auth auth-oauth" title="Requires OAuth/Personal Access Token">OAuth / token</span>  
 **Category:** Development & Version Control
 
 **Pseudo Search Terms / API Call Examples:**
@@ -99,7 +104,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 6. Twitter/X API
 
-**Documentation:** [docs.x.com](https://docs.x.com/)
+**Documentation:** [docs.x.com](https://docs.x.com/)  
+**Auth:** <span class="auth auth-oauth" title="Requires OAuth 2.0 credentials">OAuth 2.0</span>  
 **Category:** Social Media
 
 **Pseudo Search Terms / API Call Examples:**
@@ -118,7 +124,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 7. CoinGecko API
 
-**Documentation:** [docs.coingecko.com](https://docs.coingecko.com/)
+**Documentation:** [docs.coingecko.com](https://docs.coingecko.com/)  
+**Auth:** <span class="auth auth-none" title="Free access without authentication (rate limited)">No auth</span>  
 **Category:** Cryptocurrency
 
 **Pseudo Search Terms / API Call Examples:**
@@ -137,7 +144,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 8. OpenAI/GPT API
 
-**Documentation:** [platform.openai.com/docs/api-reference](https://platform.openai.com/docs/api-reference)
+**Documentation:** [platform.openai.com/docs/api-reference](https://platform.openai.com/docs/api-reference)  
+**Auth:** <span class="auth auth-key" title="Requires API key (paid)">API key</span> <span class="auth auth-paid">Paid</span>  
 **Category:** Artificial Intelligence
 
 **Pseudo Search Terms / API Call Examples:**
@@ -156,7 +164,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 9. Spotify API
 
-**Documentation:** [developer.spotify.com/documentation/web-api](https://developer.spotify.com/documentation/web-api)
+**Documentation:** [developer.spotify.com/documentation/web-api](https://developer.spotify.com/documentation/web-api)  
+**Auth:** <span class="auth auth-oauth" title="Requires OAuth 2.0">OAuth 2.0</span>  
 **Category:** Music & Entertainment
 
 **Pseudo Search Terms / API Call Examples:**
@@ -175,7 +184,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 10. Firebase API
 
-**Documentation:** [firebase.google.com/docs](https://firebase.google.com/docs)
+**Documentation:** [firebase.google.com/docs](https://firebase.google.com/docs)  
+**Auth:** <span class="auth auth-account" title="Requires project setup and credentials">Account login</span>  
 **Category:** Mobile & Backend Services
 
 **Pseudo Search Terms / API Call Examples:**
@@ -194,7 +204,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 11. Coinbase API
 
-**Documentation:** [docs.cdp.coinbase.com](https://docs.cdp.coinbase.com/)
+**Documentation:** [docs.cdp.coinbase.com](https://docs.cdp.coinbase.com/)  
+**Auth:** <span class="auth auth-keysecret" title="Requires API key and secret">Key + secret</span>  
 **Category:** Cryptocurrency Exchange
 
 **Pseudo Search Terms / API Call Examples:**
@@ -213,7 +224,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 12. Slack API
 
-**Documentation:** [api.slack.com](https://api.slack.com/)
+**Documentation:** [api.slack.com](https://api.slack.com/)  
+**Auth:** <span class="auth auth-oauth" title="Requires OAuth tokens">OAuth / token</span>  
 **Category:** Team Communication
 
 **Pseudo Search Terms / API Call Examples:**
@@ -232,7 +244,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 13. AWS API
 
-**Documentation:** [docs.aws.amazon.com](https://docs.aws.amazon.com/)
+**Documentation:** [docs.aws.amazon.com](https://docs.aws.amazon.com/)  
+**Auth:** <span class="auth auth-account" title="Requires account and access credentials">Account login</span>  
 **Category:** Cloud Computing
 
 **Pseudo Search Terms / API Call Examples:**
@@ -251,7 +264,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 14. Azure API
 
-**Documentation:** [learn.microsoft.com/en-us/rest/api/azure](https://learn.microsoft.com/en-us/rest/api/azure/)
+**Documentation:** [learn.microsoft.com/en-us/rest/api/azure](https://learn.microsoft.com/en-us/rest/api/azure/)  
+**Auth:** <span class="auth auth-account" title="Requires subscription and credentials">Account login</span>  
 **Category:** Cloud Computing
 
 **Pseudo Search Terms / API Call Examples:**
@@ -270,7 +284,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 15. Mailchimp API
 
-**Documentation:** [mailchimp.com/developer](https://mailchimp.com/developer/)
+**Documentation:** [mailchimp.com/developer](https://mailchimp.com/developer/)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Email Marketing
 
 **Pseudo Search Terms / API Call Examples:**
@@ -289,7 +304,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 16. Fixer.io API
 
-**Documentation:** [fixer.io/documentation](https://fixer.io/documentation)
+**Documentation:** [fixer.io/documentation](https://fixer.io/documentation)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free tier available)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Currency Exchange
 
 **Pseudo Search Terms / API Call Examples:**
@@ -307,7 +323,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 17. Alpha Vantage API
 
-**Documentation:** [www.alphavantage.co/documentation](https://www.alphavantage.co/documentation/)
+**Documentation:** [www.alphavantage.co/documentation](https://www.alphavantage.co/documentation/)  
+**Auth:** <span class="auth auth-key" title="Requires free API key">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Stock Market Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -326,7 +343,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 18. Binance API
 
-**Documentation:** [developers.binance.com](https://developers.binance.com/)
+**Documentation:** [developers.binance.com](https://developers.binance.com/)  
+**Auth:** <span class="auth auth-key" title="Requires API key for most features">API key</span>  
 **Category:** Cryptocurrency Trading
 
 **Pseudo Search Terms / API Call Examples:**
@@ -345,7 +363,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 19. New York Times API
 
-**Documentation:** [developer.nytimes.com/apis](https://developer.nytimes.com/apis)
+**Documentation:** [developer.nytimes.com/apis](https://developer.nytimes.com/apis)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free tier available)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** News & Content
 
 **Pseudo Search Terms / API Call Examples:**
@@ -364,7 +383,8 @@ This document provides pseudo search term examples for API calls to the 20 most 
 
 ## 20. REST Countries API
 
-**Documentation:** [restcountries.com](https://restcountries.com/)
+**Documentation:** [restcountries.com](https://restcountries.com/)  
+**Auth:** <span class="auth auth-none" title="Completely free, no auth needed">No auth</span>  
 **Category:** Geographic Data
 
 **Pseudo Search Terms / API Call Examples:**

@@ -6,7 +6,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 1. REST Countries API
 
-**Documentation:** [restcountries.com](https://restcountries.com/)
+**Documentation:** [restcountries.com](https://restcountries.com/)  
+**Auth:** <span class="auth auth-none" title="Completely free">No auth</span>  
 **Category:** Geographic Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -25,7 +26,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 2. Open Library API
 
-**Documentation:** [openlibrary.org/developers/api](https://openlibrary.org/developers/api)
+**Documentation:** [openlibrary.org/developers/api](https://openlibrary.org/developers/api)  
+**Auth:** <span class="auth auth-none" title="No authentication needed">No auth</span>  
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -44,7 +46,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 3. PoetryDB API
 
-**Documentation:** [poetrydb.org](https://poetrydb.org/)
+**Documentation:** [poetrydb.org](https://poetrydb.org/)  
+**Auth:** <span class="auth auth-none" title="Completely free">No auth</span>  
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -63,7 +66,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 4. Free Dictionary API
 
-**Documentation:** [dictionaryapi.dev](https://dictionaryapi.dev/)
+**Documentation:** [dictionaryapi.dev](https://dictionaryapi.dev/)  
+**Auth:** <span class="auth auth-none" title="No authentication required">No auth</span>  
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -82,7 +86,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 5. Words API
 
-**Documentation:** [www.wordsapi.com/docs](https://www.wordsapi.com/docs/)
+**Documentation:** [www.wordsapi.com/docs](https://www.wordsapi.com/docs/)  
+**Auth:** <span class="auth auth-key" title="Requires API key (via RapidAPI)">API key</span>  
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -101,7 +106,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 6. Merriam-Webster API
 
-**Documentation:** [dictionaryapi.com](https://dictionaryapi.com/)
+**Documentation:** [dictionaryapi.com](https://dictionaryapi.com/)  
+**Auth:** <span class="auth auth-key" title="Requires free API key">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Dictionaries & Language
 
 **Pseudo Search Terms / API Call Examples:**
@@ -120,7 +126,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 7. Dog Facts API
 
-**Documentation:** [dukengn.github.io/Dog-facts-API](https://dukengn.github.io/Dog-facts-API/)
+**Documentation:** [dukengn.github.io/Dog-facts-API](https://dukengn.github.io/Dog-facts-API/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -139,7 +146,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 8. Cat Facts API
 
-**Documentation:** [catfact.ninja](https://catfact.ninja/)
+**Documentation:** [catfact.ninja](https://catfact.ninja/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -158,7 +166,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 9. Zoo Animals API
 
-**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Animals
 
 **Pseudo Search Terms / API Call Examples:**
@@ -177,7 +186,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 10. eBird API
 
-**Documentation:** [documenter.getpostman.com/view/664302/S1ENwy59](https://documenter.getpostman.com/view/664302/S1ENwy59)
+**Documentation:** [documenter.getpostman.com/view/664302/S1ENwy59](https://documenter.getpostman.com/view/664302/S1ENwy59)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Animals & Nature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -196,7 +206,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 11. FishWatch API
 
-**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)  
+**Auth:** <span class="auth auth-none" title="Government API, free">No auth</span>  
 **Category:** Animals & Marine Life
 
 **Pseudo Search Terms / API Call Examples:**
@@ -215,7 +226,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 12. Metropolitan Museum of Art API
 
-**Documentation:** [metmuseum.github.io](https://metmuseum.github.io/)
+**Documentation:** [metmuseum.github.io](https://metmuseum.github.io/)  
+**Auth:** <span class="auth auth-none" title="No authentication">No auth</span>  
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -234,7 +246,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 13. Rijksmuseum API
 
-**Documentation:** [data.rijksmuseum.nl](https://data.rijksmuseum.nl/)
+**Documentation:** [data.rijksmuseum.nl](https://data.rijksmuseum.nl/)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -253,7 +266,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 14. Harvard Art Museums API
 
-**Documentation:** [github.com/harvardartmuseums/api-docs](https://github.com/harvardartmuseums/api-docs)
+**Documentation:** [github.com/harvardartmuseums/api-docs](https://github.com/harvardartmuseums/api-docs)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -272,7 +286,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 15. Art Institute of Chicago API
 
-**Documentation:** [api.artic.edu/docs](https://api.artic.edu/docs/)
+**Documentation:** [api.artic.edu/docs](https://api.artic.edu/docs/)  
+**Auth:** <span class="auth auth-none" title="Public API, no auth">No auth</span>  
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -291,7 +306,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 16. CoinGecko API
 
-**Documentation:** [docs.coingecko.com](https://docs.coingecko.com/)
+**Documentation:** [docs.coingecko.com](https://docs.coingecko.com/)  
+**Auth:** <span class="auth auth-none" title="Free tier without authentication">No auth</span>  
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -310,7 +326,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 17. CoinMarketCap API
 
-**Documentation:** [coinmarketcap.com/api/documentation/v1](https://coinmarketcap.com/api/documentation/v1/)
+**Documentation:** [coinmarketcap.com/api/documentation/v1](https://coinmarketcap.com/api/documentation/v1/)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -329,7 +346,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 18. Open Food Facts API
 
-**Documentation:** [openfoodfacts.github.io/openfoodfacts-server/api](https://openfoodfacts.github.io/openfoodfacts-server/api/)
+**Documentation:** [openfoodfacts.github.io/openfoodfacts-server/api](https://openfoodfacts.github.io/openfoodfacts-server/api/)  
+**Auth:** <span class="auth auth-none" title="Open data, no auth">No auth</span>  
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -348,7 +366,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 19. TheMealDB API
 
-**Documentation:** [www.themealdb.com/api.php](https://www.themealdb.com/api.php)
+**Documentation:** [www.themealdb.com/api.php](https://www.themealdb.com/api.php)  
+**Auth:** <span class="auth auth-key" title="Requires API key for full access (free tier with key)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Food & Recipes
 
 **Pseudo Search Terms / API Call Examples:**
@@ -367,7 +386,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 20. TheCocktailDB API
 
-**Documentation:** [www.thecocktaildb.com/api.php](https://www.thecocktaildb.com/api.php)
+**Documentation:** [www.thecocktaildb.com/api.php](https://www.thecocktaildb.com/api.php)  
+**Auth:** <span class="auth auth-key" title="Requires API key for full access (free tier with key)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -386,7 +406,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 21. Open Brewery DB API
 
-**Documentation:** [www.openbrewerydb.org/documentation](https://www.openbrewerydb.org/documentation)
+**Documentation:** [www.openbrewerydb.org/documentation](https://www.openbrewerydb.org/documentation)  
+**Auth:** <span class="auth auth-none" title="Completely free">No auth</span>  
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -405,7 +426,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 22. Fruityvice API
 
-**Documentation:** [fruityvice.com](https://fruityvice.com/)
+**Documentation:** [fruityvice.com](https://fruityvice.com/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -424,7 +446,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 23. Spoonacular API
 
-**Documentation:** [spoonacular.com/food-api/docs](https://spoonacular.com/food-api/docs)
+**Documentation:** [spoonacular.com/food-api/docs](https://spoonacular.com/food-api/docs)  
+**Auth:** <span class="auth auth-key" title="Requires API key (limited free tier)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Food & Recipes
 
 **Pseudo Search Terms / API Call Examples:**
@@ -443,7 +466,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 24. Bible API
 
-**Documentation:** [bible-api.com](https://bible-api.com/)
+**Documentation:** [bible-api.com](https://bible-api.com/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -462,7 +486,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 25. Quran Cloud API
 
-**Documentation:** [alquran.cloud/api](https://alquran.cloud/api)
+**Documentation:** [alquran.cloud/api](https://alquran.cloud/api)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -481,7 +506,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 26. Bhagavad Gita API
 
-**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Religious Texts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -500,7 +526,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 27. Public Holidays API
 
-**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)
+**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -519,7 +546,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 28. Nager.Date API
 
-**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)
+**Documentation:** [date.nager.at/Api](https://date.nager.at/Api)  
+**Auth:** <span class="auth auth-none" title="Free public holiday API">No auth</span>  
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -538,7 +566,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 29. OpenAQ API
 
-**Documentation:** [docs.openaq.org](https://docs.openaq.org/)
+**Documentation:** [docs.openaq.org](https://docs.openaq.org/)  
+**Auth:** <span class="auth auth-none" title="Open air quality data">No auth</span>  
 **Category:** Environment & Air Quality
 
 **Pseudo Search Terms / API Call Examples:**
@@ -557,7 +586,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 30. UK Carbon Intensity API
 
-**Documentation:** [carbon-intensity.github.io/api-definitions](https://carbon-intensity.github.io/api-definitions/)
+**Documentation:** [carbon-intensity.github.io/api-definitions](https://carbon-intensity.github.io/api-definitions/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Environment & Energy
 
 **Pseudo Search Terms / API Call Examples:**
@@ -576,7 +606,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 31. IQAir API
 
-**Documentation:** [www.iqair.com/air-pollution-data-api](https://www.iqair.com/air-pollution-data-api)
+**Documentation:** [www.iqair.com/air-pollution-data-api](https://www.iqair.com/air-pollution-data-api)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Environment & Air Quality
 
 **Pseudo Search Terms / API Call Examples:**
@@ -595,7 +626,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 32. Open Trivia Database API
 
-**Documentation:** [opentdb.com/api_config.php](https://opentdb.com/api_config.php)
+**Documentation:** [opentdb.com/api_config.php](https://opentdb.com/api_config.php)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Entertainment & Trivia
 
 **Pseudo Search Terms / API Call Examples:**
@@ -614,7 +646,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 33. JokeAPI
 
-**Documentation:** [v2.jokeapi.dev](https://v2.jokeapi.dev/)
+**Documentation:** [v2.jokeapi.dev](https://v2.jokeapi.dev/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Entertainment & Humor
 
 **Pseudo Search Terms / API Call Examples:**
@@ -633,7 +666,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 34. Random Useless Facts API
 
-**Documentation:** [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/)
+**Documentation:** [uselessfacts.jsph.pl](https://uselessfacts.jsph.pl/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Entertainment & Trivia
 
 **Pseudo Search Terms / API Call Examples:**
@@ -652,7 +686,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 35. Gutendex API
 
-**Documentation:** [gutendex.com](https://gutendex.com/)
+**Documentation:** [gutendex.com](https://gutendex.com/)  
+**Auth:** <span class="auth auth-none" title="Project Gutenberg, free">No auth</span>  
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -671,7 +706,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 36. Google Books API
 
-**Documentation:** [developers.google.com/books](https://developers.google.com/books)
+**Documentation:** [developers.google.com/books](https://developers.google.com/books)  
+**Auth:** <span class="auth auth-optional" title="API key recommended for higher limits">Key optional</span>  
 **Category:** Books & Literature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -690,7 +726,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 37. GeoNames API
 
-**Documentation:** [www.geonames.org/export/web-services.html](https://www.geonames.org/export/web-services.html)
+**Documentation:** [www.geonames.org/export/web-services.html](https://www.geonames.org/export/web-services.html)  
+**Auth:** <span class="auth auth-account" title="Requires free username/account">Account login</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Geographic Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -709,7 +746,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 38. Numbers API
 
-**Documentation:** [numbersapi.com](http://numbersapi.com/)
+**Documentation:** [numbersapi.com](http://numbersapi.com/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Mathematics & Facts
 
 **Pseudo Search Terms / API Call Examples:**
@@ -728,7 +766,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 39. Wizard World API
 
-**Documentation:** [wizard-world-api.herokuapp.com/swagger/index.html](https://wizard-world-api.herokuapp.com/swagger/index.html)
+**Documentation:** [wizard-world-api.herokuapp.com/swagger/index.html](https://wizard-world-api.herokuapp.com/swagger/index.html)  
+**Auth:** <span class="auth auth-none" title="Free Harry Potter API">No auth</span>  
 **Category:** Entertainment & Fiction
 
 **Pseudo Search Terms / API Call Examples:**
@@ -747,7 +786,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 40. PunkAPI
 
-**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)
+**Documentation:** not found; search the [public-apis directory](https://github.com/public-apis/public-apis)  
+**Auth:** <span class="auth auth-none" title="Free beer recipe API">No auth</span>  
 **Category:** Food & Drink
 
 **Pseudo Search Terms / API Call Examples:**
@@ -766,7 +806,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 41. Edamam Nutrition API
 
-**Documentation:** [developer.edamam.com](https://developer.edamam.com/)
+**Documentation:** [developer.edamam.com](https://developer.edamam.com/)  
+**Auth:** <span class="auth auth-keysecret" title="Requires API key and app ID">Key + secret</span>  
 **Category:** Food & Nutrition
 
 **Pseudo Search Terms / API Call Examples:**
@@ -785,7 +826,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 42. Chess.com API
 
-**Documentation:** [www.chess.com/news/view/published-data-api](https://www.chess.com/news/view/published-data-api)
+**Documentation:** [www.chess.com/news/view/published-data-api](https://www.chess.com/news/view/published-data-api)  
+**Auth:** <span class="auth auth-none" title="Public data is free">No auth</span>  
 **Category:** Games & Sports
 
 **Pseudo Search Terms / API Call Examples:**
@@ -804,7 +846,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 43. Lichess API
 
-**Documentation:** [lichess.org/api](https://lichess.org/api)
+**Documentation:** [lichess.org/api](https://lichess.org/api)  
+**Auth:** <span class="auth auth-none" title="Public data is free">No auth</span>  
 **Category:** Games & Sports
 
 **Pseudo Search Terms / API Call Examples:**
@@ -823,7 +866,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 44. Calendarific API
 
-**Documentation:** [calendarific.com/api-documentation](https://calendarific.com/api-documentation)
+**Documentation:** [calendarific.com/api-documentation](https://calendarific.com/api-documentation)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -842,7 +886,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 45. Checkiday API
 
-**Documentation:** [apilayer.com/marketplace/checkiday-api](https://apilayer.com/marketplace/checkiday-api)
+**Documentation:** [apilayer.com/marketplace/checkiday-api](https://apilayer.com/marketplace/checkiday-api)  
+**Auth:** <span class="auth auth-key" title="Requires API key">API key</span>  
 **Category:** Calendar & Events
 
 **Pseudo Search Terms / API Call Examples:**
@@ -861,7 +906,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 46. xeno-canto API
 
-**Documentation:** [xeno-canto.org/explore/api](https://xeno-canto.org/explore/api)
+**Documentation:** [xeno-canto.org/explore/api](https://xeno-canto.org/explore/api)  
+**Auth:** <span class="auth auth-none" title="Free bird recordings">No auth</span>  
 **Category:** Animals & Nature
 
 **Pseudo Search Terms / API Call Examples:**
@@ -880,7 +926,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 47. Coinbase API
 
-**Documentation:** [docs.cdp.coinbase.com](https://docs.cdp.coinbase.com/)
+**Documentation:** [docs.cdp.coinbase.com](https://docs.cdp.coinbase.com/)  
+**Auth:** <span class="auth auth-key" title="API key needed for account data">API key</span>  
 **Category:** Cryptocurrency Data
 
 **Pseudo Search Terms / API Call Examples:**
@@ -899,7 +946,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 48. Europeana API
 
-**Documentation:** [pro.europeana.eu/page/apis](https://pro.europeana.eu/page/apis)
+**Documentation:** [pro.europeana.eu/page/apis](https://pro.europeana.eu/page/apis)  
+**Auth:** <span class="auth auth-key" title="Requires API key (free)">API key</span> <span class="auth auth-free">Free tier</span>  
 **Category:** Art & Culture
 
 **Pseudo Search Terms / API Call Examples:**
@@ -918,7 +966,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 49. Chuck Norris Jokes API
 
-**Documentation:** [api.chucknorris.io](https://api.chucknorris.io/)
+**Documentation:** [api.chucknorris.io](https://api.chucknorris.io/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Entertainment & Humor
 
 **Pseudo Search Terms / API Call Examples:**
@@ -937,7 +986,8 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 50. Bored API
 
-**Documentation:** [bored-api.appbrewery.com](https://bored-api.appbrewery.com/)
+**Documentation:** [bored-api.appbrewery.com](https://bored-api.appbrewery.com/)  
+**Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Entertainment & Activities
 
 **Pseudo Search Terms / API Call Examples:**

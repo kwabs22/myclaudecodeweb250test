@@ -314,3 +314,21 @@ pre.mermaid { background: var(--panel); border: 1px solid var(--line); border-ra
 .metrics button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .lab.ovn.ovtop { color: #ffd166; font-weight: 800; }
 .card .note { margin: 8px 0 0; font-size: 12px; color: var(--map-muted); }
+
+/* auth badges on the API pages */
+.prose .auth { display: inline-block; padding: 1px 9px; border-radius: 999px; font: 600 12px var(--font-ui); border: 1px solid var(--line); background: var(--panel); color: var(--ink); white-space: nowrap; }
+.prose .auth-none { background: #e3f6ec; border-color: #9bd5b4; color: #0f5a33; }
+.prose .auth-key, .prose .auth-optional { background: #e8f0fe; border-color: #a9c3f5; color: #17407f; }
+.prose .auth-oauth, .prose .auth-token { background: #fdeede; border-color: #f0c391; color: #7a3d08; }
+.prose .auth-keysecret, .prose .auth-account, .prose .auth-partner { background: #f6e6f3; border-color: #dba9d1; color: #6b1f5c; }
+.prose .auth-free, .prose .auth-paid { background: transparent; color: var(--muted); font-weight: 500; }
+:root[data-theme="dark"] .prose .auth-none { background: #123a27; border-color: #2c7a52; color: #a7e8c4; }
+:root[data-theme="dark"] .prose .auth-key, :root[data-theme="dark"] .prose .auth-optional { background: #14284d; border-color: #2f58a3; color: #b6cdfa; }
+:root[data-theme="dark"] .prose .auth-oauth, :root[data-theme="dark"] .prose .auth-token { background: #46280d; border-color: #8f5a20; color: #f6cf9f; }
+:root[data-theme="dark"] .prose .auth-keysecret, :root[data-theme="dark"] .prose .auth-account, :root[data-theme="dark"] .prose .auth-partner { background: #3d1a37; border-color: #8a4a7e; color: #efbfe4; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .prose .auth-none { background: #123a27; border-color: #2c7a52; color: #a7e8c4; }
+  :root:not([data-theme="light"]) .prose .auth-key, :root:not([data-theme="light"]) .prose .auth-optional { background: #14284d; border-color: #2f58a3; color: #b6cdfa; }
+  :root:not([data-theme="light"]) .prose .auth-oauth, :root:not([data-theme="light"]) .prose .auth-token { background: #46280d; border-color: #8f5a20; color: #f6cf9f; }
+  :root:not([data-theme="light"]) .prose .auth-keysecret, :root:not([data-theme="light"]) .prose .auth-account, :root:not([data-theme="light"]) .prose .auth-partner { background: #3d1a37; border-color: #8a4a7e; color: #efbfe4; }
+}
