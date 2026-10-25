@@ -147,7 +147,7 @@
   "deck": "guitar",
   "section": "Guitar Chords and Voicings",
   "q": "If you play strings 4-3-2 at frets 7-7-7, what chord are you playing?",
-  "a": "D major triad (D-A-D-F#)"
+  "a": "A-D-F#, a D major triad in second inversion (A in the bass). String 4 at fret 7 is A, string 3 is D and string 2 is F#."
  },
  {
   "deck": "guitar",
@@ -315,7 +315,7 @@
   "deck": "guitar",
   "section": "Advanced Guitar Techniques",
   "q": "What is sweep picking and how does it affect note timing in piano roll?",
-  "a": "Sweep picking is a technique where you use one continuous pick motion across multiple strings. Notes should be very close together in timing (1-3ms apart) with consistent velocity (90-110) to create the fluid, fast arpeggiated sound."
+  "a": "Sweep picking is one continuous pick motion across several strings. The notes are tightly spaced but still separate: about 15-60 ms apart (for example 16th or 32nd notes at a fast tempo), not 1-3 ms, which would sound like a block chord. Keep velocity even (90-110) for a fluid arpeggiated sound."
  },
  {
   "deck": "guitar",
@@ -423,7 +423,7 @@
   "deck": "guitar",
   "section": "Chord Theory and Extensions",
   "q": "What notes comprise a Cmaj9 chord and how would you voice it on guitar?",
-  "a": "C-E-G-B-D (root, 3rd, 5th, 7th, 9th). Guitar voicing often omits 5th: C-E-B-D or E-B-D-G (from low to high), using easier fingerings."
+  "a": "C-E-G-B-D (root, 3rd, 5th, 7th, 9th). Guitar voicings often omit the 5th: C-E-B-D, or the rootless E-B-D-G, which is also Em7 and works over a C bass note."
  },
  {
   "deck": "guitar",
@@ -459,7 +459,7 @@
   "deck": "guitar",
   "section": "Chord Theory and Extensions",
   "q": "How do you voice a drop 2 chord voicing on guitar?",
-  "a": "Take close position chord, drop 2nd note from top down an octave. Cmaj7 close: C-E-G-B becomes E-C-G-B (drop 2). Creates wider, fuller voicing common in jazz."
+  "a": "Take a close-position chord and drop the second note from the top down an octave. Cmaj7 close: C-E-G-B. The second note from the top is G, so drop 2 is G-C-E-B (low to high). The wider spacing is common in jazz."
  },
  {
   "deck": "guitar",
@@ -483,13 +483,13 @@
   "deck": "guitar",
   "section": "Rhythm and Timing",
   "q": "What is a gallop rhythm and how do you program it in guitar parts?",
-  "a": "Metal rhythm: two quick notes followed by longer note. Pattern: 8th-16th-16th (or 16th-16th-8th). Program with power chords, palm muting, tight timing. Example: E-E-E (long-short-short)."
+  "a": "Metal rhythm of one longer note followed by two quick ones. Pattern: 8th-16th-16th (the reverse, 16th-16th-8th, is also used). Program with power chords, palm muting and tight timing. Example: E-E-E (long-short-short)."
  },
  {
   "deck": "guitar",
   "section": "Rhythm and Timing",
   "q": "How do you create a reggae guitar skank rhythm in piano roll?",
-  "a": "Staccato chords on off-beats (the \"and\" of each beat). Mute strings heavily (very short notes, 1/16 or shorter), medium velocity (60-80). Typically on beats 2 and 4 in 4/4."
+  "a": "Staccato chords on the off-beats (the \"and\" of each beat). Mute strings heavily (very short notes, 1/16 or shorter) at medium velocity (60-80). The drums, not the guitar, emphasise beats 2 and 4 (the one-drop)."
  },
  {
   "deck": "guitar",
@@ -507,7 +507,7 @@
   "deck": "guitar",
   "section": "Rhythm and Timing",
   "q": "What is a hemiola and how would you create it on guitar?",
-  "a": "Rhythmic pattern suggesting 3/2 time over 6/8 (or vice versa). Example: 6/8 time with accents every 3 beats creates 3/4 feel. Common in Spanish and Latin music."
+  "a": "A rhythmic pattern in which two beats of three are felt against three of two: in 6/8, accenting every second eighth note (3 accents per bar) creates a 3/4 feel against the usual 3+3 grouping. Common in Spanish and Latin music."
  },
  {
   "deck": "guitar",
@@ -525,7 +525,7 @@
   "deck": "guitar",
   "section": "Rhythm and Timing",
   "q": "How do you create a latin clave-based guitar rhythm?",
-  "a": "Follow 3-2 or 2-3 clave pattern. 3-2 Son clave timing: beats 1, 2.5, 4, 1.5, 3. Program guitar chords or bass notes on clave hits with slight anticipation for authentic feel."
+  "a": "Follow the 3-2 or 2-3 clave pattern. 3-2 son clave in one bar of 4/4 hits on beat 1, the \"a\" of 1 (1.75), the \"and\" of 2 (2.5), the \"and\" of 3 (3.5) and beat 4. Program guitar chords or bass notes on the clave hits, with slight anticipation for an authentic feel."
  },
  {
   "deck": "guitar",
@@ -549,7 +549,7 @@
   "deck": "guitar",
   "section": "Genre-Specific and Performance Questions",
   "q": "What makes a jazz ii-V-I progression sound more sophisticated than I-IV-V?",
-  "a": "Uses diatonic chord function with 7th chords, creates stronger voice leading. In C: Dm7-G7-Cmaj7. The tritone in G7 (B-F) resolves to 3rd and 7th of Cmaj7."
+  "a": "Uses diatonic chord function with 7th chords and creates stronger voice leading. In C: Dm7-G7-Cmaj7. The tritone in G7 (B-F) resolves inward and outward: B up to C (the root) and F down to E (the 3rd of Cmaj7)."
  },
  {
   "deck": "guitar",
@@ -759,7 +759,7 @@
   "deck": "piano",
   "section": "Piano Chords and Voicings",
   "q": "What is a \"10th\" interval, and why is it important in piano voicing?",
-  "a": "An octave plus a 3rd (17 semitones); important because it creates fuller sound than a 3rd when voiced in bass register"
+  "a": "An octave plus a 3rd: 16 semitones for a major 10th (15 for a minor 10th). Important because a 10th in the left hand creates a fuller sound than a plain 3rd in the bass register, and it is easier to reach than it looks."
  },
  {
   "deck": "piano",
@@ -855,7 +855,7 @@
   "deck": "piano",
   "section": "Applied Piano Music Theory",
   "q": "In stride piano, what interval is typically played on beat 2 of the left hand?",
-  "a": "A 10th (octave + 3rd) or sometimes just a chord"
+  "a": "Usually a mid-range chord. The 10ths belong on the bass beats (1 and 3); beat 2 and 4 take the chord."
  },
  {
   "deck": "piano",
@@ -933,13 +933,13 @@
   "deck": "piano",
   "section": "Advanced Piano Voicings",
   "q": "What is a drop 3 voicing and how does it differ from drop 2?",
-  "a": "Drop 3 = take close position chord, drop 3rd note from top down an octave. Cmaj7 close: C-E-G-B becomes G-C-E-B (drop 3). Wider spread than drop 2, often used in solo piano."
+  "a": "Drop 3 = take a close-position chord and drop the third note from the top down an octave. Cmaj7 close: C-E-G-B. The third note from the top is E, so drop 3 is E-C-G-B (low to high). Wider spread than drop 2 (G-C-E-B), often used in solo piano."
  },
  {
   "deck": "piano",
   "section": "Advanced Piano Voicings",
   "q": "How do you voice a So What chord (Dm11) like Bill Evans?",
-  "a": "Stacked 4ths/5ths: D-G-C-F-A or E-A-D-G-C. Quartal voicing with omitted 3rd. Creates open, modern jazz sound. Use both hands - left plays lower notes, right plays upper."
+  "a": "A quartal voicing with a major 3rd on top, as played by Bill Evans: E-A-D-G-B (low to high), three perfect 4ths and a major 3rd. It omits the 3rd of Dm11 and sounds open and modern. Use both hands: the left plays the lower notes, the right the upper ones."
  },
  {
   "deck": "piano",
@@ -951,7 +951,7 @@
   "deck": "piano",
   "section": "Advanced Piano Voicings",
   "q": "How do you voice a rootless A section voicing for a ii-V-I in C?",
-  "a": "Dm7: C-E-F-A (3-5-6-8). G7: B-E-F-A (3-6-7-9). Cmaj7: B-E-G-A (7-3-5-6). Left hand plays roots, right hand plays guide tones and extensions without roots."
+  "a": "Dm7: F-A-C-E (3-5-7-9). G7: F-A-B-E (7-9-3-13). Cmaj7: E-G-B-D (3-5-7-9). Only one note moves by half-step between each chord (C to B, then F to E, A to G and E to D to land on Cmaj7). Left hand plays roots, right hand plays the guide tones and extensions without roots."
  },
  {
   "deck": "piano",
@@ -975,7 +975,7 @@
   "deck": "piano",
   "section": "Advanced Piano Voicings",
   "q": "Explain the upper structure triad concept in jazz piano.",
-  "a": "Play a triad in right hand over left hand root/shell. For G13: G (root) + D major triad (D-F#-A-C# = 5-7-9-13). Creates colorful extensions efficiently."
+  "a": "Play a triad in the right hand over the left hand's root and 7th. For G13#11: left hand G and F, right hand an A major triad (A-C#-E = 9, #11 and 13). Creates colorful extensions with one simple shape."
  },
  {
   "deck": "piano",
@@ -1017,13 +1017,13 @@
   "deck": "piano",
   "section": "Scales, Modes, and Improvisation",
   "q": "How do you use the melodic minor scale in jazz improvisation?",
-  "a": "Use same scale ascending and descending (unlike classical). Creates access to altered dominant sounds. A melodic minor over E7alt provides all alterations (b9, #9, #11, b13)."
+  "a": "Use the same scale ascending and descending (unlike classical). Gives access to altered dominant sounds: the altered scale is the melodic minor a half step above the dominant's root, so F melodic minor over E7alt provides all the alterations (b9, #9, #11, b13)."
  },
  {
   "deck": "piano",
   "section": "Scales, Modes, and Improvisation",
   "q": "What is the symmetrical augmented scale and over what chord is it used?",
-  "a": "Repeating pattern of half-whole-half steps. C augmented: C-Db-E-F-Ab-A. Used over augmented triads. Symmetrical = only 4 unique augmented scales total."
+  "a": "The augmented scale alternates a minor 3rd and a half step (or the reverse): C-D#-E-G-G#-B. It is symmetrical, repeating every major 3rd, so there are only 4 distinct augmented scales. Used over augmented triads and maj7#5 chords."
  },
  {
   "deck": "piano",
@@ -1071,7 +1071,7 @@
   "deck": "piano",
   "section": "Rhythm, Groove, and Style-Specific Patterns",
   "q": "What is the clave son pattern and how does it apply to piano montuno?",
-  "a": "3-2 clave: X..X...X.X...X.. (or 2-3 reverse). Montuno follows this rhythmic pattern. Right hand plays syncopated chord pattern, left hand plays tumbao (bass pattern) aligned with clave."
+  "a": "3-2 son clave on a 16-step grid: X..X..X...X.X... (hits on steps 1, 4, 7, 11 and 13; the 2-3 version starts on the two-side). The montuno follows this rhythm: the right hand plays a syncopated chord pattern and the left hand plays the tumbao bass, aligned with the clave."
  },
  {
   "deck": "piano",
@@ -1095,7 +1095,7 @@
   "deck": "piano",
   "section": "Rhythm, Groove, and Style-Specific Patterns",
   "q": "What is the característ ica left hand pattern in Brazilian bossa nova piano?",
-  "a": "Syncopated bass line emphasizing beats 1, 2&, 3, 4. Often plays root on 1, 5th on 2&, root on 3, chromatic approach on 4&. Creates samba-influenced groove."
+  "a": "The characteristic left hand pattern in Brazilian bossa nova piano: a syncopated bass line emphasizing beats 1, 2&, 3 and 4&. Often the root on 1, the 5th on 2&, the root on 3 and a chromatic approach on 4&. It creates a samba-influenced groove."
  },
  {
   "deck": "piano",
@@ -1131,7 +1131,7 @@
   "deck": "piano",
   "section": "Advanced Techniques and Effects",
   "q": "What is a Viennese trill and how does it differ from a regular trill?",
-  "a": "Starts on upper auxiliary note, then main note alternation. Regular trill starts on main note. Viennese: D-C-D-C-D-C vs regular C-D-C-D-C-D. Classical performance practice."
+  "a": "Starts on the upper auxiliary note, then alternates with the main note. A regular trill (in the modern convention) starts on the main note. Upper-note start: D-C-D-C-D-C versus main-note start: C-D-C-D-C-D. The term \"Viennese trill\" is not standard, but starting on the upper note was normal Baroque and Classical practice."
  },
  {
   "deck": "piano",

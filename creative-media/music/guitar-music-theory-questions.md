@@ -89,7 +89,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** They contain no 3rd, avoiding dissonant overtones; only root and 5th create clean, powerful sound
 
 ### 25. If you play strings 4-3-2 at frets 7-7-7, what chord are you playing?
-**Answer:** D major triad (D-A-D-F#)
+**Answer:** A-D-F#, a D major triad in second inversion (A in the bass). String 4 at fret 7 is A, string 3 is D and string 2 is F#.
 
 ### 26. What is a "cowboy chord"?
 **Answer:** An open position chord (typically C, A, G, E, D, Am, Em, Dm) played in first position
@@ -185,7 +185,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Natural vibrato = slight pitch variations created by finger movement (±1/4 to 1/2 semitone). Mechanical vibrato = tremolo/whammy bar creates wider pitch variations. Program with pitch bend automation: subtle (±50 cents) for natural, wider for whammy bar.
 
 ### 53. What is sweep picking and how does it affect note timing in piano roll?
-**Answer:** Sweep picking is a technique where you use one continuous pick motion across multiple strings. Notes should be very close together in timing (1-3ms apart) with consistent velocity (90-110) to create the fluid, fast arpeggiated sound.
+**Answer:** Sweep picking is one continuous pick motion across several strings. The notes are tightly spaced but still separate: about 15-60 ms apart (for example 16th or 32nd notes at a fast tempo), not 1-3 ms, which would sound like a block chord. Keep velocity even (90-110) for a fluid arpeggiated sound.
 
 ### 54. How do you program a realistic guitar pick scrape in piano roll?
 **Answer:** Create a descending chromatic or atonal run with very short note durations, low velocity (30-50), and rapid timing. Often starts high and descends to low strings, with increasing velocity at the end.
@@ -247,7 +247,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 ## Chord Theory and Extensions (Questions 71-80)
 
 ### 71. What notes comprise a Cmaj9 chord and how would you voice it on guitar?
-**Answer:** C-E-G-B-D (root, 3rd, 5th, 7th, 9th). Guitar voicing often omits 5th: C-E-B-D or E-B-D-G (from low to high), using easier fingerings.
+**Answer:** C-E-G-B-D (root, 3rd, 5th, 7th, 9th). Guitar voicings often omit the 5th: C-E-B-D, or the rootless E-B-D-G, which is also Em7 and works over a C bass note.
 
 ### 72. What is a slash chord and how is C/E different from C major?
 **Answer:** Slash chord = chord with specific bass note. C/E means C major chord with E in bass (first inversion). Written as E-G-C from low to high instead of C-E-G.
@@ -265,7 +265,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Replace V7 with bII7 (dominant chord a tritone away). In C major, replace G7 with Db7, both resolve to Cmaj. They share the same 3rd and 7th (enharmonically).
 
 ### 77. How do you voice a drop 2 chord voicing on guitar?
-**Answer:** Take close position chord, drop 2nd note from top down an octave. Cmaj7 close: C-E-G-B becomes E-C-G-B (drop 2). Creates wider, fuller voicing common in jazz.
+**Answer:** Take a close-position chord and drop the second note from the top down an octave. Cmaj7 close: C-E-G-B. The second note from the top is G, so drop 2 is G-C-E-B (low to high). The wider spacing is common in jazz.
 
 ### 78. What is a quartal voicing and how does it differ from tertian harmony?
 **Answer:** Built in 4ths instead of 3rds. C quartal: C-F-Bb-Eb (stacked 4ths). Sounds open, modern, ambiguous. Jazz and fusion use extensively. Tertian = traditional 3rd-based triads/7ths.
@@ -281,10 +281,10 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 ## Rhythm and Timing (Questions 81-90)
 
 ### 81. What is a gallop rhythm and how do you program it in guitar parts?
-**Answer:** Metal rhythm: two quick notes followed by longer note. Pattern: 8th-16th-16th (or 16th-16th-8th). Program with power chords, palm muting, tight timing. Example: E-E-E (long-short-short).
+**Answer:** Metal rhythm of one longer note followed by two quick ones. Pattern: 8th-16th-16th (the reverse, 16th-16th-8th, is also used). Program with power chords, palm muting and tight timing. Example: E-E-E (long-short-short).
 
 ### 82. How do you create a reggae guitar skank rhythm in piano roll?
-**Answer:** Staccato chords on off-beats (the "and" of each beat). Mute strings heavily (very short notes, 1/16 or shorter), medium velocity (60-80). Typically on beats 2 and 4 in 4/4.
+**Answer:** Staccato chords on the off-beats (the "and" of each beat). Mute strings heavily (very short notes, 1/16 or shorter) at medium velocity (60-80). The drums, not the guitar, emphasise beats 2 and 4 (the one-drop).
 
 ### 83. What is a polymetric pattern and give an example for guitar?
 **Answer:** Two different meters played simultaneously. Example: 3/4 pattern over 4/4 time signature. Creates interesting rhythmic tension. Tool and King Crimson use extensively.
@@ -293,7 +293,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Straight 16ths = evenly spaced. Swing (66% or 2:1 ratio) = first of each pair is twice as long. At 66%, first note gets 2/3 of beat, second gets 1/3. Creates triplet feel.
 
 ### 85. What is a hemiola and how would you create it on guitar?
-**Answer:** Rhythmic pattern suggesting 3/2 time over 6/8 (or vice versa). Example: 6/8 time with accents every 3 beats creates 3/4 feel. Common in Spanish and Latin music.
+**Answer:** A rhythmic pattern in which two beats of three are felt against three of two: in 6/8, accenting every second eighth note (3 accents per bar) creates a 3/4 feel against the usual 3+3 grouping. Common in Spanish and Latin music.
 
 ### 86. How do you program a realistic funk guitar rhythm with ghost notes?
 **Answer:** Syncopated 16th note pattern with accents on off-beats. Ghost notes (velocity 20-40) between accented notes (velocity 90-120). Tight, percussive, palm-muted sound. Staccato.
@@ -302,7 +302,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Accent on unexpected beat. Instead of accenting 1 and 3, accent "&" of 2 or other off-beats. Creates syncopation and forward motion. Common in funk and jazz.
 
 ### 88. How do you create a latin clave-based guitar rhythm?
-**Answer:** Follow 3-2 or 2-3 clave pattern. 3-2 Son clave timing: beats 1, 2.5, 4, 1.5, 3. Program guitar chords or bass notes on clave hits with slight anticipation for authentic feel.
+**Answer:** Follow the 3-2 or 2-3 clave pattern. 3-2 son clave in one bar of 4/4 hits on beat 1, the "a" of 1 (1.75), the "and" of 2 (2.5), the "and" of 3 (3.5) and beat 4. Program guitar chords or bass notes on the clave hits, with slight anticipation for an authentic feel.
 
 ### 89. What is the shuffle feel and what's the mathematical ratio?
 **Answer:** Triplet-based feel where 8th notes are played as first and third note of triplet. Ratio is 2:1 (first note twice as long). Different from straight 16ths. Blues, jazz standard.
@@ -318,7 +318,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** I-I-I-I-IV-IV-I-I-V-IV-I-V (or I). In E: E7-E7-E7-E7-A7-A7-E7-E7-B7-A7-E7-B7. Each numeral represents one bar.
 
 ### 92. What makes a jazz ii-V-I progression sound more sophisticated than I-IV-V?
-**Answer:** Uses diatonic chord function with 7th chords, creates stronger voice leading. In C: Dm7-G7-Cmaj7. The tritone in G7 (B-F) resolves to 3rd and 7th of Cmaj7.
+**Answer:** Uses diatonic chord function with 7th chords and creates stronger voice leading. In C: Dm7-G7-Cmaj7. The tritone in G7 (B-F) resolves inward and outward: B up to C (the root) and F down to E (the 3rd of Cmaj7).
 
 ### 93. How would you voice a Hendrix-style dominant 7#9 chord?
 **Answer:** E7#9 (Hendrix chord): E-G#-D-G (low to high). Contains both major 3rd (G#) and minor 3rd (enharmonic to #9). Creates bluesy, funky dissonance. Play with distortion.

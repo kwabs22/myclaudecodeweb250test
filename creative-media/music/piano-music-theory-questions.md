@@ -95,7 +95,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** E (the 3rd becomes the lowest note: E-G-C)
 
 ### 27. What is a "10th" interval, and why is it important in piano voicing?
-**Answer:** An octave plus a 3rd (17 semitones); important because it creates fuller sound than a 3rd when voiced in bass register
+**Answer:** An octave plus a 3rd: 16 semitones for a major 10th (15 for a minor 10th). Important because a 10th in the left hand creates a fuller sound than a plain 3rd in the bass register, and it is easier to reach than it looks.
 
 ### 28. What notes would you play for a rootless Cmaj9 voicing (common in jazz)?
 **Answer:** E-G-B-D (3rd, 5th, 7th, 9th - omitting the root C)
@@ -151,7 +151,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Creates tension and release; the 4th resolves down to the 3rd, strengthening the pull to the I chord
 
 ### 43. In stride piano, what interval is typically played on beat 2 of the left hand?
-**Answer:** A 10th (octave + 3rd) or sometimes just a chord
+**Answer:** Usually a mid-range chord. The 10ths belong on the bass beats (1 and 3); beat 2 and 4 take the chord.
 
 ### 44. What is the I-V-vi-IV progression in the key of F major?
 **Answer:** F - C - Dm - Bb
@@ -198,16 +198,16 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 ## Advanced Piano Voicings (Questions 56-65)
 
 ### 56. What is a drop 3 voicing and how does it differ from drop 2?
-**Answer:** Drop 3 = take close position chord, drop 3rd note from top down an octave. Cmaj7 close: C-E-G-B becomes G-C-E-B (drop 3). Wider spread than drop 2, often used in solo piano.
+**Answer:** Drop 3 = take a close-position chord and drop the third note from the top down an octave. Cmaj7 close: C-E-G-B. The third note from the top is E, so drop 3 is E-C-G-B (low to high). Wider spread than drop 2 (G-C-E-B), often used in solo piano.
 
 ### 57. How do you voice a So What chord (Dm11) like Bill Evans?
-**Answer:** Stacked 4ths/5ths: D-G-C-F-A or E-A-D-G-C. Quartal voicing with omitted 3rd. Creates open, modern jazz sound. Use both hands - left plays lower notes, right plays upper.
+**Answer:** A quartal voicing with a major 3rd on top, as played by Bill Evans: E-A-D-G-B (low to high), three perfect 4ths and a major 3rd. It omits the 3rd of Dm11 and sounds open and modern. Use both hands: the left plays the lower notes, the right the upper ones.
 
 ### 58. What is a cluster chord and in what context would you use it?
 **Answer:** Adjacent notes played together (e.g., C-D-E or C-Db-D). Creates dissonance/tension. Used in modern classical, jazz, and cinematic music for dramatic effect or texture.
 
 ### 59. How do you voice a rootless A section voicing for a ii-V-I in C?
-**Answer:** Dm7: C-E-F-A (3-5-6-8). G7: B-E-F-A (3-6-7-9). Cmaj7: B-E-G-A (7-3-5-6). Left hand plays roots, right hand plays guide tones and extensions without roots.
+**Answer:** Dm7: F-A-C-E (3-5-7-9). G7: F-A-B-E (7-9-3-13). Cmaj7: E-G-B-D (3-5-7-9). Only one note moves by half-step between each chord (C to B, then F to E, A to G and E to D to land on Cmaj7). Left hand plays roots, right hand plays the guide tones and extensions without roots.
 
 ### 60. What is the difference between close and open position voicing?
 **Answer:** Close position = all notes within an octave (C-E-G-B in one octave). Open position = notes spread beyond an octave (C3-G3-E4-B4). Open position sounds fuller, less muddy.
@@ -219,7 +219,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Voicing with intervals larger than an octave between some voices. Example: C3-G3-E4-B4-D5 for Cmaj9. Creates spacious, orchestral sound. Common in solo piano and ballads.
 
 ### 63. Explain the upper structure triad concept in jazz piano.
-**Answer:** Play a triad in right hand over left hand root/shell. For G13: G (root) + D major triad (D-F#-A-C# = 5-7-9-13). Creates colorful extensions efficiently.
+**Answer:** Play a triad in the right hand over the left hand's root and 7th. For G13#11: left hand G and F, right hand an A major triad (A-C#-E = 9, #11 and 13). Creates colorful extensions with one simple shape.
 
 ### 64. How do you voice a diminished 7th chord to create maximum tension?
 **Answer:** Use all four notes close together (e.g., C-Eb-Gb-A) for compact tension. Or spread across hands for dramatic effect. Symmetrical = can resolve to multiple keys.
@@ -244,10 +244,10 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Start with most common: Ionian (major), Aeolian (minor), then Dorian, Mixolydian, Phrygian, Lydian, finally Locrian. Focus on characteristic note of each mode.
 
 ### 70. How do you use the melodic minor scale in jazz improvisation?
-**Answer:** Use same scale ascending and descending (unlike classical). Creates access to altered dominant sounds. A melodic minor over E7alt provides all alterations (b9, #9, #11, b13).
+**Answer:** Use the same scale ascending and descending (unlike classical). Gives access to altered dominant sounds: the altered scale is the melodic minor a half step above the dominant's root, so F melodic minor over E7alt provides all the alterations (b9, #9, #11, b13).
 
 ### 71. What is the symmetrical augmented scale and over what chord is it used?
-**Answer:** Repeating pattern of half-whole-half steps. C augmented: C-Db-E-F-Ab-A. Used over augmented triads. Symmetrical = only 4 unique augmented scales total.
+**Answer:** The augmented scale alternates a minor 3rd and a half step (or the reverse): C-D#-E-G-G#-B. It is symmetrical, repeating every major 3rd, so there are only 4 distinct augmented scales. Used over augmented triads and maj7#5 chords.
 
 ### 72. How do you approach chord-scale relationships in modern jazz?
 **Answer:** Match scale to chord quality: Major 7 = Ionian or Lydian, m7 = Dorian or Aeolian, 7 = Mixolydian or altered, m7b5 = Locrian. Consider harmonic context.
@@ -275,7 +275,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** 8-to-the-bar pattern using walking bass with triplets or straight 8ths. Common pattern: root-3rd-5th-6th or root-3rd-5th-b7. Stays in lower register (C2-C3). Driving rhythm.
 
 ### 79. What is the clave son pattern and how does it apply to piano montuno?
-**Answer:** 3-2 clave: X..X...X.X...X.. (or 2-3 reverse). Montuno follows this rhythmic pattern. Right hand plays syncopated chord pattern, left hand plays tumbao (bass pattern) aligned with clave.
+**Answer:** 3-2 son clave on a 16-step grid: X..X..X...X.X... (hits on steps 1, 4, 7, 11 and 13; the 2-3 version starts on the two-side). The montuno follows this rhythm: the right hand plays a syncopated chord pattern and the left hand plays the tumbao bass, aligned with the clave.
 
 ### 80. How do you program realistic rubato in a romantic piano piece?
 **Answer:** Gradual tempo changes before important notes/chords. Slight ritardando at phrase endings, accelerando building tension. Use tempo automation or manual note placement off grid.
@@ -287,7 +287,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Right hand plays syncopated melody (notes on off-beats, especially before beat 1). Left hand maintains steady boom-chick (bass-chord) pattern. Creates "ragged time" feel.
 
 ### 83. What is the característ ica left hand pattern in Brazilian bossa nova piano?
-**Answer:** Syncopated bass line emphasizing beats 1, 2&, 3, 4. Often plays root on 1, 5th on 2&, root on 3, chromatic approach on 4&. Creates samba-influenced groove.
+**Answer:** The characteristic left hand pattern in Brazilian bossa nova piano: a syncopated bass line emphasizing beats 1, 2&, 3 and 4&. Often the root on 1, the 5th on 2&, the root on 3 and a chromatic approach on 4&. It creates a samba-influenced groove.
 
 ### 84. How do you program a convincing church/gospel two-hand rhythmic pattern?
 **Answer:** Both hands play chords rhythmically together with syncopation. Heavy use of sus4 resolutions, major-minor voice movement. Emphasis on 2 & 4. Often uses triplet feels and fills.
@@ -309,7 +309,7 @@ A comprehensive set of questions to test and reinforce your understanding of mus
 **Answer:** Very short note (1/64 or shorter) just before main note (1-10ms before), low velocity (40-60), usually one semitone above or below target. Quickly resolves to main note.
 
 ### 89. What is a Viennese trill and how does it differ from a regular trill?
-**Answer:** Starts on upper auxiliary note, then main note alternation. Regular trill starts on main note. Viennese: D-C-D-C-D-C vs regular C-D-C-D-C-D. Classical performance practice.
+**Answer:** Starts on the upper auxiliary note, then alternates with the main note. A regular trill (in the modern convention) starts on the main note. Upper-note start: D-C-D-C-D-C versus main-note start: C-D-C-D-C-D. The term "Viennese trill" is not standard, but starting on the upper note was normal Baroque and Classical practice.
 
 ### 90. How do you program sympathetic resonance using MIDI CC?
 **Answer:** Use sostenuto pedal (CC66) to hold bass notes while playing melody staccato above. Or extend certain note lengths while sustain pedal is modulated. Creates harp-like shimmer effect.
