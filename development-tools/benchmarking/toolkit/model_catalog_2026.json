@@ -1,0 +1,269 @@
+{
+  "model_catalog_2026": {
+    "description": "Open-weight models released 2025 to 2026, added in October 2026 to show how far things have come. Figures come from model cards and press coverage found by web search; speeds are left blank because none were verified.",
+    "last_updated": "2026-10",
+    "version": "1.0",
+    "gpu_types": {
+      "h200": {
+        "name": "NVIDIA H200",
+        "vram_gb": 141,
+        "architecture": "Hopper",
+        "release_year": 2024,
+        "cost_tier": "premium",
+        "recommended_for": "Large models and long contexts on one GPU",
+        "modal_gpu_type": "h200"
+      }
+    },
+    "models": {
+      "models_2026": {
+        "description": "2025 to 2026 releases",
+        "recommended_gpu": [
+          "h100",
+          "b200"
+        ],
+        "models": [
+          {
+            "name": "Gemma 4 E2B",
+            "hf_id": "google/gemma-4 (see the model card)",
+            "parameters": "2.3B effective",
+            "vram_required_gb": 5,
+            "precision": "4-bit",
+            "context_length": 131072,
+            "use_case": "Phones, small boards, testing",
+            "recommended_gpu": [
+              "t4",
+              "a10g"
+            ],
+            "expected_tps": {},
+            "quality_tier": "good",
+            "release_date": "2026-04",
+            "notes": "Memory is an estimate (parameters x bits / 8, plus headroom). Tier is a judgement, not a benchmark result. Text, image and audio input."
+          },
+          {
+            "name": "Gemma 4 E4B",
+            "hf_id": "google/gemma-4 (see the model card)",
+            "parameters": "4.5B effective",
+            "vram_required_gb": 7,
+            "precision": "4-bit",
+            "context_length": 131072,
+            "use_case": "Small assistants on a 16 GB card",
+            "recommended_gpu": [
+              "t4",
+              "a10g"
+            ],
+            "expected_tps": {},
+            "quality_tier": "good",
+            "release_date": "2026-04",
+            "notes": "Memory is an estimate (parameters x bits / 8, plus headroom). Tier is a judgement, not a benchmark result. Text, image and audio input."
+          },
+          {
+            "name": "Qwen3.5-9B",
+            "hf_id": "Qwen/Qwen3.5 (see the model card)",
+            "parameters": "9B",
+            "vram_required_gb": 6,
+            "precision": "Q4_K_M (5.6 GB file)",
+            "context_length": 131072,
+            "use_case": "Small general-purpose model",
+            "recommended_gpu": [
+              "t4",
+              "a10g",
+              "l4"
+            ],
+            "expected_tps": {},
+            "quality_tier": "good",
+            "release_date": "2026",
+            "notes": "Memory is the reported 4-bit file size plus headroom. Context length not confirmed; 131072 is a placeholder. Tier is a judgement."
+          },
+          {
+            "name": "gpt-oss-20b",
+            "hf_id": "openai/gpt-oss-20b",
+            "parameters": "21B (3.6B active)",
+            "vram_required_gb": 16,
+            "precision": "MXFP4",
+            "context_length": 131072,
+            "use_case": "Reasoning and tool use in 16 GB",
+            "recommended_gpu": [
+              "t4",
+              "a10g",
+              "l4"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2025-08",
+            "notes": "Apache 2.0. Ships in 4-bit MXFP4. Tier is a judgement."
+          },
+          {
+            "name": "Gemma 4 26B MoE",
+            "hf_id": "google/gemma-4 (see the model card)",
+            "parameters": "26B (3.8B active)",
+            "vram_required_gb": 16,
+            "precision": "4-bit",
+            "context_length": 262144,
+            "use_case": "Fast mixed-purpose model on one 24 GB card",
+            "recommended_gpu": [
+              "a10g",
+              "l4"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2026-04",
+            "notes": "Memory is an estimate (parameters x bits / 8, plus headroom). Tier is a judgement, not a benchmark result. Use the total size for memory and the active size for speed."
+          },
+          {
+            "name": "Gemma 3 27B",
+            "hf_id": "google/gemma-3-27b-it",
+            "parameters": "27B",
+            "vram_required_gb": 16,
+            "precision": "4-bit",
+            "context_length": 131072,
+            "use_case": "Common single-GPU pick",
+            "recommended_gpu": [
+              "a10g",
+              "l4"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2025-03",
+            "notes": "Reported at about 16 GB at 4-bit. Tier is a judgement."
+          },
+          {
+            "name": "Qwen3-32B",
+            "hf_id": "Qwen/Qwen3-32B",
+            "parameters": "32B",
+            "vram_required_gb": 16,
+            "precision": "AWQ INT4",
+            "context_length": 131072,
+            "use_case": "General reasoning and code on one 24 GB card",
+            "recommended_gpu": [
+              "a10g",
+              "l4",
+              "l40s"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2025-04",
+            "notes": "Reported at about 16 GB of weights at 4-bit; long contexts need more. 131072 context needs the extended mode. Tier is a judgement."
+          },
+          {
+            "name": "Gemma 4 31B",
+            "hf_id": "google/gemma-4 (see the model card)",
+            "parameters": "30.7B dense",
+            "vram_required_gb": 19,
+            "precision": "4-bit",
+            "context_length": 262144,
+            "use_case": "Strong dense model on 24 to 48 GB",
+            "recommended_gpu": [
+              "a10g",
+              "l40s",
+              "a100-40gb"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2026-04",
+            "notes": "Memory is an estimate (parameters x bits / 8, plus headroom). Tier is a judgement, not a benchmark result."
+          },
+          {
+            "name": "Llama 4 Scout",
+            "hf_id": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+            "parameters": "109B (17B active)",
+            "vram_required_gb": 55,
+            "precision": "4-bit",
+            "context_length": 10000000,
+            "use_case": "Very long context on one 80 GB card",
+            "recommended_gpu": [
+              "a100",
+              "h100"
+            ],
+            "expected_tps": {},
+            "quality_tier": "excellent",
+            "release_date": "2025-04",
+            "notes": "About 55 GB at 4-bit as reported. 10M context is Meta's claim; the cache needed for it is far larger than the weights. Llama 4 community licence."
+          },
+          {
+            "name": "gpt-oss-120b",
+            "hf_id": "openai/gpt-oss-120b",
+            "parameters": "117B (5.1B active)",
+            "vram_required_gb": 70,
+            "precision": "MXFP4",
+            "context_length": 131072,
+            "use_case": "A 100B-class model on one 80 GB GPU",
+            "recommended_gpu": [
+              "a100",
+              "h100",
+              "h200"
+            ],
+            "expected_tps": {},
+            "quality_tier": "exceptional",
+            "release_date": "2025-08",
+            "notes": "61 GB checkpoint plus headroom. Apache 2.0. Tier is a judgement."
+          },
+          {
+            "name": "Qwen3-235B-A22B",
+            "hf_id": "Qwen/Qwen3-235B-A22B",
+            "parameters": "235B (22B active)",
+            "vram_required_gb": 132,
+            "precision": "4-bit",
+            "context_length": 131072,
+            "use_case": "Frontier-scale reasoning on one H200 or B200",
+            "recommended_gpu": [
+              "h200",
+              "b200"
+            ],
+            "expected_tps": {},
+            "quality_tier": "exceptional",
+            "release_date": "2025-04",
+            "notes": "Reported at about 132 GB at 4-bit. Apache 2.0. Tier is a judgement."
+          },
+          {
+            "name": "DeepSeek-V4-Flash",
+            "hf_id": "deepseek-ai/DeepSeek-V4-Flash",
+            "parameters": "284B (13B active)",
+            "vram_required_gb": 160,
+            "precision": "FP4 + FP8 mixed",
+            "context_length": 1000000,
+            "use_case": "1M context on one B200 (tight) or two 80 GB GPUs",
+            "recommended_gpu": [
+              "b200"
+            ],
+            "expected_tps": {},
+            "quality_tier": "exceptional",
+            "release_date": "2026-04",
+            "notes": "About 160 GB download per the model card; leaves little room for cache on one B200. MIT licence. Preview release. Tier is a judgement."
+          },
+          {
+            "name": "Qwen3.5-397B-A17B",
+            "hf_id": "Qwen/Qwen3.5-397B-A17B",
+            "parameters": "397B (17B active)",
+            "vram_required_gb": 230,
+            "precision": "4-bit (estimate)",
+            "context_length": 131072,
+            "use_case": "Multi-GPU flagship",
+            "recommended_gpu": [
+              "b200"
+            ],
+            "expected_tps": {},
+            "quality_tier": "exceptional",
+            "release_date": "2026-02",
+            "notes": "Memory is an estimate and exceeds one B200; plan for several GPUs. Context length not confirmed. Licence reported as Apache 2.0, check the card. Tier is a judgement."
+          },
+          {
+            "name": "DeepSeek-V4-Pro",
+            "hf_id": "deepseek-ai/DeepSeek-V4-Pro",
+            "parameters": "1.6T (49B active)",
+            "vram_required_gb": 865,
+            "precision": "FP4 + FP8 mixed",
+            "context_length": 1000000,
+            "use_case": "Trillion-parameter open weights",
+            "recommended_gpu": [
+              "b200"
+            ],
+            "expected_tps": {},
+            "quality_tier": "exceptional",
+            "release_date": "2026-04",
+            "notes": "About 865 GB download per the model card, so a multi-GPU node (at least 5 B200). MIT licence. Preview release. Tier is a judgement."
+          }
+        ]
+      }
+    }
+  }
+}
