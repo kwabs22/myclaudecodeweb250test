@@ -36,6 +36,11 @@ AVLTree.prototype.rotateLeft = function(x) {
     this.score += 10;
     return y;
 };
+// Insert a value into this.root (insert() itself works on any subtree)
+AVLTree.prototype.put = function(value) {
+    this.root = this.insert(this.root, value);
+    return this.root;
+};
 AVLTree.prototype.insert = function(node, value) {
     if (!node) {
         return { value, left: null, right: null, height: 1 };

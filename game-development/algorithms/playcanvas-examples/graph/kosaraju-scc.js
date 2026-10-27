@@ -2,12 +2,15 @@
 var KosarajuSCC = pc.createScript('kosarajuSCC');
 KosarajuSCC.prototype.initialize = function() { this.score = 0; };
 KosarajuSCC.prototype.kosaraju = function(graph) {
+    // Vertex names are compared as strings: `for (const v in graph)` always gives strings, but the neighbour
+    // lists may hold numbers (for example {0: [1], 1: [0]}), and a Set treats 1 and "1" as different.
+    const neighbours = (v) => (graph[v] || []).map(String);
     const visited = new Set();
     const stack = [];
     
     const dfs1 = (v) => {
         visited.add(v);
-        for (const w of (graph[v] || [])) {
+        for (const w of neighbours(v)) {
             if (!visited.has(w)) dfs1(w);
         }
         stack.push(v);
@@ -19,7 +22,7 @@ KosarajuSCC.prototype.kosaraju = function(graph) {
     
     const transpose = {};
     for (const v in graph) {
-        for (const w of graph[v]) {
+        for (const w of neighbours(v)) {
             if (!transpose[w]) transpose[w] = [];
             transpose[w].push(v);
         }

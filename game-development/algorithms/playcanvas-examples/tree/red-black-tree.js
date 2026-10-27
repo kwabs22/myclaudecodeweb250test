@@ -33,6 +33,13 @@ RedBlackTree.prototype.flipColors = function(h) {
     h.right.color = this.BLACK;
     this.score += 5;
 };
+// Insert a value into this.root. The root of a red-black tree must always be black, which insert() cannot do for
+// itself because it works on any subtree, so use put() to add to the whole tree.
+RedBlackTree.prototype.put = function(value) {
+    this.root = this.insert(this.root, value);
+    this.root.color = this.BLACK;
+    return this.root;
+};
 RedBlackTree.prototype.insert = function(node, value) {
     if (!node) {
         return { value, left: null, right: null, color: this.RED };

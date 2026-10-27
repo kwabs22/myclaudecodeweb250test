@@ -56,7 +56,7 @@ Knapsack01.prototype.solveKnapsack = function() {
 
     this.reconstructSolution();
     console.log('Optimal value:', this.dp[n][W]);
-    console.log('Selected items:', this.selectedItems);
+    console.log('Selected items:', this.selectedItems.map(item => item.name).join(', '));
 };
 
 Knapsack01.prototype.reconstructSolution = function() {

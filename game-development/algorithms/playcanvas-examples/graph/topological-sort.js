@@ -40,9 +40,13 @@ TopologicalSort.prototype.addEdge = function(from, to) {
 TopologicalSort.prototype.topologicalSort = function() {
     const queue = [];
 
+    // Work on a copy of the in-degrees and a fresh result, so the sort can be run again
+    const degree = Object.assign({}, this.inDegree);
+    this.sorted = [];
+
     // Find all nodes with no incoming edges
-    for (const node in this.inDegree) {
-        if (this.inDegree[node] === 0) {
+    for (const node in degree) {
+        if (degree[node] === 0) {
             queue.push(node);
         }
     }
@@ -52,9 +56,9 @@ TopologicalSort.prototype.topologicalSort = function() {
         this.sorted.push(current);
 
         this.graph[current].forEach(neighbor => {
-            this.inDegree[neighbor]--;
+            degree[neighbor]--;
 
-            if (this.inDegree[neighbor] === 0) {
+            if (degree[neighbor] === 0) {
                 queue.push(neighbor);
             }
         });

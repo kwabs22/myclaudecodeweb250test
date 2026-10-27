@@ -3,7 +3,7 @@ var JumpSearch = pc.createScript('jumpSearch');
 JumpSearch.prototype.initialize = function() { this.score = 0; };
 JumpSearch.prototype.jumpSearch = function(arr, target) {
     const n = arr.length;
-    const step = Math.floor(Math.sqrt(n));
+    let step = Math.floor(Math.sqrt(n));
     let prev = 0;
     
     while (arr[Math.min(step, n) - 1] < target) {

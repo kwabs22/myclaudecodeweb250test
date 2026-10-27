@@ -16,7 +16,8 @@ TarjanSCC.prototype.strongConnect = function(v, graph) {
     this.stack.push(v);
     this.onStack[v] = true;
     
-    for (const w of (graph[v] || [])) {
+    // Compare vertex names as strings, as in findSCCs: neighbour lists may hold numbers
+    for (const w of (graph[v] || []).map(String)) {
         if (this.indices[w] === undefined) {
             this.strongConnect(w, graph);
             this.lowlinks[v] = Math.min(this.lowlinks[v], this.lowlinks[w]);
@@ -38,6 +39,12 @@ TarjanSCC.prototype.strongConnect = function(v, graph) {
     }
 };
 TarjanSCC.prototype.findSCCs = function(graph) {
+    // Start clean so the method can be run again
+    this.index = 0;
+    this.stack = [];
+    this.indices = {};
+    this.lowlinks = {};
+    this.onStack = {};
     this.sccs = [];
     for (const v in graph) {
         if (this.indices[v] === undefined) {

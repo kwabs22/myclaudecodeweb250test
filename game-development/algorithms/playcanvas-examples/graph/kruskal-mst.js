@@ -65,6 +65,14 @@ KruskalMST.prototype.addEdge = function(u, v, weight) {
 };
 
 KruskalMST.prototype.kruskal = function() {
+    // Start from a clean slate so the method can be run again (from a button, or after reset)
+    this.mst = [];
+    this.parent = {};
+    this.rank = {};
+    this.edges.forEach(edge => {
+        if (!(edge.u in this.parent)) this.makeSet(edge.u);
+        if (!(edge.v in this.parent)) this.makeSet(edge.v);
+    });
     this.edges.sort((a, b) => a.weight - b.weight);
 
     let totalCost = 0;

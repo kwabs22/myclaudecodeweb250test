@@ -42,6 +42,7 @@ KMP.prototype.computeLPS = function() {
 };
 
 KMP.prototype.searchPattern = function() {
+    this.matches = [];
     const n = this.text.length;
     const m = this.pattern.length;
     let i = 0, j = 0;

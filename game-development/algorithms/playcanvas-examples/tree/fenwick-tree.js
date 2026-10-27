@@ -7,7 +7,9 @@ FenwickTree.prototype.initialize = function() {
 FenwickTree.prototype.init = function(n) {
     this.tree = new Array(n + 1).fill(0);
 };
-FenwickTree.prototype.update = function(i, delta) {
+// Named add(), not update(): PlayCanvas calls a script's update(dt) every frame, and with dt as the index this
+// loop never ends.
+FenwickTree.prototype.add = function(i, delta) {
     while (i < this.tree.length) {
         this.tree[i] += delta;
         i += i & (-i);
