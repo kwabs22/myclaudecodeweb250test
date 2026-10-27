@@ -106,7 +106,7 @@ ParticleArt.prototype.createParticle = function(position, style) {
 
     if (entity.model && entity.model.meshInstances[0]) {
         entity.model.meshInstances[0].material.diffuse = style.color.clone();
-        entity.model.meshInstances[0].material.emissive = style.color.clone().mulScalar(0.5);
+        entity.model.meshInstances[0].material.emissive = new pc.Color(style.color.r * 0.5, style.color.g * 0.5, style.color.b * 0.5);
         entity.model.meshInstances[0].material.update();
     }
 

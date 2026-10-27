@@ -17,6 +17,12 @@ PortalSystem.prototype.createPortal = function(markerId, pose) {
     this.portals[markerId].setPosition(pose.position);
     this.portals[markerId].setRotation(pose.rotation);
 };
+// A portal appears at its marker and follows it
+PortalSystem.prototype.onMarkerDetected = function(markerId, pose) {
+    if (this.portalMarkerIDs.includes(markerId)) {
+        this.createPortal(markerId, pose);
+    }
+};
 PortalSystem.prototype.teleportPlayer = function(fromPortalId, toPortalId) {
     const targetPortal = this.portals[toPortalId];
     if (this.player && targetPortal) {

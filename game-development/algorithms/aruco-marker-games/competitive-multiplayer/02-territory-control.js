@@ -151,7 +151,7 @@ TerritoryControl.prototype.updateZoneColor = function(zone) {
 
     if (zone.entity.model.meshInstances[0]) {
         zone.entity.model.meshInstances[0].material.diffuse = color.clone();
-        zone.entity.model.meshInstances[0].material.emissive = color.clone().mulScalar(0.3);
+        zone.entity.model.meshInstances[0].material.emissive = new pc.Color(color.r * 0.3, color.g * 0.3, color.b * 0.3);
         zone.entity.model.meshInstances[0].material.update();
     }
 };

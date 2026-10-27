@@ -125,7 +125,7 @@ ARPainting.prototype.createStrokeSegment = function(position, color, size) {
 
     if (segment.model && segment.model.meshInstances[0]) {
         segment.model.meshInstances[0].material.diffuse = color.clone();
-        segment.model.meshInstances[0].material.emissive = color.clone().mulScalar(0.2);
+        segment.model.meshInstances[0].material.emissive = new pc.Color(color.r * 0.2, color.g * 0.2, color.b * 0.2);
         segment.model.meshInstances[0].material.update();
     }
 };

@@ -103,7 +103,7 @@ ARRacing.prototype.createCheckpoint = function(markerId) {
 
     if (checkpoint.model && checkpoint.model.meshInstances[0]) {
         checkpoint.model.meshInstances[0].material.diffuse = color;
-        checkpoint.model.meshInstances[0].material.emissive = color.clone().mulScalar(0.5);
+        checkpoint.model.meshInstances[0].material.emissive = new pc.Color(color.r * 0.5, color.g * 0.5, color.b * 0.5);
         checkpoint.model.meshInstances[0].material.update();
     }
 

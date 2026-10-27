@@ -63,10 +63,12 @@ ArucoGame.prototype.update = function(dt) {
 These are game-logic scripts. Each one:
 
 - ✅ Has the game itself: state, scoring, object spawning and visual feedback
-- ✅ Has handlers for markers appearing and disappearing (`onMarkerDetected(markerId)` and `onMarkerLost(markerId)` in 47 of the 50 scripts)
+- ✅ Has a handler for a marker being seen: `onMarkerDetected(markerId, pose)` in 47 of the 50 scripts (`pose.position` and `pose.rotation` say where the marker is). Only the virtual pet also has an `onMarkerLost`; the others just stop hearing about a marker that has gone
 - ✅ Lets you set the marker IDs it listens for through script attributes
 
 What they do **not** include is the camera and the marker detection. Only `ar-entertainment/01-character-placement.js` opens the camera, and no script runs a detector. In the others, the function that is meant to connect a detector (for example `setupMarkerDetection` in the virtual pet) is an empty placeholder with the comment "integrate with AR system". To run one you need to supply the detector (AR.js, js-aruco or OpenCV.js) and call the script's `onMarkerDetected(id)` and `onMarkerLost(id)` yourself, with the pose where the script reads one. Until then the scripts load and initialise but have nothing to react to.
+
+To see them play without any of that, use the [ArUco Simulator](simulator/index.html): it acts as the detector, letting you put each game's markers on a virtual table and drag them around. Placing a marker calls `onMarkerDetected` ten times a second with its position and rotation, the way a camera would.
 
 ## Marker Management
 

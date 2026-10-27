@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArUco Simulator</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Play the 50 ArUco marker games without a camera: place virtual markers on a table and the game reacts as if the camera had found them.">
+<script>try{var t=localStorage.getItem('atlas-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f6fa;--panel:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--faint:#898781;--line:#e1e0d9;--axis:#c3c2b7;--chip:#e8ecf5;--link:#2646c4;--focus:#2646c4;--ok:#006300;--bad:#b3261e;
+--font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--ok:#0ca30c;--bad:#f2766d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--faint:#898781;--line:#2c2c2a;--axis:#383835;--chip:#262624;--link:#93a8ff;--focus:#93a8ff;--ok:#0ca30c;--bad:#f2766d;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,canvas:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.bar{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.bar a{font-weight:600;text-decoration:none}
+.bar span{color:var(--muted);font:12px var(--mono)}
+main{max-width:1240px;margin:0 auto;padding:22px 16px 56px}
+h1{margin:0 0 6px;font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em}
+.lede{margin:0 0 16px;max-width:70ch;color:var(--muted);font-size:16px}
+.pick{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 12px}
+.pick select{font:500 14px var(--font);padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);min-width:min(320px,100%)}
+.pick button{font:500 13px var(--font);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.views{display:inline-flex;gap:4px;margin-left:4px}
+.views button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.status{display:inline-flex;gap:8px;align-items:center;font:12px var(--mono);color:var(--muted);margin-left:auto}
+.status b{font-weight:500;padding:1px 8px;border-radius:999px;background:var(--chip);color:var(--ink)}
+.status b.ok{color:var(--ok)}.status b.bad{color:var(--bad)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.stagewrap{position:relative;border-radius:12px;overflow:hidden;border:1px solid #232a3d;background:#0a0d16}
+#host{aspect-ratio:16/10;max-height:70vh;width:100%}
+#host canvas{width:100%;height:100%;display:block;outline:none}
+#host.empty{background:repeating-linear-gradient(135deg,#0a0d16 0 14px,#0d111c 14px 28px)}
+.over{position:absolute;left:12px;bottom:10px;margin:0;font:12px/1.4 var(--mono);color:#b8c1d8;pointer-events:none;max-width:85%;text-shadow:0 0 6px #0a0d16}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.panel h2{margin:0 0 2px;font-size:19px;letter-spacing:-.01em}
+.panel .sub{margin:0 0 10px;color:var(--muted);font-size:14px}
+.panel h3{margin:14px 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.keys{display:flex;flex-wrap:wrap;gap:5px}
+.keys kbd{font:12px var(--mono);padding:1px 7px;border-radius:5px;border:1px solid var(--axis);background:var(--chip)}
+.actions{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.actions button{font:600 12.5px var(--ui, system-ui);padding:5px 10px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
+.actions button:hover{border-color:currentColor}
+.callbox{display:flex;gap:6px;margin:4px 0 6px}
+.callbox select{max-width:46%;min-width:0}
+.callbox input{flex:1;min-width:0;font:12.5px var(--mono);padding:5px 8px;border:1px solid var(--axis);border-radius:7px;background:var(--chip);color:inherit}
+.callbox button{font:600 12.5px system-ui;padding:5px 12px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
+.attrs{display:grid;gap:8px}
+.attr{display:grid;grid-template-columns:1fr 92px;gap:8px;align-items:center;font-size:13px}
+.attr label{overflow-wrap:anywhere}
+.attr small{display:block;color:var(--faint);font-size:11.5px}
+.attr input[type=number],.attr input[type=text]{width:100%;font:13px var(--mono);padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.logwrap{margin-top:14px}
+.logwrap h2{margin:0 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+#log{height:170px;overflow:auto;border-radius:10px;border:1px solid var(--line);background:var(--panel);padding:8px 10px;font:12px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+#log div.err{color:var(--bad)}#log div.warn{color:var(--muted)}
+.tablewrap{margin-top:14px}
+.tablewrap h2{margin:0 0 6px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tablerow{display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:14px;align-items:start}
+#table{position:relative;aspect-ratio:1/1;border-radius:12px;border:1px solid var(--line);background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/12.5% 12.5%,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/12.5% 12.5%,var(--panel);touch-action:none;overflow:hidden}
+#table .mk{position:absolute;width:12%;aspect-ratio:1/1;margin:-6% 0 0 -6%;background:#111;color:#fff;border:2px solid #fff;outline:1px solid #111;display:grid;place-items:center;font:600 12px var(--mono);cursor:grab;user-select:none;touch-action:none}
+#table .mk::after{content:"";position:absolute;inset:18%;background:repeating-conic-gradient(#fff 0 25%,#111 0 50%) 0 0/33.3% 33.3%;opacity:.35}
+#table .mk span{position:relative;z-index:1;background:#111;padding:0 3px;border-radius:3px}
+#table .mk.sel{outline:3px solid var(--focus);cursor:grabbing}
+.chipcol{display:grid;gap:8px}
+#chips h3{margin:8px 0 4px}
+#chips .row{display:flex;flex-wrap:wrap;gap:5px}
+#chips button{font:600 12.5px var(--mono);padding:4px 10px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
+#chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.addid{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}.addid input{width:78px;font:13px var(--mono);padding:4px 6px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}.addid button{font:600 12.5px system-ui;padding:4px 12px;border-radius:7px;border:1px solid var(--axis);background:var(--chip);color:inherit;cursor:pointer}
+.turn{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.turn input{flex:1}
+@media (max-width:640px){.tablerow{grid-template-columns:minmax(0,1fr)}}
+.src{margin-top:18px;font-size:13px;color:var(--muted);max-width:90ch}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}.status{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script src="../../../../assets/vendor/playcanvas-1.77.0.min.js"></script>
+</head>
+<body>
+<div class="bar"><a href="../../../../index.html">&larr; Session Atlas</a><span>game-development/algorithms/aruco-marker-games/simulator</span></div>
+<main>
+  <h1>ArUco Simulator</h1>
+  <p class="lede">The 50 marker games expect a camera and a marker detector to tell them which markers are in view and where. This page plays the detector: pick a game, then put its markers on the table below the picture and drag them around. Each placed marker is reported to the game ten times a second, the way a camera would, and taking one off the table tells the game it is gone.</p>
+  <div class="pick">
+    <select id="script" aria-label="Script"></select>
+    <button type="button" id="prev">Previous</button><button type="button" id="next">Next</button><button type="button" id="restart">Restart</button>
+    <span class="views" role="group" aria-label="Camera"><button type="button" data-cam="close" aria-pressed="true">Close</button><button type="button" data-cam="front">Front</button><button type="button" data-cam="angled">Angled</button><button type="button" data-cam="top">Top</button></span>
+    <span class="status" id="status" aria-live="polite"><b>Loading</b></span>
+  </div>
+  <div class="layout">
+    <div>
+      <div class="stagewrap"><div id="host"></div><p class="over" id="over"></p></div>
+      <section class="tablewrap" aria-label="Marker table">
+        <h2>Marker table</h2>
+        <p class="note" id="tablehint">Click a marker below to put it on the table, drag it to move it, and use the arrow keys or the slider to turn it. Double-click a marker on the table, or click it below again, to take it off.</p>
+        <div class="tablerow">
+          <div id="table" tabindex="0" aria-label="Table seen from above. Markers on it are reported to the game."></div>
+          <div class="chipcol"><div id="chips"></div><form id="addid" class="addid"><label>Any marker ID <input type="number" id="newid" min="0" max="999" value="0"></label><button type="submit">Place</button></form><label class="turn">Turn selected marker <input type="range" id="turn" min="0" max="359" value="0" disabled></label><p class="note" id="markernote"></p></div>
+        </div>
+      </section>
+      <div class="logwrap"><h2>Log</h2><div id="log" role="log" tabindex="0" aria-label="Script log"></div></div>
+    </div>
+    <aside class="panel" id="info" aria-live="polite"></aside>
+  </div>
+  <p class="src">The game scripts are the ones in <a href="../README.html">aruco-marker-games</a>, run unmodified. The page supplies a camera, a light, a root object, stand-ins for prefab assets, and the marker detector: a marker is reported by calling the script's <code>onMarkerDetected(id, pose)</code> (or <code>onMarkerFound</code>) with <code>pose.position</code> as a position on the table (in metres, as the games assume: the table is 2 metres across, so its edge is at 1) and <code>pose.rotation</code> as the turn about the vertical. Scripts without a lost handler simply stop hearing about the marker. The camera is switched off, so the one script that asks for it gets a refusal. Engine: PlayCanvas 1.77.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  var ROOT = "../../../../";
+  var camMode = "close", camEntity = null, app = null, current = null, overrides = {}, capture = false, runId = 0, resizeObs = null;
+  var scripts = [];
+  /* The games that ask for the camera get a refusal instead of a permission prompt. */
+  try { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = function () { return Promise.reject(new Error("The camera is switched off in the simulator")); }; } catch (e) {}
+
+  /* ---------------- log capture */
+  var logEl = $("log");
+  ["log", "info", "warn", "error"].forEach(function (lvl) {
+    var orig = console[lvl];
+    console[lvl] = function () {
+      if (capture) addLog(lvl, Array.prototype.map.call(arguments, function (a) { try { return typeof a === "string" ? a : (a instanceof Error ? a.message : JSON.stringify(a)); } catch (e) { return String(a); } }).join(" "));
+      return orig.apply(console, arguments);
+    };
+  });
+  function addLog(lvl, text) {
+    var d = el("div", lvl === "error" ? "err" : lvl === "warn" ? "warn" : "", text);
+    logEl.append(d); while (logEl.childNodes.length > 300) logEl.removeChild(logEl.firstChild); logEl.scrollTop = logEl.scrollHeight;
+  }
+  window.addEventListener("error", function (e) { if (capture) { addLog("error", e.message); setStatus("Error", "bad"); } });
+
+  function setStatus(text, cls, extra) {
+    var s = $("status"); s.textContent = ""; var b = el("b", cls || "", text); s.append(b); if (extra) s.append(extra);
+  }
+
+  /* ---------------- script list */
+  function nice(name) { return name.replace(/\.js$/, "").replace(/^\d+-/, "").replace(/-/g, " "); }
+  function loadList() {
+    return fetch(ROOT + "data/tree.json").then(function (r) { return r.json(); }).then(function (d) {
+      var re = /^game-development\/algorithms\/aruco-marker-games\/([^/]+)\/([^/]+\.js)$/;
+      d.nodes.forEach(function (n) { var m = re.exec(n.p); if (m) scripts.push({ path: n.p, group: m[1], name: m[2] }); });
+      scripts.sort(function (a, b) { return a.group.localeCompare(b.group) || a.name.localeCompare(b.name); });
+      var sel = $("script"), groups = {};
+      scripts.forEach(function (s, i) {
+        if (!groups[s.group]) { groups[s.group] = el("optgroup"); groups[s.group].label = nice(s.group).replace(/^./, function (c) { return c.toUpperCase(); }); sel.append(groups[s.group]); }
+        var o = el("option", "", nice(s.name)); o.value = String(i); groups[s.group].append(o);
+      });
+    });
+  }
+
+  /* ---------------- teardown and run */
+  function stop() {
+    capture = false;
+    if (resizeObs) { resizeObs.disconnect(); resizeObs = null; }
+    if (app) {
+      /* destroy() leaves the WebGL context alive until the garbage collector gets to it, and browsers cap live contexts */
+      var gl = app.graphicsDevice && app.graphicsDevice.gl, lose = gl && gl.getExtension && gl.getExtension("WEBGL_lose_context");
+      try { app.destroy(); } catch (e) {}
+      if (lose) { try { lose.loseContext(); } catch (e) {} }
+      app = null;
+    }
+    $("host").textContent = "";
+    markerStop();
+  }
+
+  function header(text) {
+    var m = /\/\*\*([\s\S]*?)\*\//.exec(text), out = { title: "", algorithm: "", game: "" };
+    if (!m) return out;
+    var lines = m[1].split("\n").map(function (l) { return l.replace(/^\s*\*\s?/, "").trim(); }).filter(Boolean);
+    out.title = lines[0] || "";
+    lines.forEach(function (l) { var a = /^Algorithm:\s*(.*)$/i.exec(l), g = /^Game:\s*(.*)$/i.exec(l); if (a) out.algorithm = a[1]; if (g) out.game = g[1]; });
+    return out;
+  }
+
+  function run(index, keepOverrides) {
+    var id = ++runId, s = scripts[index]; current = index;
+    if (!keepOverrides) overrides = {};
+    stop(); logEl.textContent = ""; setStatus("Loading");
+    return fetch(ROOT + s.path).then(function (r) { if (!r.ok) throw new Error("Could not load " + s.path); return r.text(); }).then(function (text) {
+      if (id !== runId) return;
+      var scriptText = text, head = header(text), name = null, ScriptType = null, instance = null;
+      var canvas = document.createElement("canvas"); canvas.tabIndex = 0; $("host").append(canvas);
+      capture = true;
+      app = new pc.Application(canvas, { mouse: new pc.Mouse(canvas), keyboard: new pc.Keyboard(window), touch: new pc.TouchDevice(canvas), graphicsDeviceOptions: { antialias: true } });
+      app.setCanvasFillMode(pc.FILLMODE_NONE); app.setCanvasResolution(pc.RESOLUTION_AUTO);
+      var fit = function () { var r = $("host").getBoundingClientRect(); if (app && r.width) app.resizeCanvas(Math.round(r.width), Math.round(r.height)); };
+      resizeObs = new ResizeObserver(fit); resizeObs.observe($("host")); fit();
+      app.scene.ambientLight = new pc.Color(0.4, 0.4, 0.46);
+      /* Several scripts pick objects with a physics raycast but never add colliders, and no physics engine is loaded here.
+         Stand in a ray-versus-bounding-box test over everything with a model. */
+      app.systems.rigidbody.raycastFirst = function (start, end) {
+        var ray = new pc.Ray(start.clone(), end.clone().sub(start).normalize()), hit = new pc.Vec3(), best = null, bestD = Infinity;
+        app.root.find(function (n) { return n.model && n.model.meshInstances; }).forEach(function (n) {
+          n.model.meshInstances.forEach(function (mi) {
+            if (mi.aabb && mi.aabb.intersectsRay(ray, hit)) { var d = hit.distance(start); if (d < bestD) { bestD = d; best = { entity: n, point: hit.clone(), normal: new pc.Vec3(0, 1, 0) }; } }
+          });
+        });
+        return best;
+      };
+      var cam = new pc.Entity("Camera"); cam.addComponent("camera", { clearColor: new pc.Color(0.04, 0.05, 0.09), fov: 45, farClip: 300 }); camEntity = cam; placeCamera(); app.root.addChild(cam);
+      var light = new pc.Entity("Light"); light.addComponent("light", { type: "directional", intensity: 1.1 }); light.setEulerAngles(45, 30, 0); app.root.addChild(light);
+
+      /* Let the script register itself, and learn the name it used. */
+      var origCreate = pc.createScript;
+      pc.createScript = function (n, a) { name = n; ScriptType = origCreate.call(pc, n, a); return ScriptType; };
+      try { (new Function(text))(); } catch (err) { pc.createScript = origCreate; throw err; } finally { pc.createScript = origCreate; }
+      if (!ScriptType) throw new Error("The file did not register a script.");
+
+      var host = new pc.Entity("Game"); host.addComponent("script"); instance = host.script.create(name);
+      var defs = (ScriptType.attributes && ScriptType.attributes.index) || {}, needsAsset = [];
+      Object.keys(defs).forEach(function (k) {
+        var d = defs[k];
+        if (d.type === "asset" || d.type === "entity") {
+          needsAsset.push(k);
+          if (d.type === "asset") Object.defineProperty(instance, k, { configurable: true, writable: true, value: stubAsset() });
+        } else if (overrides[k] != null) instance[k] = overrides[k];
+      });
+      host.script.on("error", function (sc, err, method) { addLog("error", "Error in " + method + ": " + (err && err.message ? err.message : err)); setStatus("Error", "bad"); });
+      app.root.addChild(host); app.start();
+      renderInfo(s, head, text, defs, needsAsset);
+      markerSetup(instance, defs, /getUserMedia/.test(text));
+      var started = renderActions(instance, ScriptType, id);
+
+      var t0 = performance.now();
+      var tick = function () {
+        if (id !== runId || !app) return;
+        var visuals = app.root.find(function (n) { return n.model || n.render; }).length;
+        var bad = logEl.querySelector(".err");
+        if (!bad) { var st = $("status").firstChild; if (st && st.textContent !== "Running") setStatus("Running", "ok"); }
+        var sp = $("status"); while (sp.childNodes.length > 1) sp.removeChild(sp.lastChild); sp.append(" ", visuals + " objects on screen");
+        $("over").textContent = (visuals === 0 ? "This one has no scene of its own. It plays out in the log below. " : "") + keyHint(scriptText);
+        $("host").classList.toggle("empty", visuals === 0);
+        if (performance.now() - t0 < 4000) setTimeout(tick, 500);
+      };
+      setTimeout(tick, 300);
+    }).catch(function (err) {
+      if (id !== runId) return;
+      addLog("error", err.message); setStatus("Could not run", "bad");
+      renderInfo(s, { title: nice(s.name), algorithm: "", game: "" }, "", {}, []);
+    });
+  }
+
+  /* Nearly every script only defines methods like startSort() or reset() for the PlayCanvas editor's buttons to call, and
+     never calls them itself. Offer each one as a button, and start the first start-like one so the page is not blank. */
+  var LIFECYCLE = /^(initialize|postInitialize|update|postUpdate|swap|constructor)$/, INTERNAL = /^(create|update|draw|render|swap)/;
+  var AUTO = /^(start|begin|run|solve|play|execute|animate)/i;
+  function words(n) { var t = n.replace(/([A-Z])/g, " $1").toLowerCase().trim(); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function renderActions(instance, ScriptType, id) {
+    var names = Object.keys(ScriptType.prototype).filter(function (n) {
+      return typeof ScriptType.prototype[n] === "function" && ScriptType.prototype[n].length === 0 && !LIFECYCLE.test(n) && !INTERNAL.test(n);
+    });
+    var box = $("info");
+    if (names.length) {
+      var h = el("h3", "", "Actions"), row = el("div", "actions");
+      names.forEach(function (n) {
+        var b = el("button", "", words(n)); b.type = "button";
+        b.onclick = function () { callMethod(instance, n, []); };
+        row.append(b);
+      });
+      box.insertBefore(row, box.children[3] || null); box.insertBefore(h, row);
+    }
+    /* Plain algorithm classes (trie.insert(word), segment tree query(l, r)) have no demo of their own: give them a call box. */
+    var withArgs = Object.keys(ScriptType.prototype).filter(function (n) {
+      return typeof ScriptType.prototype[n] === "function" && ScriptType.prototype[n].length > 0 && !LIFECYCLE.test(n) && !INTERNAL.test(n);
+    });
+    if (withArgs.length) {
+      var form = el("form", "callbox"), sel = el("select"), inp = document.createElement("input");
+      var sig = function (n) { var m = /\(([^)]*)\)/.exec(ScriptType.prototype[n].toString()); return m ? m[1].replace(/\s+/g, " ").trim() : ""; };
+      withArgs.forEach(function (n) { var o = el("option", "", n + "(" + sig(n) + ")"); o.value = n; sel.append(o); });
+      inp.type = "text"; inp.setAttribute("aria-label", "Arguments, as JSON values separated by commas");
+      var hint = function () { inp.placeholder = sig(sel.value); };
+      sel.onchange = hint; hint();
+      var go = el("button", "", "Call"); go.type = "submit";
+      form.onsubmit = function (e) {
+        e.preventDefault(); var vals;
+        try { vals = JSON.parse("[" + inp.value + "]"); } catch (err) { addLog("error", "Arguments must be JSON values, e.g. \"apple\", 3, [1,2]"); return; }
+        callMethod(instance, sel.value, vals);
+      };
+      form.append(sel, inp, go);
+      var h2 = el("h3", "", "Call a method"), p2 = el("p", "note", "Arguments are JSON values separated by commas, for example \"apple\" or [1,2,3], 5. Results appear in the log.");
+      var at = box.children[3] || null; box.insertBefore(h2, at); box.insertBefore(form, at); box.insertBefore(p2, at);
+    }
+    var auto = names.filter(function (n) { return AUTO.test(n); })[0];
+    if (auto) setTimeout(function () {
+      if (id !== runId || !app) return;
+      try { instance[auto](); } catch (err) { addLog("error", auto + ": " + err.message); setStatus("Error", "bad"); }
+    }, 150);
+    return auto;
+  }
+
+  function callMethod(instance, n, args) {
+    capture = true;
+    try {
+      var r = instance[n].apply(instance, args);
+      addLog("", n + "(" + args.map(function (a) { return JSON.stringify(a); }).join(", ") + ")" + (r === undefined ? "" : " returned " + JSON.stringify(r)));
+    } catch (err) { addLog("error", n + ": " + err.message); setStatus("Error", "bad"); }
+  }
+
+  function placeCamera() {
+    if (!camEntity) return;
+    if (camMode === "close") { camEntity.setPosition(0, 1.6, 2.4); camEntity.lookAt(0, 0, 0); }
+    else if (camMode === "front") { camEntity.setPosition(0, 1.5, 15); camEntity.lookAt(0, 0, 0); }
+    else if (camMode === "top") { camEntity.setPosition(0, 17, 0); camEntity.setEulerAngles(-90, 0, 0); }
+    else { camEntity.setPosition(0, 8, 13); camEntity.lookAt(0, 0, 0); }
+    document.querySelectorAll("[data-cam]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.cam === camMode)); });
+  }
+  function stubAsset() {
+    return { resource: { instantiate: function () { var e = new pc.Entity("Piece"); e.addComponent("model", { type: "sphere" }); return e; } } };
+  }
+  function keyHint(text) {
+    var keys = unique((text.match(/pc\.KEY_[A-Z0-9_]+/g) || []).map(function (k) { return k.slice(7); }));
+    var parts = []; if (keys.length) parts.push("keys: " + keys.slice(0, 8).join(" ").toLowerCase());
+    if (/EVENT_MOUSE/.test(text)) parts.push("click the canvas"); return parts.length ? "Try " + parts.join(", ") : "Watch the log for what happens";
+  }
+  function unique(a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); }
+
+  /* ---------------- info panel */
+  function renderInfo(s, head, text, defs, needsAsset) {
+    var p = $("info"); p.textContent = "";
+    p.append(el("h2", "", head.game ? head.game.replace(/^"|"$/g, "").split('" - ')[0].replace(/^"/, "") : (head.title || nice(s.name))));
+    p.append(el("p", "sub", head.algorithm ? "Algorithm: " + head.algorithm : (head.title || "")));
+    var gameText = head.game.replace(/^"[^"]*"\s*-\s*/, ""); if (gameText) p.append(el("p", "", gameText));
+    var keys = unique((text.match(/pc\.KEY_[A-Z0-9_]+/g) || []).map(function (k) { return k.slice(7); }));
+    if (keys.length || /EVENT_MOUSE/.test(text)) {
+      p.append(el("h3", "", "Controls")); var k = el("div", "keys");
+      keys.slice(0, 12).forEach(function (x) { k.append(el("kbd", "", x.toLowerCase().replace(/_/g, " "))); }); if (/EVENT_MOUSE/.test(text)) k.append(el("kbd", "", "mouse"));
+      p.append(k); p.append(el("p", "note", "Click the canvas first so it receives the keys."));
+    }
+    var names = Object.keys(defs).filter(function (n) { return needsAsset.indexOf(n) < 0; });
+    if (names.length) {
+      p.append(el("h3", "", "Settings")); var box = el("div", "attrs");
+      names.forEach(function (n) {
+        var d = defs[n], row = el("div", "attr"), lab = el("label"); lab.htmlFor = "a_" + n; lab.append(n); if (d.description) lab.append(el("small", "", d.description));
+        var inp = document.createElement("input"); inp.id = "a_" + n;
+        if (d.type === "boolean") { inp.type = "checkbox"; inp.checked = overrides[n] != null ? !!overrides[n] : !!d.default; inp.onchange = function () { overrides[n] = inp.checked; run(current, true); }; }
+        else if (d.type === "number") { inp.type = "number"; inp.step = "any"; inp.value = overrides[n] != null ? overrides[n] : (d.default != null ? d.default : 0); inp.onchange = function () { overrides[n] = parseFloat(inp.value); run(current, true); }; }
+        else { inp.type = "text"; inp.value = overrides[n] != null ? overrides[n] : (d.default != null ? d.default : ""); inp.onchange = function () { overrides[n] = inp.value; run(current, true); }; }
+        row.append(lab, inp); box.append(row);
+      });
+      p.append(box);
+    }
+    if (needsAsset.length) p.append(el("p", "note", "This script expects " + needsAsset.join(", ") + " from the PlayCanvas editor. " + (needsAsset.some(function (n) { return defs[n].type === "asset"; }) ? "A stand-in sphere is used here." : "It is left empty here.")));
+    p.append(el("p", "note")); var a = el("a", "", "Read the source"); a.href = "../" + s.group + "/" + s.name + ".html"; p.lastChild.append(a);
+  }
+
+  /* ---------------- the marker table: plays the detector */
+  var MK = { inst: null, placed: {}, sel: null, timer: null, handler: null, lost: null, warned: false };
+  function words(n) { var t = n.replace(/([A-Z])/g, " $1").replace(/I Ds?$/, function (m) { return m.length === 4 ? "IDs" : "ID"; }).trim(); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function markerStop() {
+    if (MK.timer) clearInterval(MK.timer);
+    MK.timer = null; MK.placed = {}; MK.sel = null; MK.inst = null; MK.handler = null; MK.lost = null; MK.warned = false;
+    $("table").textContent = ""; $("chips").textContent = ""; $("turn").disabled = true; $("markernote").textContent = "";
+  }
+  function markerSetup(inst, defs, ownCamera) {
+    markerStop(); MK.inst = inst;
+    MK.handler = inst.onMarkerDetected || inst.onMarkerFound || null;
+    MK.lost = inst.onMarkerLost || null;
+    var box = $("chips"), found = 0;
+    Object.keys(defs).forEach(function (n) {
+      if (!/marker/i.test(n) || defs[n].type !== "number") return;
+      var v = inst[n] != null ? inst[n] : defs[n].default;
+      var ids = unique([].concat(v).filter(function (x) { return typeof x === "number" && isFinite(x); }));
+      if (!ids.length) return;
+      found += ids.length;
+      var h = el("h3", "", words(n)), row = el("div", "row");
+      ids.forEach(function (id) {
+        var b = el("button", "", String(id)); b.type = "button"; b.setAttribute("aria-pressed", "false"); b.dataset.id = id;
+        b.title = n + " " + id; b.onclick = function () { if (MK.placed[id]) removeMarker(id); else placeMarker(id); };
+        row.append(b);
+      });
+      box.append(h, row);
+    });
+    if (!found) {
+      /* No marker attributes: offer the README's general-purpose range 0 to 9 */
+      var h0 = el("h3", "", "Marker IDs 0 to 9"), row0 = el("div", "row");
+      for (var q = 0; q < 10; q++) (function (id) { var b = el("button", "", String(id)); b.type = "button"; b.setAttribute("aria-pressed", "false"); b.dataset.id = id; b.onclick = function () { if (MK.placed[id]) removeMarker(id); else placeMarker(id); }; row0.append(b); })(q);
+      box.append(h0, row0); found = 10;
+    }
+    var names = ["onMarkerDetected", "onMarkerFound", "onMarkerSelected", "onMarkerLost"].filter(function (m) { return typeof inst[m] === "function"; });
+    $("markernote").textContent = ownCamera ? "This game opens its own camera and runs its own detector (AR.js), which the simulator does not provide, so markers placed here do nothing." : !found ? "This game has no marker IDs to place. Look at its source to see what it listens for."
+      : !MK.handler ? "This game has no handler for a marker being found (" + (names.join(", ") || "none") + "), so placing markers will not change anything."
+      : "The game listens through " + names.join(" and ") + (MK.lost ? "." : "; it has no lost handler, so it never hears that a marker was removed.");
+    if (MK.handler) MK.timer = setInterval(stream, 100);
+  }
+  function freeSpot() {
+    var spots = [[.5,.5],[.25,.25],[.75,.25],[.25,.75],[.75,.75],[.5,.2],[.5,.8],[.2,.5],[.8,.5]];
+    for (var i = 0; i < spots.length; i++) { var s = spots[i]; if (!Object.keys(MK.placed).some(function (k) { var p = MK.placed[k]; return Math.abs(p.x - s[0]) < .1 && Math.abs(p.y - s[1]) < .1; })) return { x: s[0], y: s[1] }; }
+    return { x: .1 + Math.random() * .8, y: .1 + Math.random() * .8 };
+  }
+  function placeMarker(id) { var p = freeSpot(); p.rot = 0; MK.placed[id] = p; MK.sel = id; drawTable(); }
+  function removeMarker(id) {
+    delete MK.placed[id]; if (MK.sel === id) MK.sel = null; drawTable();
+    if (MK.lost && MK.inst) { try { MK.lost.call(MK.inst, id); } catch (e) { addLog("error", "onMarkerLost: " + e.message); } }
+  }
+  function drawTable() {
+    var t = $("table"); t.textContent = "";
+    Object.keys(MK.placed).forEach(function (k) {
+      var p = MK.placed[k], m = el("div", "mk" + (MK.sel == k ? " sel" : "")); m.dataset.id = k;
+      m.style.left = (p.x * 100) + "%"; m.style.top = (p.y * 100) + "%"; m.style.transform = "rotate(" + p.rot + "deg)"; m.append(el("span", "", k)); t.append(m);
+    });
+    [].forEach.call($("chips").querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(!!MK.placed[b.dataset.id])); });
+    var sel = MK.sel != null && MK.placed[MK.sel]; $("turn").disabled = !sel; if (sel) $("turn").value = sel.rot;
+  }
+  function stream() {
+    if (!app || !MK.handler) return;
+    Object.keys(MK.placed).forEach(function (k) {
+      var p = MK.placed[k];
+      var pose = { position: new pc.Vec3((p.x - 0.5) * 2, 0, (p.y - 0.5) * 2), rotation: new pc.Quat().setFromEulerAngles(0, -p.rot, 0), id: +k };
+      try { MK.handler.call(MK.inst, +k, pose); }
+      catch (e) { if (!MK.warned) { MK.warned = true; addLog("error", "marker " + k + ": " + e.message); setStatus("Error", "bad"); } }
+    });
+  }
+  (function wireTable() {
+    var t = $("table"), drag = null;
+    t.addEventListener("pointerdown", function (e) { var m = e.target.closest(".mk"); if (!m) { MK.sel = null; drawTable(); return; } MK.sel = m.dataset.id; drag = m.dataset.id; try { t.setPointerCapture(e.pointerId); } catch (x) {} drawTable(); e.preventDefault(); });
+    t.addEventListener("pointermove", function (e) { if (drag == null || !MK.placed[drag]) return; var r = t.getBoundingClientRect(); var p = MK.placed[drag]; p.x = Math.min(.96, Math.max(.04, (e.clientX - r.left) / r.width)); p.y = Math.min(.96, Math.max(.04, (e.clientY - r.top) / r.height)); drawTable(); });
+    t.addEventListener("pointerup", function () { drag = null; });
+    t.addEventListener("dblclick", function (e) { var m = e.target.closest(".mk"); if (m) removeMarker(m.dataset.id); });
+    t.addEventListener("keydown", function (e) {
+      var p = MK.sel != null && MK.placed[MK.sel]; if (!p) return; var step = .03, hit = true;
+      if (e.key === "ArrowLeft") p.x = Math.max(.04, p.x - step); else if (e.key === "ArrowRight") p.x = Math.min(.96, p.x + step);
+      else if (e.key === "ArrowUp") p.y = Math.max(.04, p.y - step); else if (e.key === "ArrowDown") p.y = Math.min(.96, p.y + step);
+      else if (e.key === "[") p.rot = (p.rot + 345) % 360; else if (e.key === "]") p.rot = (p.rot + 15) % 360;
+      else if (e.key === "Delete" || e.key === "Backspace") removeMarker(MK.sel); else hit = false;
+      if (hit) { e.preventDefault(); drawTable(); }
+    });
+    $("addid").onsubmit = function (e) { e.preventDefault(); var id = parseInt($("newid").value, 10); if (isFinite(id) && !MK.placed[id] && MK.inst) placeMarker(id); };
+    $("turn").oninput = function () { var p = MK.sel != null && MK.placed[MK.sel]; if (p) { p.rot = +$("turn").value; drawTable(); } };
+  })();
+
+  /* ---------------- wiring */
+  function go(i) { i = (i + scripts.length) % scripts.length; $("script").value = String(i); run(i); }
+  $("script").onchange = function () { run(+$("script").value); };
+  document.querySelectorAll("[data-cam]").forEach(function (b) { b.onclick = function () { camMode = b.dataset.cam; placeCamera(); }; });
+  $("prev").onclick = function () { go(current - 1); }; $("next").onclick = function () { go(current + 1); }; $("restart").onclick = function () { run(current, true); };
+
+  if (typeof pc === "undefined") { setStatus("Engine missing", "bad"); addLog("error", "The PlayCanvas engine did not load."); return; }
+  loadList().then(function () { var start = scripts.map(function (s) { return s.name; }).indexOf("02-virtual-pet.js"); go(start > -1 ? start : 0); })
+    .catch(function (e) { setStatus("Could not load the list", "bad"); addLog("error", String(e)); });
+})();
+</script>
+</body>
+</html>

@@ -114,7 +114,7 @@ CaptureTheFlag.prototype.createFlag = function(markerId) {
 
     if (banner.model && banner.model.meshInstances[0]) {
         banner.model.meshInstances[0].material.diffuse = color;
-        banner.model.meshInstances[0].material.emissive = color.clone().mulScalar(0.3);
+        banner.model.meshInstances[0].material.emissive = new pc.Color(color.r * 0.3, color.g * 0.3, color.b * 0.3);
         banner.model.meshInstances[0].material.update();
     }
 

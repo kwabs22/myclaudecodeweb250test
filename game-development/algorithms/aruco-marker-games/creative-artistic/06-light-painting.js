@@ -101,7 +101,7 @@ LightPainting.prototype.createTrailSegment = function(position, color, intensity
 
     if (segment.model && segment.model.meshInstances[0]) {
         segment.model.meshInstances[0].material.diffuse = color.clone();
-        segment.model.meshInstances[0].material.emissive = color.clone().mulScalar(intensity);
+        segment.model.meshInstances[0].material.emissive = new pc.Color(color.r * intensity, color.g * intensity, color.b * intensity);
         segment.model.meshInstances[0].material.update();
     }
 };

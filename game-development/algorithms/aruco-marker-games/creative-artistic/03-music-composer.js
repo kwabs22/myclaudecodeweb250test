@@ -60,6 +60,16 @@ MusicComposer.prototype.onMarkerDetected = function(markerId, pose) {
     }
 };
 
+// The sequencer marker is the play button: bringing it into view toggles playback. A detector reports a visible
+// marker many times a second, so only a marker that has been out of view for half a second counts as a new press.
+MusicComposer.prototype.updateSequencer = function(pose) {
+    const now = Date.now();
+    if (!this.sequencerSeenAt || now - this.sequencerSeenAt > 500) {
+        this.togglePlayback();
+    }
+    this.sequencerSeenAt = now;
+};
+
 MusicComposer.prototype.updateInstrument = function(markerId, pose) {
     if (!this.instruments[markerId]) {
         this.createInstrument(markerId);

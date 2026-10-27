@@ -50,5 +50,9 @@
  "ai-ml/careers/ai-engineer-roadmap/phase3-quiz-app.html": {
   "type": "Quiz",
   "blurb": "96 hand-written generative AI questions: OpenAI API, Hugging Face, vector databases, RAG and agents."
+ },
+ "game-development/algorithms/aruco-marker-games/simulator/index.html": {
+  "type": "Playground",
+  "blurb": "Play the 50 ArUco marker games without a camera: put virtual markers on a table and the game reacts as if a detector had found them."
  }
 }

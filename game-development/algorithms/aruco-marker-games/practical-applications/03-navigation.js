@@ -44,7 +44,7 @@ ARNavigation.prototype.createWaypoint = function(markerId) {
 
     if (waypoint.model && waypoint.model.meshInstances[0]) {
         waypoint.model.meshInstances[0].material.diffuse = color;
-        waypoint.model.meshInstances[0].material.emissive = color.clone().mulScalar(0.5);
+        waypoint.model.meshInstances[0].material.emissive = new pc.Color(color.r * 0.5, color.g * 0.5, color.b * 0.5);
         waypoint.model.meshInstances[0].material.update();
     }
 
