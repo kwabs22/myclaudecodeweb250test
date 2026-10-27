@@ -37,7 +37,9 @@ export default function ConnectDotsGame() {
   };
 
   const handleDotPress = (dot) => {
-    if (connectedDots.length === 0 || dot.id === connectedDots[connectedDots.length - 1].id + 1) {
+    // Start at dot 1, then each next dot in order (starting anywhere else made the puzzle impossible to finish)
+    const expected = connectedDots.length === 0 ? 1 : connectedDots[connectedDots.length - 1].id + 1;
+    if (dot.id === expected) {
       const newConnected = [...connectedDots, dot];
       setConnectedDots(newConnected);
 

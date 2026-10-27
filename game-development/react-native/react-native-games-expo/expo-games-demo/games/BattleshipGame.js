@@ -11,6 +11,7 @@ export default function BattleshipGame() {
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState(null);
   const [hits, setHits] = useState({ player: 0, cpu: 0 });
+  const [cpuTurnPending, setCpuTurnPending] = useState(false);
 
   const createGrid = () => {
     return Array(GRID_SIZE).fill(null).map(() =>
@@ -64,13 +65,15 @@ export default function BattleshipGame() {
     setCpuGrid(cpuSetup.grid);
     setCpuShips(cpuSetup.ships);
     setHits({ player: 0, cpu: 0 });
+    setCpuTurnPending(false);
     setGameStarted(true);
     setGameOver(false);
     setWinner(null);
   };
 
   const handleCellPress = (row, col) => {
-    if (cpuGrid[row][col].hit) return;
+    // One shot per turn: ignore taps while the CPU is still replying
+    if (cpuGrid[row][col].hit || cpuTurnPending || gameOver) return;
 
     const newCpuGrid = cpuGrid.map(r => r.map(c => ({ ...c })));
     newCpuGrid[row][col].hit = true;
@@ -89,6 +92,7 @@ export default function BattleshipGame() {
     }
 
     // CPU turn
+    setCpuTurnPending(true);
     setTimeout(() => cpuTurn(newHits), 500);
   };
 
@@ -102,6 +106,7 @@ export default function BattleshipGame() {
     const newPlayerGrid = playerGrid.map(r => r.map(c => ({ ...c })));
     newPlayerGrid[row][col].hit = true;
     setPlayerGrid(newPlayerGrid);
+    setCpuTurnPending(false);
 
     if (newPlayerGrid[row][col].ship) {
       currentHits.cpu++;

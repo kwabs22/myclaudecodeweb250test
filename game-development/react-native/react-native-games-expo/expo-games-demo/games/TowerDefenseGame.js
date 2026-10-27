@@ -4,6 +4,22 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-nati
 const { width } = Dimensions.get('window');
 const CELL_SIZE = (width - 40) / 8;
 
+// The route the enemies walk (module level, so it is not a new array on every render)
+const path = [
+  { row: 0, col: 0 },
+  { row: 1, col: 0 },
+  { row: 2, col: 0 },
+  { row: 2, col: 1 },
+  { row: 2, col: 2 },
+  { row: 3, col: 2 },
+  { row: 4, col: 2 },
+  { row: 4, col: 3 },
+  { row: 4, col: 4 },
+  { row: 5, col: 4 },
+  { row: 6, col: 4 },
+  { row: 7, col: 4 },
+];
+
 export default function TowerDefenseGame() {
   const [money, setMoney] = useState(100);
   const [lives, setLives] = useState(10);
@@ -14,21 +30,6 @@ export default function TowerDefenseGame() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-
-  const path = [
-    { row: 0, col: 0 },
-    { row: 1, col: 0 },
-    { row: 2, col: 0 },
-    { row: 2, col: 1 },
-    { row: 2, col: 2 },
-    { row: 3, col: 2 },
-    { row: 4, col: 2 },
-    { row: 4, col: 3 },
-    { row: 4, col: 4 },
-    { row: 5, col: 4 },
-    { row: 6, col: 4 },
-    { row: 7, col: 4 },
-  ];
 
   useEffect(() => {
     if (gameStarted && !isPaused && !gameOver) {
@@ -51,6 +52,8 @@ export default function TowerDefenseGame() {
           let updated = [...prev];
           towers.forEach(tower => {
             const inRange = updated.find(enemy => {
+              // Enemies of a new wave wait off the start of the path with a negative index
+              if (enemy.pathIndex < 0) return false;
               const enemyPos = path[enemy.pathIndex];
               const distance = Math.abs(tower.row - enemyPos.row) + Math.abs(tower.col - enemyPos.col);
               return distance <= 2 && enemy.health > 0;
@@ -71,7 +74,7 @@ export default function TowerDefenseGame() {
 
       return () => clearInterval(gameLoop);
     }
-  }, [gameStarted, isPaused, gameOver, towers, path]);
+  }, [gameStarted, isPaused, gameOver, towers]);
 
   useEffect(() => {
     if (lives <= 0) {

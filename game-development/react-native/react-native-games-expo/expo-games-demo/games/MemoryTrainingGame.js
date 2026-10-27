@@ -42,6 +42,7 @@ export default function MemoryTrainingGame() {
 
     if (newPlayerSequence.length === sequence.length) {
       setPlayerSequence([]);
+      setIsPlaying(true); // taps during the pause before the next sequence used to count as mistakes
       setTimeout(() => addToSequence(), 1000);
     }
   };
@@ -52,6 +53,7 @@ export default function MemoryTrainingGame() {
     setRound(0);
     setGameStarted(true);
     setGameOver(false);
+    setIsPlaying(true); // no input until the first sequence has been shown
     setTimeout(() => addToSequence(), 500);
   };
 

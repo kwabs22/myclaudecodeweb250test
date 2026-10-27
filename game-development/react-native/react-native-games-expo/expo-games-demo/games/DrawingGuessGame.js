@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Dimensions } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
@@ -21,6 +21,9 @@ export default function DrawingGuessGame() {
   const [gameOver, setGameOver] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const timerRef = useRef(null);
+  // The pan responder is created once, so it reads the stroke from a ref: reading state here would see only the
+  // values from the first render and every stroke but the last would vanish.
+  const currentPathRef = useRef('');
 
   const panResponder = useRef(
     PanResponder.create({
@@ -28,15 +31,19 @@ export default function DrawingGuessGame() {
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: (evt) => {
         const { locationX, locationY } = evt.nativeEvent;
-        setCurrentPath(`M${locationX},${locationY}`);
+        currentPathRef.current = `M${locationX},${locationY}`;
+        setCurrentPath(currentPathRef.current);
       },
       onPanResponderMove: (evt) => {
         const { locationX, locationY } = evt.nativeEvent;
-        setCurrentPath(prev => `${prev} L${locationX},${locationY}`);
+        currentPathRef.current = `${currentPathRef.current} L${locationX},${locationY}`;
+        setCurrentPath(currentPathRef.current);
       },
       onPanResponderRelease: () => {
-        if (currentPath) {
-          setPaths([...paths, currentPath]);
+        if (currentPathRef.current) {
+          const finished = currentPathRef.current;
+          currentPathRef.current = '';
+          setPaths(prev => [...prev, finished]);
           setCurrentPath('');
         }
       },
@@ -47,6 +54,7 @@ export default function DrawingGuessGame() {
     const newWord = WORDS[Math.floor(Math.random() * WORDS.length)];
     setWord(newWord);
     setPaths([]);
+    currentPathRef.current = '';
     setCurrentPath('');
     setGuess('');
     setScore(0);
@@ -69,6 +77,7 @@ export default function DrawingGuessGame() {
 
   const clearCanvas = () => {
     setPaths([]);
+    currentPathRef.current = '';
     setCurrentPath('');
   };
 
@@ -76,6 +85,7 @@ export default function DrawingGuessGame() {
     const newWord = WORDS[Math.floor(Math.random() * WORDS.length)];
     setWord(newWord);
     setPaths([]);
+    currentPathRef.current = '';
     setCurrentPath('');
     setShowAnswer(false);
   };
@@ -100,6 +110,9 @@ export default function DrawingGuessGame() {
     }
     return options.sort(() => Math.random() - 0.5);
   };
+
+  // Shuffled once per word (calling it in the render made the buttons reshuffle every second as the timer ticked)
+  const options = useMemo(guessOptions, [word]);
 
   return (
     <View style={styles.container}>
@@ -187,7 +200,7 @@ export default function DrawingGuessGame() {
           <View style={styles.guessArea}>
             <Text style={styles.guessLabel}>Practice Guessing:</Text>
             <View style={styles.guessOptions}>
-              {guessOptions().map((option, index) => (
+              {options.map((option, index) => (
                 <TouchableOpacity
                   key={index}
                   style={[
