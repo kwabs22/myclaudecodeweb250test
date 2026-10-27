@@ -206,7 +206,7 @@ export default function SolitaireGame() {
                   {foundation.length > 0 ? (
                     renderCard(foundation[foundation.length - 1], true)
                   ) : (
-                    <Text style={styles.emptyPile}>♠♥♦♣'[index]}</Text>
+                    <Text style={styles.emptyPile}>{'♠♥♦♣'[index]}</Text>
                   )}
                 </TouchableOpacity>
               ))}

@@ -9,6 +9,21 @@ const PIECES = {
   '♚': 'king', '♛': 'queen', '♜': 'rook', '♝': 'bishop', '♞': 'knight', '♟': 'pawn',
 };
 
+// True when every square strictly between the two squares is empty (for rooks, bishops and queens, which
+// slide along a row, column or diagonal and cannot jump over pieces).
+export function isPathClear(board, fromRow, fromCol, toRow, toCol) {
+  const stepRow = Math.sign(toRow - fromRow);
+  const stepCol = Math.sign(toCol - fromCol);
+  let r = fromRow + stepRow;
+  let c = fromCol + stepCol;
+  while (r !== toRow || c !== toCol) {
+    if (board[r][c]) return false;
+    r += stepRow;
+    c += stepCol;
+  }
+  return true;
+}
+
 export default function ChessGame() {
   const [board, setBoard] = useState([]);
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -80,13 +95,13 @@ export default function ChessGame() {
         return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
 
       case 'bishop':
-        return rowDiff === colDiff && rowDiff > 0;
+        return rowDiff === colDiff && rowDiff > 0 && isPathClear(board, fromRow, fromCol, toRow, toCol);
 
       case 'rook':
-        return (rowDiff > 0 && colDiff === 0) || (rowDiff === 0 && colDiff > 0);
+        return ((rowDiff > 0 && colDiff === 0) || (rowDiff === 0 && colDiff > 0)) && isPathClear(board, fromRow, fromCol, toRow, toCol);
 
       case 'queen':
-        return (rowDiff === colDiff) || (rowDiff > 0 && colDiff === 0) || (rowDiff === 0 && colDiff > 0);
+        return ((rowDiff === colDiff && rowDiff > 0) || (rowDiff > 0 && colDiff === 0) || (rowDiff === 0 && colDiff > 0)) && isPathClear(board, fromRow, fromCol, toRow, toCol);
 
       case 'king':
         return rowDiff <= 1 && colDiff <= 1;

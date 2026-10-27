@@ -1,5 +1,7 @@
 # 50 React Native Game Ideas for Expo
 
+> **Status.** 46 of these 50 ideas are built in [`expo-games-demo`](expo-games-demo/README.md), under slightly different names in places (Jump Stack is Stack Blocks, Circle Tap is Circle Tap, Pet Clicker is Coin Clicker, Tap the Mole is Whack A Mole, Tower Defense Mini is Tower Defense). These four were not built: **27 Card Memory Strategy, 28 Merge Defense, 29 Puzzle RPG Lite, 30 Risk-Style Territory**. The demo also has four games that are not on this list: Tic Tac Toe (plain), Dice Roller, Rock Paper Scissors and Simon Says. Chess is the simplified version (no check, castling, en passant or promotion: capturing the king wins), and Checkers allows jumps and chain jumps but does not force you to capture.
+
 A curated list of game ideas perfect for React Native with Expo, ranging from simple to complex.
 
 ## Puzzle Games (1-10)

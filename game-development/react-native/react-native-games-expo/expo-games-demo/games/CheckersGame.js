@@ -4,6 +4,49 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-nati
 const { width } = Dimensions.get('window');
 const CELL_SIZE = (width - 40) / 8;
 
+// Rule helpers live outside the component so they can be tested without React.
+// A piece is { player: 1 | 2, king: boolean }; player 1 starts at the top and moves down.
+
+// Returns the square jumped over when moving from (fromRow, fromCol) to (toRow, toCol) is a legal capture
+// for this piece (two squares diagonally, over an opponent, onto an empty square), otherwise null.
+export function jumpedSquare(board, fromRow, fromCol, toRow, toCol, piece) {
+  const rowDiff = toRow - fromRow;
+  const colDiff = toCol - fromCol;
+  if (Math.abs(rowDiff) !== 2 || Math.abs(colDiff) !== 2) return null;
+  if (toRow < 0 || toRow >= 8 || toCol < 0 || toCol >= 8) return null;
+  if (board[toRow][toCol] !== null) return null;
+  if (!piece.king && rowDiff !== (piece.player === 1 ? 2 : -2)) return null;
+  const midRow = fromRow + rowDiff / 2;
+  const midCol = fromCol + colDiff / 2;
+  const mid = board[midRow][midCol];
+  return mid && mid.player !== piece.player ? { row: midRow, col: midCol } : null;
+}
+
+export function hasJump(board, row, col, piece) {
+  return [-2, 2].some(dr => [-2, 2].some(dc => jumpedSquare(board, row, col, row + dr, col + dc, piece) !== null));
+}
+
+// A plain one-square diagonal move onto an empty square
+export function canStep(board, fromRow, fromCol, toRow, toCol, piece) {
+  if (toRow < 0 || toRow >= 8 || toCol < 0 || toCol >= 8) return false;
+  if (board[toRow][toCol] !== null) return false;
+  const rowDiff = toRow - fromRow;
+  if (Math.abs(toCol - fromCol) !== 1) return false;
+  return piece.king ? Math.abs(rowDiff) === 1 : rowDiff === (piece.player === 1 ? 1 : -1);
+}
+
+export function hasAnyMove(board, player) {
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const piece = board[r][c];
+      if (!piece || piece.player !== player) continue;
+      if (hasJump(board, r, c, piece)) return true;
+      if ([-1, 1].some(dr => [-1, 1].some(dc => canStep(board, r, c, r + dr, c + dc, piece)))) return true;
+    }
+  }
+  return false;
+}
+
 export default function CheckersGame() {
   const [board, setBoard] = useState([]);
   const [selectedPiece, setSelectedPiece] = useState(null);
@@ -45,61 +88,56 @@ export default function CheckersGame() {
     setWinner(null);
   };
 
-  const canMove = (fromRow, fromCol, toRow, toCol, piece) => {
-    if (toRow < 0 || toRow >= 8 || toCol < 0 || toCol >= 8) return false;
-    if (board[toRow][toCol] !== null) return false;
-
-    const rowDiff = toRow - fromRow;
-    const colDiff = Math.abs(toCol - fromCol);
-
-    if (colDiff !== 1) return false;
-
-    if (piece.king) {
-      return Math.abs(rowDiff) === 1;
-    } else {
-      return piece.player === 1 ? rowDiff === 1 : rowDiff === -1;
-    }
-  };
-
   const handleCellPress = (row, col) => {
     if (!selectedPiece) {
       const piece = board[row][col];
       if (piece && piece.player === currentPlayer) {
         setSelectedPiece({ row, col });
       }
-    } else {
-      const piece = board[selectedPiece.row][selectedPiece.col];
+      return;
+    }
 
-      if (canMove(selectedPiece.row, selectedPiece.col, row, col, piece)) {
-        const newBoard = board.map(r => r.map(c => c ? { ...c } : null));
-        newBoard[row][col] = { ...piece };
-        newBoard[selectedPiece.row][selectedPiece.col] = null;
+    const piece = board[selectedPiece.row][selectedPiece.col];
+    const captured = jumpedSquare(board, selectedPiece.row, selectedPiece.col, row, col, piece);
 
-        // Make king
-        if ((piece.player === 1 && row === 7) || (piece.player === 2 && row === 0)) {
-          newBoard[row][col].king = true;
-        }
+    if (captured || canStep(board, selectedPiece.row, selectedPiece.col, row, col, piece)) {
+      const newBoard = board.map(r => r.map(c => (c ? { ...c } : null)));
+      newBoard[row][col] = { ...piece };
+      newBoard[selectedPiece.row][selectedPiece.col] = null;
+      if (captured) newBoard[captured.row][captured.col] = null;
 
-        setBoard(newBoard);
-        setSelectedPiece(null);
-        setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
+      // Make king
+      const crowned = !piece.king && ((piece.player === 1 && row === 7) || (piece.player === 2 && row === 0));
+      if (crowned) newBoard[row][col].king = true;
 
-        // Check win
-        checkWin(newBoard);
-      } else {
-        setSelectedPiece(null);
+      setBoard(newBoard);
+
+      // After a capture the same piece keeps going while it can jump again
+      if (captured && !crowned && hasJump(newBoard, row, col, newBoard[row][col])) {
+        setSelectedPiece({ row, col });
+        return;
       }
+
+      setSelectedPiece(null);
+      const next = currentPlayer === 1 ? 2 : 1;
+      setCurrentPlayer(next);
+      checkWin(newBoard, next);
+    } else if (board[row][col] && board[row][col].player === currentPlayer) {
+      setSelectedPiece({ row, col });
+    } else {
+      setSelectedPiece(null);
     }
   };
 
-  const checkWin = (currentBoard) => {
+  // The game ends when a player has no pieces left or no move to make
+  const checkWin = (currentBoard, nextPlayer) => {
     const player1Pieces = currentBoard.flat().filter(p => p && p.player === 1);
     const player2Pieces = currentBoard.flat().filter(p => p && p.player === 2);
 
-    if (player1Pieces.length === 0) {
+    if (player1Pieces.length === 0 || (nextPlayer === 1 && !hasAnyMove(currentBoard, 1))) {
       setWinner(2);
       setGameOver(true);
-    } else if (player2Pieces.length === 0) {
+    } else if (player2Pieces.length === 0 || (nextPlayer === 2 && !hasAnyMove(currentBoard, 2))) {
       setWinner(1);
       setGameOver(true);
     }
@@ -127,7 +165,7 @@ export default function CheckersGame() {
             </Text>
           </TouchableOpacity>
           <Text style={styles.instructions}>
-            Capture all opponent pieces to win!
+            Jump over a piece to capture it. Capture them all, or leave your opponent with no move, to win!
           </Text>
         </View>
       ) : (

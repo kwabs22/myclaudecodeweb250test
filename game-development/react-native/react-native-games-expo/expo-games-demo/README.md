@@ -1,39 +1,72 @@
 # Expo Games Collection 🎮
 
-A collection of 19 fully playable React Native games built with Expo. Perfect for learning game development and testing game concepts!
+A collection of 50 playable React Native games built with Expo. Perfect for learning game development and testing game concepts!
 
 ## 🎯 Included Games
 
-### Puzzle Games (7 games)
-1. **Color Match** - Match falling colored blocks with the target color
+All 50 games are on the home screen, in these groups. The tests check the rule helpers for Checkers and Chess (`node tests/rules.test.js`); the other games have been opened and played with random taps and swipes without errors, but their rules have not been checked game by game.
+
+### Puzzle Games (11 games)
+1. **Color Match** - Match falling colored blocks
 2. **Number Slider** - Classic 15-puzzle sliding game
 3. **Memory Cards** - Find matching emoji pairs
-4. **Connect Dots** - Connect numbered dots in sequential order
-5. **Tetris** - Classic falling blocks puzzle game
-6. **2048** - Merge tiles to reach the 2048 tile
-7. **Bubble Pop** - Pop 3+ connected bubbles of the same color
+4. **Connect Dots** - Connect numbered dots in order
+5. **Tetris** - Classic falling blocks puzzle
+6. **2048** - Merge tiles to reach 2048
+7. **Bubble Pop** - Pop connected bubbles
+8. **Maze Runner** - Navigate through generated mazes
+9. **Jigsaw Puzzle** - Solve the jigsaw puzzle
+10. **Word Search** - Find hidden words in the grid
+11. **Sliding Puzzle** - Slide tiles to complete the image
 
-### Arcade Games (5 games)
-8. **Flappy Clone** - Tap to fly through pipes
-9. **Snake** - Classic snake game - eat food and grow
-10. **Pong** - Classic paddle game vs AI opponent
-11. **Stack Blocks** - Stack blocks as high as you can with precision timing
-12. **Circle Tap** - Tap circles before they disappear in a time challenge
+### Arcade Games (12 games)
+12. **Flappy Clone** - Tap to fly through pipes
+13. **Snake** - Classic snake game
+14. **Pong** - Classic paddle game vs AI
+15. **Stack Blocks** - Stack blocks as high as you can
+16. **Circle Tap** - Tap circles before they disappear
+17. **Endless Runner** - Jump over obstacles endlessly
+18. **Space Shooter** - Shoot asteroids in space
+19. **Brick Breaker** - Classic breakout game
+20. **Fruit Ninja** - Slice falling fruits
+21. **Color Switch** - Match colors to pass obstacles
+22. **Ball Bounce** - Keep the ball bouncing
+23. **Coin Collector** - Collect coins and avoid obstacles
 
-### Strategy Games (1 game)
-13. **Tic Tac Toe** - Classic X's and O's game
+### Strategy Games (7 games)
+24. **Tic Tac Toe** - Classic X's and O's
+25. **Ultimate Tic Tac Toe** - Meta tic-tac-toe with 9 boards
+26. **Checkers** - Classic checkers game
+27. **Chess** - Simplified chess game
+28. **Battleship** - Sink the enemy fleet
+29. **Dots and Boxes** - 2-player grid game
+30. **Tower Defense** - Defend against enemy waves
 
-### Casual Games (2 games)
-14. **Whack A Mole** - Tap moles as they pop up
-15. **Coin Clicker** - Idle clicker game with upgrades
+### Casual Games (9 games)
+31. **Whack A Mole** - Tap moles as they pop up
+32. **Coin Clicker** - Idle clicker with upgrades
+33. **Balloon Pop** - Pop rising balloons
+34. **Emoji Match** - Match emoji pairs in grid
+35. **Dice Roller** - Roll dice and track history
+36. **Rock Paper Scissors** - Classic RPS vs CPU
+37. **Coffee Shop** - Build your coffee empire
+38. **Garden Merge** - Merge plants to grow garden
+39. **Solitaire** - Classic card solitaire
 
-### Multiplayer & Social (3 games)
-16. **Quiz Battle** - Answer trivia questions to test your knowledge
-17. **Simon Says** - Remember and repeat the color sequence
-18. **Reaction Time** - Test your reflexes and reaction speed
+### Multiplayer & Social (5 games)
+40. **Quiz Battle** - Answer trivia questions
+41. **Simon Says** - Remember the color sequence
+42. **Reaction Time** - Test your reflexes
+43. **Truth or Dare** - Party game with challenges
+44. **Draw & Guess** - Draw and guess words
 
-### Educational Games (1 game)
-19. **Math Speed** - Solve math problems as quickly as possible
+### Educational Games (6 games)
+45. **Math Speed** - Solve math problems quickly
+46. **Type Racer** - Test your typing speed
+47. **Geography Quiz** - Test your geography knowledge
+48. **Word Chain** - Build word chains by last letter
+49. **Memory Training** - Train your memory skills
+50. **Language Flashcards** - Learn Spanish vocabulary
 
 ## 🚀 Quick Start
 
