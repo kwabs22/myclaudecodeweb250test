@@ -491,6 +491,6 @@ By completing Phase 2, you will have:
 **Version**: 1.0.0
 **Total Questions**: 1000
 **Prerequisite**: Phase 1 (Fundamentals)
-**Next Phase**: Phase 3 (Generative AI)
+**Next Phase**: Phase 3 (Generative AI): take the [Phase 3 quiz](phase3-quiz-app.html), see [PHASE3_README.md](PHASE3_README.md)
 
 **Ready to Master Machine Learning? Start Now! 🚀🧠**

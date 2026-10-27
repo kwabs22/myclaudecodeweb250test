@@ -1,6 +1,6 @@
 # AI and machine learning
 
-Guides, project plans and two runnable quizzes on AI engineering, computer vision, agents and language models.
+Guides, project plans and three runnable quizzes on AI engineering, computer vision, agents and language models.
 
 | Folder | What is in it | Start with |
 |---|---|---|

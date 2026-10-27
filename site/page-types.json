@@ -46,5 +46,9 @@
  "learning-resources/mathematics/quiz/index.html": {
   "type": "Quiz",
   "blurb": "100 combinatorics problems as flashcards, with worked answers checked by brute force."
+ },
+ "ai-ml/careers/ai-engineer-roadmap/phase3-quiz-app.html": {
+  "type": "Quiz",
+  "blurb": "96 hand-written generative AI questions: OpenAI API, Hugging Face, vector databases, RAG and agents."
  }
 }
