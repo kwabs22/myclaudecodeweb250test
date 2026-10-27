@@ -22,3 +22,16 @@ SegmentTree.prototype.query = function(node, start, end, l, r) {
     return this.query(2 * node + 1, start, mid, l, r) +
            this.query(2 * node + 2, mid + 1, end, l, r);
 };
+// Point update: set arr[index] to value and fix the sums above it. Named setValue(), not update(), because
+// PlayCanvas calls a script's update(dt) every frame.
+SegmentTree.prototype.setValue = function(index, value, node = 0, start = 0, end = this.arr.length - 1) {
+    if (start === end) {
+        this.arr[index] = value;
+        this.tree[node] = value;
+        return;
+    }
+    const mid = Math.floor((start + end) / 2);
+    if (index <= mid) this.setValue(index, value, 2 * node + 1, start, mid);
+    else this.setValue(index, value, 2 * node + 2, mid + 1, end);
+    this.tree[node] = this.tree[2 * node + 1] + this.tree[2 * node + 2];
+};

@@ -14,7 +14,7 @@ This folder contains complete PlayCanvas script implementations for 50 unique Ar
 
 ### Hardware
 - Webcam or device camera
-- Printed ArUco markers (included in `/markers` folder)
+- Printed ArUco markers (not included in this repository: generate them with any ArUco marker generator, using the dictionary your detector expects)
 - Adequate lighting for marker detection
 
 ### Software Dependencies
@@ -24,7 +24,7 @@ This folder contains complete PlayCanvas script implementations for 50 unique Ar
 
 ## Quick Start
 
-1. **Print Markers**: Print the ArUco markers from the `/markers` folder
+1. **Print Markers**: Generate and print the ArUco markers you need (marker IDs are set in each script's attributes)
 2. **Import Script**: Add the desired script to your PlayCanvas project
 3. **Configure Camera**: Attach camera entity with marker detection enabled
 4. **Set Attributes**: Configure marker IDs and game parameters
@@ -58,16 +58,15 @@ ArucoGame.prototype.update = function(dt) {
 };
 ```
 
-## Common Features
+## What is and is not included
 
-Each implementation includes:
-- ✅ Marker detection and tracking
-- ✅ Pose estimation (position + rotation)
-- ✅ Object spawning and management
-- ✅ Visual feedback
-- ✅ Score/progress tracking
-- ✅ Multi-marker support
-- ✅ Error handling and fallbacks
+These are game-logic scripts. Each one:
+
+- ✅ Has the game itself: state, scoring, object spawning and visual feedback
+- ✅ Has handlers for markers appearing and disappearing (`onMarkerDetected(markerId)` and `onMarkerLost(markerId)` in 47 of the 50 scripts)
+- ✅ Lets you set the marker IDs it listens for through script attributes
+
+What they do **not** include is the camera and the marker detection. Only `ar-entertainment/01-character-placement.js` opens the camera, and no script runs a detector. In the others, the function that is meant to connect a detector (for example `setupMarkerDetection` in the virtual pet) is an empty placeholder with the comment "integrate with AR system". To run one you need to supply the detector (AR.js, js-aruco or OpenCV.js) and call the script's `onMarkerDetected(id)` and `onMarkerLost(id)` yourself, with the pose where the script reads one. Until then the scripts load and initialise but have nothing to react to.
 
 ## Marker Management
 

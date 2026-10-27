@@ -79,4 +79,5 @@ The algorithms are tested in plain Node, without a browser: run `node tests/run.
 - `graph/kosaraju-scc.js` and `graph/tarjan-scc.js` returned wrong components when neighbour lists held numbers, and Tarjan returned nothing the second time it ran.
 - `graph/kruskal-mst.js`, `graph/topological-sort.js` and `string/kmp-pattern-matching.js` gave wrong results (zero cost, a false "cycle detected", duplicate matches) when run a second time, for example from a button.
 - `graph/minimum-cut.js` only worked when `MaximumFlow` was on the same entity; it now works alone.
+- `tree/segment-tree.js` could build and query but not update, although it is described as a tree for range queries and updates; it gained `setValue(index, value)`.
 - `tree/red-black-tree.js` had no way to keep the root black, so it gained `put(value)`. `tree/avl-tree.js` gained `put(value)` too, so both can be driven without passing nodes around.

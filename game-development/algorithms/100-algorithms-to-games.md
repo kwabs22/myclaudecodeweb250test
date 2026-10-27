@@ -235,7 +235,7 @@ This document lists 100 unique algorithms found across the analyzed LeetCode rep
 **Game Idea**: "Message Broadcast" - Send alerts through network. Calculate minimum time for everyone to receive the message.
 
 ### 57. Maximum Flow (Ford-Fulkerson)
-**Algorithm**: Find maximum flow in a flow network.
+**Algorithm**: Find maximum flow in a flow network. The example script uses the Edmonds-Karp variant, which finds each augmenting path with a breadth-first search.
 **Game Idea**: "Pipeline Manager" - Maximize water/oil flow through pipeline network. Upgrade pipes strategically!
 
 ### 58. Minimum Cut
