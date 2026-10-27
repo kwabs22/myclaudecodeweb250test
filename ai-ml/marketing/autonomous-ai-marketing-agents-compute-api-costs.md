@@ -30,7 +30,7 @@ This document provides a comprehensive analysis of the computing power and API c
 5. [Monthly Cost Projections](#monthly-cost-projections)
 6. [Local Computing Requirements](#local-computing-requirements)
 7. [Cost Optimization Strategies](#cost-optimization-strategies)
-8. [Total Cost of Ownership](#total-cost-of-ownership)
+8. [Total Cost of Ownership](#total-cost-of-ownership-3-year)
 
 ---
 

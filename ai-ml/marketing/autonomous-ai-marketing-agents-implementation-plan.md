@@ -15,9 +15,9 @@ This implementation plan provides three distinct approaches for deploying autono
 ## Table of Contents
 
 1. [Pre-Implementation Assessment](#pre-implementation-assessment)
-2. [Approach 1: Platform Implementation (Agentforce 360)](#approach-1-platform-implementation)
-3. [Approach 2: Custom Build (LangGraph)](#approach-2-custom-build)
-4. [Approach 3: Hybrid Solution](#approach-3-hybrid-solution)
+2. [Approach 1: Platform Implementation (Agentforce 360)](#approach-1-platform-implementation-salesforce-agentforce-360)
+3. [Approach 2: Custom Build (LangGraph)](#approach-2-custom-build-langgraph)
+4. [Approach 3: Hybrid Solution](#approach-3-hybrid-solution-recommended)
 5. [Resource Requirements](#resource-requirements)
 6. [Cost Analysis](#cost-analysis)
 7. [Success Metrics & KPIs](#success-metrics--kpis)
