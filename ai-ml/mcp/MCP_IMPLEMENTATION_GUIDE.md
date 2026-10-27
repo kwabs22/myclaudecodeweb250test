@@ -338,30 +338,32 @@ Aider doesn't directly support MCP yet, but you can:
 
 ### Claude Code (Official CLI)
 
-If available, Claude's official CLI tool:
+Anthropic's terminal coding agent. It manages MCP servers with the `claude mcp` commands.
 
 1. **Install**
 ```bash
-npm install -g @anthropic-ai/claude-cli
-# or
-pip install anthropic-cli
+npm install -g @anthropic-ai/claude-code
 ```
 
-2. **Configure MCP**
+2. **Add servers**
 ```bash
-claude config set mcp.filesystem.path /Users/yourname/code
-claude config set mcp.github.token your_github_token
+# A local (stdio) server: everything after -- is the command that starts it
+claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem /Users/yourname/code
+
+# A remote server over HTTP
+claude mcp add --transport http example https://mcp.example.com/mcp
+
+claude mcp list      # show the configured servers
 ```
 
 3. **Usage**
 ```bash
-# Start session with MCP
-claude chat --mcp filesystem,github
-
-# In chat, use MCP tools
-> List files in current directory
-> Create a new branch in GitHub
+claude
+> List the files in the current directory      # uses the filesystem server
+> /mcp                                         # shows server status inside a session
 ```
+
+Check `claude mcp --help` for the flags in your version, as they change between releases.
 
 ### Cursor (AI Code Editor)
 
@@ -401,21 +403,13 @@ Zed editor with AI assistant:
 
 ### Current MCP Support Status
 
-**Note**: As of November 2024, MCP is primarily supported by Anthropic's Claude. OpenAI/ChatGPT does not natively support MCP protocol.
+**Note**: This guide was first written in November 2024, when MCP worked mainly with Anthropic's Claude. That has changed: OpenAI added MCP support to its Agents SDK and Responses API in 2025, and ChatGPT supports connectors built on it in some plans. Check OpenAI's current documentation for what your plan allows.
 
-### Workarounds for ChatGPT Users
+### Other options for ChatGPT users
 
-#### Option 1: Use OpenAI-Compatible MCP Bridges
+#### Option 1: Call MCP servers from the OpenAI API
 
-Some community projects provide bridges:
-
-```bash
-# Example: MCP-to-OpenAI bridge (hypothetical)
-npm install -g mcp-openai-bridge
-
-# Run bridge server
-mcp-bridge --provider openai --api-key your_openai_key
-```
+The OpenAI Agents SDK can attach an MCP server to an agent, and the Responses API can call a remote MCP server by URL. This needs your own code, but it is the supported route.
 
 #### Option 2: Custom GPTs with Actions
 
