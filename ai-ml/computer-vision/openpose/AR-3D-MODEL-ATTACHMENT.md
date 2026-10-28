@@ -1489,7 +1489,7 @@ model = model.to(device)
 
 ## Resources
 
-- **MediaPipe Pose:** https://google.github.io/mediapipe/solutions/pose
+- **MediaPipe Pose:** https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker
 - **Three.js:** https://threejs.org/
 - **Unity AR Foundation:** https://unity.com/unity/features/arfoundation
 - **Blender Python API:** https://docs.blender.org/api/current/

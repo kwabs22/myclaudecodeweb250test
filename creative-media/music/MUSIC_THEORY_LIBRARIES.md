@@ -7,7 +7,7 @@ A comprehensive list of music theory libraries and frameworks across different p
 ## Python Libraries
 
 ### **music21** ⭐ Most Comprehensive
-- **Repository**: [MIT/music21](http://web.mit.edu/music21/)
+- **Repository**: [MIT/music21](https://web.mit.edu/music21/)
 - **Description**: Toolkit for computational musicology, music theory, and generative composition
 - **Features**:
   - MusicXML, MIDI, Humdrum/Kern, ABC format support
@@ -419,7 +419,7 @@ fundsp = "0.18"
 ## Sources
 
 - [Tonal.js - GitHub](https://github.com/tonaljs/tonal)
-- [music21 - MIT](http://web.mit.edu/music21/)
+- [music21 - MIT](https://web.mit.edu/music21/)
 - [Music Theory Libraries - GitHub Topics](https://github.com/topics/music-theory)
 - [Awesome Music Projects](https://github.com/noteflakes/awesome-music)
 - [Python in Music - Python Wiki](https://wiki.python.org/moin/PythonInMusic)

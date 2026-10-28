@@ -820,7 +820,7 @@ The question is no longer "Should we use AI agents?" but "Which approach fits ou
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
 - [CrewAI Documentation](https://docs.crewai.com/)
 - [Salesforce Agentforce](https://www.salesforce.com/agentforce/)
-- [Microsoft Copilot Studio](https://www.microsoft.com/microsoft-copilot/copilot-studio)
+- [Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio)
 
 ### Research Papers
 - "Autonomous AI Agents for Multi-Platform Social Media Marketing" (MDPI, 2025)

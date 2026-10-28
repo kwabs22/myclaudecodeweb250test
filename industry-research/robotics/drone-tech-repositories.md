@@ -316,7 +316,7 @@ A curated collection of the best open-source repositories for drone technology, 
 ## Mapping & Photogrammetry
 
 ### 23. OpenDroneMap (WebODM)
-**Repository:** [OpenDroneMap/WebODM](https://github.com/OpenDroneMap/WebODM)
+**Repository:** [OpenDroneMap/WebODM](https://github.com/WebODM/WebODM)
 - **Stars:** 3,452+ | **Last Updated:** Nov 2025
 - **Description:** User-friendly, commercial-grade drone imagery processing
 - **Key Features:**

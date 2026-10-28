@@ -11,7 +11,7 @@ Based on research conducted in January 2025, here are the best repositories and 
 ## 🎯 Top UI Component Libraries (2025)
 
 ### 1. [**shadcn/ui**](https://ui.shadcn.com/) ⭐ Most Recommended
-- **URL**: https://github.com/shadcn/ui
+- **URL**: https://github.com/shadcn-ui/ui
 - **Description**: Beautiful, accessible components for React and Next.js
 - **Why Learn**: Go-to open-source component library for modern web apps
 - **Tech Stack**: React, Tailwind CSS, Radix UI
