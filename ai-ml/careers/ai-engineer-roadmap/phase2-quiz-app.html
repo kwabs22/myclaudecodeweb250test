@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phase 2: Machine Learning Quiz - 1000 Questions</title>
+    <title>Phase 2: Machine Learning Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes fadeIn {
@@ -50,7 +50,7 @@
                         <p class="text-purple-100 text-lg">Master ML, Deep Learning & Prompt Engineering</p>
                     </div>
                     <div class="text-right">
-                        <div class="text-3xl font-bold">1000</div>
+                        <div class="text-3xl font-bold" id="total-count"></div>
                         <div class="text-sm text-purple-200">Questions</div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <!-- Progress Bar -->
                 <div class="mt-6">
                     <div class="flex justify-between text-sm text-purple-100 mb-2">
-                        <span id="progress-text">Question 1 of 1000</span>
+                        <span id="progress-text">Question 1</span>
                         <span id="score-text">0/0 Correct (0%)</span>
                     </div>
                     <div class="w-full bg-purple-900 bg-opacity-30 rounded-full h-3">
@@ -71,16 +71,16 @@
             <div class="bg-white rounded-lg shadow-lg p-4 mb-6 fade-in">
                 <div class="flex flex-wrap gap-2">
                     <button onclick="setTopicFilter('all')" class="topic-tab px-4 py-2 rounded-lg font-medium transition-all bg-purple-600 text-white">
-                        All (1000)
+                        All
                     </button>
                     <button onclick="setTopicFilter('classical_ml')" class="topic-tab px-4 py-2 rounded-lg font-medium transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
-                        Classical ML (350)
+                        Classical ML
                     </button>
                     <button onclick="setTopicFilter('deep_learning')" class="topic-tab px-4 py-2 rounded-lg font-medium transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
-                        Deep Learning (500)
+                        Deep Learning
                     </button>
                     <button onclick="setTopicFilter('prompt_engineering')" class="topic-tab px-4 py-2 rounded-lg font-medium transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
-                        Prompt Engineering (150)
+                        Prompt Engineering
                     </button>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                 <div class="flex flex-wrap items-center gap-3 mb-6" id="question-badges"></div>
 
                 <!-- Question text -->
-                <h2 class="text-2xl font-semibold text-gray-800 mb-8 leading-relaxed" id="question-text"></h2>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-8 leading-relaxed whitespace-pre-wrap" id="question-text"></h2>
 
                 <!-- Options -->
                 <div class="space-y-4 mb-6" id="options-container"></div>
@@ -152,7 +152,7 @@
                 </button>
 
                 <div class="text-center">
-                    <div class="text-2xl font-bold text-gray-800" id="nav-position">1 / 1000</div>
+                    <div class="text-2xl font-bold text-gray-800" id="nav-position"></div>
                     <div class="text-sm text-gray-500">Use ← → keys</div>
                 </div>
 
@@ -190,6 +190,17 @@
                     return { ...q, options: order.map(i => q.options[i]), correct_answer: order.indexOf(q.correct_answer) };
                 });
                 filteredQuestions = allQuestions;
+                // The questions' counts are filled in from the data, so the page never claims a number the bank does not have
+                const counts = {};
+                allQuestions.forEach(q => { counts[q.topic] = (counts[q.topic] || 0) + 1; });
+                document.getElementById('total-count').textContent = allQuestions.length;
+                document.querySelectorAll('.topic-tab').forEach(btn => {
+                    const m = (btn.getAttribute('onclick') || '').match(/'(\w+)'/);
+                    if (!m) return;
+                    const n = m[1] === 'all' ? allQuestions.length : counts[m[1]];
+                    if (n) btn.textContent = btn.textContent.replace(/\s*\(\d+\)\s*$/, '').trim() + ` (${n})`;
+                });
+
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('quiz-container').classList.remove('hidden');
                 renderQuestion();
@@ -268,7 +279,9 @@
             `;
 
             // Question text
-            document.getElementById('question-text').textContent = question.question;
+            const qEl = document.getElementById('question-text');
+            qEl.textContent = question.question;
+            qEl.classList.toggle('font-mono', question.question.includes('\n'));
 
             // Options
             const optionsHtml = question.options.map((option, index) => {
