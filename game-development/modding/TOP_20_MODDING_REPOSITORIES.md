@@ -829,7 +829,7 @@ Official mod manager from Nexus Mods, supporting multiple games.
 ## Example Projects & Learning Resources
 
 ### 18. **RimWorld Mods (Community)**
-**Example**: https://github.com/AndroidQuazar/VanillaExpandedFramework
+**Example**: https://github.com/Vanilla-Expanded/VanillaExpandedFramework
 **Language**: C#, XML
 **License**: Varies
 

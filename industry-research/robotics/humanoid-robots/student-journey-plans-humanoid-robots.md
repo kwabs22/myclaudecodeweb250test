@@ -389,7 +389,7 @@ Learn to work with robots in simulation before touching hardware
 - 🌐 **Omniverse Platform:** [nvidia.com/omniverse](https://www.nvidia.com/en-us/omniverse/)
 - 🎮 **Isaac Sim:** [developer.nvidia.com/isaac-sim](https://developer.nvidia.com/isaac-sim)
 - 📖 **Documentation:** [Isaac Sim Docs](https://docs.omniverse.nvidia.com/isaacsim/latest/index.html)
-- 💻 **Isaac Gym (Legacy):** [github.com/NVIDIA-Omniverse/IsaacGymEnvs](https://github.com/NVIDIA-Omniverse/IsaacGymEnvs)
+- 💻 **Isaac Gym (Legacy):** [github.com/isaac-sim/IsaacGymEnvs](https://github.com/isaac-sim/IsaacGymEnvs)
 - 🆕 **Isaac Lab (New):** [isaac-sim.github.io/IsaacLab](https://isaac-sim.github.io/IsaacLab/)
 - 📝 **Getting Started:** [Isaac Sim Quickstart](https://docs.omniverse.nvidia.com/isaacsim/latest/introductory_tutorials/tutorial_intro_interface.html)
 - 🎓 **Tutorials:**
@@ -451,7 +451,7 @@ Learn to work with robots in simulation before touching hardware
 - 📦 **Key Packages:**
   - [ros2_control](https://control.ros.org/humble/index.html) - Robot control
   - [MoveIt2](https://moveit.picknik.ai/humble/index.html) - Motion planning
-  - [Navigation2](https://navigation.ros.org/) - Navigation stack
+  - [Navigation2](https://docs.nav2.org/) - Navigation stack
 - 💬 **Community:**
   - [ROS Discourse](https://discourse.ros.org/) - Official forum
   - [ROS Discord](https://discord.gg/ros) - Real-time chat
@@ -1620,7 +1620,7 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 - [MIT OCW 18.06](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/) - Linear algebra course
 
 **Robotics:**
-- [Modern Robotics Book](http://hades.mech.northwestern.edu/index.php/Modern_Robotics) - Free textbook
+- [Modern Robotics Book](https://hades.mech.northwestern.edu/index.php/Modern_Robotics) - Free textbook
 - [Modern Robotics YouTube](https://www.youtube.com/playlist?list=PLggLP4f-rq02vX0OQQ5vrCxbJrzamYDfx) - Course videos
 - [Underactuated Robotics](https://underactuated.mit.edu/) - MIT course
 
@@ -1739,9 +1739,9 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 ### 📚 Free Textbooks
 
 **Robotics:**
-- [Modern Robotics](http://hades.mech.northwestern.edu/images/7/7f/MR.pdf) - Free PDF
+- [Modern Robotics](https://hades.mech.northwestern.edu/images/7/7f/MR.pdf) - Free PDF
 - [Probabilistic Robotics](http://www.probabilistic-robotics.org/) - Classic text
-- [Planning Algorithms](http://lavalle.pl/planning/) - Free online
+- [Planning Algorithms](https://lavalle.pl/planning/) - Free online
 
 **Programming:**
 - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)

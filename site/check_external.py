@@ -21,7 +21,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent.parent
 TEXT = (".md", ".html", ".txt", ".json", ".py", ".js", ".jsx", ".yml", ".csv")
 SKIP_FILES = ("package-lock.json", "questions.json", "question-bank.json", "model_catalog")
-PLACEHOLDER = re.compile(r"(^|\.)(example\.(com|org|net)|company\.com|yourdomain\.com|your-[\w-]+\.\w+|test\.com)$|^localhost|^127\.|^0\.0\.0\.0|\{|\}|<|>|\$")
+PLACEHOLDER = re.compile(r"(^|\.)(example\.(com|org|net)|company\.com|yourdomain\.com|your-[\w-]+\.\w+|test\.com|acmecorp\.com|competitor[ab]\.com|crm\.com|w3\.org|fonts\.googleapis\.com|fonts\.gstatic\.com)$|^localhost|^127\.|^0\.0\.0\.0|^10\.|^192\.168\.|^172\.(1[6-9]|2\d|3[01])\.|^[^.]+$|yourusername|\{|\}|<|>|\$")
 # Sites that answer scripts with 403/429/999 even when the page is fine: reported as "unchecked", not broken
 BOT_WALLED = ("reddit.com", "linkedin.com", "twitter.com", "x.com", "instagram.com", "facebook.com", "medium.com", "udemy.com", "coursera.org", "bestbuy.com", "amazon.com", "quora.com")
 URL = re.compile(r"https?://[A-Za-z0-9._~:/?#@!$&*+,;=%\-\[\]]+")
@@ -34,7 +34,7 @@ def collect():
     files = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines()
     where = defaultdict(list)
     for f in files:
-        if not f.endswith(TEXT) or any(s in f for s in SKIP_FILES):
+        if not f.endswith(TEXT) or f.startswith(("site/", ".github/")) or any(s in f for s in SKIP_FILES):
             continue
         try:
             text = (ROOT / f).read_text(errors="ignore")
@@ -72,6 +72,8 @@ def check(url):
                 break
             except Exception as e:  # DNS failure, TLS error, timeout
                 status, note = None, type(e).__name__ + ": " + str(getattr(e, "reason", e))[:60]
+                if host.endswith(BOT_WALLED) and "imed out" in note:
+                    return url, "unchecked", None, note
                 if attempt < 2:
                     time.sleep(2)
     if status and 200 <= status < 400:

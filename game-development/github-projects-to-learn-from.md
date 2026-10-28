@@ -351,7 +351,7 @@ Powers the PlayCanvas Editor UI. Shows how to build professional-grade UI framew
 ---
 
 ### 4. **SuperSplat**
-**Repository**: https://github.com/playcanvas/super-splat
+**Repository**: https://github.com/playcanvas/supersplat
 **Language**: JavaScript/TypeScript
 **Live Demo**: https://playcanvas.com/supersplat
 

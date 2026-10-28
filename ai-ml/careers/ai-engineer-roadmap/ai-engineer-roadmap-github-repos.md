@@ -518,7 +518,7 @@ A comprehensive collection of GitHub repositories mapped to the "God Tier" AI En
 |------------|-------|-------------|----------|
 | [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow) | 14k+ | ML toolkit for Kubernetes | Complete MLOps |
 | [mlflow/mlflow](https://github.com/mlflow/mlflow) | 18k+ | Experiment tracking, model packaging, deployment | Experiment management |
-| [iterative/dvc](https://github.com/iterative/dvc) | 13k+ | Data Version Control - Git for data | Data versioning |
+| [iterative/dvc](https://github.com/treeverse/dvc) | 13k+ | Data Version Control - Git for data | Data versioning |
 | [zenml-io/zenml](https://github.com/zenml-io/zenml) | 4k+ | MLOps framework for production | Pipeline orchestration |
 
 **Key Components**:

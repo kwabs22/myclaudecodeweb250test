@@ -879,5 +879,5 @@ pip install ultralytics opencv-python dtaidistance numpy scipy matplotlib jupyte
 **Resources:**
 - OpenPose: https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - Ultralytics YOLO: https://docs.ultralytics.com/
-- MediaPipe: https://google.github.io/mediapipe/
+- MediaPipe: https://ai.google.dev/edge/mediapipe/solutions/guide
 - DTW: https://dtaidistance.readthedocs.io/

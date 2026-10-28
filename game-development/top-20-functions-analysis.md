@@ -681,7 +681,7 @@ This document presents a detailed analysis of **400 functions** (20 per project)
 
 ## 11. SuperSplat
 
-**Repository**: https://github.com/playcanvas/super-splat
+**Repository**: https://github.com/playcanvas/supersplat
 **Language**: JavaScript/TypeScript
 **Focus**: 3D Gaussian Splatting editor
 

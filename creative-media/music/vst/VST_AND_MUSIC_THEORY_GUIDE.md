@@ -602,7 +602,7 @@ if (abs(value) < 1e-10) value = 0.0f;
 ### Online
 - [JUCE Tutorials](https://juce.com/learn/tutorials)
 - [The Audio Programmer YouTube](https://www.youtube.com/c/TheAudioProgrammer)
-- [Katja's DSP Resources](http://www.katjaas.nl/home/home.html)
+- [Katja's DSP Resources](https://www.katjaas.nl/home/home.html)
 - [musicdsp.org](https://www.musicdsp.org/) (algorithms archive)
 
 ### Communities

@@ -286,7 +286,7 @@ Once markers are working:
 - **OpenCV ArUco Docs:** https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html
 - **Dictionary Reference:** DICT_4X4_50 = 50 unique 4x4 bit markers
 - **Alternative Generators:**
-  - https://fodi.github.io/arucogen/
+  - https://chev.me/arucogen/
   - https://sourceforge.net/projects/aruco/
 
 ---

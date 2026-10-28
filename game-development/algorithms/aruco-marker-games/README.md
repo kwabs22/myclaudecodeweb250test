@@ -115,7 +115,7 @@ Each script can be configured to use custom marker ID ranges via attributes.
 - [AR.js Documentation](https://ar-js-org.github.io/AR.js-Docs/)
 - [OpenCV.js Tutorials](https://docs.opencv.org/4.x/d5/d10/tutorial_js_root.html)
 - [PlayCanvas API Reference](https://developer.playcanvas.com/en/api/)
-- [ArUco Marker Generator](http://chev.me/arucogen/)
+- [ArUco Marker Generator](https://chev.me/arucogen/)
 
 ## Contributing
 
