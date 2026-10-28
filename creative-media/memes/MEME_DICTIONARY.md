@@ -19,7 +19,7 @@ A comprehensive guide to internet memes, meme repositories, categories, formats,
 
 ### Top Meme Collection Repositories
 
-#### 1. **bagginsgauss/ultimate-meme-repo** ⭐ 6 stars
+#### 1. [**bagginsgauss/ultimate-meme-repo**](https://github.com/bagginsgauss/ultimate-meme-repo) ⭐ 6 stars
 A comprehensive repository to save the best memes, organized into multiple categories:
 
 **Main Categories:**
@@ -37,44 +37,44 @@ A comprehensive repository to save the best memes, organized into multiple categ
 
 📝 **License:** GPL-3.0
 
-#### 2. **codewithpom/dev-meme**
+#### 2. [**codewithpom/dev-meme**](https://github.com/codewithpom/dev-meme)
 A repository containing memes specifically for developers, featuring programming and coding humor.
 
-#### 3. **itsgucci/meme**
+#### 3. [**itsgucci/meme**](https://github.com/itsgucci/meme)
 A general collection of various memes.
 
-#### 4. **MadIceTea/meme-repository**
+#### 4. [**MadIceTea/meme-repository**](https://github.com/MadIceTea/meme-repository)
 Evolving from a storage repository to a fun "show me a random meme" JavaScript webpage.
 
 ### Top Meme-Related Tools & APIs
 
-#### 1. **jacebrowning/memegen** ⭐ 1,600 stars
+#### 1. [**jacebrowning/memegen**](https://github.com/jacebrowning/memegen) ⭐ 1,600 stars
 - The free and open source API to generate memes
 - Python-based tool for programmatic meme creation
 - Uses templates and text overlays
 
-#### 2. **MemeCrafters/meme-generator** ⭐ 920 stars
+#### 2. [**MemeCrafters/meme-generator**](https://github.com/MemeCrafters/meme-generator) ⭐ 920 stars
 - A meme generator for creating various image macros
 - Built in Python
 
-#### 3. **D3vd/Meme_Api** ⭐ 857 stars
+#### 3. [**D3vd/Meme_Api**](https://github.com/D3vd/Meme_Api) ⭐ 857 stars
 - Summons random memes at will
 - Go-based API aggregating memes from Reddit
-- Default sources: r/memes, r/dankmemes, r/me_irl
+- Default sources: [r/memes](https://www.reddit.com/r/memes/), [r/dankmemes](https://www.reddit.com/r/dankmemes/), [r/me_irl](https://www.reddit.com/r/me_irl/)
 - Supports custom subreddit requests
 
-#### 4. **Rick-Lang/rickroll-lang** ⭐ 767 stars
+#### 4. [**Rick-Lang/rickroll-lang**](https://github.com/Rick-Lang/rickroll-lang) ⭐ 767 stars
 - Esoteric programming language using Rick Astley's song lyrics as keywords
 - Novelty/meme programming language
 
 ### GitHub Topics to Explore
 
-- **github.com/topics/memes** - General meme repositories
-- **github.com/topics/meme** - Meme-related projects
-- **github.com/topics/meme-generator** - Meme generation tools
-- **github.com/topics/meme-api** - Meme APIs
-- **github.com/topics/meme-website** - Meme websites
-- **github.com/topics/meme-app** - Meme applications
+- [**github.com/topics/memes**](https://github.com/topics/memes) - General meme repositories
+- [**github.com/topics/meme**](https://github.com/topics/meme) - Meme-related projects
+- [**github.com/topics/meme-generator**](https://github.com/topics/meme-generator) - Meme generation tools
+- [**github.com/topics/meme-api**](https://github.com/topics/meme-api) - Meme APIs
+- [**github.com/topics/meme-website**](https://github.com/topics/meme-website) - Meme websites
+- [**github.com/topics/meme-app**](https://github.com/topics/meme-app) - Meme applications
 
 ---
 
@@ -430,11 +430,11 @@ Subcategories include:
 - **Stars:** 857
 - **Features:**
   - Random meme fetching from Reddit
-  - Default subreddits: r/memes, r/dankmemes, r/me_irl
+  - Default subreddits: [r/memes](https://www.reddit.com/r/memes/), [r/dankmemes](https://www.reddit.com/r/dankmemes/), [r/me_irl](https://www.reddit.com/r/me_irl/)
   - Custom subreddit support
   - Metadata: NSFW flags, spoiler tags, upvotes, author
   - Multiple image resolutions
-- **URL:** github.com/D3vd/Meme_Api
+- **URL:** [github.com/D3vd/Meme_Api](https://github.com/D3vd/Meme_Api)
 
 #### **2. Memegen (jacebrowning)**
 - **Language:** Python
@@ -444,7 +444,7 @@ Subcategories include:
   - Template-based meme generation
   - Text overlay customization
   - Programmatic meme creation
-- **URL:** github.com/jacebrowning/memegen
+- **URL:** [github.com/jacebrowning/memegen](https://github.com/jacebrowning/memegen)
 
 #### **3. Meme Generator (MemeCrafters)**
 - **Language:** Python
@@ -452,11 +452,11 @@ Subcategories include:
 - **Features:**
   - Create various image macros
   - Multiple template support
-- **URL:** github.com/MemeCrafters/meme-generator
+- **URL:** [github.com/MemeCrafters/meme-generator](https://github.com/MemeCrafters/meme-generator)
 
 ### Meme Resources & Databases
 
-#### **Know Your Meme**
+#### **[Know Your Meme](https://knowyourmeme.com/)**
 - **Description:** Comprehensive internet meme documentation
 - **Categories:**
   - 33,882 memes documented
@@ -467,28 +467,28 @@ Subcategories include:
   - Spread and usage tracking
   - Examples and variations
   - Confirmed/researching/deadpooled status
-- **URL:** knowyourmeme.com
+- **URL:** [knowyourmeme.com](https://knowyourmeme.com/)
 
 #### **Reddit Meme Communities**
-- **r/memes** - General memes (30M+ members)
-- **r/dankmemes** - Dank memes (7M+ members)
-- **r/me_irl** - Relatable content (5M+ members)
-- **r/wholesomememes** - Positive memes (4M+ members)
-- **r/ProgrammerHumor** - Developer memes (3M+ members)
-- **r/AdviceAnimals** - Classic image macros (8M+ members)
-- **r/MemeEconomy** - Meme investment jokes (1M+ members)
-- **r/DeepFriedMemes** - Deep-fried content
-- **r/surrealmemes** - Surreal/abstract humor
-- **r/antimeme** - Anti-humor memes
+- [**r/memes**](https://www.reddit.com/r/memes/) - General memes (30M+ members)
+- [**r/dankmemes**](https://www.reddit.com/r/dankmemes/) - Dank memes (7M+ members)
+- [**r/me_irl**](https://www.reddit.com/r/me_irl/) - Relatable content (5M+ members)
+- [**r/wholesomememes**](https://www.reddit.com/r/wholesomememes/) - Positive memes (4M+ members)
+- [**r/ProgrammerHumor**](https://www.reddit.com/r/ProgrammerHumor/) - Developer memes (3M+ members)
+- [**r/AdviceAnimals**](https://www.reddit.com/r/AdviceAnimals/) - Classic image macros (8M+ members)
+- [**r/MemeEconomy**](https://www.reddit.com/r/MemeEconomy/) - Meme investment jokes (1M+ members)
+- [**r/DeepFriedMemes**](https://www.reddit.com/r/DeepFriedMemes/) - Deep-fried content
+- [**r/surrealmemes**](https://www.reddit.com/r/surrealmemes/) - Surreal/abstract humor
+- [**r/antimeme**](https://www.reddit.com/r/antimeme/) - Anti-humor memes
 
 ### Meme Template Resources
 
-#### **Kapwing Meme Templates**
+#### **[Kapwing Meme Templates](https://www.kapwing.com/meme-maker)**
 - Free and customizable templates
 - Popular formats available
 - Online meme editor
 
-#### **Imgflip Meme Generator**
+#### **[Imgflip Meme Generator](https://imgflip.com/memegenerator)**
 - Extensive template library
 - Simple online interface
 - Popular meme formats
@@ -540,7 +540,7 @@ Subcategories include:
 **Compiled:** 2025-11-18
 **Sources:**
 - GitHub repositories: ultimate-meme-repo, dev-meme, Meme_Api, memegen
-- Know Your Meme database
+- [Know Your Meme](https://knowyourmeme.com/) database
 - Reddit meme communities
 - Internet culture documentation
 

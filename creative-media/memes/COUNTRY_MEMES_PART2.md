@@ -820,7 +820,7 @@ According to 2024 reports, seven major memes marked Brazilian social networks, s
 - Aggressive demeanor
 
 #### **Slav Squat Meme**
-- **Subreddit:** r/slavs_squatting (founded Nov 29, 2012)
+- **Subreddit:** [r/slavs_squatting](https://www.reddit.com/r/slavs_squatting/) (founded Nov 29, 2012)
 - **Viral Period:** 2016-2017 (mass spread)
 - **International:** Meme transcended Russia
 - **Rule:** Heels on ground = true Slav
@@ -1353,7 +1353,7 @@ According to 2024 reports, seven major memes marked Brazilian social networks, s
 - 🇹🇭 Thailand
 
 **Research Sources:**
-- Know Your Meme database
+- [Know Your Meme](https://knowyourmeme.com/) database
 - Country-specific internet forums and platforms
 - Academic papers on internet culture (Mongolia, China, South Africa)
 - News articles about viral trends 2024-2025
