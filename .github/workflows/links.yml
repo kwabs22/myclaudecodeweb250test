@@ -2,10 +2,12 @@ name: Check external links
 
 on:
   workflow_dispatch:
-  # Changing the checker or this file also runs it, since the session cannot start workflows by hand
+  # Runs after any merge that touches the docs or the checker, so every link change is checked
   push:
     branches: [main]
     paths:
+      - "**.md"
+      - "**.html"
       - site/check_external.py
       - .github/workflows/links.yml
 
