@@ -581,7 +581,7 @@ setx GITHUB_TOKEN "your_token"
 **Community**:
 - Discord: MCP Community Server
 - Reddit: r/ClaudeAI
-- GitHub Discussions: https://github.com/modelcontextprotocol/servers/discussions
+- GitHub Discussions: https://github.com/orgs/modelcontextprotocol/discussions
 
 ---
 

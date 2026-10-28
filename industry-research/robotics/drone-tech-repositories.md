@@ -301,10 +301,10 @@ A curated collection of the best open-source repositories for drone technology, 
   - Deep learning integration
 - **Use Case:** AI/ML training, realistic simulation, computer vision
 
-### 22. Autonomous Drone SITL
-**Repository:** [pratik7229/Autonomous_Drone_using_SITL_ROS_and-gazebo_simulation](https://github.com/pratik7229/Autonomous_Drone_using_SITL_ROS_and-gazebo_simulation)
-- **Description:** Comprehensive drone programming tutorial
-- **Technologies:** SITL, ROS, mavros, Gazebo
+### 22. ArduPilot Gazebo plugin (SITL)
+**Repository:** [ArduPilot/ardupilot_gazebo](https://github.com/ArduPilot/ardupilot_gazebo)
+- **Description:** Gazebo plugin and models for software-in-the-loop drone simulation with ArduPilot
+- **Technologies:** SITL, ArduPilot, Gazebo
 - **Key Features:**
   - Complete learning resource
   - DroneKit and pymavlink integration

@@ -43,9 +43,9 @@ A comprehensive list of music theory libraries and frameworks across different p
 - **Installation**: `pip install musicpy`
 - **Last Updated**: February 2025
 
-### **mutils**
-- **Repository**: [charlie-rbchd/mutils](https://github.com/charlie-rbchd/mutils)
-- **Description**: MIDI and frequency representations of musical constructs
+### **mingus**
+- **Repository**: [bspaans/python-mingus](https://github.com/bspaans/python-mingus)
+- **Description**: Python package for music theory and notation, with MIDI support
 - **Features**:
   - Notes, chords, scales
   - MIDI <-> Frequency conversion
@@ -295,7 +295,7 @@ process = os.osc(440) : fi.lowpass(3, 1000);
 ## Web APIs & Services
 
 ### **Hooktheory API**
-- **Website**: [hooktheory.com/api](https://www.hooktheory.com/api)
+- **Website**: [hooktheory.com/api/trends/docs](https://www.hooktheory.com/api/trends/docs)
 - **Description**: Database of chord progressions from popular music
 - **Features**:
   - Query chord progressions
@@ -429,7 +429,7 @@ fundsp = "0.18"
 - [FunDSP - Rust Audio](https://github.com/SamiPerttu/fundsp)
 - [Chord Recognition - GitHub Topics](https://github.com/topics/chord-recognition)
 - [Chord Progression Tools](https://github.com/topics/chord-progression)
-- [mutils - Python Library](https://github.com/charlie-rbchd/mutils)
+- [mingus - Python Library](https://github.com/bspaans/python-mingus)
 
 ---
 

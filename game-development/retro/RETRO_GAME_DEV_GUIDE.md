@@ -240,8 +240,9 @@ sudo apt install rgbds
 # Follow instructions at devkitpro.org
 
 # Ubuntu example
-wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb
-sudo dpkg -i devkitpro-pacman.amd64.deb
+wget https://apt.devkitpro.org/install-devkitpro-pacman
+chmod +x ./install-devkitpro-pacman
+sudo ./install-devkitpro-pacman
 sudo dkp-pacman -S gba-dev
 
 # Set environment variables

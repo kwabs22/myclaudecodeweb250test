@@ -385,10 +385,8 @@ This document presents a detailed analysis of **400 functions** (20 per project)
 
 ## 6. Bomber
 
-**Repository**: https://github.com/marcinbiegun/Bomber
-**Status**: Repository not accessible (404 error)
-
-**Note**: Unable to analyze this repository as it appears to be private, deleted, or the URL is incorrect. Attempted access returned a 404 error.
+**Repository**: https://github.com/JanSeliv/Bomber
+**Status**: Not analysed. The original address (`marcinbiegun/Bomber`) returned a 404, so the link above now points to a similar open-source Unreal Engine 5 Bomberman project, which has not been analysed here.
 
 ---
 

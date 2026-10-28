@@ -163,7 +163,7 @@ Industry-standard character controller used in many commercial games. Perfect fo
 ---
 
 ### 7. **Bomber (Multiplayer Bomberman)**
-**Repository**: https://github.com/marcinbiegun/Bomber
+**Repository**: https://github.com/JanSeliv/Bomber
 **Engine Version**: Unreal Engine 5
 **Language**: C++
 
@@ -216,7 +216,7 @@ Shows how to build RPG-specific systems using GAS. Great for understanding how t
 ---
 
 ### 9. **Eternal Crusade: Resurrection**
-**Repository**: https://github.com/Soverance/EternalCrusadeResurrection
+**Repository**: https://github.com/JediKnightChan/EternalCrusadeResurrection
 **Engine Version**: Unreal Engine 5
 **Language**: C++
 
@@ -325,7 +325,7 @@ The official examples repository. Each example is small, focused, and demonstrat
 ### 3. **PCUI (PlayCanvas UI Framework)**
 **Repository**: https://github.com/playcanvas/pcui
 **Language**: JavaScript/TypeScript
-**Live Demo**: https://playcanvas.github.io/pcui/
+**Docs**: https://github.com/playcanvas/pcui#readme
 
 **What You'll Learn**:
 - Modern UI framework architecture
@@ -404,7 +404,7 @@ Essential system for any 3D game. Clean implementation of character movement fun
 ### 6. **PlayCanvas AR (ARToolkit Integration)**
 **Repository**: https://github.com/playcanvas/playcanvas-ar
 **Language**: JavaScript
-**Live Demo**: https://playcanvas.com/ar
+**Docs**: https://developer.playcanvas.com/user-manual/xr/
 
 **What You'll Learn**:
 - Augmented Reality implementation for web
@@ -498,10 +498,10 @@ Shows how to integrate third-party physics engines. Great for 2D games or UI phy
 
 ---
 
-### 10. **Recast Navigation for PlayCanvas**
-**Repository**: https://github.com/kpalexander/playcanvas-recast-navigation
-**Language**: JavaScript/TypeScript
-**NPM**: @recast-navigation/playcanvas
+### 10. **Recast Navigation (recast-navigation-js)**
+**Repository**: https://github.com/isaac-mason/recast-navigation-js
+**Language**: JavaScript/TypeScript (WebAssembly)
+**NPM**: @recast-navigation/core (works with PlayCanvas through a little glue code; there are ready-made helpers for three.js)
 
 **What You'll Learn**:
 - NavMesh generation

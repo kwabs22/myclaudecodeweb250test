@@ -360,15 +360,15 @@ for(auto entity: view) {
 }
 ```
 
-#### 5. ecs-game-architecture Examples
-- **URL**: https://github.com/smwbalfe/ecs-game-architecture
-- **Description**: Project demonstrating use of ECS for data-driven architecture in rendering games
+#### 5. Lightweight ECS Examples
+- **URL**: https://github.com/mikedesu/ecs
+- **Description**: Entity component system in plain C++ on SDL, written partly for learning
 - **Purpose**: Educational example
 
-- **URL**: https://github.com/tylersuehr7/ecs-game-architecture
-- **Description**: Lightweight C++ ECS framework for game development
-- **Focus**: Simplicity and ease of use
-- **Target**: Arcade games, indie projects, educational purposes
+- **URL**: https://github.com/pvigier/ecs
+- **Description**: Header-only C++17 ECS library
+- **Focus**: Simplicity and speed
+- **Target**: Small games, indie projects, educational purposes
 
 #### 6. Kengine
 - **URL**: https://github.com/phisko/kengine
