@@ -798,7 +798,7 @@ for obj in bpy.context.selected_objects:
 ### Community and Support
 
 - **Blender Artists Forum**: https://blenderartists.org/
-- **r/blender**: Reddit community
+- [**r/blender**](https://www.reddit.com/r/blender/): Reddit community
 - **Blender Discord**: Real-time help
 - **Stack Exchange**: Technical Q&A
 

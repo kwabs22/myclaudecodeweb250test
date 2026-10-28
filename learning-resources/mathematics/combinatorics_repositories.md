@@ -35,7 +35,7 @@ A curated list of repositories dealing with combinatorics mathematics, including
 
 ## Python
 
-### 1. **xguse/Combinatorics**
+### 1. [**xguse/Combinatorics**](https://github.com/xguse/Combinatorics)
 - **Repository:** https://github.com/xguse/Combinatorics
 - **Language:** Python
 - **Description:** Basic combinatorics functions that supplement Python's itertools module
@@ -227,7 +227,7 @@ For more repositories, explore these GitHub topics:
 
 ### For Production Applications:
 1. **C++:** Discreture (modern, header-only)
-2. **Python:** Built-in itertools + xguse/Combinatorics for extensions
+2. **Python:** Built-in itertools + [xguse/Combinatorics](https://github.com/xguse/Combinatorics) for extensions
 3. **Java:** combinatoricslib3 (stream-based)
 4. **Julia:** Combinatorics.jl
 5. **Clojure:** math.combinatorics (functional, lazy)

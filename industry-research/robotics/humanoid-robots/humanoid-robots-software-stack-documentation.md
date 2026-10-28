@@ -775,7 +775,7 @@ CyberOne is Xiaomi's humanoid robot unveiled in Beijing in 2022. It is primarily
 Note: CyberDog is Xiaomi's quadruped robot, NOT the humanoid CyberOne, but shares the "Cyber" branding.
 
 #### MiRoboticsLab GitHub
-- **Organization:** github.com/MiRoboticsLab
+- **Organization:** [github.com/MiRoboticsLab](https://github.com/MiRoboticsLab)
 - **Repositories:** 30+ repositories for CyberDog platform
 - **Key Repositories:**
   - cyberdog_ros2: Main ROS 2 packages
@@ -893,7 +893,7 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 ### Fully Open Source Platforms
 
 #### AgiBot X1
-- **Organization:** github.com/AgibotTech
+- **Organization:** [github.com/AgibotTech](https://github.com/AgibotTech)
 - **License:** MULAN open source license
 - **Repositories:**
   - agibot_x1_infer (inference module)
@@ -903,7 +903,7 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 - **Status:** Fully open for modification and distribution
 
 #### Unitree H1 & G1
-- **Organization:** github.com/unitreerobotics
+- **Organization:** [github.com/unitreerobotics](https://github.com/unitreerobotics)
 - **Repositories:**
   - unitree_sdk2 (main SDK for Go2, B2, H1, G1)
   - unitree_sdk2_python (Python interface)
@@ -915,7 +915,7 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 - **Status:** Active development, extensive SDK
 
 #### PAL Robotics TALOS
-- **Organization:** github.com/pal-robotics
+- **Organization:** [github.com/pal-robotics](https://github.com/pal-robotics)
 - **Repositories:**
   - talos_robot (main robot repository)
   - launch_pal (ROS2 launch utilities)
@@ -926,18 +926,18 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 ### Partial Open Source / Community Repositories
 
 #### Boston Dynamics Atlas
-- **OpenHumanoids Project:** github.com/openhumanoids/oh-distro
+- **OpenHumanoids Project:** [github.com/openhumanoids/oh-distro](https://github.com/openhumanoids/oh-distro)
   - Developed by MIT and University of Edinburgh
   - For DARPA Robotics Challenge
   - Incomplete (Atlas software interface cannot be publicly released)
-- **Boston Dynamics GitHub:** github.com/boston-dynamics
+- **Boston Dynamics GitHub:** [github.com/boston-dynamics](https://github.com/boston-dynamics)
   - 4 repositories (mainly Spot-focused)
   - Spot RL Research Kit available
 
 #### Agility Robotics Digit
 - **Community Repositories:**
-  - github.com/GTLIDAR/digit_controller
-  - github.com/grantgib/digit_ros2 (ROS2 workspace for JSON API)
+  - [github.com/GTLIDAR/digit_controller](https://github.com/GTLIDAR/digit_controller)
+  - [github.com/grantgib/digit_ros2](https://github.com/grantgib/digit_ros2) (ROS2 workspace for JSON API)
 - **Official:** API access, not full open source
 - **Status:** Developer-friendly but not fully open
 
@@ -960,10 +960,10 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 - **Limited Release:** Some Spot tools only
 
 #### Figure AI
-- **Organization:** github.com/figurerobotics (51 repositories)
+- **Organization:** [github.com/figurerobotics](https://github.com/figurerobotics) (51 repositories)
 - **Official SDK:** Not released
 - **Approach:** Proprietary Helix VLA
-- **Third-Party:** Some community implementations (github.com/pie33000/helix)
+- **Third-Party:** Some community implementations ([github.com/pie33000/helix](https://github.com/pie33000/helix))
 - **Philosophy:** Vertical integration, closed development
 
 #### Sanctuary AI Phoenix
@@ -979,7 +979,7 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 
 #### Xiaomi CyberOne
 - **Humanoid:** No public SDK or repositories
-- **Quadruped (CyberDog):** github.com/MiRoboticsLab (30+ repos)
+- **Quadruped (CyberDog):** [github.com/MiRoboticsLab](https://github.com/MiRoboticsLab) (30+ repos)
 - **Approach:** Demonstration platform, not for developers
 
 #### Clone Robotics
@@ -995,28 +995,28 @@ Clone Robotics (founded 2021 in Poland) takes a unique biomimetic approach using
 ### Research & Academic Platforms
 
 #### Awesome Humanoid Learning
-- **Repository:** github.com/jonyzhang2023/awesome-humanoid-learning
+- **Repository:** [github.com/jonyzhang2023/awesome-humanoid-learning](https://github.com/jonyzhang2023/awesome-humanoid-learning)
 - **Purpose:** Curated resources for humanoid robot development
 - **Content:** Tracks developments across multiple platforms
 
 #### Poppy Humanoid
-- **Repository:** github.com/poppy-project/poppy-humanoid
+- **Repository:** [github.com/poppy-project/poppy-humanoid](https://github.com/poppy-project/poppy-humanoid)
 - **Purpose:** Open-source 3D printed humanoid
 - **Focus:** Research and education
 
 #### Berkeley Humanoid Lite
-- **Repository:** github.com/HybridRobotics/Berkeley-Humanoid-Lite
+- **Repository:** [github.com/HybridRobotics/Berkeley-Humanoid-Lite](https://github.com/HybridRobotics/Berkeley-Humanoid-Lite)
 - **Purpose:** Academic research platform
 
 ### Open Source Frameworks & Libraries
 
 #### LeRobot (HuggingFace)
-- **Repository:** github.com/huggingface/lerobot
+- **Repository:** [github.com/huggingface/lerobot](https://github.com/huggingface/lerobot)
 - **Purpose:** End-to-end learning for robotics
 - **Integration:** Used with Unitree platforms
 
 #### Humanoid-Gym
-- **Organization:** github.com/roboterax/humanoid-gym
+- **Organization:** [github.com/roboterax/humanoid-gym](https://github.com/roboterax/humanoid-gym)
 - **Purpose:** RL framework for humanoid locomotion
 - **Base:** NVIDIA Isaac Gym
 - **Features:** Zero-shot sim-to-real transfer

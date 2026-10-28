@@ -743,9 +743,9 @@ Happy music making! 🎹🎵
 - Microtonality and non-Western music theory
 
 ### Online Tools
-- musictheory.net - Interactive lessons
+- [musictheory.net](https://www.musictheory.net/) - Interactive lessons
 - teoria.js - JavaScript music theory library
-- hooktheory.com - Song analysis database
+- [hooktheory.com](https://www.hooktheory.com/) - Song analysis database
 - YouTube channels: 12tone, Adam Neely, Rick Beato, Andrew Huang
 
 ---

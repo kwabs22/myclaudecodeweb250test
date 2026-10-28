@@ -368,14 +368,14 @@ A curated collection of open-source music production tools, libraries, and appli
 - **Awesome Pure Data** (`MikeMorenoDSP/awesome-puredata`) - Pure Data resources
 
 ### GitHub Topics to Explore
-- `github.com/topics/music-production`
-- `github.com/topics/digital-audio-workstation`
-- `github.com/topics/synthesizer`
-- `github.com/topics/audio-plugin`
-- `github.com/topics/music-theory`
-- `github.com/topics/midi`
-- `github.com/topics/audio-effects`
-- `github.com/topics/live-coding`
+- [`github.com/topics/music-production`](https://github.com/topics/music-production)
+- [`github.com/topics/digital-audio-workstation`](https://github.com/topics/digital-audio-workstation)
+- [`github.com/topics/synthesizer`](https://github.com/topics/synthesizer)
+- [`github.com/topics/audio-plugin`](https://github.com/topics/audio-plugin)
+- [`github.com/topics/music-theory`](https://github.com/topics/music-theory)
+- [`github.com/topics/midi`](https://github.com/topics/midi)
+- [`github.com/topics/audio-effects`](https://github.com/topics/audio-effects)
+- [`github.com/topics/live-coding`](https://github.com/topics/live-coding)
 
 ---
 

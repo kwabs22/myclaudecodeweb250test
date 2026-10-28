@@ -2456,17 +2456,17 @@ print(tokenizer.decode(outputs[0]))
 ### Recommended Repositories Summary
 
 #### Traditional NLP:
-1. **NLTK** (github.com/nltk/nltk) - Learning and research
-2. **spaCy** (github.com/explosion/spaCy) - Production NLP
-3. **Gensim** (github.com/piskvorky/gensim) - Topic modeling, embeddings
+1. **NLTK** ([github.com/nltk/nltk](https://github.com/nltk/nltk)) - Learning and research
+2. **spaCy** ([github.com/explosion/spaCy](https://github.com/explosion/spaCy)) - Production NLP
+3. **Gensim** ([github.com/piskvorky/gensim](https://github.com/piskvorky/gensim)) - Topic modeling, embeddings
 4. **Stanford CoreNLP** - Academic-grade linguistic analysis
-5. **Flair** (github.com/flairNLP/flair) - Bridge to neural methods
+5. **Flair** ([github.com/flairNLP/flair](https://github.com/flairNLP/flair)) - Bridge to neural methods
 
 #### Small LLMs:
-1. **SmolLM** (github.com/huggingface/smollm) - Best-in-class small models
-2. **Qwen2** (github.com/QwenLM/Qwen3) - Exceptional math/code capabilities
+1. **SmolLM** ([github.com/huggingface/smollm](https://github.com/huggingface/smollm)) - Best-in-class small models
+2. **Qwen3** ([github.com/QwenLM/Qwen3](https://github.com/QwenLM/Qwen3)) - Exceptional math/code capabilities
 3. **Phi-3** - Enterprise-grade accuracy
-4. **awesome-slm** (github.com/4IK1d/awesome-slm) - Curated list of small models
+4. **awesome-slm** ([github.com/4IK1d/awesome-slm](https://github.com/4IK1d/awesome-slm)) - Curated list of small models
 
 ---
 

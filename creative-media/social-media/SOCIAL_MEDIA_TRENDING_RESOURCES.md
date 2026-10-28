@@ -322,7 +322,7 @@ Based on research conducted in January 2025, here are the best repositories, API
 - **styled-components**: Dynamic styling
 
 ### UI Components
-- **shadcn/ui**: Pre-built accessible components
+- [**shadcn/ui**](https://ui.shadcn.com/): Pre-built accessible components
 - **Radix UI**: Headless primitives
 - **Lucide React**: Icon library
 - **Framer Motion**: Animations
