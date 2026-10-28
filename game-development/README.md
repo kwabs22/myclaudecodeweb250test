@@ -2,9 +2,24 @@
 
 A comprehensive collection of analyses, guides, and resources for learning modern 3D game development through open-source projects.
 
-**Total Documents**: 10 comprehensive guides + 13 supplementary files
-**Total Content**: 175+ pages of analysis
-**Coverage**: AI tools, game engines, automation, narrative systems, and 35+ major GitHub projects
+**Coverage**: AI tools, game engines, automation, game design, modding, retro development, and 35+ major GitHub projects. It also holds runnable PlayCanvas examples and 50 mobile games.
+
+---
+
+## Browse by folder
+
+| Folder | What is in it |
+|---|---|
+| [`ai-tools/`](ai-tools/ai-tools-3d-gaming-impact.md) | How AI tools (EasyBPY, Shap-E, Caption-Anything) change 3D game production |
+| [`blender/`](blender/easybpy-concepts-for-playcanvas.md) | Blender automation and workflows, UI settings, mesh analysis, voxelisation, and how to keep scripts readable (5 guides) |
+| [`game-design/`](game-design/the-verbs-of-coding.md) | Game verbs and mechanics, abstractions, the game loop, engine support and system design (9 guides) |
+| [`playcanvas/`](playcanvas/PlayCanvas_Complexity_Analysis.md) | Complexity and function analysis of the PlayCanvas engine |
+| [`gasshooter/`](gasshooter/GASSHOOTER_ANALYSIS_INDEX.md) | Analysis of the GASShooter Unreal Engine project |
+| [`modding/`](modding/README.md) | A modding guide, the most modded games and the 20 top modding repositories |
+| [`retro/`](retro/RETRO_GAME_DEV_GUIDE.md) | A guide to retro game development |
+| [`algorithms/`](algorithms/100-algorithms-to-games.md) | Algorithms mapped to games, 50 ArUco marker games, and runnable PlayCanvas examples with a [lab](algorithms/playcanvas-examples/lab/index.html) and an [ArUco simulator](algorithms/aruco-marker-games/simulator/index.html) |
+| [`react-native/`](react-native/react-native-games-expo/expo-games-demo/README.md) | 50 mobile games built with Expo, with a web demo |
+| [`complexity-explorer/`](complexity-explorer/index.html) | The Complexity Landscape, an interactive page |
 
 ---
 
