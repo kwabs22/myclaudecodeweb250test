@@ -286,7 +286,7 @@ Perfect for games focused on character dialogue and conversation-driven narrativ
 ### 3. **Twine**
 
 **Website**: https://twinery.org/
-**Community**: Very large (thousands of games on itch.io)
+**Community**: Very large (thousands of games on [itch.io](https://itch.io/))
 **Language**: Web-based (HTML/JavaScript/CSS)
 **License**: GPL-3.0
 

@@ -627,7 +627,7 @@ The next 15 years will see more change in retail than the previous 100 years com
 ## References & Sources
 
 - **Vending-Bench Benchmark**: arXiv:2502.15840 (Andon Labs, 2025)
-- **Project Vend**: Anthropic Research, anthropic.com/research/project-vend-1
+- **Project Vend**: Anthropic Research, [anthropic.com/research/project-vend-1](https://www.anthropic.com/research/project-vend-1)
 - **Industry Data**: US Census Bureau, Retail Trade Statistics
 - **Autonomous Vehicle Timeline**: SAE International, Waymo/Cruise deployment data
 - **Economic Modeling**: Bureau of Labor Statistics, retail sector analysis

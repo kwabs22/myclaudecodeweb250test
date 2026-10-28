@@ -1490,7 +1490,7 @@ Home/Consumer:      ░░░░░░░░░░░░░░░░░░ (<1% 
 - **Agility Robotics Digit:** [agilityrobotics.com/digit](https://www.agilityrobotics.com/digit)
 
 ### Technical Communities
-- **r/humanoidrobots** (Reddit)
+- [**r/humanoidrobots**](https://www.reddit.com/r/humanoidrobots/) (Reddit)
 - **ROS Discourse - Humanoid Robotics**
 - **IEEE Robotics and Automation Society**
 

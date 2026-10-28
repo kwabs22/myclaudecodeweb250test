@@ -1523,16 +1523,16 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 ### GitHub Organizations
 
 **Open Source Projects:**
-- github.com/AgibotTech
-- github.com/unitreerobotics
-- github.com/pal-robotics
-- github.com/HybridRobotics
-- github.com/poppy-project
+- [github.com/AgibotTech](https://github.com/AgibotTech)
+- [github.com/unitreerobotics](https://github.com/unitreerobotics)
+- [github.com/pal-robotics](https://github.com/pal-robotics)
+- [github.com/HybridRobotics](https://github.com/HybridRobotics)
+- [github.com/poppy-project](https://github.com/poppy-project)
 
 **Learning Resources:**
-- github.com/jonyzhang2023/awesome-humanoid-learning
-- github.com/roboterax/humanoid-gym
-- github.com/huggingface/lerobot
+- [github.com/jonyzhang2023/awesome-humanoid-learning](https://github.com/jonyzhang2023/awesome-humanoid-learning)
+- [github.com/roboterax/humanoid-gym](https://github.com/roboterax/humanoid-gym)
+- [github.com/huggingface/lerobot](https://github.com/huggingface/lerobot)
 
 ### YouTube Channels
 

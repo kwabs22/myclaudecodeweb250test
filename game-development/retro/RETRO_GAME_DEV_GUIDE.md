@@ -65,7 +65,7 @@ The Nintendo DS (2004-2011) and Game Boy Advance (2001-2008) era represents a un
 
 ### Modern Games with DS Aesthetics
 
-**Examples on itch.io**:
+**Examples on [itch.io](https://itch.io/)**:
 - **Claw Express (NDS)** - Rail shooter with authentic DS limitations
 - **Fishing the Deep (NDS)** - Fishing sim with dual-screen design
 - **BioDie (NDS)** - Action game leveraging DS constraints
@@ -300,7 +300,7 @@ int main() {
 - Non-programmers
 - Learning GB hardware indirectly
 
-**Download**: gbstudio.dev
+**Download**: [gbstudio.dev](https://www.gbstudio.dev/)
 
 **Features**:
 - Visual scene editor
@@ -339,7 +339,7 @@ int main() {
 - Cross-platform
 - Active development
 
-**Download**: mgba.io
+**Download**: [mgba.io](https://mgba.io/)
 
 **Developer Features**:
 - I/O register viewer
@@ -655,7 +655,7 @@ end
 - Extensive online documentation
 - Solo developers possible
 - Choose constraints deliberately
-- Digital distribution (itch.io, Steam)
+- Digital distribution ([itch.io](https://itch.io/), Steam)
 
 **What We Can Learn**:
 - Constraints breed creativity
@@ -794,30 +794,30 @@ end
   - Curated resources list
 
 - **GBDK-2020 Documentation**
-  - GitHub: github.com/gbdk-2020/gbdk-2020
+  - GitHub: [github.com/gbdk-2020/gbdk-2020](https://github.com/gbdk-2020/gbdk-2020)
   - API reference and examples
 
 - **GB Studio Community**
-  - gbstudio.dev - Official site
+  - [gbstudio.dev](https://www.gbstudio.dev/) - Official site
   - Discord server (very active)
 
 **Game Boy Advance Development**:
-- **gbadev.net** - GBA development portal
+- **[gbadev.net](https://gbadev.net/)** - GBA development portal
   - Tutorials, tools, resources
   - Active forums
 
 - **TONC (Tutorials on GBA Development)**
-  - coranac.com/tonc/text/toc.htm
+  - [coranac.com/tonc/text/toc.htm](https://www.coranac.com/tonc/text/toc.htm)
   - Comprehensive GBA programming guide
   - Covers graphics, sound, timers, interrupts
 
 - **devkitPro Documentation**
-  - devkitpro.org
+  - [devkitpro.org](https://devkitpro.org/)
   - libgba reference
   - Example projects
 
 **Nintendo DS Development**:
-- **devkitPro/libnds**
+- [**devkitPro/libnds**](https://github.com/devkitPro/libnds)
   - Documentation for DS development
   - Example code repository
 
@@ -874,7 +874,7 @@ end
 
 **Annual Events**:
 - **GB Compo** - Game Boy competition (summer)
-- **GBJam** - Game Boy themed jam (itch.io)
+- **GBJam** - Game Boy themed jam ([itch.io](https://itch.io/))
 - **GBA Jam** - Game Boy Advance jam
 - **GBJAM** - Week-long GB restrictions jam
 
@@ -1156,7 +1156,7 @@ void fragment() {
 
 **Month 2+: Polish & Share**
 - Create complete mini-game
-- Export to web (itch.io)
+- Export to web ([itch.io](https://itch.io/))
 - Get community feedback
 - Iterate on aesthetic
 
@@ -1257,20 +1257,20 @@ Start small, be patient, and most importantly: **have fun making games!**
 ## Quick Links Summary
 
 **Tools**:
-- GBDK-2020: github.com/gbdk-2020/gbdk-2020
-- GB Studio: gbstudio.dev
-- devkitPro: devkitpro.org
-- mGBA: mgba.io
+- GBDK-2020: [github.com/gbdk-2020/gbdk-2020](https://github.com/gbdk-2020/gbdk-2020)
+- GB Studio: [gbstudio.dev](https://www.gbstudio.dev/)
+- devkitPro: [devkitpro.org](https://devkitpro.org/)
+- mGBA: [mgba.io](https://mgba.io/)
 
 **Learning**:
 - Pan Docs: gbdev.io/pandocs/
-- TONC: coranac.com/tonc/text/
+- TONC: [coranac.com/tonc/text/](https://www.coranac.com/tonc/text/)
 - GB ASM Tutorial: gbdev.io/gb-asm-tutorial/
 
 **Community**:
 - GBDev Discord (link on gbdev.io)
 - r/Gameboy
-- itch.io (search "gameboy" tag)
+- [itch.io](https://itch.io/) (search "gameboy" tag)
 
 **Get Started**:
 1. Download mGBA

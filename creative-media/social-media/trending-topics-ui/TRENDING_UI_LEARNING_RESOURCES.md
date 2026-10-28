@@ -10,7 +10,7 @@ Based on research conducted in January 2025, here are the best repositories and 
 
 ## 🎯 Top UI Component Libraries (2025)
 
-### 1. **shadcn/ui** ⭐ Most Recommended
+### 1. [**shadcn/ui**](https://ui.shadcn.com/) ⭐ Most Recommended
 - **URL**: https://github.com/shadcn/ui
 - **Description**: Beautiful, accessible components for React and Next.js
 - **Why Learn**: Go-to open-source component library for modern web apps
@@ -153,7 +153,7 @@ Based on research conducted in January 2025, here are the best repositories and 
 - **styled-components**: CSS-in-JS alternative
 
 ### UI Components
-- **shadcn/ui**: Pre-built accessible components
+- [**shadcn/ui**](https://ui.shadcn.com/): Pre-built accessible components
 - **Radix UI**: Unstyled primitive components
 - **Headless UI**: Unstyled accessible components
 
@@ -221,7 +221,7 @@ interface TrendingTopic {
 ## 🎯 Learning Path
 
 ### Beginner
-1. Start with **shadcn/ui** documentation
+1. Start with [**shadcn/ui**](https://ui.shadcn.com/) documentation
 2. Build a simple sidebar with **react-sidebar-ui**
 3. Add sparklines with **react-trend**
 4. Style with **Tailwind CSS**

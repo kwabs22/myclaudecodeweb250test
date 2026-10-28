@@ -1155,8 +1155,8 @@ import_pose_sequence('/path/to/keypoints.json', 'Armature')
 ### OpenPose Rig for Blender
 
 You can use pre-made OpenPose rigs:
-- GitHub: `io7m/com.io7m.visual.openpose_rig`
-- GitHub: `n1ckfg/OpenPoseRig`
+- GitHub: [`io7m/com.io7m.visual.openpose_rig`](https://github.com/io7m/com.io7m.visual.openpose_rig)
+- GitHub: [`n1ckfg/OpenPoseRig`](https://github.com/n1ckfg/OpenPoseRig)
 
 These provide ready-to-use armatures matched to OpenPose keypoints.
 

@@ -1077,7 +1077,7 @@ Open-source mod repository platform used by many games (Valheim, Lethal Company,
 ## Additional Resources
 
 ### Communities
-- **r/modding** - General modding
+- [**r/modding**](https://www.reddit.com/r/modding/) - General modding
 - **BepInEx Discord** - Unity modding
 - **Nexus Mods Forums** - Game-specific
 - **RimWorld Discord** - Great modding community
