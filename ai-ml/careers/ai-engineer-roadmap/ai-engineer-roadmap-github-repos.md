@@ -846,7 +846,7 @@ A comprehensive collection of GitHub repositories mapped to the "God Tier" AI En
 - [AI Stack Exchange](https://ai.stackexchange.com/)
 
 **Papers & Research**:
-- [Papers with Code](https://paperswithcode.com/)
+- [Papers with Code](https://huggingface.co/papers/trending)
 - [arXiv.org](https://arxiv.org/list/cs.AI/recent)
 - [Hugging Face Papers](https://huggingface.co/papers)
 

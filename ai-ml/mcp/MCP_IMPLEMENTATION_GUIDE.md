@@ -26,7 +26,7 @@ A comprehensive guide to setting up and using Model Context Protocol (MCP) serve
 
 ### 5-Minute Setup (Claude Desktop + Filesystem)
 
-1. Install Claude Desktop from https://claude.ai/download
+1. Install Claude Desktop from https://claude.com/download
 2. Open Claude Desktop settings (Gear icon → Settings)
 3. Navigate to "Developer" tab
 4. Click "Edit Config" to open `claude_desktop_config.json`
@@ -57,19 +57,19 @@ A comprehensive guide to setting up and using Model Context Protocol (MCP) serve
 **macOS:**
 ```bash
 # Download from website
-open https://claude.ai/download
+open https://claude.com/download
 
 # Or install via Homebrew (if available)
 brew install --cask claude
 ```
 
 **Windows:**
-- Download installer from https://claude.ai/download
+- Download installer from https://claude.com/download
 - Run the installer
 - Launch Claude Desktop
 
 **Linux:**
-- Download AppImage from https://claude.ai/download
+- Download AppImage from https://claude.com/download
 - Make executable: `chmod +x Claude-*.AppImage`
 - Run: `./Claude-*.AppImage`
 
@@ -369,7 +369,7 @@ Check `claude mcp --help` for the flags in your version, as they change between 
 
 Cursor is built on VS Code and supports Claude:
 
-1. **Download Cursor**: https://cursor.sh
+1. **Download Cursor**: https://cursor.com
 2. **Configure in Settings**:
    - Open Settings → Cursor Settings
    - Add MCP configuration similar to VS Code
@@ -575,13 +575,13 @@ setx GITHUB_TOKEN "your_token"
 
 **Official Resources**:
 - MCP Documentation: https://modelcontextprotocol.io
-- Claude Support: https://support.anthropic.com
+- Claude Support: https://support.claude.com/en/
 - GitHub Issues: https://github.com/modelcontextprotocol/servers/issues
 
 **Community**:
 - Discord: MCP Community Server
 - Reddit: r/ClaudeAI
-- GitHub Discussions: https://github.com/orgs/modelcontextprotocol/discussions
+- GitHub Discussions: https://github.com/modelcontextprotocol/modelcontextprotocol/discussions
 
 ---
 

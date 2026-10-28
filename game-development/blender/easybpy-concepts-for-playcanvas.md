@@ -775,7 +775,7 @@ setupZoneLighting('outdoor', { type: 'directional', color: [1, 0.95, 0.8], inten
 ```javascript
 // ==UserScript==
 // @name         PlayCanvas Auto-Setup
-// @namespace    http://tampermonkey.net/
+// @namespace    https://www.tampermonkey.net/
 // @version      1.0
 // @description  Automate PlayCanvas scene setup
 // @match        https://playcanvas.com/editor/*
