@@ -638,7 +638,7 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 30. Lyft API
 
-**Documentation:** [developer.lyft.com](https://developer.lyft.com/)  
+**Documentation:** [Lyft Go SDK](https://pkg.go.dev/github.com/lyft/lyft-go-sdk) (Lyft's own client; the old developer portal is gone)  
 **Auth:** <span class="auth auth-oauth" title="OAuth 2.0">OAuth 2.0</span>  
 **Category:** Transportation
 **Difficulty:** MEDIUM
@@ -659,7 +659,7 @@ This document lists popular app APIs that were not included in the original 20 p
 
 ### 31. DoorDash Drive API
 
-**Documentation:** [developer.doordash.com/en-US/docs/drive/overview](https://developer.doordash.com/en-US/docs/drive/overview/)  
+**Documentation:** [developer.doordash.com/docs/drive/overview/about_drive](https://developer.doordash.com/docs/drive/overview/about_drive)  
 **Auth:** <span class="auth auth-key" title="API Key">API Key</span>  
 **Category:** Food Delivery
 **Difficulty:** MEDIUM

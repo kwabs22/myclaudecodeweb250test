@@ -440,7 +440,7 @@ Learn to work with robots in simulation before touching hardware
   - [ROS2 Basics Course](https://www.theconstruct.ai/robotigniteacademy_learnros/ros-courses-library/)
 - 📹 **YouTube Channels:**
   - [Articulated Robotics](https://www.youtube.com/@ArticulatedRobotics) - Excellent beginner series
-  - [The Construct](https://www.youtube.com/@TheConstructsim)
+  - [The Construct](https://www.youtube.com/@TheConstruct)
   - [Robotics Back-End](https://www.youtube.com/@RoboticsBackEnd)
 - 💻 **GitHub Resources:**
   - [ros2/examples](https://github.com/ros2/examples) - Official examples
@@ -1707,7 +1707,7 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 
 **YouTube Channels:**
 - [Articulated Robotics](https://www.youtube.com/@ArticulatedRobotics) - ROS2 tutorials
-- [The Construct](https://www.youtube.com/@TheConstructsim) - ROS courses
+- [The Construct](https://www.youtube.com/@TheConstruct) - ROS courses
 - [Robotics Back-End](https://www.youtube.com/@RoboticsBackEnd) - Tutorials
 - [Two Minute Papers](https://www.youtube.com/@TwoMinutePapers) - Latest AI research
 - [3Blue1Brown](https://www.youtube.com/@3blue1brown) - Math visualizations
@@ -1740,7 +1740,7 @@ Year 5+: Cutting-edge Research (TALOS, Atlas equivalent)
 
 **Robotics:**
 - [Modern Robotics](https://hades.mech.northwestern.edu/images/7/7f/MR.pdf) - Free PDF
-- [Probabilistic Robotics](http://www.probabilistic-robotics.org/) - Classic text
+- [Probabilistic Robotics](https://mitpress.mit.edu/9780262201629/probabilistic-robotics/) - Classic text
 - [Planning Algorithms](https://lavalle.pl/planning/) - Free online
 
 **Programming:**

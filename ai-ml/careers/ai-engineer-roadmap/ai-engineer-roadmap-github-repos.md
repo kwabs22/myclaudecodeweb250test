@@ -484,7 +484,7 @@ A comprehensive collection of GitHub repositories mapped to the "God Tier" AI En
 
 | Repository | Stars | Description | Best For |
 |------------|-------|-------------|----------|
-| [aws-samples/aws-machine-learning](https://github.com/aws-samples/aws-machine-learning) | Various | AWS ML samples and tutorials | AWS learning |
+| [aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples) | Various | AWS ML samples and tutorials | AWS learning |
 | [GoogleCloudPlatform/mlops-on-gcp](https://github.com/GoogleCloudPlatform/mlops-on-gcp) | 800+ | MLOps patterns on GCP | GCP learning |
 
 **Key Services to Learn**:

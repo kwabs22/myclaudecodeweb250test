@@ -277,8 +277,7 @@ cv2.imwrite('aruco_marker_0.png', marker)
 
 ### Learn More About Anatomy
 
-- **Joints:** https://www.kenhub.com/en/library/anatomy/joints
-- **Bones:** https://www.kenhub.com/en/library/anatomy/bones
+- **Joints and bones:** https://openstax.org/details/books/anatomy-and-physiology-2e
 - **Orthopedic Terminology:** https://orthoinfo.aaos.org/
 
 ### Learn More About ArUco

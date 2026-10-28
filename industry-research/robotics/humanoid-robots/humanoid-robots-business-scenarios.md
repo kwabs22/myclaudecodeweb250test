@@ -1485,9 +1485,9 @@ Home/Consumer:      ░░░░░░░░░░░░░░░░░░ (<1% 
 
 ### Company Resources
 - **Tesla AI Day Presentations:** [tesla.com/AI](https://www.tesla.com/AI)
-- **Figure AI Blog:** [figure.ai/blog](https://www.figure.ai/blog)
+- **Figure AI Blog:** [figure.ai/news](https://www.figure.ai/news)
 - **Boston Dynamics Atlas Updates:** [bostondynamics.com/atlas](https://www.bostondynamics.com/atlas)
-- **Agility Robotics Digit:** [agilityrobotics.com/digit](https://www.agilityrobotics.com/digit)
+- **Agility Robotics Digit:** [agilityrobotics.com](https://www.agilityrobotics.com/)
 
 ### Technical Communities
 - [**r/humanoidrobots**](https://www.reddit.com/r/humanoidrobots/) (Reddit)
