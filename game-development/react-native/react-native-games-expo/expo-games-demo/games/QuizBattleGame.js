@@ -30,6 +30,7 @@ export default function QuizBattleGame() {
   };
 
   const handleAnswer = (answerIndex) => {
+    if (selectedAnswer !== null) return; // one answer per question
     setSelectedAnswer(answerIndex);
     if (answerIndex === QUESTIONS[currentQuestion].correct) {
       setScore(score + 10);

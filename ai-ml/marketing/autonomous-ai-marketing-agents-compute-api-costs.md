@@ -1,5 +1,7 @@
 # Autonomous AI Marketing Agents: Compute Power & API Cost Analysis
 
+> **Prices are from November 2025.** Model names, per-token prices and GPU costs change often. Treat the figures as a way to compare options, and check each provider's pricing page before budgeting.
+
 ## Executive Summary
 
 This document provides a comprehensive analysis of the computing power and API credits required to implement autonomous AI marketing agents across the three recommended approaches.
@@ -28,7 +30,7 @@ This document provides a comprehensive analysis of the computing power and API c
 5. [Monthly Cost Projections](#monthly-cost-projections)
 6. [Local Computing Requirements](#local-computing-requirements)
 7. [Cost Optimization Strategies](#cost-optimization-strategies)
-8. [Total Cost of Ownership](#total-cost-of-ownership)
+8. [Total Cost of Ownership](#total-cost-of-ownership-3-year)
 
 ---
 

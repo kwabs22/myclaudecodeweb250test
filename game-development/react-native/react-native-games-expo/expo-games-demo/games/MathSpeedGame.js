@@ -38,6 +38,8 @@ export default function MathSpeedGame() {
     } else {
       num1 = Math.floor(Math.random() * 20) + 1;
       num2 = Math.floor(Math.random() * 20) + 1;
+      // Keep subtraction answers positive: the numeric keyboard on a phone often has no minus key
+      if (op === '-' && num1 < num2) [num1, num2] = [num2, num1];
     }
 
     setQuestion({ num1, num2, operator: op });

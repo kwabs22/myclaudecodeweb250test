@@ -811,7 +811,7 @@ setupZoneLighting('outdoor', { type: 'directional', color: [1, 0.95, 0.8], inten
 
 **Best for**: Build automation, CI/CD integration, multi-project operations
 
-```javascript
+```text
 // package.json automation scripts
 {
   "scripts": {

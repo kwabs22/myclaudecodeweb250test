@@ -788,7 +788,7 @@ def evaluate_run(history):
 ```python
 # Multiple AI agents competing
 agents = [claude, gpt4, gemini, human]
-results = run_tournament(agents, 100_games)
+results = run_tournament(agents, n_games=100)
 ```
 
 **Difficulty levels:**
@@ -799,11 +799,11 @@ results = run_tournament(agents, 100_games)
 
 **Scenario variants:**
 ```python
-scenarios = [
-    'Great_Depression': {recession: True, severity: 0.9},
-    'Golden_Age': {growth: True, competition: 'low'},
-    'Disruption': {new_competitor: True, tech_change: True},
-]
+scenarios = {
+    'Great_Depression': {'recession': True, 'severity': 0.9},
+    'Golden_Age': {'growth': True, 'competition': 'low'},
+    'Disruption': {'new_competitor': True, 'tech_change': True},
+}
 ```
 
 ---

@@ -42,7 +42,7 @@ class PoseSearchEngine:
 
         # Detect format if auto
         if format == 'auto':
-            if isinstance(data, list) and 'people' in data[0]:
+            if isinstance(data, list) and data and 'people' in data[0]:
                 format = 'openpose'
             else:
                 format = 'yolo'

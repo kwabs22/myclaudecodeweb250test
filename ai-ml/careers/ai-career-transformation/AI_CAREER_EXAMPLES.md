@@ -4,6 +4,8 @@
 **Related Document**: AI_NATIVE_ROLE_TRANSFORMATION_PLAN.md
 **Last Updated**: 2025-11-18
 
+> **Read the numbers as planning estimates.** The hours saved, improvement rates and implementation times in these examples are illustrative, not measured results. Time a workflow by hand before and after to get your own. Legal, healthcare and finance work also needs your organisation's approval for any tool that sees client, patient or customer data.
+
 ---
 
 ## Table of Contents

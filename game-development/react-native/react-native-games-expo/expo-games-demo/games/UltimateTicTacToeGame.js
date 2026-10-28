@@ -34,19 +34,24 @@ export default function UltimateTicTacToeGame() {
     newBoards[boardIndex][cellIndex] = isXNext ? 'X' : 'O';
     setBoards(newBoards);
 
+    // Work with the updated winners, not the ones from this render: a board won by this very move counts
+    const newBoardWinners = [...boardWinners];
     const boardWinner = checkWinner(newBoards[boardIndex]);
     if (boardWinner) {
-      const newBoardWinners = [...boardWinners];
       newBoardWinners[boardIndex] = boardWinner;
       setBoardWinners(newBoardWinners);
-
-      const gameWinner = checkWinner(newBoardWinners);
-      if (gameWinner) {
-        setWinner(gameWinner);
-      }
     }
 
-    setActiveBoard(boardWinners[cellIndex] ? null : cellIndex);
+    const isDecided = (i) => newBoardWinners[i] || newBoards[i].every(cell => cell !== null);
+    const gameWinner = boardWinner ? checkWinner(newBoardWinners) : null;
+    if (gameWinner) {
+      setWinner(gameWinner);
+    } else if (newBoards.every((_, i) => isDecided(i))) {
+      setWinner('Nobody');
+    }
+
+    // The cell played sends the opponent to the matching board; if that board is already won or full they may play anywhere
+    setActiveBoard(isDecided(cellIndex) ? null : cellIndex);
     setIsXNext(!isXNext);
   };
 
@@ -73,7 +78,7 @@ export default function UltimateTicTacToeGame() {
       {!gameStarted || winner ? (
         <View style={styles.menuContainer}>
           {winner && (
-            <Text style={styles.winText}>🎉 {winner} Wins! 🎉</Text>
+            <Text style={styles.winText}>{winner === 'Nobody' ? '🤝 A draw!' : `🎉 ${winner} Wins! 🎉`}</Text>
           )}
           <TouchableOpacity style={styles.startButton} onPress={startGame}>
             <Text style={styles.startButtonText}>

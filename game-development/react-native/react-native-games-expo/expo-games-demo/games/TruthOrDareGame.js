@@ -42,25 +42,19 @@ export default function TruthOrDareGame() {
 
   const drawCard = (type) => {
     const pool = type === 'truth' ? TRUTHS : DARES;
-    const used = type === 'truth' ? usedCards.truths : usedCards.dares;
-    const available = pool.filter((_, i) => !used.includes(i));
+    let used = type === 'truth' ? usedCards.truths : usedCards.dares;
 
-    if (available.length === 0) {
-      // Reset if all cards used
-      setUsedCards(prev => ({
-        ...prev,
-        [type === 'truth' ? 'truths' : 'dares']: [],
-      }));
-      return drawCard(type);
-    }
+    // Once every card has been drawn, start the pile again
+    if (used.length >= pool.length) used = [];
 
-    const randomIndex = Math.floor(Math.random() * pool.length);
+    const available = pool.map((_, i) => i).filter(i => !used.includes(i));
+    const randomIndex = available[Math.floor(Math.random() * available.length)];
     setCurrentCard(pool[randomIndex]);
     setCardType(type);
 
     setUsedCards(prev => ({
       ...prev,
-      [type === 'truth' ? 'truths' : 'dares']: [...(type === 'truth' ? prev.truths : prev.dares), randomIndex],
+      [type === 'truth' ? 'truths' : 'dares']: [...used, randomIndex],
     }));
   };
 

@@ -5,7 +5,7 @@
 2. [Voxelization (Cubes)](#voxelization-cubes)
 3. [Triangular Decomposition](#triangular-decomposition)
 4. [Octree Subdivision](#octree-subdivision)
-5. [Tetrahedral Meshing](#tetrahedral-meshing)
+5. [Tetrahedral Meshing](#method-2-tetrahedral-decomposition)
 6. [Game Development Applications](#game-development-applications)
 7. [Performance Optimization](#performance-optimization)
 

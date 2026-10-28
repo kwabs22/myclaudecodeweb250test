@@ -13,7 +13,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Input Buffering**: Queue jump input if pressed slightly before landing
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check ground contact (raycast/collision check)
 - If jump pressed && (grounded || coyoteTimeRemaining > 0 || hasDoubleJump):
@@ -41,7 +41,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Stamina Management**: Optional exhaustion mechanics
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Read horizontal input axis
 - Calculate target velocity based on input direction
@@ -68,7 +68,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Rate Limiting**: Cooldown timers, full-auto vs semi-auto
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check fire input && cooldownTimer <= 0 && ammo > 0
 - If shooting:
@@ -98,7 +98,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Camera Adjustment**: Different camera behavior while climbing
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If near climbable surface && climb input:
   - Enter climb state
@@ -128,7 +128,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Animation Layers**: Full-body swimming vs treading water
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check if in water volume (trigger collision)
 - If swimming:
@@ -157,7 +157,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Cooldown Management**: Prevent spam
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check dodge input && cooldownTimer <= 0 && not dodging
 - If dodge initiated:
@@ -191,7 +191,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Stealth Integration**: Reduced detection radius/noise
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check crouch input toggle
 - If crouching:
@@ -220,7 +220,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Cooldown Visualization**: UI indicators, character glow
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check dash input && charges > 0
 - If dash initiated:
@@ -252,7 +252,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Throwing Mechanics**: Charge-up power, aim trajectory preview
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If not holding:
   - Raycast forward for grabbable objects
@@ -281,7 +281,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Momentum Transfer**: Add character velocity to throw velocity
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If charging throw:
   - Increase power meter (clamped)
@@ -312,7 +312,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Animation Blending**: Shield raised position, block impact flinch
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check block input (hold or toggle)
 - If blocking:
@@ -344,7 +344,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Audio/Visual Feedback**: Distinctive clang sound, spark effect
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check parry input (tap, not hold)
 - If parry initiated:
@@ -377,7 +377,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Attack Integration**: Slide attacks, slide-jump combos
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check slide input && moving && grounded
 - If sliding:
@@ -410,7 +410,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Detachment Logic**: Auto-release vs manual release
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If grapple input:
   - Raycast for grapple point (within range, tagged surface)
@@ -442,7 +442,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Wind Currents**: Updrafts for height gain
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check glide input && airborne && hasGlider
 - If gliding:
@@ -473,7 +473,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Turn Restriction**: Reduced turn radius at high speed
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check sprint input && stamina > 0 && moving
 - If sprinting:
@@ -503,7 +503,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Target Assistance**: Auto-aim magnetism, aim smoothing
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check aim input (hold or toggle)
 - If aiming:
@@ -534,7 +534,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Tactical Reload**: Keep chambered round if reload before empty
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check reload input && ammo < maxClip && reserveAmmo > 0
 - If reloading:
@@ -564,7 +564,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Interruption Consequences**: Fail state if attacked during hack
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check hack input && near hackable object
 - If hacking:
@@ -598,7 +598,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Shadow Blending**: Darkness provides concealment bonus
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Sample light level at player position (texture lookup or volume)
 - Calculate movement noise (speed * surface modifier)
@@ -628,7 +628,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Information Overlay**: Display enemy health, object names
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check scan input && cooldown <= 0
 - If scan activated:
@@ -659,7 +659,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Animation Lock**: Cannot move or attack while healing
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check heal input && hasHealItem && health < maxHealth
 - If healing:
@@ -692,7 +692,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Multi-Stage Interactions**: Sequences like lockpicking phases
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Raycast or overlap sphere for interactables
 - If valid target in range:
@@ -721,7 +721,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Workstation Requirements**: Must be at specific location
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If in crafting UI:
   - Check selected recipe requirements
@@ -753,7 +753,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Camera Modes**: Third-person, first-person, chase cam
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Read vehicle inputs (throttle, brake, steering)
 - Apply wheel forces based on throttle/brake
@@ -782,7 +782,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **G-Force Effects**: Screen effects from high-speed maneuvers
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Read flight inputs (pitch, yaw, roll, throttle)
 - Apply rotational torque for each axis
@@ -810,7 +810,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Visual Effects**: Particle burst, model swap timing
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check transform input && energy >= cost && cooldown <= 0
 - If transforming:
@@ -842,7 +842,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Release Timing**: Perfect charge window for bonus damage
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check charge input (hold button)
 - While charging:
@@ -875,7 +875,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Range Limitation**: Maximum distance or line-of-sight requirement
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check teleport input && cooldown <= 0
 - If teleport mode active:
@@ -908,7 +908,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Dispossession**: Return to original body
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check possess input && valid target in view
 - If possessing:
@@ -942,7 +942,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Build Time**: Progress bar for construction completion
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If in build mode:
   - Raycast to ground for placement position
@@ -977,7 +977,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Structural Integrity**: Chain reactions for connected structures
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check destroy input on target
 - If destroying:
@@ -1008,7 +1008,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Burning Mechanics**: Too long = ruined food
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If cooking active:
   - Update cook timer
@@ -1040,7 +1040,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Animation Syncing**: Hit timing matches animation impact frame
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check mine input && has tool && stamina > 0
 - If mining:
@@ -1075,7 +1075,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Fish Variety**: Different behaviors and difficulty per species
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - If casting:
   - Charge cast power
@@ -1111,7 +1111,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Cooperative Pulling**: Multiple players reduce weight
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check pull input && attached to pullable object
 - If pulling:
@@ -1140,7 +1140,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Puzzle Integration**: Pressure plates, block placement
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check push input && in contact with pushable object
 - If pushing:
@@ -1169,7 +1169,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Weight Limit**: Max total mass that can be levitated
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check levitate input && mana > 0
 - If levitating:
@@ -1202,7 +1202,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Visual Effects**: Ice shader, frost particles
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check freeze input && target in range
 - If freeze cast:
@@ -1238,7 +1238,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Light Emission**: Dynamic point light for burning objects
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - For each burning object:
   - Update burn timer
@@ -1270,7 +1270,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Camera Distance**: Zoom in to maintain visibility
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check shrink input && not at min scale
 - If shrinking:
@@ -1303,7 +1303,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Camera Pull-Back**: Zoom out to keep character in view
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check grow input && energy > 0
 - If growing:
@@ -1337,7 +1337,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Stamina Cost**: Each reflection drains resource
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check reflect input
 - If reflecting:
@@ -1370,7 +1370,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Cooldown System**: Time between absorption activations
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check absorb input && cooldown <= 0
 - If absorbing:
@@ -1407,7 +1407,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Stuck Prevention**: Force-end phase if exiting inside wall
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check phase input && energy > 0
 - If phasing:
@@ -1441,7 +1441,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Lifetime Management**: Duration-based or until dismissed
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check summon input && mana >= cost && summonCount < max
 - If summoning:
@@ -1474,7 +1474,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Invincibility Window**: Brief immunity after revival
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check for downed allies in range (overlap sphere)
 - If revive input && valid target && hasResource:
@@ -1509,7 +1509,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Animation/Audio**: Distinctive taunt gesture and voice line
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check taunt input && cooldown <= 0
 - If taunt activated:
@@ -1542,7 +1542,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Failure Consequences**: Target regains health on failed capture
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check capture input && target health < threshold
 - If capturing:
@@ -1577,7 +1577,7 @@ A comprehensive analysis of common game verbs, their implementation complexities
 - **Stat Mirroring**: Copy health, speed, damage values
 
 ### Per-Frame Loop Impact
-```javascript
+```text
 // Every frame:
 - Check morph input && valid target scanned
 - If morphing:

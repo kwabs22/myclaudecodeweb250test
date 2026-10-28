@@ -6,11 +6,11 @@ A comprehensive guide to memes, internet culture, slang, and viral content speci
 
 ## Table of Contents
 
-1. [England (United Kingdom)](#england-united-kingdom)
-2. [Germany](#germany)
-3. [Japan](#japan)
-4. [South Korea](#south-korea)
-5. [Nigeria](#nigeria)
+1. [England (United Kingdom)](#england-united-kingdom-)
+2. [Germany](#germany-)
+3. [Japan](#japan-)
+4. [South Korea](#south-korea-)
+5. [Nigeria](#nigeria-)
 
 ---
 

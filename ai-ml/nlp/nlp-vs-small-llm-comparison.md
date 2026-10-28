@@ -601,7 +601,7 @@ Traditional NLP requires manual feature engineering:
 #### Feature Types:
 
 1. **Token-level features:**
-```python
+```text
 - Token text (lowercased)
 - Token shape (e.g., "iPhone" → "Xxxxx")
 - Prefix/suffix (first/last 3 characters)
@@ -610,14 +610,14 @@ Traditional NLP requires manual feature engineering:
 ```
 
 2. **Context features:**
-```python
+```text
 - Previous/next 2 tokens
 - Previous/next POS tags
 - Word embeddings (Word2Vec, GloVe)
 ```
 
 3. **Lexicon features:**
-```python
+```text
 - Matches in company name gazetteer
 - Matches in product name list
 - Currency symbols for PRICE entities
@@ -667,7 +667,7 @@ Early stopping at epoch 25 (no improvement)
 - Single GPU: 30-60 minutes
 
 #### Step 4.2: Hyperparameter Tuning
-```python
+```text
 # Key hyperparameters to tune:
 - Learning rate: [0.0001, 0.001, 0.01]
 - Dropout: [0.1, 0.2, 0.3]
@@ -793,7 +793,7 @@ for ent in doc.ents:
 #### Step 1.1: Choose Architecture
 
 **Reference: GPT-2 125M Architecture**
-```python
+```text
 Configuration:
 - Parameters: 125M
 - Layers: 12
@@ -816,7 +816,7 @@ Architecture breakdown:
 #### Step 1.2: Implementation Choice
 
 **Option A: From-Scratch PyTorch**
-```python
+```bash
 # Following Andrej Karpathy's approach
 git clone https://github.com/karpathy/nanoGPT
 cd nanoGPT
@@ -873,7 +873,7 @@ git clone https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu
 ```
 
 2. **Domain-Specific:**
-```python
+```text
 Medical: PubMed (30M articles), MIMIC-III
 Legal: FreeLaw Project, Caselaw Access Project
 Code: The Stack (3TB), GitHub public repos
@@ -1259,7 +1259,7 @@ print(f"Test Perplexity: {test_ppl:.2f}")
 #### Step 5.2: Downstream Task Evaluation
 
 **Zero-Shot Benchmarks:**
-```python
+```bash
 # Use EleutherAI's lm-evaluation-harness
 pip install lm-eval
 

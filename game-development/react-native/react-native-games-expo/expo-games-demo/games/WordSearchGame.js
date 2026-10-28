@@ -18,17 +18,20 @@ export default function WordSearchGame() {
       )
     );
 
-    // Place words in grid
+    // Place words in grid. `placed` remembers which cells hold word letters, so a later word can only cross an
+    // earlier one where the letters agree (before, it could overwrite letters and make a word impossible to find).
+    const placedLetters = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(null));
     WORDS.forEach(word => {
       let placed = false;
       let attempts = 0;
 
-      while (!placed && attempts < 50) {
+      while (!placed && attempts < 1000) {
         const direction = Math.floor(Math.random() * 4); // 0: horizontal, 1: vertical, 2: diagonal-right, 3: diagonal-left
         const row = Math.floor(Math.random() * GRID_SIZE);
         const col = Math.floor(Math.random() * GRID_SIZE);
 
-        if (canPlaceWord(newGrid, word, row, col, direction)) {
+        if (canPlaceWord(placedLetters, word, row, col, direction)) {
+          placeWord(placedLetters, word, row, col, direction);
           placeWord(newGrid, word, row, col, direction);
           placed = true;
         }
@@ -50,6 +53,9 @@ export default function WordSearchGame() {
       else { r += i; c -= i; } // diagonal-left
 
       if (r < 0 || r >= GRID_SIZE || c < 0 || c >= GRID_SIZE) {
+        return false;
+      }
+      if (grid[r][c] !== null && grid[r][c] !== word[i]) {
         return false;
       }
     }

@@ -40,10 +40,12 @@ export default function GardenMergeGame() {
 
   const buyPlant = () => {
     if (coins >= 10 && garden.length < 12) {
+      // The first empty slot: after a merge the garden has gaps, so garden.length can be a slot that is taken
+      const freeSlot = Array.from({ length: 12 }, (_, i) => i).find(i => !garden.some(p => p.slot === i));
       setGarden([...garden, {
         id: Date.now(),
         plantId: 1,
-        slot: garden.length,
+        slot: freeSlot,
       }]);
       setCoins(coins - 10);
     }

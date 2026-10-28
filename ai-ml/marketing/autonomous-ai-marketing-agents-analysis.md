@@ -15,9 +15,9 @@ Autonomous AI marketing agents are complete software systems that combine reason
 
 1. [What Are Autonomous AI Marketing Agents?](#what-are-autonomous-ai-marketing-agents)
 2. [Core Architecture](#core-architecture)
-3. [Key Capabilities](#key-capabilities)
-4. [Building Frameworks: LangGraph vs CrewAI vs Claude Code](#building-frameworks)
-5. [Enterprise Platforms: Agentforce 360 vs Copilot Studio](#enterprise-platforms)
+3. [Key Capabilities](#key-capabilities-for-analytical-marketing-agents)
+4. [Building Frameworks: LangGraph vs CrewAI vs Claude Code](#building-frameworks-langgraph-vs-crewai-vs-claude-code)
+5. [Enterprise Platforms: Agentforce 360 vs Copilot Studio](#enterprise-platforms-agentforce-360-vs-copilot-studio)
 6. [The 2025 Business Reality](#the-2025-business-reality)
 7. [Decision Framework](#decision-framework)
 
