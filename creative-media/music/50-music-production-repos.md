@@ -14,9 +14,6 @@ A curated collection of open-source music production tools, libraries, and appli
 - [Music Notation](#music-notation)
 - [Audio Visualization](#audio-visualization)
 - [Loopers & Live Performance](#loopers--live-performance)
-- [Visual Programming](#visual-programming)
-- [AI Music Generation](#ai-music-generation)
-- [Audio Analysis & MIR](#audio-analysis--mir)
 
 ---
 

@@ -13,7 +13,7 @@ A comprehensive collection of GitHub repositories for image-based translation, O
 - [Camera & Mobile Translation](#camera--mobile-translation)
 - [OCR Libraries & Engines](#ocr-libraries--engines)
 - [Gaming Translation Tools](#gaming-translation-tools)
-- [Real-Time Translation](#real-time-translation)
+- [Real-Time Translation](#real-time-translation-tools)
 - [Specialized Tools](#specialized-tools)
 - [Developer Resources](#developer-resources)
 

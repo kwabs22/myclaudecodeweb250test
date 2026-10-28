@@ -15,7 +15,7 @@ A curated collection of 50 outstanding GitHub repositories focused on language l
 - [Language-Specific Tools](#language-specific-tools)
 - [Games & Interactive Learning](#games--interactive-learning)
 - [Browser Extensions & Dictionaries](#browser-extensions--dictionaries)
-- [Developer Resources & Libraries](#developer-resources--libraries)
+- [Developer Resources & Libraries](#developer-resources--data)
 
 ---
 

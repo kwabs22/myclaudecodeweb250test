@@ -9,8 +9,8 @@ Complete guide to understanding VSTs and sound design from a programmer's perspe
 1. [VST Architecture](#vst-architecture)
 2. [Core DSP Abstractions](#core-dsp-abstractions)
 3. [Sound Design Building Blocks](#sound-design-building-blocks)
-4. [Example Code](#example-code)
-5. [Music Theory Implementations](#music-theory-implementations)
+4. [Example Code](#example-code-walkthrough)
+5. [Music Theory Implementations](#music-theory-abstractions)
 
 ---
 

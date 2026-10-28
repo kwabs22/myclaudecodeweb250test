@@ -3,14 +3,14 @@
 Answers to the [100 combinatorics questions](combinatorics_learning_questions.md). Every numeric answer was checked by brute force; the working is a short outline, not a full write-up. You can also work through the questions as flashcards in the [Combinatorics Quiz](quiz/index.html).
 
 ## Table of Contents
-- [Basic Counting Principles (Questions 1-15)](#basic-counting-principles-questions-1-15)
-- [Permutations (Questions 16-30)](#permutations-questions-16-30)
-- [Combinations (Questions 31-45)](#combinations-questions-31-45)
-- [Advanced Counting (Questions 46-60)](#advanced-counting-questions-46-60)
-- [Partitions and Distributions (Questions 61-70)](#partitions-and-distributions-questions-61-70)
-- [Generating Functions (Questions 71-80)](#generating-functions-questions-71-80)
-- [Graph Theory & Combinatorics (Questions 81-90)](#graph-theory--combinatorics-questions-81-90)
-- [Challenge Problems (Questions 91-100)](#challenge-problems-questions-91-100)
+- [Basic Counting Principles (Questions 1-15)](#basic-counting-principles)
+- [Permutations (Questions 16-30)](#permutations)
+- [Combinations (Questions 31-45)](#combinations)
+- [Advanced Counting (Questions 46-60)](#advanced-counting)
+- [Partitions and Distributions (Questions 61-70)](#partitions-and-distributions)
+- [Generating Functions (Questions 71-80)](#generating-functions)
+- [Graph Theory & Combinatorics (Questions 81-90)](#graph-theory--combinatorics)
+- [Challenge Problems (Questions 91-100)](#challenge-problems)
 
 ---
 

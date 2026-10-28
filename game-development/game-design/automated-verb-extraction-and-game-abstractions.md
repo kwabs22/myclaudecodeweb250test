@@ -14,9 +14,9 @@
   - [Essential Game Systems](#essential-game-systems)
   - [The ECS Abstraction](#the-ecs-abstraction)
   - [Resource Management](#resource-management)
-  - [Scene Graph vs ECS](#scene-graph-vs-ecs)
+  - [Scene Graph vs ECS](#4-scene-graph-vs-ecs)
 - [Part 3: Practical Implementation](#part-3-practical-implementation)
-  - [Building a Verb Analyzer](#building-a-verb-analyzer)
+  - [Building a Verb Analyzer](#building-a-codebase-analyzer)
   - [Implementing Core Game Abstractions](#implementing-core-game-abstractions)
   - [Performance Considerations](#performance-considerations)
 

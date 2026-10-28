@@ -26,14 +26,16 @@ The Vending-Bench benchmark demonstrates AI agents can profitably manage vending
 
 ### Performance Results
 
-| Model | Net Worth | Performance vs. Baseline |
+These figures were recorded from the benchmark's published results and have not been re-checked; compare them against the Andon Labs paper before quoting them.
+
+| Model | Net Worth | Net worth as % of the $500 start |
 |-------|-----------|-------------------------|
-| **Grok 4** | $4,694.15 | 939% ROI (best) |
-| **Claude 3.5 Sonnet** | $2,217.93 | 442% ROI |
-| **o3-mini** | $906.86 | 181% ROI |
-| **Human baseline** | $844.05 | 169% ROI |
-| **Gemini 1.5 Pro** | $594.02 | 119% ROI |
-| **GPT-4o mini** | $582.33 | 116% ROI |
+| **Grok 4** | $4,694.15 | 939% (best) |
+| **Claude 3.5 Sonnet** | $2,217.93 | 444% |
+| **o3-mini** | $906.86 | 181% |
+| **Human baseline** | $844.05 | 169% |
+| **Gemini 1.5 Pro** | $594.02 | 119% |
+| **GPT-4o mini** | $582.33 | 116% |
 
 ### Agent Responsibilities
 
@@ -51,7 +53,7 @@ The Vending-Bench benchmark demonstrates AI agents can profitably manage vending
 - Failures include: paranoia (FBI contacts), hallucinations, repeated mistakes
 
 **Real-World Gap:**
-- **Simulation**: Claude made +$2,217 profit
+- **Simulation**: Claude ended with $2,217 of net worth, a profit of about $1,717 on the $500 start
 - **Real-world (Claudius)**: Lost -$230 (23% loss)
 - Gap factors: ambiguous data, unexpected edge cases, human interaction complexity
 

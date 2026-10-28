@@ -41,7 +41,7 @@
 11. [Common Hurdles and Solutions](#common-hurdles-and-solutions)
 12. [Success Metrics](#success-metrics)
 13. [Community Resources](#community-resources)
-14. [🔗 Quick Reference Links](#quick-reference-links)
+14. [🔗 Quick Reference Links](#-quick-reference-links)
 
 ---
 

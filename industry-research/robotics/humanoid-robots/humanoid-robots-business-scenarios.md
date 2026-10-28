@@ -3,6 +3,8 @@
 **Last Updated:** January 2025
 **Status:** Active Commercial Deployments & Pilot Programs
 
+> The unit costs, deployment counts and market projections here are from early 2025, when the field was changing quickly. Treat them as a snapshot and look up current figures before relying on them.
+
 ---
 
 ## 🚀 Quick Overview
