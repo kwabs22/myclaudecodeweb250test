@@ -6,7 +6,7 @@ Add GPU benchmarking capabilities to the planning interface
 import gradio as gr
 import asyncio
 import json
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, List, Tuple
 from benchmark_modal import ModalBenchmark
 
 

@@ -16694,7 +16694,7 @@
       "question": "Given the table(s)\n\nemployees\nid | name | dept | salary | manager_id\n1 | Ada | Eng | 50000 | NULL\n2 | Ben | Sales | 80000 | 1\n3 | Hana | Eng | 70000 | 1\n4 | Gus | Sales | 40000 | 2\n5 | Eli | Sales | 50000 | 4\n6 | Dev | Sales | 50000 | 4\n7 | Jun | Ops | 50000 | 6\n\nWhat does this query return? (Columns are separated by commas and rows by semicolons; NULL means no value.)\n\nSELECT COUNT(*) FROM employees WHERE dept = 'Sales'",
       "options": [
         "4",
-        "2",
+        "1",
         "8",
         "3"
       ],

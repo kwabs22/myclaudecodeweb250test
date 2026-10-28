@@ -226,12 +226,11 @@ def sql(b):
                 continue
             rows_ = db.execute(query).fetchall()
             variants = perturb(rows_)
-            for v in {tpl.replace("'{d}'", "'%s'" % o).format(d=o, s=s, t=t) for o in ("Eng", "Ops", "Sales")} | {tpl.format(d=d, s=s + 10000, t=t + 50000), tpl.format(d=d, s=s - 10000, t=t - 50000)}:
+            for v in sorted({tpl.replace("'{d}'", "'%s'" % o).format(d=o, s=s, t=t) for o in ("Eng", "Ops", "Sales")} | {tpl.format(d=d, s=s + 10000, t=t + 50000), tpl.format(d=d, s=s - 10000, t=t - 50000)}):
                 try:
                     variants.append(fmt_result(db.execute(v).fetchall()))
                 except Exception:
                     pass
-            use = ot if "orders" in tpl else et
             both = ot if "orders" in tpl and "employees" not in tpl else (et if "orders" not in tpl else et + "\n\n" + ot)
             b.add(SQ, sub, lvl, f"Given the table(s)\n\n{both}\n\nWhat does this query return? (Columns are separated by commas and rows by semicolons; NULL means no value.)\n\n{query}", res, variants, expl.format(d=d, s=s, t=t), qtype="multiple_choice")
         db.close()
@@ -337,7 +336,7 @@ def dsa(b):
             u = q.popleft(); order.append(u)
             for v in adj[u]:
                 if v not in seen: seen.add(v); q.append(v)
-        stack, seen2, dfs = [0], set(), []
+        seen2, dfs = set(), []
         def rec(u):
             seen2.add(u); dfs.append(u)
             for v in adj[u]:
