@@ -611,7 +611,7 @@ def page(repo, out_path, title, body, *, current_dir="", crumbs="", mermaid=Fals
     <a href="{esc(REPO_URL)}">GitHub</a>
   </nav>
   <div class="search">
-    <input id="q" type="search" placeholder="Search {len(repo.nodes)} files" autocomplete="off" spellcheck="false" aria-label="Search the atlas" role="combobox" aria-expanded="false" aria-controls="results">
+    <input id="q" type="search" placeholder="Search files" autocomplete="off" spellcheck="false" aria-label="Search the atlas" role="combobox" aria-expanded="false" aria-controls="results">
     <ul id="results" role="listbox" hidden></ul>
   </div>
   <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 0 0 16Z" fill="currentColor"/></svg></button>

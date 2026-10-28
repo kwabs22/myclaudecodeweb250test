@@ -6,6 +6,14 @@ A complete, working web application that uses AI pose detection to overlay anato
 
 ---
 
+## More in this folder
+
+- [ArUco quick start](ARUCO-QUICK-START.md): print markers and place 3D objects on them
+- [Orthopedic labels and ArUco](ORTHOPEDIC-LABELS-ARUCO.md): the medical terms the labels use, and how the marker feature works
+- [Camera test page](test-camera.html) and [image test page](test-image.html): check that your camera and the pose model work before you open the app
+
+---
+
 ## ✨ Features
 
 ### Current MVP Features

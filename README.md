@@ -2,23 +2,23 @@
 
 **Repository merged from 30 Claude Code branches**
 **Date**: 2025-12-25 (completed 2026-09-27, see [`MERGE_COMPLETE.md`](./MERGE_COMPLETE.md))
-**Total files**: 400+
-**Categories**: 5 main areas
+**Total files**: about 450
+**Categories**: 6 main areas
 **Origin**: the 30 original branches came from Claude Code sessions run in Q4 2025 as part of a $250 credit test. Merging them, auditing the merge, and building the [Session Atlas](https://kwabs22.github.io/myclaudecodeweb250test/) site was done in one later session that was part of a $100 free-credit test.
 
 ---
 
 ## 📁 What's Inside
 
-This repository contains research, tools, and documentation from **30 different Claude Code sessions**, now organized into 5 main categories:
+This repository contains research, tools, and documentation from **30 different Claude Code sessions**, now organized into 6 main categories:
 
 ```
-├── game-development/        🎮 Game dev analysis & resources (170+ files)
-├── ai-ml/                   🤖 AI, ML, careers & tools (30+ files)
-├── creative-media/          🎨 Memes, music, social media (10+ files)
-├── learning-resources/      📚 Languages, math, chess (40+ files)
-├── development-tools/       🛠️ Claude Code, APIs, benchmarking (15+ files)
-└── industry-research/       🏭 Robotics & business (5+ files)
+├── game-development/        🎮 Game dev analysis & resources (about 270 files)
+├── ai-ml/                   🤖 AI, ML, careers & tools (about 50 files)
+├── creative-media/          🎨 Memes, music, social media (about 45 files)
+├── learning-resources/      📚 Languages, math, chess (about 15 files)
+├── development-tools/       🛠️ Claude Code, APIs, benchmarking (about 45 files)
+└── industry-research/       🏭 Robotics & business (about 13 files)
 ```
 
 ---

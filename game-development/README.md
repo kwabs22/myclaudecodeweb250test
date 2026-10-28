@@ -11,8 +11,8 @@ A comprehensive collection of analyses, guides, and resources for learning moder
 | Folder | What is in it |
 |---|---|
 | [`ai-tools/`](ai-tools/ai-tools-3d-gaming-impact.md) | How AI tools (EasyBPY, Shap-E, Caption-Anything) change 3D game production |
-| [`blender/`](blender/easybpy-concepts-for-playcanvas.md) | Blender automation and workflows, UI settings, mesh analysis, voxelisation, and how to keep scripts readable (5 guides) |
-| [`game-design/`](game-design/the-verbs-of-coding.md) | Game verbs and mechanics, abstractions, the game loop, engine support and system design (9 guides) |
+| [`blender/`](blender/README.md) | Blender automation and workflows, UI settings, mesh analysis, voxelisation, and how to keep scripts readable (5 guides) |
+| [`game-design/`](game-design/README.md) | Game verbs and mechanics, abstractions, the game loop, engine support and system design (9 guides) |
 | [`playcanvas/`](playcanvas/PlayCanvas_Complexity_Analysis.md) | Complexity and function analysis of the PlayCanvas engine |
 | [`gasshooter/`](gasshooter/GASSHOOTER_ANALYSIS_INDEX.md) | Analysis of the GASShooter Unreal Engine project |
 | [`modding/`](modding/README.md) | A modding guide, the most modded games and the 20 top modding repositories |
