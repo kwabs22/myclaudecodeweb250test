@@ -1751,7 +1751,7 @@ def generate_3d_model_rodin(prompt, api_key):
     Generate 3D model using Hyper3D Rodin API
     Note: Requires API key from Hyper3D service
     """
-    api_url = "https://api.hyper3d.ai/v1/rodin/generate"
+    api_url = "https://hyperhuman.deemos.com/api/v2/rodin"
 
     # Submit generation request
     headers = {
@@ -1774,7 +1774,7 @@ def generate_3d_model_rodin(prompt, api_key):
         task_id = result['task_id']
 
         # Poll for completion
-        status_url = f"https://api.hyper3d.ai/v1/rodin/status/{task_id}"
+        status_url = f"https://hyperhuman.deemos.com/api/v2/status/{task_id}"
 
         while True:
             status_response = requests.get(status_url, headers=headers)

@@ -746,7 +746,7 @@ This document provides pseudo search term examples for API calls to 50 informati
 
 ## 38. Numbers API
 
-**Documentation:** [numbersapi.com](http://numbersapi.com/42)  
+**Documentation:** [numbersapi.com, archived copy](https://web.archive.org/web/2024/http://numbersapi.com/) (the live site was returning 404 in October 2026)  
 **Auth:** <span class="auth auth-none" title="Free, no auth">No auth</span>  
 **Category:** Mathematics & Facts
 

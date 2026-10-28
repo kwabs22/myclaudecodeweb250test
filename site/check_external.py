@@ -78,6 +78,10 @@ def check(url):
                     time.sleep(2)
     if status and 200 <= status < 400:
         return url, "ok", status, note
+    # An API address (api.example.com, or a /api path) is not a web page: it answers 400, 404 or 422 to a bare GET
+    path = urlparse(url).path
+    if status in (400, 404, 405, 422) and (host.startswith("api.") or path.startswith(("/api", "/v1", "/v2", "/v3"))):
+        return url, "unchecked", status, "API endpoint"
     if status in (401, 403, 405, 429, 999) or (host.endswith(BOT_WALLED) and status):
         return url, "unchecked", status, note
     return url, "broken", status, note
