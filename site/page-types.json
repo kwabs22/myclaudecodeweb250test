@@ -1,11 +1,11 @@
 {
  "ai-ml/careers/ai-engineer-roadmap/quiz-app.html": {
   "type": "Quiz",
-  "blurb": "1,000 questions from the phase 1 question bank, with a statistics panel."
+  "blurb": "1,148 questions with computed answers: maths, Python, SQL and algorithms, with a statistics panel."
  },
  "ai-ml/careers/ai-engineer-roadmap/phase2-quiz-app.html": {
   "type": "Quiz",
-  "blurb": "1,000 machine-learning questions from the phase 2 question bank."
+  "blurb": "487 machine-learning, deep-learning and prompt-engineering questions."
  },
  "ai-ml/computer-vision/openpose/anatomy-viz-web/index.html": {
   "type": "AR viewer",

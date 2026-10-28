@@ -2,7 +2,7 @@
 
 | Folder | What is in it |
 |---|---|
-| [`ai-engineer-roadmap/`](ai-engineer-roadmap/README.md) | A repository guide for each phase of an AI engineer roadmap, plus three quiz apps: [Phase 1](ai-engineer-roadmap/quiz-app.html) (maths, Python, SQL, algorithms) and [Phase 2](ai-engineer-roadmap/phase2-quiz-app.html) (machine learning), each with 1,000 questions, and [Phase 3](ai-engineer-roadmap/phase3-quiz-app.html) (generative AI, hand-written). See the [Phase 1](ai-engineer-roadmap/PHASE1_README.md) and [Phase 2](ai-engineer-roadmap/PHASE2_README.md) READMEs for how they were built. |
+| [`ai-engineer-roadmap/`](ai-engineer-roadmap/README.md) | A repository guide for each phase of an AI engineer roadmap, plus three quiz apps: [Phase 1](ai-engineer-roadmap/quiz-app.html) (maths, Python, SQL, algorithms) and [Phase 2](ai-engineer-roadmap/phase2-quiz-app.html) (machine learning), with 1,148 and 487 questions, and [Phase 3](ai-engineer-roadmap/phase3-quiz-app.html) (generative AI, hand-written). See the [Phase 1](ai-engineer-roadmap/PHASE1_README.md) and [Phase 2](ai-engineer-roadmap/PHASE2_README.md) READMEs for how they were built. |
 | [`ai-career-transformation/`](ai-career-transformation/AI_CAREER_EXAMPLES.md) | [Ten examples](ai-career-transformation/AI_CAREER_EXAMPLES.md) of how AI changes a role, and a [plan](ai-career-transformation/AI_NATIVE_ROLE_TRANSFORMATION_PLAN.md) for making the change |
 
 ## The roadmap at a glance
