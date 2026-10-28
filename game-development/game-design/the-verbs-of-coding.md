@@ -68,7 +68,7 @@ Verb = clear action, easy to visualize
 ```
 
 **Reading Code**:
-```javascript
+```text
 user.save()
      ^--- What does "save" actually DO?
           - Validate fields?
@@ -118,7 +118,7 @@ Natural language verbs compress complex actions:
 - "Save" = (validate, serialize, connect, write, close, verify)
 
 Code verbs do the same:
-```javascript
+```text
 // Compressed verb
 users.sort()
 

@@ -398,6 +398,8 @@ This collection covers multiple evidence-based language learning methodologies:
 
 ## Star Count Categories
 
+Star counts were recorded in November 2025 and will have moved.
+
 - **🌟 1000+ stars**: 13 repositories (Highly popular)
 - **⭐ 100-999 stars**: 15 repositories (Well-established)
 - **✨ 10-99 stars**: 17 repositories (Growing projects)
