@@ -24,10 +24,16 @@ function buildChips() {
     el.appendChild(b);
   }
 }
+function buildGlance() {
+  /* The same seven groups and 23 tasks as below, as a table: made from the data so it cannot drift from the page */
+  const rows = MODALITIES.map((m) => `<tr style="--c:${m.color}"><th scope="row"><a href="#g-${m.id}"><i></i>${esc(m.name)}</a></th><td class="q">${esc(m.ask)}</td><td class="t">${TASKS.filter((t) => t.modality === m.id).map((t) => `<a href="#${t.id}" data-task="${t.id}">${esc(t.title)}</a>`).join("; ")}</td></tr>`).join("");
+  $("glance").innerHTML = `<caption>The seven groups and what is in each</caption><thead><tr><th scope="col">Group</th><th scope="col">The question</th><th scope="col">Tasks</th></tr></thead><tbody>${rows}</tbody>`;
+  $("glance").querySelectorAll("a[data-task]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); select(a.dataset.task); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); }));
+}
 function buildList() {
   const g = $("groups"); g.innerHTML = "";
   for (const m of MODALITIES) {
-    const sec = document.createElement("section"); sec.className = "group"; sec.style.setProperty("--c", m.color); sec.dataset.m = m.id;
+    const sec = document.createElement("section"); sec.className = "group"; sec.id = "g-" + m.id; sec.style.setProperty("--c", m.color); sec.dataset.m = m.id;
     sec.innerHTML = `<h3><i></i>${esc(m.name)}</h3><p class="q">${esc(m.ask)}</p><p class="b">${esc(m.blurb)}</p>`;
     const cards = document.createElement("div"); cards.className = "cards";
     for (const t of TASKS.filter((t) => t.modality === m.id)) {
@@ -206,7 +212,7 @@ function build3D() {
 }
 
 /* ------------------------------------------------------------------ start */
-buildChips(); buildList();
+buildChips(); buildGlance(); buildList();
 scene = build3D();
 const start = location.hash.slice(1);
 select(TASKS.some((t) => t.id === start) ? start : "birthday");

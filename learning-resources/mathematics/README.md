@@ -10,6 +10,20 @@ Three reference documents and a quiz on counting, plus a map from the questions 
 | [Repositories](combinatorics_repositories.md) | GitHub libraries for combinatorics, by language |
 | [Combinatorics in the real world](real-world/index.html) | A 3D map of 23 everyday problems (passwords, poker, the birthday problem, test results, delivery routes, schedules, error-correcting codes and more), grouped by the question each one asks, with live numbers. The logic is in `real-world/tasks.js` and `real-world/check.js` checks it |
 
+## Combinatorics in the real world
+
+The [real-world page](real-world/index.html) is a 3D map of 23 everyday problems, grouped by the question each one asks. Prediction is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Each task has live numbers; `real-world/check.js` tests them against brute force.
+
+| Group | The question | Tasks |
+|---|---|---|
+| Counting | How many are there? | How many passwords?; Licence plates and product codes; Poker hands |
+| Prediction | What is likely to happen? | Surprising coincidences (the birthday problem); What a positive test really means; Guessing the next word; Chances of reaching a target in a season; Lottery odds |
+| Search size | Could we simply try them all? | DNA and the number of short words; Game trees (chess, Go and friends); Choosing a set of features |
+| Optimisation | Which choice is best? | A delivery route; Loading a truck; Matching workers to jobs |
+| Feasibility | Is there a valid arrangement, and how many? | Colouring a map or a timetable; Sudoku, rotas and Latin squares; Shift rotas with rules |
+| Coverage and design | How do we arrange things so nothing is missed? | A league where everyone plays everyone; A code that repairs a flipped bit; Testing software settings |
+| Sampling and randomness | How many ways could the draw have gone? | Shuffling a deck; Picking a survey sample; Resampling your own data (the bootstrap) |
+
 ## Closest tasks in this repository
 
 Counting a thing and generating every one of them are the same problem seen from two sides. Each task below is a runnable script (a PlayCanvas game) that does one of them. The scripts are checked against the counts the questions ask for by `../../game-development/algorithms/playcanvas-examples/tests/combinatorics.test.js` (run `node tests/run.js` in that folder).
