@@ -30,13 +30,13 @@ test("every task is solo or group, both kinds exist in every group, and the page
   const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8"); assert.ok(html.includes(`<span id="n-tasks">${R.TASKS.length}</span>`), "page says a different number of tasks");
   const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8"); assert.ok(md.includes(`${R.TASKS.length} everyday problems`), "README says a different number of tasks");
 });
-test("the mathematics README table lists every group, its question, and each task in the right solo or group column", () => {
-  const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8");
-  for (const m of R.MODALITIES) {
-    const line = md.split("\n").find((l) => l.startsWith("| " + m.name + " |")); assert.ok(line, "no row for " + m.name);
-    const cells = line.split("|").map((c) => c.trim()).slice(1, -1); assert.strictEqual(cells.length, 4, m.name + " cells"); assert.strictEqual(cells[1], m.ask);
-    for (const t of R.TASKS.filter((t) => t.modality === m.id)) { assert.ok(cells[t.who === "solo" ? 2 : 3].includes(t.title), t.title + " missing from the " + t.who + " column of " + m.name); assert.ok(!cells[t.who === "solo" ? 3 : 2].includes(t.title), t.title + " is in the wrong column"); }
-  }
+test("the mathematics README section is exactly what sync-readme.js generates from the data", () => {
+  const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8"); assert.strictEqual(require("./sync-readme.js").build(md), md, "run: node sync-readme.js");
+});
+test("hobby steps point at real tasks, in order, and every hobby task is a step", () => {
+  const ids = new Set(R.TASKS.map((t) => t.id)); assert.ok(R.HOBBY_STEPS.length >= 8);
+  for (const [id, why] of R.HOBBY_STEPS) { assert.ok(ids.has(id), id); assert.ok(why.length > 15); assert.ok(R.TASKS.find((t) => t.id === id).hobby); }
+  assert.strictEqual(R.TASKS.filter((t) => t.hobby).length, R.HOBBY_STEPS.length); assert.strictEqual(new Set(R.HOBBY_STEPS.map((x) => x[0])).size, R.HOBBY_STEPS.length);
 });
 test("passwords: 94^8 and a four digit PIN", () => { assert.strictEqual(row("passwords", { a: 94, L: 8 }, "Possible"), "6,095,689,385,410,816"); assert.strictEqual(row("passwords", { a: 10, L: 4 }, "Possible"), "10,000"); });
 test("plates", () => { assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes (characters may"), "17,576,000"); assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes with no"), "11,232,000"); });
@@ -194,6 +194,66 @@ test("grid routes: C(a+b, a), and routes with a closed crossing, equal listing e
   for (const [a, b] of [[2, 2], [3, 4], [5, 5], [6, 4], [4, 7]]) { const mid = [Math.floor(a / 2), Math.floor(b / 2)]; let all = 0, avoid = 0; const go = (i, j, hit) => { if (i === a && j === b) { all++; if (!hit) avoid++; return; } if (i < a) go(i + 1, j, hit || (i + 1 === mid[0] && j === mid[1])); if (j < b) go(i, j + 1, hit || (i === mid[0] && j + 1 === mid[1])); }; go(0, 0, mid[0] === 0 && mid[1] === 0);
     assert.strictEqual(U.comb(a + b, a), BigInt(all)); assert.strictEqual(T.gridroutes._gridRoutes(a, b, mid), BigInt(avoid), `closed ${a}x${b}`); assert.strictEqual(row("gridroutes", { a, b, block: "mid" }, "Routes with the middle"), U.fmtBig(BigInt(avoid))); }
   assert.strictEqual(row("gridroutes", { a: 6, b: 6, block: "none" }, "Routes with every"), "924");
+});
+
+test("shared hobby: the chances equal comparing every pair of hobby lists", () => {
+  for (const [N, k] of [[8, 3], [10, 4], [9, 2], [7, 3]]) {
+    const lists = []; const go = (start, cur) => { if (cur.length === k) { lists.push(cur.slice()); return; } for (let i = start; i < N; i++) { cur.push(i); go(i + 1, cur); cur.pop(); } }; go(0, []);
+    const tally = {}; let pairs = 0; for (const a of lists) for (const b of lists) { const sh = a.filter((x) => b.includes(x)).length; tally[sh] = (tally[sh] || 0) + 1; pairs++; }
+    assert.strictEqual(row("sharedhobby", { N: Math.max(N, 10), k, g: 5 }, "Chance two people share") !== undefined, true);
+    for (let j = 0; j <= k; j++) assert.ok(Math.abs(T.sharedhobby._shareChance(N, k, j) - (tally[j] || 0) / pairs) < 1e-12, `N=${N} k=${k} j=${j}`);
+  }
+  assert.strictEqual(row("sharedhobby", { N: 30, k: 4, g: 20 }, "Chance two people share"), "45.4%");
+});
+test("invites: the binomial sums equal listing who comes, and the number to invite is the smallest that works", () => {
+  for (const [n, s, p] of [[6, 3, 0.6], [8, 5, 0.4], [10, 7, 0.8], [5, 2, 0.25]]) {
+    let prob = 0; for (let m = 0; m < 1 << n; m++) { let k = 0, w = 1; for (let i = 0; i < n; i++) { const come = (m >> i) & 1; k += come; w *= come ? p : 1 - p; } if (k >= s) prob += w; }
+    assert.ok(Math.abs(T.invites._atLeast(n, s, p) - prob) < 1e-12, [n, s, p] + "");
+  }
+  const exact = (n, s, p) => { let t = 0; for (let k = s; k <= n; k++) t += Number(U.comb(n, k)) * p ** k * (1 - p) ** (n - k); return t; };
+  for (const [s, p, conf] of [[8, 0.6, 0.9], [4, 0.5, 0.8], [12, 0.7, 0.95], [20, 0.4, 0.99], [2, 0.9, 0.9], [30, 0.5, 0.9]]) { const n = T.invites._invitesFor(s, p, conf); assert.ok(exact(n, s, p) >= conf, "enough " + [s, p, conf]); assert.ok(n === s || exact(n - 1, s, p) < conf, "smallest " + [s, p, conf]); }
+  assert.strictEqual(row("invites", { s: 8, p: 60, conf: 0.9 }, "Invitations to send"), "17");
+});
+test("roles: the smallest covering group equals checking by increasing size, and the greedy pick covers every role", () => {
+  for (let seed = 1; seed <= 12; seed++) for (const [n, r] of [[6, 3], [8, 4], [10, 5], [9, 6]]) {
+    const c = T.roles._roleCandidates(n, r, seed); let best = null, count = 0;
+    for (let size = 1; size <= n && best === null; size++) { const go = (start, cur) => { if (cur.length === size) { if ([...Array(r).keys()].every((j) => cur.some((i) => c[i][j]))) { count++; best = size; } return; } for (let i = start; i < n; i++) { cur.push(i); go(i + 1, cur); cur.pop(); } }; go(0, []); }
+    const res = T.roles._smallestCover(c, r); assert.strictEqual(res.size, best, [seed, n, r] + ""); assert.strictEqual(res.count, count); assert.ok(res.greedy.length >= best); assert.ok([...Array(r).keys()].every((j) => res.greedy.some((i) => c[i][j])));
+  }
+});
+test("meeting days: the best days equal trying every choice of days", () => {
+  for (let seed = 1; seed <= 15; seed++) for (const [n, k] of [[10, 1], [16, 2], [30, 3]]) {
+    const av = T.meetdays._availability(n, 0.35, seed); let best = -1; const days = [0, 1, 2, 3, 4, 5, 6];
+    const pick = (start, cur) => { if (cur.length === k) { best = Math.max(best, av.filter((m) => cur.some((d) => m[d])).length); return; } for (let d = start; d < 7; d++) pick(d + 1, [...cur, d]); }; pick(0, []);
+    const r = T.meetdays._bestDays(av, k); assert.strictEqual(r.best, best, [seed, n, k] + ""); assert.strictEqual(r.options, Number(U.comb(7, k))); assert.ok(r.best >= T.meetdays._bestDays(av, 1).best);
+  }
+});
+test("hosting rotas: the count equals listing every rota", () => {
+  for (const [n, w] of [[3, 4], [4, 5], [2, 6], [3, 6], [5, 4]]) { let ok = 0; const total = n ** w; for (let m = 0; m < total; m++) { let x = m, prev = -1, good = true; for (let i = 0; i < w; i++) { const h = x % n; x = Math.floor(x / n); if (h === prev) good = false; prev = h; } if (good) ok++; }
+    assert.strictEqual(row("hosts", { n, w }, "Nobody hosts"), U.fmtBig(BigInt(ok)), [n, w] + ""); assert.strictEqual(row("hosts", { n, w }, "All possible rotas"), U.fmtBig(BigInt(total))); }
+  assert.strictEqual(row("hosts", { n: 3, w: 6 }, "Share of rotas"), "13.2%");
+});
+test("fair teams: the best split equals checking every way to choose a team", () => {
+  for (let seed = 1; seed <= 12; seed++) for (const n of [4, 6, 8, 10, 12]) {
+    const g = U.rng(seed * 4177), skills = Array.from({ length: n }, () => 1 + Math.floor(g() * 10)), total = skills.reduce((a, b) => a + b, 0); let best = Infinity, splits = 0;
+    const go = (start, cur, sum) => { if (cur === n / 2) { splits++; best = Math.min(best, Math.abs(total - 2 * sum)); return; } for (let i = start; i < n; i++) go(i + 1, cur + 1, sum + skills[i]); }; go(0, 0, 0);
+    const r = T.fairteams._fairSplit(skills); assert.strictEqual(r.best, best, [seed, n] + ""); assert.strictEqual(r.count * 2, splits); assert.strictEqual(r.count, Number(U.comb(n - 1, n / 2 - 1))); assert.ok(r.snake >= best);
+  }
+});
+test("table rotation: every round seats everyone once, tables are not too big, every pair meets, and rounds are never below the bound", () => {
+  for (const [n, s] of [[4, 2], [6, 2], [8, 4], [9, 3], [12, 4], [15, 3], [10, 4], [16, 4], [7, 3], [24, 6], [5, 5]]) {
+    const r = T.rotation._rotate(n, s), met = new Set();
+    for (const round of r.rounds) { const seen = round.flat(); assert.strictEqual(seen.length, n); assert.strictEqual(new Set(seen).size, n); for (const t of round) { assert.ok(t.length <= s); for (let i = 0; i < t.length; i++) for (let j = i + 1; j < t.length; j++) met.add(Math.min(t[i], t[j]) + "-" + Math.max(t[i], t[j])); } }
+    assert.strictEqual(met.size, n * (n - 1) / 2, `all pairs ${n},${s}`); assert.ok(r.rounds.length >= r.lower, `bound ${n},${s}`);
+  }
+  assert.strictEqual(T.rotation._rotate(4, 2).rounds.length, 3); assert.strictEqual(T.rotation._rotate(15, 3).lower, 7); assert.strictEqual(T.rotation._rotate(5, 5).rounds.length, 1);
+});
+test("clubs: the clash-free plans equal checking every subset, and the greedy rule matches the best", () => {
+  for (let seed = 1; seed <= 15; seed++) for (const m of [5, 8, 11]) {
+    const clubs = T.joinclubs._clubSlots(m, seed), clashes = (a, b) => a.day === b.day && a.start < b.start + b.len && b.start < a.start + a.len; let ok = 0, best = 0, bestCount = 0;
+    for (let mask = 0; mask < 1 << m; mask++) { const idx = []; for (let i = 0; i < m; i++) if ((mask >> i) & 1) idx.push(i); let good = true; for (let a = 0; a < idx.length && good; a++) for (let b = a + 1; b < idx.length; b++) if (clashes(clubs[idx[a]], clubs[idx[b]])) { good = false; break; } if (!good) continue; ok++; if (idx.length > best) { best = idx.length; bestCount = 1; } else if (idx.length === best) bestCount++; }
+    const r = T.joinclubs._clubPlans(clubs); assert.strictEqual(r.ok, ok, [seed, m] + ""); assert.strictEqual(r.best, best); assert.strictEqual(r.bestCount, bestCount); assert.strictEqual(r.greedy, best, "greedy " + [seed, m]);
+  }
 });
 
 test("formatting", () => { assert.strictEqual(U.fmtBig(1234567n), "1,234,567"); assert.strictEqual(U.fmtBig(10n ** 20n), "1.00 × 10^20"); assert.strictEqual(U.fmtBig(U.fact(52)), "8.07 × 10^67"); assert.strictEqual(U.fmtNum(100000, 0), "100,000"); assert.strictEqual(U.pct(0.5), "50%"); assert.ok(/year/.test(U.human(1e12)) && /second/.test(U.human(5))); });

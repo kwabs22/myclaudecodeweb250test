@@ -98,7 +98,7 @@
   function task(t) { T.push(t); return t; }
   const range = (key, label, min, max, value, extra = {}) => Object.assign({ key, label, type: "range", min, max, step: 1, value }, extra);
   const select = (key, label, options, value) => ({ key, label, type: "select", options, value });
-  const seed = (value = 1) => ({ key: "seed", label: "Random map", type: "seed", value });
+  const seed = (value = 1) => ({ key: "seed", label: "Random example", type: "seed", value });
   const Q = "../combinatorics_learning_questions.md";
   const REPO = "../../../game-development/algorithms/playcanvas-examples/";
 
@@ -715,7 +715,186 @@
     },
     _gridRoutes: gridRoutes,
   });
+
+  /* ================================================================== HOBBY GROUPS */
+  const LF = [0]; for (let i = 1; i <= 700; i++) LF[i] = LF[i - 1] + Math.log(i);
+  const binomPmf = (n, k, p) => Math.exp(LF[n] - LF[k] - LF[n - k] + k * Math.log(p) + (n - k) * Math.log(1 - p));
+  const binomAtLeast = (n, s, p) => { let t = 0; for (let k = s; k <= n; k++) t += binomPmf(n, k, p); return Math.min(1, t); };
+  function shareChance(N, k, j) { return Number(comb(k, j) * comb(N - k, k - j)) / Number(comb(N, k)); }
+  function popcount(x) { let c = 0; while (x) { c += x & 1; x >>= 1; } return c; }
+
+  task({
+    id: "sharedhobby", modality: "prediction", who: "group", title: "Will anyone else share my hobby?",
+    ask: "Each person picks k hobbies from a list of N. How likely is it that two people share at least one, and how many people must you meet to find a match?",
+    idea: "Count the ways the second person can avoid every hobby you chose: they must pick all k from the N − k you did not, which is C(N − k, k) of the C(N, k) equally likely choices. The chance of sharing is one minus that. Meeting g independent people then gives 1 − (chance of missing)^g.",
+    questions: [31, 33, 47], repo: [["Combinations", REPO + "backtracking/combinations.js"]],
+    controls: [range("N", "Hobbies to choose from", 10, 100, 30), range("k", "Hobbies each person picks", 1, 10, 4), range("g", "People you could meet", 1, 100, 20)],
+    compute(v) {
+      const k = Math.min(v.k, v.N), miss = Number(comb(v.N - k, k)) / Number(comb(v.N, k)), share = 1 - miss; let need = 1; while (need < 10000 && 1 - miss ** need < 0.5) need++;
+      const rows = [["Chance two people share at least one hobby", pct(share)]];
+      for (let j = 1; j <= Math.min(k, 3); j++) rows.push([`…share exactly ${j}`, pct(shareChance(v.N, k, j))]);
+      rows.push(["Hobbies two people share, on average", fmtNum(k * k / v.N, 2)], [`Chance at least one of ${v.g} people shares one with you`, pct(1 - miss ** v.g)], ["People to meet for an even chance of a match", fmtNum(need, 0)]);
+      return { rows, note: "This assumes everyone picks at random. Real hobbies cluster (people who like hiking often like camping), which makes matches more likely than this." };
+    },
+    _shareChance: shareChance,
+  });
+  function invitesFor(s, p, conf) { let n = s; while (n < 600 && binomAtLeast(n, s, p) < conf) n++; return n; }
+  task({
+    id: "invites", modality: "prediction", who: "group", title: "How many people to invite for a full session",
+    ask: "You want s people to turn up and each invited person comes with chance p. How many invitations make a full session likely, and when do you have too many?",
+    idea: "Each invitation is an independent yes or no, so the number who come follows a binomial distribution: the chance exactly k of n come is C(n, k) p^k (1 − p)^(n − k). Add those up for k ≥ s to get the chance of a full session, and for k > s to get the chance of turning people away.",
+    questions: [12, 33], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("s", "People you want", 2, 30, 8), range("p", "Chance each invited person comes (%)", 20, 95, 60, { step: 5 }), select("conf", "How sure you want to be", [[0.8, "80%"], [0.9, "90%"], [0.95, "95%"], [0.99, "99%"]], 0.9)],
+    compute(v) {
+      const p = v.p / 100, n = invitesFor(v.s, p, v.conf), turned = binomAtLeast(n, v.s + 1, p);
+      return { rows: [["Invitations to send", String(n)], ["Chance at least " + v.s + " come", pct(binomAtLeast(n, v.s, p))], ["Chance more than " + v.s + " come (someone is turned away)", pct(turned)], ["People expected to come", fmtNum(n * p, 1)], ["If you only invited " + v.s, `chance of a full session is ${pct(p ** v.s)}`]],
+        note: "Being sure of a full session means inviting well over the number you want, so you will often have more people than seats. This treats every invitation as independent; friends tend to come together or not at all, so a small, committed core can work better than a long list." };
+    },
+    _invitesFor: invitesFor, _atLeast: binomAtLeast,
+  });
+  const ROLES = ["vocals", "guitar", "bass", "drums", "keys", "sound desk"];
+  function roleCandidates(n, r, seedv) {
+    const g = rng(seedv * 31337), c = Array.from({ length: n }, () => Array.from({ length: r }, () => g() < 0.25));
+    for (let j = 0; j < r; j++) if (!c.some((x) => x[j])) c[Math.floor(g() * n)][j] = true;
+    for (let i = 0; i < n; i++) if (!c[i].some(Boolean)) c[i][Math.floor(g() * r)] = true;
+    return c;
+  }
+  function smallestCover(c, r) {
+    const n = c.length, mask = c.map((x) => x.reduce((m, b, j) => (b ? m | (1 << j) : m), 0)), full = (1 << r) - 1; let best = n + 1, bestMasks = [];
+    for (let m = 1; m < 1 << n; m++) { let size = 0, cov = 0; for (let i = 0; i < n; i++) if ((m >> i) & 1) { size++; cov |= mask[i]; } if (cov !== full) continue; if (size < best) { best = size; bestMasks = [m]; } else if (size === best) bestMasks.push(m); }
+    let cov = 0; const greedy = []; while (cov !== full) { let bi = -1, bg = -1; for (let i = 0; i < n; i++) { const gain = popcount(mask[i] & ~cov); if (gain > bg) { bg = gain; bi = i; } } greedy.push(bi); cov |= mask[bi]; }
+    return { size: best, count: bestMasks.length, first: bestMasks[0], greedy };
+  }
+  task({
+    id: "roles", modality: "optimisation", who: "group", title: "Founding members who cover every role",
+    ask: "A new group needs several roles filled (a band needs vocals, guitar, bass and so on). Each candidate can do some of them. What is the smallest founding group that covers every role?",
+    idea: "Every subset of candidates is a possible group, so n candidates have 2^n − 1 groups to try. The page checks them all and also shows the greedy shortcut of repeatedly adding the person who covers the most uncovered roles, which is fast but can use more people than the best answer.",
+    questions: [10, 12, 31], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Partition equal subset", REPO + "dynamic-programming/partition-equal-subset.js"]],
+    controls: [range("n", "Candidates", 5, 14, 10), range("r", "Roles to cover", 3, 6, 5), seed(2)],
+    compute(v) {
+      const c = roleCandidates(v.n, v.r, v.seed), res = smallestCover(c, v.r), chosen = []; for (let i = 0; i < v.n; i++) if ((res.first >> i) & 1) chosen.push(i);
+      return { rows: [["Groups to try (2^n − 1)", fmtBig(pow(2, v.n) - 1n)], ["Smallest group that covers every role", `${res.size} people (${res.count} different ways)`], ["One such group", chosen.map((i) => "person " + (i + 1)).join(", ")], ["Greedy shortcut", `${res.greedy.length} people${res.greedy.length > res.size ? ` (${res.greedy.length - res.size} more than needed)` : " (as few as possible)"}`]],
+        viz: { type: "cover", roles: ROLES.slice(0, v.r), cand: c, chosen }, note: "A ✓ marks a role the person can fill; chosen people are highlighted. Press the dice for another set of candidates." };
+    },
+    _roleCandidates: roleCandidates, _smallestCover: smallestCover,
+  });
+  const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  function availability(n, q, seedv) { const g = rng(seedv * 7757); return Array.from({ length: n }, () => DAYS.map(() => g() < q)); }
+  function bestDays(av, k) {
+    let best = -1, bestSet = null; const combos = []; const go = (start, cur) => { if (cur.length === k) { combos.push(cur.slice()); return; } for (let d = start; d < 7; d++) { cur.push(d); go(d + 1, cur); cur.pop(); } }; go(0, []);
+    let total = 0; for (const set of combos) { const c = av.filter((m) => set.some((d) => m[d])).length; total += c; if (c > best) { best = c; bestSet = set; } }
+    return { best, set: bestSet, average: total / combos.length, options: combos.length };
+  }
+  task({
+    id: "meetdays", modality: "optimisation", who: "group", title: "Which days should the group meet?",
+    ask: "Each member is free on some weekdays. If the group meets on k days a week, which days let the most members take part?",
+    idea: "There are C(7, k) ways to choose the days. For each, count the members free on at least one chosen day, and keep the best. The best pair of days is usually not the two days with the most free people, because those people overlap.",
+    questions: [31, 38], repo: [["Combinations", REPO + "backtracking/combinations.js"]],
+    controls: [range("n", "Members", 6, 40, 16), range("q", "Chance a member is free on a given day (%)", 10, 80, 35, { step: 5 }), range("k", "Meeting days per week", 1, 3, 2), seed(4)],
+    compute(v) {
+      const av = availability(v.n, v.q / 100, v.seed), r = bestDays(av, v.k), single = bestDays(av, 1), per = DAYS.map((d, i) => av.filter((m) => m[i]).length);
+      return { rows: [["Ways to choose the days", String(r.options)], ["Best days", r.set.map((d) => DAYS[d]).join(" + ")], ["Members who can come to at least one", `${r.best} of ${v.n} (${pct(r.best / v.n)})`], ["Best single day", `${single.best} of ${v.n}`], ["Average of all choices", fmtNum(r.average, 1)]],
+        viz: { type: "bars", items: DAYS.map((d, i) => ({ label: d + (r.set.includes(i) ? " (chosen)" : ""), value: per[i], on: r.set.includes(i) })), log: false }, note: "Bars show how many members are free each day. Press the dice for another set of diaries." };
+    },
+    _availability: availability, _bestDays: bestDays,
+  });
+  task({
+    id: "hosts", modality: "counting", who: "group", title: "Sharing the hosting",
+    ask: "Each week one member hosts. How many rotas are there, and how many have nobody hosting two weeks in a row?",
+    idea: "The first week has n choices. Each later week has n − 1 choices if the same person may not host twice running, so there are n × (n − 1)^(w − 1) such rotas out of n^w in all. A fully fair rota where everyone hosts once over n weeks is one of n! orders.",
+    questions: [1, 2, 16], repo: [["Permutations", REPO + "backtracking/permutations.js"]],
+    controls: [range("n", "Members", 2, 12, 5), range("w", "Weeks", 1, 12, 6)],
+    compute(v) {
+      const all = pow(v.n, v.w), ok = B(v.n) * pow(v.n - 1, v.w - 1);
+      return { rows: [["All possible rotas (n^w)", fmtBig(all)], ["Nobody hosts two weeks in a row", fmtBig(ok)], ["Share of rotas that qualify", pct(Number(ok) / Number(all))], [`Orders in which all ${v.n} members host once each`, fmtBig(fact(v.n))]],
+        note: "A random rota breaks the rule often for small groups: with 3 members and 6 weeks only 13.2% of rotas avoid back-to-back hosting." };
+    },
+  });
+  function fairSplit(skills) {
+    const n = skills.length, half = n / 2, total = skills.reduce((a, b) => a + b, 0); let best = Infinity, bestMask = 0, count = 0;
+    for (let m = 0; m < 1 << n; m++) { if (!(m & 1) || popcount(m) !== half) continue; count++; let a = 0; for (let i = 0; i < n; i++) if ((m >> i) & 1) a += skills[i]; const d = Math.abs(total - 2 * a); if (d < best) { best = d; bestMask = m; } }
+    const order = skills.map((x, i) => i).sort((a, b) => skills[b] - skills[a] || a - b); let sa = 0, sb = 0;
+    order.forEach((pl, i) => { const round = Math.floor(i / 2), first = i % 2 === 0, toA = round % 2 === 0 ? first : !first; if (toA) sa += skills[pl]; else sb += skills[pl]; });
+    return { count, best, bestMask, snake: Math.abs(sa - sb) };
+  }
+  task({
+    id: "fairteams", modality: "optimisation", who: "group", title: "Fair teams for a pick-up game",
+    ask: "Split n players of different skill into two equal teams so the totals are as close as possible. How many splits are there, and how well does a quick method do?",
+    idea: "Fixing one player on team A, the other n/2 − 1 of team A can be chosen in C(n − 1, n/2 − 1) ways, and each choice fixes the other team. The page checks every split for the best balance, and compares it with a snake draft (strongest picked first, then pairs of picks in alternating order), which is quick and often very close.",
+    questions: [31, 38, 65], repo: [["Partition equal subset", REPO + "dynamic-programming/partition-equal-subset.js"], ["Combinations", REPO + "backtracking/combinations.js"]],
+    controls: [range("n", "Players (even number)", 4, 16, 10, { step: 2 }), seed(6)],
+    compute(v) {
+      const n = v.n % 2 ? v.n + 1 : v.n, g = rng(v.seed * 4177), skills = Array.from({ length: n }, () => 1 + Math.floor(g() * 10)), r = fairSplit(skills);
+      const A = [], Bt = []; for (let i = 0; i < n; i++) ((r.bestMask >> i) & 1 ? A : Bt).push(i);
+      return { rows: [["Ways to split into two equal teams", fmtBig(comb(n - 1, n / 2 - 1))], ["Splits checked by this page", fmtBig(B(r.count))], ["Best split: difference in total skill", String(r.best)], ["Snake draft: difference", `${r.snake}${r.snake > r.best ? ` (${r.snake - r.best} worse)` : " (as good as the best)"}`]],
+        viz: { type: "teams", a: A.map((i) => skills[i]), b: Bt.map((i) => skills[i]) }, note: "Skills are random ratings from 1 to 10. Press the dice for another set of players." };
+    },
+    _fairSplit: fairSplit,
+  });
+  function rotate(n, s) {
+    const met = Array.from({ length: n }, () => new Array(n).fill(false)); let unmet = n * (n - 1) / 2; const rounds = [];
+    const need = (a, rem) => rem.filter((x) => x !== a && !met[a][x]).length;
+    while (unmet > 0 && rounds.length < 400) {
+      const rem = [...Array(n).keys()], tables = [];
+      while (rem.length) {
+        let u = rem[0], bu = -1; for (const x of rem) { const c = need(x, rem); if (c > bu) { bu = c; u = x; } }
+        const table = [u]; rem.splice(rem.indexOf(u), 1);
+        while (table.length < s && rem.length) { let w = rem[0], bw = -1; for (const x of rem) { const c = table.filter((t) => !met[t][x]).length; if (c > bw) { bw = c; w = x; } } table.push(w); rem.splice(rem.indexOf(w), 1); }
+        tables.push(table);
+      }
+      for (const t of tables) for (let i = 0; i < t.length; i++) for (let j = i + 1; j < t.length; j++) if (!met[t[i]][t[j]]) { met[t[i]][t[j]] = met[t[j]][t[i]] = true; unmet--; }
+      rounds.push(tables);
+    }
+    return { rounds, lower: Math.ceil((n - 1) / (s - 1)) };
+  }
+  task({
+    id: "rotation", modality: "design", who: "group", title: "Mixing the tables so everyone meets",
+    ask: "At a game night, n players sit at tables of s. How many rounds until everyone has sat with everyone else at least once?",
+    idea: "Each player meets s − 1 new people a round, and has n − 1 people to meet, so at least ⌈(n − 1)/(s − 1)⌉ rounds are needed. Whether that is reachable depends on the numbers (15 players at tables of 3 in 7 rounds is the classic schoolgirl puzzle). The page builds a schedule greedily, always seating each player with people they have not met, and checks that every pair meets.",
+    questions: [31, 38], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("n", "Players", 4, 24, 12), range("s", "Players per table", 2, 6, 4, { maxFor: (v) => Math.min(6, v.n) })],
+    compute(v) {
+      const s = Math.min(v.s, v.n), r = rotate(v.n, s);
+      return { rows: [["Pairs that need to meet", fmtBig(comb(v.n, 2))], ["Pairs that can meet each round, at most", fmtBig(B(Math.floor(v.n / s)) * comb(s, 2))], ["Fewest rounds possible (lower bound)", String(r.lower)], ["Rounds this schedule uses", `${r.rounds.length}${r.rounds.length === r.lower ? " (meets the lower bound)" : ""}`]],
+        viz: { type: "tables", rounds: r.rounds }, note: "The greedy plan is not always the shortest possible: the lower bound only says it cannot be shorter. Special numbers allow perfect designs." };
+    },
+    _rotate: rotate,
+  });
+  function clubSlots(m, seedv) { const g = rng(seedv * 9173); return Array.from({ length: m }, () => ({ day: Math.floor(g() * 4), start: 18 + Math.floor(g() * 4), len: 1 + Math.floor(g() * 3) })); }
+  const clash = (a, b) => a.day === b.day && a.start < b.start + b.len && b.start < a.start + a.len;
+  function clubPlans(clubs) {
+    const m = clubs.length, bad = Array.from({ length: m }, () => 0);
+    for (let i = 0; i < m; i++) for (let j = 0; j < m; j++) if (i !== j && clash(clubs[i], clubs[j])) bad[i] |= 1 << j;
+    let ok = 0, best = 0, bestCount = 0, bestMask = 0;
+    for (let mask = 0; mask < 1 << m; mask++) { let good = true; for (let i = 0; i < m && good; i++) if (((mask >> i) & 1) && (bad[i] & mask)) good = false; if (!good) continue; ok++; const size = popcount(mask); if (size > best) { best = size; bestCount = 1; bestMask = mask; } else if (size === best) bestCount++; }
+    const byDay = {}; clubs.forEach((c, i) => (byDay[c.day] = byDay[c.day] || []).push(i)); let greedy = 0;
+    for (const list of Object.values(byDay)) { list.sort((a, b) => clubs[a].start + clubs[a].len - (clubs[b].start + clubs[b].len)); let end = -1; for (const i of list) if (clubs[i].start >= end) { greedy++; end = clubs[i].start + clubs[i].len; } }
+    return { total: 2 ** m, ok, best, bestCount, bestMask, greedy };
+  }
+  task({
+    id: "joinclubs", modality: "feasibility", who: "solo", title: "Fitting clubs into my own week",
+    ask: "I could join m hobby clubs, each meeting once a week at a fixed time. Some clash. How many combinations of clubs fit without a clash, and what is the most I can join?",
+    idea: "Every subset of clubs is a possible plan, so m clubs have 2^m plans, and a plan works if no two of its clubs overlap. The page tests every plan. The largest clash-free plan can also be found quickly by taking, day by day, the club that finishes earliest (the greedy rule for interval scheduling), and the page checks the two agree.",
+    questions: [10, 12], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("m", "Clubs", 5, 14, 10), seed(3)],
+    compute(v) {
+      const clubs = clubSlots(v.m, v.seed), r = clubPlans(clubs);
+      return { rows: [["Plans to try (2^m)", fmtBig(B(r.total))], ["Plans with no clash", fmtBig(B(r.ok))], ["Most clubs I can join", String(r.best)], ["Different ways to join that many", String(r.bestCount)], ["Quick greedy rule gives", `${r.greedy} clubs${r.greedy === r.best ? " (the same)" : " (different!)"}`]],
+        viz: { type: "timeline", clubs, laneH: [0, 0, 0, 0], chosen: clubs.map((c, i) => i).filter((i) => (r.bestMask >> i) & 1) }, note: "Clubs meet Monday to Thursday, starting between 18:00 and 21:00 and running one to three hours. Highlighted bars are one best plan. Press the dice for another set of clubs." };
+    },
+    _clubSlots: clubSlots, _clubPlans: clubPlans, _clash: clash,
+  });
+
+  /* the order a new hobby group usually meets its questions in */
+  const HOBBY_STEPS = [
+    ["joinclubs", "Before starting, check what fits into your own week."], ["sharedhobby", "Will anyone else share your hobby?"], ["invites", "Invite enough people for a full session."],
+    ["meetdays", "Pick the meeting days that suit the most members."], ["scheduling", "Check the chance a given time suits everyone."], ["roles", "Make sure every role the hobby needs is covered."],
+    ["committee", "Choose organisers."], ["hosts", "Share the hosting fairly."], ["fairteams", "Split into fair teams for games."],
+    ["rotation", "Mix the tables so members meet each other."], ["roundrobin", "Run a league where everyone plays everyone."],
+  ];
+  HOBBY_STEPS.forEach(([id]) => { const t = T.find((x) => x.id === id); if (!t) throw new Error("hobby step " + id + " is not a task"); t.hobby = true; });
+
   T.forEach((t) => { if (t.who !== "solo" && t.who !== "group") throw new Error("task " + t.id + " has no solo or group tag"); });
 
-  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn, stirling2, bell, derangements, pairings }, WHO_LABELS: { solo: "Solo", group: "Group" }, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
+  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn, stirling2, bell, derangements, pairings }, WHO_LABELS: { solo: "Solo", group: "Group" }, HOBBY_STEPS, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
 });
