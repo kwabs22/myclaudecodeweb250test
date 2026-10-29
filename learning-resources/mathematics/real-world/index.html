@@ -14,6 +14,18 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--font)}
 main{max-width:1180px;margin:0 auto;padding:20px 16px 70px}
 h1{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:6px 0 8px}
 .lede{color:var(--muted);max-width:760px;margin:0 0 16px}
+.glancewrap{overflow-x:auto;margin:0 0 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table.glance{border-collapse:collapse;width:100%;font-size:15px}
+table.glance caption{caption-side:top;text-align:left;padding:10px 14px 4px;font:600 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+table.glance th,table.glance td{padding:9px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+table.glance th{white-space:nowrap}
+table.glance th a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+table.glance th a i{width:11px;height:11px;border-radius:50%;background:var(--c)}
+table.glance th a:hover{text-decoration:underline}
+table.glance td.q{font-weight:600;min-width:150px}
+table.glance td.t{color:var(--muted)}
+table.glance td.t a{color:var(--muted);text-decoration:underline dotted;text-underline-offset:3px}
+table.glance td.t a:hover{color:var(--ink)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;font:inherit;font-size:14px}
 .chip i{width:11px;height:11px;border-radius:50%;background:var(--c)}
@@ -94,6 +106,7 @@ footer{margin-top:34px;color:var(--muted);font-size:14px}
 <main>
   <h1>Combinatorics in the real world</h1>
   <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are 23 everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
+  <div class="glancewrap"><table class="glance" id="glance"></table></div>
   <div class="chips" id="chips" role="group" aria-label="Show one group"></div>
   <div class="layout">
     <div class="stagewrap">

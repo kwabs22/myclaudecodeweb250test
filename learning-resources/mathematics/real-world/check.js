@@ -24,6 +24,10 @@ test("question numbers are real and repository links exist", () => {
   for (const t of R.TASKS) { for (const q of t.questions) assert.ok(q >= 1 && q <= 100, t.id + " question " + q); for (const [label, p] of t.repo) assert.ok(fs.existsSync(path.join(__dirname, p)), t.id + " missing " + p); }
 });
 
+test("the mathematics README table lists every group, its question and every task", () => {
+  const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8");
+  for (const m of R.MODALITIES) { const line = md.split("\n").find((l) => l.startsWith("| " + m.name + " |")); assert.ok(line, "no row for " + m.name); assert.ok(line.includes(m.ask), m.name + " question"); for (const t of R.TASKS.filter((t) => t.modality === m.id)) assert.ok(line.includes(t.title), t.title + " missing from the " + m.name + " row"); }
+});
 test("passwords: 94^8 and a four digit PIN", () => { assert.strictEqual(row("passwords", { a: 94, L: 8 }, "Possible"), "6,095,689,385,410,816"); assert.strictEqual(row("passwords", { a: 10, L: 4 }, "Possible"), "10,000"); });
 test("plates", () => { assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes (characters may"), "17,576,000"); assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes with no"), "11,232,000"); });
 test("poker: all 2,598,960 hands classified by brute force match the formulas", () => {
