@@ -885,9 +885,65 @@
     _clubSlots: clubSlots, _clubPlans: clubPlans, _clash: clash,
   });
 
+  /* --- choosing what the group does */
+  const AREAS = ["Origami", "Chess", "Painting", "Coding", "Hiking", "Baking", "Music", "Board games", "Photography", "Gardening", "Film", "Robotics"];
+  task({
+    id: "areabundles", modality: "counting", who: "group", title: "Bundles of interests to choose from",
+    ask: "One small activity (folding a single page) is not enough for a whole group. If the group can draw on k areas of interest, how many different bundles of r areas could it build a programme from?",
+    idea: "Choosing r areas from k where the order does not matter is C(k, r). If the areas are done as phases, one after another, order matters and there are k!/(k − r)! programmes. Allowing a bundle of any size gives 2^k − 1 non-empty bundles. A modest list of areas already gives far more programmes than a group could ever discuss, which is why the next tasks narrow them down.",
+    questions: [1, 3, 10], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("k", "Areas of interest on the list", 3, 12, 8), range("r", "Areas in the programme", 1, 8, 3, { maxFor: (v) => Math.min(8, v.k) })],
+    compute(v) {
+      const r = Math.min(v.r, v.k);
+      return { rows: [["Bundles of " + r + " (order does not matter)", fmtBig(comb(v.k, r))], ["Programmes if the areas run as phases in order", fmtBig(perm(v.k, r))], ["Bundles of any size, at least one area", fmtBig(pow(2, v.k) - 1n)], ["Areas on the list", AREAS.slice(0, v.k).join(", ")]],
+        note: "With 8 areas there are 56 bundles of 3, but 336 ordered programmes. Fewer, larger bundles are easier to choose between." };
+    },
+  });
+  function areaVotes(n, k, seedv) {
+    const g = rng(seedv * 7919);
+    return Array.from({ length: n }, () => { const likes = new Array(k).fill(false), howMany = 1 + Math.floor(g() * 3); for (let c = 0; c < howMany; c++) likes[Math.floor(g() * k)] = true; return likes; });
+  }
+  function bestAreas(votes, k, r) {
+    const n = votes.length, mask = votes.map((row) => row.reduce((m, b, j) => (b ? m | (1 << j) : m), 0)); let best = -1, count = 0, bestMask = 0, all = 0;
+    for (let m = 0; m < 1 << k; m++) { if (popcount(m) !== r) continue; all++; const covered = mask.filter((x) => x & m).length; if (covered > best) { best = covered; count = 1; bestMask = m; } else if (covered === best) count++; }
+    let cov = 0, greedyMask = 0; for (let c = 0; c < r; c++) { let bj = -1, bg = -1; for (let j = 0; j < k; j++) { if ((greedyMask >> j) & 1) continue; const gain = mask.filter((x) => (x & (1 << j)) && !(x & greedyMask)).length; if (gain > bg) { bg = gain; bj = j; } } greedyMask |= 1 << bj; }
+    cov = mask.filter((x) => x & greedyMask).length;
+    return { all, best, count, bestMask, greedy: cov, greedyMask, n };
+  }
+  task({
+    id: "areapick", modality: "optimisation", who: "group", title: "Picking areas that most members care about",
+    ask: "Each member ticks the areas they would enjoy. If the group can only run r areas, which r leave the fewest members with nothing they like?",
+    idea: "There are C(k, r) ways to choose r areas. The page tries them all and counts how many members like at least one chosen area. Adding, one at a time, the area that brings in the most uncovered members is a fast shortcut, but it can fall short of the best choice.",
+    questions: [10, 12, 31], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("n", "Members", 4, 20, 10), range("k", "Areas on the list", 4, 12, 8), range("r", "Areas the group can run", 1, 6, 3, { maxFor: (v) => Math.min(6, v.k) }), seed(4)],
+    compute(v) {
+      const r = Math.min(v.r, v.k), votes = areaVotes(v.n, v.k, v.seed), res = bestAreas(votes, v.k, r), names = (m) => AREAS.slice(0, v.k).filter((a, j) => (m >> j) & 1).join(", ");
+      const mask = votes.map((row) => row.reduce((m, b, j) => (b ? m | (1 << j) : m), 0)), chosen = mask.map((x, i) => i).filter((i) => mask[i] & res.bestMask);
+      return { rows: [["Choices of areas to try", fmtBig(comb(v.k, r))], ["Most members reached", `${res.best} of ${v.n} (${res.count} different ways)`], ["One best choice", names(res.bestMask)], ["Greedy shortcut reaches", `${res.greedy} of ${v.n}${res.greedy < res.best ? " (fewer than the best)" : " (as many as the best)"}`]],
+        viz: { type: "cover", roles: AREAS.slice(0, v.k), cand: votes, chosen }, note: "A ✓ marks an area a member would enjoy; highlighted rows are the members reached by one best choice. Press the dice for another group." };
+    },
+    _areaVotes: areaVotes, _bestAreas: bestAreas,
+  });
+  function surjections(p, n) { return fact(n) * stirling2(p, n); }
+  task({
+    id: "projectsize", modality: "feasibility", who: "group", title: "Is the project big enough for the group?",
+    ask: "A project has p separate parts and n members, and everyone should have at least one part. How many ways are there to hand the parts out so nobody is idle, and how big must the project be?",
+    idea: "Handing each of p distinguishable parts to one of n members gives n^p ways. Those that leave nobody idle are the surjections, n! × S(p, n), where S is the Stirling number of the second kind. If p is below n the count is zero: the project is too small however it is shared. A single page to fold is one part, so it suits one person.",
+    questions: [1, 16, 31], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("p", "Parts in the project", 1, 14, 6), range("n", "Members", 2, 10, 4)],
+    compute(v) {
+      const all = pow(v.n, v.p), ok = surjections(v.p, v.n), enough = v.p >= v.n;
+      return { rows: [["Ways to hand out the parts (n^p)", fmtBig(all)], ["Ways where nobody is idle", fmtBig(ok)], ["Share of hand-outs that keep everyone busy", pct(Number(ok) / Number(all))], ["Fewest parts that can keep everyone busy", String(v.n)], ["Verdict", enough ? `big enough: about ${(v.p / v.n).toFixed(1)} parts each` : `too small: ${v.n - v.p} member${v.n - v.p === 1 ? "" : "s"} would have nothing to do`]],
+        note: "A random hand-out often leaves someone idle even when the project is big enough, so it is better to plan the split than to let people grab parts." };
+    },
+    _surjections: surjections,
+  });
+
   /* the order a new hobby group usually meets its questions in */
   const HOBBY_STEPS = [
-    ["joinclubs", "Before starting, check what fits into your own week."], ["sharedhobby", "Will anyone else share your hobby?"], ["invites", "Invite enough people for a full session."],
+    ["joinclubs", "Before starting, check what fits into your own week."], ["sharedhobby", "Will anyone else share your hobby?"],
+    ["areabundles", "A single small activity is too little for a group: see how many bundles of areas there are."], ["areapick", "Pick the areas that reach the most members."], ["projectsize", "Check the project is big enough to keep everyone busy."],
+    ["invites", "Invite enough people for a full session."],
     ["meetdays", "Pick the meeting days that suit the most members."], ["scheduling", "Check the chance a given time suits everyone."], ["roles", "Make sure every role the hobby needs is covered."],
     ["committee", "Choose organisers."], ["hosts", "Share the hosting fairly."], ["fairteams", "Split into fair teams for games."],
     ["rotation", "Mix the tables so members meet each other."], ["roundrobin", "Run a league where everyone plays everyone."],
