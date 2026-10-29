@@ -6,6 +6,8 @@
 **Categories**: 6 main areas
 **Origin**: the 30 original branches came from Claude Code sessions run in Q4 2025 as part of a $250 credit test. Merging them, auditing the merge, and building the [Session Atlas](https://kwabs22.github.io/myclaudecodeweb250test/) site was done in one later session that was part of a $100 free-credit test.
 
+> **Try this first:** [Combinatorics in the real world](./learning-resources/mathematics/real-world/index.html), a 3D map of everyday counting problems (schedules, teams, hobby groups) with live numbers.
+
 ---
 
 ## 📁 What's Inside

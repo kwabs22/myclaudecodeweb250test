@@ -793,6 +793,7 @@ def render_home(repo):
   <h1>{SITE_NAME}</h1>
   <p class="lede">A map of everything the sessions produced. The <b>Overview</b> shows the areas around this repo's README; click one to open its folders. <b>All files</b> plots every file as a point. <b>Runnable pages</b> lights up the diamonds you can open in the browser, filtered by type. <b>By session</b> replays the build, one chat at a time.</p>
 </section>
+<a class="featured" href="learning-resources/mathematics/real-world/index.html"><span class="ft-tag">Featured · try it</span><span class="ft-title">Combinatorics in the real world</span><span class="ft-text">Everyday problems in a 3D map: how many schedules, teams, passwords or hobby groups are possible, with live numbers.</span><span class="ft-go">Open the map →</span></a>
 <section class="mapwrap" aria-label="3D map of the repository">
   <div class="chiprow">
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>

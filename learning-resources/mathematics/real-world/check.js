@@ -38,6 +38,21 @@ test("hobby steps point at real tasks, in order, and every hobby task is a step"
   for (const [id, why] of R.HOBBY_STEPS) { assert.ok(ids.has(id), id); assert.ok(why.length > 15); assert.ok(R.TASKS.find((t) => t.id === id).hobby); }
   assert.strictEqual(R.TASKS.filter((t) => t.hobby).length, R.HOBBY_STEPS.length); assert.strictEqual(new Set(R.HOBBY_STEPS.map((x) => x[0])).size, R.HOBBY_STEPS.length);
 });
+test("area bundles: the counts match listing every bundle", () => {
+  for (const [k, r] of [[3, 1], [5, 2], [8, 3], [10, 4]]) { let c = 0, o = 0; for (let m = 0; m < 1 << k; m++) { let b = 0; for (let i = 0; i < k; i++) b += (m >> i) & 1; if (b === r) c++; } o = c * [...Array(r).keys()].reduce((a, i) => a * (i + 1), 1); assert.strictEqual(row("areabundles", { k, r }, "Bundles of " + r), String(c)); assert.strictEqual(row("areabundles", { k, r }, "Programmes"), o.toLocaleString("en-US")); }
+  assert.strictEqual(row("areabundles", { k: 8, r: 3 }, "Bundles of any size"), "255");
+});
+test("area picking: the best choice equals listing every choice of areas, and greedy never beats it", () => {
+  for (const [n, k, r, seed] of [[10, 8, 3, 4], [6, 5, 2, 1], [15, 10, 4, 7], [20, 12, 5, 9]]) {
+    const votes = T.areapick._areaVotes(n, k, seed); let best = -1, count = 0, all = 0; const sets = [];
+    (function go(start, chosen) { if (chosen.length === r) { all++; const cov = votes.filter((row) => chosen.some((j) => row[j])).length; if (cov > best) { best = cov; count = 1; } else if (cov === best) count++; return; } for (let j = start; j < k; j++) go(j + 1, [...chosen, j]); })(0, []);
+    const res = T.areapick._bestAreas(votes, k, r); assert.strictEqual(res.best, best); assert.strictEqual(res.count, count); assert.strictEqual(res.all, all); assert.ok(res.greedy <= best);
+  }
+});
+test("project size: hand-outs that leave nobody idle equal counting every assignment", () => {
+  for (const [p, n] of [[1, 2], [2, 3], [3, 3], [5, 3], [6, 4], [7, 2], [8, 5]]) { let ok = 0; const total = n ** p; for (let a = 0; a < total; a++) { let x = a; const seen = new Set(); for (let i = 0; i < p; i++) { seen.add(x % n); x = Math.floor(x / n); } if (seen.size === n) ok++; } assert.strictEqual(T.projectsize._surjections(p, n), BigInt(ok), [p, n] + ""); }
+  assert.ok(row("projectsize", { p: 2, n: 4 }, "Verdict").startsWith("too small")); assert.ok(row("projectsize", { p: 8, n: 4 }, "Verdict").startsWith("big enough"));
+});
 test("passwords: 94^8 and a four digit PIN", () => { assert.strictEqual(row("passwords", { a: 94, L: 8 }, "Possible"), "6,095,689,385,410,816"); assert.strictEqual(row("passwords", { a: 10, L: 4 }, "Possible"), "10,000"); });
 test("plates", () => { assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes (characters may"), "17,576,000"); assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes with no"), "11,232,000"); });
 test("poker: all 2,598,960 hands classified by brute force match the formulas", () => {
