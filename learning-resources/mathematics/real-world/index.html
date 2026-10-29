@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combinatorics in the Real World</title>
-<meta name="description" content="Thirty-five counting problems from everyday life, grouped by the question they ask (how many, what is likely, can we try them all, which is best) and by whether one person or a group is involved. Each has live numbers.">
+<meta name="description" content="Forty-three counting problems from everyday life, grouped by the question they ask (how many, what is likely, can we try them all, which is best) and by whether one person or a group is involved, including a path for starting a hobby group. Each has live numbers.">
 <style>
 :root{--bg:#f6f7fb;--panel:#fff;--ink:#14161f;--muted:#5d6479;--line:#d9dde8;--accent:#3a63d8;--chip:#eef1f8;--good:#17794a;--bad:#b3341f;--stage:#0b1020;--stage-ink:#e8ecf8;--font:system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--chip:#1f2535;--good:#5fd49b;--bad:#ff8f7a}}
@@ -27,6 +27,15 @@ table.glance td.q{font-weight:600;min-width:140px}
 .chip.whobtn{font-weight:600}.chip.whobtn small{color:inherit;opacity:.7;font-weight:400}
 .badge{display:inline-block;font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:6px;background:var(--chip);color:var(--muted);margin-left:6px;vertical-align:2px}
 .badge.group{background:var(--ink);color:var(--bg)}
+.badge.hobby{background:#e8590c;color:#fff}
+.card b .badge,.panel .badge{margin:0 0 0 8px}.panel>div>.badge,.panel .tag+.badge{margin:0 0 8px 6px}
+.hobbysec{margin:26px 0 6px}.hobbysec h2{margin:0 0 6px;font-size:22px}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+ol.steps button{width:100%;display:flex;gap:12px;text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:10px 12px;cursor:pointer;font:inherit}
+ol.steps button:hover{border-color:#e8590c}
+ol.steps .n{flex:none;width:28px;height:28px;border-radius:50%;background:#e8590c;color:#fff;display:grid;place-items:center;font:700 14px var(--mono)}
+ol.steps .why{color:var(--muted);font-size:14px}
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:12px}.teams b{font-size:14px}
 table.glance td.t{color:var(--muted)}
 table.glance td.t a{color:var(--muted);text-decoration:underline dotted;text-underline-offset:3px}
 table.glance td.t a:hover{color:var(--ink)}
@@ -109,7 +118,7 @@ footer{margin-top:34px;color:var(--muted);font-size:14px}
 <body>
 <main>
   <h1>Combinatorics in the real world</h1>
-  <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are <span id="n-tasks">35</span> everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
+  <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are <span id="n-tasks">43</span> everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
   <p class="lede"><b>Solo or group?</b> Each problem is also marked by who is involved. A <b class="solo">solo</b> task is one person or system facing the problem alone: their ticket, hand, route or data. A <b class="grp">group</b> task depends on how several people or agents fit, meet, share or compete: a team, a league, a crowd. Solo tasks grow with the number of <i>options</i>; group tasks also grow with the number of <i>people</i>, usually much faster (pairs grow with n², sub-groups with 2<sup>n</sup>, line-ups with n!). Use the buttons to see one kind at a time.</p>
   <div class="glancewrap"><table class="glance" id="glance"></table></div>
   <div class="chips" id="who" role="group" aria-label="Show solo or group tasks"></div>
@@ -124,6 +133,7 @@ footer{margin-top:34px;color:var(--muted);font-size:14px}
     </div>
     <section class="panel" id="panel" aria-live="polite"></section>
   </div>
+  <section class="hobbysec" id="hobbysec"><h2>Starting a hobby group, step by step</h2><p class="lede" style="margin-bottom:12px">Starting a hobby group runs into the same counting questions in a fairly fixed order. Each step below opens the task that answers it; the ones marked <span class="badge hobby">hobby</span> are the tasks that make up this path, and the <b>Hobby groups</b> button above highlights them on the map and in the list.</p><ol class="steps" id="steps"></ol></section>
   <div class="groups" id="groups"></div>
   <footer>The logic is in <code>tasks.js</code> and is checked by <code>check.js</code> (run <code>node check.js</code>): the poker counts against all 2,598,960 hands, the route and packing answers against brute force, the seating, team-split and Secret Santa counts against exhaustive enumeration, and so on. Related questions are in the <a href="../combinatorics_learning_questions.html">100 combinatorics questions</a>, and the matching code tasks are mapped in the <a href="../README.html">mathematics README</a>.</footer>
 </main>

@@ -9,8 +9,8 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 const mod = Object.fromEntries(MODALITIES.map((m) => [m.id, m]));
 const values = {};                       /* each task keeps its own slider values while you look at others */
 for (const t of TASKS) values[t.id] = Object.fromEntries(t.controls.map((c) => [c.key, c.type === "bits" ? c.value.slice() : c.value]));
-let current = null, filter = null, who = null;
-const visible = (t) => (!filter || t.modality === filter) && (!who || t.who === who);
+let current = null, filter = null, who = null, hobbyOnly = false;
+const visible = (t) => (!filter || t.modality === filter) && (!who || t.who === who) && (!hobbyOnly || t.hobby);
 const cardEls = new Map();
 
 /* ------------------------------------------------------------------ chips and the task list */
@@ -22,6 +22,19 @@ function buildWho() {
     b.innerHTML = `${esc(label)} <small>${n(w)}</small>`;
     b.addEventListener("click", () => setWho(w || null));
     el.appendChild(b);
+  });
+  const h = document.createElement("button"); h.className = "chip hobbybtn"; h.type = "button"; h.setAttribute("aria-pressed", "false");
+  h.innerHTML = `Hobby groups <small>${TASKS.filter((t) => t.hobby).length}</small>`;
+  h.addEventListener("click", () => { hobbyOnly = !hobbyOnly; h.setAttribute("aria-pressed", String(hobbyOnly)); refreshVisibility(); if (hobbyOnly) $("hobbysec").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
+  el.appendChild(h);
+}
+function buildSteps() {
+  const ol = $("steps"); ol.innerHTML = "";
+  RW.HOBBY_STEPS.forEach(([id, why], i) => {
+    const t = TASKS.find((x) => x.id === id), li = document.createElement("li");
+    li.innerHTML = `<button type="button"><span class="n">${i + 1}</span><span><b>${esc(t.title)}</b><span class="badge ${t.who}">${t.who}</span><br><span class="why">${esc(why)}</span></span></button>`;
+    li.querySelector("button").addEventListener("click", () => { select(id); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
+    ol.appendChild(li);
   });
 }
 function setWho(w) { who = w; document.querySelectorAll(".whobtn").forEach((c) => c.setAttribute("aria-pressed", String((who || "") === c.dataset.who))); refreshVisibility(); }
@@ -58,7 +71,7 @@ function buildList() {
     const cards = document.createElement("div"); cards.className = "cards";
     for (const t of TASKS.filter((t) => t.modality === m.id)) {
       const c = document.createElement("button"); c.className = "card"; c.style.setProperty("--c", m.color);
-      c.innerHTML = `<b>${esc(t.title)}<span class="badge ${t.who}">${t.who}</span></b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
+      c.innerHTML = `<b>${esc(t.title)}<span class="badge ${t.who}">${t.who}</span>${t.hobby ? '<span class="badge hobby">hobby</span>' : ""}</b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
       c.addEventListener("click", () => { select(t.id); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
       cardEls.set(t.id, c); cards.appendChild(c);
     }
@@ -102,7 +115,7 @@ function select(id, fromScene) {
   current = t; const m = mod[t.modality];
   const p = $("panel"); p.style.setProperty("--c", m.color); p.innerHTML = "";
   const head = document.createElement("div");
-  head.innerHTML = `<span class="tag">${esc(m.name)}</span><span class="badge ${t.who}">${t.who === "group" ? "group task" : "solo task"}</span><h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
+  head.innerHTML = `<span class="tag">${esc(m.name)}</span><span class="badge ${t.who}">${t.who === "group" ? "group task" : "solo task"}</span>${t.hobby ? '<span class="badge hobby">hobby group</span>' : ""}<h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
   p.appendChild(head);
   const ctl = document.createElement("div"); ctl.className = "controls"; ctl.id = "ctl";
   t.controls.forEach((c) => ctl.appendChild(control(t, c)));
@@ -146,6 +159,20 @@ function viz(z, color) {
     case "schedule": return `<div class="scroll"><table><tr><th>Round</th><th>Matches (team numbers)</th></tr>${z.rounds.map((r, i) => `<tr><td>${i + 1}</td><td style="text-align:left">${r.map(([a, b]) => `${a + 1}–${b + 1}`).join("  ")}</td></tr>`).join("")}</table></div>`;
     case "table": return `<div class="scroll"><table><tr><th>Run</th>${z.head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr>${z.rows.map((r, i) => `<tr><td>${i + 1}</td>${r.map((c) => `<td>${"abcd"[c]}</td>`).join("")}</tr>`).join("")}</table></div>`;
     case "bits": return ["sent", "got"].map((k) => `<div class="bitrow"><b>${k === "sent" ? "Sent" : "Received"}</b>${z[k].map((b, i) => `<span class="${k === "got" && z.flip === i + 1 ? "flip" : ""}">${b}</span>`).join("")}</div>`).join("") + `<div class="bitrow"><b>Position</b>${[1, 2, 3, 4, 5, 6, 7].map((i) => `<span style="background:none;color:var(--muted);font-size:12px">${i}</span>`).join("")}</div>`;
+    case "cover": return `<div class="scroll"><table><tr><th></th>${z.roles.map((r) => `<th>${esc(r)}</th>`).join("")}</tr>${z.cand.map((row, i) => `<tr class="${z.chosen.includes(i) ? "hi" : ""}"><th>Person ${i + 1}</th>${row.map((b) => `<td>${b ? "✓" : ""}</td>`).join("")}</tr>`).join("")}</table></div>`;
+    case "teams": { const sum = (a) => a.reduce((x, y) => x + y, 0); return `<div class="teams">${[["Team A", z.a], ["Team B", z.b]].map(([n, a]) => `<div><b>${n}</b> (total ${sum(a)})<div class="pills">${a.slice().sort((x, y) => y - x).map((s) => `<span>${s}</span>`).join("")}</div></div>`).join("")}</div>`; }
+    case "tables": return `<div class="scroll"><table><tr><th>Round</th><th>Tables (player numbers)</th></tr>${z.rounds.map((r, i) => `<tr><td>${i + 1}</td><td style="text-align:left">${r.map((t) => "[" + t.map((p) => p + 1).join(" ") + "]").join("  ")}</td></tr>`).join("")}</table></div>`;
+    case "timeline": {
+      const days = ["Mon", "Tue", "Wed", "Thu"], x = (h) => 14 + ((h - 18) / 6) * 84; let out = "";
+      days.forEach((d, di) => {
+        const items = z.clubs.map((c, i) => ({ c, i })).filter((o) => o.c.day === di).sort((a, b) => a.c.start - b.c.start), lanes = [];
+        items.forEach((o) => { let l = lanes.findIndex((end) => end <= o.c.start); if (l < 0) { l = lanes.length; lanes.push(0); } lanes[l] = o.c.start + o.c.len; o.l = l; });
+        const h = Math.max(1, lanes.length) * 8 + 4, y0 = days.slice(0, di).reduce((s, _, k) => s + z.laneH[k], 0);
+        z.laneH[di] = h; out += `<text x="1" y="${y0 + 8}" font-size="4.2" fill="var(--muted)">${d}</text>` + items.map((o) => `<rect x="${x(o.c.start)}" y="${y0 + 2 + o.l * 8}" width="${(o.c.len / 6) * 84 - 0.6}" height="6.4" rx="1.2" fill="${z.chosen.includes(o.i) ? color : "var(--chip)"}" stroke="${z.chosen.includes(o.i) ? color : "var(--muted)"}" stroke-width="0.4"/><text x="${x(o.c.start) + 1.2}" y="${y0 + 2 + o.l * 8 + 4.6}" font-size="3.8" fill="${z.chosen.includes(o.i) ? "#fff" : "var(--ink)"}">${o.i + 1}</text>`).join("");
+      });
+      const total = z.laneH.reduce((a, b) => a + b, 0) + 6; let ticks = ""; for (let h = 18; h <= 24; h++) ticks += `<line x1="${x(h)}" y1="0" x2="${x(h)}" y2="${total - 6}" stroke="var(--line)" stroke-width="0.3"/><text x="${x(h)}" y="${total - 1}" font-size="3.4" text-anchor="middle" fill="var(--muted)">${h}:00</text>`;
+      return `<svg viewBox="0 0 100 ${total}" role="img" aria-label="Week timetable of the clubs, with a best set of clubs highlighted">${ticks}${out}</svg>`;
+    }
     default: return "";
   }
 }
@@ -232,7 +259,7 @@ function build3D() {
 
 /* ------------------------------------------------------------------ start */
 $("n-tasks").textContent = TASKS.length;
-buildWho(); buildChips(); buildGlance(); buildList();
+buildWho(); buildChips(); buildGlance(); buildSteps(); buildList();
 scene = build3D();
 const start = location.hash.slice(1);
 select(TASKS.some((t) => t.id === start) ? start : "birthday");
