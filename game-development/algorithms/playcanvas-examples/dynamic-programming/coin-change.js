@@ -91,6 +91,20 @@ CoinChange.prototype.calculateMinCoins = function() {
     }
 };
 
+// Count the ways to make an amount (order does not matter). This is the counting version of the problem: the
+// answer is the coefficient of x^amount in the product of 1/(1 - x^coin) over the coins, which is how a generating
+// function solves it. For pennies, nickels and dimes and 100 cents it gives 121.
+CoinChange.prototype.countWays = function(coins, amount) {
+    const ways = new Array(amount + 1).fill(0);
+    ways[0] = 1;
+    for (const coin of coins) {
+        for (let a = coin; a <= amount; a++) {
+            ways[a] += ways[a - coin];
+        }
+    }
+    return ways[amount];
+};
+
 // Visualize DP table
 CoinChange.prototype.visualizeDPTable = function() {
     const tableEntity = new pc.Entity('DPTable');

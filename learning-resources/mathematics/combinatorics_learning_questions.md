@@ -377,7 +377,7 @@ Prove or disprove: The number of self-complementary graphs on n vertices is 2^(C
 3. Look for patterns and symmetries
 4. Practice writing clear mathematical proofs
 5. Don't hesitate to look up solutions if stuck, but make sure you understand them
-6. Implement algorithms in code to verify your answers (see combinatorics_repositories.md for library recommendations)
+6. Implement algorithms in code to verify your answers (see combinatorics_repositories.md for library recommendations; the [README](README.md) maps each question group to a task in this repository that counts or lists the same thing)
 
 ---
 
