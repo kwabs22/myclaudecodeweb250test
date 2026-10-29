@@ -5424,9 +5424,9 @@
       "question": "What is the softmax probability of the first entry for the logits [4, 2, 4]? (3 decimal places)",
       "options": [
         "0.468",
-        "0.400",
         "0.532",
-        "0.333"
+        "0.400",
+        "54.598"
       ],
       "correct_answer": 0,
       "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.468.",
@@ -5440,15 +5440,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [1, -1, -2, -1]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [-1, 4, 1]? (3 decimal places)",
       "options": [
-        "0.757",
-        "0.243",
-        "0.250",
-        "0.200"
+        "0.006",
+        "0.994",
+        "0.368",
+        "0.333"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.757.",
+      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.006.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5459,15 +5459,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [-1, 1, 4, -1]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [1, 3, 0, 0]? (3 decimal places)",
       "options": [
-        "0.006",
+        "0.110",
+        "0.810",
         "0.250",
-        "0.994",
-        "0.941"
+        "0.890"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.006.",
+      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.110.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5478,15 +5478,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [4, 4, 4, -1]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [4, -1, 4, -1]? (3 decimal places)",
       "options": [
-        "0.333",
-        "0.667",
-        "54.598",
-        "0.002"
+        "0.497",
+        "0.250",
+        "0.503",
+        "0.003"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.333.",
+      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.497.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5497,15 +5497,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [2, 4, 2]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [4, 4, 4, -1]? (3 decimal places)",
       "options": [
-        "0.107",
-        "0.893",
         "0.333",
-        "0.250"
+        "0.667",
+        "0.308",
+        "0.002"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^2 / Σe^z = 0.107.",
+      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.333.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5516,15 +5516,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [3, 0, 2, -2]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [-1, 2, 4, 2]? (3 decimal places)",
       "options": [
-        "0.702",
-        "0.429",
-        "20.086",
-        "0.250"
+        "0.005",
+        "0.250",
+        "-0.111",
+        "0.995"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^3 / Σe^z = 0.702.",
+      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.005.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5535,15 +5535,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [-1, 0, 2, -2]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [2, -1, 1, 3]? (3 decimal places)",
       "options": [
-        "0.041",
-        "-0.200",
-        "0.831",
-        "0.959"
+        "0.242",
+        "0.657",
+        "0.758",
+        "0.286"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.041.",
+      "explanation": "softmax(z)₁ = e^2 / Σe^z = 0.242.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5554,15 +5554,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [4, -2, 4]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [-2, -1, 2, 0]? (3 decimal places)",
       "options": [
-        "0.499",
-        "54.598",
-        "0.501",
-        "0.400"
+        "0.015",
+        "0.985",
+        "0.250",
+        "0.831"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.499.",
+      "explanation": "softmax(z)₁ = e^-2 / Σe^z = 0.015.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5573,15 +5573,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [-2, -1, 1]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [3, 4, 3]? (3 decimal places)",
       "options": [
-        "0.042",
-        "0.135",
-        "0.958",
-        "0.333"
+        "0.212",
+        "0.300",
+        "0.576",
+        "0.788"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^-2 / Σe^z = 0.042.",
+      "explanation": "softmax(z)₁ = e^3 / Σe^z = 0.212.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5592,15 +5592,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [0, 3, 4]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [4, -2, 4]? (3 decimal places)",
       "options": [
-        "0.013",
-        "1.000",
-        "0.000",
-        "0.721"
+        "0.499",
+        "54.598",
+        "0.400",
+        "0.501"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^0 / Σe^z = 0.013.",
+      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.499.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5611,15 +5611,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [1, 1, 4]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [-1, -2, -1]? (3 decimal places)",
       "options": [
-        "0.045",
-        "0.909",
+        "0.422",
+        "-0.250",
         "0.333",
-        "0.955"
+        "0.368"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.045.",
+      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.422.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5630,15 +5630,15 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [-2, 2, -1]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [-1, 4, 2, 3]? (3 decimal places)",
       "options": [
-        "0.017",
-        "0.333",
-        "0.983",
-        "0.135"
+        "0.004",
+        "0.368",
+        "0.250",
+        "0.996"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^-2 / Σe^z = 0.017.",
+      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.004.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5649,21 +5649,78 @@
       "subtopic": "softmax",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [3, 2, 0, 0]? (3 decimal places)",
+      "question": "What is the softmax probability of the first entry for the logits [4, -1, 0]? (3 decimal places)",
       "options": [
-        "0.681",
-        "0.319",
-        "0.034",
-        "0.600"
+        "0.976",
+        "0.018",
+        "54.598",
+        "0.800"
       ],
       "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^3 / Σe^z = 0.681.",
+      "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.976.",
       "hints": [
         "Work through the softmax step by step."
       ]
     },
     {
       "id": 298,
+      "topic": "deep_learning",
+      "subtopic": "softmax",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the softmax probability of the first entry for the logits [0, -1, 2]? (3 decimal places)",
+      "options": [
+        "0.114",
+        "0.000",
+        "1.000",
+        "0.844"
+      ],
+      "correct_answer": 0,
+      "explanation": "softmax(z)₁ = e^0 / Σe^z = 0.114.",
+      "hints": [
+        "Work through the softmax step by step."
+      ]
+    },
+    {
+      "id": 299,
+      "topic": "deep_learning",
+      "subtopic": "softmax",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the softmax probability of the first entry for the logits [-1, 1, 3, 4]? (3 decimal places)",
+      "options": [
+        "0.005",
+        "0.250",
+        "-0.111",
+        "0.995"
+      ],
+      "correct_answer": 0,
+      "explanation": "softmax(z)₁ = e^-1 / Σe^z = 0.005.",
+      "hints": [
+        "Work through the softmax step by step."
+      ]
+    },
+    {
+      "id": 300,
+      "topic": "deep_learning",
+      "subtopic": "softmax",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the softmax probability of the first entry for the logits [1, 0, -2, 1]? (3 decimal places)",
+      "options": [
+        "0.414",
+        "2.718",
+        "0.250",
+        "0.586"
+      ],
+      "correct_answer": 0,
+      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.414.",
+      "hints": [
+        "Work through the softmax step by step."
+      ]
+    },
+    {
+      "id": 301,
       "topic": "deep_learning",
       "subtopic": "softmax",
       "difficulty": "intermediate",
@@ -5682,7 +5739,7 @@
       ]
     },
     {
-      "id": 299,
+      "id": 302,
       "topic": "deep_learning",
       "subtopic": "softmax",
       "difficulty": "intermediate",
@@ -5691,68 +5748,11 @@
       "options": [
         "0.458",
         "0.250",
-        "0.364",
-        "0.542"
+        "0.542",
+        "0.062"
       ],
       "correct_answer": 0,
       "explanation": "softmax(z)₁ = e^4 / Σe^z = 0.458.",
-      "hints": [
-        "Work through the softmax step by step."
-      ]
-    },
-    {
-      "id": 300,
-      "topic": "deep_learning",
-      "subtopic": "softmax",
-      "difficulty": "intermediate",
-      "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [1, -2, 4, 2]? (3 decimal places)",
-      "options": [
-        "0.042",
-        "0.250",
-        "2.718",
-        "0.111"
-      ],
-      "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.042.",
-      "hints": [
-        "Work through the softmax step by step."
-      ]
-    },
-    {
-      "id": 301,
-      "topic": "deep_learning",
-      "subtopic": "softmax",
-      "difficulty": "intermediate",
-      "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [0, -2, 4, -2]? (3 decimal places)",
-      "options": [
-        "0.018",
-        "0.250",
-        "0.000",
-        "0.982"
-      ],
-      "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^0 / Σe^z = 0.018.",
-      "hints": [
-        "Work through the softmax step by step."
-      ]
-    },
-    {
-      "id": 302,
-      "topic": "deep_learning",
-      "subtopic": "softmax",
-      "difficulty": "intermediate",
-      "type": "multiple_choice",
-      "question": "What is the softmax probability of the first entry for the logits [1, -2, 0]? (3 decimal places)",
-      "options": [
-        "0.705",
-        "0.295",
-        "0.333",
-        "0.259"
-      ],
-      "correct_answer": 0,
-      "explanation": "softmax(z)₁ = e^1 / Σe^z = 0.705.",
       "hints": [
         "Work through the softmax step by step."
       ]
@@ -5766,8 +5766,8 @@
       "question": "A classifier gives the true class probability 0.9. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "0.105",
-        "0.900",
         "0.100",
+        "0.900",
         "-0.105"
       ],
       "correct_answer": 0,
@@ -5785,9 +5785,9 @@
       "question": "A classifier gives the true class probability 0.5. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "0.693",
+        "1.386",
         "-0.693",
-        "0.500",
-        "1.386"
+        "0.301"
       ],
       "correct_answer": 0,
       "explanation": "−ln(0.5) = 0.693; confident correct predictions give small loss.",
@@ -5804,9 +5804,9 @@
       "question": "A classifier gives the true class probability 0.25. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "1.386",
-        "2.773",
         "0.750",
-        "0.602"
+        "0.602",
+        "-1.386"
       ],
       "correct_answer": 0,
       "explanation": "−ln(0.25) = 1.386; confident correct predictions give small loss.",
@@ -5844,7 +5844,7 @@
         "0.223",
         "0.200",
         "0.800",
-        "-0.223"
+        "0.446"
       ],
       "correct_answer": 0,
       "explanation": "−ln(0.8) = 0.223; confident correct predictions give small loss.",
@@ -5861,9 +5861,9 @@
       "question": "A classifier gives the true class probability 0.99. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "0.010",
-        "-0.010",
-        "0.004",
-        "0.990"
+        "0.990",
+        "0.020",
+        "0.004"
       ],
       "correct_answer": 0,
       "explanation": "−ln(0.99) = 0.010; confident correct predictions give small loss.",
@@ -5880,9 +5880,9 @@
       "question": "A classifier gives the true class probability 0.7. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "0.357",
-        "0.300",
         "-0.357",
-        "0.155"
+        "0.300",
+        "0.713"
       ],
       "correct_answer": 0,
       "explanation": "−ln(0.7) = 0.357; confident correct predictions give small loss.",
@@ -5899,7 +5899,7 @@
       "question": "A classifier gives the true class probability 0.01. What is the cross-entropy loss −ln(p) for this example, to 3 decimal places?",
       "options": [
         "4.605",
-        "-4.605",
+        "0.010",
         "0.990",
         "9.210"
       ],
@@ -5918,9 +5918,9 @@
       "question": "Binary cross-entropy for true label 1 and predicted probability 0.9 is what, to 3 decimal places?",
       "options": [
         "0.105",
+        "0.895",
         "0.010",
-        "0.100",
-        "2.303"
+        "0.211"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 0.105.",
@@ -5937,9 +5937,9 @@
       "question": "Binary cross-entropy for true label 0 and predicted probability 0.2 is what, to 3 decimal places?",
       "options": [
         "0.223",
-        "0.200",
-        "0.040",
-        "0.777"
+        "0.446",
+        "0.777",
+        "0.040"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 0.223.",
@@ -5956,9 +5956,9 @@
       "question": "Binary cross-entropy for true label 1 and predicted probability 0.4 is what, to 3 decimal places?",
       "options": [
         "0.916",
-        "0.600",
-        "0.360",
-        "1.833"
+        "1.833",
+        "0.511",
+        "0.360"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 0.916.",
@@ -5975,9 +5975,9 @@
       "question": "Binary cross-entropy for true label 0 and predicted probability 0.7 is what, to 3 decimal places?",
       "options": [
         "1.204",
-        "-0.204",
-        "0.357",
-        "0.700"
+        "0.700",
+        "0.490",
+        "0.357"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 1.204.",
@@ -5995,8 +5995,8 @@
       "options": [
         "0.511",
         "0.400",
-        "0.489",
-        "0.916"
+        "0.916",
+        "0.160"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 0.511.",
@@ -6014,8 +6014,8 @@
       "options": [
         "0.051",
         "0.003",
-        "2.996",
-        "0.050"
+        "0.050",
+        "0.949"
       ],
       "correct_answer": 0,
       "explanation": "−[y·ln p + (1 − y)·ln(1 − p)] = 0.051.",
@@ -6033,8 +6033,8 @@
       "options": [
         "-0.964",
         "0.000",
-        "0.135",
-        "-2.000"
+        "0.119",
+        "0.135"
       ],
       "correct_answer": 0,
       "explanation": "tanh(-2) = -0.964; its range is (−1, 1).",
@@ -6051,9 +6051,9 @@
       "question": "What is tanh(-1) to 3 decimal places?",
       "options": [
         "-0.762",
-        "0.368",
         "0.269",
-        "0.000"
+        "0.000",
+        "-1.000"
       ],
       "correct_answer": 0,
       "explanation": "tanh(-1) = -0.762; its range is (−1, 1).",
@@ -6089,9 +6089,9 @@
       "question": "What is tanh(1) to 3 decimal places?",
       "options": [
         "0.762",
-        "2.718",
+        "0.731",
         "1.000",
-        "0.731"
+        "2.718"
       ],
       "correct_answer": 0,
       "explanation": "tanh(1) = 0.762; its range is (−1, 1).",
@@ -6108,8 +6108,8 @@
       "question": "What is tanh(2) to 3 decimal places?",
       "options": [
         "0.964",
-        "0.881",
         "2.000",
+        "0.881",
         "7.389"
       ],
       "correct_answer": 0,
@@ -6146,9 +6146,9 @@
       "question": "What is ReLU(-3)?",
       "options": [
         "0",
-        "3",
         "1",
-        "4"
+        "4",
+        "3"
       ],
       "correct_answer": 0,
       "explanation": "ReLU(z) = max(0, z).",
@@ -6165,9 +6165,9 @@
       "question": "What is Leaky ReLU(-3) with slope 0.1 for negative inputs?",
       "options": [
         "-0.3",
-        "0.1",
         "0",
-        "3"
+        "0.1",
+        "-30"
       ],
       "correct_answer": 0,
       "explanation": "Leaky ReLU keeps a small slope for z < 0 instead of zero.",
@@ -6184,9 +6184,9 @@
       "question": "What is Leaky ReLU(-1) with slope 0.1 for negative inputs?",
       "options": [
         "-0.1",
-        "0.1",
-        "0",
-        "1"
+        "1",
+        "-10",
+        "0"
       ],
       "correct_answer": 0,
       "explanation": "Leaky ReLU keeps a small slope for z < 0 instead of zero.",
@@ -6204,8 +6204,8 @@
       "options": [
         "0",
         "1",
-        "1.5",
-        "0.5"
+        "0.5",
+        "1.5"
       ],
       "correct_answer": 0,
       "explanation": "ReLU(z) = max(0, z).",
@@ -6222,9 +6222,9 @@
       "question": "What is Leaky ReLU(-0.5) with slope 0.1 for negative inputs?",
       "options": [
         "-0.05",
-        "0.1",
-        "0",
-        "0.5"
+        "-5",
+        "0.5",
+        "0.1"
       ],
       "correct_answer": 0,
       "explanation": "Leaky ReLU keeps a small slope for z < 0 instead of zero.",
@@ -6238,21 +6238,59 @@
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
       "type": "multiple_choice",
-      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = 2, x = 3, b = 1. The target is y = 2 and the loss is (ŷ − y)². What is the loss?",
+      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = 2, x = 4, b = 1. The target is y = 5 and the loss is (ŷ − y)². What is the loss?",
       "options": [
-        "25",
-        "26",
-        "50",
-        "7"
+        "16",
+        "9",
+        "32",
+        "14"
       ],
       "correct_answer": 0,
-      "explanation": "z = 7, ŷ = ReLU(7) = 7, loss = (7 − 2)² = 25.",
+      "explanation": "z = 9, ŷ = ReLU(9) = 9, loss = (9 − 5)² = 16.",
       "hints": [
         "Work through the backpropagation step by step."
       ]
     },
     {
       "id": 329,
+      "topic": "deep_learning",
+      "subtopic": "backpropagation",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = -1, x = 3, b = 0. The target is y = 2 and the loss is (ŷ − y)². What is ∂loss/∂w?",
+      "options": [
+        "0",
+        "2",
+        "10",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "Chain rule: 2(ŷ − y) × ReLU′(z) × x = 2(0 − 2) × 0 × 3 = 0.",
+      "hints": [
+        "Work through the backpropagation step by step."
+      ]
+    },
+    {
+      "id": 330,
+      "topic": "deep_learning",
+      "subtopic": "backpropagation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = 3, x = 4, b = -2. The target is y = 2 and the loss is (ŷ − y)². What is the loss?",
+      "options": [
+        "64",
+        "74",
+        "66",
+        "128"
+      ],
+      "correct_answer": 0,
+      "explanation": "z = 10, ŷ = ReLU(10) = 10, loss = (10 − 2)² = 64.",
+      "hints": [
+        "Work through the backpropagation step by step."
+      ]
+    },
+    {
+      "id": 331,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6271,7 +6309,7 @@
       ]
     },
     {
-      "id": 330,
+      "id": 332,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6290,7 +6328,7 @@
       ]
     },
     {
-      "id": 331,
+      "id": 333,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6309,7 +6347,7 @@
       ]
     },
     {
-      "id": 332,
+      "id": 334,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6328,7 +6366,7 @@
       ]
     },
     {
-      "id": 333,
+      "id": 335,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6347,7 +6385,7 @@
       ]
     },
     {
-      "id": 334,
+      "id": 336,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6366,7 +6404,7 @@
       ]
     },
     {
-      "id": 335,
+      "id": 337,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6385,7 +6423,7 @@
       ]
     },
     {
-      "id": 336,
+      "id": 338,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6404,7 +6442,7 @@
       ]
     },
     {
-      "id": 337,
+      "id": 339,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6423,7 +6461,7 @@
       ]
     },
     {
-      "id": 338,
+      "id": 340,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6442,7 +6480,7 @@
       ]
     },
     {
-      "id": 339,
+      "id": 341,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6461,7 +6499,7 @@
       ]
     },
     {
-      "id": 340,
+      "id": 342,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "intermediate",
@@ -6480,7 +6518,7 @@
       ]
     },
     {
-      "id": 341,
+      "id": 343,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6499,58 +6537,20 @@
       ]
     },
     {
-      "id": 342,
-      "topic": "deep_learning",
-      "subtopic": "backpropagation",
-      "difficulty": "intermediate",
-      "type": "multiple_choice",
-      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = 1, x = 3, b = 1. The target is y = -1 and the loss is (ŷ − y)². What is the loss?",
-      "options": [
-        "25",
-        "4",
-        "27",
-        "28"
-      ],
-      "correct_answer": 0,
-      "explanation": "z = 4, ŷ = ReLU(4) = 4, loss = (4 − -1)² = 25.",
-      "hints": [
-        "Work through the backpropagation step by step."
-      ]
-    },
-    {
-      "id": 343,
-      "topic": "deep_learning",
-      "subtopic": "backpropagation",
-      "difficulty": "advanced",
-      "type": "multiple_choice",
-      "question": "A neuron computes ŷ = ReLU(w·x + b) with w = 0, x = 1, b = 0. The target is y = -3 and the loss is (ŷ − y)². What is ∂loss/∂w?",
-      "options": [
-        "0",
-        "2",
-        "3",
-        "1"
-      ],
-      "correct_answer": 0,
-      "explanation": "Chain rule: 2(ŷ − y) × ReLU′(z) × x = 2(0 − -3) × 0 × 1 = 0.",
-      "hints": [
-        "Work through the backpropagation step by step."
-      ]
-    },
-    {
       "id": 344,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 2, x = 3. What is ∂ŷ/∂w₁?",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 2, x = 2. What is ∂ŷ/∂w₁?",
       "options": [
+        "4",
         "6",
-        "12",
         "2",
-        "3"
+        "12"
       ],
       "correct_answer": 0,
-      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
+      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 4.",
       "hints": [
         "Work through the backpropagation step by step."
       ]
@@ -6561,15 +6561,15 @@
       "subtopic": "backpropagation",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 2, x = 3. What is ∂ŷ/∂w₁?",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 3, x = 1. What is ∂ŷ/∂w₁?",
       "options": [
-        "6",
-        "9",
+        "3",
+        "1",
         "2",
-        "18"
+        "6"
       ],
       "correct_answer": 0,
-      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
+      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 3.",
       "hints": [
         "Work through the backpropagation step by step."
       ]
@@ -6580,12 +6580,12 @@
       "subtopic": "backpropagation",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 3, x = 2. What is ∂ŷ/∂w₁?",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 3, x = 2. What is ∂ŷ/∂w₁?",
       "options": [
         "6",
-        "2",
+        "4",
         "3",
-        "18"
+        "12"
       ],
       "correct_answer": 0,
       "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
@@ -6602,9 +6602,9 @@
       "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 3, x = 3. What is ∂ŷ/∂w₁?",
       "options": [
         "9",
-        "3",
+        "18",
         "6",
-        "18"
+        "3"
       ],
       "correct_answer": 0,
       "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 9.",
@@ -6614,63 +6614,6 @@
     },
     {
       "id": 348,
-      "topic": "deep_learning",
-      "subtopic": "backpropagation",
-      "difficulty": "advanced",
-      "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 2, x = 2. What is ∂ŷ/∂w₁?",
-      "options": [
-        "4",
-        "6",
-        "12",
-        "2"
-      ],
-      "correct_answer": 0,
-      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 4.",
-      "hints": [
-        "Work through the backpropagation step by step."
-      ]
-    },
-    {
-      "id": 349,
-      "topic": "deep_learning",
-      "subtopic": "backpropagation",
-      "difficulty": "advanced",
-      "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 3, x = 1. What is ∂ŷ/∂w₁?",
-      "options": [
-        "3",
-        "1",
-        "6",
-        "2"
-      ],
-      "correct_answer": 0,
-      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 3.",
-      "hints": [
-        "Work through the backpropagation step by step."
-      ]
-    },
-    {
-      "id": 350,
-      "topic": "deep_learning",
-      "subtopic": "backpropagation",
-      "difficulty": "advanced",
-      "type": "multiple_choice",
-      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 3, x = 2. What is ∂ŷ/∂w₁?",
-      "options": [
-        "6",
-        "4",
-        "2",
-        "3"
-      ],
-      "correct_answer": 0,
-      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
-      "hints": [
-        "Work through the backpropagation step by step."
-      ]
-    },
-    {
-      "id": 351,
       "topic": "deep_learning",
       "subtopic": "backpropagation",
       "difficulty": "advanced",
@@ -6689,6 +6632,63 @@
       ]
     },
     {
+      "id": 349,
+      "topic": "deep_learning",
+      "subtopic": "backpropagation",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 2, x = 3. What is ∂ŷ/∂w₁?",
+      "options": [
+        "6",
+        "18",
+        "2",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
+      "hints": [
+        "Work through the backpropagation step by step."
+      ]
+    },
+    {
+      "id": 350,
+      "topic": "deep_learning",
+      "subtopic": "backpropagation",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 2, w₂ = 2, x = 3. What is ∂ŷ/∂w₁?",
+      "options": [
+        "6",
+        "3",
+        "12",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
+      "hints": [
+        "Work through the backpropagation step by step."
+      ]
+    },
+    {
+      "id": 351,
+      "topic": "deep_learning",
+      "subtopic": "backpropagation",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A two-layer linear chain computes h = w₁·x and ŷ = w₂·h with w₁ = 3, w₂ = 3, x = 2. What is ∂ŷ/∂w₁?",
+      "options": [
+        "6",
+        "18",
+        "2",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "ŷ = w₂w₁x, so ∂ŷ/∂w₁ = w₂·x = 6.",
+      "hints": [
+        "Work through the backpropagation step by step."
+      ]
+    },
+    {
       "id": 352,
       "topic": "deep_learning",
       "subtopic": "rnn",
@@ -6697,7 +6697,7 @@
       "question": "A simple RNN layer has input size 10 and hidden size 20, with one bias vector. How many parameters does it have?",
       "options": [
         "620",
-        "600",
+        "220",
         "2480",
         "400"
       ],
@@ -6716,9 +6716,9 @@
       "question": "An LSTM layer has input size 10 and hidden size 20. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "2480",
-        "620",
-        "1240",
-        "800"
+        "1860",
+        "800",
+        "620"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (620): 4 × 620 = 2480.",
@@ -6735,9 +6735,9 @@
       "question": "A GRU layer has input size 10 and hidden size 20. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "1860",
+        "1240",
         "2480",
-        "620",
-        "1240"
+        "600"
       ],
       "correct_answer": 0,
       "explanation": "A GRU has three gate-sized blocks of 620 parameters each: 1860.",
@@ -6754,9 +6754,9 @@
       "question": "A simple RNN layer has input size 50 and hidden size 64, with one bias vector. How many parameters does it have?",
       "options": [
         "7360",
-        "14720",
-        "29440",
-        "4096"
+        "7296",
+        "3264",
+        "14720"
       ],
       "correct_answer": 0,
       "explanation": "Weights for input→hidden (64×50) and hidden→hidden (64×64) plus 64 biases: 7360.",
@@ -6773,9 +6773,9 @@
       "question": "An LSTM layer has input size 50 and hidden size 64. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "29440",
-        "7360",
         "12800",
-        "22080"
+        "7360",
+        "14720"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (7360): 4 × 7360 = 29440.",
@@ -6792,9 +6792,9 @@
       "question": "A GRU layer has input size 50 and hidden size 64. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "22080",
-        "7360",
-        "14720",
-        "9600"
+        "9600",
+        "29440",
+        "14720"
       ],
       "correct_answer": 0,
       "explanation": "A GRU has three gate-sized blocks of 7360 parameters each: 22080.",
@@ -6811,9 +6811,9 @@
       "question": "A simple RNN layer has input size 100 and hidden size 128, with one bias vector. How many parameters does it have?",
       "options": [
         "29312",
-        "117248",
-        "58624",
-        "12928"
+        "12928",
+        "16384",
+        "29184"
       ],
       "correct_answer": 0,
       "explanation": "Weights for input→hidden (128×100) and hidden→hidden (128×128) plus 128 biases: 29312.",
@@ -6831,8 +6831,8 @@
       "options": [
         "117248",
         "29312",
-        "87936",
-        "58624"
+        "58624",
+        "51200"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (29312): 4 × 29312 = 117248.",
@@ -6849,9 +6849,9 @@
       "question": "A GRU layer has input size 100 and hidden size 128. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "87936",
-        "29312",
-        "38400",
-        "58624"
+        "117248",
+        "58624",
+        "29312"
       ],
       "correct_answer": 0,
       "explanation": "A GRU has three gate-sized blocks of 29312 parameters each: 87936.",
@@ -6887,9 +6887,9 @@
       "question": "An LSTM layer has input size 32 and hidden size 32. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "8320",
+        "2080",
         "4096",
-        "4160",
-        "6240"
+        "4160"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (2080): 4 × 2080 = 8320.",
@@ -6908,7 +6908,7 @@
         "6240",
         "4160",
         "8320",
-        "3072"
+        "2080"
       ],
       "correct_answer": 0,
       "explanation": "A GRU has three gate-sized blocks of 2080 parameters each: 6240.",
@@ -6925,9 +6925,9 @@
       "question": "A simple RNN layer has input size 300 and hidden size 256, with one bias vector. How many parameters does it have?",
       "options": [
         "142592",
-        "142336",
-        "77056",
-        "285184"
+        "65536",
+        "285184",
+        "142336"
       ],
       "correct_answer": 0,
       "explanation": "Weights for input→hidden (256×300) and hidden→hidden (256×256) plus 256 biases: 142592.",
@@ -6944,9 +6944,9 @@
       "question": "An LSTM layer has input size 300 and hidden size 256. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "570368",
-        "307200",
         "285184",
-        "427776"
+        "427776",
+        "307200"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (142592): 4 × 142592 = 570368.",
@@ -6964,8 +6964,8 @@
       "options": [
         "427776",
         "142592",
-        "285184",
-        "230400"
+        "570368",
+        "285184"
       ],
       "correct_answer": 0,
       "explanation": "A GRU has three gate-sized blocks of 142592 parameters each: 427776.",
@@ -6982,8 +6982,8 @@
       "question": "A simple RNN layer has input size 8 and hidden size 16, with one bias vector. How many parameters does it have?",
       "options": [
         "400",
-        "144",
         "256",
+        "800",
         "384"
       ],
       "correct_answer": 0,
@@ -7001,9 +7001,9 @@
       "question": "An LSTM layer has input size 8 and hidden size 16. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "1600",
-        "512",
         "400",
-        "800"
+        "800",
+        "512"
       ],
       "correct_answer": 0,
       "explanation": "An LSTM has four gates, each with the size of a simple RNN layer (400): 4 × 400 = 1600.",
@@ -7020,8 +7020,8 @@
       "question": "A GRU layer has input size 8 and hidden size 16. Counting one bias vector per gate, how many parameters does it have?",
       "options": [
         "1200",
+        "400",
         "384",
-        "800",
         "1600"
       ],
       "correct_answer": 0,
@@ -7039,8 +7039,8 @@
       "question": "An embedding layer maps a vocabulary of 1000 tokens to vectors of size 64. How many parameters does it have?",
       "options": [
         "64000",
-        "1000",
         "128000",
+        "1064",
         "64"
       ],
       "correct_answer": 0,
@@ -7058,9 +7058,9 @@
       "question": "An embedding layer maps a vocabulary of 50000 tokens to vectors of size 128. How many parameters does it have?",
       "options": [
         "6400000",
-        "50000",
         "12800000",
-        "50128"
+        "128",
+        "50000"
       ],
       "correct_answer": 0,
       "explanation": "It is a table with one 128-dimensional row per token: 50000 × 128 = 6400000.",
@@ -7078,8 +7078,8 @@
       "options": [
         "23040000",
         "30000",
-        "30768",
-        "46080000"
+        "46080000",
+        "768"
       ],
       "correct_answer": 0,
       "explanation": "It is a table with one 768-dimensional row per token: 30000 × 768 = 23040000.",
@@ -7096,9 +7096,9 @@
       "question": "An embedding layer maps a vocabulary of 10000 tokens to vectors of size 300. How many parameters does it have?",
       "options": [
         "3000000",
+        "10000",
         "6000000",
-        "300",
-        "10000"
+        "10300"
       ],
       "correct_answer": 0,
       "explanation": "It is a table with one 300-dimensional row per token: 10000 × 300 = 3000000.",
@@ -7116,8 +7116,8 @@
       "options": [
         "16000",
         "500",
-        "32",
-        "532"
+        "532",
+        "32000"
       ],
       "correct_answer": 0,
       "explanation": "It is a table with one 32-dimensional row per token: 500 × 32 = 16000.",
@@ -7134,9 +7134,9 @@
       "question": "An embedding layer maps a vocabulary of 100000 tokens to vectors of size 256. How many parameters does it have?",
       "options": [
         "25600000",
-        "100000",
+        "51200000",
         "256",
-        "51200000"
+        "100000"
       ],
       "correct_answer": 0,
       "explanation": "It is a table with one 256-dimensional row per token: 100000 × 256 = 25600000.",
@@ -7150,15 +7150,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-1, 0, 2, -1, 2, 1, -1, 2, 0] meets a key k = [0, 1, 0, -2, 0, 1, -1, -1, 2], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [1, -2, -1, -2, -2, 2, 2, -2, 1, -1, 0, 2, -1, 2, 1, -1] meets a key k = [2, 0, 0, 1, 0, -2, 0, 1, -1, -1, 2, 0, 0, 2, -1, 0], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "0.667",
-        "2.000",
-        "1.667",
-        "0.222"
+        "-0.750",
+        "-3.000",
+        "-0.188",
+        "0.250"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 2; divide by √9 = 3.000 to get 0.667.",
+      "explanation": "q·k = -3; divide by √16 = 4.000 to get -0.750.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7169,15 +7169,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-1, 0, 0, 2, 0, 1, -2, -2, -2, -1, 1, 0, 2, 0, -2, 1] meets a key k = [1, -2, 1, -1, -1, -1, 2, 0, 0, 0, 2, 1, 0, -2, 1, 1], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-2, -2, -2, -1, 1, 0, 2, 0, -2] meets a key k = [1, 1, -2, 1, -1, -1, -1, 2, 0], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "-1.750",
-        "-0.750",
-        "-0.438",
-        "-7.000"
+        "-1.333",
+        "-4.000",
+        "-0.333",
+        "-0.444"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = -7; divide by √16 = 4.000 to get -1.750.",
+      "explanation": "q·k = -4; divide by √9 = 3.000 to get -1.333.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7188,15 +7188,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-2, 1, -2, -2, -1, 2, -1, 1, 0, 2, -1, 2, -2, 1, 0, -2] meets a key k = [-1, -1, 0, 2, 1, 1, -1, -2, -2, 2, 1, 1, 1, -2, -2, 0], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-2, 1, 1, 2, 0, -1, 1, -2, 1] meets a key k = [-2, -2, -1, 2, -1, 1, 0, 2, -1], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "-0.500",
-        "0.500",
-        "-2.000",
-        "-0.125"
+        "-0.333",
+        "0.667",
+        "0.333",
+        "-0.111"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = -2; divide by √16 = 4.000 to get -0.500.",
+      "explanation": "q·k = -1; divide by √9 = 3.000 to get -0.333.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7207,15 +7207,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [1, 1, -1, -1, 1, 1, 1, -2, 0, 2, 0, 2, 2, -2, 1, -1] meets a key k = [1, -1, -2, -1, 0, 1, 1, 1, 1, 0, -1, -2, 2, 2, 0, -2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-2, -1, -1, 0, 2, 1, 1, -1, -2, -2, 2, 1, 1, 1, -2, -2] meets a key k = [0, 0, 2, -2, 1, 1, -1, -1, 1, 1, 1, -2, 0, 2, 0, 2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "0.250",
+        "-1.250",
         "1.250",
-        "0.062",
-        "1.000"
+        "-0.250",
+        "-0.312"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 1; divide by √16 = 4.000 to get 0.250.",
+      "explanation": "q·k = -5; divide by √16 = 4.000 to get -1.250.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7226,15 +7226,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-2, 0, 2, -2] meets a key k = [1, 2, 2, -2], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [0, 2, -2, 1] meets a key k = [2, 2, -2, 1], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "3.000",
-        "6.000",
-        "1.500",
-        "4.000"
+        "4.500",
+        "9.000",
+        "5.500",
+        "2.250"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 6; divide by √4 = 2.000 to get 3.000.",
+      "explanation": "q·k = 9; divide by √4 = 2.000 to get 4.500.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7245,15 +7245,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [1, 0, -1, 0, -2, -2, 0, 0, 0] meets a key k = [-2, 0, -2, 0, 0, 2, -2, -1, 1], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [1, 1, -2, 0] meets a key k = [-1, 0, 1, -1], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "-1.333",
-        "1.333",
-        "-0.333",
-        "-4.000"
+        "-1.500",
+        "1.500",
+        "-0.500",
+        "-3.000"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = -4; divide by √9 = 3.000 to get -1.333.",
+      "explanation": "q·k = -3; divide by √4 = 2.000 to get -1.500.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7264,15 +7264,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-2, 0, -1, -2, -1, 2, -1, -2, -2] meets a key k = [1, -1, 0, 1, -1, 1, 1, -1, -2], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [0, 2, -2, -1, 1, -1, -2, 0, 1, -2, 0, -1, -2, -1, 2, -1] meets a key k = [-2, -2, 1, -1, 0, 1, -1, 1, 1, -1, -2, -2, -2, 2, -2, 2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "1.333",
-        "0.444",
-        "2.333",
-        "4.000"
+        "-0.750",
+        "0.250",
+        "0.750",
+        "-3.000"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 4; divide by √9 = 3.000 to get 1.333.",
+      "explanation": "q·k = -3; divide by √16 = 4.000 to get -0.750.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7283,15 +7283,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-2, 2, -1, -2, -1, -2, 1, 1, -1, -1, -1, 2, 0, 0, -1, -1] meets a key k = [-1, -1, 2, -2, -1, 2, -1, -1, 0, -2, 1, 2, -2, -1, 0, 0], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [1, 1, -1, -1] meets a key k = [-1, 2, 0, 0], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
         "0.500",
-        "0.125",
-        "1.500",
-        "2.000"
+        "0.250",
+        "1.000",
+        "1.500"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 2; divide by √16 = 4.000 to get 0.500.",
+      "explanation": "q·k = 1; divide by √4 = 2.000 to get 0.500.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7302,15 +7302,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-2, 2, 2, 0, 1, 2, 0, -2, 1, -2, 1, 2, -2, 2, -1, 2] meets a key k = [-2, 0, -2, 0, 1, 1, 2, 1, 2, 2, 2, -1, -2, 1, 1, 2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-1, -1, 2, -2] meets a key k = [-1, 2, -1, -1], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "2.000",
+        "-0.500",
         "0.500",
-        "8.000",
-        "3.000"
+        "-1.000",
+        "-0.250"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 8; divide by √16 = 4.000 to get 2.000.",
+      "explanation": "q·k = -1; divide by √4 = 2.000 to get -0.500.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7321,15 +7321,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [-1, -2, -2, -1] meets a key k = [2, 2, 1, 2], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [1, 2, -2, -1, 0, 0, -2, -1, -1, 1, 0, -2, 0, 0, -2, -1] meets a key k = [1, 2, -2, 2, 2, 0, 1, 2, 0, -2, 1, -2, 1, 2, -2, 2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "-5.000",
-        "5.000",
-        "-4.000",
-        "-10.000"
+        "1.750",
+        "0.438",
+        "2.750",
+        "7.000"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = -10; divide by √4 = 2.000 to get -5.000.",
+      "explanation": "q·k = 7; divide by √16 = 4.000 to get 1.750.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7340,15 +7340,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [2, 0, -1, 2, -2, -1, 1, 0, -2, 1, 2, 1, -2, 1, 0, 1] meets a key k = [-2, -2, 0, 2, -1, -1, 0, 2, -2, -1, 2, 0, -1, 1, 0, 1], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-2, 0, 1, 1, 2, 1, 2, 2, 2] meets a key k = [-1, -2, 1, 1, 2, 2, -2, -1, -1], both of length d = 9. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "3.500",
-        "4.500",
-        "14.000",
-        "0.875"
+        "0.667",
+        "0.222",
+        "1.667",
+        "2.000"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = 14; divide by √16 = 4.000 to get 3.500.",
+      "explanation": "q·k = 2; divide by √9 = 3.000 to get 0.667.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7359,15 +7359,15 @@
       "subtopic": "attention",
       "difficulty": "advanced",
       "type": "multiple_choice",
-      "question": "In scaled dot-product attention, a query q = [1, 2, -1, 0] meets a key k = [-2, -1, 0, -2], both of length d = 4. What is the scaled score q·k/√d, to 3 decimal places?",
+      "question": "In scaled dot-product attention, a query q = [-1, 2, 2, 1, 2, -1, -2, 0, 2, 0, -1, 2, -2, -1, 1, 0] meets a key k = [-2, 1, 2, 1, -2, 1, 0, 1, -2, -2, 0, 2, -1, -1, 0, 2], both of length d = 16. What is the scaled score q·k/√d, to 3 decimal places?",
       "options": [
-        "-2.000",
-        "-1.000",
-        "-4.000",
-        "2.000"
+        "1.750",
+        "0.438",
+        "2.750",
+        "7.000"
       ],
       "correct_answer": 0,
-      "explanation": "q·k = -4; divide by √4 = 2.000 to get -2.000.",
+      "explanation": "q·k = 7; divide by √16 = 4.000 to get 1.750.",
       "hints": [
         "Work through the attention step by step."
       ]
@@ -7381,9 +7381,9 @@
       "question": "A self-attention layer processes 10 tokens. How many entries does the attention-score matrix (before softmax) have, for one head?",
       "options": [
         "100",
-        "640",
         "6400",
-        "20"
+        "10",
+        "640"
       ],
       "correct_answer": 0,
       "explanation": "Every token attends to every token: L × L scores, which is why the cost grows quadratically with length.",
@@ -7400,9 +7400,9 @@
       "question": "A self-attention layer processes 128 tokens. How many entries does the attention-score matrix (before softmax) have, for one head?",
       "options": [
         "16384",
-        "128",
+        "65536",
         "8388608",
-        "65536"
+        "128"
       ],
       "correct_answer": 0,
       "explanation": "Every token attends to every token: L × L scores, which is why the cost grows quadratically with length.",
@@ -7419,9 +7419,9 @@
       "question": "A self-attention layer processes 512 tokens. How many entries does the attention-score matrix (before softmax) have, for one head?",
       "options": [
         "262144",
-        "393216",
-        "201326592",
-        "512"
+        "1024",
+        "512",
+        "201326592"
       ],
       "correct_answer": 0,
       "explanation": "Every token attends to every token: L × L scores, which is why the cost grows quadratically with length.",
@@ -7438,9 +7438,9 @@
       "question": "A self-attention layer processes 4 tokens. How many entries does the attention-score matrix (before softmax) have, for one head?",
       "options": [
         "16",
-        "128",
-        "4",
-        "32"
+        "8",
+        "32",
+        "128"
       ],
       "correct_answer": 0,
       "explanation": "Every token attends to every token: L × L scores, which is why the cost grows quadratically with length.",
@@ -7458,8 +7458,8 @@
       "options": [
         "4194304",
         "4096",
-        "2048",
-        "2097152"
+        "2097152",
+        "4294967296"
       ],
       "correct_answer": 0,
       "explanation": "Every token attends to every token: L × L scores, which is why the cost grows quadratically with length.",
@@ -7477,8 +7477,8 @@
       "options": [
         "16 tokens, each with a 64-dimensional vector",
         "16 layers, 64 heads",
-        "16 classes, 64 samples",
-        "16 features, 64 tokens"
+        "16 features, 64 tokens",
+        "16 classes, 64 samples"
       ],
       "correct_answer": 0,
       "explanation": "Shape is (batch, sequence length, hidden size).",
@@ -7495,9 +7495,9 @@
       "question": "A transformer layer's output for a batch has shape (batch, 100, 128). What do 100 and 128 represent?",
       "options": [
         "100 tokens, each with a 128-dimensional vector",
-        "100 classes, 128 samples",
         "100 layers, 128 heads",
-        "100 features, 128 tokens"
+        "100 features, 128 tokens",
+        "100 classes, 128 samples"
       ],
       "correct_answer": 0,
       "explanation": "Shape is (batch, sequence length, hidden size).",
@@ -7514,9 +7514,9 @@
       "question": "A transformer layer's output for a batch has shape (batch, 512, 768). What do 512 and 768 represent?",
       "options": [
         "512 tokens, each with a 768-dimensional vector",
-        "512 classes, 768 samples",
         "512 features, 768 tokens",
-        "512 layers, 768 heads"
+        "512 layers, 768 heads",
+        "512 classes, 768 samples"
       ],
       "correct_answer": 0,
       "explanation": "Shape is (batch, sequence length, hidden size).",
@@ -7533,8 +7533,8 @@
       "question": "A BatchNorm layer is applied to 16 channels. How many trainable parameters does it have (scale and shift)?",
       "options": [
         "32",
-        "2",
         "64",
+        "2",
         "16"
       ],
       "correct_answer": 0,
@@ -7552,9 +7552,9 @@
       "question": "A BatchNorm layer is applied to 32 channels. How many trainable parameters does it have (scale and shift)?",
       "options": [
         "64",
-        "1024",
-        "128",
-        "2"
+        "32",
+        "2",
+        "128"
       ],
       "correct_answer": 0,
       "explanation": "One scale (γ) and one shift (β) per channel: 2 × 32 = 64.",
@@ -7573,7 +7573,7 @@
         "128",
         "2",
         "256",
-        "4096"
+        "64"
       ],
       "correct_answer": 0,
       "explanation": "One scale (γ) and one shift (β) per channel: 2 × 64 = 128.",
@@ -7590,9 +7590,9 @@
       "question": "A BatchNorm layer is applied to 128 channels. How many trainable parameters does it have (scale and shift)?",
       "options": [
         "256",
-        "512",
         "16384",
-        "2"
+        "512",
+        "128"
       ],
       "correct_answer": 0,
       "explanation": "One scale (γ) and one shift (β) per channel: 2 × 128 = 256.",
@@ -7609,9 +7609,9 @@
       "question": "A BatchNorm layer is applied to 256 channels. How many trainable parameters does it have (scale and shift)?",
       "options": [
         "512",
-        "1024",
+        "2",
         "65536",
-        "2"
+        "256"
       ],
       "correct_answer": 0,
       "explanation": "One scale (γ) and one shift (β) per channel: 2 × 256 = 512.",
@@ -7647,9 +7647,9 @@
       "question": "With inverted dropout at rate 0.2, surviving activations are scaled up by what factor during training?",
       "options": [
         "1.25",
-        "0.2",
-        "5",
-        "1"
+        "1",
+        "0.8",
+        "0.2"
       ],
       "correct_answer": 0,
       "explanation": "Scaling by 1/(1 − p) = 1.25 keeps the expected activation unchanged.",
@@ -7666,9 +7666,9 @@
       "question": "With inverted dropout at rate 0.25, surviving activations are scaled up by what factor during training?",
       "options": [
         "1.3333",
-        "1",
+        "4",
         "0.75",
-        "0.25"
+        "1"
       ],
       "correct_answer": 0,
       "explanation": "Scaling by 1/(1 − p) = 1.3333 keeps the expected activation unchanged.",
@@ -7685,9 +7685,9 @@
       "question": "A data set has 1000 examples and the batch size is 32. How many gradient steps are in one epoch?",
       "options": [
         "32",
-        "33",
+        "1000",
         "31",
-        "1000"
+        "33"
       ],
       "correct_answer": 0,
       "explanation": "⌈1000/32⌉ = 32.",
@@ -7704,9 +7704,9 @@
       "question": "A data set has 50000 examples and the batch size is 128. How many gradient steps are in one epoch?",
       "options": [
         "391",
-        "128",
+        "390",
         "50000",
-        "390"
+        "128"
       ],
       "correct_answer": 0,
       "explanation": "⌈50000/128⌉ = 391.",
@@ -7723,8 +7723,8 @@
       "question": "A data set has 60000 examples and the batch size is 64. How many gradient steps are in one epoch?",
       "options": [
         "938",
-        "939",
         "937",
+        "60000",
         "64"
       ],
       "correct_answer": 0,
@@ -7742,8 +7742,8 @@
       "question": "A data set has 1281167 examples and the batch size is 256. How many gradient steps are in one epoch?",
       "options": [
         "5005",
-        "5006",
         "1281167",
+        "5006",
         "5004"
       ],
       "correct_answer": 0,
@@ -7762,8 +7762,8 @@
       "options": [
         "100",
         "10000",
-        "101",
-        "99"
+        "99",
+        "101"
       ],
       "correct_answer": 0,
       "explanation": "⌈10000/100⌉ = 100.",
@@ -7780,9 +7780,9 @@
       "question": "Gradient descent minimises L(w) = w² starting at w = 1 with learning rate 0.1. What is w after 10 steps, to 3 decimal places?",
       "options": [
         "0.107",
+        "0.000",
         "0.349",
-        "0.215",
-        "0.000"
+        "0.215"
       ],
       "correct_answer": 0,
       "explanation": "Each step multiplies w by (1 − 2·lr) = 0.8, so w = 0.107.",
@@ -7800,8 +7800,8 @@
       "options": [
         "0.133",
         "0.366",
-        "0.000",
-        "0.265"
+        "0.265",
+        "0.000"
       ],
       "correct_answer": 0,
       "explanation": "Each step multiplies w by (1 − 2·lr) = 0.98, so w = 0.133.",
@@ -7818,9 +7818,9 @@
       "question": "Gradient descent minimises L(w) = w² starting at w = 1 with learning rate 1.0. What is w after 3 steps, to 3 decimal places?",
       "options": [
         "-1.000",
-        "0.000",
+        "-2.000",
         "1.000",
-        "-2.000"
+        "0.000"
       ],
       "correct_answer": 0,
       "explanation": "Each step multiplies w by (1 − 2·lr) = -1, so w = -1.000.",
@@ -7837,9 +7837,9 @@
       "question": "Why do neural networks need non-linear activation functions?",
       "options": [
         "Without them, stacked layers collapse into one linear transformation",
-        "To make training faster by itself",
+        "To normalise the inputs",
         "To allow negative weights",
-        "To normalise the inputs"
+        "To reduce the number of weights"
       ],
       "correct_answer": 0,
       "explanation": "A composition of linear maps is linear.",
@@ -7856,7 +7856,7 @@
       "question": "What problem do ReLU activations help with compared with sigmoid?",
       "options": [
         "Vanishing gradients for large positive inputs",
-        "Slow inference",
+        "Exploding activations in the output",
         "Lack of non-linearity",
         "Needing more layers"
       ],
@@ -7875,9 +7875,9 @@
       "question": "What is the vanishing gradient problem?",
       "options": [
         "Gradients shrink as they flow back through many layers, so early layers learn very slowly",
+        "The loss becomes negative",
         "Weights become infinite",
-        "The model has too few parameters",
-        "The data disappears"
+        "The model has too few parameters"
       ],
       "correct_answer": 0,
       "explanation": "Repeated multiplication by small numbers drives gradients toward zero.",
@@ -7894,9 +7894,9 @@
       "question": "What does backpropagation compute?",
       "options": [
         "The gradient of the loss with respect to every parameter, using the chain rule",
-        "The best learning rate",
+        "The next training batch",
         "The number of layers",
-        "The next training batch"
+        "The best learning rate"
       ],
       "correct_answer": 0,
       "explanation": "It reuses intermediate results to be efficient.",
@@ -7913,9 +7913,9 @@
       "question": "What is the purpose of the learning rate?",
       "options": [
         "It sets the size of each parameter update",
+        "It sets the dropout rate",
         "It sets the number of epochs",
-        "It sets the batch size",
-        "It sets the number of layers"
+        "It sets the batch size"
       ],
       "correct_answer": 0,
       "explanation": "Too high overshoots; too low is slow.",
@@ -7933,7 +7933,7 @@
       "options": [
         "One full pass through the training data",
         "One test run",
-        "One gradient step",
+        "One batch",
         "One layer"
       ],
       "correct_answer": 0,
@@ -7951,9 +7951,9 @@
       "question": "Why use mini-batches rather than the whole data set for each step?",
       "options": [
         "They give a noisy but cheap gradient estimate, allowing many more updates",
-        "Full batches are impossible on any computer",
-        "They remove the need for a learning rate",
-        "They are always more accurate"
+        "They are always more accurate",
+        "They avoid overfitting entirely",
+        "Full batches are impossible on any computer"
       ],
       "correct_answer": 0,
       "explanation": "Mini-batch SGD balances cost and gradient quality.",
@@ -7970,9 +7970,9 @@
       "question": "What does momentum add to gradient descent?",
       "options": [
         "A running average of past gradients, smoothing and speeding the updates",
-        "A random restart",
+        "More layers",
         "A second loss function",
-        "More layers"
+        "A random restart"
       ],
       "correct_answer": 0,
       "explanation": "It helps roll through shallow valleys and dampens oscillations.",
@@ -7990,8 +7990,8 @@
       "options": [
         "It adapts the step size per parameter using running averages of gradients and squared gradients",
         "It has no learning rate",
-        "It only works for CNNs",
-        "It does not use gradients"
+        "It uses the whole data set each step",
+        "It only works for CNNs"
       ],
       "correct_answer": 0,
       "explanation": "Adam combines momentum with per-parameter scaling.",
@@ -8008,8 +8008,8 @@
       "question": "What is the main benefit of convolutional layers for images?",
       "options": [
         "They share weights across positions and use local patterns, cutting parameters",
-        "They ignore colour",
         "They need no training",
+        "They remove noise",
         "They make images smaller always"
       ],
       "correct_answer": 0,
@@ -8027,9 +8027,9 @@
       "question": "What does max pooling do?",
       "options": [
         "Keeps the largest value in each window, shrinking the feature map",
-        "Normalises the values",
-        "Doubles the resolution",
-        "Adds noise"
+        "Averages all channels",
+        "Adds noise",
+        "Doubles the resolution"
       ],
       "correct_answer": 0,
       "explanation": "It gives some translation invariance.",
@@ -8048,7 +8048,7 @@
         "Adds a layer's input to its output, easing the flow of gradients in deep networks",
         "Applies dropout",
         "Removes a layer",
-        "Doubles the batch size"
+        "Normalises the input"
       ],
       "correct_answer": 0,
       "explanation": "The network only has to learn the change, F(x), in x + F(x).",
@@ -8085,7 +8085,7 @@
       "options": [
         "It connects any two positions directly and parallelises over the sequence",
         "It needs no positional information",
-        "It removed the need for data",
+        "It uses fewer parameters than any model",
         "It handles only images"
       ],
       "correct_answer": 0,
@@ -8104,8 +8104,8 @@
       "options": [
         "Self-attention alone does not know the order of tokens",
         "To add dropout",
-        "To reduce parameters",
-        "To produce probabilities"
+        "To produce probabilities",
+        "To reduce parameters"
       ],
       "correct_answer": 0,
       "explanation": "Without them the model treats the input as a bag of tokens.",
@@ -8123,8 +8123,8 @@
       "options": [
         "Reusing a model trained on one task as the starting point for another",
         "Using the same optimizer",
-        "Training with no labels",
-        "Copying the test set"
+        "Moving data between servers",
+        "Training with no labels"
       ],
       "correct_answer": 0,
       "explanation": "Fine-tuning a pretrained model needs far less data.",
@@ -8141,9 +8141,9 @@
       "question": "When fine-tuning a pretrained model on a small data set, which is a common approach?",
       "options": [
         "Freeze the early layers and train the later ones (or use a small learning rate)",
+        "Double the batch size only",
         "Remove all pretrained weights",
-        "Train with a very large learning rate",
-        "Double the batch size only"
+        "Train with a very large learning rate"
       ],
       "correct_answer": 0,
       "explanation": "Early layers capture general features worth keeping.",
@@ -8161,8 +8161,8 @@
       "options": [
         "Stopping training when validation performance stops improving",
         "Stopping at random",
-        "Stopping when loss is zero",
-        "Stopping when the batch ends"
+        "Stopping after one epoch",
+        "Stopping when loss is zero"
       ],
       "correct_answer": 0,
       "explanation": "It prevents overfitting by watching a validation metric.",
@@ -8179,9 +8179,9 @@
       "question": "What does batch normalisation do?",
       "options": [
         "Normalises layer inputs using batch statistics, stabilising and speeding up training",
+        "Reduces the number of layers",
         "Removes outliers from the data set",
-        "Normalises the labels",
-        "Adds noise to weights"
+        "Normalises the labels"
       ],
       "correct_answer": 0,
       "explanation": "It keeps activations in a stable range.",
@@ -8198,9 +8198,9 @@
       "question": "What is a good reason to use data augmentation for images?",
       "options": [
         "It creates varied training examples, helping the model generalise",
-        "It reduces the test set size",
         "It removes the need for a validation set",
-        "It makes labels more accurate"
+        "It reduces the test set size",
+        "It speeds up inference"
       ],
       "correct_answer": 0,
       "explanation": "Flips, crops and colour shifts teach invariances.",
@@ -8217,9 +8217,9 @@
       "question": "Why initialise all weights of a layer to the same value (e.g. 0)?",
       "options": [
         "You should not: every neuron would compute and learn the same thing",
-        "It improves symmetry",
+        "It prevents overfitting",
         "It speeds up training",
-        "It is required by backpropagation"
+        "It improves symmetry"
       ],
       "correct_answer": 0,
       "explanation": "Random initialisation breaks the symmetry between neurons.",
@@ -8237,8 +8237,8 @@
       "options": [
         "Reconstruct its input through a narrow bottleneck",
         "Predict the next token",
-        "Translate languages",
-        "Generate labels"
+        "Generate labels",
+        "Translate languages"
       ],
       "correct_answer": 0,
       "explanation": "The bottleneck forces a compact representation.",
@@ -8255,8 +8255,8 @@
       "question": "What is the role of the discriminator in a GAN?",
       "options": [
         "To tell real samples from the generator's fakes",
-        "To generate images",
         "To compress data",
+        "To label data",
         "To choose the learning rate"
       ],
       "correct_answer": 0,
@@ -8274,9 +8274,9 @@
       "question": "Why is the softmax output not a measure of how sure a model really is?",
       "options": [
         "It always sums to 1 over the classes, even for inputs unlike anything seen in training",
-        "It is always 0.5",
+        "It is exact",
         "It ignores the logits",
-        "It is exact"
+        "It is always 0.5"
       ],
       "correct_answer": 0,
       "explanation": "Probabilities from softmax can be overconfident and uncalibrated.",
@@ -8293,9 +8293,9 @@
       "question": "Why use a GPU for training neural networks?",
       "options": [
         "Matrix operations parallelise across thousands of cores",
-        "GPUs run Python faster than CPUs",
-        "GPUs avoid backpropagation",
-        "GPUs have no memory limits"
+        "GPUs have no memory limits",
+        "GPUs never need data",
+        "GPUs run Python faster than CPUs"
       ],
       "correct_answer": 0,
       "explanation": "Neural networks are dominated by large matrix multiplications.",
@@ -8312,9 +8312,9 @@
       "question": "What is a prompt?",
       "options": [
         "The input text (and any context) given to a language model to elicit a response",
-        "The training data set",
-        "A fine-tuning algorithm",
-        "The model's output"
+        "The model's output",
+        "The model's parameter count",
+        "The training data set"
       ],
       "correct_answer": 0,
       "explanation": "A prompt is everything you send to the model.",
@@ -8331,7 +8331,7 @@
       "question": "What is a system prompt used for?",
       "options": [
         "Setting the model's role, rules and tone before the conversation",
-        "Training the model",
+        "Choosing the GPU",
         "Increasing the context window",
         "Storing user passwords"
       ],
@@ -8350,9 +8350,9 @@
       "question": "Why is it good practice to state the desired output format in a prompt?",
       "options": [
         "Models follow explicit format instructions far more reliably than implied ones",
-        "It makes responses longer",
-        "It reduces cost to zero",
-        "It disables safety filters"
+        "It disables safety filters",
+        "It changes the model's weights",
+        "It reduces cost to zero"
       ],
       "correct_answer": 0,
       "explanation": "For example: 'Reply as JSON with keys name and age'.",
@@ -8370,8 +8370,8 @@
       "options": [
         "'Summarise the article below in three bullet points for a busy executive.'",
         "'Summarise.'",
-        "'Article: ... What?'",
-        "'Do the thing.'"
+        "'Do the thing.'",
+        "'Make it good.'"
       ],
       "correct_answer": 0,
       "explanation": "Specific length, audience and format give the model a clear target.",
@@ -8388,9 +8388,9 @@
       "question": "What is a token in a language model?",
       "options": [
         "A chunk of text (often part of a word) that the model reads and writes",
-        "A password",
-        "A whole document",
-        "A GPU core"
+        "A training example",
+        "A GPU core",
+        "A whole document"
       ],
       "correct_answer": 0,
       "explanation": "Costs and context limits are measured in tokens.",
@@ -8407,9 +8407,9 @@
       "question": "What is the context window?",
       "options": [
         "The maximum number of tokens the model can consider at once, prompt and reply together",
-        "The training data size",
         "The learning rate",
-        "The number of users"
+        "The number of layers",
+        "The training data size"
       ],
       "correct_answer": 0,
       "explanation": "Input that does not fit is cut off or must be summarised.",
@@ -8427,8 +8427,8 @@
       "options": [
         "Makes the model's word choices more varied and less predictable",
         "Makes it faster",
-        "Makes it more deterministic",
-        "Increases the context window"
+        "Reduces the cost",
+        "Makes it more deterministic"
       ],
       "correct_answer": 0,
       "explanation": "Temperature scales the probabilities before sampling.",
@@ -8446,8 +8446,8 @@
       "options": [
         "Extracting data or writing code where you want consistent output",
         "Generating names",
-        "Writing poetry",
-        "Brainstorming wild ideas"
+        "Brainstorming wild ideas",
+        "Writing poetry"
       ],
       "correct_answer": 0,
       "explanation": "Low temperature picks the most likely tokens.",
@@ -8464,9 +8464,9 @@
       "question": "What does top-p (nucleus) sampling do?",
       "options": [
         "Samples only from the smallest set of tokens whose probabilities add up to p",
-        "Repeats the prompt p times",
         "Picks the top p tokens by length",
-        "Removes the system prompt"
+        "Removes the system prompt",
+        "Repeats the prompt p times"
       ],
       "correct_answer": 0,
       "explanation": "It trims the unlikely tail of the distribution.",
@@ -8483,9 +8483,9 @@
       "question": "What is the difference between zero-shot and few-shot prompting?",
       "options": [
         "Zero-shot gives no examples; few-shot includes a few worked examples in the prompt",
-        "They are the same",
+        "Zero-shot uses a larger model",
         "Few-shot trains the model's weights",
-        "Zero-shot uses a larger model"
+        "Zero-shot is always more accurate"
       ],
       "correct_answer": 0,
       "explanation": "Examples in the prompt steer format and style without any training.",
@@ -8502,9 +8502,9 @@
       "question": "In few-shot prompting, what makes good examples?",
       "options": [
         "Varied, correct and in the exact format you want back",
+        "As many as will fit, even if wrong",
         "Only edge cases",
-        "All identical",
-        "As many as will fit, even if wrong"
+        "All identical"
       ],
       "correct_answer": 0,
       "explanation": "The model copies patterns, including mistakes.",
@@ -8522,8 +8522,8 @@
       "options": [
         "Asking the model to reason step by step before giving a final answer",
         "Fine-tuning on reasoning data",
-        "Chaining several models together",
-        "Asking for the shortest possible answer"
+        "Hiding the reasoning",
+        "Chaining several models together"
       ],
       "correct_answer": 0,
       "explanation": "Intermediate steps often improve accuracy on multi-step problems.",
@@ -8540,9 +8540,9 @@
       "question": "Which instruction elicits step-by-step reasoning?",
       "options": [
         "'Think through the problem step by step, then give the final answer.'",
-        "'Do not explain.'",
         "'Be brief.'",
-        "'Answer instantly.'"
+        "'Answer instantly.'",
+        "'Do not explain.'"
       ],
       "correct_answer": 0,
       "explanation": "It gives the model room to work before committing.",
@@ -8559,9 +8559,9 @@
       "question": "What is a role prompt?",
       "options": [
         "Telling the model to act as a specific persona, e.g. 'You are a patient maths tutor'",
-        "A database permission",
         "A model parameter",
-        "A training method"
+        "A database permission",
+        "A prompt about job roles"
       ],
       "correct_answer": 0,
       "explanation": "It shapes tone and focus.",
@@ -8578,8 +8578,8 @@
       "question": "Why should instructions and the data to process be clearly separated in a prompt?",
       "options": [
         "To stop the model confusing text to be processed with instructions to follow",
-        "To avoid using a system prompt",
         "To disable few-shot examples",
+        "To save tokens",
         "To make the answer longer"
       ],
       "correct_answer": 0,
@@ -8597,9 +8597,9 @@
       "question": "What is a good way to handle a very long document that exceeds the context window?",
       "options": [
         "Split it into chunks, process each, and combine the results",
-        "Remove the system prompt",
+        "Ask for a shorter answer only",
         "Increase the temperature",
-        "Ask for a shorter answer only"
+        "Paste it anyway and hope"
       ],
       "correct_answer": 0,
       "explanation": "Chunking (and retrieval) works within the limit.",
@@ -8617,8 +8617,8 @@
       "options": [
         "Fluent output that is false or unsupported by the input or reality",
         "A formatting error",
-        "Repeated output",
-        "A slow response"
+        "A slow response",
+        "A crash"
       ],
       "correct_answer": 0,
       "explanation": "Models generate plausible text, which is not always true.",
@@ -8635,9 +8635,9 @@
       "question": "Which prompt change most directly reduces hallucination on a question about a supplied document?",
       "options": [
         "'Answer only from the document below. If the answer is not there, say you cannot tell.'",
-        "'Always give a number.'",
         "'Answer with confidence.'",
-        "'Use your imagination.'"
+        "'Be creative.'",
+        "'Always give a number.'"
       ],
       "correct_answer": 0,
       "explanation": "Grounding plus permission to say 'unknown' reduces invention.",
@@ -8654,9 +8654,9 @@
       "question": "What is prompt injection?",
       "options": [
         "Text in the input that tries to override the developer's instructions",
-        "A fine-tuning step",
         "A token limit",
-        "A way to speed up output"
+        "A way to speed up output",
+        "Adding more examples"
       ],
       "correct_answer": 0,
       "explanation": "For example a web page saying 'ignore all previous instructions'.",
@@ -8673,9 +8673,9 @@
       "question": "Which is the safest way to treat untrusted text (such as an email) in a prompt?",
       "options": [
         "Mark it clearly as data, keep privileges minimal, and never let it trigger sensitive actions unreviewed",
-        "Hide it from logs",
-        "Trust it as instructions",
-        "Merge it into the system prompt"
+        "Merge it into the system prompt",
+        "Give the model admin tools",
+        "Hide it from logs"
       ],
       "correct_answer": 0,
       "explanation": "Treat model input from outside as untrusted.",
@@ -8692,8 +8692,8 @@
       "question": "What is structured output (for example JSON mode) useful for?",
       "options": [
         "Getting machine-readable results that code can parse reliably",
+        "Shortening the context window",
         "Changing the model size",
-        "Making responses poetic",
         "Increasing the temperature"
       ],
       "correct_answer": 0,
@@ -8711,9 +8711,9 @@
       "question": "Why validate a model's JSON output in code?",
       "options": [
         "Models can still produce invalid or incomplete JSON",
-        "It reduces token use",
+        "It is required by the model licence",
         "Validation makes it faster",
-        "It is required by the model licence"
+        "It reduces token use"
       ],
       "correct_answer": 0,
       "explanation": "Always check, and retry or repair if invalid.",
@@ -8730,9 +8730,9 @@
       "question": "What is the purpose of an evaluation set for prompts?",
       "options": [
         "To measure whether a prompt change really improves results across many cases",
-        "To lower the temperature",
+        "To store system prompts",
         "To raise the token limit",
-        "To store system prompts"
+        "To lower the temperature"
       ],
       "correct_answer": 0,
       "explanation": "One good-looking answer is not evidence.",
@@ -8749,8 +8749,8 @@
       "question": "What is retrieval-augmented generation (RAG)?",
       "options": [
         "Fetching relevant documents and adding them to the prompt before generating",
-        "Retraining the model on each question",
         "Using a bigger temperature",
+        "Generating images from text",
         "Compressing prompts"
       ],
       "correct_answer": 0,
@@ -8768,7 +8768,7 @@
       "question": "What is prompt chaining?",
       "options": [
         "Splitting a task into steps where each step's output feeds the next prompt",
-        "Making one prompt very long",
+        "Sending prompts to different users",
         "Repeating the system prompt",
         "Running the same prompt twice"
       ],
@@ -8787,9 +8787,9 @@
       "question": "When should you give the model an 'out', such as 'say N/A if unknown'?",
       "options": [
         "When the input may not contain the answer, to avoid forced guesses",
+        "Only for code",
         "Never",
-        "Only when temperature is high",
-        "Only for code"
+        "Only when temperature is high"
       ],
       "correct_answer": 0,
       "explanation": "Otherwise the model tends to fill the gap.",
@@ -8806,9 +8806,9 @@
       "question": "Why might the same prompt give different answers on different runs?",
       "options": [
         "Sampling is random unless the temperature is 0 (and even then outputs can vary slightly)",
-        "The prompt changes itself",
+        "Tokens are shuffled",
         "The model forgets",
-        "The internet changed"
+        "The prompt changes itself"
       ],
       "correct_answer": 0,
       "explanation": "Variation is a property of sampling.",
@@ -8825,9 +8825,9 @@
       "question": "What is self-consistency prompting?",
       "options": [
         "Sampling several reasoning paths and taking the most common answer",
-        "Checking spelling",
-        "Asking the model to repeat itself",
-        "Using a longer prompt"
+        "Using a longer prompt",
+        "Using temperature 0",
+        "Checking spelling"
       ],
       "correct_answer": 0,
       "explanation": "Majority agreement across paths improves reliability.",
@@ -8844,9 +8844,9 @@
       "question": "What does 'few-shot' cost compared with zero-shot?",
       "options": [
         "More input tokens per request, because the examples are sent every time",
-        "Extra training time",
-        "Nothing",
-        "A new model"
+        "Fewer input tokens",
+        "A new model",
+        "Extra training time"
       ],
       "correct_answer": 0,
       "explanation": "Examples occupy context and add to the bill.",
@@ -8863,8 +8863,8 @@
       "question": "Which is a sign of a weak prompt?",
       "options": [
         "Vague goals with no audience, format or constraints",
+        "A clear output schema",
         "Explicit success criteria",
-        "Worked examples",
         "A stated role"
       ],
       "correct_answer": 0,
@@ -8882,9 +8882,9 @@
       "question": "What does it mean to put the most important instructions at the start or end of a long prompt?",
       "options": [
         "Models tend to attend best to the beginning and end of long contexts",
-        "It reduces the token count",
+        "Middle text is deleted",
         "It is required by every API",
-        "Middle text is deleted"
+        "It changes the temperature"
       ],
       "correct_answer": 0,
       "explanation": "Important details buried in the middle of long text are more likely to be missed.",
@@ -8901,8 +8901,8 @@
       "question": "Which is better for classification: 'Is this review positive?' or 'Classify the review as exactly one of: positive, negative, neutral. Output only the label.'?",
       "options": [
         "The second, because it fixes the allowed labels and format",
-        "Neither",
         "The first, because it is shorter",
+        "They are equivalent",
         "The first, because it is open-ended"
       ],
       "correct_answer": 0,
@@ -8922,7 +8922,7 @@
         "Real inputs are messy and failures usually appear there",
         "They lower the temperature",
         "Edge cases are always ignored",
-        "They change the model"
+        "They reduce cost"
       ],
       "correct_answer": 0,
       "explanation": "A prompt that works on neat examples may break in production.",
@@ -8939,9 +8939,9 @@
       "question": "What is the right way to compare two prompt versions?",
       "options": [
         "Run both on the same set of test cases and compare against agreed criteria",
-        "Try each once",
+        "Use the cheaper one",
         "Pick the one that looks longer",
-        "Use the cheaper one"
+        "Ask the model which it prefers without checking"
       ],
       "correct_answer": 0,
       "explanation": "Same inputs, same scoring.",
@@ -8958,9 +8958,9 @@
       "question": "What should you NOT put in a prompt sent to a third-party model service?",
       "options": [
         "Secrets or personal data you are not allowed to share",
-        "Examples",
         "A role",
-        "Output format instructions"
+        "A task description",
+        "Examples"
       ],
       "correct_answer": 0,
       "explanation": "Prompts leave your environment; follow your data-handling rules.",
@@ -8977,9 +8977,9 @@
       "question": "What is a stop sequence?",
       "options": [
         "A string that makes the model stop generating when it appears",
-        "A token limit",
+        "A fine-tuning step",
         "A safety filter",
-        "A prompt delimiter"
+        "A token limit"
       ],
       "correct_answer": 0,
       "explanation": "Useful to end output before the model starts a new turn.",
@@ -8998,7 +8998,7 @@
         "The maximum length of the generated reply",
         "The temperature",
         "The number of examples",
-        "The model's vocabulary"
+        "The size of the prompt window"
       ],
       "correct_answer": 0,
       "explanation": "A reply may be cut off mid-sentence when it is too low.",
@@ -9016,8 +9016,8 @@
       "options": [
         "The max_tokens limit (or the context window) was reached",
         "The model refused",
-        "The system prompt was missing",
-        "The prompt had a typo"
+        "The temperature was too low",
+        "The system prompt was missing"
       ],
       "correct_answer": 0,
       "explanation": "The reply ran out of allowed tokens.",
@@ -9034,9 +9034,9 @@
       "question": "Which technique is best when a task needs facts the model was not trained on?",
       "options": [
         "Retrieval (add the facts to the prompt) or fine-tuning, with retrieval usually cheaper and easier to update",
-        "Lower top-p",
+        "Add 'be accurate' to the prompt",
         "Raise the temperature",
-        "Add 'be accurate' to the prompt"
+        "Lower top-p"
       ],
       "correct_answer": 0,
       "explanation": "Telling the model to be accurate cannot supply knowledge it lacks.",
@@ -9053,9 +9053,9 @@
       "question": "What is the main difference between fine-tuning and prompting?",
       "options": [
         "Fine-tuning changes the model's weights; prompting only changes the input",
-        "Prompting needs a GPU cluster",
-        "They are identical",
-        "Fine-tuning needs no data"
+        "Fine-tuning needs no data",
+        "Prompting changes the weights",
+        "They are identical"
       ],
       "correct_answer": 0,
       "explanation": "Prompts are instant and reversible; fine-tuning bakes in behaviour.",
@@ -9072,9 +9072,9 @@
       "question": "Why ask the model to quote supporting text from a document?",
       "options": [
         "It makes answers checkable and discourages unsupported claims",
-        "It increases creativity",
         "It lowers latency",
-        "It removes the need for the document"
+        "It removes the need for the document",
+        "It increases creativity"
       ],
       "correct_answer": 0,
       "explanation": "Quotes let you verify the answer against the source.",
@@ -9091,9 +9091,9 @@
       "question": "What is a good practice for prompts used in a product?",
       "options": [
         "Keep them in version control and test changes against an evaluation set",
+        "Store them in chat history only",
         "Copy them from the web unchecked",
-        "Edit them live without records",
-        "Store them in chat history only"
+        "Edit them live without records"
       ],
       "correct_answer": 0,
       "explanation": "Prompts are part of your software.",
@@ -9110,9 +9110,9 @@
       "question": "What is the likely effect of adding 'Let's think step by step' to a simple factual lookup ('Capital of France?')?",
       "options": [
         "Little or no gain, with longer output and higher cost",
-        "The model refuses",
+        "The context window grows",
         "The temperature changes",
-        "A dramatic accuracy gain"
+        "The model refuses"
       ],
       "correct_answer": 0,
       "explanation": "Reasoning prompts help multi-step problems, not trivial lookups.",
@@ -9130,7 +9130,7 @@
       "options": [
         "To base it on supplied, verifiable sources",
         "To shorten it",
-        "To lower the temperature",
+        "To translate it",
         "To run it offline"
       ],
       "correct_answer": 0,
@@ -9148,8 +9148,8 @@
       "question": "What is the benefit of asking the model to output its answer in a fixed template (headings, fields)?",
       "options": [
         "Consistent, easy-to-compare results across many inputs",
+        "Faster training",
         "Lower cost per token",
-        "Higher temperature",
         "A bigger context window"
       ],
       "correct_answer": 0,
@@ -9167,8 +9167,8 @@
       "question": "A user asks the assistant to ignore its rules. What should a well-designed system do?",
       "options": [
         "Keep enforcing its rules in the system prompt and in code, not rely on the model alone",
-        "Raise the temperature",
         "Log the user out of the model",
+        "Raise the temperature",
         "Delete the system prompt"
       ],
       "correct_answer": 0,
@@ -9186,9 +9186,9 @@
       "question": "What is 'prompt leakage'?",
       "options": [
         "The model revealing hidden instructions or private context from its prompt",
+        "A prompt being too long",
         "A formatting bug",
-        "A slow response",
-        "A prompt being too long"
+        "The model forgetting"
       ],
       "correct_answer": 0,
       "explanation": "Do not put secrets in prompts that users can probe.",
@@ -9205,9 +9205,9 @@
       "question": "What does 'few-shot' example ordering affect?",
       "options": [
         "Models can be biased toward the most recent or most frequent example label",
-        "Only the temperature",
+        "Only the cost",
         "Nothing",
-        "Only the context window"
+        "Only the temperature"
       ],
       "correct_answer": 0,
       "explanation": "Shuffle and balance labels in classification examples.",
@@ -9224,9 +9224,9 @@
       "question": "How can you make a classification prompt less sensitive to wording?",
       "options": [
         "Test several phrasings and pick the one that scores best on a labelled set",
-        "Make it as long as possible",
-        "Use the first one that works once",
-        "Remove the labels"
+        "Write it in all capitals",
+        "Remove the labels",
+        "Use the first one that works once"
       ],
       "correct_answer": 0,
       "explanation": "Prompts are brittle; measure them.",
@@ -9243,9 +9243,9 @@
       "question": "Which is a valid reason to split a complex task into several prompts?",
       "options": [
         "Each step can be tested, and errors are easier to locate",
+        "It increases temperature",
         "The model can only read one sentence",
-        "It always costs less",
-        "It increases temperature"
+        "It always costs less"
       ],
       "correct_answer": 0,
       "explanation": "Modularity helps debugging.",
@@ -9262,9 +9262,9 @@
       "question": "What is the effect of very high temperature (e.g. 2) on factual answers?",
       "options": [
         "More errors and incoherent text, because unlikely tokens are sampled more often",
-        "Shorter answers always",
-        "Deterministic output",
-        "More accuracy"
+        "More accuracy",
+        "No change",
+        "Shorter answers always"
       ],
       "correct_answer": 0,
       "explanation": "Randomness works against precision.",

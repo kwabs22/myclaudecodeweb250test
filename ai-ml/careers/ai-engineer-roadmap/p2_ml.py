@@ -195,7 +195,6 @@ def deep(b):
     seen = 0
     while seen < 18:
         z = [r.randint(-2, 4) for _ in range(r.choice([3, 4]))]; e = np.exp(z); sm = e / e.sum(); assert abs(sm.sum() - 1) < 1e-12
-        i = r.randrange(len(z))
         ok = b.add(DL, "softmax", "intermediate", f"What is the softmax probability of the first entry for the logits {z}? (3 decimal places)", fnum(sm[0]), [fnum(1 / len(z)), fnum(z[0] / sum(abs(v) for v in z) if sum(abs(v) for v in z) else 0.25), fnum(float(np.exp(z[0]))), fnum(sm[int(np.argmax(sm))] if int(np.argmax(sm)) != 0 else sm[-1]), fnum(1 - sm[0])], f"softmax(z)₁ = e^{z[0]} / Σe^z = {fnum(sm[0])}.")
         if ok: seen += 1
     for p in [0.9, 0.5, 0.25, 0.1, 0.8, 0.99, 0.7, 0.01]:

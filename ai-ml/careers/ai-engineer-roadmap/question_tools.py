@@ -76,7 +76,6 @@ def num(x, digits=4):
 
 def near(rng, value, n=6, step=None):
     """Plausible wrong numbers around a value: neighbours, sign flip, double, half."""
-    out = []
     if isinstance(value, Fraction):
         cands = [value + Fraction(k, max(value.denominator, 1)) for k in (-2, -1, 1, 2)] + [-value, value * 2]
         return [num(c) for c in cands if c != value]
