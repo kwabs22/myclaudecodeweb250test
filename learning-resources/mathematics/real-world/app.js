@@ -9,10 +9,29 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 const mod = Object.fromEntries(MODALITIES.map((m) => [m.id, m]));
 const values = {};                       /* each task keeps its own slider values while you look at others */
 for (const t of TASKS) values[t.id] = Object.fromEntries(t.controls.map((c) => [c.key, c.type === "bits" ? c.value.slice() : c.value]));
-let current = null, filter = null;
+let current = null, filter = null, who = null;
+const visible = (t) => (!filter || t.modality === filter) && (!who || t.who === who);
 const cardEls = new Map();
 
 /* ------------------------------------------------------------------ chips and the task list */
+function buildWho() {
+  const el = $("who"); el.innerHTML = "";
+  const n = (w) => TASKS.filter((t) => !w || t.who === w).length;
+  [["", "All tasks"], ["solo", "Solo"], ["group", "Group"]].forEach(([w, label]) => {
+    const b = document.createElement("button"); b.className = "chip whobtn"; b.type = "button"; b.setAttribute("aria-pressed", String((who || "") === w)); b.dataset.who = w;
+    b.innerHTML = `${esc(label)} <small>${n(w)}</small>`;
+    b.addEventListener("click", () => setWho(w || null));
+    el.appendChild(b);
+  });
+}
+function setWho(w) { who = w; document.querySelectorAll(".whobtn").forEach((c) => c.setAttribute("aria-pressed", String((who || "") === c.dataset.who))); refreshVisibility(); }
+function refreshVisibility() {
+  cardEls.forEach((el, id) => el.classList.toggle("dim", !visible(TASKS.find((t) => t.id === id))));
+  document.querySelectorAll(".group").forEach((s) => s.classList.toggle("dim", !TASKS.some((t) => t.modality === s.dataset.m && visible(t))));
+  document.querySelectorAll("#glance tr[data-m]").forEach((r) => r.classList.toggle("dim", !TASKS.some((t) => t.modality === r.dataset.m && visible(t))));
+  document.querySelectorAll("#glance a[data-task]").forEach((a) => a.classList.toggle("dim", !visible(TASKS.find((t) => t.id === a.dataset.task))));
+  scene && scene.applyFilter();
+}
 function buildChips() {
   const el = $("chips");
   el.innerHTML = "";
@@ -25,9 +44,10 @@ function buildChips() {
   }
 }
 function buildGlance() {
-  /* The same seven groups and 23 tasks as below, as a table: made from the data so it cannot drift from the page */
-  const rows = MODALITIES.map((m) => `<tr style="--c:${m.color}"><th scope="row"><a href="#g-${m.id}"><i></i>${esc(m.name)}</a></th><td class="q">${esc(m.ask)}</td><td class="t">${TASKS.filter((t) => t.modality === m.id).map((t) => `<a href="#${t.id}" data-task="${t.id}">${esc(t.title)}</a>`).join("; ")}</td></tr>`).join("");
-  $("glance").innerHTML = `<caption>The seven groups and what is in each</caption><thead><tr><th scope="col">Group</th><th scope="col">The question</th><th scope="col">Tasks</th></tr></thead><tbody>${rows}</tbody>`;
+  /* The same seven groups and every task as below, as a table: made from the data so it cannot drift from the page */
+  const cell = (m, w) => TASKS.filter((t) => t.modality === m.id && t.who === w).map((t) => `<a href="#${t.id}" data-task="${t.id}">${esc(t.title)}</a>`).join("; ") || "none yet";
+  const rows = MODALITIES.map((m) => `<tr data-m="${m.id}" style="--c:${m.color}"><th scope="row"><a href="#g-${m.id}"><i></i>${esc(m.name)}</a></th><td class="q">${esc(m.ask)}</td><td class="t">${cell(m, "solo")}</td><td class="t">${cell(m, "group")}</td></tr>`).join("");
+  $("glance").innerHTML = `<caption>The seven groups, split into solo and group tasks</caption><thead><tr><th scope="col">Group</th><th scope="col">The question</th><th scope="col">Solo tasks (one person or system)</th><th scope="col">Group tasks (several people or agents)</th></tr></thead><tbody>${rows}</tbody>`;
   $("glance").querySelectorAll("a[data-task]").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); select(a.dataset.task); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); }));
 }
 function buildList() {
@@ -38,7 +58,7 @@ function buildList() {
     const cards = document.createElement("div"); cards.className = "cards";
     for (const t of TASKS.filter((t) => t.modality === m.id)) {
       const c = document.createElement("button"); c.className = "card"; c.style.setProperty("--c", m.color);
-      c.innerHTML = `<b>${esc(t.title)}</b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
+      c.innerHTML = `<b>${esc(t.title)}<span class="badge ${t.who}">${t.who}</span></b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
       c.addEventListener("click", () => { select(t.id); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
       cardEls.set(t.id, c); cards.appendChild(c);
     }
@@ -47,9 +67,8 @@ function buildList() {
 }
 function setFilter(id) {
   filter = id;
-  document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.m === id)));
-  document.querySelectorAll(".group").forEach((s) => s.classList.toggle("dim", !!id && s.dataset.m !== id));
-  scene && scene.applyFilter();
+  document.querySelectorAll(".chip[data-m]").forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.m === id)));
+  refreshVisibility();
 }
 
 /* ------------------------------------------------------------------ the task panel */
@@ -61,7 +80,7 @@ function control(t, c) {
     const id = `c-${t.id}-${c.key}`;
     wrap.innerHTML = `<label for="${id}">${esc(c.label)}<output id="${id}-o"></output></label><input id="${id}" type="range">`;
     const input = wrap.querySelector("input"), out = wrap.querySelector("output");
-    const sync = () => { input.min = c.min; input.max = max(); input.step = step(); if (v[c.key] > max()) v[c.key] = max(); input.value = v[c.key]; out.textContent = Number(v[c.key]).toLocaleString(); };
+    const sync = () => { const lo = c.minFor ? c.minFor(v) : c.min; input.min = lo; if (v[c.key] < lo) v[c.key] = lo; input.max = max(); input.step = step(); if (v[c.key] > max()) v[c.key] = max(); input.value = v[c.key]; out.textContent = Number(v[c.key]).toLocaleString(); };
     sync(); input.addEventListener("input", () => { v[c.key] = Number(input.value); out.textContent = Number(v[c.key]).toLocaleString(); update(false); });
     wrap._sync = sync;
   } else if (c.type === "select") {
@@ -83,7 +102,7 @@ function select(id, fromScene) {
   current = t; const m = mod[t.modality];
   const p = $("panel"); p.style.setProperty("--c", m.color); p.innerHTML = "";
   const head = document.createElement("div");
-  head.innerHTML = `<span class="tag">${esc(m.name)}</span><h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
+  head.innerHTML = `<span class="tag">${esc(m.name)}</span><span class="badge ${t.who}">${t.who === "group" ? "group task" : "solo task"}</span><h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
   p.appendChild(head);
   const ctl = document.createElement("div"); ctl.className = "controls"; ctl.id = "ctl";
   t.controls.forEach((c) => ctl.appendChild(control(t, c)));
@@ -152,7 +171,7 @@ function build3D() {
 
   const fib = (i, n, r) => { const y = 1 - (2 * (i + 0.5)) / n, rad = Math.sqrt(1 - y * y), a = i * Math.PI * (3 - Math.sqrt(5)); return new THREE.Vector3(Math.cos(a) * rad * r, y * r, Math.sin(a) * rad * r); };
   const nodes = [], labelEls = [], group = new THREE.Group(); sc.add(group);
-  const sphereGeo = new THREE.SphereGeometry(1, 28, 20);
+  const sphereGeo = new THREE.SphereGeometry(1, 28, 20), diamondGeo = new THREE.OctahedronGeometry(1.3);
   MODALITIES.forEach((m, mi) => {
     const centre = fib(mi, MODALITIES.length, 5.6), col = new THREE.Color(m.color);
     const hub = new THREE.Mesh(sphereGeo, new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.35, roughness: 0.4, transparent: true, opacity: 0.95 }));
@@ -160,11 +179,11 @@ function build3D() {
     const mine = TASKS.filter((t) => t.modality === m.id);
     mine.forEach((t, ti) => {
       const off = fib(ti, mine.length + 2, 1.9), pos = centre.clone().add(off);
-      const mesh = new THREE.Mesh(sphereGeo, new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.15, roughness: 0.35, transparent: true, opacity: 1 }));
-      mesh.scale.setScalar(0.3); mesh.position.copy(pos); mesh.userData = { id: t.id, m: m.id, title: t.title }; group.add(mesh);
+      const mesh = new THREE.Mesh(t.who === "group" ? diamondGeo : sphereGeo, new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.15, roughness: 0.35, transparent: true, opacity: 1, flatShading: t.who === "group" }));
+      mesh.scale.setScalar(0.3); mesh.position.copy(pos); mesh.userData = { id: t.id, m: m.id, title: t.title + " (" + t.who + ")" }; group.add(mesh);
       const geo = new THREE.BufferGeometry().setFromPoints([centre, pos]);
       const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.45 })); group.add(line);
-      nodes.push({ mesh, line, id: t.id, m: m.id, base: 0.3 });
+      nodes.push({ mesh, line, id: t.id, m: m.id, who: t.who, base: 0.3 });
     });
     const el = document.createElement("div"); el.className = "lab group"; el.textContent = m.name; $("labels").appendChild(el);
     labelEls.push({ el, pos: centre.clone().add(new THREE.Vector3(0, 0.75, 0)), m: m.id });
@@ -176,7 +195,7 @@ function build3D() {
 
   const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let hover = null, down = null, tween = null;
   const tip = $("tip");
-  const pick = (ev) => { const r = renderer.domElement.getBoundingClientRect(); ptr.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera); const hits = ray.intersectObjects(nodes.filter((n) => !filter || n.m === filter).map((n) => n.mesh)); return hits.length ? hits[0].object : null; };
+  const pick = (ev) => { const r = renderer.domElement.getBoundingClientRect(); ptr.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ptr, camera); const hits = ray.intersectObjects(nodes.filter((n) => visible({ modality: n.m, who: n.who })).map((n) => n.mesh)); return hits.length ? hits[0].object : null; };
   renderer.domElement.addEventListener("pointermove", (ev) => {
     const o = pick(ev); hover = o; renderer.domElement.style.cursor = o ? "pointer" : "grab";
     if (o) { const r = stage.getBoundingClientRect(); tip.textContent = o.userData.title; tip.style.left = ev.clientX - r.left + "px"; tip.style.top = ev.clientY - r.top + "px"; tip.style.opacity = 1; } else tip.style.opacity = 0;
@@ -207,12 +226,13 @@ function build3D() {
   requestAnimationFrame(frame);
   return {
     focus(id) { const n = nodes.find((x) => x.id === id); if (n) { tween = n.mesh.position.clone().multiplyScalar(0.55); controls.autoRotate = false; } },
-    applyFilter() { for (const n of nodes) { const on = !filter || n.m === filter; n.mesh.material.opacity = on ? 1 : 0.18; n.line.material.opacity = on ? 0.45 : 0.08; } if (filter) { const c = nodes.filter((n) => n.m === filter).reduce((s, n) => s.add(n.mesh.position), new THREE.Vector3()).multiplyScalar(1 / nodes.filter((n) => n.m === filter).length); tween = c.multiplyScalar(0.6); controls.autoRotate = false; } else tween = new THREE.Vector3(); },
+    applyFilter() { const on = (n) => visible({ modality: n.m, who: n.who }); for (const n of nodes) { n.mesh.material.opacity = on(n) ? 1 : 0.15; n.line.material.opacity = on(n) ? 0.45 : 0.06; } const shown = nodes.filter(on); if (filter && shown.length) { const c = shown.reduce((s, n) => s.add(n.mesh.position), new THREE.Vector3()).multiplyScalar(1 / shown.length); tween = c.multiplyScalar(0.6); controls.autoRotate = false; } else tween = new THREE.Vector3(); },
   };
 }
 
 /* ------------------------------------------------------------------ start */
-buildChips(); buildGlance(); buildList();
+$("n-tasks").textContent = TASKS.length;
+buildWho(); buildChips(); buildGlance(); buildList();
 scene = build3D();
 const start = location.hash.slice(1);
 select(TASKS.some((t) => t.id === start) ? start : "birthday");

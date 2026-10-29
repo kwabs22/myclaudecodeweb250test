@@ -8,21 +8,23 @@ Three reference documents and a quiz on counting, plus a map from the questions 
 | [Answers](combinatorics_answers.md) | Worked answers; every numeric answer was checked by brute force |
 | [Combinatorics Quiz](quiz/index.html) | A page that quizzes you on the 100 questions |
 | [Repositories](combinatorics_repositories.md) | GitHub libraries for combinatorics, by language |
-| [Combinatorics in the real world](real-world/index.html) | A 3D map of 23 everyday problems (passwords, poker, the birthday problem, test results, delivery routes, schedules, error-correcting codes and more), grouped by the question each one asks, with live numbers. The logic is in `real-world/tasks.js` and `real-world/check.js` checks it |
+| [Combinatorics in the real world](real-world/index.html) | A 3D map of 35 everyday problems (passwords, poker, the birthday problem, test results, seating, Secret Santa, team splits, voting, delivery routes, schedules, error-correcting codes and more), grouped by the question each one asks and by solo or group, with live numbers. The logic is in `real-world/tasks.js` and `real-world/check.js` checks it |
 
 ## Combinatorics in the real world
 
-The [real-world page](real-world/index.html) is a 3D map of 23 everyday problems, grouped by the question each one asks. Prediction is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Each task has live numbers; `real-world/check.js` tests them against brute force.
+The [real-world page](real-world/index.html) is a 3D map of 35 everyday problems, grouped by the question each one asks. Prediction is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen.
 
-| Group | The question | Tasks |
-|---|---|---|
-| Counting | How many are there? | How many passwords?; Licence plates and product codes; Poker hands |
-| Prediction | What is likely to happen? | Surprising coincidences (the birthday problem); What a positive test really means; Guessing the next word; Chances of reaching a target in a season; Lottery odds |
-| Search size | Could we simply try them all? | DNA and the number of short words; Game trees (chess, Go and friends); Choosing a set of features |
-| Optimisation | Which choice is best? | A delivery route; Loading a truck; Matching workers to jobs |
-| Feasibility | Is there a valid arrangement, and how many? | Colouring a map or a timetable; Sudoku, rotas and Latin squares; Shift rotas with rules |
-| Coverage and design | How do we arrange things so nothing is missed? | A league where everyone plays everyone; A code that repairs a flipped bit; Testing software settings |
-| Sampling and randomness | How many ways could the draw have gone? | Shuffling a deck; Picking a survey sample; Resampling your own data (the bootstrap) |
+Each problem is also marked **solo** (17 tasks: one person or system faces it alone, such as a ticket, a hand, a route or a data set) or **group** (18 tasks: the answer depends on how several people or agents fit, meet, share or compete, such as a team, a league or a crowd). Solo tasks grow with the number of options; group tasks also grow with the number of people, usually much faster: pairs grow with n², sub-groups with 2ⁿ and line-ups with n!. Each task has live numbers; `real-world/check.js` tests them against brute force.
+
+| Group | The question | Solo tasks | Group tasks |
+|---|---|---|---|
+| Counting | How many are there? | How many passwords?; Licence plates and product codes; Poker hands; Counting routes across a city grid | Handshakes and who talks to whom; Picking a committee; Seating people round a table; Splitting people into teams; How fast groups blow up |
+| Prediction | What is likely to happen? | What a positive test really means; Guessing the next word; Lottery odds; Collecting a complete set; What will the dice show? | Surprising coincidences (the birthday problem); Chances of reaching a target in a season; Can a majority vote go in a circle?; Finding a time everyone can meet |
+| Search size | Could we simply try them all? | DNA and the number of short words; Choosing a set of features | Game trees (chess, Go and friends) |
+| Optimisation | Which choice is best? | A delivery route; Loading a truck | Matching workers to jobs |
+| Feasibility | Is there a valid arrangement, and how many? | Sudoku, rotas and Latin squares | Colouring a map or a timetable; Shift rotas with rules; Secret Santa: nobody draws themselves |
+| Coverage and design | How do we arrange things so nothing is missed? | Testing software settings | A league where everyone plays everyone; A code that repairs a flipped bit; A knockout tournament |
+| Sampling and randomness | How many ways could the draw have gone? | Shuffling a deck; Resampling your own data (the bootstrap) | Picking a survey sample |
 
 ## Closest tasks in this repository
 

@@ -518,5 +518,204 @@
     },
   });
 
-  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn }, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
+
+  /* ================================================================== SOLO AND GROUP */
+  /* Solo: one person or system faces the problem alone (their ticket, hand, route, data).
+     Group: the answer depends on how several people or agents fit, meet, share or compete. */
+  const WHO = { passwords: "solo", plates: "solo", poker: "solo", birthday: "group", bayes: "solo", nextword: "solo", season: "group", lottery: "solo",
+    kmers: "solo", gametree: "group", subsets: "solo", tsp: "solo", knapsack: "solo", assignment: "group", colouring: "group", latin: "solo", roster: "group",
+    roundrobin: "group", hamming: "group", pairwise: "solo", shuffle: "solo", survey: "group", bootstrap: "solo" };
+  T.forEach((t) => { t.who = WHO[t.id]; });
+
+  /* --- helpers for the group tasks */
+  function stirling2(n, k) {                 /* ways to split n people into k non-empty teams, teams unlabelled */
+    const S = Array.from({ length: n + 1 }, () => new Array(k + 1).fill(0n)); S[0][0] = 1n;
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= Math.min(i, k); j++) S[i][j] = B(j) * S[i - 1][j] + S[i - 1][j - 1];
+    return S[n][k];
+  }
+  function bell(n) { let t = 0n; for (let k = 0; k <= n; k++) t += stirling2(n, k); return t; }
+  function derangements(n) { if (n === 0) return 1n; let a = 1n, b = 0n; for (let i = 2; i <= n; i++) [a, b] = [b, B(i - 1) * (a + b)]; return n === 1 ? 0n : b; }
+  function pairings(n) { let r = 1n; for (let i = n - 1; i > 1; i -= 2) r *= B(i); return r; }   /* (n-1)!! for even n */
+
+  task({
+    id: "handshakes", modality: "counting", who: "group", title: "Handshakes and who talks to whom",
+    ask: "In a group of n people, how many pairs can talk to each other, and how many different sub-groups could form?",
+    idea: "Every pair is one link, so n people have C(n, 2) = n(n − 1)/2 links: doubling the group roughly quadruples them. Every person is in or out of a sub-group, so there are 2^n sub-groups, of which 2^n − n − 1 have two or more people. This is why big teams struggle to keep everyone in step.",
+    questions: [31, 38, 63], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("n", "People in the group", 2, 60, 10)],
+    compute(v) {
+      const links = comb(v.n, 2);
+      return { rows: [["Pairs (handshakes, possible conversations)", fmtBig(links)], ["Messages if everyone tells everyone", fmtBig(B(v.n) * B(v.n - 1))], ["Possible sub-groups of two or more", fmtBig(pow(2, v.n) - B(v.n) - 1n)], ["Pairs after doubling the group", fmtBig(comb(2 * v.n, 2))]],
+        note: "Five people have 10 pairs; ten people have 45. Adding people adds many more links than people." };
+    },
+  });
+  task({
+    id: "committee", modality: "counting", who: "group", title: "Picking a committee",
+    ask: "From a group of n people, how many different committees of k can be chosen, and how do rules change the count?",
+    idea: "A committee is a subset, so order does not matter: C(n, k). A rule changes the count by splitting the choice. Needing exactly m members from a sub-group of W means choosing m from the W and the rest from the others: C(W, m) × C(n − W, k − m). Naming a chair and a secretary adds ordered choices.",
+    questions: [31, 33, 15, 14], repo: [["Combinations", REPO + "backtracking/combinations.js"]],
+    controls: [range("n", "People in the group", 4, 40, 12), range("k", "Committee size", 2, 40, 4, { maxFor: (v) => v.n }), range("W", "People in sub-group A", 0, 40, 5, { maxFor: (v) => v.n }), range("m", "Members needed from sub-group A", 0, 40, 2, { maxFor: (v) => Math.min(v.k, v.W) })],
+    compute(v) {
+      const n = v.n, k = Math.min(v.k, n), W = Math.min(v.W, n), m = Math.min(v.m, k, W);
+      const rest = k - m <= n - W ? comb(W, m) * comb(n - W, k - m) : 0n;
+      return { rows: [["All committees of " + k, fmtBig(comb(n, k))], [`Exactly ${m} from sub-group A (${W} people)`, fmtBig(rest)], ["…with a chair and a secretary named (two different members)", fmtBig(comb(n, k) * B(k) * B(k - 1))], ["Including at least one of two particular people", fmtBig(comb(n, k) - comb(n - 2, k))]],
+        note: "The last row counts all committees and removes the ones that exclude both people: C(n, k) − C(n − 2, k)." };
+    },
+  });
+  task({
+    id: "seating", modality: "counting", who: "group", title: "Seating people round a table",
+    ask: "n people sit at a round table. How many different seatings are there, and how many keep two friends together or apart?",
+    idea: "Turning everyone one seat round gives the same seating, so fix one person and arrange the others: (n − 1)!. Treat two friends as one block that can face either way: 2 × (n − 2)! seatings keep them side by side. The rest, (n − 1)! − 2(n − 2)!, keep them apart.",
+    questions: [24, 25, 58], repo: [["Permutations", REPO + "backtracking/permutations.js"]],
+    controls: [range("n", "People", 3, 20, 8)],
+    compute(v) {
+      const all = fact(v.n - 1), together = 2n * fact(v.n - 2);
+      return { rows: [["Different seatings", fmtBig(all)], ["Two particular friends side by side", fmtBig(together)], ["Those two apart", fmtBig(all - together)], ["Chance two friends end up side by side by luck", pct(2 / (v.n - 1))], ["If a seating and its mirror image count as one", v.n >= 3 ? fmtBig(all / 2n) : fmtBig(all)]],
+        note: "At a table of 8, two friends are side by side in 2 of every 7 random seatings, and a table of 20 has about 1.2 × 10^17 seatings." };
+    },
+  });
+  task({
+    id: "teams", modality: "counting", who: "group", title: "Splitting people into teams",
+    ask: "n people must be split into k teams, with nobody left out and no team empty. How many ways?",
+    idea: "When teams have no names, the count is a Stirling number of the second kind S(n, k). Adding up S(n, k) over every k gives the Bell number: all the ways to split the group at all. If the teams must be equal size s, divide n! by (s!)^k and by k! so reordering people inside a team, or the teams themselves, is not counted twice.",
+    questions: [63, 65, 66, 70], repo: [["Combination sum", REPO + "backtracking/combination-sum.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("n", "People", 1, 25, 9), range("k", "Teams", 1, 25, 3, { maxFor: (v) => v.n })],
+    compute(v) {
+      const k = Math.min(v.k, v.n), s = v.n / k;
+      const equal = Number.isInteger(s) ? fact(v.n) / (fact(s) ** B(k) * fact(k)) : null;
+      return { rows: [[`Ways to split ${v.n} people into ${k} teams`, fmtBig(stirling2(v.n, k))], ["Ways to split them into any number of teams (Bell number)", fmtBig(bell(v.n))], [equal !== null ? `Ways if every team has exactly ${s} people` : "Equal-sized teams", equal !== null ? fmtBig(equal) : `not possible: ${v.n} people do not divide into ${k} equal teams`]],
+        note: "Nine people into three teams of three can be done in 280 ways. Four people can be split in 15 ways in all." };
+    },
+  });
+  task({
+    id: "santa", modality: "feasibility", who: "group", title: "Secret Santa: nobody draws themselves",
+    ask: "n people each draw one name from a hat. How many draws leave nobody holding their own name, and how likely is a random draw to be valid?",
+    idea: "Draws are permutations (n! of them). Those with no fixed point are called derangements, counted by D(n) = (n − 1)(D(n − 1) + D(n − 2)). Surprisingly, D(n)/n! settles near 1/e = 36.8% however big the group is, so about one random draw in three is valid.",
+    questions: [28, 30], repo: [["Permutations", REPO + "backtracking/permutations.js"]],
+    controls: [range("n", "People", 2, 20, 6)],
+    compute(v) {
+      const all = fact(v.n), d = derangements(v.n);
+      return { rows: [["All possible draws (n!)", fmtBig(all)], ["Draws where nobody has their own name", fmtBig(d)], ["Chance a random draw is valid", pct(Number(d) / Number(all))], ["Draws to expect before one works", fmtNum(Number(all) / Number(d), 2)]],
+        note: "Four people have 9 valid draws out of 24. From about 6 people on, the chance is 36.8% to three figures." };
+    },
+  });
+  /* ordered ballots of three candidates, and the majority cycle (Condorcet paradox) */
+  const RANKINGS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
+  const beats = RANKINGS.map((r) => { const pos = []; r.forEach((c, i) => (pos[c] = i)); return [pos[0] < pos[1], pos[1] < pos[2], pos[2] < pos[0]]; });
+  function votingCycles(v) {
+    let cyc = 0n; const total = pow(6, v), half = v / 2;
+    const go = (i, left, counts) => {
+      if (i === 5) { counts[5] = left; const m = [0, 0, 0]; for (let r = 0; r < 6; r++) for (let q = 0; q < 3; q++) if (beats[r][q]) m[q] += counts[r];
+        const ab = m[0] > half, bc = m[1] > half, ca = m[2] > half; if ((ab && bc && ca) || (!ab && !bc && !ca)) { let ways = fact(v); for (const c of counts) ways /= fact(c); cyc += ways; } return; }
+      for (let c = 0; c <= left; c++) { counts[i] = c; go(i + 1, left - c, counts); }
+    };
+    go(0, v, new Array(6).fill(0)); return { cycles: cyc, total };
+  }
+  task({
+    id: "voting", modality: "prediction", who: "group", title: "Can a majority vote go in a circle?",
+    ask: "Voters each rank three candidates. How often does majority rule give a cycle, where A beats B, B beats C and C beats A, so there is no clear winner?",
+    idea: "Each voter can submit 6 different rankings, so v voters give 6^v possible sets of ballots. The page counts every set by how many voters chose each ranking (weighting by the number of ways to arrange the voters) and checks each for a cycle. The share is the chance of a cycle if every ranking were equally likely. It rises with the number of voters toward about 8.8%, so it is small but never goes away.",
+    questions: [], repo: [],
+    controls: [range("v", "Voters (odd numbers, so there are no ties)", 3, 15, 3, { step: 2 })],
+    compute(v) {
+      const n = v.v % 2 ? v.v : v.v + 1, r = votingCycles(n);
+      return { rows: [["Possible sets of ballots (6^v)", fmtBig(r.total)], ["Sets with a majority cycle", fmtBig(r.cycles)], ["Chance of a cycle", pct(Number(r.cycles) / Number(r.total))], ["Limit with very many voters", "about 8.8%"]],
+        note: "Three voters can produce a cycle in 5.6% of the sets. A cycle means any pairing of candidates is decided by a different majority, which is why rules like ranked choice or points exist." };
+    },
+    _cycles: votingCycles,
+  });
+  task({
+    id: "scheduling", modality: "prediction", who: "group", title: "Finding a time everyone can meet",
+    ask: "Each of n people is free for any given slot with some chance. How likely is it that at least one slot suits everyone?",
+    idea: "One slot suits everyone with chance p^n, which falls fast as the group grows. With m independent slots the chance that none works is (1 − p^n)^m, so at least one working is 1 − (1 − p^n)^m. The number of slots that work is m × p^n on average.",
+    questions: [], repo: [],
+    controls: [range("n", "People", 2, 12, 5), range("m", "Slots on offer", 1, 60, 10), range("p", "Chance one person is free for a slot (%)", 10, 95, 60, { step: 5 })],
+    compute(v) {
+      const q = (v.p / 100) ** v.n, none = (1 - q) ** v.m, need = q >= 1 ? 1 : Math.ceil(Math.log(0.1) / Math.log(1 - q));
+      return { rows: [["Chance a given slot suits everyone", pct(q)], ["Slots that suit everyone, on average", fmtNum(v.m * q, 2)], ["Chance at least one slot suits everyone", pct(1 - none)], ["Slots to offer for a 90% chance", fmtNum(need, 0)]],
+        note: "This assumes people are free independently of each other. Real diaries are correlated (everyone avoids Friday evenings), so offer slots that differ in kind." };
+    },
+  });
+  function bracketCount(n) {                 /* distinct knockout brackets, counted from the formula n! / 2^(n-1) */
+    return fact(n) / pow(2, n - 1);
+  }
+  task({
+    id: "bracket", modality: "design", who: "group", title: "A knockout tournament",
+    ask: "n teams play a single-elimination bracket. How many matches, how many different brackets, and how likely are two teams to meet?",
+    idea: "Every match removes one team, so n teams need n − 1 matches. Placing teams on the bracket gives n! orders, but swapping the two teams in any of the n − 1 matches changes nothing, leaving n!/2^(n−1) distinct brackets. If every team is equally good, two particular teams meet with chance 2/n, and in the final with chance 2/(n(n − 1)).",
+    questions: [31, 38], repo: [["Combinations", REPO + "backtracking/combinations.js"]],
+    controls: [select("n", "Teams", [[2, "2"], [4, "4"], [8, "8"], [16, "16"], [32, "32"], [64, "64"]], 8)],
+    compute(v) {
+      return { rows: [["Matches", String(v.n - 1)], ["Rounds", String(Math.log2(v.n))], ["Distinct brackets", fmtBig(bracketCount(v.n))], ["Chance two given teams ever meet", pct(2 / v.n)], ["Chance they meet in the final", v.n > 2 ? pct(2 / (v.n * (v.n - 1))) : "certain (only one match)"]],
+        note: "With equal teams the chance a given team wins is 1/n, and bigger brackets mean any two particular teams are less likely to meet." };
+    },
+    _bracket: bracketCount,
+  });
+  task({
+    id: "groupgrowth", modality: "counting", who: "group", title: "How fast groups blow up",
+    ask: "As a group of n people grows, how quickly do the numbers of pairs, sub-groups, line-ups, seatings, team splits and pairings grow?",
+    idea: "Pairs grow like n², sub-groups like 2^n, and orderings like n!, which overtakes everything else. Splitting the group into teams (the Bell number) lies between 2^n and n!. This is the arithmetic behind why coordination gets harder with size, and why group problems need rules rather than checking every case.",
+    questions: [16, 24, 63, 70], repo: [["Permutations", REPO + "backtracking/permutations.js"], ["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("n", "People in the group", 2, 30, 10)],
+    compute(v) {
+      const items = [["Pairs", comb(v.n, 2)], ["All sub-groups (2^n)", pow(2, v.n)], ["Ways to split into teams (Bell)", bell(v.n)], ["Seatings round a table", fact(v.n - 1)], ["Line-ups (n!)", fact(v.n)]];
+      if (v.n % 2 === 0) items.splice(4, 0, ["Ways to pair everyone off", pairings(v.n)]);
+      return { rows: items.map(([a, b]) => [a, fmtBig(b)]), viz: { type: "bars", items: items.map(([a, b]) => ({ label: a, value: Number(b), on: false })), log: true }, note: "Bars use a log scale. At 10 people there are only 45 pairs but 3,628,800 line-ups; at 30 people the line-ups number 2.65 × 10^32." };
+    },
+  });
+
+  /* --- more solo tasks, so both sides of the comparison are filled */
+  function coupon(n, t) {
+    const p = new Array(n + 1).fill(0); p[0] = 1;
+    for (let step = 0; step < t; step++) for (let k = n; k >= 0; k--) { p[k] = p[k] * (k / n) + (k > 0 ? p[k - 1] * ((n - (k - 1)) / n) : 0); }
+    return p[n];
+  }
+  task({
+    id: "coupon", modality: "prediction", who: "solo", title: "Collecting a complete set",
+    ask: "There are n different cards in a collection and each pack gives one at random. How many packs does it take to get them all?",
+    idea: "When you hold k cards, the next pack is new with chance (n − k)/n, so you wait n/(n − k) packs on average for it. Adding these up for k = 0 … n − 1 gives n × (1 + 1/2 + … + 1/n), about n ln n. The last few cards cost the most.",
+    questions: [], repo: [],
+    controls: [range("n", "Different cards", 2, 100, 20), range("t", "Packs bought", 1, 1000, 100)],
+    compute(v) {
+      let e = 0; for (let k = 0; k < v.n; k++) e += v.n / (v.n - k); const half = (() => { let t = v.n; while (coupon(v.n, t) < 0.5 && t < 5000) t++; return t; })();
+      return { rows: [["Packs needed on average", fmtNum(e, 1)], ["Packs for an even chance of a full set", fmtNum(half, 0)], [`Chance of a full set after ${v.t} packs`, pct(coupon(v.n, v.t))], ["Rule of thumb n ln n + 0.58 n", fmtNum(v.n * Math.log(v.n) + 0.5772 * v.n, 1)]],
+        note: "For 20 cards the average is about 72 packs, which is 3.6 packs per card, not one. Swapping with friends turns this into a group task and cuts the cost." };
+    },
+    _coupon: coupon,
+  });
+  function diceWays(d, sides = 6) { let w = { 0: 1n }; for (let i = 0; i < d; i++) { const nw = {}; for (const [s, c] of Object.entries(w)) for (let f = 1; f <= sides; f++) nw[+s + f] = (nw[+s + f] || 0n) + c; w = nw; } return w; }
+  task({
+    id: "dice", modality: "prediction", who: "solo", title: "What will the dice show?",
+    ask: "Roll d six-sided dice. How many ways give a total of t, and which total is likeliest?",
+    idea: "There are 6^d equally likely rolls. The number that give total t is built one die at a time: ways(t) = ways with one fewer die summed over the six faces. Totals near the middle have the most ways, which is why 7 is the commonest total of two dice.",
+    questions: [31, 74, 75, 80], repo: [["Coin change (counting ways)", REPO + "dynamic-programming/coin-change.js"], ["Target sum", REPO + "dynamic-programming/target-sum.js"]],
+    controls: [range("d", "Dice", 1, 10, 2), range("t", "Target total", 1, 60, 7, { minFor: (v) => v.d, maxFor: (v) => 6 * v.d })],
+    compute(v) {
+      const w = diceWays(v.d), t = Math.min(Math.max(v.t, v.d), 6 * v.d), total = pow(6, v.d); let best = v.d; for (const k of Object.keys(w)) if (w[k] > w[best]) best = +k;
+      return { rows: [["Possible rolls (6^d)", fmtBig(total)], [`Rolls totalling ${t}`, fmtBig(w[t])], ["Chance", pct(Number(w[t]) / Number(total))], ["Likeliest total", `${best} (${fmtBig(w[best])} ways)`]],
+        viz: { type: "bars", items: Object.keys(w).map((k) => ({ label: "total " + k, value: Number(w[k]), on: +k === t })), log: false }, note: "The counts here are the coefficients of (x + x² + … + x⁶)^d, the generating-function view of the same problem." };
+    },
+    _dice: diceWays,
+  });
+  function gridRoutes(a, b, blocked) {
+    const W = Array.from({ length: a + 1 }, () => new Array(b + 1).fill(0n)); W[0][0] = 1n;
+    for (let i = 0; i <= a; i++) for (let j = 0; j <= b; j++) { if (blocked && blocked[0] === i && blocked[1] === j) { W[i][j] = 0n; continue; } if (i || j) W[i][j] = (i ? W[i - 1][j] : 0n) + (j ? W[i][j - 1] : 0n); }
+    return W[a][b];
+  }
+  task({
+    id: "gridroutes", modality: "counting", who: "solo", title: "Counting routes across a city grid",
+    ask: "Walk a blocks east and b blocks north, only moving east or north. How many routes are there, and how many if one crossing is closed?",
+    idea: "A route is a sequence of a easts and b norths, so choosing which of the a + b steps are east gives C(a + b, a). With a closed crossing, count routes crossing by crossing: routes to a crossing are the routes to the one before it from the west plus from the south, and the closed crossing adds nothing.",
+    questions: [52, 12], repo: [["Unique paths", REPO + "dynamic-programming/unique-paths.js"], ["Climbing stairs", REPO + "dynamic-programming/climbing-stairs.js"]],
+    controls: [range("a", "Blocks east", 1, 25, 6), range("b", "Blocks north", 1, 25, 6), select("block", "A crossing is closed", [["none", "none"], ["mid", "the middle crossing"]], "none")],
+    compute(v) {
+      const mid = [Math.floor(v.a / 2), Math.floor(v.b / 2)], all = comb(v.a + v.b, v.a), closed = gridRoutes(v.a, v.b, v.block === "mid" ? mid : null), through = comb(mid[0] + mid[1], mid[0]) * comb(v.a + v.b - mid[0] - mid[1], v.a - mid[0]);
+      return { rows: [["Routes with every crossing open", fmtBig(all)], ["Routes through the middle crossing", fmtBig(through)], [v.block === "mid" ? "Routes with the middle crossing closed" : "Routes avoiding the middle crossing", fmtBig(all - through)], ["Chance a random route uses the middle crossing", pct(Number(through) / Number(all))]],
+        note: "Routes through a crossing multiply: routes to it times routes from it. Subtracting them from the total counts the routes that avoid it." };
+    },
+    _gridRoutes: gridRoutes,
+  });
+  T.forEach((t) => { if (t.who !== "solo" && t.who !== "group") throw new Error("task " + t.id + " has no solo or group tag"); });
+
+  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn, stirling2, bell, derangements, pairings }, WHO_LABELS: { solo: "Solo", group: "Group" }, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
 });

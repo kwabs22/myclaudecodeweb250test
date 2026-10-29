@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combinatorics in the Real World</title>
-<meta name="description" content="Twenty-three counting problems from everyday life, grouped by the question they ask: how many, what is likely, can we try them all, which is best. Each has live numbers.">
+<meta name="description" content="Thirty-five counting problems from everyday life, grouped by the question they ask (how many, what is likely, can we try them all, which is best) and by whether one person or a group is involved. Each has live numbers.">
 <style>
 :root{--bg:#f6f7fb;--panel:#fff;--ink:#14161f;--muted:#5d6479;--line:#d9dde8;--accent:#3a63d8;--chip:#eef1f8;--good:#17794a;--bad:#b3341f;--stage:#0b1020;--stage-ink:#e8ecf8;--font:system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--chip:#1f2535;--good:#5fd49b;--bad:#ff8f7a}}
@@ -17,12 +17,16 @@ h1{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:6px 0 8px}
 .glancewrap{overflow-x:auto;margin:0 0 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
 table.glance{border-collapse:collapse;width:100%;font-size:15px}
 table.glance caption{caption-side:top;text-align:left;padding:10px 14px 4px;font:600 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-table.glance th,table.glance td{padding:9px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+table.glance th,table.glance td{padding:9px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
 table.glance th{white-space:nowrap}
 table.glance th a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 table.glance th a i{width:11px;height:11px;border-radius:50%;background:var(--c)}
 table.glance th a:hover{text-decoration:underline}
-table.glance td.q{font-weight:600;min-width:150px}
+table.glance td.q{font-weight:600;min-width:140px}
+.who b.solo,.lede b.solo{color:var(--ink);border-bottom:3px solid var(--muted)}.lede b.grp{border-bottom:3px double var(--muted)}
+.chip.whobtn{font-weight:600}.chip.whobtn small{color:inherit;opacity:.7;font-weight:400}
+.badge{display:inline-block;font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:6px;background:var(--chip);color:var(--muted);margin-left:6px;vertical-align:2px}
+.badge.group{background:var(--ink);color:var(--bg)}
 table.glance td.t{color:var(--muted)}
 table.glance td.t a{color:var(--muted);text-decoration:underline dotted;text-underline-offset:3px}
 table.glance td.t a:hover{color:var(--ink)}
@@ -105,21 +109,23 @@ footer{margin-top:34px;color:var(--muted);font-size:14px}
 <body>
 <main>
   <h1>Combinatorics in the real world</h1>
-  <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are 23 everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
+  <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are <span id="n-tasks">35</span> everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
+  <p class="lede"><b>Solo or group?</b> Each problem is also marked by who is involved. A <b class="solo">solo</b> task is one person or system facing the problem alone: their ticket, hand, route or data. A <b class="grp">group</b> task depends on how several people or agents fit, meet, share or compete: a team, a league, a crowd. Solo tasks grow with the number of <i>options</i>; group tasks also grow with the number of <i>people</i>, usually much faster (pairs grow with n², sub-groups with 2<sup>n</sup>, line-ups with n!). Use the buttons to see one kind at a time.</p>
   <div class="glancewrap"><table class="glance" id="glance"></table></div>
+  <div class="chips" id="who" role="group" aria-label="Show solo or group tasks"></div>
   <div class="chips" id="chips" role="group" aria-label="Show one group"></div>
   <div class="layout">
     <div class="stagewrap">
-      <div class="stage" id="stage" role="img" aria-label="A 3D map of the 23 tasks. Each coloured cluster is one group. The same tasks are listed below.">
+      <div class="stage" id="stage" role="img" aria-label="A 3D map of the tasks. Each coloured cluster is one group; round dots are solo tasks and diamonds are group tasks. The same tasks are listed below.">
         <div class="labels" id="labels"></div><div class="tip" id="tip"></div>
         <div class="nogl" id="nogl">The 3D map needs WebGL, which this browser is not providing. Every task is in the list below.</div>
-        <div class="hint">drag to turn · scroll or pinch to zoom · click a dot</div>
+        <div class="hint">drag to turn · scroll or pinch to zoom · click a dot · ● solo ◆ group</div>
       </div>
     </div>
     <section class="panel" id="panel" aria-live="polite"></section>
   </div>
   <div class="groups" id="groups"></div>
-  <footer>The logic is in <code>tasks.js</code> and is checked by <code>check.js</code> (run <code>node check.js</code>): the poker counts against all 2,598,960 hands, the route and packing answers against brute force, and so on. Related questions are in the <a href="../combinatorics_learning_questions.html">100 combinatorics questions</a>, and the matching code tasks are mapped in the <a href="../README.html">mathematics README</a>.</footer>
+  <footer>The logic is in <code>tasks.js</code> and is checked by <code>check.js</code> (run <code>node check.js</code>): the poker counts against all 2,598,960 hands, the route and packing answers against brute force, the seating, team-split and Secret Santa counts against exhaustive enumeration, and so on. Related questions are in the <a href="../combinatorics_learning_questions.html">100 combinatorics questions</a>, and the matching code tasks are mapped in the <a href="../README.html">mathematics README</a>.</footer>
 </main>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <script src="tasks.js"></script>

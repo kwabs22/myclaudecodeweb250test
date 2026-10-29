@@ -24,9 +24,19 @@ test("question numbers are real and repository links exist", () => {
   for (const t of R.TASKS) { for (const q of t.questions) assert.ok(q >= 1 && q <= 100, t.id + " question " + q); for (const [label, p] of t.repo) assert.ok(fs.existsSync(path.join(__dirname, p)), t.id + " missing " + p); }
 });
 
-test("the mathematics README table lists every group, its question and every task", () => {
+test("every task is solo or group, both kinds exist in every group, and the page text matches the data", () => {
+  for (const t of R.TASKS) assert.ok(t.who === "solo" || t.who === "group", t.id);
+  for (const m of R.MODALITIES) for (const w of ["solo", "group"]) assert.ok(R.TASKS.some((t) => t.modality === m.id && t.who === w), m.name + " has no " + w + " task");
+  const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8"); assert.ok(html.includes(`<span id="n-tasks">${R.TASKS.length}</span>`), "page says a different number of tasks");
+  const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8"); assert.ok(md.includes(`${R.TASKS.length} everyday problems`), "README says a different number of tasks");
+});
+test("the mathematics README table lists every group, its question, and each task in the right solo or group column", () => {
   const md = fs.readFileSync(path.join(__dirname, "..", "README.md"), "utf8");
-  for (const m of R.MODALITIES) { const line = md.split("\n").find((l) => l.startsWith("| " + m.name + " |")); assert.ok(line, "no row for " + m.name); assert.ok(line.includes(m.ask), m.name + " question"); for (const t of R.TASKS.filter((t) => t.modality === m.id)) assert.ok(line.includes(t.title), t.title + " missing from the " + m.name + " row"); }
+  for (const m of R.MODALITIES) {
+    const line = md.split("\n").find((l) => l.startsWith("| " + m.name + " |")); assert.ok(line, "no row for " + m.name);
+    const cells = line.split("|").map((c) => c.trim()).slice(1, -1); assert.strictEqual(cells.length, 4, m.name + " cells"); assert.strictEqual(cells[1], m.ask);
+    for (const t of R.TASKS.filter((t) => t.modality === m.id)) { assert.ok(cells[t.who === "solo" ? 2 : 3].includes(t.title), t.title + " missing from the " + t.who + " column of " + m.name); assert.ok(!cells[t.who === "solo" ? 3 : 2].includes(t.title), t.title + " is in the wrong column"); }
+  }
 });
 test("passwords: 94^8 and a four digit PIN", () => { assert.strictEqual(row("passwords", { a: 94, L: 8 }, "Possible"), "6,095,689,385,410,816"); assert.strictEqual(row("passwords", { a: 10, L: 4 }, "Possible"), "10,000"); });
 test("plates", () => { assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes (characters may"), "17,576,000"); assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes with no"), "11,232,000"); });
@@ -115,6 +125,77 @@ test("shuffle, survey and bootstrap", () => {
   for (let n = 2; n <= 6; n++) { let multisets = 0; const go = (i, left) => { if (i === n - 1) { multisets++; return; } for (let c = 0; c <= left; c++) go(i + 1, left - c); }; go(0, n); assert.strictEqual(BigInt(multisets), U.comb(2 * n - 1, n), "n=" + n); }
   assert.strictEqual(row("bootstrap", { n: 10 }, "Distinct resamples"), "92,378");
 });
+
+test("handshakes: pairs and sub-groups against enumeration", () => {
+  for (let n = 2; n <= 12; n++) { let pairs = 0, subs = 0; for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) pairs++; for (let m = 0; m < 1 << n; m++) { let c = 0, x = m; while (x) { c += x & 1; x >>= 1; } if (c >= 2) subs++; }
+    assert.strictEqual(row("handshakes", { n }, "Pairs ("), U.fmtBig(BigInt(pairs)), "pairs " + n); assert.strictEqual(row("handshakes", { n }, "Possible sub-groups"), U.fmtBig(BigInt(subs)), "subs " + n); }
+  assert.strictEqual(row("handshakes", { n: 10 }, "Pairs ("), "45");
+});
+test("committee: every count equals listing the committees", () => {
+  for (const [n, k, W, m] of [[8, 3, 3, 2], [9, 4, 4, 1], [7, 5, 2, 2], [10, 3, 6, 3]]) {
+    let all = 0, exact = 0, atLeast = 0, officers = 0; const go = (i, chosen) => { if (chosen.length === k) { all++; if (chosen.filter((x) => x < W).length === m) exact++; if (chosen.includes(0) || chosen.includes(1)) atLeast++; officers += k * (k - 1); return; } if (i === n) return; go(i + 1, [...chosen, i]); go(i + 1, chosen); }; go(0, []);
+    const base = { n, k, W, m };
+    assert.strictEqual(row("committee", base, "All committees"), U.fmtBig(BigInt(all))); assert.strictEqual(row("committee", base, "Exactly"), U.fmtBig(BigInt(exact)), [n, k, W, m] + " exact");
+    assert.strictEqual(row("committee", base, "Including at least"), U.fmtBig(BigInt(atLeast))); assert.strictEqual(row("committee", base, "…with a chair"), U.fmtBig(BigInt(officers)));
+  }
+});
+test("seating: fixing one person and listing the others gives (n-1)!, with friends together or apart as predicted", () => {
+  for (let n = 3; n <= 8; n++) { let total = 0, together = 0; for (const p of U.permutations([...Array(n - 1).keys()].map((i) => i + 1))) { const seat = [0, ...p]; total++; const i0 = seat.indexOf(0), i1 = seat.indexOf(1), d = Math.abs(i0 - i1); if (d === 1 || d === n - 1) together++; }
+    assert.strictEqual(row("seating", { n }, "Different seatings"), U.fmtBig(BigInt(total)), "n=" + n); assert.strictEqual(row("seating", { n }, "Two particular friends side"), U.fmtBig(BigInt(together)), "together n=" + n); assert.strictEqual(row("seating", { n }, "Those two apart"), U.fmtBig(BigInt(total - together))); }
+});
+test("teams: Stirling and Bell numbers equal listing every way to split", () => {
+  const counts = {}; for (let n = 1; n <= 9; n++) { counts[n] = {}; const go = (i, blocks) => { if (i === n) { counts[n][blocks] = (counts[n][blocks] || 0) + 1; return; } for (let b = 0; b <= blocks; b++) go(i + 1, b === blocks ? blocks + 1 : blocks); }; go(0, 0); }
+  for (let n = 1; n <= 9; n++) { let sum = 0; for (let k = 1; k <= n; k++) { assert.strictEqual(U.stirling2(n, k), BigInt(counts[n][k] || 0), `S(${n},${k})`); sum += counts[n][k] || 0; } assert.strictEqual(U.bell(n), BigInt(sum)); }
+  assert.strictEqual(U.bell(10), 115975n); assert.strictEqual(row("teams", { n: 9, k: 3 }, "Ways if every team"), "280"); assert.strictEqual(row("teams", { n: 6, k: 3 }, "Ways if every team"), "15"); assert.strictEqual(row("teams", { n: 4, k: 2 }, "Ways if every team"), "3");
+  assert.ok(/not possible/.test(row("teams", { n: 7, k: 3 }, "Equal-sized")));
+  /* equal teams by listing: 6 people into 3 teams of 2, and 9 into 3 of 3 */
+  for (const [n, k, want] of [[6, 3, 15], [9, 3, 280]]) { let c = 0; const go = (i, sizes) => { if (i === n) { if (sizes.length === k && sizes.every((x) => x === n / k)) c++; return; } for (let b = 0; b <= sizes.length; b++) { const s = sizes.slice(); if (b === s.length) s.push(1); else s[b]++; if (s.length <= k && s.every((x) => x <= n / k)) go(i + 1, s); } }; go(0, []); assert.strictEqual(c, want, n + " people"); }
+});
+test("secret santa: derangements equal listing permutations with no fixed point; the chance tends to 1/e", () => {
+  for (let n = 1; n <= 8; n++) { let c = 0; for (const p of U.permutations([...Array(n).keys()])) if (p.every((x, i) => x !== i)) c++; assert.strictEqual(U.derangements(n), BigInt(c), "n=" + n); }
+  assert.strictEqual(U.derangements(4), 9n); assert.strictEqual(U.derangements(6), 265n); assert.ok(Math.abs(Number(U.derangements(12)) / Number(U.fact(12)) - 1 / Math.E) < 1e-8); assert.strictEqual(row("santa", { n: 8 }, "Chance"), "36.8%");
+});
+test("voting: counting by ballot type equals checking every one of the 6^v sets of ballots", () => {
+  const R6 = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]]; const pos = R6.map((r) => { const q = []; r.forEach((c, i) => (q[c] = i)); return q; });
+  for (const v of [3, 5, 7]) { let cyc = 0; const total = 6 ** v; for (let m = 0; m < total; m++) { let x = m, ab = 0, bc = 0, ca = 0; for (let i = 0; i < v; i++) { const q = pos[x % 6]; x = Math.floor(x / 6); if (q[0] < q[1]) ab++; if (q[1] < q[2]) bc++; if (q[2] < q[0]) ca++; } const h = v / 2; if ((ab > h && bc > h && ca > h) || (ab < h && bc < h && ca < h)) cyc++; }
+    const r = T.voting._cycles(v); assert.strictEqual(r.cycles, BigInt(cyc), "v=" + v); assert.strictEqual(r.total, BigInt(total)); }
+  assert.strictEqual(T.voting._cycles(3).cycles, 12n); assert.strictEqual(row("voting", { v: 3 }, "Chance of a cycle"), "5.6%");
+  const share = (v) => Number(T.voting._cycles(v).cycles) / Number(T.voting._cycles(v).total); assert.ok(share(3) < share(5) && share(5) < share(7) && share(7) < share(15) && share(15) < 0.0877);
+});
+test("scheduling: the chance of a shared slot equals enumerating who is free when", () => {
+  for (const [n, m, p] of [[2, 3, 0.6], [3, 2, 0.5], [2, 4, 0.3], [4, 2, 0.8]]) {
+    let prob = 0; const cells = n * m; for (let mask = 0; mask < 1 << cells; mask++) { let w = 1, ok = false; for (let s = 0; s < m; s++) { let all = true; for (let q = 0; q < n; q++) { const free = (mask >> (s * n + q)) & 1; w *= free ? p : 1 - p; if (!free) all = false; } if (all) ok = true; } if (ok) prob += w; }
+    assert.strictEqual(row("scheduling", { n, m, p: Math.round(p * 100) }, "Chance at least one"), U.pct(prob), [n, m, p] + ""); }
+});
+test("bracket: n!/2^(n-1) distinct brackets by listing seatings, and 2/n for two teams meeting by listing every outcome", () => {
+  const canon = (a) => (a.length === 1 ? String(a[0]) : (() => { const h = a.length / 2, l = canon(a.slice(0, h)), r = canon(a.slice(h)); return l < r ? `(${l},${r})` : `(${r},${l})`; })());
+  for (const n of [2, 4, 8]) { const seen = new Set(); for (const p of U.permutations([...Array(n).keys()])) seen.add(canon(p)); assert.strictEqual(BigInt(seen.size), T.bracket._bracket(n), "n=" + n); }
+  assert.strictEqual(T.bracket._bracket(8), 315n); assert.strictEqual(T.bracket._bracket(16), U.fact(16) / 2n ** 15n);
+  for (const n of [4, 8]) { let meet = 0, total = 0, finalMeet = 0; const rounds = Math.log2(n);
+    for (const p of U.permutations([...Array(n).keys()])) for (let r = 0; r < 1 << (n - 1); r++) { let alive = p.slice(), bit = 0, met = false, inFinal = false; while (alive.length > 1) { const next = []; for (let i = 0; i < alive.length; i += 2) { const a = alive[i], b = alive[i + 1]; if ((a === 0 && b === 1) || (a === 1 && b === 0)) { met = true; if (alive.length === 2) inFinal = true; } next.push((r >> bit++) & 1 ? a : b); } alive = next; } total++; if (met) meet++; if (inFinal) finalMeet++; }
+    assert.ok(Math.abs(meet / total - 2 / n) < 1e-12, "meet n=" + n); assert.ok(Math.abs(finalMeet / total - 2 / (n * (n - 1))) < 1e-12, "final n=" + n); }
+  assert.strictEqual(row("bracket", { n: 8 }, "Distinct brackets"), "315");
+});
+test("group growth: known values for 10 people", () => {
+  assert.strictEqual(row("groupgrowth", { n: 10 }, "Pairs"), "45"); assert.strictEqual(row("groupgrowth", { n: 10 }, "All sub-groups"), "1,024"); assert.strictEqual(row("groupgrowth", { n: 10 }, "Ways to split into teams"), "115,975");
+  assert.strictEqual(row("groupgrowth", { n: 10 }, "Seatings"), "362,880"); assert.strictEqual(row("groupgrowth", { n: 10 }, "Line-ups"), "3,628,800"); assert.strictEqual(row("groupgrowth", { n: 10 }, "Ways to pair"), "945"); assert.strictEqual(U.pairings(8), 105n);
+  let c = 0; const pairUp = (left) => { if (!left.length) { c++; return; } const [a, ...rest] = left; for (let i = 0; i < rest.length; i++) pairUp(rest.filter((_, j) => j !== i)); }; pairUp([...Array(8).keys()]); assert.strictEqual(c, 105);
+});
+test("coupon collector: the chance of a full set equals listing every purchase sequence", () => {
+  for (const [n, t] of [[3, 6], [3, 4], [4, 7], [2, 5]]) { let ok = 0; for (let m = 0; m < n ** t; m++) { let x = m; const seen = new Set(); for (let i = 0; i < t; i++) { seen.add(x % n); x = Math.floor(x / n); } if (seen.size === n) ok++; } assert.ok(Math.abs(T.coupon._coupon(n, t) - ok / n ** t) < 1e-12, [n, t] + ""); }
+  const ie = (n, t) => { let s = 0; for (let j = 0; j <= n; j++) s += (j % 2 ? -1 : 1) * Number(U.comb(n, j)) * ((n - j) / n) ** t; return s; }; assert.ok(Math.abs(T.coupon._coupon(5, 15) - ie(5, 15)) < 1e-12);
+  assert.strictEqual(row("coupon", { n: 20, t: 100 }, "Packs needed on average"), "72"); assert.strictEqual(T.coupon._coupon(1 + 1, 1), 0);
+});
+test("dice: ways to each total equal listing every roll", () => {
+  for (let d = 1; d <= 5; d++) { const counts = {}; for (let m = 0; m < 6 ** d; m++) { let x = m, s = 0; for (let i = 0; i < d; i++) { s += (x % 6) + 1; x = Math.floor(x / 6); } counts[s] = (counts[s] || 0) + 1; } const w = T.dice._dice(d); for (const k of Object.keys(counts)) assert.strictEqual(w[k], BigInt(counts[k]), `d=${d} total ${k}`); assert.strictEqual(Object.keys(w).length, Object.keys(counts).length); }
+  assert.strictEqual(row("dice", { d: 2, t: 7 }, "Rolls totalling"), "6"); assert.strictEqual(row("dice", { d: 2, t: 7 }, "Likeliest"), "7 (6 ways)");
+});
+test("grid routes: C(a+b, a), and routes with a closed crossing, equal listing every route", () => {
+  for (const [a, b] of [[2, 2], [3, 4], [5, 5], [6, 4], [4, 7]]) { const mid = [Math.floor(a / 2), Math.floor(b / 2)]; let all = 0, avoid = 0; const go = (i, j, hit) => { if (i === a && j === b) { all++; if (!hit) avoid++; return; } if (i < a) go(i + 1, j, hit || (i + 1 === mid[0] && j === mid[1])); if (j < b) go(i, j + 1, hit || (i === mid[0] && j + 1 === mid[1])); }; go(0, 0, mid[0] === 0 && mid[1] === 0);
+    assert.strictEqual(U.comb(a + b, a), BigInt(all)); assert.strictEqual(T.gridroutes._gridRoutes(a, b, mid), BigInt(avoid), `closed ${a}x${b}`); assert.strictEqual(row("gridroutes", { a, b, block: "mid" }, "Routes with the middle"), U.fmtBig(BigInt(avoid))); }
+  assert.strictEqual(row("gridroutes", { a: 6, b: 6, block: "none" }, "Routes with every"), "924");
+});
+
 test("formatting", () => { assert.strictEqual(U.fmtBig(1234567n), "1,234,567"); assert.strictEqual(U.fmtBig(10n ** 20n), "1.00 × 10^20"); assert.strictEqual(U.fmtBig(U.fact(52)), "8.07 × 10^67"); assert.strictEqual(U.fmtNum(100000, 0), "100,000"); assert.strictEqual(U.pct(0.5), "50%"); assert.ok(/year/.test(U.human(1e12)) && /second/.test(U.human(5))); });
 
 console.log(`${ok} checks passed`);
