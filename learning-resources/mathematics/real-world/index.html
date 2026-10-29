@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combinatorics in the Real World</title>
+<meta name="description" content="Twenty-three counting problems from everyday life, grouped by the question they ask: how many, what is likely, can we try them all, which is best. Each has live numbers.">
+<style>
+:root{--bg:#f6f7fb;--panel:#fff;--ink:#14161f;--muted:#5d6479;--line:#d9dde8;--accent:#3a63d8;--chip:#eef1f8;--good:#17794a;--bad:#b3341f;--stage:#0b1020;--stage-ink:#e8ecf8;--font:system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--chip:#1f2535;--good:#5fd49b;--bad:#ff8f7a}}
+:root[data-theme="dark"]{--bg:#0e1118;--panel:#171b26;--ink:#e8ebf4;--muted:#9aa3ba;--line:#2a3042;--accent:#8aa6ff;--chip:#1f2535;--good:#5fd49b;--bad:#ff8f7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--font)}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 70px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.08;margin:6px 0 8px}
+.lede{color:var(--muted);max-width:760px;margin:0 0 16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;font:inherit;font-size:14px}
+.chip i{width:11px;height:11px;border-radius:50%;background:var(--c)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+.stagewrap{position:sticky;top:8px}
+@media (max-width:900px){.stagewrap{position:static}}
+.stage{position:relative;height:clamp(320px,56vh,560px);background:radial-gradient(ellipse at 50% 40%,#17203b,var(--stage) 70%);border-radius:16px;overflow:hidden;border:1px solid #232b45;touch-action:none}
+.stage canvas{display:block;width:100%;height:100%}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;white-space:nowrap;font:600 12px var(--font);color:var(--stage-ink);text-shadow:0 1px 3px #000,0 0 6px #000;transform:translate(-50%,-50%);will-change:transform}
+.lab.group{font-size:13px;margin-top:-22px;letter-spacing:.01em}
+.tip{position:absolute;pointer-events:none;background:#0b1020e6;color:#fff;border:1px solid #38426a;border-radius:8px;padding:5px 9px;font-size:13px;opacity:0;transform:translate(12px,12px);max-width:240px}
+.hint{position:absolute;left:10px;bottom:8px;right:10px;color:#9aa6c9;font:12px var(--mono);pointer-events:none}
+.nogl{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;color:#c4cce0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 20px 22px}
+.panel h2{margin:0 0 4px;font-size:clamp(21px,3.2vw,28px);line-height:1.2}
+.tag{display:inline-block;font:600 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff;background:var(--c);margin-bottom:8px}
+.ask{margin:6px 0 14px;font-size:17px}
+.controls{display:grid;gap:12px;margin:0 0 16px}
+.ctl label,.ctl .lbl{display:flex;justify-content:space-between;gap:10px;font:600 12px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ctl output{color:var(--ink);font:600 13px var(--mono);text-transform:none;letter-spacing:0}
+.ctl input[type=range]{width:100%;accent-color:var(--c,var(--accent))}
+.ctl select{width:100%;max-width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.btn{padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer;font:inherit}
+.btn:hover{border-color:var(--c,var(--accent))}
+.bits{display:flex;gap:8px}
+.bit{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);font:700 18px var(--mono);cursor:pointer}
+.bit[aria-pressed="true"]{background:var(--c,var(--accent));color:#fff;border-color:transparent}
+dl.rows{margin:0;border-top:1px solid var(--line)}
+dl.rows .r{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 14px;padding:8px 0;border-bottom:1px solid var(--line)}
+dl.rows dt{margin:0;color:var(--muted);flex:1 1 190px}
+dl.rows dd{margin:0;font:600 15px var(--mono);text-align:right;overflow-wrap:anywhere;flex:0 1 auto;max-width:100%;margin-left:auto}
+dl.rows dd.hot{color:var(--c)}
+.note{margin:12px 0 0;color:var(--muted);font-size:14px}
+.idea{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--chip);font-size:15px}
+.idea b{display:block;font:600 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.links{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.links a{color:var(--accent)}
+.viz{margin:14px 0 0}
+.viz svg{width:100%;height:auto;max-height:300px;display:block;background:var(--bg);border-radius:12px;border:1px solid var(--line)}
+.viz table{border-collapse:collapse;width:100%;font:13px var(--mono)}
+.viz th,.viz td{border:1px solid var(--line);padding:3px 6px;text-align:center}
+.viz th{background:var(--chip);font-weight:600}
+.scroll{overflow:auto;max-width:100%;max-height:340px}
+.hi{background:color-mix(in srgb,var(--c) 28%,transparent);font-weight:700}
+.out{outline:2px solid var(--ink);outline-offset:-2px}
+.barline{display:grid;grid-template-columns:minmax(90px,150px) minmax(0,1fr) auto;gap:8px;align-items:center;font-size:13px;margin:4px 0}
+.barline span.t{height:14px;background:var(--chip);border-radius:7px;overflow:hidden}
+.barline span.t i{display:block;height:100%;background:var(--muted);opacity:.7}
+.barline.on span.t i{background:var(--c);opacity:1}
+.barline.on{font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{padding:2px 9px;border-radius:999px;background:var(--chip);font:13px var(--mono)}
+.bitrow{display:flex;gap:6px;margin:4px 0;align-items:center;font-size:13px}
+.bitrow b{width:62px;font-weight:600;color:var(--muted)}
+.bitrow span{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:var(--chip);font:700 15px var(--mono)}
+.bitrow span.flip{background:var(--bad);color:#fff}
+.groups{margin-top:30px}
+.group{margin:0 0 26px}
+.group h3{display:flex;align-items:center;gap:9px;margin:0;font-size:21px}
+.group h3 i{width:13px;height:13px;border-radius:50%;background:var(--c)}
+.group .q{margin:2px 0 4px;font-weight:600}
+.group p.b{margin:0 0 10px;color:var(--muted);max-width:860px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer;font:inherit;border-left:5px solid var(--c)}
+.card:hover,.card[aria-current="true"]{border-color:var(--c);box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 30%,transparent)}
+.card b{display:block;margin-bottom:2px}
+.card span{color:var(--muted);font-size:14px}
+.dim{opacity:.35}
+footer{margin-top:34px;color:var(--muted);font-size:14px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Combinatorics in the real world</h1>
+  <p class="lede">Combinatorics is the mathematics of counting arrangements and choices. Here are 23 everyday problems, grouped by the <b>question being asked</b> of them: how many, what is likely, can we try them all, which is best. <b>Prediction</b> is one group: when outcomes are equally likely, a forecast is a count of what you care about divided by a count of everything that could happen. Pick a dot, change the sliders, and the numbers are recomputed live.</p>
+  <div class="chips" id="chips" role="group" aria-label="Show one group"></div>
+  <div class="layout">
+    <div class="stagewrap">
+      <div class="stage" id="stage" role="img" aria-label="A 3D map of the 23 tasks. Each coloured cluster is one group. The same tasks are listed below.">
+        <div class="labels" id="labels"></div><div class="tip" id="tip"></div>
+        <div class="nogl" id="nogl">The 3D map needs WebGL, which this browser is not providing. Every task is in the list below.</div>
+        <div class="hint">drag to turn · scroll or pinch to zoom · click a dot</div>
+      </div>
+    </div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+  <div class="groups" id="groups"></div>
+  <footer>The logic is in <code>tasks.js</code> and is checked by <code>check.js</code> (run <code>node check.js</code>): the poker counts against all 2,598,960 hands, the route and packing answers against brute force, and so on. Related questions are in the <a href="../combinatorics_learning_questions.html">100 combinatorics questions</a>, and the matching code tasks are mapped in the <a href="../README.html">mathematics README</a>.</footer>
+</main>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script src="tasks.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

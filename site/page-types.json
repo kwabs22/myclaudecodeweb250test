@@ -54,5 +54,9 @@
  "game-development/algorithms/aruco-marker-games/simulator/index.html": {
   "type": "Playground",
   "blurb": "Play the 50 ArUco marker games without a camera: put virtual markers on a table and the game reacts as if a detector had found them."
+ },
+ "learning-resources/mathematics/real-world/index.html": {
+  "type": "Visualisation",
+  "blurb": "23 real-world counting problems in a 3D map, grouped by the question they ask (how many, what is likely, which is best), with live numbers."
  }
 }

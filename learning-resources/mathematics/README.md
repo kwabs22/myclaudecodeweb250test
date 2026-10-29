@@ -8,6 +8,7 @@ Three reference documents and a quiz on counting, plus a map from the questions 
 | [Answers](combinatorics_answers.md) | Worked answers; every numeric answer was checked by brute force |
 | [Combinatorics Quiz](quiz/index.html) | A page that quizzes you on the 100 questions |
 | [Repositories](combinatorics_repositories.md) | GitHub libraries for combinatorics, by language |
+| [Combinatorics in the real world](real-world/index.html) | A 3D map of 23 everyday problems (passwords, poker, the birthday problem, test results, delivery routes, schedules, error-correcting codes and more), grouped by the question each one asks, with live numbers. The logic is in `real-world/tasks.js` and `real-world/check.js` checks it |
 
 ## Closest tasks in this repository
 
