@@ -11,6 +11,7 @@ This folder contains PlayCanvas script implementations for the 100 algorithms li
 - **tree/** - Tree-based games (Traversals, BST operations, Segment Trees, etc.)
 - **string/** - String algorithm games (KMP, Palindromes, Pattern matching, etc.)
 - **backtracking/** - Backtracking puzzles (N-Queens, Sudoku, Combinations, etc.)
+  The counting side of these (permutations, combinations, subsets, change-making, grid paths) is mapped to the combinatorics questions in [`learning-resources/mathematics`](../../../learning-resources/mathematics/README.md), and `tests/combinatorics.test.js` checks each script against the formula.
 
 ## Using These Examples
 

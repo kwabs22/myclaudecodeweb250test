@@ -10,6 +10,7 @@ These run the scripts in plain Node, with a small stand-in for the PlayCanvas en
 | `dijkstra.test.js` | Dijkstra distances for every pair in the example graph |
 | `graphs-and-trees.test.js` | Floyd-Warshall, SCCs, flow, MSTs, AVL and red-black invariants, segment and Fenwick trees |
 | `puzzles.test.js` | Sudoku, N-Queens, knapsack, coin change, LCS, KMP, Kruskal, topological sort |
+| `combinatorics.test.js` | The counting and listing tasks against combinatorics formulas: n! permutations, C(n, k) combinations, 2ⁿ subsets, Catalan numbers, grid paths, Fibonacci tilings, sign choices, and 121 ways to make change |
 | `rerun.test.js` | Methods behave the same when a button runs them a second time |
 | `binary-search-game.test.js` | 200 games of optimal play finish within the stated optimum |
 
