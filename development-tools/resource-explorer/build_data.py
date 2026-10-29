@@ -88,6 +88,49 @@ def parse(path, topic):
     return out
 
 
+GAMES_DOC = "game-development/modding/MOST_MODDED_GAMES.md"
+
+
+def numbers(s):
+    return [int(n.replace(",", "")) for n in re.findall(r"(\d[\d,]*)\+?", s or "") if n.replace(",", "")]
+
+
+def parse_games():
+    lines = open(os.path.join(ROOT, GAMES_DOC), encoding="utf-8").read().splitlines()
+    games, cur, mode = [], None, ""
+    for ln in lines:
+        h = re.match(r"^###\s+(\d+)\.\s+\*\*(.*?)\*\*\s*(?:\((.*?)\))?", ln)
+        if h:
+            cur = {"rank": int(h.group(1)), "name": h.group(2), "year": h.group(3) or "", "highlights": []}
+            games.append(cur); mode = ""
+            continue
+        if re.match(r"^##\s", ln):
+            cur = None
+        if cur is None:
+            continue
+        f = re.match(r"^\*\*(Platform|Engine|Total Mods|Active Modders)\*\*:\s*(.*)$", ln)
+        if f:
+            cur[{"Platform": "platform", "Engine": "engine", "Total Mods": "mods_text", "Active Modders": "modders_text"}[f.group(1)]] = clean(f.group(2))
+            continue
+        t = re.match(r"^\*\*(.*?)\*\*:?\s*$", ln)
+        if t:
+            mode = t.group(1).lower()
+            continue
+        b = re.match(r"^-\s+(.*)$", ln)
+        if b and mode.startswith("why") and "why" not in cur:
+            cur["why"] = clean(b.group(1))
+        elif b and mode.startswith("modding highlights"):
+            n = re.match(r"\*\*(.*?)\*\*", b.group(1))
+            if n:
+                cur["highlights"].append(clean(n.group(1)))
+    for g in games:
+        g["mods"] = sum(numbers(g.get("mods_text", "")))
+        n = numbers(g.get("modders_text", ""))
+        g["modders"] = n[0] if n else None
+        g["doc"] = GAMES_DOC.replace(".md", ".html")
+    return games
+
+
 def main():
     allitems, seen = [], set()
     for path, topic in SOURCES:
@@ -99,9 +142,12 @@ def main():
                 seen.add(key)
                 allitems.append(g)
     print(len(allitems), "items")
+    games = parse_games()
+    print(len(games), "games")
     if "--check" not in sys.argv:
         with open(os.path.join(os.path.dirname(__file__), "resources.js"), "w", encoding="utf-8") as f:
             f.write("window.RESOURCES = " + json.dumps(allitems, ensure_ascii=False, indent=0, separators=(",", ":")) + ";\n")
+            f.write("window.GAMES = " + json.dumps(games, ensure_ascii=False, indent=0, separators=(",", ":")) + ";\n")
 
 
 main()

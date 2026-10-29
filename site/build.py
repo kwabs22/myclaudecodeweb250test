@@ -514,6 +514,18 @@ def rewrite_href(repo, href, src):
 # ----------------------------------------------------------------------------- html
 
 
+# Pages shown in the home page carousel, in order (path, heading); the blurb comes from page-types.json.
+FEATURED = [
+    ("learning-resources/mathematics/real-world/index.html", "Combinatorics in the real world"),
+    ("development-tools/resource-explorer/index.html", "Resource Explorer"),
+    ("ai-ml/careers/ai-engineer-roadmap/quiz-app.html", "AI engineer question bank"),
+    ("game-development/algorithms/aruco-marker-games/simulator/index.html", "ArUco marker game simulator"),
+    ("game-development/complexity-explorer/index.html", "Complexity explorer"),
+    ("game-development/algorithms/playcanvas-examples/lab/index.html", "Algorithm lab"),
+    ("development-tools/benchmarking/model-explorer/index.html", "Which model fits my GPU?"),
+]
+
+
 def esc(s):
     return html.escape(str(s), quote=True)
 
@@ -787,13 +799,25 @@ def render_home(repo):
     has_prov = bool(repo.sessions)
     inline = lambda obj: json.dumps(obj, separators=(",", ":")).replace("</", "<\\/")
 
+    by_path = {n["p"]: n for n in repo.nodes}
+    slides = []
+    for p, title in FEATURED:
+        n = by_path.get(p)
+        if n:
+            slides.append(f'<li class="slide" role="group" aria-roledescription="slide"><a href="{esc(n["u"])}"><span class="ft-tag">{esc(n.get("ty", "Page"))}</span><span class="ft-title">{esc(title)}</span><span class="ft-text">{esc(n.get("x", ""))}</span><span class="ft-go">Open →</span></a></li>')
+    carousel = (
+        '<section class="carousel" aria-roledescription="carousel" aria-label="Featured pages"><p class="car-head">Featured · try it</p>'
+        f'<ul class="track" id="track">{"".join(slides)}</ul>'
+        '<div class="car-ctl"><button type="button" id="car-prev" aria-label="Previous">←</button><span class="dots" id="car-dots"></span><button type="button" id="car-next" aria-label="Next">→</button><button type="button" id="car-play" aria-label="Pause automatic change" aria-pressed="false">Pause</button></div></section>'
+    ) if slides else ""
+
     body = f"""
 <section class="hero">
   <p class="eyebrow">{n_doc + n_app + n_code} files from 30 Claude Code sessions</p>
   <h1>{SITE_NAME}</h1>
   <p class="lede">A map of everything the sessions produced. The <b>Overview</b> shows the areas around this repo's README; click one to open its folders. <b>All files</b> plots every file as a point. <b>Runnable pages</b> lights up the diamonds you can open in the browser, filtered by type. <b>By session</b> replays the build, one chat at a time.</p>
 </section>
-<a class="featured" href="learning-resources/mathematics/real-world/index.html"><span class="ft-tag">Featured · try it</span><span class="ft-title">Combinatorics in the real world</span><span class="ft-text">Everyday problems in a 3D map: how many schedules, teams, passwords or hobby groups are possible, with live numbers.</span><span class="ft-go">Open the map →</span></a>
+{carousel}
 <section class="mapwrap" aria-label="3D map of the repository">
   <div class="chiprow">
     <div class="chips" role="group" aria-label="Filter by area">{''.join(chips)}</div>
@@ -831,6 +855,7 @@ def render_home(repo):
 <script type="application/json" id="cats-data">{inline(cats_json)}</script>
 <script type="application/json" id="prov-data">{inline(repo.sessions)}</script>
 <script type="importmap">{{"imports":{{"three":"./assets/vendor/three.module.min.js"}}}}</script>
+<script src="assets/carousel.js"></script>
 <script type="module" src="assets/hub.js"></script>
 """
     write("index.html", page(repo, "index.html", SITE_NAME, body, hub=True))

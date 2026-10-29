@@ -3016,3 +3016,357 @@ window.RESOURCES = [
 "features":""
 }
 ];
+window.GAMES = [
+{
+"rank":1,
+"name":"The Elder Scrolls V: Skyrim",
+"year":"2011",
+"highlights":[
+"SkyUI",
+"Enderal",
+"Requiem",
+"Beyond Skyrim",
+"SKSE64"
+],
+"platform":"PC, Xbox, PlayStation",
+"engine":"Creation Engine",
+"mods_text":"~70,000+ (Nexus Mods) + 28,000+ (Steam Workshop)",
+"modders_text":"10,000+",
+"why":"Official modding tools (Creation Kit)",
+"mods":98000,
+"modders":10000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":2,
+"name":"Minecraft",
+"year":"2011",
+"highlights":[
+"Forge",
+"Fabric",
+"Pixelmon",
+"Thermal Expansion",
+"Create"
+],
+"platform":"Java (PC), Bedrock (Multi-platform)",
+"engine":"Custom (Java)",
+"mods_text":"~62,000+ (CurseForge) + countless custom",
+"modders_text":"50,000+",
+"why":"Java-based (easy to decompile and mod)",
+"mods":62000,
+"modders":50000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":3,
+"name":"The Elder Scrolls IV: Oblivion",
+"year":"2006",
+"highlights":[
+"Nehrim",
+"Oscuro's Oblivion Overhaul",
+"Better Cities",
+"Midas Magic"
+],
+"platform":"PC, Xbox 360",
+"engine":"GameBryo Engine",
+"mods_text":"~30,000+",
+"modders_text":"1,000+ (still active!)",
+"why":"First Bethesda game with extensive modding tools",
+"mods":30000,
+"modders":1000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":4,
+"name":"Grand Theft Auto V",
+"year":"2013",
+"highlights":[
+"FiveM",
+"LSPDFR",
+"NaturalVision Evolved",
+"Script Hook V"
+],
+"platform":"PC, Consoles",
+"engine":"RAGE",
+"mods_text":"~15,000+",
+"modders_text":"5,000+",
+"why":"Open world sandbox perfect for creativity",
+"mods":15000,
+"modders":5000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":5,
+"name":"Fallout 4",
+"year":"2015",
+"highlights":[
+"Sim Settlements",
+"Horizon",
+"Fallout: London",
+"F4SE"
+],
+"platform":"PC, Xbox, PlayStation",
+"engine":"Creation Engine",
+"mods_text":"~50,000+ (Nexus) + 30,000+ (Bethesda.net)",
+"modders_text":"8,000+",
+"why":"Same modding support as Skyrim",
+"mods":80000,
+"modders":8000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":6,
+"name":"The Sims 4",
+"year":"2014",
+"highlights":[
+"MC Command Center",
+"WickedWhims",
+"Slice of Life"
+],
+"platform":"PC",
+"engine":"Custom",
+"mods_text":"~40,000+ custom content pieces",
+"modders_text":"20,000+",
+"why":"Massive custom content (CC) community",
+"mods":40000,
+"modders":20000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":7,
+"name":"Doom",
+"year":"1993",
+"highlights":[
+"Brutal Doom",
+"MyHouse.wad",
+"Total Chaos"
+],
+"platform":"DOS, Everything (literally)",
+"engine":"id Tech 1",
+"mods_text":"~40,000+ WADs",
+"modders_text":"1,000+ (30+ years later!)",
+"why":"First major modding community",
+"mods":40000,
+"modders":1000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":8,
+"name":"Half-Life",
+"year":"1998",
+"highlights":[],
+"platform":"PC",
+"engine":"GoldSrc (modified Quake engine)",
+"mods_text":"~5,000+",
+"modders_text":"Limited (legacy community)",
+"why":"Valve included modding tools",
+"mods":5000,
+"modders":null,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":9,
+"name":"Garry's Mod",
+"year":"2004/2006",
+"highlights":[],
+"platform":"PC (requires Source engine game)",
+"engine":"Source",
+"mods_text":"~1,700,000+ Workshop items",
+"modders_text":"50,000+",
+"why":"A mod that became a game",
+"mods":1700000,
+"modders":50000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":10,
+"name":"Warcraft III",
+"year":"2002",
+"highlights":[],
+"platform":"PC",
+"engine":"Warcraft III Engine",
+"mods_text":"~10,000+ custom maps",
+"modders_text":"Historical (limited current)",
+"why":"World Editor included with game",
+"mods":10000,
+"modders":null,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":11,
+"name":"RimWorld",
+"year":"2018",
+"highlights":[
+"Vanilla Expanded",
+"Combat Extended",
+"RimWorld of Magic",
+"Save Our Ship 2"
+],
+"platform":"PC",
+"engine":"Unity",
+"mods_text":"~9,000+ (Steam Workshop)",
+"modders_text":"2,000+",
+"why":"Designed for modding from day one",
+"mods":9000,
+"modders":2000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":12,
+"name":"Stardew Valley",
+"year":"2016",
+"highlights":[
+"Stardew Valley Expanded",
+"Automate",
+"Tractor Mod",
+"NPC Map Locations"
+],
+"platform":"PC, Consoles, Mobile",
+"engine":"Custom (C#/XNA)",
+"mods_text":"~15,000+",
+"modders_text":"5,000+",
+"why":"Solo dev (ConcernedApe) supports modding",
+"mods":15000,
+"modders":5000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":13,
+"name":"Terraria",
+"year":"2011",
+"highlights":[
+"Calamity",
+"Thorium",
+"Spirit Mod"
+],
+"platform":"PC, Consoles, Mobile",
+"engine":"XNA/FNA",
+"mods_text":"~7,000+",
+"modders_text":"3,000+",
+"why":"tModLoader official integration (2020)",
+"mods":7000,
+"modders":3000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":14,
+"name":"Left 4 Dead 2",
+"year":"2009",
+"highlights":[],
+"platform":"PC, Xbox 360",
+"engine":"Source",
+"mods_text":"~50,000+ Workshop items",
+"modders_text":"2,000+",
+"why":"Valve supports modding",
+"mods":50000,
+"modders":2000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":15,
+"name":"The Witcher 3",
+"year":"2015",
+"highlights":[
+"HD Reworked Project",
+"Ghost Mode",
+"Random Encounters"
+],
+"platform":"PC, Consoles",
+"engine":"REDengine",
+"mods_text":"~12,000+",
+"modders_text":"2,000+",
+"why":"CD Projekt RED released modding tools",
+"mods":12000,
+"modders":2000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":16,
+"name":"Mount & Blade: Warband",
+"year":"2010",
+"highlights":[
+"Prophesy of Pendor",
+"1257 AD",
+"Game of Thrones",
+"Star Wars Conquest"
+],
+"platform":"PC",
+"engine":"Custom",
+"mods_text":"~5,000+",
+"modders_text":"1,000+",
+"why":"Developer TaleWorlds embraced mods",
+"mods":5000,
+"modders":1000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":17,
+"name":"Cities: Skylines",
+"year":"2015",
+"highlights":[
+"Traffic Manager: President Edition",
+"Move It",
+"Procedural Objects"
+],
+"platform":"PC, Consoles",
+"engine":"Unity",
+"mods_text":"~200,000+ Workshop items",
+"modders_text":"10,000+",
+"why":"Paradox Interactive encourages modding",
+"mods":200000,
+"modders":10000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":18,
+"name":"Quake",
+"year":"1996",
+"highlights":[],
+"platform":"PC",
+"engine":"Quake Engine",
+"mods_text":"~5,000+",
+"modders_text":"Limited (historical)",
+"why":"id Software released tools",
+"mods":5000,
+"modders":null,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":19,
+"name":"Arma 3",
+"year":"2013",
+"highlights":[
+"ACE3",
+"JSRS",
+"RHS",
+"Exile"
+],
+"platform":"PC",
+"engine":"Real Virtuality",
+"mods_text":"~100,000+ Workshop items",
+"modders_text":"5,000+",
+"why":"Military simulation",
+"mods":100000,
+"modders":5000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+},
+{
+"rank":20,
+"name":"Kerbal Space Program",
+"year":"2015",
+"highlights":[
+"MechJeb",
+"Realism Overhaul",
+"Principia",
+"Kopernicus"
+],
+"platform":"PC, Consoles",
+"engine":"Unity",
+"mods_text":"~5,000+",
+"modders_text":"2,000+",
+"why":"Educational game",
+"mods":5000,
+"modders":2000,
+"doc":"game-development/modding/MOST_MODDED_GAMES.html"
+}
+];

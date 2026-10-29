@@ -61,6 +61,6 @@
  },
   "development-tools/resource-explorer/index.html": {
     "type": "Tool",
-    "blurb": "232 repositories from nine of the session lists in one searchable, sortable table, filtered by topic and language."
+    "blurb": "232 repositories from nine of the session lists, plus the 20 most modded games, in searchable, sortable tables."
   }
 }
