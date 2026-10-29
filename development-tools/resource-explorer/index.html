@@ -31,6 +31,11 @@ td.n a{font-weight:600;color:var(--acc);text-decoration:none}td.n a:hover{text-d
 td.d{color:var(--muted);max-width:46ch}td small{display:block;color:var(--muted)}
 .tag{display:inline-block;padding:1px 8px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--muted);white-space:nowrap}
 .st{display:flex;align-items:center;gap:6px;white-space:nowrap}.st i{display:block;height:8px;border-radius:4px;background:var(--bar)}
+.views{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2px 0 12px}
+.views button{font:inherit;color:inherit;background:var(--card);border:0;padding:8px 14px;cursor:pointer}
+.views button[aria-pressed=true]{background:var(--acc);color:#fff}
+.note{color:var(--muted);font-size:13px;margin:6px 0 10px;max-width:75ch}
+.rk{font-weight:700;color:var(--muted)}td.n small b{font-weight:500}
 .empty{padding:28px;text-align:center;color:var(--muted)}
 footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--acc)}
 @media(max-width:640px){.topic{grid-template-columns:110px 1fr 30px}}
@@ -40,6 +45,8 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--ac
 <main>
 <h1>Resource Explorer</h1>
 <p class="lede">Every repository listed in the session documents, in one place. Pick a topic, search, or click a column heading to sort. Each row links to the project and to the document it came from.</p>
+<div class="views" role="group" aria-label="View"><button type="button" id="vRepo" aria-pressed="true">Repositories</button><button type="button" id="vGame" aria-pressed="false">Most modded games</button></div>
+<div id="repoView">
 <div class="topics" id="topics" role="group" aria-label="Filter by topic"></div>
 <div class="tools">
   <input type="search" id="q" placeholder="Search names and descriptions" aria-label="Search">
@@ -47,6 +54,13 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--ac
 </div>
 <p id="count" aria-live="polite"></p>
 <div class="scroll"><table><thead><tr id="head"></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty" hidden>Nothing matches. Clear the search or choose another topic.</div></div>
+</div>
+<div id="gameView" hidden>
+  <p class="note">The twenty games ranked in the modding document. The rank mixes mod counts with cultural impact, so a game can rank high with fewer mods. Bars show total mods; counts span a huge range, so the default scale is logarithmic.</p>
+  <div class="tools"><input type="search" id="gq" placeholder="Search games, engines, mods" aria-label="Search games"><select id="gscale" aria-label="Bar scale"><option value="log">Log scale</option><option value="lin">Linear scale</option></select></div>
+  <p id="gcount" aria-live="polite" style="color:var(--muted)"></p>
+  <div class="scroll"><table><thead><tr id="ghead"></tr></thead><tbody id="grows"></tbody></table><div class="empty" id="gempty" hidden>No game matches.</div></div>
+</div>
 <footer>Built by <code>build_data.py</code> from the markdown lists: re-run it after editing a list. Stars are as written in each document, so not every row has one.</footer>
 </main>
 <script src="resources.js"></script>
@@ -55,6 +69,7 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--ac
   var D=(window.RESOURCES||[]).map(function(x){var l=(x.language||"").split(/[,/&]| and /)[0].replace(/\(.*$/,"").trim();x.lang=l;return x});
   var COLS=[["name","Name"],["topic","Topic"],["lang","Language"],["stars","Stars"],["description","About"]];
   var state={topic:"",q:"",lang:"",key:"stars",dir:-1};
+  var hit=function(text,q){if(!q)return true;var t=text.toLowerCase();return q.split(/\s+/).every(function(w){return new RegExp("(^|[^a-z0-9])"+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).test(t)})};
   var $=function(i){return document.getElementById(i)};
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
   var fmt=function(n){return n>=1000?(n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,"")+"k":String(n)};
@@ -67,7 +82,7 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--ac
   var smax=Math.max.apply(null,D.map(function(x){return x.stars||0}).concat([1]));
   function view(){
     var q=state.q.toLowerCase(),r=D.filter(function(x){
-      return (!state.topic||x.topic===state.topic)&&(!state.lang||x.lang===state.lang)&&(!q||(x.name+" "+x.description+" "+x.features+" "+x.section+" "+x.language).toLowerCase().indexOf(q)>=0)});
+      return (!state.topic||x.topic===state.topic)&&(!state.lang||x.lang===state.lang)&&hit(x.name+" "+x.description+" "+x.features+" "+x.section+" "+x.language,q)});
     r.sort(function(a,b){var A=a[state.key],B=b[state.key];
       if(A==null||A==="")return 1;if(B==null||B==="")return -1;
       return (typeof A==="number"?A-B:String(A).localeCompare(String(B)))*state.dir});
@@ -86,6 +101,29 @@ footer{margin-top:18px;color:var(--muted);font-size:13px}footer a{color:var(--ac
   $("head").addEventListener("click",function(e){sort(e.target.closest("th"))});
   $("head").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();sort(e.target.closest("th"))}});
   view();
+
+  /* second view: most modded games */
+  var G=window.GAMES||[],gs={q:"",key:"rank",dir:1,scale:"log"};
+  var GC=[["rank","#"],["name","Game"],["year","Year"],["engine","Engine"],["mods","Total mods"],["modders","Active modders"]];
+  $("ghead").innerHTML=GC.map(function(c){return '<th data-k="'+c[0]+'" tabindex="0" role="columnheader">'+c[1]+'</th>'}).join("");
+  var gmax=Math.max.apply(null,G.map(function(g){return g.mods}).concat([1]));
+  function gw(n){if(!n)return 0;return gs.scale==="log"?Math.max(3,Math.log(n)/Math.log(gmax)*100):Math.max(2,n/gmax*100)}
+  function gview(){
+    var q=gs.q.toLowerCase(),r=G.filter(function(g){return hit(g.name+" "+g.engine+" "+g.platform+" "+g.why+" "+g.highlights.join(" "),q)});
+    r.sort(function(a,b){var A=a[gs.key],B=b[gs.key];if(A==null)return 1;if(B==null)return -1;return (typeof A==="number"?A-B:String(A).localeCompare(String(B)))*gs.dir});
+    $("grows").innerHTML=r.map(function(g){
+      return '<tr><td class="rk">'+g.rank+'</td><td class="n"><a href="../../'+esc(g.doc)+'">'+esc(g.name)+'</a><small>'+esc(g.why||"")+'</small><small>'+esc(g.highlights.slice(0,4).join(" · "))+'</small></td><td>'+esc(g.year)+'</td><td>'+esc(g.engine||"–")+'</td><td><div class="st"><i style="width:'+Math.round(gw(g.mods)*1.4)+'px"></i>'+(g.mods?fmt(g.mods):"–")+'</div></td><td>'+(g.modders?fmt(g.modders):"–")+'</td></tr>'}).join("");
+    $("gempty").hidden=r.length>0;$("gcount").textContent=r.length+" of "+G.length+" games";
+    [].forEach.call($("ghead").children,function(th){th.removeAttribute("aria-sort");if(th.dataset.k===gs.key)th.setAttribute("aria-sort",gs.dir>0?"ascending":"descending")});
+  }
+  function gsort(th){if(!th)return;var k=th.dataset.k;gs.dir=gs.key===k?-gs.dir:(k==="mods"||k==="modders"?-1:1);gs.key=k;gview()}
+  $("ghead").addEventListener("click",function(e){gsort(e.target.closest("th"))});
+  $("ghead").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();gsort(e.target.closest("th"))}});
+  $("gq").addEventListener("input",function(e){gs.q=e.target.value;gview()});
+  $("gscale").addEventListener("change",function(e){gs.scale=e.target.value;gview()});
+  function show(g){$("repoView").hidden=g;$("gameView").hidden=!g;$("vRepo").setAttribute("aria-pressed",String(!g));$("vGame").setAttribute("aria-pressed",String(g));try{history.replaceState(null,"",g?"#games":"#repos")}catch(e){}}
+  $("vRepo").addEventListener("click",function(){show(false)});$("vGame").addEventListener("click",function(){show(true)});
+  gview();if(location.hash==="#games")show(true);
 })();
 </script>
 </body>
