@@ -53,6 +53,55 @@ test("project size: hand-outs that leave nobody idle equal counting every assign
   for (const [p, n] of [[1, 2], [2, 3], [3, 3], [5, 3], [6, 4], [7, 2], [8, 5]]) { let ok = 0; const total = n ** p; for (let a = 0; a < total; a++) { let x = a; const seen = new Set(); for (let i = 0; i < p; i++) { seen.add(x % n); x = Math.floor(x / n); } if (seen.size === n) ok++; } assert.strictEqual(T.projectsize._surjections(p, n), BigInt(ok), [p, n] + ""); }
   assert.ok(row("projectsize", { p: 2, n: 4 }, "Verdict").startsWith("too small")); assert.ok(row("projectsize", { p: 8, n: 4 }, "Verdict").startsWith("big enough"));
 });
+test("networks: counts match listing every network of up to 5 people", () => {
+  for (let n = 1; n <= 5; n++) {
+    const P = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) P.push([i, j]); let conn = 0; const byE = {};
+    for (let m = 0; m < 1 << P.length; m++) {
+      const par = [...Array(n).keys()], find = (x) => (par[x] === x ? x : (par[x] = find(par[x]))); let e = 0;
+      P.forEach(([a, b], i) => { if ((m >> i) & 1) { e++; par[find(a)] = find(b); } }); byE[e] = (byE[e] || 0) + 1; if (new Set([...Array(n).keys()].map(find)).size === 1) conn++;
+    }
+    assert.strictEqual(T.networks._connected(n), BigInt(conn), "connected " + n); if (n >= 2) { assert.strictEqual(row("networks", { n, e: 1 }, "All possible"), (1 << P.length).toLocaleString("en-US")); assert.strictEqual(row("networks", { n, e: 1 }, "Networks with exactly"), String(byE[1])); }
+  }
+  assert.strictEqual(T.networks._connected(6), 26704n);
+});
+test("mutual trio: 12 five-person networks avoid it and no six-person network does", () => {
+  const brute = (n) => { const P = []; for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) P.push([a, b]); let free = 0; for (let m = 0; m < 1 << P.length; m++) { const col = (a, b) => (m >> P.findIndex((p) => p[0] === a && p[1] === b)) & 1; let mono = false; for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) for (let c = b + 1; c < n; c++) if (col(a, b) === col(a, c) && col(a, c) === col(b, c)) mono = true; if (!mono) free++; } return free; };
+  for (let n = 3; n <= 6; n++) assert.strictEqual(T.mutualtrio._mutualTrio(n).free, brute(n), "n=" + n);
+  assert.strictEqual(T.mutualtrio._mutualTrio(5).free, 12); assert.strictEqual(T.mutualtrio._mutualTrio(6).free, 0);
+  assert.strictEqual(row("mutualtrio", { n: 6, seed: 1 }, "Verdict"), "a trio is unavoidable");
+});
+test("separation: reach equals walking the contact tree, and a billion is within a few steps", () => {
+  const walk = (k, d) => { let layer = k, total = 1; for (let i = 1; i <= d; i++) { total += layer; layer *= k - 1; } return total; };
+  for (const [k, d] of [[3, 2], [3, 5], [10, 4], [30, 3]]) assert.strictEqual(T.separation._reach(k, d), BigInt(walk(k, d)));
+  assert.strictEqual(row("separation", { k: 30, pop: 4 }, "Steps to reach"), "7");
+});
+test("ancestors: 2^g slots and the first generation that outnumbers the population", () => {
+  assert.strictEqual(row("ancestors", { g: 10, pop: 2 }, "Ancestor slots"), "1,024"); assert.strictEqual(row("ancestors", { g: 10, pop: 2 }, "Slots over all"), "2,046");
+  assert.strictEqual(row("ancestors", { g: 20, pop: 2 }, "First generation"), "20"); assert.ok(row("ancestors", { g: 25, pop: 0 }, "Verdict").startsWith("some people"));
+});
+test("remix: counts match listing every selection", () => {
+  const sel = (n, r) => { let c = 0; (function go(s, k) { if (k === r) { c++; return; } for (let i = s; i < n; i++) go(i + 1, k + 1); })(0, 0); return c; };
+  for (const [n, r, v] of [[5, 2, 2], [6, 3, 3], [8, 4, 2]]) { const c = sel(n, r); assert.strictEqual(row("remix", { n, r, v }, "Ways to choose"), String(c)); assert.strictEqual(row("remix", { n, r, v }, "…with a choice").replace(/,/g, ""), String(c * v ** r)); assert.strictEqual(row("remix", { n, r, v }, "…and in a chosen").replace(/,/g, ""), String(c * v ** r * [...Array(r).keys()].reduce((a, i) => a * (i + 1), 1))); }
+});
+test("lineages: histories match listing every parent choice and every set of sources", () => {
+  for (let n = 2; n <= 5; n++) {
+    let single = 0; (function go(i) { if (i === n) { single++; return; } for (let p = 0; p < i; p++) go(i + 1); })(1);
+    let every = 0; const pairs = n * (n - 1) / 2; for (let m = 0; m < 1 << pairs; m++) every++;
+    let noEmpty = 0; (function go(i, ok) { if (i === n) { if (ok) noEmpty++; return; } for (let set = 0; set < 1 << i; set++) go(i + 1, ok && set !== 0); })(1, true);
+    const L = T.lineages._lineages(n); assert.strictEqual(L.single, BigInt(single)); assert.strictEqual(L.any, BigInt(every)); assert.strictEqual(L.anyBut, BigInt(noEmpty));
+  }
+});
+test("licences: legal mixes equal listing every set whose pairs are all compatible", () => {
+  for (const [m, p, seed] of [[5, 60, 1], [8, 40, 3], [10, 80, 5], [9, 30, 7]]) {
+    const r = T.licences._licenceMixes(m, p, seed), ok = new Set(r.edges.map(([a, b]) => a * 100 + b)); let legal = 0, best = 0, bestCount = 0;
+    for (let mask = 0; mask < 1 << m; mask++) { const ids = [...Array(m).keys()].filter((i) => (mask >> i) & 1); let good = true; for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) if (!ok.has(ids[i] * 100 + ids[j])) good = false; if (!good) continue; if (ids.length >= 2) legal++; if (ids.length > best) { best = ids.length; bestCount = 1; } else if (ids.length === best) bestCount++; }
+    assert.strictEqual(r.legal, legal, [m, p, seed] + ""); assert.strictEqual(r.best, best); assert.strictEqual(r.bestCount, bestCount); assert.strictEqual(r.total, 2 ** m - m - 1);
+  }
+});
+test("every theme has solo or group tasks and the names are defined", () => {
+  const themes = new Set(R.TASKS.filter((t) => t.theme).map((t) => t.theme)); assert.deepStrictEqual([...themes].sort(), Object.keys(R.THEMES).sort());
+  for (const th of themes) assert.ok(R.TASKS.filter((t) => t.theme === th).length >= 3, th);
+});
 test("passwords: 94^8 and a four digit PIN", () => { assert.strictEqual(row("passwords", { a: 94, L: 8 }, "Possible"), "6,095,689,385,410,816"); assert.strictEqual(row("passwords", { a: 10, L: 4 }, "Possible"), "10,000"); });
 test("plates", () => { assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes (characters may"), "17,576,000"); assert.strictEqual(row("plates", { L: 3, D: 3 }, "Codes with no"), "11,232,000"); });
 test("poker: all 2,598,960 hands classified by brute force match the formulas", () => {
