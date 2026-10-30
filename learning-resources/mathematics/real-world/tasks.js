@@ -939,6 +939,133 @@
     _surjections: surjections,
   });
 
+  /* --- relationships in general, and derivative works */
+  const pairList = (n) => { const p = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) p.push([i, j]); return p; };
+  function connectedNetworks(n) {              /* labelled connected graphs on n people */
+    const g = (k) => pow(2, k * (k - 1) / 2), c = [0n, 1n];
+    for (let m = 2; m <= n; m++) { let t = g(m); for (let k = 1; k < m; k++) t -= comb(m - 1, k - 1) * c[k] * g(m - k); c.push(t); }
+    return c[n];
+  }
+  task({
+    id: "networks", modality: "counting", who: "group", theme: "relationships", title: "How many friendship networks are there?",
+    ask: "n people, and each pair either know each other or do not. How many different networks of acquaintance are possible, how many hold everyone together, and how many have exactly e friendships?",
+    idea: "A group of n has C(n, 2) pairs, and each pair is in or out, so there are 2^C(n,2) networks. Exactly e friendships is a choice of e pairs from those C(n, 2). A network that holds everyone together (connected) is counted by taking all networks and removing those where the group of the first person is smaller than everyone: c(n) = 2^C(n,2) − Σ C(n−1, k−1) · c(k) · 2^C(n−k,2). Small groups already have more networks than anyone could draw.",
+    questions: [1, 3, 10], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("n", "People", 2, 12, 6), range("e", "Friendships", 0, 66, 7, { maxFor: (v) => v.n * (v.n - 1) / 2 })],
+    compute(v) {
+      const pairs = v.n * (v.n - 1) / 2, e = Math.min(v.e, pairs), all = pow(2, pairs), conn = connectedNetworks(v.n);
+      return { rows: [["Pairs of people", fmtBig(B(pairs))], ["All possible networks (2^pairs)", fmtBig(all)], [`Networks with exactly ${e} friendships`, fmtBig(comb(pairs, e))], ["Networks where everyone is linked (connected)", fmtBig(conn)], ["Share of networks that are connected", pct(Number(conn) / Number(all))]],
+        note: "With 5 people there are 1,024 networks and 728 of them are connected. With 12 people, almost every network is connected, but there are more of them than grains of sand on Earth." };
+    },
+    _connected: connectedNetworks,
+  });
+  function mutualTrio(n, maskFor) {
+    const P = pairList(n), idx = {}; P.forEach(([a, b], i) => (idx[a * n + b] = i));
+    const trios = []; for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++) for (let c = b + 1; c < n; c++) trios.push([a, b, c, idx[a * n + b], idx[a * n + c], idx[b * n + c]]);
+    const mono = (mask) => { for (const t of trios) { const x = (mask >> t[3]) & 1, y = (mask >> t[4]) & 1, z = (mask >> t[5]) & 1; if (x === y && y === z) return t; } return null; };
+    let free = 0, firstFree = -1; const total = 1 << P.length;
+    for (let m = 0; m < total; m++) if (!mono(m)) { free++; if (firstFree < 0) firstFree = m; }
+    return { P, total, free, firstFree, mono, maskFor: maskFor || (() => 0) };
+  }
+  task({
+    id: "mutualtrio", modality: "feasibility", who: "group", theme: "relationships", title: "Is a trio of friends or strangers unavoidable?",
+    ask: "Among n people, every pair are either friends or strangers. Is there always a trio who are all friends with each other, or all strangers to each other, however the friendships fall?",
+    idea: "The page lists every possible network of n people (2^C(n,2) of them) and looks for a trio with all three pairs the same. For 3, 4 and 5 people some networks avoid it (5 people in a ring where each knows only their two neighbours). For 6 people none do: every network has such a trio. This is the smallest case of Ramsey's theorem, and shows that large enough groups always contain some order.",
+    questions: [1, 12, 38], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("n", "People", 3, 6, 5), seed(2)],
+    compute(v) {
+      const r = mutualTrio(v.n), g = rng(v.seed * 8431); let mask = r.firstFree, mark = [];
+      if (v.n === 6 || v.seed > 1) { mask = Math.floor(g() * r.total); const t = r.mono(mask); mark = t ? [t[0], t[1], t[2]] : []; }
+      const edges = [], non = []; r.P.forEach(([a, b], i) => (((mask >> i) & 1 ? edges : non).push([a, b])));
+      return { rows: [["Networks checked (2^pairs)", fmtBig(B(r.total))], ["Networks with no trio of all friends or all strangers", fmtBig(B(r.free))], ["Verdict", r.free === 0 ? "a trio is unavoidable" : "a trio can be avoided"]],
+        viz: { type: "network", n: v.n, edges, non, mark }, note: mark.length ? "A random network; the highlighted trio are all friends or all strangers. Solid lines are friends, faint dashes are strangers. Press the dice for another." : "Solid lines are friends, faint dashes are strangers: this network has no trio of all one kind." };
+    },
+    _mutualTrio: mutualTrio,
+  });
+  const POPS = [[1e3, "a thousand"], [1e4, "ten thousand"], [1e6, "a million"], [1e8, "a hundred million"], [8e9, "eight billion"]];
+  function reach(k, d) { let t = 1n; for (let i = 1; i <= d; i++) t += B(k) * pow(k - 1, i - 1); return t; }
+  task({
+    id: "separation", modality: "prediction", who: "solo", theme: "relationships", title: "How many steps away is everyone?",
+    ask: "You know k people, each of them knows k others, and so on. How many steps of introduction does it take to reach a population of N?",
+    idea: "At step 1 you reach k people. Each of those has k − 1 new contacts (one is whoever introduced them), so step d adds k × (k − 1)^(d − 1) people. This best case, where nobody is reached twice, grows geometrically, so a few steps cover even eight billion people. Real networks overlap (your friends know each other), so the true count of steps is somewhat larger.",
+    questions: [1, 2, 16], repo: [["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("k", "People each person knows", 3, 200, 30), select("pop", "Population", POPS.map((p, i) => [i, p[1]]), 3)],
+    compute(v) {
+      const N = B(POPS[v.pop][0]); let d = 0; while (reach(v.k, d) < N && d < 80) d++;
+      const shown = Math.min(Math.max(d, 3), 12);
+      return { rows: [["People reached after 1 step", fmtBig(reach(v.k, 1) - 1n)], ["People reached after 3 steps, at most", fmtBig(reach(v.k, 3) - 1n)], [`Steps to reach ${POPS[v.pop][1]} people, best case`, String(d)]],
+        viz: { type: "bars", items: Array.from({ length: shown }, (_, i) => ({ label: `${i + 1} step${i ? "s" : ""}`, value: Number(reach(v.k, i + 1) - 1n), on: i + 1 === d })), log: true },
+        note: "Bars use a logarithmic scale. Overlapping friend groups make real networks slower than this best case, but experiments with chains of letters found about six steps." };
+    },
+    _reach: reach,
+  });
+  task({
+    id: "ancestors", modality: "counting", who: "solo", theme: "relationships", title: "Your ancestors: more places than people",
+    ask: "Going back g generations, you have 2^g ancestor slots. When does that exceed the number of people who were alive, and what does it mean?",
+    idea: "Each person has two parents, so generation g back has 2^g slots, and 2^(g+1) − 2 slots over g generations. A population of P people cannot fill more than P distinct slots, so once 2^g exceeds P some people fill several slots: relatives had children together, far back. The number of generations where this must start is about log2 of the population.",
+    questions: [1, 2, 16], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"]],
+    controls: [range("g", "Generations back", 1, 40, 25), select("pop", "People alive back then", POPS.map((p, i) => [i, p[1]]), 3)],
+    compute(v) {
+      const slots = pow(2, v.g), P = B(POPS[v.pop][0]); let first = 0; while (pow(2, first) <= P) first++;
+      return { rows: [["Ancestor slots in that generation (2^g)", fmtBig(slots)], ["Slots over all generations so far", fmtBig(pow(2, v.g + 1) - 2n)], ["People alive then", POPS[v.pop][1]], ["Slots per person alive", fmtNum(Number(slots) / Number(P), 2)], ["First generation with more slots than people", String(first)], ["Verdict", slots > P ? "some people must fill more than one slot" : "enough people for every slot to be different"]],
+        note: "A generation is roughly 25 to 30 years, so 25 generations is about 700 years. Family trees stop looking like trees long before they run out of people." };
+    },
+  });
+  task({
+    id: "remix", modality: "counting", who: "solo", theme: "derivative", title: "Mashups from a pile of source works",
+    ask: "You have n source works (songs, images, stories). A derivative work uses r of them, each in one of v versions. How many different derivative works could you make?",
+    idea: "Choosing which r sources to use is C(n, r). Each chosen source can appear in v versions, so v^r. If the order or layering matters, multiply by r!. Allowing any number of sources gives 2^n − 1 selections. The number of ways to remix grows far faster than the number of sources, which is why a modest library supports a huge range of derivative works.",
+    questions: [1, 3, 10], repo: [["Combinations", REPO + "backtracking/combinations.js"], ["Permutations", REPO + "backtracking/permutations.js"]],
+    controls: [range("n", "Source works", 2, 30, 10), range("r", "Sources in one mashup", 1, 8, 3, { maxFor: (v) => Math.min(8, v.n) }), range("v", "Versions of each source", 1, 6, 2)],
+    compute(v) {
+      const r = Math.min(v.r, v.n), pick = comb(v.n, r), withV = pick * pow(v.v, r);
+      return { rows: [[`Ways to choose ${r} sources`, fmtBig(pick)], ["…with a choice of version for each", fmtBig(withV)], ["…and in a chosen order or layering", fmtBig(withV * fact(r))], ["Selections of any size, at least one source", fmtBig(pow(2, v.n) - 1n)]],
+        note: "With 10 sources, 3 in a mashup and 2 versions each: 120 selections, 960 with versions and 5,760 once order counts." };
+    },
+  });
+  function lineages(n) {
+    let single = 1n, noneOk = 1n; for (let i = 2; i <= n; i++) { single *= B(i - 1); noneOk *= pow(2, i - 1) - 1n; }
+    return { single, anyBut: noneOk, any: pow(2, n * (n - 1) / 2) };
+  }
+  task({
+    id: "lineages", modality: "counting", who: "group", theme: "derivative", title: "Who was derived from whom?",
+    ask: "n works are made one after another. Each later work may be based on earlier ones. How many different derivation histories are possible, if each work has one parent, or any set of earlier works as sources?",
+    idea: "The second work can derive from 1 earlier work, the third from 2, the fourth from 3, so single-parent histories number 1 × 2 × 3 × … × (n − 1) = (n − 1)!. If any set of earlier works may be sources, work i has 2^(i−1) choices, and these multiply to 2^C(n,2), the same count as friendship networks: a derivation history is a network of relationships with a direction in time. Insisting that every later work has at least one source gives the product of (2^(i−1) − 1).",
+    questions: [1, 3, 16], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Permutations", REPO + "backtracking/permutations.js"]],
+    controls: [range("n", "Works", 2, 12, 6), seed(3)],
+    compute(v) {
+      const r = lineages(v.n), g = rng(v.seed * 3571), edges = []; for (let i = 1; i < v.n; i++) edges.push([Math.floor(g() * i), i]);
+      return { rows: [["Histories where each work has one earlier parent", fmtBig(r.single)], ["Histories where each later work has at least one source set", fmtBig(r.anyBut)], ["Histories with any set of sources, even none (2^pairs)", fmtBig(r.any)], ["Same count for friendship networks of this many people", fmtBig(pow(2, v.n * (v.n - 1) / 2))]],
+        viz: { type: "network", n: v.n, edges, non: [], mark: [], labels: "W" }, note: "One random single-parent history is drawn: each work is joined to the earlier work it came from. Press the dice for another." };
+    },
+    _lineages: lineages,
+  });
+  function licenceMixes(m, p, seedv) {
+    const g = rng(seedv * 6151), P = pairList(m), ok = Array.from({ length: m }, () => 0), edges = [], non = [];
+    for (const [a, b] of P) { if (g() * 100 < p) { ok[a] |= 1 << b; ok[b] |= 1 << a; edges.push([a, b]); } else non.push([a, b]); }
+    let legal = 0, best = 0, bestCount = 0, bestMask = 0;
+    for (let mask = 0; mask < 1 << m; mask++) {
+      let good = true; for (let i = 0; i < m && good; i++) if (((mask >> i) & 1) && ((mask & ~(1 << i)) & ~ok[i])) good = false;
+      if (!good) continue; const size = popcount(mask); if (size >= 2) legal++; if (size > best) { best = size; bestCount = 1; bestMask = mask; } else if (size === best) bestCount++;
+    }
+    return { edges, non, legal, best, bestCount, bestMask, total: 2 ** m - m - 1 };
+  }
+  task({
+    id: "licences", modality: "feasibility", who: "group", theme: "derivative", title: "Which sources can legally be combined?",
+    ask: "Each source work has a licence, and some pairs of licences are compatible. How many combinations of two or more sources can be merged into one derivative, and what is the most sources in a single legal mix?",
+    idea: "A combination can be merged only if every pair of its sources is compatible, so it is a set of works all linked to each other in the compatibility network (a clique). There are 2^m − m − 1 combinations of two or more, and the page tests each. Adding one more source with a single incompatible partner shrinks the legal combinations sharply.",
+    questions: [10, 12, 31], repo: [["Subset generation", REPO + "backtracking/subset-generation.js"], ["Graph colouring", REPO + "backtracking/graph-coloring.js"]],
+    controls: [range("m", "Source works", 3, 14, 9), range("p", "Chance two licences are compatible (%)", 20, 95, 60, { step: 5 }), seed(4)],
+    compute(v) {
+      const r = licenceMixes(v.m, v.p, v.seed), chosen = []; for (let i = 0; i < v.m; i++) if ((r.bestMask >> i) & 1) chosen.push(i);
+      return { rows: [["Combinations of two or more sources", fmtBig(B(r.total))], ["Combinations where every pair is compatible", fmtBig(B(r.legal))], ["Most sources in one legal mix", `${r.best} (${r.bestCount === 1 ? "1 way" : r.bestCount + " different ways"})`], ["Share of combinations that are legal", pct(r.legal / r.total)]],
+        viz: { type: "network", n: v.m, edges: r.edges, non: [], mark: chosen, labels: "S" }, note: "Lines join compatible licences; a highlighted set is one largest legal mix. Press the dice for another set of licences." };
+    },
+    _licenceMixes: licenceMixes,
+  });
+  { const hs = T.find((t) => t.id === "handshakes"); if (hs) hs.theme = "relationships"; }
+  const THEMES = { relationships: "Relationships", derivative: "Derivative works" };
+
   /* the order a new hobby group usually meets its questions in */
   const HOBBY_STEPS = [
     ["joinclubs", "Before starting, check what fits into your own week."], ["sharedhobby", "Will anyone else share your hobby?"],
@@ -952,5 +1079,5 @@
 
   T.forEach((t) => { if (t.who !== "solo" && t.who !== "group") throw new Error("task " + t.id + " has no solo or group tag"); });
 
-  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn, stirling2, bell, derangements, pairings }, WHO_LABELS: { solo: "Solo", group: "Group" }, HOBBY_STEPS, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
+  return { MODALITIES, TASKS: T, util: { fact, comb, perm, pow, fib, fmtBig, fmtNum, pct, human, rng, permutations, oneIn, stirling2, bell, derangements, pairings }, WHO_LABELS: { solo: "Solo", group: "Group" }, HOBBY_STEPS, THEMES, HANDS: HANDS.map((h) => [h[0], h[1]]), followers, CORPUS, birthday };
 });

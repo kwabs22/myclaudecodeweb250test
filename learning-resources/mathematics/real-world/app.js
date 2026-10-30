@@ -9,8 +9,8 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 const mod = Object.fromEntries(MODALITIES.map((m) => [m.id, m]));
 const values = {};                       /* each task keeps its own slider values while you look at others */
 for (const t of TASKS) values[t.id] = Object.fromEntries(t.controls.map((c) => [c.key, c.type === "bits" ? c.value.slice() : c.value]));
-let current = null, filter = null, who = null, hobbyOnly = false;
-const visible = (t) => (!filter || t.modality === filter) && (!who || t.who === who) && (!hobbyOnly || t.hobby);
+let current = null, filter = null, who = null, hobbyOnly = false, theme = null;
+const visible = (t) => (!filter || t.modality === filter) && (!who || t.who === who) && (!hobbyOnly || t.hobby) && (!theme || t.theme === theme);
 const cardEls = new Map();
 
 /* ------------------------------------------------------------------ chips and the task list */
@@ -27,6 +27,12 @@ function buildWho() {
   h.innerHTML = `Hobby groups <small>${TASKS.filter((t) => t.hobby).length}</small>`;
   h.addEventListener("click", () => { hobbyOnly = !hobbyOnly; h.setAttribute("aria-pressed", String(hobbyOnly)); refreshVisibility(); if (hobbyOnly) $("hobbysec").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
   el.appendChild(h);
+  Object.entries(RW.THEMES).forEach(([key, label]) => {
+    const b = document.createElement("button"); b.className = "chip themebtn"; b.type = "button"; b.setAttribute("aria-pressed", "false"); b.dataset.theme = key;
+    b.innerHTML = `${esc(label)} <small>${TASKS.filter((t) => t.theme === key).length}</small>`;
+    b.addEventListener("click", () => { theme = theme === key ? null : key; document.querySelectorAll(".themebtn").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === theme))); refreshVisibility(); });
+    el.appendChild(b);
+  });
 }
 function buildSteps() {
   const ol = $("steps"); ol.innerHTML = "";
@@ -71,7 +77,7 @@ function buildList() {
     const cards = document.createElement("div"); cards.className = "cards";
     for (const t of TASKS.filter((t) => t.modality === m.id)) {
       const c = document.createElement("button"); c.className = "card"; c.style.setProperty("--c", m.color);
-      c.innerHTML = `<b>${esc(t.title)}<span class="badge ${t.who}">${t.who}</span>${t.hobby ? '<span class="badge hobby">hobby</span>' : ""}</b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
+      c.innerHTML = `<b>${esc(t.title)}<span class="badge ${t.who}">${t.who}</span>${t.hobby ? '<span class="badge hobby">hobby</span>' : ""}${t.theme ? `<span class="badge theme">${esc(RW.THEMES[t.theme].toLowerCase())}</span>` : ""}</b><span>${esc(t.ask.length > 110 ? t.ask.slice(0, 107).replace(/\s+\S*$/, "") + "…" : t.ask)}</span>`;
       c.addEventListener("click", () => { select(t.id); $("panel").scrollIntoView({ block: "nearest", behavior: "smooth" }); });
       cardEls.set(t.id, c); cards.appendChild(c);
     }
@@ -115,7 +121,7 @@ function select(id, fromScene) {
   current = t; const m = mod[t.modality];
   const p = $("panel"); p.style.setProperty("--c", m.color); p.innerHTML = "";
   const head = document.createElement("div");
-  head.innerHTML = `<span class="tag">${esc(m.name)}</span><span class="badge ${t.who}">${t.who === "group" ? "group task" : "solo task"}</span>${t.hobby ? '<span class="badge hobby">hobby group</span>' : ""}<h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
+  head.innerHTML = `<span class="tag">${esc(m.name)}</span><span class="badge ${t.who}">${t.who === "group" ? "group task" : "solo task"}</span>${t.hobby ? '<span class="badge hobby">hobby group</span>' : ""}${t.theme ? `<span class="badge theme">${esc(RW.THEMES[t.theme])}</span>` : ""}<h2>${esc(t.title)}</h2><p class="ask">${esc(t.ask)}</p>`;
   p.appendChild(head);
   const ctl = document.createElement("div"); ctl.className = "controls"; ctl.id = "ctl";
   t.controls.forEach((c) => ctl.appendChild(control(t, c)));
@@ -153,6 +159,12 @@ function viz(z, color) {
       return `<svg viewBox="-6 -6 112 112" role="img" aria-label="Map of stops with the shortest route in colour and the nearest-neighbour route dashed"><polyline points="${line(z.greedy)}" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 2"/><polyline points="${line(z.best)}" fill="none" stroke="${color}" stroke-width="2"/>${pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="3.2" fill="${i === 0 ? "var(--ink)" : "var(--panel)"}" stroke="var(--ink)"/><text x="${p[0]}" y="${p[1] + 1.4}" font-size="3.6" text-anchor="middle" fill="${i === 0 ? "var(--bg)" : "var(--ink)"}">${i === 0 ? "S" : i}</text>`).join("")}</svg>`;
     }
     case "items": return `<div class="scroll"><table><tr><th>Parcel</th><th>Weight</th><th>Value</th><th>Best load</th><th>Greedy</th></tr>${z.items.map((it, i) => `<tr class="${it.best ? "hi" : ""}"><td>${i + 1}</td><td>${it.w}</td><td>${it.val}</td><td>${it.best ? "✓" : ""}</td><td>${it.greedy ? "✓" : ""}</td></tr>`).join("")}</table></div>`;
+    case "network": {
+      const n = z.n, pos = Array.from({ length: n }, (_, i) => [50 + 38 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 50 + 38 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]), mk = new Set(z.mark || []);
+      const line = (a, b, cls, extra = "") => `<line x1="${pos[a][0].toFixed(1)}" y1="${pos[a][1].toFixed(1)}" x2="${pos[b][0].toFixed(1)}" y2="${pos[b][1].toFixed(1)}" ${cls} ${extra}/>`;
+      const inMark = (a, b) => mk.has(a) && mk.has(b);
+      return `<svg viewBox="0 0 100 100" role="img" aria-label="Network of ${n} people or works with the lines between them">${(z.non || []).map(([a, b]) => line(a, b, `stroke="${inMark(a, b) ? color : "var(--muted)"}" stroke-width="${inMark(a, b) ? 2.2 : 0.5}" stroke-dasharray="2 2" opacity="${inMark(a, b) ? 1 : 0.35}"`)).join("")}${z.edges.map(([a, b]) => line(a, b, `stroke="${inMark(a, b) ? color : "var(--muted)"}" stroke-width="${inMark(a, b) ? 2.6 : 1}"`)).join("")}${pos.map((p, i) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5" fill="${mk.has(i) ? color : "var(--bg, #fff)"}" stroke="var(--ink)"/>${z.labels ? `<text x="${p[0].toFixed(1)}" y="${(p[1] + 1.6).toFixed(1)}" font-size="4.6" text-anchor="middle" fill="${mk.has(i) ? "#fff" : "var(--ink)"}">${z.labels}${i + 1}</text>` : ""}`).join("")}</svg>`;
+    }
     case "matrix": return `<div class="scroll"><table><tr><th></th>${z.cost.map((_, j) => `<th>Job ${j + 1}</th>`).join("")}</tr>${z.cost.map((r, i) => `<tr><th>Worker ${i + 1}</th>${r.map((c, j) => `<td class="${z.best[i] === j ? "hi" : ""} ${z.greedy[i] === j ? "out" : ""}">${c}</td>`).join("")}</tr>`).join("")}</table></div>`;
     case "graph": return `<svg viewBox="0 0 100 100" role="img" aria-label="Map with each region coloured so neighbours differ">${z.edges.map(([a, b]) => `<line x1="${z.pos[a][0]}" y1="${z.pos[a][1]}" x2="${z.pos[b][0]}" y2="${z.pos[b][1]}" stroke="var(--muted)" stroke-width="1"/>`).join("")}${z.pos.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="5.2" fill="${PALETTE[z.colours[i] % PALETTE.length]}" stroke="var(--ink)"/>`).join("")}</svg>`;
     case "grid": return `<p class="note" style="margin:0 0 6px">${esc(z.title)}</p><table style="width:auto">${z.cells.map((r) => `<tr>${r.map((c) => `<td style="width:34px;background:${PALETTE[c % PALETTE.length]}33">${c + 1}</td>`).join("")}</tr>`).join("")}</table>`;
@@ -238,10 +250,10 @@ function build3D() {
   }
   new ResizeObserver(resize).observe(stage); resize();
   const v3 = new THREE.Vector3();
-  let visible = true; new IntersectionObserver((e) => (visible = e[0].isIntersecting)).observe(stage);
+  let inView = true; new IntersectionObserver((e) => (inView = e[0].isIntersecting)).observe(stage);
   function frame() {
     requestAnimationFrame(frame);
-    if (!visible || document.hidden) return;
+    if (!inView || document.hidden) return;
     if (tween) { controls.target.lerp(tween, 0.08); if (controls.target.distanceTo(tween) < 0.02) tween = null; }
     controls.update();
     for (const n of nodes) { const on = current && current.id === n.id, want = n.base * (on ? 1.9 : n === hoverNode() ? 1.5 : 1); n.mesh.scale.setScalar(n.mesh.scale.x + (want - n.mesh.scale.x) * 0.2); }
@@ -253,7 +265,7 @@ function build3D() {
   requestAnimationFrame(frame);
   return {
     focus(id) { const n = nodes.find((x) => x.id === id); if (n) { tween = n.mesh.position.clone().multiplyScalar(0.55); controls.autoRotate = false; } },
-    applyFilter() { const on = (n) => visible({ modality: n.m, who: n.who }); for (const n of nodes) { n.mesh.material.opacity = on(n) ? 1 : 0.15; n.line.material.opacity = on(n) ? 0.45 : 0.06; } const shown = nodes.filter(on); if (filter && shown.length) { const c = shown.reduce((s, n) => s.add(n.mesh.position), new THREE.Vector3()).multiplyScalar(1 / shown.length); tween = c.multiplyScalar(0.6); controls.autoRotate = false; } else tween = new THREE.Vector3(); },
+    applyFilter() { const on = (n) => visible(TASKS.find((t) => t.id === n.id)); for (const n of nodes) { n.mesh.material.opacity = on(n) ? 1 : 0.15; n.line.material.opacity = on(n) ? 0.45 : 0.06; } const shown = nodes.filter(on); if (filter && shown.length) { const c = shown.reduce((s, n) => s.add(n.mesh.position), new THREE.Vector3()).multiplyScalar(1 / shown.length); tween = c.multiplyScalar(0.6); controls.autoRotate = false; } else tween = new THREE.Vector3(); },
   };
 }
 
