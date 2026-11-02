@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alpha channel on a 3D model</title>
+<meta name="description" content="What the alpha channel does on a 3D model: opaque, blended and cutout rendering of a textured knot and two glass panes, with the blending sum worked out live.">
+<style>
+:root{--bg:#f7f8fb;--fg:#161a23;--muted:#5b6475;--card:#fff;--line:#dfe3ec;--acc:#3b63e0}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10131a;--fg:#e8ebf3;--muted:#9aa3b5;--card:#181c26;--line:#2a3040;--acc:#7b9bff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+h1{margin:0 0 4px;font-size:clamp(26px,5vw,38px);letter-spacing:-.02em}h2{font-size:20px;margin:30px 0 8px}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+#stage{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#222}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.hint{position:absolute;left:8px;bottom:6px;margin:0;font-size:12px;color:#fff;opacity:.75;pointer-events:none}
+fieldset{border:0;margin:0 0 10px;padding:0}legend{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:0;margin-bottom:4px}
+.opt{display:block;padding:6px 8px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent)}.opt small{display:block;color:var(--muted)}
+label.s{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:8px}label.s b{float:right;color:var(--fg);text-transform:none;letter-spacing:0}
+input[type=range]{width:100%}
+.tex{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}.tex figure{margin:0}.tex canvas{width:100%;display:block;border:1px solid var(--line);border-radius:6px}.tex figcaption{font-size:12px;color:var(--muted)}
+.sum{font:14px ui-monospace,monospace;margin:6px 0 0;white-space:pre-wrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;border:1px solid var(--line);margin-right:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.cards div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.cards b{display:block}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.scroll{overflow-x:auto}.note{color:var(--muted);font-size:13px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Alpha channel on a 3D model</h1>
+<p class="lede">A colour has three numbers (red, green, blue). The <b>alpha channel</b> is a fourth: how much of the surface is there, from 0 (nothing) to 1 (fully solid). It does not change the colour. It tells the renderer how much of that colour to put on screen, and how much of whatever is behind to keep. Drag the model to turn it, then change how the renderer treats alpha.</p>
+<div class="grid">
+  <div class="panel"><div id="stage"><p class="hint">Drag to rotate · scroll or pinch to zoom</p></div>
+    <div class="tex"><figure><canvas id="tRGB" width="128" height="128"></canvas><figcaption>Colour channels only</figcaption></figure><figure><canvas id="tA" width="128" height="128"></canvas><figcaption>Alpha channel (white = solid)</figcaption></figure><figure><canvas id="tRGBA" width="128" height="128"></canvas><figcaption>Both together</figcaption></figure></div>
+  </div>
+  <div class="panel">
+    <fieldset><legend>How alpha is used</legend>
+      <label class="opt"><input type="radio" name="mode" value="opaque"> Ignore alpha <small>Everything is solid. The holes in the texture are filled with whatever colour is stored there (black here).</small></label>
+      <label class="opt"><input type="radio" name="mode" value="blend" checked> Blend <small>Partly see-through. Drawn back to front without writing depth.</small></label>
+      <label class="opt"><input type="radio" name="mode" value="blendz"> Blend, depth written <small>The common mistake: a nearer pane hides what is behind it, even where it is see-through.</small></label>
+      <label class="opt"><input type="radio" name="mode" value="cutout"> Cutout (alpha test) <small>Each pixel is either kept or thrown away, by a threshold. Fast, hard edges, no sorting needed.</small></label>
+    </fieldset>
+    <label class="s" for="op">Surface opacity <b id="opV"></b></label><input type="range" id="op" min="0" max="1" step="0.05" value="0.6">
+    <label class="s" for="th">Cutout threshold <b id="thV"></b></label><input type="range" id="th" min="0" max="1" step="0.05" value="0.5">
+    <h2 style="font-size:16px;margin:16px 0 4px">The sum for one pixel</h2>
+    <p class="note" style="margin:0">A red surface in front of a blue one, at the opacity above.</p>
+    <p class="sum" id="sum"></p>
+  </div>
+</div>
+
+<h2>Where alpha lives on a model</h2>
+<div class="cards">
+  <div><b>In a texture</b>RGBA image files (PNG, TGA, WebP). Alpha can vary across the surface: leaves, fences, hair cards, decals. Most alpha in games is here.</div>
+  <div><b>In the material</b>One opacity number for the whole surface, such as tinted glass. In glTF this is the fourth value of <code>baseColorFactor</code>.</div>
+  <div><b>In vertex colours</b>Each vertex carries an alpha that is interpolated across the triangle, used for soft fades on particles and decals.</div>
+</div>
+
+<h2>Three ways to draw it</h2>
+<div class="scroll"><table><thead><tr><th>Mode (glTF name)</th><th>What happens</th><th>Good for</th><th>Watch out for</th></tr></thead><tbody>
+<tr><td>Opaque (<code>OPAQUE</code>)</td><td>Alpha is ignored.</td><td>Solid objects</td><td>A texture that has holes shows whatever colour sits under them.</td></tr>
+<tr><td>Cutout (<code>MASK</code>)</td><td>Pixels below the cutoff (default 0.5) are discarded, the rest are solid.</td><td>Foliage, fences, chain-link</td><td>Jagged edges; thin leaves can shimmer or vanish at a distance unless mipmaps are adjusted.</td></tr>
+<tr><td>Blend (<code>BLEND</code>)</td><td>The surface is mixed with what is behind it: result = colour × α + behind × (1 − α).</td><td>Glass, smoke, ghosts, soft edges</td><td>Order matters: sort back to front, and objects that cross each other cannot always be sorted.</td></tr>
+</tbody></table></div>
+
+<h2>Things that commonly go wrong</h2>
+<div class="cards">
+  <div><b>Sorting</b>Blending is not commutative: red over blue is not blue over red. If transparent things are drawn in the wrong order, a far pane hides a near one. Opaque things go first, then transparent ones far to near.</div>
+  <div><b>Straight vs premultiplied</b>Straight alpha stores the colour unscaled and multiplies on blending. Premultiplied stores colour × α already and blends as colour + behind × (1 − α). Mixing the two up gives dark or bright fringes.</div>
+  <div><b>Edge fringes</b>Pixels at a cutout edge may keep the colour of the (often white or black) background they were painted over, so a leaf shows a halo. Artists extend the colour past the edge to avoid it.</div>
+  <div><b>Mipmaps</b>Shrinking a texture averages alpha, so cutouts get fainter in the distance. Engines rescale alpha per level to keep the covered area constant.</div>
+</div>
+<p class="note" style="margin-top:14px">Rendered here with three.js. Opacity is <code>material.opacity</code>, blending is <code>material.transparent</code>, the cutout threshold is <code>material.alphaTest</code>, and depth writing is <code>material.depthWrite</code>.</p>
+</main>
+<script type="importmap">{"imports":{"three":"../../../learning-resources/mathematics/real-world/vendor/three.module.min.js"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "../../../learning-resources/mathematics/real-world/vendor/OrbitControls.js";
+const $ = (id) => document.getElementById(id);
+
+/* the texture: striped colour, with soft round holes in the alpha channel */
+const N = 256, data = new Uint8ClampedArray(N * N * 4);
+const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+  const i = (y * N + x) * 4, cx = (x % 64) - 32, cy = (y % 64) - 32, d = Math.hypot(cx, cy), stripe = (Math.floor((x + y) / 16) % 2) === 0;
+  data[i] = stripe ? 235 : 60; data[i + 1] = stripe ? 140 : 170; data[i + 2] = stripe ? 40 : 90;
+  data[i + 3] = Math.round(255 * (1 - smooth(14, 24, d)));
+}
+const drawTex = (cv, f) => { const g = cv.getContext("2d"), s = cv.width, im = g.createImageData(s, s); for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) { const j = (Math.floor(y * N / s) * N + Math.floor(x * N / s)) * 4, k = (y * s + x) * 4, c = f(j, x, y); im.data[k] = c[0]; im.data[k + 1] = c[1]; im.data[k + 2] = c[2]; im.data[k + 3] = 255; } g.putImageData(im, 0, 0); };
+drawTex($("tRGB"), (j) => [data[j], data[j + 1], data[j + 2]]);
+drawTex($("tA"), (j) => [data[j + 3], data[j + 3], data[j + 3]]);
+drawTex($("tRGBA"), (j, x, y) => { const a = data[j + 3] / 255, chk = (Math.floor(x / 8) + Math.floor(y / 8)) % 2 ? 200 : 120; return [data[j] * a + chk * (1 - a), data[j + 1] * a + chk * (1 - a), data[j + 2] * a + chk * (1 - a)]; });
+const tc = document.createElement("canvas"); tc.width = tc.height = N;
+{ const g = tc.getContext("2d"), im = g.createImageData(N, N); im.data.set(data); g.putImageData(im, 0, 0); }
+const tex = new THREE.CanvasTexture(tc); tex.colorSpace = THREE.SRGBColorSpace; tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(8, 1);
+
+const stage = $("stage"), renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); stage.prepend(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x1d2230);
+const camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 50); camera.position.set(0, 0.6, 7);
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 1.6)); const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(3, 4, 5); scene.add(sun);
+
+const back = new THREE.Mesh(new THREE.SphereGeometry(1.1, 40, 24), new THREE.MeshStandardMaterial({ color: 0x3b82f6 })); back.position.set(0, 0, -2.2); scene.add(back);
+const knotMat = new THREE.MeshStandardMaterial({ map: tex, side: THREE.DoubleSide });
+const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.1, 0.38, 220, 32), knotMat); knot.position.set(-1.2, 0, 0); scene.add(knot);
+const paneRed = new THREE.MeshStandardMaterial({ color: 0xef4444, side: THREE.DoubleSide }), paneGreen = new THREE.MeshStandardMaterial({ color: 0x22c55e, side: THREE.DoubleSide });
+const p1 = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 2.2), paneRed); p1.position.set(2, 0, 0.5); p1.rotation.y = -0.45; scene.add(p1);
+const p2 = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 2.2), paneGreen); p2.position.set(2.5, 0, -0.1); p2.rotation.y = 0.45; scene.add(p2);
+const mats = [knotMat, paneRed, paneGreen];
+
+function apply() {
+  const mode = document.querySelector("input[name=mode]:checked").value, op = +$("op").value, th = +$("th").value;
+  $("opV").textContent = op.toFixed(2); $("thV").textContent = th.toFixed(2);
+  for (const m of mats) {
+    m.opacity = op; m.transparent = mode === "blend" || mode === "blendz"; m.depthWrite = mode !== "blend"; m.alphaTest = mode === "cutout" ? th : 0;
+    if (mode === "opaque") m.opacity = 1;
+    m.needsUpdate = true;
+  }
+  p1.renderOrder = 1; p2.renderOrder = 2; knot.renderOrder = 0;
+  const a = mode === "opaque" ? 1 : op, src = [255, 0, 0], dst = [0, 0, 255], out = src.map((s, i) => Math.round(s * a + dst[i] * (1 - a))), pre = src.map((s) => Math.round(s * a));
+  const sw = (c) => `<span class="sw" style="background:rgb(${c})"></span>`;
+  $("sum").innerHTML = `${sw(src)}source (255, 0, 0), alpha ${a.toFixed(2)}\n${sw(dst)}behind (0, 0, 255)\n\nresult = source × α + behind × (1 − α)\n       = (${out.join(", ")})  ${sw(out)}\n\npremultiplied source = (${pre.join(", ")})\nresult = premultiplied + behind × (1 − α)\n       = (${out.join(", ")})  same answer`;
+}
+document.querySelectorAll("input").forEach((e) => e.addEventListener("input", apply)); apply();
+
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(stage); resize();
+let inView = true; new IntersectionObserver((e) => (inView = e[0].isIntersecting)).observe(stage);
+(function loop() { requestAnimationFrame(loop); if (!inView || document.hidden) return; controls.update(); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>

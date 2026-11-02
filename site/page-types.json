@@ -62,5 +62,13 @@
   "development-tools/resource-explorer/index.html": {
     "type": "Tool",
     "blurb": "232 repositories from nine of the session lists, plus the 20 most modded games, in searchable, sortable tables."
+  },
+  "ai-ml/computer-vision/edge-detection/index.html": {
+    "type": "Playground",
+    "blurb": "Sobel, Prewitt, Scharr, Roberts, Laplacian and Canny edge detection on a sample, upload or camera snapshot, with a click-a-pixel view of the arithmetic."
+  },
+  "ai-ml/computer-vision/alpha-channel/index.html": {
+    "type": "Visualisation",
+    "blurb": "A 3D knot and two glass panes drawn with alpha ignored, blended, blended with depth written, or cut out, with the blending sum worked out live."
   }
 }
