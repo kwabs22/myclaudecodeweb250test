@@ -3,12 +3,13 @@
 
 Numeric answers are computed with numpy or the standard library while the bank is built. The conceptual questions are
 written out in p2_ml.py. Run `python generate_phase2_questions.py`, then `python check_question_banks.py`.
-Needs: numpy. The output is deterministic (fixed seed).
+Needs: numpy (OpenCV is used for a second check when installed). The output is deterministic (fixed seed).
 """
 import json
 from pathlib import Path
 
 import p2_ml
+import p2_vision
 from question_tools import Bank, finish
 
 TOPICS = ["classical_ml", "deep_learning", "prompt_engineering"]
@@ -16,7 +17,7 @@ TOPICS = ["classical_ml", "deep_learning", "prompt_engineering"]
 
 def build():
     b = Bank(seed=20251118)
-    for fn in (p2_ml.classical, p2_ml.deep, p2_ml.prompts):
+    for fn in (p2_ml.classical, p2_ml.deep, p2_ml.prompts, p2_vision.vision, p2_vision.concepts):
         fn(b)
     order = {t: i for i, t in enumerate(TOPICS)}
     b.questions.sort(key=lambda q: (order[q["topic"]], q["id"]))

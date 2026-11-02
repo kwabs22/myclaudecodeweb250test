@@ -1,13 +1,13 @@
 # AI engineer roadmap: guide and quizzes
 
-A repository guide for a six-phase AI engineer roadmap, a computed-answer quiz for each of the first two phases (1,148 and 487 questions), and a hand-written quiz for the third.
+A repository guide for a six-phase AI engineer roadmap, a computed-answer quiz for each of the first two phases (1,148 and 607 questions), and a hand-written quiz for the third.
 
 ## Where each phase stands
 
 | Phase | Topic | Quiz | Questions | Read this |
 |---|---|---|---|---|
 | 1 | Maths and programming fundamentals | [Phase 1 quiz](quiz-app.html) | 1,148: linear algebra 224, calculus 209, probability and statistics 220, Python 142, SQL 178, data structures and algorithms 175 | [PHASE1_README.md](PHASE1_README.md) |
-| 2 | Machine learning and deep learning | [Phase 2 quiz](phase2-quiz-app.html) | 487: deep learning 220, classical ML 216, prompt engineering 51 (hand-written) | [PHASE2_README.md](PHASE2_README.md) |
+| 2 | Machine learning and deep learning | [Phase 2 quiz](phase2-quiz-app.html) | 607: deep learning 340, classical ML 216, prompt engineering 51 (hand-written) | [PHASE2_README.md](PHASE2_README.md) |
 | 3 | Generative AI | [Phase 3 quiz](phase3-quiz-app.html) | 96, hand-written: OpenAI API, Hugging Face, embeddings and vector databases, RAG, agents | [PHASE3_README.md](PHASE3_README.md) |
 | 4 to 6 | MLOps, advanced topics, capstone | none yet | none | The [repository guide](ai-engineer-roadmap-github-repos.md) covers them |
 

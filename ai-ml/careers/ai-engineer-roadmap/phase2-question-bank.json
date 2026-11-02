@@ -11,10 +11,10 @@
     "question_types": [
       "multiple_choice"
     ],
-    "total_questions": 487,
+    "total_questions": 607,
     "topics": {
       "classical_ml": 216,
-      "deep_learning": 220,
+      "deep_learning": 340,
       "prompt_engineering": 51
     }
   },
@@ -8305,6 +8305,2286 @@
     },
     {
       "id": 437,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 20 131  58\n217 167  28\n 94 187 114",
+      "options": [
+        "-320",
+        "242",
+        "-131",
+        "-262"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -320.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 438,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n196 188 191\n 44   6  45\n 15 164 132",
+      "options": [
+        "114",
+        "226",
+        "113",
+        "346"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 114.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 439,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n190  21  51\n111  43  42\n130 192 223",
+      "options": [
+        "-184",
+        "-230",
+        "184",
+        "454"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -184.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 440,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n190  21 176\n100 132 168\n126 158  73",
+      "options": [
+        "69",
+        "107",
+        "2",
+        "479"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 69.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 441,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n214  84  23\n244 126  86\n 58 123  11",
+      "options": [
+        "-554",
+        "-792",
+        "554",
+        "-90"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -554.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 442,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n  7 224 224\n247 180 212\n184 202 245",
+      "options": [
+        "208",
+        "154",
+        "-208",
+        "243"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 208.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 443,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 89  81 175\n100 205  19\n127  46 238",
+      "options": [
+        "35",
+        "31",
+        "-219",
+        "116"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 35.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 444,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n146 184 161\n235  56 165\n 27 143 212",
+      "options": [
+        "60",
+        "-60",
+        "130",
+        "-100"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 60.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 445,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 74 162  96\n115  37  48\n145 132  12",
+      "options": [
+        "-245",
+        "245",
+        "-356",
+        "-73"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -245.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 446,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n171 235 189\n 48 133  70\n 55 160  94",
+      "options": [
+        "101",
+        "158",
+        "79",
+        "-361"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 101.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 447,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 99  69 121\n115 190 183\n 32 179 227",
+      "options": [
+        "353",
+        "259",
+        "-353",
+        "1331"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 353.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 448,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n108  15  20\n 49  28  20\n 95 166 101",
+      "options": [
+        "-140",
+        "370",
+        "-111",
+        "-536"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -140.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 449,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 58   3 229\n246 213 177\n 93 157  15",
+      "options": [
+        "-45",
+        "24",
+        "-411",
+        "45"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -45.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 450,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n214 221  74\n 74  33 165\n168  66 164",
+      "options": [
+        "38",
+        "-266",
+        "-53",
+        "478"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 38.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 451,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n178  82 219\n204 209  20\n121 247 226",
+      "options": [
+        "-222",
+        "-38",
+        "280",
+        "-1402"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -222.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 452,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 88  80 200\n 21  60 247\n141  79 148",
+      "options": [
+        "571",
+        "345",
+        "-1",
+        "-571"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 571.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 453,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n243 210 216\n 23 202 116\n 25  70  29",
+      "options": [
+        "163",
+        "-685",
+        "-163",
+        "140"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 163.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 454,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n214 177  14\n241  86 187\n166 161 211",
+      "options": [
+        "-263",
+        "117",
+        "-418",
+        "263"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -263.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 455,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 67 128  69\n 99  10  61\n 41 160 142",
+      "options": [
+        "27",
+        "111",
+        "-27",
+        "65"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 27.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 456,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n125 128 158\n168 114 224\n 88  77 170",
+      "options": [
+        "227",
+        "171",
+        "342",
+        "-127"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = 227.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 457,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n234  44 179\n208 111 244\n228  43 149",
+      "options": [
+        "-62",
+        "-42",
+        "-196",
+        "-38"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -62.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 458,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n 56  20  92\n116 186 172\n240  33   5",
+      "options": [
+        "-87",
+        "-37",
+        "-143",
+        "87"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -87.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 459,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n147 231  80\n193 250 191\n184 110   2",
+      "options": [
+        "-253",
+        "-767",
+        "-251",
+        "253"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -253.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 460,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch of brightness values, what is the Sobel x-response (Gx) at the centre pixel? Use the kernel [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]] without flipping it.\n\n115 149  73\n 97 234  25\n 73 174 204",
+      "options": [
+        "-55",
+        "-453",
+        "139",
+        "34"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply each pixel by its kernel weight and add: Gx = (right column weighted 1-2-1) − (left column weighted 1-2-1) = -55.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 461,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n224 106 118\n 57 138 175\n 38 113  44",
+      "options": [
+        "-246",
+        "-710",
+        "-253",
+        "136"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -246. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 462,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n106 181  82\n191   9  93\n 75  26  18",
+      "options": [
+        "-405",
+        "405",
+        "-250",
+        "-277"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -405. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 463,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n106 159 248\n 65  64 217\n195 173 144",
+      "options": [
+        "13",
+        "95",
+        "395",
+        "-13"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = 13. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 464,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n229  15 227\n225 187  84\n251 238 245",
+      "options": [
+        "486",
+        "-486",
+        "-290",
+        "526"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = 486. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 465,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n 19  51 238\n 11 135 237\n 72  62  15",
+      "options": [
+        "-148",
+        "148",
+        "-400",
+        "-159"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -148. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 466,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n244 164 218\n198 220  70\n132 114  90",
+      "options": [
+        "-340",
+        "-290",
+        "-1220",
+        "340"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -340. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 467,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n109 254  98\n 12 130  79\n 16  73 149",
+      "options": [
+        "-404",
+        "-1936",
+        "-223",
+        "-446"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -404. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 468,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n  7 255 190\n199 167 198\n139 156 187",
+      "options": [
+        "-69",
+        "60",
+        "-603",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -69. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 469,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n110 196   9\n 17  22 146\n 40  31 162",
+      "options": [
+        "-247",
+        "-1401",
+        "247",
+        "-82"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = -247. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 470,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n 81  15  10\n 34 142 251\n124 175 169",
+      "options": [
+        "522",
+        "724",
+        "-522",
+        "2206"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = 522. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 471,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n168 141  82\n 59 244  41\n197 253 135",
+      "options": [
+        "306",
+        "-184",
+        "1366",
+        "194"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = 306. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 472,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "For this 3×3 patch, what is the Sobel y-response (Gy) at the centre pixel? Use the kernel [[-1, -2, -1], [0, 0, 0], [1, 2, 1]].\n\n138   6  67\n250 171 226\n181 132 202",
+      "options": [
+        "430",
+        "-98",
+        "1794",
+        "608"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gy = (bottom row weighted 1-2-1) − (top row weighted 1-2-1) = 430. Rows are down the page, so positive means brighter below.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 473,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n 57  95 208\n104 201 162\n114  41 164",
+      "options": [
+        "-402",
+        "402",
+        "-663",
+        "-804"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -402.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 474,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n246   4  42\n187 203 126\n160 190 150",
+      "options": [
+        "-305",
+        "305",
+        "-519",
+        "-610"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -305.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 475,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n236  17 202\n153 192  36\n 20  64  36",
+      "options": [
+        "-498",
+        "-195",
+        "-996",
+        "498"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -498.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 476,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n180 138 213\n249 200 172\n153 174  99",
+      "options": [
+        "-67",
+        "21",
+        "67",
+        "-222"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -67.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 477,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n 34   1  46\n103  31 178\n 70 248 139",
+      "options": [
+        "406",
+        "812",
+        "231",
+        "-406"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: 406.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 478,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n254 142  66\n 73 106  33\n160 187   1",
+      "options": [
+        "11",
+        "22",
+        "-427",
+        "-106"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: 11.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 479,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n 27 148 186\n165 153 174\n189 125  89",
+      "options": [
+        "0",
+        "77",
+        "-121",
+        "33"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: 0.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 480,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n117 154   4\n 54 169 248\n188  62  58",
+      "options": [
+        "-158",
+        "-36",
+        "158",
+        "145"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -158.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 481,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n 59 131  31\n 53   6  23\n 92 101 172",
+      "options": [
+        "284",
+        "614",
+        "-284",
+        "-8"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: 284.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 482,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the response of the Laplacian kernel [[0, 1, 0], [1, -4, 1], [0, 1, 0]] at the centre of this 3×3 patch?\n\n212 104 234\n 66 235 104\n191 232  44",
+      "options": [
+        "-434",
+        "-300",
+        "-693",
+        "-49"
+      ],
+      "correct_answer": 0,
+      "explanation": "Add the four neighbours up, down, left and right, then subtract four times the centre: -434.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 483,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 30 and Gy = -40. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "50",
+        "-10",
+        "2500",
+        "40"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(30² + -40²) = √2500 = 50. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 484,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 6 and Gy = 8. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "10",
+        "14",
+        "2",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(6² + 8²) = √100 = 10. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 485,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -5 and Gy = 12. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "13",
+        "169",
+        "17",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(-5² + 12²) = √169 = 13. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 486,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 9 and Gy = 12. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "15",
+        "225",
+        "12",
+        "21"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(9² + 12²) = √225 = 15. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 487,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -8 and Gy = -15. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "17",
+        "7",
+        "-23",
+        "15"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(-8² + -15²) = √289 = 17. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 488,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 20 and Gy = 21. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "29",
+        "41",
+        "21",
+        "841"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(20² + 21²) = √841 = 29. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 489,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -24 and Gy = 7. What is the edge strength √(Gx² + Gy²)?",
+      "options": [
+        "25",
+        "625",
+        "-17",
+        "31"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(-24² + 7²) = √625 = 25. Adding the absolute values is a cheaper approximation that overstates it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 490,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 10 and Gy = 10. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "45",
+        "-45",
+        "225",
+        "22.5"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 45°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 491,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -10 and Gy = 10. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "135",
+        "-45",
+        "67.5",
+        "-135"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 135°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 492,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 10 and Gy = -10. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "-45",
+        "-22.5",
+        "45",
+        "135"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = -45°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 493,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 0 and Gy = 5. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "90",
+        "45",
+        "-90",
+        "270"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 90°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 494,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -7 and Gy = 0. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "180",
+        "90",
+        "0",
+        "-90"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 180°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 495,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 5 and Gy = 12. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "67.4",
+        "-67.4",
+        "33.7",
+        "247.4"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 67.4°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 496,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = -12 and Gy = -5. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "-157.4",
+        "22.6",
+        "-78.7",
+        "-112.6"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = -157.4°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 497,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pixel has Gx = 3 and Gy = 5.2. What is the gradient direction atan2(Gy, Gx), in degrees (to one decimal)?",
+      "options": [
+        "60",
+        "240",
+        "30",
+        "-60"
+      ],
+      "correct_answer": 0,
+      "explanation": "atan2(Gy, Gx) = 60°. This points to the brighter side, across the edge (the edge itself runs at right angles to it). atan(Gy/Gx) alone cannot tell opposite quadrants apart.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 498,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 100 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 100). What is the Sobel Gx response at the centre?",
+      "options": [
+        "400",
+        "300",
+        "800",
+        "1600"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 100 gives 4 × 100 = 400.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 499,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 100 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 100). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "300",
+        "400",
+        "800",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 100 gives 3 × 100 = 300.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 500,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 100 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 100). What is the Scharr Gx response at the centre?",
+      "options": [
+        "1600",
+        "400",
+        "100",
+        "200"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 100 gives 16 × 100 = 1600.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 501,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 20 on the left and 120 on the right, with a flat edge on each side (a 3×3 patch with columns 20, 20, 120). What is the Sobel Gx response at the centre?",
+      "options": [
+        "400",
+        "200",
+        "1600",
+        "300"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 100 gives 4 × 100 = 400.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 502,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 20 on the left and 120 on the right, with a flat edge on each side (a 3×3 patch with columns 20, 20, 120). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "300",
+        "100",
+        "200",
+        "800"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 100 gives 3 × 100 = 300.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 503,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 20 on the left and 120 on the right, with a flat edge on each side (a 3×3 patch with columns 20, 20, 120). What is the Scharr Gx response at the centre?",
+      "options": [
+        "1600",
+        "800",
+        "100",
+        "300"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 100 gives 16 × 100 = 1600.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 504,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 50 on the left and 250 on the right, with a flat edge on each side (a 3×3 patch with columns 50, 50, 250). What is the Sobel Gx response at the centre?",
+      "options": [
+        "800",
+        "200",
+        "3200",
+        "400"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 200 gives 4 × 200 = 800.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 505,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 50 on the left and 250 on the right, with a flat edge on each side (a 3×3 patch with columns 50, 50, 250). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "600",
+        "1600",
+        "200",
+        "800"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 200 gives 3 × 200 = 600.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 506,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 50 on the left and 250 on the right, with a flat edge on each side (a 3×3 patch with columns 50, 50, 250). What is the Scharr Gx response at the centre?",
+      "options": [
+        "3200",
+        "200",
+        "400",
+        "800"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 200 gives 16 × 200 = 3200.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 507,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 10 on the left and 60 on the right, with a flat edge on each side (a 3×3 patch with columns 10, 10, 60). What is the Sobel Gx response at the centre?",
+      "options": [
+        "200",
+        "400",
+        "50",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 50 gives 4 × 50 = 200.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 508,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 10 on the left and 60 on the right, with a flat edge on each side (a 3×3 patch with columns 10, 10, 60). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "150",
+        "50",
+        "200",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 50 gives 3 × 50 = 150.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 509,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 10 on the left and 60 on the right, with a flat edge on each side (a 3×3 patch with columns 10, 10, 60). What is the Scharr Gx response at the centre?",
+      "options": [
+        "800",
+        "50",
+        "100",
+        "200"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 50 gives 16 × 50 = 800.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 510,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 100 on the left and 200 on the right, with a flat edge on each side (a 3×3 patch with columns 100, 100, 200). What is the Sobel Gx response at the centre?",
+      "options": [
+        "400",
+        "300",
+        "200",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 100 gives 4 × 100 = 400.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 511,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 100 on the left and 200 on the right, with a flat edge on each side (a 3×3 patch with columns 100, 100, 200). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "300",
+        "100",
+        "800",
+        "1600"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 100 gives 3 × 100 = 300.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 512,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 100 on the left and 200 on the right, with a flat edge on each side (a 3×3 patch with columns 100, 100, 200). What is the Scharr Gx response at the centre?",
+      "options": [
+        "1600",
+        "300",
+        "200",
+        "800"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 100 gives 16 × 100 = 1600.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 513,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 255 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 255). What is the Sobel Gx response at the centre?",
+      "options": [
+        "1020",
+        "510",
+        "765",
+        "4080"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 4, so a step of 255 gives 4 × 255 = 1020.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 514,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 255 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 255). What is the Prewitt Gx response at the centre?",
+      "options": [
+        "765",
+        "4080",
+        "255",
+        "510"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 3, so a step of 255 gives 3 × 255 = 765.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 515,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A vertical step edge has brightness 0 on the left and 255 on the right, with a flat edge on each side (a 3×3 patch with columns 0, 0, 255). What is the Scharr Gx response at the centre?",
+      "options": [
+        "4080",
+        "765",
+        "1020",
+        "255"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel weights in a column add to 16, so a step of 255 gives 16 × 255 = 4080.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 516,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 28×28 image is filtered with a 3×3 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "26",
+        "28",
+        "27",
+        "25"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 28 − 3 + 1 = 26. With padding of 1 it would stay 28.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 517,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 64×64 image is filtered with a 3×3 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "62",
+        "66",
+        "61",
+        "63"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 64 − 3 + 1 = 62. With padding of 1 it would stay 64.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 518,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 100×100 image is filtered with a 5×5 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "96",
+        "90",
+        "97",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 100 − 5 + 1 = 96. With padding of 2 it would stay 100.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 519,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 32×32 image is filtered with a 3×3 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "30",
+        "34",
+        "31",
+        "26"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 32 − 3 + 1 = 30. With padding of 1 it would stay 32.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 520,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 224×224 image is filtered with a 7×7 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "218",
+        "224",
+        "219",
+        "210"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 224 − 7 + 1 = 218. With padding of 3 it would stay 224.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 521,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 50×50 image is filtered with a 3×3 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "48",
+        "49",
+        "52",
+        "50"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 50 − 3 + 1 = 48. With padding of 1 it would stay 50.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 522,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 128×128 image is filtered with a 5×5 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "124",
+        "118",
+        "128",
+        "132"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 128 − 5 + 1 = 124. With padding of 2 it would stay 128.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 523,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An 9×9 image is filtered with a 3×3 kernel and no padding (a 'valid' filter). How wide is the result?",
+      "options": [
+        "7",
+        "11",
+        "9",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "The kernel fits in n − k + 1 positions across: 9 − 3 + 1 = 7. With padding of 1 it would stay 9.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 524,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 1, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "7",
+        "6",
+        "9",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 3, so the width is 2 × 3 + 1 = 7. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 525,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 1.5, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "11",
+        "13",
+        "6",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 5, so the width is 2 × 5 + 1 = 11. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 526,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 2, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "13",
+        "7",
+        "12",
+        "15"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 6, so the width is 2 × 6 + 1 = 13. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 527,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 3, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "19",
+        "9",
+        "18",
+        "21"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 9, so the width is 2 × 9 + 1 = 19. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 528,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 0.8, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "7",
+        "4",
+        "9",
+        "5"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 3, so the width is 2 × 3 + 1 = 7. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 529,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 2.5, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "17",
+        "15",
+        "9",
+        "19"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 8, so the width is 2 × 8 + 1 = 17. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 530,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Gaussian blur keeps weights out to 3σ on each side. For σ = 4, how wide is the kernel in pixels (an odd number)?",
+      "options": [
+        "25",
+        "27",
+        "24",
+        "11"
+      ],
+      "correct_answer": 0,
+      "explanation": "The radius is ⌈3σ⌉ = 12, so the width is 2 × 12 + 1 = 25. Beyond 3σ the weights are below 1% of the peak.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 531,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [20, 16, 87, 27, 10, 71, 54, 19, 60, 58, 19]. The low threshold is 25 and the high threshold is 70. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "4",
+        "3",
+        "6",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 70): 2. Weak ones (≥ 25) join them only when connected through kept neighbours. Final count: 4; plain thresholding at 25 would keep 6.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 532,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [53, 36, 30, 14, 22, 39, 23, 60, 78]. The low threshold is 30 and the high threshold is 50. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "5",
+        "4",
+        "3",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 50): 3. Weak ones (≥ 30) join them only when connected through kept neighbours. Final count: 5; plain thresholding at 30 would keep 6.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 533,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [76, 16, 42, 8, 26, 72, 29, 50, 56]. The low threshold is 25 and the high threshold is 70. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "6",
+        "5",
+        "3",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 70): 2. Weak ones (≥ 25) join them only when connected through kept neighbours. Final count: 6; plain thresholding at 25 would keep 7.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 534,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [67, 34, 25, 37, 30, 26, 75, 51, 32]. The low threshold is 30 and the high threshold is 50. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "5",
+        "7",
+        "3",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 50): 3. Weak ones (≥ 30) join them only when connected through kept neighbours. Final count: 5; plain thresholding at 30 would keep 7.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 535,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [71, 74, 30, 37, 14, 78, 65, 75, 23, 12, 30]. The low threshold is 15 and the high threshold is 55. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "8",
+        "3",
+        "9",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 55): 5. Weak ones (≥ 15) join them only when connected through kept neighbours. Final count: 8; plain thresholding at 15 would keep 9.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 536,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [26, 51, 67, 23, 86, 9, 75, 46]. The low threshold is 25 and the high threshold is 70. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "3",
+        "6",
+        "2",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 70): 2. Weak ones (≥ 25) join them only when connected through kept neighbours. Final count: 3; plain thresholding at 25 would keep 6.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 537,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [69, 63, 73, 46, 8, 61, 54, 26, 64, 16, 86]. The low threshold is 25 and the high threshold is 70. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "5",
+        "4",
+        "9",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 70): 2. Weak ones (≥ 25) join them only when connected through kept neighbours. Final count: 5; plain thresholding at 25 would keep 9.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 538,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [18, 7, 61, 67, 31, 12, 31, 10, 18, 42]. The low threshold is 15 and the high threshold is 55. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "3",
+        "4",
+        "7",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 55): 2. Weak ones (≥ 15) join them only when connected through kept neighbours. Final count: 3; plain thresholding at 15 would keep 7.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 539,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [85, 87, 48, 12, 90, 13, 30, 40, 49, 22, 82]. The low threshold is 25 and the high threshold is 70. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "5",
+        "8",
+        "6",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 70): 4. Weak ones (≥ 25) join them only when connected through kept neighbours. Final count: 5; plain thresholding at 25 would keep 8.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 540,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Canny's hysteresis step looks at a chain of neighbouring edge pixels with strengths [34, 86, 63, 51, 76, 62, 87, 8, 24]. The low threshold is 20 and the high threshold is 60. How many pixels are kept as edges? (Weak pixels count only if they connect, through other kept pixels, to a strong one.)",
+      "options": [
+        "7",
+        "6",
+        "5",
+        "8"
+      ],
+      "correct_answer": 0,
+      "explanation": "Strong pixels (≥ 60): 5. Weak ones (≥ 20) join them only when connected through kept neighbours. Final count: 7; plain thresholding at 20 would keep 8.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 541,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does an edge detector respond to?",
+      "options": [
+        "Rapid changes in brightness between neighbouring pixels",
+        "Large flat areas of one colour",
+        "Bright regions",
+        "The total number of pixels"
+      ],
+      "correct_answer": 0,
+      "explanation": "Edges are where intensity changes quickly; flat areas, bright or dark, give no response.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 542,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Why do edge-detection kernels such as Sobel have entries that add up to zero?",
+      "options": [
+        "So a flat region gives zero response",
+        "So the image gets brighter",
+        "So the kernel can be flipped",
+        "So the output has fewer pixels"
+      ],
+      "correct_answer": 0,
+      "explanation": "A flat area has equal pixel values, and weights summing to zero make the weighted sum zero.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 543,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Why is the Sobel x-kernel described as a smoothing column [1, 2, 1] times a difference row [−1, 0, 1]?",
+      "options": [
+        "It averages along the edge to resist noise, then takes the difference across it",
+        "It adds the image to its edges",
+        "It blurs first and sharpens after",
+        "It uses two different images"
+      ],
+      "correct_answer": 0,
+      "explanation": "The outer product of the two vectors is exactly the Sobel kernel.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 544,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "How does Prewitt differ from Sobel?",
+      "options": [
+        "Prewitt weights the three rows equally (1-1-1); Sobel counts the centre row double",
+        "Prewitt finds only diagonal edges",
+        "Prewitt uses 5×5 kernels",
+        "Prewitt needs no threshold"
+      ],
+      "correct_answer": 0,
+      "explanation": "Equal weights blur less along the edge than 1-2-1, and make Prewitt slightly more noise-sensitive.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 545,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Why was the Scharr kernel designed?",
+      "options": [
+        "To estimate gradient direction more accurately than Sobel, especially on diagonal edges",
+        "To avoid needing a threshold",
+        "To detect colour edges",
+        "To run on 1×1 images"
+      ],
+      "correct_answer": 0,
+      "explanation": "Its weights (3, 10, 3) give more rotation-consistent results than Sobel's 1-2-1.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 546,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Why blur an image slightly before detecting edges?",
+      "options": [
+        "Noise creates many small false edges, and blurring averages them away at the cost of softening real edges",
+        "Blurring makes edges thicker so they are easier to see",
+        "Blurring removes colour",
+        "Edge detectors cannot read sharp images"
+      ],
+      "correct_answer": 0,
+      "explanation": "Derivative filters amplify noise, so smoothing first is a standard trade-off.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 547,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "In OpenCV, why compute Sobel with cv2.CV_32F rather than the default 8-bit output?",
+      "options": [
+        "Negative slopes would otherwise be clipped to zero, losing the edges that go from bright to dark",
+        "8-bit output is too slow",
+        "It makes the image brighter",
+        "CV_32F is the only type Sobel accepts"
+      ],
+      "correct_answer": 0,
+      "explanation": "A dark-to-bright step gives a positive response and bright-to-dark a negative one; unsigned 8-bit drops the negatives.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 548,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the gradient direction at an edge pixel relative to the edge itself?",
+      "options": [
+        "It is perpendicular to the edge, pointing toward the brighter side",
+        "It is always 45 degrees",
+        "It is undefined",
+        "It runs along the edge"
+      ],
+      "correct_answer": 0,
+      "explanation": "Brightness changes fastest across an edge, not along it.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 549,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What does non-maximum suppression do in Canny edge detection?",
+      "options": [
+        "It thins each ridge of strong gradient to one pixel by keeping only the local maximum across the edge",
+        "It removes all weak edges",
+        "It blurs the gradient",
+        "It merges neighbouring edges"
+      ],
+      "correct_answer": 0,
+      "explanation": "Without it, a Sobel edge is several pixels thick.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 550,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the two thresholds in Canny's hysteresis step?",
+      "options": [
+        "Strong pixels are kept for certain; weak pixels are kept only if connected to a strong one, which keeps real edges whole and drops isolated noise",
+        "They set the blur size",
+        "They choose between horizontal and vertical edges",
+        "The low one removes dark pixels and the high one removes bright pixels"
+      ],
+      "correct_answer": 0,
+      "explanation": "Hysteresis uses connectivity to separate faint real edges from isolated noise.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 551,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Why is the Laplacian more sensitive to noise than the Sobel gradient?",
+      "options": [
+        "It is a second difference, which amplifies noise more than a first difference, and it has no built-in smoothing across the edge",
+        "It uses larger kernels",
+        "It ignores edges",
+        "It works only on colour images"
+      ],
+      "correct_answer": 0,
+      "explanation": "Second derivatives magnify high-frequency noise; Laplacian of Gaussian blurs first to compensate.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 552,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Where does a Laplacian-based detector place an edge?",
+      "options": [
+        "At zero crossings, where the second difference changes sign",
+        "Wherever the response is positive",
+        "At the minimum of the original image",
+        "At the maximum of the second difference"
+      ],
+      "correct_answer": 0,
+      "explanation": "At the steepest point of a step, the first derivative peaks and the second derivative crosses zero.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 553,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "How is a Sobel filter related to a convolution layer in a neural network?",
+      "options": [
+        "Both slide a small kernel over the image and add weighted neighbours; the network learns its kernels instead of fixing them",
+        "They work on different data types",
+        "A network layer cannot use 3×3 kernels",
+        "Sobel uses learned weights"
+      ],
+      "correct_answer": 0,
+      "explanation": "After training, first-layer filters often look like oriented edge detectors.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 554,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A Sobel edge map and a segmentation mask of the same object differ in what way?",
+      "options": [
+        "The edge map marks places where brightness changes, with no notion of which object they belong to; the mask labels every pixel as inside or outside a chosen object",
+        "They are the same output",
+        "A mask has only boundary pixels",
+        "An edge map is always more accurate"
+      ],
+      "correct_answer": 0,
+      "explanation": "Edges are local brightness changes; a segmentation assigns pixels to objects, which needs knowledge beyond local brightness.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 555,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What task does SAM 3 (Segment Anything Model 3, released by Meta in November 2025) add compared with SAM and SAM 2?",
+      "options": [
+        "Promptable concept segmentation: given a short noun phrase or example image, it finds and segments every instance of that concept",
+        "Edge detection with a Sobel kernel",
+        "Converting masks to vector drawings",
+        "Segmenting only one object per click"
+      ],
+      "correct_answer": 0,
+      "explanation": "SAM and SAM 2 segment one object per visual prompt; SAM 3 takes a concept (for example 'yellow school bus') and returns masks for all matching instances.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 556,
+      "topic": "deep_learning",
+      "subtopic": "image_processing",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Which statement best contrasts classical edge detection with a promptable segmentation model such as SAM 3?",
+      "options": [
+        "Edge detection applies a fixed formula to local brightness with no training; the segmentation model is a trained network that returns object masks for a prompt",
+        "Edge detection returns object names",
+        "Both need a text prompt",
+        "Both are fixed formulas"
+      ],
+      "correct_answer": 0,
+      "explanation": "Sobel and Canny have no learned parameters and no notion of objects; SAM-style models learn from data what objects look like.",
+      "hints": [
+        "Work through the image processing step by step."
+      ]
+    },
+    {
+      "id": 557,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8323,7 +10603,7 @@
       ]
     },
     {
-      "id": 438,
+      "id": 558,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8342,7 +10622,7 @@
       ]
     },
     {
-      "id": 439,
+      "id": 559,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8361,7 +10641,7 @@
       ]
     },
     {
-      "id": 440,
+      "id": 560,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8380,7 +10660,7 @@
       ]
     },
     {
-      "id": 441,
+      "id": 561,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8399,7 +10679,7 @@
       ]
     },
     {
-      "id": 442,
+      "id": 562,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8418,7 +10698,7 @@
       ]
     },
     {
-      "id": 443,
+      "id": 563,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8437,7 +10717,7 @@
       ]
     },
     {
-      "id": 444,
+      "id": 564,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8456,7 +10736,7 @@
       ]
     },
     {
-      "id": 445,
+      "id": 565,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8475,7 +10755,7 @@
       ]
     },
     {
-      "id": 446,
+      "id": 566,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8494,7 +10774,7 @@
       ]
     },
     {
-      "id": 447,
+      "id": 567,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8513,7 +10793,7 @@
       ]
     },
     {
-      "id": 448,
+      "id": 568,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8532,7 +10812,7 @@
       ]
     },
     {
-      "id": 449,
+      "id": 569,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8551,7 +10831,7 @@
       ]
     },
     {
-      "id": 450,
+      "id": 570,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8570,7 +10850,7 @@
       ]
     },
     {
-      "id": 451,
+      "id": 571,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8589,7 +10869,7 @@
       ]
     },
     {
-      "id": 452,
+      "id": 572,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8608,7 +10888,7 @@
       ]
     },
     {
-      "id": 453,
+      "id": 573,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8627,7 +10907,7 @@
       ]
     },
     {
-      "id": 454,
+      "id": 574,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8646,7 +10926,7 @@
       ]
     },
     {
-      "id": 455,
+      "id": 575,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8665,7 +10945,7 @@
       ]
     },
     {
-      "id": 456,
+      "id": 576,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8684,7 +10964,7 @@
       ]
     },
     {
-      "id": 457,
+      "id": 577,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8703,7 +10983,7 @@
       ]
     },
     {
-      "id": 458,
+      "id": 578,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8722,7 +11002,7 @@
       ]
     },
     {
-      "id": 459,
+      "id": 579,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8741,7 +11021,7 @@
       ]
     },
     {
-      "id": 460,
+      "id": 580,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8760,7 +11040,7 @@
       ]
     },
     {
-      "id": 461,
+      "id": 581,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8779,7 +11059,7 @@
       ]
     },
     {
-      "id": 462,
+      "id": 582,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8798,7 +11078,7 @@
       ]
     },
     {
-      "id": 463,
+      "id": 583,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8817,7 +11097,7 @@
       ]
     },
     {
-      "id": 464,
+      "id": 584,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8836,7 +11116,7 @@
       ]
     },
     {
-      "id": 465,
+      "id": 585,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8855,7 +11135,7 @@
       ]
     },
     {
-      "id": 466,
+      "id": 586,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8874,7 +11154,7 @@
       ]
     },
     {
-      "id": 467,
+      "id": 587,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8893,7 +11173,7 @@
       ]
     },
     {
-      "id": 468,
+      "id": 588,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8912,7 +11192,7 @@
       ]
     },
     {
-      "id": 469,
+      "id": 589,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8931,7 +11211,7 @@
       ]
     },
     {
-      "id": 470,
+      "id": 590,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8950,7 +11230,7 @@
       ]
     },
     {
-      "id": 471,
+      "id": 591,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8969,7 +11249,7 @@
       ]
     },
     {
-      "id": 472,
+      "id": 592,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -8988,7 +11268,7 @@
       ]
     },
     {
-      "id": 473,
+      "id": 593,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9007,7 +11287,7 @@
       ]
     },
     {
-      "id": 474,
+      "id": 594,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9026,7 +11306,7 @@
       ]
     },
     {
-      "id": 475,
+      "id": 595,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9045,7 +11325,7 @@
       ]
     },
     {
-      "id": 476,
+      "id": 596,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9064,7 +11344,7 @@
       ]
     },
     {
-      "id": 477,
+      "id": 597,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9083,7 +11363,7 @@
       ]
     },
     {
-      "id": 478,
+      "id": 598,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9102,7 +11382,7 @@
       ]
     },
     {
-      "id": 479,
+      "id": 599,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9121,7 +11401,7 @@
       ]
     },
     {
-      "id": 480,
+      "id": 600,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9140,7 +11420,7 @@
       ]
     },
     {
-      "id": 481,
+      "id": 601,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9159,7 +11439,7 @@
       ]
     },
     {
-      "id": 482,
+      "id": 602,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9178,7 +11458,7 @@
       ]
     },
     {
-      "id": 483,
+      "id": 603,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9197,7 +11477,7 @@
       ]
     },
     {
-      "id": 484,
+      "id": 604,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9216,7 +11496,7 @@
       ]
     },
     {
-      "id": 485,
+      "id": 605,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9235,7 +11515,7 @@
       ]
     },
     {
-      "id": 486,
+      "id": 606,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
@@ -9254,7 +11534,7 @@
       ]
     },
     {
-      "id": 487,
+      "id": 607,
       "topic": "prompt_engineering",
       "subtopic": "basics",
       "difficulty": "beginner",
