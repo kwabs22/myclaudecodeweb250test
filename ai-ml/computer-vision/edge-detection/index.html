@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edge detection</title>
+<meta name="description" content="Try Sobel, Prewitt, Scharr, Roberts, Laplacian and Canny edge detection on a sample, an uploaded image or a camera snapshot, and click a pixel to see the arithmetic.">
+<style>
+:root{--bg:#f7f8fb;--fg:#161a23;--muted:#5b6475;--card:#fff;--line:#dfe3ec;--acc:#3b63e0;--hi:#fde68a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10131a;--fg:#e8ebf3;--muted:#9aa3b5;--card:#181c26;--line:#2a3040;--acc:#7b9bff;--hi:#5b4b12}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+h1{margin:0 0 4px;font-size:clamp(26px,5vw,38px);letter-spacing:-.02em}h2{font-size:20px;margin:30px 0 8px}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 16px;margin-bottom:12px}
+label{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+label b{float:right;color:var(--fg);letter-spacing:0;text-transform:none;font-weight:600}
+select,input[type=range],button,input[type=file]{width:100%;font:inherit;color:inherit}
+select,button{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px;cursor:pointer}
+button:hover,select:hover{border-color:var(--acc)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.row>*{flex:1 1 150px;width:auto}
+.views{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.views button{width:auto;flex:0 0 auto;padding:5px 12px}.views button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0}figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+canvas{display:block;width:100%;height:auto;image-rendering:pixelated;border:1px solid var(--line);border-radius:8px;background:#000;cursor:crosshair;touch-action:manipulation}
+.insp{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+table.k{border-collapse:collapse;font:13px ui-monospace,monospace}table.k td{border:1px solid var(--line);padding:3px 7px;text-align:right;min-width:34px}table.k td.c{background:var(--hi);font-weight:700}
+.note{color:var(--muted);font-size:13px}.eq{font:13px ui-monospace,monospace;white-space:pre-wrap;margin:6px 0 0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.steps li::before{content:counter(s);display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;text-align:center;font-size:13px;margin-right:6px}
+table.cmp{border-collapse:collapse;width:100%;font-size:14px}table.cmp th,table.cmp td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}table.cmp th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.scroll{overflow-x:auto}
+@media(max-width:640px){.pair{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Edge detection</h1>
+<p class="lede">An edge is a place where brightness changes quickly. Each method below slides a small grid of weights (a <b>kernel</b>) over the picture and adds up weighted neighbours, which measures how steeply brightness rises there. Pick a method, change the image, and click any pixel in the left picture to see the arithmetic for that spot.</p>
+
+<div class="panel">
+  <div class="row">
+    <select id="sample" aria-label="Sample image"><option value="shapes">Sample: shapes</option><option value="text">Sample: text</option><option value="noise">Sample: soft gradient with noise</option><option value="checker">Sample: checkerboard</option></select>
+    <input type="file" id="file" accept="image/*" aria-label="Upload an image">
+    <button type="button" id="cam">Camera snapshot</button>
+  </div>
+  <div class="ctl">
+    <div><label for="method">Method</label><select id="method"></select></div>
+    <div><label for="blur">Blur before <b id="blurV"></b></label><input type="range" id="blur" min="0" max="4" step="0.5" value="0"></div>
+    <div id="thrBox"><label for="thr">Threshold <b id="thrV"></b></label><input type="range" id="thr" min="1" max="120" value="30"></div>
+    <div id="lowBox" hidden><label for="low">Canny low <b id="lowV"></b></label><input type="range" id="low" min="1" max="120" value="15"></div>
+    <div id="highBox" hidden><label for="high">Canny high <b id="highV"></b></label><input type="range" id="high" min="1" max="160" value="45"></div>
+  </div>
+  <div class="views" role="group" aria-label="What to show"></div>
+  <div class="pair">
+    <figure><canvas id="src" aria-label="Original in greyscale. Click a pixel to inspect it."></canvas><figcaption>Greyscale input. Click a pixel.</figcaption></figure>
+    <figure><canvas id="out" aria-label="Result"></canvas><figcaption id="outCap"></figcaption></figure>
+  </div>
+  <div class="insp" id="insp"></div>
+</div>
+
+<h2>How the steps fit together</h2>
+<ol class="steps">
+  <li><b>Make it grey.</b> Edges are about brightness, so colour is reduced to one number per pixel (0.299 R + 0.587 G + 0.114 B).</li>
+  <li><b>Blur a little.</b> Noise looks like tiny edges everywhere. A Gaussian blur averages it away, at the cost of softening real edges.</li>
+  <li><b>Measure the slope.</b> One kernel measures change left to right (Gx), another top to bottom (Gy). Strength is √(Gx² + Gy²) and direction is atan2(Gy, Gx).</li>
+  <li><b>Decide what counts.</b> A threshold keeps pixels whose strength is large enough. Canny also thins the ridge to one pixel and keeps weak edges only if they touch strong ones.</li>
+</ol>
+
+<h2>The methods compared</h2>
+<div class="scroll"><table class="cmp"><thead><tr><th>Method</th><th>Kernel size</th><th>Good at</th><th>Weak at</th></tr></thead><tbody>
+<tr><td>Roberts cross</td><td>2×2</td><td>Speed, fine detail</td><td>Noise, since it averages almost nothing</td></tr>
+<tr><td>Prewitt</td><td>3×3</td><td>Simple, even smoothing</td><td>Diagonal accuracy</td></tr>
+<tr><td>Sobel</td><td>3×3</td><td>The standard first choice: a little smoothing built in</td><td>Edges are several pixels thick and need a threshold</td></tr>
+<tr><td>Scharr</td><td>3×3</td><td>More accurate direction than Sobel</td><td>Slightly more noise-sensitive</td></tr>
+<tr><td>Laplacian</td><td>3×3</td><td>Finds edges in every direction at once, as zero crossings of the second difference</td><td>Very noisy without blurring first, and gives no direction</td></tr>
+<tr><td>Canny</td><td>Blur + Sobel</td><td>Thin, connected outlines with fewer false edges</td><td>Three settings to tune (blur, low, high)</td></tr>
+</tbody></table></div>
+
+<h2>Why a kernel with a 1-2-1 column?</h2>
+<p class="lede">The Sobel x kernel is a column of weights <code>[1, 2, 1]</code> (smooth along the edge) multiplied by a row <code>[−1, 0, 1]</code> (difference across it). So it first averages three rows and then takes a difference, which is why it resists noise better than a plain difference. Scharr uses <code>[3, 10, 3]</code> for the smoothing part. The numbers in each kernel sum to zero, so a flat region gives zero response.</p>
+<p class="note">The logic is in <code>edges.js</code> and is checked by <code>check.js</code> (<code>node check.js</code>): the kernels, a hand-padded reference, the response to a step edge (Sobel 4h, Prewitt 3h, Scharr 16h), the response to a ramp, the Canny outline of a square, and more. See the <a href="README.html">README</a> for how to use these on real images with OpenCV.</p>
+</main>
+<script src="edges.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var MAXD=320, grey=null, state={method:"sobel",view:"edges",pick:null};
+  var METHODS=[["sobel","Sobel"],["prewitt","Prewitt"],["scharr","Scharr"],["roberts","Roberts cross"],["laplacian","Laplacian"],["canny","Canny"]];
+  $("method").innerHTML=METHODS.map(function(m){return '<option value="'+m[0]+'">'+m[1]+'</option>'}).join("");
+  var VIEWS=[["edges","Edges"],["mag","Strength"],["gx","Gx"],["gy","Gy"],["dir","Direction"]];
+  document.querySelector(".views").innerHTML=VIEWS.map(function(v){return '<button type="button" data-v="'+v[0]+'" aria-pressed="'+(v[0]==="edges")+'">'+v[1]+'</button>'}).join("");
+
+  /* sample images drawn with the canvas, so there is nothing to download */
+  function sample(kind){
+    var c=document.createElement("canvas");c.width=320;c.height=240;var g=c.getContext("2d");
+    if(kind==="shapes"){g.fillStyle="#d8d8d8";g.fillRect(0,0,320,240);g.fillStyle="#2a2a2a";g.beginPath();g.arc(95,110,62,0,7);g.fill();g.fillStyle="#fafafa";g.fillRect(180,50,100,90);g.fillStyle="#707070";g.beginPath();g.moveTo(150,215);g.lineTo(300,215);g.lineTo(225,150);g.closePath();g.fill();g.strokeStyle="#111";g.lineWidth=2;g.beginPath();g.moveTo(10,30);g.lineTo(150,12);g.stroke()}
+    else if(kind==="text"){g.fillStyle="#f4f1e6";g.fillRect(0,0,320,240);g.fillStyle="#222";g.font="bold 56px system-ui,sans-serif";g.fillText("Edges",30,100);g.font="24px system-ui,sans-serif";g.fillText("Sobel · Canny",30,150);g.fillText("0123456789",30,190)}
+    else if(kind==="noise"){var gr=g.createLinearGradient(0,0,320,240);gr.addColorStop(0,"#222");gr.addColorStop(1,"#ddd");g.fillStyle=gr;g.fillRect(0,0,320,240);g.fillStyle="#fff";g.beginPath();g.arc(160,120,50,0,7);g.fill();var im=g.getImageData(0,0,320,240),s=12345;for(var i=0;i<im.data.length;i+=4){s=(s*1664525+1013904223)>>>0;var n=(s/4294967296-.5)*40;im.data[i]+=n;im.data[i+1]+=n;im.data[i+2]+=n}g.putImageData(im,0,0)}
+    else{for(var y=0;y<8;y++)for(var x=0;x<10;x++){g.fillStyle=(x+y)%2?"#eee":"#222";g.fillRect(x*32,y*30,32,30)}g.fillStyle="#e33";g.beginPath();g.arc(160,120,40,0,7);g.fill()}
+    return c;
+  }
+  function setImage(source,w,h){
+    var s=Math.min(1,MAXD/Math.max(w,h)),cw=Math.max(8,Math.round(w*s)),ch=Math.max(8,Math.round(h*s)),c=document.createElement("canvas");c.width=cw;c.height=ch;
+    var g=c.getContext("2d");g.drawImage(source,0,0,cw,ch);var px=g.getImageData(0,0,cw,ch).data;grey=Edges.toGrey(px,cw,ch);state.pick=null;draw()}
+  function loadSample(){var c=sample($("sample").value);setImage(c,c.width,c.height)}
+  $("sample").addEventListener("change",loadSample);
+  $("file").addEventListener("change",function(e){var f=e.target.files[0];if(!f)return;var img=new Image();img.onload=function(){setImage(img,img.naturalWidth,img.naturalHeight);URL.revokeObjectURL(img.src)};img.src=URL.createObjectURL(f)});
+  $("cam").addEventListener("click",function(){
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("This browser has no camera access.");return}
+    navigator.mediaDevices.getUserMedia({video:true}).then(function(st){var v=document.createElement("video");v.srcObject=st;v.muted=true;v.playsInline=true;v.onloadedmetadata=function(){v.play().then(function(){setTimeout(function(){setImage(v,v.videoWidth,v.videoHeight);st.getTracks().forEach(function(t){t.stop()})},400)})}}).catch(function(){alert("The camera could not be opened. Allow access, or upload an image instead.")})});
+
+  function field(name,v){$(name+"V").textContent=v}
+  function paint(cv,w,h,rgba){cv.width=w;cv.height=h;var g=cv.getContext("2d"),im=g.createImageData(w,h);im.data.set(rgba);g.putImageData(im,0,0)}
+  function hue(a){var h=((a+Math.PI)/(2*Math.PI))*6,i=Math.floor(h)%6,f=h-Math.floor(h),q=1-f,t=f,r,g,b;
+    switch(i){case 0:r=1;g=t;b=0;break;case 1:r=q;g=1;b=0;break;case 2:r=0;g=1;b=t;break;case 3:r=0;g=q;b=1;break;case 4:r=t;g=0;b=1;break;default:r=1;g=0;b=q}return [r*255,g*255,b*255]}
+
+  function draw(){
+    if(!grey)return;
+    var m=state.method,w=grey.w,h=grey.h,sig=+$("blur").value,thr=+$("thr").value,low=+$("low").value,high=+$("high").value;
+    field("blur",sig===0?"off":"σ "+sig);field("thr",thr);field("low",low);field("high",high);
+    $("thrBox").hidden=m==="canny";$("lowBox").hidden=$("highBox").hidden=m!=="canny";$("blur").closest("div").querySelector("label").style.opacity=m==="canny"?1:1;
+    var src=new Uint8ClampedArray(w*h*4);for(var i=0;i<w*h;i++){var v=grey.d[i];src[i*4]=src[i*4+1]=src[i*4+2]=v;src[i*4+3]=255}
+    var sc=$("src");paint(sc,w,h,src);
+    var base=m==="canny"?grey:Edges.blur(grey,sig),res=null,edges,mag,gx,gy,dir,scale=1;
+    if(m==="canny"){res=Edges.canny(grey,sig,low,high);edges=res.edges;mag=res.mag;gx=res.gx;gy=res.gy;scale=4;dir=null}
+    else if(m==="laplacian"){var L=Edges.laplacianEdges(base,thr*2);edges=L.edges;mag=L.response.map(Math.abs);gx=gy=null;dir=null;scale=8}
+    else{var g=Edges.gradient(base,m);edges=Edges.thresholdEdges(g,thr);mag=g.mag;gx=g.gx;gy=g.gy;dir=g.dir;scale=g.scale}
+    state.cur={gx:gx,gy:gy,mag:mag,dir:dir,scale:scale};
+    var view=state.view;if((view==="gx"||view==="gy"||view==="dir")&&!gx)view="mag";if(view==="dir"&&!dir)view="mag";
+    var out=new Uint8ClampedArray(w*h*4),mx=1;for(var j=0;j<mag.length;j++)if(mag[j]/scale>mx)mx=mag[j]/scale;
+    for(var p=0;p<w*h;p++){var r,gg,b;
+      if(view==="edges"){r=gg=b=edges[p]}
+      else if(view==="mag"){r=gg=b=Math.min(255,mag[p]/scale/mx*255*(m==="laplacian"?1:1))}
+      else if(view==="gx"||view==="gy"){var a=(view==="gx"?gx:gy)[p]/scale;r=gg=b=Math.max(0,Math.min(255,128+a/mx*127))}
+      else{var s2=Math.min(1,mag[p]/scale/mx*3),c=hue(dir[p]);r=c[0]*s2;gg=c[1]*s2;b=c[2]*s2}
+      out[p*4]=r;out[p*4+1]=gg;out[p*4+2]=b;out[p*4+3]=255}
+    paint($("out"),w,h,out);
+    var n=0;for(var q=0;q<edges.length;q++)if(edges[q])n++;
+    $("outCap").textContent=({edges:"Edge pixels: "+n+" of "+w*h+" ("+(100*n/(w*h)).toFixed(1)+"%)",mag:"Strength, brightest is the strongest edge",gx:"Change left to right: grey is none, light is brighter to the right, dark is darker to the right",gy:"Change top to bottom: grey is none, light is brighter below",dir:"Direction of steepest brightness rise, as colour, faded where the edge is weak"})[view];
+    document.querySelectorAll(".views button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.v===view));b.disabled=(b.dataset.v==="gx"||b.dataset.v==="gy"||b.dataset.v==="dir")&&(m==="laplacian"||(m==="canny"&&b.dataset.v==="dir"))});
+    inspect();
+  }
+
+  /* click a pixel to see the arithmetic */
+  function inspect(){
+    var box=$("insp");if(!grey||!state.pick){box.innerHTML='<p class="note">Click a pixel in the left picture to see its neighbours, the kernel and the sums.</p>';return}
+    var m=state.method,km=(m==="laplacian"||m==="canny")?"sobel":m,K=Edges.KERNELS[km],x=state.pick[0],y=state.pick[1],lo=K.size===2?0:-1,base=Edges.blur(grey,0);
+    var cells=[],sx=0,sy=0;
+    for(var j=0;j<K.size;j++){cells.push([]);for(var i=0;i<K.size;i++){var v=Edges.at(grey,x+lo+i,y+lo+j);cells[j].push(Math.round(v));sx+=K.gx[j][i]*v;sy+=K.gy[j][i]*v}}
+    var tbl=function(a,hl){return '<table class="k">'+a.map(function(r,j){return '<tr>'+r.map(function(c,i){return '<td'+(hl&&hl(i,j)?' class="c"':"")+'>'+c+'</td>'}).join("")+'</tr>'}).join("")+'</table>'};
+    var mid=function(i,j){return K.size===3&&i===1&&j===1};
+    var mag=Math.hypot(sx,sy),ang=Math.atan2(sy,sx)*180/Math.PI;
+    box.innerHTML='<div><b>Pixels around ('+x+', '+y+')</b>'+tbl(cells,mid)+'<p class="note">Unblurred brightness, 0 to 255.</p></div>'
+      +'<div><b>'+K.name+' Gx</b>'+tbl(K.gx,mid)+'<p class="note">Change left to right</p></div>'
+      +'<div><b>'+K.name+' Gy</b>'+tbl(K.gy,mid)+'<p class="note">Change top to bottom</p></div>'
+      +'<div><b>The sums</b><p class="eq">Gx = '+sx.toFixed(0)+'\nGy = '+sy.toFixed(0)+'\nstrength = √(Gx²+Gy²) = '+mag.toFixed(1)+'\nper unit of change = '+(mag/K.scale).toFixed(1)+'\ndirection = '+ang.toFixed(0)+'°</p><p class="note">'+K.note+(m==="laplacian"||m==="canny"?" (Shown with Sobel; "+(m==="canny"?"Canny":"the Laplacian")+" builds on or replaces this.)":"")+'</p></div>';
+  }
+  $("src").addEventListener("click",function(e){var r=this.getBoundingClientRect();state.pick=[Math.min(grey.w-1,Math.max(0,Math.floor((e.clientX-r.left)/r.width*grey.w))),Math.min(grey.h-1,Math.max(0,Math.floor((e.clientY-r.top)/r.height*grey.h)))];inspect()});
+  $("method").addEventListener("change",function(e){state.method=e.target.value;draw()});
+  ["blur","thr","low","high"].forEach(function(id){$(id).addEventListener("input",draw)});
+  document.querySelector(".views").addEventListener("click",function(e){var b=e.target.closest("button");if(!b||b.disabled)return;state.view=b.dataset.v;draw()});
+  loadSample();
+})();
+</script>
+</body>
+</html>
