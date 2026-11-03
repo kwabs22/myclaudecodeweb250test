@@ -7,3 +7,5 @@
 | [`alpha-channel/`](./alpha-channel/README.md) | What the alpha channel does on a 3D model, with a [3D page](./alpha-channel/index.html) |
 
 Edge detection is the classical step underneath much of the rest: pose estimators and marker detectors both start from image gradients, and a convolutional network's first layer learns filters much like Sobel kernels.
+
+See also: [Edges, depth and segmentation](./edges-depth-and-segmentation.md), which compares edge detection with Depth Anything and SAM 3 and says which can run in a web page.
