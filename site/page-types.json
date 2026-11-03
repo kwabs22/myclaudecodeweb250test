@@ -70,5 +70,9 @@
   "ai-ml/computer-vision/alpha-channel/index.html": {
     "type": "Visualisation",
     "blurb": "A 3D knot and two glass panes drawn with alpha ignored, blended, blended with depth written, or cut out, with the blending sum worked out live."
+  },
+  "learning-resources/mathematics/geometry/index.html": {
+    "type": "Playground",
+    "blurb": "Drag points to see triangle area, segment crossing, point in polygon, the convex hull, 2D transformation matrices and a pinhole camera, each checked against a slow reference."
   }
 }
