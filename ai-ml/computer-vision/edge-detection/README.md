@@ -59,3 +59,4 @@ Use a float output type (`CV_32F`). With the default 8-bit output, negative slop
 
 - Convolution layers in a neural network are the same sliding sum, with kernels that are learned instead of chosen. After training, first-layer filters often look like oriented edge detectors.
 - The ArUco marker detection used in the AR examples looks for square outlines, which starts from edges like these.
+- Edge detection has no learned parameters and no idea of objects. For how it differs from depth estimation (Depth Anything) and segmentation (SAM 3), see [Edges, depth and segmentation](../edges-depth-and-segmentation.md).
