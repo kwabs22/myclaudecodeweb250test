@@ -2,7 +2,7 @@
   "metadata": {
     "title": "AI Engineer Roadmap - Phase 1: Fundamentals Question Bank",
     "version": "2.0.0",
-    "description": "Maths, Python, SQL and algorithm questions. Answers are computed by code when the bank is built.",
+    "description": "Maths, Python, SQL, algorithm and geometry questions. Answers are computed by code when the bank is built.",
     "difficulty_levels": [
       "beginner",
       "intermediate",
@@ -11,14 +11,15 @@
     "question_types": [
       "multiple_choice"
     ],
-    "total_questions": 1148,
+    "total_questions": 1317,
     "topics": {
       "linear_algebra": 224,
       "calculus": 209,
       "probability_statistics": 220,
       "python": 142,
       "sql": 178,
-      "data_structures_algorithms": 175
+      "data_structures_algorithms": 175,
+      "geometry": 169
     }
   },
   "questions": [
@@ -21832,6 +21833,3217 @@
       "explanation": "Build the best count for every amount up to 13; the minimum for 13 is 3.",
       "hints": [
         "Work through the dynamic programming step by step."
+      ]
+    },
+    {
+      "id": 1149,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-4, 4) and (-1, 8)?",
+      "options": [
+        "5",
+        "25",
+        "6",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(3² + 4²) = √25 = 5. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1150,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (4, 0) and (-1, 12)?",
+      "options": [
+        "13",
+        "14",
+        "17",
+        "12"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(5² + 12²) = √169 = 13. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1151,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (1, 1) and (7, 9)?",
+      "options": [
+        "10",
+        "100",
+        "14",
+        "11"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(6² + 8²) = √100 = 10. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1152,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-4, -4) and (4, 11)?",
+      "options": [
+        "17",
+        "18",
+        "16",
+        "289"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(8² + 15²) = √289 = 17. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1153,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-3, 2) and (-10, -22)?",
+      "options": [
+        "25",
+        "24",
+        "31",
+        "26"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(7² + 24²) = √625 = 25. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1154,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-1, -1) and (8, 11)?",
+      "options": [
+        "15",
+        "225",
+        "12",
+        "16"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(9² + 12²) = √225 = 15. Adding the two differences gives the walking distance on a grid, not the straight line.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1155,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-3, 6) and (-6, -5), to 2 decimal places?",
+      "options": [
+        "11.4",
+        "11",
+        "5.7",
+        "130"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(3² + 11²) = √130 ≈ 11.4.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1156,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (-4, 4) and (5, -3), to 2 decimal places?",
+      "options": [
+        "11.4",
+        "9",
+        "5.7",
+        "130"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(9² + 7²) = √130 ≈ 11.4.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1157,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (3, 5) and (5, 3), to 2 decimal places?",
+      "options": [
+        "2.83",
+        "4",
+        "2",
+        "1.41"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(2² + 2²) = √8 ≈ 2.83.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1158,
+      "topic": "geometry",
+      "subtopic": "distance",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the straight-line distance between (6, -3) and (-5, 1), to 2 decimal places?",
+      "options": [
+        "11.7",
+        "15",
+        "5.85",
+        "12.7"
+      ],
+      "correct_answer": 0,
+      "explanation": "√(11² + 4²) = √137 ≈ 11.7.",
+      "hints": [
+        "Work through the distance step by step."
+      ]
+    },
+    {
+      "id": 1159,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (5, 1) and (5, 0), in degrees (to one decimal)?",
+      "options": [
+        "11.3",
+        "0.2",
+        "78.7",
+        "5.7"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 25/(5.1 × 5) = 0.981, so θ = 11.3°. A result in radians would be 0.20.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1160,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (5, -2) and (0, -2), in degrees (to one decimal)?",
+      "options": [
+        "68.2",
+        "34.1",
+        "111.8",
+        "21.8"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 4/(5.39 × 2) = 0.371, so θ = 68.2°. A result in radians would be 1.19.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1161,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (-2, -3) and (-2, -1), in degrees (to one decimal)?",
+      "options": [
+        "29.7",
+        "14.9",
+        "150.3",
+        "0.5"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 7/(3.61 × 2.24) = 0.868, so θ = 29.7°. A result in radians would be 0.52.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1162,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (4, -5) and (-1, 2), in degrees (to one decimal)?",
+      "options": [
+        "167.9",
+        "77.9",
+        "84.0",
+        "2.9"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = -14/(6.4 × 2.24) = -0.978, so θ = 167.9°. A result in radians would be 2.93.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1163,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (-3, 5) and (-2, -3), in degrees (to one decimal)?",
+      "options": [
+        "115.3",
+        "2.0",
+        "121.0",
+        "25.3"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = -9/(5.83 × 3.61) = -0.428, so θ = 115.3°. A result in radians would be 2.01.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1164,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (4, 3) and (0, 4), in degrees (to one decimal)?",
+      "options": [
+        "53.1",
+        "0.9",
+        "126.9",
+        "36.9"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 12/(5 × 4) = 0.600, so θ = 53.1°. A result in radians would be 0.93.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1165,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (1, -4) and (-2, 3), in degrees (to one decimal)?",
+      "options": [
+        "160.3",
+        "19.7",
+        "2.8",
+        "70.3"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = -14/(4.12 × 3.61) = -0.942, so θ = 160.3°. A result in radians would be 2.80.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1166,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (4, 1) and (3, -1), in degrees (to one decimal)?",
+      "options": [
+        "32.5",
+        "16.2",
+        "147.5",
+        "0.6"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 11/(4.12 × 3.16) = 0.844, so θ = 32.5°. A result in radians would be 0.57.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1167,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (4, 3) and (-3, 1), in degrees (to one decimal)?",
+      "options": [
+        "124.7",
+        "34.7",
+        "62.3",
+        "2.2"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = -9/(5 × 3.16) = -0.569, so θ = 124.7°. A result in radians would be 2.18.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1168,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (1, -4) and (1, 2), in degrees (to one decimal)?",
+      "options": [
+        "139.4",
+        "69.7",
+        "2.4",
+        "40.6"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = -7/(4.12 × 2.24) = -0.759, so θ = 139.4°. A result in radians would be 2.43.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1169,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (-5, 5) and (-4, 3), in degrees (to one decimal)?",
+      "options": [
+        "8.1",
+        "4.1",
+        "135.0",
+        "81.9"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 35/(7.07 × 5) = 0.990, so θ = 8.1°. A result in radians would be 0.14.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1170,
+      "topic": "geometry",
+      "subtopic": "angles",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the angle between the vectors (5, -5) and (-1, -3), in degrees (to one decimal)?",
+      "options": [
+        "63.4",
+        "26.6",
+        "1.1",
+        "31.7"
+      ],
+      "correct_answer": 0,
+      "explanation": "cos θ = (u·v)/(|u||v|) = 10/(7.07 × 3.16) = 0.447, so θ = 63.4°. A result in radians would be 1.11.",
+      "hints": [
+        "Work through the angles step by step."
+      ]
+    },
+    {
+      "id": 1171,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-1, 3), (-4, 3) and (-1, 5)?",
+      "options": [
+        "3",
+        "7",
+        "3/2",
+        "26"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-3)(2) − (0)(0)| = ½ × 6 = 3. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1172,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (0, -2), (8, 7) and (7, 5)?",
+      "options": [
+        "7/2",
+        "7",
+        "7/4",
+        "8"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(8)(7) − (9)(7)| = ½ × 7 = 7/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1173,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-3, -3), (-1, 3) and (4, 8)?",
+      "options": [
+        "10",
+        "29",
+        "20",
+        "21"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(2)(11) − (6)(7)| = ½ × 20 = 10. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1174,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (0, 5), (-4, -6) and (2, 8)?",
+      "options": [
+        "5",
+        "11",
+        "10",
+        "22"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-4)(3) − (-11)(2)| = ½ × 10 = 5. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1175,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-6, 7), (-5, 6) and (7, 2)?",
+      "options": [
+        "4",
+        "9",
+        "2",
+        "8"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(1)(-5) − (-1)(13)| = ½ × 8 = 4. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1176,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (8, 0), (2, 5) and (5, 8)?",
+      "options": [
+        "33/2",
+        "33/4",
+        "33",
+        "56"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-6)(8) − (5)(-3)| = ½ × 33 = 33/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1177,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (3, 5), (-3, 4) and (-4, -1)?",
+      "options": [
+        "29/2",
+        "31/2",
+        "5",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-6)(-6) − (-1)(-7)| = ½ × 29 = 29/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1178,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-4, 7), (6, 0) and (2, -5)?",
+      "options": [
+        "39",
+        "78",
+        "16",
+        "39/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(10)(-12) − (-7)(6)| = ½ × 78 = 39. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1179,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (6, -5), (-5, 4) and (-5, -2)?",
+      "options": [
+        "33",
+        "34",
+        "59",
+        "66"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-11)(3) − (9)(-11)| = ½ × 66 = 33. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1180,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-3, 8), (5, 5) and (6, 7)?",
+      "options": [
+        "19/2",
+        "68",
+        "20",
+        "21/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(8)(-1) − (-3)(9)| = ½ × 19 = 19/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1181,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-1, 0), (8, 1) and (3, -5)?",
+      "options": [
+        "49/2",
+        "49",
+        "41",
+        "50"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(9)(-5) − (1)(4)| = ½ × 49 = 49/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1182,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-2, -2), (-5, 1) and (8, 2)?",
+      "options": [
+        "21",
+        "21/2",
+        "43",
+        "42"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-3)(4) − (3)(10)| = ½ × 42 = 21. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1183,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (2, 2), (8, 6) and (2, -6)?",
+      "options": [
+        "24",
+        "49",
+        "25",
+        "48"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(6)(-8) − (4)(0)| = ½ × 48 = 24. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1184,
+      "topic": "geometry",
+      "subtopic": "triangle_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What is the area of the triangle with corners (-1, 1), (-2, -3) and (-3, 0)?",
+      "options": [
+        "7/2",
+        "9/2",
+        "8",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "Half the absolute cross product of two sides: ½ |(-1)(-1) − (-4)(-2)| = ½ × 7 = 7/2. Forgetting the ½ doubles it.",
+      "hints": [
+        "Work through the triangle area step by step."
+      ]
+    },
+    {
+      "id": 1185,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (-4, -3) to (4, 2) to (5, -3) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Clockwise",
+        "Anticlockwise",
+        "In a straight line",
+        "Cannot be told without the origin"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is -45: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1186,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (-2, -3) to (3, 2) to (-5, 3) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Anticlockwise",
+        "Always clockwise",
+        "In a straight line",
+        "Cannot be told without the origin"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 45: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1187,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (-5, -4) to (17, -6) to (6, -5) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "In a straight line",
+        "Cannot be told without the origin",
+        "Anticlockwise",
+        "Always clockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 0: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1188,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (0, 2) to (-2, -4) to (-1, -1) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "In a straight line",
+        "Clockwise",
+        "Cannot be told without the origin",
+        "Anticlockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 0: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1189,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (6, -4) to (4, -4) to (6, -1) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Clockwise",
+        "In a straight line",
+        "Cannot be told without the origin",
+        "Anticlockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is -6: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1190,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (3, 6) to (-5, 0) to (2, 1) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Anticlockwise",
+        "In a straight line",
+        "Clockwise",
+        "Cannot be told without the origin"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 34: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1191,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (2, -3) to (-3, -2) to (3, 5) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Clockwise",
+        "Cannot be told without the origin",
+        "In a straight line",
+        "Always clockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is -41: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1192,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (-2, 4) to (4, 6) to (-5, 4) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Anticlockwise",
+        "In a straight line",
+        "Cannot be told without the origin",
+        "Always clockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 6: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1193,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (-5, -5) to (4, 0) to (-1, -3) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Clockwise",
+        "In a straight line",
+        "Cannot be told without the origin",
+        "Anticlockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is -2: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1194,
+      "topic": "geometry",
+      "subtopic": "orientation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Going from (0, -3) to (2, -2) to (-1, 5) (with y pointing up), do the three points turn anticlockwise, clockwise, or lie in a line?",
+      "options": [
+        "Anticlockwise",
+        "Cannot be told without the origin",
+        "In a straight line",
+        "Clockwise"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product of (B − A) and (C − A) is 17: positive means anticlockwise, negative clockwise, zero in a line.",
+      "hints": [
+        "Work through the orientation step by step."
+      ]
+    },
+    {
+      "id": 1195,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (2, 5), (1, 2), (-8, 0), (4, -3)?",
+      "options": [
+        "65/2",
+        "63/2",
+        "65",
+        "127/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 65 = 65/2. The bounding box would be 96.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1196,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (-2, 0), (0, -5), (1, -7), (6, -2)?",
+      "options": [
+        "51/2",
+        "26",
+        "56",
+        "49/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 51 = 51/2. The bounding box would be 56.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1197,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (1, 3), (0, 3), (-3, -2), (5, -3)?",
+      "options": [
+        "49/2",
+        "49",
+        "47/2",
+        "48"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 49 = 49/2. The bounding box would be 48.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1198,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (-3, 4), (-3, -3), (1, -2), (4, -4), (2, -2), (5, -2)?",
+      "options": [
+        "27",
+        "54",
+        "55/2",
+        "37"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 54 = 27. The bounding box would be 64.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1199,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (3, 1), (2, 1), (-3, -2), (-2, -8)?",
+      "options": [
+        "21",
+        "42",
+        "33",
+        "43/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 42 = 21. The bounding box would be 54.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1200,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (-3, 6), (-5, -1), (-4, -4), (1, -7)?",
+      "options": [
+        "33",
+        "45",
+        "78",
+        "66"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 66 = 33. The bounding box would be 78.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1201,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (5, 2), (1, 7), (-4, -1), (1, -8)?",
+      "options": [
+        "135/2",
+        "133/2",
+        "135",
+        "68"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 135 = 135/2. The bounding box would be 135.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1202,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (-1, 4), (-3, 7), (-2, 2), (-6, 1), (2, -8), (4, -2)?",
+      "options": [
+        "111/2",
+        "111",
+        "56",
+        "150"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 111 = 111/2. The bounding box would be 150.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1203,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (-1, 4), (-4, 1), (-2, 0), (-4, -1), (3, -6)?",
+      "options": [
+        "26",
+        "52",
+        "70",
+        "53/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 52 = 26. The bounding box would be 70.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1204,
+      "topic": "geometry",
+      "subtopic": "polygon_area",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What is the area of the polygon with corners, in order, (5, 0), (-2, 3), (-3, 3), (-2, 1)?",
+      "options": [
+        "8",
+        "16",
+        "24",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "The shoelace formula: ½ |Σ (xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ)| = ½ × 16 = 8. The bounding box would be 24.",
+      "hints": [
+        "Work through the polygon area step by step."
+      ]
+    },
+    {
+      "id": 1205,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (2, 0) to (1, 5) and segment B from (5, 4) to (4, 3). Which describes them?",
+      "options": [
+        "They do not meet",
+        "They overlap along part of a line",
+        "They meet at one point, an end of one lying on the other",
+        "They cross at one point, inside both segments"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they do not meet. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1206,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (1, 5) to (3, 2) and segment B from (3, 2) to (4, 0). Which describes them?",
+      "options": [
+        "They meet at one point, an end of one lying on the other",
+        "They overlap along part of a line",
+        "They cross at one point, inside both segments",
+        "They do not meet"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they meet at one point, an end of one lying on the other. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1207,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (6, 3) to (0, 3) and segment B from (2, 2) to (2, 4). Which describes them?",
+      "options": [
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other",
+        "They do not meet",
+        "They overlap along part of a line"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they cross at one point, inside both segments. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1208,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (5, 6) to (3, 2) and segment B from (1, 4) to (1, 1). Which describes them?",
+      "options": [
+        "They do not meet",
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other",
+        "They overlap along part of a line"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they do not meet. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1209,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (6, 3) to (0, 5) and segment B from (4, 3) to (0, 5). Which describes them?",
+      "options": [
+        "They meet at one point, an end of one lying on the other",
+        "They do not meet",
+        "They cross at one point, inside both segments",
+        "They overlap along part of a line"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they meet at one point, an end of one lying on the other. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1210,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (5, 1) to (6, 0) and segment B from (5, 4) to (6, 0). Which describes them?",
+      "options": [
+        "They meet at one point, an end of one lying on the other",
+        "They cross at one point, inside both segments",
+        "They do not meet",
+        "They overlap along part of a line"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they meet at one point, an end of one lying on the other. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1211,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (5, 2) to (5, 3) and segment B from (2, 6) to (4, 5). Which describes them?",
+      "options": [
+        "They do not meet",
+        "They meet at one point, an end of one lying on the other",
+        "They cross at one point, inside both segments",
+        "They overlap along part of a line"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they do not meet. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1212,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (5, 5) to (5, 2) and segment B from (0, 6) to (0, 5). Which describes them?",
+      "options": [
+        "They do not meet",
+        "They overlap along part of a line",
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they do not meet. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1213,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (2, 5) to (6, 3) and segment B from (0, 1) to (3, 6). Which describes them?",
+      "options": [
+        "They cross at one point, inside both segments",
+        "They do not meet",
+        "They overlap along part of a line",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they cross at one point, inside both segments. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1214,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (6, 2) to (0, 6) and segment B from (6, 0) to (5, 6). Which describes them?",
+      "options": [
+        "They cross at one point, inside both segments",
+        "They overlap along part of a line",
+        "They do not meet",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they cross at one point, inside both segments. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1215,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (3, 6) to (1, 4) and segment B from (6, 5) to (1, 6). Which describes them?",
+      "options": [
+        "They cross at one point, inside both segments",
+        "They do not meet",
+        "They overlap along part of a line",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they cross at one point, inside both segments. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1216,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (5, 6) to (1, 6) and segment B from (0, 6) to (6, 6). Which describes them?",
+      "options": [
+        "They overlap along part of a line",
+        "They do not meet",
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they overlap along part of a line. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1217,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (1, 6) to (1, 0) and segment B from (1, 5) to (1, 4). Which describes them?",
+      "options": [
+        "They overlap along part of a line",
+        "They do not meet",
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they overlap along part of a line. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1218,
+      "topic": "geometry",
+      "subtopic": "segments",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Segment A runs from (3, 1) to (5, 1) and segment B from (3, 1) to (5, 1). Which describes them?",
+      "options": [
+        "They overlap along part of a line",
+        "They cross at one point, inside both segments",
+        "They meet at one point, an end of one lying on the other",
+        "They do not meet"
+      ],
+      "correct_answer": 0,
+      "explanation": "Test each end against the line through the other segment with the cross product. Here the result is: they overlap along part of a line. Segments stop at their ends, so their lines can cross where the segments do not.",
+      "hints": [
+        "Work through the segments step by step."
+      ]
+    },
+    {
+      "id": 1219,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (5.5, 9.5). The polygon has corners (0, 0), (10, 0), (10, 10), (6, 10), (6, 4), (4, 4), (4, 10), (0, 10). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "2",
+        "8",
+        "3",
+        "0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = 9.5 and lie to the right of x = 5.5: 2.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1220,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (0.5, 6.5) inside the polygon with corners (0, 0), (9, 0), (4, 7)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Outside",
+        "Inside",
+        "On the edge",
+        "Cannot be decided"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 2 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1221,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (10.5, 0.5). The polygon has corners (0, 0), (8, 0), (8, 3), (4, 3), (4, 8), (0, 8). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "0",
+        "2",
+        "6",
+        "1"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = 0.5 and lie to the right of x = 10.5: 0.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1222,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (5.5, 10.5) inside the polygon with corners (0, 0), (8, 0), (8, 3), (4, 3), (4, 8), (0, 8)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Outside",
+        "Inside",
+        "Cannot be decided",
+        "On the edge"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 0 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1223,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (10.5, 2.5). The polygon has corners (0, 0), (9, 0), (4, 7). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = 2.5 and lie to the right of x = 10.5: 0.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1224,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (5.5, 4.5) inside the polygon with corners (0, 0), (9, 0), (4, 7)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Inside",
+        "On the edge",
+        "Outside",
+        "Cannot be decided"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 1 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1225,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (1.5, 7.5). The polygon has corners (1, 0), (7, 1), (9, 6), (4, 9), (0, 5). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = 7.5 and lie to the right of x = 1.5: 2.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1226,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (4.5, 3.5) inside the polygon with corners (0, 0), (10, 0), (10, 10), (6, 10), (6, 4), (4, 4), (4, 10), (0, 10)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Inside",
+        "Cannot be decided",
+        "On the edge",
+        "Outside"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 1 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1227,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (7.5, 7.5). The polygon has corners (0, 0), (10, 0), (10, 10), (6, 10), (6, 4), (4, 4), (4, 10), (0, 10). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "8"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = 7.5 and lie to the right of x = 7.5: 1.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1228,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (3.5, 9.5) inside the polygon with corners (0, 0), (10, 0), (10, 10), (6, 10), (6, 4), (4, 4), (4, 10), (0, 10)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Inside",
+        "Outside",
+        "Cannot be decided",
+        "On the edge"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 3 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1229,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A ray is shot to the right (in the +x direction) from the point (1.5, -0.5). The polygon has corners (0, 0), (9, 0), (4, 7). How many times does the ray cross the polygon's outline?",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Count the edges that straddle the height y = -0.5 and lie to the right of x = 1.5: 0.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1230,
+      "topic": "geometry",
+      "subtopic": "point_in_polygon",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Is the point (10.5, -0.5) inside the polygon with corners (1, 0), (7, 1), (9, 6), (4, 9), (0, 5)? (Use the rule: shoot a ray to the right and count crossings.)",
+      "options": [
+        "Outside",
+        "On the edge",
+        "Cannot be decided",
+        "Inside"
+      ],
+      "correct_answer": 0,
+      "explanation": "The rightward ray crosses the outline 0 times. An odd count means inside, an even count outside.",
+      "hints": [
+        "Work through the point in polygon step by step."
+      ]
+    },
+    {
+      "id": 1231,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 7 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 0), (2, 7), (4, 9), (6, 5), (7, 0), (7, 9), (9, 7)",
+      "options": [
+        "6",
+        "5",
+        "8",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 6 corners; the other 1 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1232,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 7 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 0), (3, 5), (3, 8), (7, 4), (7, 8), (8, 5), (8, 9)",
+      "options": [
+        "5",
+        "2",
+        "7",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 5 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1233,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 8 points are corners of their convex hull (the smallest convex shape that holds them all)? (0, 0), (2, 1), (2, 7), (3, 8), (7, 1), (8, 2), (9, 4), (9, 7)",
+      "options": [
+        "7",
+        "1",
+        "8",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 7 corners; the other 1 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1234,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 8 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 5), (2, 6), (6, 0), (7, 3), (7, 5), (8, 1), (9, 0), (9, 7)",
+      "options": [
+        "5",
+        "8",
+        "4",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 5 corners; the other 3 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1235,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 8 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 0), (1, 2), (2, 9), (4, 7), (5, 4), (7, 3), (8, 5), (8, 9)",
+      "options": [
+        "6",
+        "7",
+        "2",
+        "5"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 6 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1236,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 7 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 6), (2, 4), (4, 6), (5, 9), (7, 2), (8, 0), (8, 8)",
+      "options": [
+        "5",
+        "7",
+        "4",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 5 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1237,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 7 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 9), (2, 6), (3, 2), (5, 1), (6, 8), (9, 0), (9, 8)",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 5 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1238,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 6 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 0), (1, 8), (3, 0), (6, 5), (7, 7), (8, 5)",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "1"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 5 corners; the other 1 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1239,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 8 points are corners of their convex hull (the smallest convex shape that holds them all)? (1, 2), (3, 0), (3, 9), (5, 0), (6, 5), (6, 6), (7, 2), (8, 5)",
+      "options": [
+        "6",
+        "8",
+        "5",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 6 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1240,
+      "topic": "geometry",
+      "subtopic": "convex_hull",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many of these 9 points are corners of their convex hull (the smallest convex shape that holds them all)? (0, 2), (1, 8), (2, 9), (3, 0), (3, 3), (4, 1), (5, 7), (7, 0), (9, 3)",
+      "options": [
+        "7",
+        "8",
+        "2",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "The hull has 7 corners; the other 2 points lie inside it.",
+      "hints": [
+        "Work through the convex hull step by step."
+      ]
+    },
+    {
+      "id": 1241,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (3, 1) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-1, 3)",
+        "(1, 3)",
+        "(3, -1)",
+        "(-3, -1)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (-1, 3). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1242,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (2, 5) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-5, 2)",
+        "(2, -5)",
+        "(5, 2)",
+        "(-2, -5)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (-5, 2). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1243,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (4, -2) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(2, 4)",
+        "(-4, 2)",
+        "(4, 2)",
+        "(-2, 4)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (2, 4). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1244,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (4, -2) by 180° about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-4, 2)",
+        "(2, 4)",
+        "(4, 2)",
+        "(-4, -2)"
+      ],
+      "correct_answer": 0,
+      "explanation": "180°: (x, y) → (−x, −y) gives (-4, 2). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1245,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (-3, 2) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-2, -3)",
+        "(2, -3)",
+        "(-3, -2)",
+        "(2, 3)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (-2, -3). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1246,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (-3, 2) by 180° about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(3, -2)",
+        "(3, 2)",
+        "(-3, -2)",
+        "(-2, -3)"
+      ],
+      "correct_answer": 0,
+      "explanation": "180°: (x, y) → (−x, −y) gives (3, -2). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1247,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (1, 6) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-6, 1)",
+        "(1, -6)",
+        "(6, 1)",
+        "(-1, -6)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (-6, 1). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1248,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Turn the point (5, 5) by 90° anticlockwise about the origin (y pointing up). Where does it end up?",
+      "options": [
+        "(-5, 5)",
+        "(5, -5)",
+        "(-5, -5)",
+        "(5, 5)"
+      ],
+      "correct_answer": 0,
+      "explanation": "90° anticlockwise: (x, y) → (−y, x) gives (-5, 5). The other answers are a clockwise turn or a reflection.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1249,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Rotate the point (4, 0) by 60° anticlockwise about the origin. Where is it, to 2 decimal places?",
+      "options": [
+        "(2, 3.46)",
+        "(3.46, 2)",
+        "(2, -3.46)",
+        "(2, 4)"
+      ],
+      "correct_answer": 0,
+      "explanation": "R(θ)·(L, 0) = (L cos θ, L sin θ) = (2, 3.46). A clockwise turn would give the opposite y.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1250,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Rotate the point (6, 0) by 30° anticlockwise about the origin. Where is it, to 2 decimal places?",
+      "options": [
+        "(5.2, 3)",
+        "(3, 5.2)",
+        "(5.2, -3)",
+        "(5.2, 6)"
+      ],
+      "correct_answer": 0,
+      "explanation": "R(θ)·(L, 0) = (L cos θ, L sin θ) = (5.2, 3). A clockwise turn would give the opposite y.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1251,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Rotate the point (2, 0) by 120° anticlockwise about the origin. Where is it, to 2 decimal places?",
+      "options": [
+        "(-1, 1.73)",
+        "(1.73, -1)",
+        "(-1, 2)",
+        "(-1, -1.73)"
+      ],
+      "correct_answer": 0,
+      "explanation": "R(θ)·(L, 0) = (L cos θ, L sin θ) = (-1, 1.73). A clockwise turn would give the opposite y.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1252,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Rotate the point (8, 0) by 60° anticlockwise about the origin. Where is it, to 2 decimal places?",
+      "options": [
+        "(4, 6.93)",
+        "(4, 8)",
+        "(4, -6.93)",
+        "(6.93, 4)"
+      ],
+      "correct_answer": 0,
+      "explanation": "R(θ)·(L, 0) = (L cos θ, L sin θ) = (4, 6.93). A clockwise turn would give the opposite y.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1253,
+      "topic": "geometry",
+      "subtopic": "rotation",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Rotate the point (4, 0) by 150° anticlockwise about the origin. Where is it, to 2 decimal places?",
+      "options": [
+        "(-3.46, 2)",
+        "(-3.46, 4)",
+        "(2, -3.46)",
+        "(-3.46, -2)"
+      ],
+      "correct_answer": 0,
+      "explanation": "R(θ)·(L, 0) = (L cos θ, L sin θ) = (-3.46, 2). A clockwise turn would give the opposite y.",
+      "hints": [
+        "Work through the rotation step by step."
+      ]
+    },
+    {
+      "id": 1254,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 5 is transformed by the matrix [[-1, 3], [-2, -1]]. What is the area of the result?",
+      "options": [
+        "35",
+        "7",
+        "10",
+        "12"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(-1)(-1) − (3)(-2)| = 7, so 5 × 7 = 35.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1255,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 6 is transformed by the matrix [[0, -1], [-3, 0]]. What is the area of the result?",
+      "options": [
+        "18",
+        "0",
+        "36",
+        "9"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(0)(0) − (-1)(-3)| = 3, so 6 × 3 = 18.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1256,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Does the matrix [[3, 3], [-1, 1]] flip a shape over, as a mirror does?",
+      "options": [
+        "No: the determinant is positive",
+        "No: only rotations can change orientation",
+        "Yes: the determinant is negative",
+        "Yes: the matrix has a zero entry"
+      ],
+      "correct_answer": 0,
+      "explanation": "The determinant is 6. A negative determinant reverses orientation; its absolute value is the area scale.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1257,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 5 is transformed by the matrix [[-2, 2], [1, -2]]. What is the area of the result?",
+      "options": [
+        "10",
+        "2",
+        "20",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(-2)(-2) − (2)(1)| = 2, so 5 × 2 = 10.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1258,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 5 is transformed by the matrix [[2, 4], [3, -3]]. What is the area of the result?",
+      "options": [
+        "90",
+        "23",
+        "180",
+        "25"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(2)(-3) − (4)(3)| = 18, so 5 × 18 = 90.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1259,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Does the matrix [[4, 0], [2, -3]] flip a shape over, as a mirror does?",
+      "options": [
+        "Yes: the determinant is negative",
+        "No: the determinant is positive",
+        "No: only rotations can change orientation",
+        "Yes: the matrix has a zero entry"
+      ],
+      "correct_answer": 0,
+      "explanation": "The determinant is -12. A negative determinant reverses orientation; its absolute value is the area scale.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1260,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 2 is transformed by the matrix [[-1, 4], [-2, -3]]. What is the area of the result?",
+      "options": [
+        "22",
+        "8",
+        "44",
+        "11"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(-1)(-3) − (4)(-2)| = 11, so 2 × 11 = 22.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1261,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 2 is transformed by the matrix [[3, -3], [1, 2]]. What is the area of the result?",
+      "options": [
+        "18",
+        "9",
+        "11",
+        "10"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(3)(2) − (-3)(1)| = 9, so 2 × 9 = 18.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1262,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Does the matrix [[-2, -3], [0, 4]] flip a shape over, as a mirror does?",
+      "options": [
+        "Yes: the determinant is negative",
+        "Yes: the matrix has a zero entry",
+        "No: only rotations can change orientation",
+        "No: the determinant is positive"
+      ],
+      "correct_answer": 0,
+      "explanation": "The determinant is -8. A negative determinant reverses orientation; its absolute value is the area scale.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1263,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 5 is transformed by the matrix [[3, 1], [-1, -3]]. What is the area of the result?",
+      "options": [
+        "40",
+        "8",
+        "80",
+        "13"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(3)(-3) − (1)(-1)| = 8, so 5 × 8 = 40.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1264,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shape of area 6 is transformed by the matrix [[0, -3], [1, 0]]. What is the area of the result?",
+      "options": [
+        "18",
+        "0",
+        "9",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "Areas scale by the absolute value of the determinant: |(0)(0) − (-3)(1)| = 3, so 6 × 3 = 18.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1265,
+      "topic": "geometry",
+      "subtopic": "determinant_area",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Does the matrix [[-3, -1], [2, 1]] flip a shape over, as a mirror does?",
+      "options": [
+        "Yes: the determinant is negative",
+        "No: the determinant is positive",
+        "Yes: the matrix has a zero entry",
+        "No: only rotations can change orientation"
+      ],
+      "correct_answer": 0,
+      "explanation": "The determinant is -1. A negative determinant reverses orientation; its absolute value is the area scale.",
+      "hints": [
+        "Work through the determinant area step by step."
+      ]
+    },
+    {
+      "id": 1266,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[1, 1, 3], [-1, 3, -1], [0.1, 0.1, 1]]. Where does it send the point (7, 1)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(6.11, -2.78)",
+        "(11, -5)",
+        "(7.11, -3.78)",
+        "(19.8, -9)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0.1·7 + 0.1·1 + 1 = 1.8; x' = 11/1.8, y' = -5/1.8.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1267,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[3, -1, -3], [-1, 3, 8], [0, 0.1, 1]]. Where does it send the point (4, 3)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(4.62, 10)",
+        "(6, 13)",
+        "(10, 4.62)",
+        "(7.8, 16.9)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·4 + 0.1·3 + 1 = 1.3; x' = 6/1.3, y' = 13/1.3.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1268,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[1, 1, 2], [1, 3, -1], [0, 0, 1]]. Where does it send the point (3, 6)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(11, 20)",
+        "(9, 21)",
+        "(12, 19)",
+        "(20, 11)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·3 + 0·6 + 1 = 1; x' = 11/1, y' = 20/1.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1269,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[3, -1, 1], [-1, 2, 6], [0, 0.1, 1]]. Where does it send the point (7, 3)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(14.62, 3.85)",
+        "(3.85, 14.62)",
+        "(24.7, 6.5)",
+        "(15.62, 2.85)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·7 + 0.1·3 + 1 = 1.3; x' = 19/1.3, y' = 5/1.3.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1270,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[2, 1, 6], [0, 2, 7], [0, 0, 1]]. Where does it send the point (3, 0)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(12, 7)",
+        "(13, 6)",
+        "(6, 0)",
+        "(7, 12)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·3 + 0·0 + 1 = 1; x' = 12/1, y' = 7/1.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1271,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[2, 1, 5], [-1, 2, -1], [0, 0.1, 1]]. Where does it send the point (7, 6)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(15.62, 2.5)",
+        "(16.62, 1.5)",
+        "(25, 4)",
+        "(40, 6.4)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·7 + 0.1·6 + 1 = 1.6; x' = 25/1.6, y' = 4/1.6.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1272,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[3, 0, 4], [1, 3, 6], [0.1, 0.1, 1]]. Where does it send the point (9, 9)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(11.07, 15)",
+        "(86.8, 117.6)",
+        "(12.07, 14)",
+        "(15, 11.07)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0.1·9 + 0.1·9 + 1 = 2.8; x' = 31/2.8, y' = 42/2.8.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1273,
+      "topic": "geometry",
+      "subtopic": "homography",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A homography has matrix [[3, 1, -2], [0, 3, 7], [0, 0, 1]]. Where does it send the point (5, 2)? (Give the answer to 2 decimal places.)",
+      "options": [
+        "(15, 13)",
+        "(16, 12)",
+        "(13, 15)",
+        "(17, 6)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Multiply, then divide by the last component: w = 0·5 + 0·2 + 1 = 1; x' = 15/1, y' = 13/1.",
+      "hints": [
+        "Work through the homography step by step."
+      ]
+    },
+    {
+      "id": 1274,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 800 pixels and its image centre is at column 320. A point is -1.5 m to the right of the camera's axis and 10 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "200",
+        "250",
+        "-880",
+        "-5013.33"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 800 × -1.5 / 10 + 320 = 200. Forgetting to divide by the distance gives -880.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1275,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 400. A point is -1.5 m to the right of the camera's axis and 10 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "340",
+        "-2266.67",
+        "460",
+        "-60"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × -1.5 / 10 + 400 = 340. Forgetting to divide by the distance gives -200.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1276,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 1000 pixels and its image centre is at column 400. A point is -1 m to the right of the camera's axis and 4 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "150",
+        "650",
+        "-3600",
+        "-600"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 1000 × -1 / 4 + 400 = 150. Forgetting to divide by the distance gives -600.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1277,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 320. A point is 1.5 m to the right of the camera's axis and 5 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "440",
+        "200",
+        "120",
+        "490"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × 1.5 / 5 + 320 = 440. Forgetting to divide by the distance gives 920.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1278,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 400. A point is -1.5 m to the right of the camera's axis and 4 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "250",
+        "550",
+        "-200",
+        "300"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × -1.5 / 4 + 400 = 250. Forgetting to divide by the distance gives -200.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1279,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 320. A point is -1 m to the right of the camera's axis and 8 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "270",
+        "-50",
+        "-2880",
+        "370"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × -1 / 8 + 320 = 270. Forgetting to divide by the distance gives -80.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1280,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 320. A point is -1.5 m to the right of the camera's axis and 10 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "260",
+        "380",
+        "-60",
+        "-2346.67"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × -1.5 / 10 + 320 = 260. Forgetting to divide by the distance gives -280.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1281,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 800 pixels and its image centre is at column 320. A point is -1.5 m to the right of the camera's axis and 8 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "170",
+        "-880",
+        "-3946.67",
+        "-150"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 800 × -1.5 / 8 + 320 = 170. Forgetting to divide by the distance gives -880.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1282,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 400 pixels and its image centre is at column 640. A point is -0.5 m to the right of the camera's axis and 8 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "615",
+        "-5760",
+        "-25",
+        "440"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 400 × -0.5 / 8 + 640 = 615. Forgetting to divide by the distance gives 440.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1283,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 500 pixels and its image centre is at column 640. A point is -0.5 m to the right of the camera's axis and 5 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "590",
+        "-50",
+        "-4360",
+        "640"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 500 × -0.5 / 5 + 640 = 590. Forgetting to divide by the distance gives 390.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1284,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 600 pixels and its image centre is at column 320. A point is 1 m to the right of the camera's axis and 4 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "470",
+        "150",
+        "520",
+        "2720"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 600 × 1 / 4 + 320 = 470. Forgetting to divide by the distance gives 920.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1285,
+      "topic": "geometry",
+      "subtopic": "pinhole",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A pinhole camera has focal length 500 pixels and its image centre is at column 640. A point is -0.5 m to the right of the camera's axis and 10 m in front of the camera. Using u = f·X/Z + cx, which pixel column does it land on?",
+      "options": [
+        "615",
+        "665",
+        "-25",
+        "390"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = 500 × -0.5 / 10 + 640 = 615. Forgetting to divide by the distance gives 390.",
+      "hints": [
+        "Work through the pinhole step by step."
+      ]
+    },
+    {
+      "id": 1286,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 500 pixels. An upright object 1.8 m tall stands 6 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "150",
+        "1666.67",
+        "900",
+        "10.8"
+      ],
+      "correct_answer": 0,
+      "explanation": "500 × 1.8 / 6 = 150 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1287,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 800 pixels. An upright object 2 m tall stands 10 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "160",
+        "320",
+        "80",
+        "4000"
+      ],
+      "correct_answer": 0,
+      "explanation": "800 × 2 / 10 = 160 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1288,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 600 pixels. An upright object 0.5 m tall stands 3 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "100",
+        "3600",
+        "50",
+        "300"
+      ],
+      "correct_answer": 0,
+      "explanation": "600 × 0.5 / 3 = 100 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1289,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 1000 pixels. An upright object 1.6 m tall stands 8 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "200",
+        "1600",
+        "12.8",
+        "5000"
+      ],
+      "correct_answer": 0,
+      "explanation": "1000 × 1.6 / 8 = 200 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1290,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 400 pixels. An upright object 3 m tall stands 12 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "100",
+        "50",
+        "1200",
+        "36"
+      ],
+      "correct_answer": 0,
+      "explanation": "400 × 3 / 12 = 100 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1291,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A camera has focal length 500 pixels. An upright object 1 m tall stands 5 m in front of it. How many pixels tall does it appear (size = f·h/Z)?",
+      "options": [
+        "100",
+        "50",
+        "200",
+        "5"
+      ],
+      "correct_answer": 0,
+      "explanation": "500 × 1 / 5 = 100 pixels. Twice as far away halves it.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1292,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 4 m from a pinhole camera and appears 120 pixels tall. If it moves to 8 m (same camera), how tall does it appear?",
+      "options": [
+        "60",
+        "120",
+        "30",
+        "116"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 2 times as far means 1/2 of the size: 120/2 = 60.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1293,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 4 m from a pinhole camera and appears 120 pixels tall. If it moves to 12 m (same camera), how tall does it appear?",
+      "options": [
+        "40",
+        "120",
+        "116",
+        "360"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 3 times as far means 1/3 of the size: 120/3 = 40.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1294,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 6 m from a pinhole camera and appears 120 pixels tall. If it moves to 12 m (same camera), how tall does it appear?",
+      "options": [
+        "60",
+        "114",
+        "240",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 2 times as far means 1/2 of the size: 120/2 = 60.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1295,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 6 m from a pinhole camera and appears 120 pixels tall. If it moves to 18 m (same camera), how tall does it appear?",
+      "options": [
+        "40",
+        "114",
+        "120",
+        "360"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 3 times as far means 1/3 of the size: 120/3 = 40.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1296,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 9 m from a pinhole camera and appears 120 pixels tall. If it moves to 18 m (same camera), how tall does it appear?",
+      "options": [
+        "60",
+        "111",
+        "120",
+        "240"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 2 times as far means 1/2 of the size: 120/2 = 60.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1297,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 9 m from a pinhole camera and appears 120 pixels tall. If it moves to 27 m (same camera), how tall does it appear?",
+      "options": [
+        "40",
+        "360",
+        "111",
+        "13.33"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 3 times as far means 1/3 of the size: 120/3 = 40.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1298,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 12 m from a pinhole camera and appears 120 pixels tall. If it moves to 24 m (same camera), how tall does it appear?",
+      "options": [
+        "60",
+        "108",
+        "120",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 2 times as far means 1/2 of the size: 120/2 = 60.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1299,
+      "topic": "geometry",
+      "subtopic": "pinhole_size",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An object is 12 m from a pinhole camera and appears 120 pixels tall. If it moves to 36 m (same camera), how tall does it appear?",
+      "options": [
+        "40",
+        "108",
+        "13.33",
+        "360"
+      ],
+      "correct_answer": 0,
+      "explanation": "Image size is proportional to 1/distance, so 3 times as far means 1/3 of the size: 120/3 = 40.",
+      "hints": [
+        "Work through the pinhole size step by step."
+      ]
+    },
+    {
+      "id": 1300,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the sign of the 2D cross product of (B − A) and (C − A) tell you?",
+      "options": [
+        "Whether A, B, C turn anticlockwise (positive), clockwise (negative) or lie in a line (zero)",
+        "Whether the triangle is right-angled",
+        "The length of the side BC",
+        "The angle at A in degrees"
+      ],
+      "correct_answer": 0,
+      "explanation": "The cross product is the signed area of the parallelogram on the two sides; its sign is the turn direction.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1301,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Why is half the absolute cross product the area of a triangle?",
+      "options": [
+        "The cross product is the area of the parallelogram on two sides, and a triangle is half of it",
+        "The cross product measures perimeter",
+        "Absolute value halves the number",
+        "A triangle has two sides"
+      ],
+      "correct_answer": 0,
+      "explanation": "The two sides span a parallelogram; the diagonal cuts it into two equal triangles.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1302,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Three points have a cross product of zero. What does that mean?",
+      "options": [
+        "They lie on one straight line (the triangle has zero area)",
+        "They form a right angle",
+        "They form an equilateral triangle",
+        "They are equally spaced"
+      ],
+      "correct_answer": 0,
+      "explanation": "Zero signed area means no triangle: the points are collinear.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1303,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Two segments have their lines crossing at a point, but the segments themselves do not meet. How is that possible?",
+      "options": [
+        "Segments stop at their ends, and the crossing point of the lines lies beyond one or both ends",
+        "Lines can cross only once, so the segments must meet",
+        "Segments have no ends",
+        "The cross product is wrong"
+      ],
+      "correct_answer": 0,
+      "explanation": "A segment is only part of its line, so the lines can cross somewhere the segments do not reach.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1304,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Two segments cross when…",
+      "options": [
+        "each segment's ends lie on opposite sides of the other segment's line",
+        "their slopes are equal",
+        "their midpoints are the same",
+        "they have the same length"
+      ],
+      "correct_answer": 0,
+      "explanation": "This is the orientation test: the two cross products for each segment have opposite signs.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1305,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How does the winding number differ from ray casting for deciding if a point is inside a shape?",
+      "options": [
+        "Winding counts how many times the outline goes round the point (inside if not zero); ray casting counts crossings (inside if odd). They can disagree when the outline crosses itself",
+        "They always give different answers",
+        "Ray casting works only on triangles",
+        "The winding number needs a straight ray"
+      ],
+      "correct_answer": 0,
+      "explanation": "For simple outlines both agree; for a self-crossing outline some regions are wound twice, which is odd/even-outside but non-zero/inside.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1306,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is the convex hull of a set of points?",
+      "options": [
+        "The smallest convex shape that contains all the points, like a rubber band stretched round them",
+        "The average of the points",
+        "The circle through the three most distant points",
+        "The shortest path through all the points"
+      ],
+      "correct_answer": 0,
+      "explanation": "Convex means any two points inside can be joined by a line that stays inside.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1307,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Every turn along the boundary of a convex polygon, going anticlockwise, is…",
+      "options": [
+        "a left turn (positive cross product)",
+        "alternately left and right",
+        "zero",
+        "a right turn"
+      ],
+      "correct_answer": 0,
+      "explanation": "A polygon is convex exactly when all its turns go the same way.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1308,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the determinant of a 2×2 matrix tell you about the transformation it makes?",
+      "options": [
+        "The factor by which areas change, with a negative sign meaning the shape is flipped over",
+        "The angle of rotation",
+        "Whether the matrix has an inverse in every case",
+        "The length of the first column"
+      ],
+      "correct_answer": 0,
+      "explanation": "|det| is the area scale; det < 0 reverses orientation; det = 0 squashes the plane to a line.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1309,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Why does the order of two transformations matter, for example rotating then stretching versus stretching then rotating?",
+      "options": [
+        "Matrix multiplication is not commutative, so AB and BA are usually different",
+        "Rotations change the stretch",
+        "Stretching changes the angle",
+        "Computers apply them in random order"
+      ],
+      "correct_answer": 0,
+      "explanation": "An even stretch (same in both directions) is the exception: it commutes with rotation.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1310,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A rotation matrix R satisfies…",
+      "options": [
+        "its inverse is its transpose, and its determinant is 1",
+        "its entries are all positive",
+        "its determinant is 0",
+        "its inverse is itself"
+      ],
+      "correct_answer": 0,
+      "explanation": "Rotations preserve lengths and angles, so R·Rᵀ = I and det R = 1.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1311,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Why are 3D rotations about different axes not interchangeable (turning about X then Y differs from Y then X)?",
+      "options": [
+        "3D rotation matrices do not commute",
+        "Because rotations lose length",
+        "Because X comes before Y",
+        "They are interchangeable"
+      ],
+      "correct_answer": 0,
+      "explanation": "Hold a book and turn it 90° about two different axes in both orders: it ends up in different orientations.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1312,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What problem do quaternions avoid compared with turning a 3D object by three Euler angles?",
+      "options": [
+        "Gimbal lock, where two of the rotation axes line up and a degree of freedom is lost, and they interpolate smoothly",
+        "They make rotation commutative",
+        "They work only in 2D",
+        "They need no multiplication"
+      ],
+      "correct_answer": 0,
+      "explanation": "Quaternions represent a rotation as one axis and angle without a fixed order of three turns.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1313,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "In a pinhole camera, what happens to an object's size in the image if its distance doubles?",
+      "options": [
+        "It halves, since image size is proportional to 1/distance",
+        "It doubles",
+        "It stays the same",
+        "It quarters"
+      ],
+      "correct_answer": 0,
+      "explanation": "u = f·X/Z, so the offset from the centre scales with 1/Z.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1314,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does doubling the focal length of a pinhole camera do to the image?",
+      "options": [
+        "Every point moves twice as far from the image centre, which zooms in",
+        "It moves the camera back",
+        "It rotates the image",
+        "It halves the field of view"
+      ],
+      "correct_answer": 0,
+      "explanation": "Focal length multiplies all offsets, and the field of view narrows.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1315,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "How many point correspondences are needed to find a homography between two views of a plane, and why?",
+      "options": [
+        "Four, because the matrix has 8 degrees of freedom (nine entries, defined only up to scale) and each correspondence gives 2 equations",
+        "Nine, one per entry",
+        "Two, because it has two coordinates",
+        "Three, like a triangle"
+      ],
+      "correct_answer": 0,
+      "explanation": "Each point pair (x, y) → (x', y') gives two equations, so 4 pairs give the 8 needed (no three of the points may be in a line).",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1316,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "What does a homography describe?",
+      "options": [
+        "How points on one plane (such as a marker or a table) map to their positions in a camera image, or to another view of the same plane",
+        "The rotation of a 3D object",
+        "How a camera lens bends light",
+        "The depth of every pixel"
+      ],
+      "correct_answer": 0,
+      "explanation": "A planar surface seen by a pinhole camera maps by a 3×3 matrix acting on homogeneous coordinates.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 1317,
+      "topic": "geometry",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Why must you divide by the last component after applying a homography to (x, y, 1)?",
+      "options": [
+        "The result is in homogeneous coordinates, and the real position is the first two entries divided by the third",
+        "To convert degrees to radians",
+        "To normalise the colours",
+        "To make the matrix invertible"
+      ],
+      "correct_answer": 0,
+      "explanation": "The third component carries the perspective: it is what makes far things smaller.",
+      "hints": [
+        "Work through the concepts step by step."
       ]
     }
   ]

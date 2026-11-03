@@ -4,7 +4,7 @@ Guides, project plans and three runnable quizzes on AI engineering, computer vis
 
 | Folder | What is in it | Start with |
 |---|---|---|
-| [`careers/`](careers/README.md) | A learning roadmap for becoming an AI engineer, with about 1,850 quiz questions, and a plan for how AI changes ten jobs | [Phase 1 quiz](careers/ai-engineer-roadmap/quiz-app.html) |
+| [`careers/`](careers/README.md) | A learning roadmap for becoming an AI engineer, with about 2,000 quiz questions, and a plan for how AI changes ten jobs | [Phase 1 quiz](careers/ai-engineer-roadmap/quiz-app.html) |
 | [`computer-vision/openpose/`](computer-vision/openpose/README-OPENPOSE.md) | Pose estimation for video search and AR, and an anatomy visualisation web app that runs in the browser | [Anatomy Visualization](computer-vision/openpose/anatomy-viz-web/index.html) |
 | [`computer-vision/edge-detection/`](computer-vision/edge-detection/README.md) | How edges are found: Sobel, Prewitt, Scharr, Roberts, Laplacian and Canny, with checked code | [Edge detection](computer-vision/edge-detection/index.html) |
 | [`computer-vision/alpha-channel/`](computer-vision/alpha-channel/README.md) | What the alpha channel does on a 3D model | [Alpha channel in 3D](computer-vision/alpha-channel/index.html) |

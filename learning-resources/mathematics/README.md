@@ -9,7 +9,7 @@ Three reference documents and a quiz on counting, plus a map from the questions 
 | [Combinatorics Quiz](quiz/index.html) | A page that quizzes you on the 100 questions |
 | [Repositories](combinatorics_repositories.md) | GitHub libraries for combinatorics, by language |
 | [Geometry in this repository](geometry-coverage.md) | Where geometry appears elsewhere in the repository (meshes, collisions, vectors, poses) and what is missing |
-| [Geometry you can drag](geometry/index.html) | Triangle area, segment crossing, point in polygon, convex hull, transformation matrices and a pinhole camera, with draggable points and checked code |
+| [Geometry you can drag](geometry/index.html) | Triangle area, segment crossing, point in polygon, convex hull, transformation matrices, a pinhole camera and the homography of a marker, with draggable points and checked code |
 | [Combinatorics in the real world](real-world/index.html) | A 3D map of 53 everyday problems (passwords, poker, the birthday problem, test results, seating, Secret Santa, team splits, voting, delivery routes, schedules, error-correcting codes and more), grouped by the question each one asks and by solo or group, with live numbers. The logic is in `real-world/tasks.js` and `real-world/check.js` checks it |
 
 ## Combinatorics in the real world

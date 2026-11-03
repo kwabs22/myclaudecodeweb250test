@@ -113,6 +113,38 @@ test("pinhole camera: the plain formula equals the matrix form, moving along a r
   const near1 = G.project([1, 0, -2], I, z, 500, 320, 240), far = G.project([1, 0, -4], I, z, 500, 320, 240); assert.ok(near1.u - 320 === 2 * (far.u - 320), "twice as far looks half as big");
   const up = G.project([0, 1, -2], I, z, 500, 320, 240); assert.ok(up.v < 240, "up in the world is up in the image (smaller v)"); const right = G.project([1, 0, -2], I, z, 500, 320, 240); assert.ok(right.u > 320, "right is right");
 });
+test("homography: four pairs fix it exactly, it recovers a known matrix, it ignores overall scale and has an inverse", () => {
+  const g = prng(10);
+  for (let i = 0; i < 300; i++) {
+    const H0 = [[1 + g() * 0.6, g() * 0.4 - 0.2, g() * 40 - 20], [g() * 0.4 - 0.2, 1 + g() * 0.6, g() * 40 - 20], [g() * 0.004 - 0.002, g() * 0.004 - 0.002, 1]];
+    const src = [0, 1, 2, 3].map(() => [g() * 100, g() * 100]); if (src.some((_, k) => G.triArea(src[k], src[(k + 1) % 4], src[(k + 2) % 4]) < 200)) continue;
+    const dst = src.map((p) => G.applyH(H0, p)), H = G.homography(src, dst); assert.ok(H);
+    src.forEach((p, k) => { const q = G.applyH(H, p); assert.ok(near(q[0], dst[k][0], 1e-7) && near(q[1], dst[k][1], 1e-7)); });
+    assert.ok(nearM(H, H0, 1e-6), "recovers the matrix that made the points");
+    const x = [g() * 100, g() * 100], a = G.applyH(H, x), b = G.applyH(H0, x); assert.ok(near(a[0], b[0], 1e-6) && near(a[1], b[1], 1e-6), "and agrees on other points");
+    const k = 3.7, Hk = H.map((r) => r.map((v) => v * k)), c = G.applyH(Hk, x); assert.ok(near(c[0], a[0], 1e-9) && near(c[1], a[1], 1e-9), "scaling all nine entries changes nothing");
+    assert.ok(nearM(G.m3.mul(H, G.inv3(H)), [[1, 0, 0], [0, 1, 0], [0, 0, 1]], 1e-8));
+  }
+  assert.strictEqual(G.homography([[0, 0], [1, 1], [2, 2], [5, 0]], [[0, 0], [1, 0], [2, 0], [3, 1]]), null, "three points in a line have no unique homography");
+  const pure = G.homography([[0, 0], [1, 0], [1, 1], [0, 1]], [[2, 3], [4, 3], [4, 5], [2, 5]]); assert.ok(nearM(pure, [[2, 0, 2], [0, 2, 3], [0, 0, 1]]), "a stretch and a shift is a homography with a bottom row of 0 0 1");
+});
+test("pose from a homography: the camera pose used to draw a square marker is recovered, and a random quadrilateral is flagged as not a view of a square", () => {
+  const g = prng(11), M = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+  for (let i = 0; i < 200; i++) {
+    const R = G.euler((g() - 0.5) * 1.6, (g() - 0.5) * 1.6, (g() - 0.5) * 6), t = [g() * 1.5 - 0.75, g() * 1.5 - 0.75, -(3 + g() * 6)], f = 300 + g() * 500, cx = 320, cy = 240;
+    const px = M.map((p) => { const r = G.project([p[0], p[1], 0], R, t, f, cx, cy); assert.ok(r.visible); return [r.u, r.v]; });
+    const H = G.homography(M, px); if (!H) continue; const pose = G.poseFromHomography(H, f, cx, cy);
+    if (R[2][2] < 0.12) continue;   /* a marker seen almost edge-on is badly conditioned */
+    assert.ok(nearM(pose.R, R, 1e-5), "rotation recovered"); pose.t.forEach((v, k) => assert.ok(near(v, t[k], 1e-5), "translation recovered")); assert.ok(pose.orthoError < 1e-8, "a true view has no orthonormality error");
+    assert.ok(near(G.m3.det(pose.R), 1, 1e-9) && pose.t[2] < 0);
+    const back = M.map((p) => G.project([p[0], p[1], 0], pose.R, pose.t, f, cx, cy)); back.forEach((q, k) => assert.ok(near(q.u, px[k][0], 1e-5) && near(q.v, px[k][1], 1e-5)));
+  }
+  let flagged = 0, total = 0; for (let i = 0; i < 100; i++) { const quad = [0, 1, 2, 3].map((k) => [200 + (k % 3 === 0 ? -1 : 1) * (20 + g() * 100), 150 + (k < 2 ? -1 : 1) * (20 + g() * 100)]); const H = G.homography(M, quad); if (!H) continue; total++; if (G.poseFromHomography(H, 500, 320, 240).orthoError > 0.15) flagged++; }
+  assert.ok(flagged > 0.8 * total, `${flagged} of ${total} arbitrary quadrilaterals flagged`);
+  const R = G.euler(0.4, -0.3, 0.2), t = [0.2, 0.1, -6], f = 450, px = M.map((p) => { const r = G.project([p[0], p[1], 0], R, t, f, 320, 240); return [r.u, r.v]; });
+  const a = G.poseFromHomography(G.homography(M, px), f, 320, 240), noisy = G.poseFromHomography(G.homography(M, px.map(([u, v], k) => [u + (k % 2 ? 1 : -1) * 0.8, v + (k < 2 ? 0.8 : -0.8)])), f, 320, 240);
+  assert.ok(a.orthoError < 1e-9 && noisy.orthoError > 1e-6 && noisy.orthoError < 0.15, "a little pixel noise gives a small non-zero error: " + noisy.orthoError); assert.ok(Math.abs(noisy.t[2] - t[2]) < 0.3);
+});
 
 let failed = 0; for (const [name, fn] of tests) { try { fn(); } catch (e) { failed++; console.log("FAIL", name, "\n   ", e.message.slice(0, 300)); } }
 console.log(`${tests.length - failed} of ${tests.length} checks passed`); process.exit(failed ? 1 : 0);
