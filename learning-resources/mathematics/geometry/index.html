@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Geometry you can drag</title>
+<meta name="description" content="Drag points to see triangle area, segment intersection, point in polygon, the convex hull, 2D transformations and a pinhole camera, with the arithmetic shown and every method checked against a slow reference.">
+<style>
+:root{--bg:#f7f8fb;--fg:#161a23;--muted:#5b6475;--card:#fff;--line:#dfe3ec;--acc:#3b63e0;--ok:#16794a;--warn:#b45309;--shape:#cfe0ff;--pt:#e8590c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10131a;--fg:#e8ebf3;--muted:#9aa3b5;--card:#181c26;--line:#2a3040;--acc:#7b9bff;--ok:#4ade80;--warn:#fbbf24;--shape:#23305a;--pt:#fb923c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+h1{margin:0 0 4px;font-size:clamp(26px,5vw,38px);letter-spacing:-.02em}h2{font-size:21px;margin:0 0 4px}
+.lede{color:var(--muted);max-width:70ch;margin:0 0 12px}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 18px}nav.toc a{padding:4px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:inherit;text-decoration:none;font-size:14px}nav.toc a:hover{border-color:var(--acc)}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 18px;scroll-margin-top:60px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+svg.board{width:100%;height:auto;aspect-ratio:1;background:var(--bg);border:1px solid var(--line);border-radius:10px;touch-action:none;user-select:none}
+svg .grid{stroke:var(--line);stroke-width:.25}svg text{font:3.6px system-ui,sans-serif;fill:var(--fg);pointer-events:none}
+.handle{fill:var(--pt);stroke:var(--card);stroke-width:.8;cursor:grab}.handle:active{cursor:grabbing}.fixed{fill:var(--muted)}
+table.r{border-collapse:collapse;width:100%;font-size:14px}table.r td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}table.r td:first-child{color:var(--muted)}table.r td:last-child{font-variant-numeric:tabular-nums;text-align:right}
+.ok{color:var(--ok);font-weight:600}.warn{color:var(--warn);font-weight:600}.note{color:var(--muted);font-size:13px;margin:8px 0 0}
+label{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:8px}label b{float:right;color:var(--fg);text-transform:none;letter-spacing:0}
+input[type=range]{width:100%}button,select{font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}button:hover{border-color:var(--acc)}
+.mat{display:inline-grid;grid-template-columns:repeat(2,auto);gap:2px 14px;font:14px ui-monospace,monospace;padding:4px 12px;border-left:2px solid var(--fg);border-right:2px solid var(--fg);border-radius:6px}
+.mat3{grid-template-columns:repeat(3,auto)}
+#stage{position:relative;width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#1d2230}#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.cap{font-size:12px;color:var(--muted);margin:2px 0 6px}
+code{font-size:.92em}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>Geometry you can drag</h1>
+<p class="lede">Orange dots are handles: drag them (mouse or finger) and every number updates. Each section shows the arithmetic behind the picture, and the code in <code>geometry.js</code> is checked against slower reference methods by <code>check.js</code>.</p>
+<nav class="toc"><a href="#tri">Triangle</a><a href="#seg">Two segments</a><a href="#pip">Point in polygon</a><a href="#hull">Convex hull</a><a href="#mat">Transformations</a><a href="#cam">3D and the camera</a></nav>
+
+<section class="card" id="tri"><h2>1. A triangle: area, angles, which way round</h2>
+<p class="lede">Three points make a triangle. Half of the <b>cross product</b> of two sides is its area, and the sign of that cross product tells you whether the points go anticlockwise (positive) or clockwise (negative).</p>
+<div class="grid"><svg class="board" id="s1" viewBox="0 0 100 100" aria-label="Triangle with draggable corners"></svg><div><table class="r" id="r1"></table><p class="note" id="n1"></p></div></div></section>
+
+<section class="card" id="seg"><h2>2. Do two segments cross?</h2>
+<p class="lede">Each end of one segment is tested against the line through the other: <code>orient</code> is positive on the left, negative on the right, zero on the line. Two segments cross when each one's ends are on opposite sides of the other.</p>
+<div class="grid"><svg class="board" id="s2" viewBox="0 0 100 100" aria-label="Two segments with draggable ends"></svg><div><table class="r" id="r2"></table><p class="note" id="n2"></p></div></div></section>
+
+<section class="card" id="pip"><h2>3. Is the point inside the shape?</h2>
+<p class="lede">Two rules. <b>Ray casting</b>: shoot a ray to the right and count the edges it crosses (odd means inside). <b>Winding number</b>: count how many times the outline goes round the point (not zero means inside). Drag the corners until the outline crosses itself to see them disagree.</p>
+<div class="grid"><svg class="board" id="s3" viewBox="0 0 100 100" aria-label="Polygon with draggable corners and a test point"></svg><div><table class="r" id="r3"></table><p class="note" id="n3"></p><button type="button" id="reset3">Reset shape</button></div></div></section>
+
+<section class="card" id="hull"><h2>4. The convex hull: a rubber band round the points</h2>
+<p class="lede">The hull is the smallest convex shape holding every point. The fast method sorts the points and keeps only left turns. The page also runs the slow method (a point is a corner unless some other points enclose it) and says whether they agree.</p>
+<div class="grid"><svg class="board" id="s4" viewBox="0 0 100 100" aria-label="Points and their convex hull"></svg><div><label for="n4">Points <b id="n4v"></b></label><input type="range" id="n4" min="3" max="40" value="14"><p><button type="button" id="again4">New random points</button></p><table class="r" id="r4"></table></div></div></section>
+
+<section class="card" id="mat"><h2>5. Transformations are matrices</h2>
+<p class="lede">Turning, stretching and shearing a shape are each a 2×2 matrix, and doing one after another multiplies the matrices. The <b>determinant</b> is how much the area changes, and a negative one means the shape has been flipped over.</p>
+<div class="grid"><svg class="board" id="s5" viewBox="-50 -50 100 100" aria-label="A letter F transformed by sliders"></svg><div>
+<label for="rot">Rotate <b id="rotv"></b></label><input type="range" id="rot" min="-180" max="180" value="30">
+<label for="sx">Stretch across <b id="sxv"></b></label><input type="range" id="sx" min="-2" max="3" step="0.1" value="1.5">
+<label for="sy">Stretch up <b id="syv"></b></label><input type="range" id="sy" min="-2" max="3" step="0.1" value="1">
+<label for="sh">Shear <b id="shv"></b></label><input type="range" id="sh" min="-1.5" max="1.5" step="0.1" value="0">
+<label for="ord">Order</label><select id="ord"><option value="rs">Stretch first, then rotate</option><option value="sr">Rotate first, then stretch</option></select>
+<p style="margin:10px 0 4px">Matrix: <span class="mat" id="m5"></span></p><table class="r" id="r5"></table><p class="note" id="n5"></p></div></div></section>
+
+<section class="card" id="cam"><h2>6. 3D turns and a pinhole camera</h2>
+<p class="lede">A cube is turned by a 3×3 rotation matrix, then a pinhole camera divides by distance: a point at depth <code>d</code> in front of the camera (the camera looks down −Z, as in three.js) lands at <code>u = f·X/d + cx</code>, <code>v = cy − f·Y/d</code>. Things twice as far look half as big. Left: the cube in 3D (drag to look around). Right: what the camera sees.</p>
+<div class="grid"><div><div id="stage"></div><p class="cap">Drag to orbit the view. Blue is the cube, the red cone is the camera, looking towards the cube.</p></div>
+<div><svg class="board" id="s6" viewBox="0 0 320 240" style="aspect-ratio:4/3" aria-label="The cube as the pinhole camera sees it"></svg></div></div>
+<div class="grid" style="margin-top:10px"><div>
+<label for="yaw">Turn about Y (yaw) <b id="yawv"></b></label><input type="range" id="yaw" min="-180" max="180" value="35">
+<label for="pitch">Turn about X (pitch) <b id="pitchv"></b></label><input type="range" id="pitch" min="-180" max="180" value="25">
+<label for="roll">Turn about Z (roll) <b id="rollv"></b></label><input type="range" id="roll" min="-180" max="180" value="0">
+<label for="foc">Focal length f (pixels) <b id="focv"></b></label><input type="range" id="foc" min="100" max="1000" step="10" value="300">
+<label for="dist">Distance to the cube <b id="distv"></b></label><input type="range" id="dist" min="2.5" max="12" step="0.1" value="6"></div>
+<div><p style="margin:6px 0 4px">Rotation matrix: <span class="mat mat3" id="m6"></span></p><table class="r" id="r6"></table><p class="note" id="n6"></p></div></div></section>
+
+<p class="note">Everything here is plain functions in <code>geometry.js</code>. See the <a href="README.html">README</a> for the formulas, and <a href="../geometry-coverage.html">what geometry the rest of the repository covers</a>.</p>
+</main>
+<script src="geometry.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)},f2=function(x,d){return (+x).toFixed(d==null?2:d)},NS="http://www.w3.org/2000/svg";
+  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
+  var Y=function(y){return 100-y};
+  function gridSvg(){var s="";for(var i=0;i<=100;i+=10)s+='<line class="grid" x1="'+i+'" y1="0" x2="'+i+'" y2="100"/><line class="grid" x1="0" y1="'+i+'" x2="100" y2="'+i+'"/>';return s}
+  var pt=function(p,i,label,fixed){return '<circle class="handle'+(fixed?" fixed":"")+'" data-i="'+i+'" cx="'+p[0]+'" cy="'+Y(p[1])+'" r="3"/>'+(label?'<text x="'+(p[0]+3.6)+'" y="'+(Y(p[1])-3.4)+'">'+label+'</text>':"")};
+  /* dragging: one pointer handler per board, moving the point whose handle was grabbed */
+  function drag(svg,pts,redraw,limit){var cur=-1;
+    svg.addEventListener("pointerdown",function(e){var h=e.target.closest&&e.target.closest("[data-i]");if(!h)return;cur=+h.dataset.i;svg.setPointerCapture(e.pointerId);e.preventDefault()});
+    svg.addEventListener("pointermove",function(e){if(cur<0)return;var m=svg.getScreenCTM().inverse(),p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;p=p.matrixTransform(m);
+      pts[cur]=[clamp(p.x,2,98),clamp(Y(p.y),2,98)];redraw()});
+    var end=function(){cur=-1};svg.addEventListener("pointerup",end);svg.addEventListener("pointercancel",end)}
+  function rows(el,list){el.innerHTML=list.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join("")}
+  var deg=function(r){return r*180/Math.PI};
+
+  /* 1 triangle */
+  var T=[[20,18],[78,30],[42,82]];
+  function draw1(){var a=T[0],b=T[1],c=T[2],o=Geo.orient(a,b,c),s1=Geo.triArea(a,b,c),s2=Geo.heron(a,b,c),s3=Math.abs(Geo.polyArea(T)),A=Geo.angleAt(b,a,c),B=Geo.angleAt(a,b,c),C=Geo.angleAt(a,c,b);
+    $("s1").innerHTML=gridSvg()+'<polygon points="'+T.map(function(p){return p[0]+","+Y(p[1])}).join(" ")+'" fill="var(--shape)" stroke="var(--acc)" stroke-width=".6"/>'+pt(a,0,"A")+pt(b,1,"B")+pt(c,2,"C");
+    rows($("r1"),[["Side a = |BC|",f2(Geo.dist(b,c))],["Side b = |AC|",f2(Geo.dist(a,c))],["Side c = |AB|",f2(Geo.dist(a,b))],["cross(B−A, C−A)",f2(o)],["Area = ½ |cross|",f2(s1)],["Area by Heron's formula",f2(s2)],["Area by the shoelace formula",f2(s3)],["Angle at A, B, C",f2(deg(A),1)+"°, "+f2(deg(B),1)+"°, "+f2(deg(C),1)+"°"],["Angles add up to",f2(deg(A+B+C),1)+"°"],["Order A, B, C",Math.abs(o)<1e-9?"in a line":o>0?"anticlockwise":"clockwise"]]);
+    $("n1").innerHTML='The three area formulas agree to '+Math.max(Math.abs(s1-s2),Math.abs(s1-s3)).toExponential(1)+'. Drag C onto the line through A and B and the area drops to zero.'}
+  drag($("s1"),T,draw1);draw1();
+
+  /* 2 segments */
+  var S=[[18,25],[82,70],[22,78],[80,22]];
+  function draw2(){var a=S[0],b=S[1],c=S[2],d=S[3],r=Geo.segmentIntersect(a,b,c,d),sg=function(x){return x>0?"+ left":x<0?"− right":"0 on line"},o1=Geo.orient(c,d,a),o2=Geo.orient(c,d,b),o3=Geo.orient(a,b,c),o4=Geo.orient(a,b,d);
+    $("s2").innerHTML=gridSvg()+'<line x1="'+a[0]+'" y1="'+Y(a[1])+'" x2="'+b[0]+'" y2="'+Y(b[1])+'" stroke="var(--acc)" stroke-width="1.2"/><line x1="'+c[0]+'" y1="'+Y(c[1])+'" x2="'+d[0]+'" y2="'+Y(d[1])+'" stroke="var(--warn)" stroke-width="1.2"/>'+(r.point?'<circle cx="'+r.point[0]+'" cy="'+Y(r.point[1])+'" r="2.4" fill="none" stroke="var(--ok)" stroke-width="1"/>':"")+pt(a,0,"P1")+pt(b,1,"P2")+pt(c,2,"Q1")+pt(d,3,"Q2");
+    rows($("r2"),[["P1 against line Q1–Q2",sg(o1)],["P2 against line Q1–Q2",sg(o2)],["Q1 against line P1–P2",sg(o3)],["Q2 against line P1–P2",sg(o4)],["Segments meet?",r.hit?'<span class="ok">yes</span>':'<span class="warn">no</span>'],["Where",r.point?"("+f2(r.point[0],1)+", "+f2(r.point[1],1)+")":"–"]]);
+    $("n2").textContent=r.hit?"Each segment's ends are on opposite sides of the other (or an end touches it).":"Both ends of one segment are on the same side of the other, so they cannot meet. The lines through them still might: segments stop, lines do not."}
+  drag($("s2"),S,draw2);draw2();
+
+  /* 3 point in polygon */
+  var BASE=[[50,90],[62,62],[92,58],[68,40],[78,10],[50,28],[22,10],[32,40],[8,58],[38,62]];
+  var ALL=BASE.map(function(p){return p.slice()}).concat([[50,50]]),PT=ALL[ALL.length-1];
+  function draw3(){PT=ALL[ALL.length-1];var poly=ALL.slice(0,ALL.length-1),r=Geo.pointInPolygon(PT,poly),xs=[];
+    for(var i=0;i<poly.length;i++){var a=poly[i],b=poly[(i+1)%poly.length];if((a[1]>PT[1])!==(b[1]>PT[1])){var x=a[0]+(PT[1]-a[1])*(b[0]-a[0])/(b[1]-a[1]);if(x>PT[0])xs.push(x)}}
+    $("s3").innerHTML=gridSvg()+'<polygon points="'+poly.map(function(p){return p[0]+","+Y(p[1])}).join(" ")+'" fill="var(--shape)" fill-rule="evenodd" stroke="var(--acc)" stroke-width=".6"/><line x1="'+PT[0]+'" y1="'+Y(PT[1])+'" x2="100" y2="'+Y(PT[1])+'" stroke="var(--muted)" stroke-dasharray="1.5 1.5" stroke-width=".5"/>'+xs.map(function(x){return '<circle cx="'+x+'" cy="'+Y(PT[1])+'" r="1.6" fill="var(--ok)"/>'}).join("")+poly.map(function(p,i){return pt(p,i)}).join("")+'<circle class="handle" data-i="'+poly.length+'" cx="'+PT[0]+'" cy="'+Y(PT[1])+'" r="3.4" style="fill:var(--ok)"/>';
+    var agree=r.ray===r.windingInside;
+    rows($("r3"),[["Ray crosses the outline",r.crossings+" times"],["Ray casting says",r.ray?"inside (odd)":"outside (even)"],["Winding number",String(r.winding)],["Winding number says",r.windingInside?"inside (not zero)":"outside (zero)"],["On the edge?",r.onEdge?"yes":"no"],["Do the rules agree?",agree?'<span class="ok">yes</span>':'<span class="warn">no</span>'],["Shape area (shoelace)",f2(Math.abs(Geo.polyArea(poly)),1)]]);
+    $("n3").innerHTML=agree?"For an outline that does not cross itself, the two rules always agree. Green dots are where the ray meets the outline.":"The outline crosses itself here, so the shape has regions that are wound round twice. Ray casting calls those outside, the winding number calls them inside: both are valid rules."}
+  drag($("s3"),ALL,draw3);draw3();
+  $("reset3").addEventListener("click",function(){for(var i=0;i<BASE.length;i++)ALL[i]=BASE[i].slice();ALL[BASE.length]=[50,50];draw3()});
+
+  /* 4 hull */
+  var seed4=7,H=[];function rand(){seed4=(seed4*1664525+1013904223)>>>0;return seed4/4294967296}
+  function make4(){var n=+$("n4").value;H=[];for(var i=0;i<n;i++)H.push([10+rand()*80,10+rand()*80])}
+  function draw4(){var hull=Geo.convexHull(H),slow=Geo.hullBrute(H),k=function(p){return p[0].toFixed(6)+","+p[1].toFixed(6)},a=hull.map(k).sort().join("|"),b=slow.map(k).sort().join("|"),area=hull.length>2?Geo.polyArea(hull):0,inside=0;
+    $("n4v").textContent=H.length;
+    $("s4").innerHTML=gridSvg()+(hull.length>1?'<polygon points="'+hull.map(function(p){return p[0]+","+Y(p[1])}).join(" ")+'" fill="var(--shape)" stroke="var(--acc)" stroke-width=".7" stroke-linejoin="round"/>':"")+H.map(function(p,i){var on=hull.some(function(h){return h[0]===p[0]&&h[1]===p[1]});return '<circle class="handle'+(on?"":" fixed")+'" data-i="'+i+'" cx="'+p[0]+'" cy="'+Y(p[1])+'" r="'+(on?2.6:2)+'"/>'}).join("");
+    rows($("r4"),[["Points",String(H.length)],["Corners of the hull",String(hull.length)],["Points inside the hull",String(H.length-hull.length)],["Hull area",f2(area,1)],["Hull perimeter",f2(Geo.perimeter(hull),1)],["Slow check finds the same corners?",a===b?'<span class="ok">yes</span>':'<span class="warn">no</span>']]);}
+  drag($("s4"),H,draw4);
+  $("n4").addEventListener("input",function(){make4();draw4()});$("again4").addEventListener("click",function(){seed4=(seed4*31+17)>>>0;make4();draw4()});make4();draw4();
+
+  /* 5 transformations */
+  var F=[[0,0],[10,0],[10,3],[4,3],[4,5.5],[8,5.5],[8,8.5],[4,8.5],[4,14],[0,14]].map(function(p){return [p[0]-5,p[1]-7]});
+  function draw5(){var th=+$("rot").value*Math.PI/180,sx=+$("sx").value,sy=+$("sy").value,sh=+$("sh").value;
+    $("rotv").textContent=f2($("rot").value,0)+"°";$("sxv").textContent="× "+f2(sx,1);$("syv").textContent="× "+f2(sy,1);$("shv").textContent=f2(sh,1);
+    var R=Geo.mat.rotation(th),S=Geo.mat.mul(Geo.mat.scale(sx,sy),Geo.mat.shear(sh)),M=$("ord").value==="rs"?Geo.mat.mul(R,S):Geo.mat.mul(S,R);
+    var out=F.map(function(p){return Geo.mat.apply(M,p)}),pts=function(L){return L.map(function(p){return (p[0]*3)+","+(-p[1]*3)}).join(" ")};
+    var ax='<line x1="-50" y1="0" x2="50" y2="0" stroke="var(--line)" stroke-width=".4"/><line x1="0" y1="-50" x2="0" y2="50" stroke="var(--line)" stroke-width=".4"/>';
+    $("s5").innerHTML=ax+'<polygon points="'+pts(F)+'" fill="none" stroke="var(--muted)" stroke-dasharray="2 1.5" stroke-width=".5"/><polygon points="'+pts(out)+'" fill="var(--shape)" fill-opacity=".85" stroke="var(--acc)" stroke-width=".7"/><circle cx="0" cy="0" r="1" fill="var(--pt)"/>';
+    $("m5").innerHTML=[M[0][0],M[0][1],M[1][0],M[1][1]].map(function(v){return '<span>'+f2(v,2)+'</span>'}).join("");
+    var a0=Math.abs(Geo.polyArea(F)),a1=Math.abs(Geo.polyArea(out)),d=Geo.mat.det(M);
+    rows($("r5"),[["Determinant",f2(d,3)],["Area before → after",f2(a0,1)+" → "+f2(a1,1)],["Area ratio",f2(a1/a0,3)],["Shape flipped over?",d<0?'<span class="warn">yes (determinant below 0)</span>':"no"]]);
+    $("n5").textContent="The area ratio is the absolute value of the determinant. Switch the order with unequal stretches to see that rotate-then-stretch is not the same as stretch-then-rotate; an even stretch gives the same result either way."}
+  ["rot","sx","sy","sh","ord"].forEach(function(i){$(i).addEventListener("input",draw5)});draw5();
+
+  /* 6 camera: 2D view from the pinhole formula, 3D view with three.js */
+  var CUBE=[];for(var i=0;i<8;i++)CUBE.push([(i&1?1:-1),(i&2?1:-1),(i&4?1:-1)]);
+  var EDGES=[];for(var i2=0;i2<8;i2++)for(var b=1;b<8;b<<=1)if(!(i2&b))EDGES.push([i2,i2|b]);
+  var cur6={R:null};
+  function draw6(){var yaw=+$("yaw").value*Math.PI/180,pitch=+$("pitch").value*Math.PI/180,roll=+$("roll").value*Math.PI/180,f=+$("foc").value,D=+$("dist").value;
+    $("yawv").textContent=$("yaw").value+"°";$("pitchv").textContent=$("pitch").value+"°";$("rollv").textContent=$("roll").value+"°";$("focv").textContent=f+" px";$("distv").textContent=f2(D,1);
+    var R=Geo.euler(yaw,pitch,roll);cur6.R=R;var t=[0,0,-D],pr=CUBE.map(function(p){return Geo.project(p,R,t,f,160,120)});
+    var lines=EDGES.map(function(e){var a=pr[e[0]],c=pr[e[1]];return '<line x1="'+f2(a.u,1)+'" y1="'+f2(a.v,1)+'" x2="'+f2(c.u,1)+'" y2="'+f2(c.v,1)+'" stroke="var(--acc)" stroke-width="1.6"/>'}).join("");
+    $("s6").innerHTML='<rect width="320" height="240" fill="var(--bg)"/><line x1="160" y1="0" x2="160" y2="240" stroke="var(--line)"/><line x1="0" y1="120" x2="320" y2="120" stroke="var(--line)"/>'+lines+pr.map(function(p,i){return '<circle cx="'+f2(p.u,1)+'" cy="'+f2(p.v,1)+'" r="'+(i===7?4.5:3)+'" fill="'+(i===7?"var(--ok)":"var(--pt)")+'"/>'}).join("")+'<text x="6" y="14" style="font-size:11px">image 320 × 240 pixels, centre (160, 120)</text>';
+    $("m6").innerHTML=[0,1,2].map(function(i){return [0,1,2].map(function(j){return '<span>'+f2(R[i][j],2)+'</span>'}).join("")}).join("");
+    var c=pr[7],rp=Geo.m3.apply(R,CUBE[7]),depths=pr.map(function(p){return p.depth});
+    rows($("r6"),[["Corner (1, 1, 1) after turning","("+rp.map(function(x){return f2(x,2)}).join(", ")+")"],["Depth d = −Z after pushing it "+f2(D,1)+" away",f2(c.depth,2)],["f·X/d and f·Y/d (pixels from the centre)",f2(f*c.cam[0]/c.depth,1)+", "+f2(f*c.cam[1]/c.depth,1)],["Pixel (u, v)",f2(c.u,1)+", "+f2(c.v,1)],["Determinant of the rotation",f2(Geo.m3.det(R),3)],["Farthest corner ÷ nearest corner (depth)","× "+f2(Math.max.apply(null,depths)/Math.min.apply(null,depths),2)]]);
+    $("n6").textContent="The rotation keeps lengths and has determinant 1. Raise the distance and the cube shrinks in proportion; double the focal length and every point moves twice as far from the centre (zoom).";
+    if(window.__cube)window.__cube(R,D)}
+  ["yaw","pitch","roll","foc","dist"].forEach(function(i){$(i).addEventListener("input",draw6)});draw6();
+})();
+</script>
+<script type="importmap">{"imports":{"three":"../real-world/vendor/three.module.min.js"}}</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "../real-world/vendor/OrbitControls.js";
+const stage = document.getElementById("stage");
+try {
+  const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); stage.appendChild(renderer.domElement);
+  const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100); camera.position.set(10, 7, 13); scene.background = new THREE.Color(0x1d2230);
+  const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 1.6)); const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(4, 6, 5); scene.add(sun);
+  const cube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial({ color: 0x3b63e0, transparent: true, opacity: 0.85 })); cube.matrixAutoUpdate = false;
+  cube.add(new THREE.LineSegments(new THREE.EdgesGeometry(cube.geometry), new THREE.LineBasicMaterial({ color: 0xffffff }))); scene.add(cube);
+  const marker = new THREE.Mesh(new THREE.SphereGeometry(0.16), new THREE.MeshBasicMaterial({ color: 0x4ade80 })); marker.position.set(1, 1, 1); cube.add(marker);
+  const axes = new THREE.AxesHelper(3.2); scene.add(axes);
+  const cam = new THREE.Mesh(new THREE.ConeGeometry(0.35, 0.9, 16), new THREE.MeshStandardMaterial({ color: 0xef4444 })); cam.rotation.x = -Math.PI / 2; const camGroup = new THREE.Group(); camGroup.add(cam); scene.add(camGroup);
+  /* The page's maths uses a camera at the origin looking down -Z with the cube pushed D in front of it. Here the cube stays at the origin and the camera sits at +D on Z looking back at it: the same picture. */
+  window.__cube = (R, D) => {
+    const m = new THREE.Matrix4(); m.set(R[0][0], R[0][1], R[0][2], 0, R[1][0], R[1][1], R[1][2], 0, R[2][0], R[2][1], R[2][2], 0, 0, 0, 0, 1);
+    cube.matrix.copy(m); cube.matrixWorldNeedsUpdate = true; camGroup.position.set(0, 0, D);
+  };
+  const resize = () => { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); };
+  new ResizeObserver(resize).observe(stage); resize();
+  let inView = true; new IntersectionObserver((e) => (inView = e[0].isIntersecting)).observe(stage);
+  (function loop() { requestAnimationFrame(loop); if (!inView || document.hidden) return; controls.update(); renderer.render(scene, camera); })();
+  const R = JSON.parse(JSON.stringify(window.Geo.euler(+document.getElementById("yaw").value * Math.PI / 180, +document.getElementById("pitch").value * Math.PI / 180, +document.getElementById("roll").value * Math.PI / 180)));
+  window.__cube(R, +document.getElementById("dist").value);
+} catch (e) { stage.innerHTML = '<p style="color:#fff;padding:16px">The 3D view needs WebGL, which this browser has turned off. The picture on the right shows the same cube.</p>'; }
+</script>
+</body>
+</html>
