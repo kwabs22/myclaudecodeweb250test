@@ -1,7 +1,7 @@
 {
  "ai-ml/careers/ai-engineer-roadmap/quiz-app.html": {
   "type": "Quiz",
-  "blurb": "1,148 questions with computed answers: maths, Python, SQL and algorithms, with a statistics panel."
+  "blurb": "1,317 questions with computed answers: maths, Python, SQL, algorithms and geometry, with a statistics panel."
  },
  "ai-ml/careers/ai-engineer-roadmap/phase2-quiz-app.html": {
   "type": "Quiz",
@@ -73,6 +73,6 @@
   },
   "learning-resources/mathematics/geometry/index.html": {
     "type": "Playground",
-    "blurb": "Drag points to see triangle area, segment crossing, point in polygon, the convex hull, 2D transformation matrices and a pinhole camera, each checked against a slow reference."
+    "blurb": "Drag points to see triangle area, segment crossing, point in polygon, the convex hull, 2D transformation matrices, a pinhole camera and the homography of a flat marker, each checked against a slow reference."
   }
 }

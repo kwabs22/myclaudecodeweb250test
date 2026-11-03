@@ -11,7 +11,7 @@ from fractions import Fraction
 # Sub-topics whose answers are counts, sizes or positions: a negative wrong answer would be an obvious giveaway
 NONNEG = {"combinatorics", "binary_search", "trees", "graphs", "algorithms", "dynamic_programming", "validation", "network_size", "cnn",
           "rnn", "embeddings", "normalization", "training", "rank", "matrix_shapes", "stacks_queues", "sorting", "complexity",
-          "regularization", "attention", "model_evaluation", "activations"}
+          "regularization", "attention", "model_evaluation", "activations", "distance", "triangle_area", "polygon_area", "determinant_area", "pinhole_size", "convex_hull", "angles"}
 
 
 class Bank:

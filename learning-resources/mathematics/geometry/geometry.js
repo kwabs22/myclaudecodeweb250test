@@ -97,5 +97,46 @@
     return { u: s[0] / s[2], v: s[1] / s[2], w: s[2] };
   }
 
-  return { sub, add, dot, cross, len, dist, orient, angleAt, triArea, heron, polyArea, perimeter, onSegment, segmentIntersect, pointInPolygon, convexHull, hullBrute, mat, m3, rotX, rotY, rotZ, euler, axisAngle, quatFromAxisAngle, quatToMatrix, project, projectMatrix };
+  /* Solve A x = b by Gaussian elimination with partial pivoting; returns null when the system is singular. */
+  function solveLinear(A, b) {
+    const n = b.length, M = A.map((r, i) => r.concat([b[i]]));
+    for (let c = 0; c < n; c++) {
+      let p = c; for (let r = c + 1; r < n; r++) if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r;
+      if (Math.abs(M[p][c]) < 1e-12) return null;
+      [M[c], M[p]] = [M[p], M[c]];
+      for (let r = 0; r < n; r++) if (r !== c) { const k = M[r][c] / M[c][c]; for (let j = c; j <= n; j++) M[r][j] -= k * M[c][j]; }
+    }
+    return M.map((r, i) => r[n] / r[i]);
+  }
+  const inv3 = (M) => {
+    const d = m3.det(M); if (Math.abs(d) < 1e-14) return null;
+    const c = (i, j) => { const r = [0, 1, 2].filter((x) => x !== i), s = [0, 1, 2].filter((x) => x !== j); return ((i + j) % 2 ? -1 : 1) * (M[r[0]][s[0]] * M[r[1]][s[1]] - M[r[0]][s[1]] * M[r[1]][s[0]]); };
+    return [0, 1, 2].map((i) => [0, 1, 2].map((j) => c(j, i) / d));
+  };
+
+  /* Homography: the 3x3 matrix H that sends four points of one plane to four points of another, (x, y) -> (u, v) with
+     u = (h11 x + h12 y + h13) / (h31 x + h32 y + 1) and v likewise. Each pair gives two equations; eight unknowns need four pairs.
+     Returns null if three of the points are in a line (no unique answer). */
+  function homography(src, dst) {
+    const A = [], b = [];
+    for (let i = 0; i < 4; i++) { const [x, y] = src[i], [u, v] = dst[i]; A.push([x, y, 1, 0, 0, 0, -u * x, -u * y]); b.push(u); A.push([0, 0, 0, x, y, 1, -v * x, -v * y]); b.push(v); }
+    const h = solveLinear(A, b); return h ? [[h[0], h[1], h[2]], [h[3], h[4], h[5]], [h[6], h[7], 1]] : null;
+  }
+  const applyH = (H, p) => { const w = H[2][0] * p[0] + H[2][1] * p[1] + H[2][2]; return [(H[0][0] * p[0] + H[0][1] * p[1] + H[0][2]) / w, (H[1][0] * p[0] + H[1][1] * p[1] + H[1][2]) / w]; };
+
+  /* Camera pose from a homography of a flat marker (the marker's plane is Z = 0, its corners given as (x, y)).
+     For points on that plane the camera maps (X, Y, 1) by K [r1 r2 t], so K^-1 H = scale * [r1 r2 t]. The scale comes from r1 and r2 having length 1.
+     Returns the rotation R (columns r1, r2, r3 = r1 x r2), the translation t, and orthoError: how far r1 and r2 were from perpendicular unit vectors
+     (zero for a true view of a flat marker with the right focal length). */
+  function poseFromHomography(H, f, cx, cy) {
+    const Ki = inv3([[f, 0, -cx], [0, -f, -cy], [0, 0, -1]]), M = m3.mul(Ki, H), col = (j) => [M[0][j], M[1][j], M[2][j]];
+    const n = (v) => Math.hypot(...v), dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2], cr = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+    let c1 = col(0), c2 = col(1), c3 = col(2); const lam0 = 1 / Math.sqrt(n(c1) * n(c2)), sign = c3[2] * lam0 > 0 ? -1 : 1, lam = sign * lam0;   /* the marker must be in front of the camera: t_z < 0 */
+    c1 = c1.map((v) => v * lam); c2 = c2.map((v) => v * lam); const t = c3.map((v) => v * lam);
+    const orthoError = Math.abs(dot3(c1, c2)) / (n(c1) * n(c2)) + Math.abs(n(c1) - n(c2)) / Math.max(n(c1), n(c2));
+    const r1 = c1.map((v) => v / n(c1)); let r2 = c2.map((v, i) => v - dot3(c2, r1) * r1[i]); r2 = r2.map((v) => v / n(r2)); const r3 = cr(r1, r2);
+    return { R: [0, 1, 2].map((i) => [r1[i], r2[i], r3[i]]), t, scale: lam, orthoError };
+  }
+
+  return { sub, add, dot, cross, len, dist, orient, angleAt, triArea, heron, polyArea, perimeter, onSegment, segmentIntersect, pointInPolygon, convexHull, hullBrute, mat, m3, rotX, rotY, rotZ, euler, axisAngle, quatFromAxisAngle, quatToMatrix, project, projectMatrix, solveLinear, inv3, homography, applyH, poseFromHomography };
 });

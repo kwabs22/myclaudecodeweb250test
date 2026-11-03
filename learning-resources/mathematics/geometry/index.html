@@ -34,7 +34,7 @@ code{font-size:.92em}
 <main>
 <h1>Geometry you can drag</h1>
 <p class="lede">Orange dots are handles: drag them (mouse or finger) and every number updates. Each section shows the arithmetic behind the picture, and the code in <code>geometry.js</code> is checked against slower reference methods by <code>check.js</code>.</p>
-<nav class="toc"><a href="#tri">Triangle</a><a href="#seg">Two segments</a><a href="#pip">Point in polygon</a><a href="#hull">Convex hull</a><a href="#mat">Transformations</a><a href="#cam">3D and the camera</a></nav>
+<nav class="toc"><a href="#tri">Triangle</a><a href="#seg">Two segments</a><a href="#pip">Point in polygon</a><a href="#hull">Convex hull</a><a href="#mat">Transformations</a><a href="#cam">3D and the camera</a><a href="#hom">A marker and the homography</a></nav>
 
 <section class="card" id="tri"><h2>1. A triangle: area, angles, which way round</h2>
 <p class="lede">Three points make a triangle. Half of the <b>cross product</b> of two sides is its area, and the sign of that cross product tells you whether the points go anticlockwise (positive) or clockwise (negative).</p>
@@ -73,6 +73,16 @@ code{font-size:.92em}
 <label for="foc">Focal length f (pixels) <b id="focv"></b></label><input type="range" id="foc" min="100" max="1000" step="10" value="300">
 <label for="dist">Distance to the cube <b id="distv"></b></label><input type="range" id="dist" min="2.5" max="12" step="0.1" value="6"></div>
 <div><p style="margin:6px 0 4px">Rotation matrix: <span class="mat mat3" id="m6"></span></p><table class="r" id="r6"></table><p class="note" id="n6"></p></div></div></section>
+
+<section class="card" id="hom"><h2>7. A flat marker seen by a camera: the homography</h2>
+<p class="lede">A marker detector (ArUco, for example) finds the four corners of a square marker in the image. Four corners are enough to find the <b>homography</b>, the 3×3 matrix that sends the marker's flat surface to the picture, and from it the camera's distance and angle to the marker. Drag the four orange corners: while they form a true perspective view of a square, the recovered pose is exact; pull them somewhere a square could never appear and the page says so.</p>
+<div class="grid"><svg class="board" id="s7" viewBox="0 0 320 240" style="aspect-ratio:4/3" aria-label="Four marker corners in a camera image, draggable"></svg>
+<div><label for="hy">Marker turned about its vertical axis <b id="hyv"></b></label><input type="range" id="hy" min="-70" max="70" value="30">
+<label for="hp">Marker tilted back <b id="hpv"></b></label><input type="range" id="hp" min="-70" max="70" value="25">
+<label for="hr">Marker spun in its own plane <b id="hrv"></b></label><input type="range" id="hr" min="-180" max="180" value="10">
+<label for="hd">Distance from the camera <b id="hdv"></b></label><input type="range" id="hd" min="3" max="12" step="0.1" value="6">
+<p><button type="button" id="hreset">Put the corners back on the true view</button></p>
+<p style="margin:6px 0 4px">Homography H: <span class="mat mat3" id="m7"></span></p><table class="r" id="r7"></table><p class="note" id="n7"></p></div></div></section>
 
 <p class="note">Everything here is plain functions in <code>geometry.js</code>. See the <a href="README.html">README</a> for the formulas, and <a href="../geometry-coverage.html">what geometry the rest of the repository covers</a>.</p>
 </main>
@@ -160,6 +170,34 @@ code{font-size:.92em}
     $("n6").textContent="The rotation keeps lengths and has determinant 1. Raise the distance and the cube shrinks in proportion; double the focal length and every point moves twice as far from the centre (zoom).";
     if(window.__cube)window.__cube(R,D)}
   ["yaw","pitch","roll","foc","dist"].forEach(function(i){$(i).addEventListener("input",draw6)});draw6();
+
+  /* 7 homography and marker pose */
+  var MK=[[-1,-1],[1,-1],[1,1],[-1,1]],FH=500,HC=[[0,0],[0,0],[0,0],[0,0]],TRUE7={R:null};
+  function truth7(){var yaw=+$("hy").value*Math.PI/180,pitch=+$("hp").value*Math.PI/180,roll=+$("hr").value*Math.PI/180,D=+$("hd").value;
+    $("hyv").textContent=$("hy").value+"°";$("hpv").textContent=$("hp").value+"°";$("hrv").textContent=$("hr").value+"°";$("hdv").textContent=f2(D,1);
+    var R=Geo.euler(yaw,pitch,roll);TRUE7={R:R,D:D,tilt:Math.acos(Math.max(-1,Math.min(1,R[2][2])))};
+    HC=MK.map(function(p){var r=Geo.project([p[0],p[1],0],R,[0,0,-D],FH,160,120);return r.visible?[r.u,r.v]:[160,120]});draw7()}
+  function draw7(){var H=Geo.homography(MK,HC),svg=$("s7"),html='<rect width="320" height="240" fill="var(--bg)"/><line x1="160" y1="0" x2="160" y2="240" stroke="var(--line)"/><line x1="0" y1="120" x2="320" y2="120" stroke="var(--line)"/>';
+    var bad=!H||!HC.every(function(p){return isFinite(p[0])&&isFinite(p[1])});
+    if(!bad){var cell=function(i,j){var xs=[-1+i*0.4,-1+(i+1)*0.4],ys=[-1+j*0.4,-1+(j+1)*0.4];return [[xs[0],ys[0]],[xs[1],ys[0]],[xs[1],ys[1]],[xs[0],ys[1]]].map(function(p){var q=Geo.applyH(H,p);return q[0].toFixed(1)+","+q[1].toFixed(1)}).join(" ")};
+      var bits=[1,0,1,1,0, 0,1,0,0,1, 1,1,0,1,0, 0,0,1,1,1, 1,0,1,0,1];
+      for(var j=0;j<5;j++)for(var i=0;i<5;i++){var edge=i===0||j===0||i===4||j===4;html+='<polygon points="'+cell(i,j)+'" fill="'+((edge||bits[j*5+i])?"var(--fg)":"var(--card)")+'" fill-opacity="'+(edge?0.85:bits[j*5+i]?0.6:0.9)+'" stroke="var(--line)" stroke-width=".4"/>'}
+      html+='<polygon points="'+HC.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1)}).join(" ")+'" fill="none" stroke="var(--acc)" stroke-width="1.6"/>'}
+    html+=HC.map(function(p,i){return '<circle class="handle" data-i="'+i+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="7"/><text x="'+(p[0]+9).toFixed(1)+'" y="'+(p[1]-8).toFixed(1)+'" style="font-size:11px">'+(i+1)+'</text>'}).join("");
+    svg.innerHTML=html;
+    if(bad){$("m7").innerHTML="";rows($("r7"),[["Homography","none: three corners are in a line"]]);$("n7").textContent="A square's four corners cannot be seen in a straight line, so there is no solution.";return}
+    var pose=Geo.poseFromHomography(H,FH,160,120),ok=pose.R.every(function(r){return r.every(isFinite)});
+    $("m7").innerHTML=[0,1,2].map(function(i){return [0,1,2].map(function(j){return '<span>'+f2(H[i][j],3)+'</span>'}).join("")}).join("");
+    if(!ok){rows($("r7"),[["Pose","could not be recovered"]]);$("n7").textContent="";return}
+    var tilt=Math.acos(Math.max(-1,Math.min(1,pose.R[2][2]))),back=MK.map(function(p){return Geo.project([p[0],p[1],0],pose.R,pose.t,FH,160,120)}),err=Math.max.apply(null,back.map(function(q,i){return q.visible?Math.hypot(q.u-HC[i][0],q.v-HC[i][1]):999})),oe=pose.orthoError;
+    var verdict=oe<0.03?'<span class="ok">a good view of a square</span>':oe<0.15?'<span class="warn">close: the corners are a little off</span>':'<span class="warn">not a view of a square</span>';
+    rows($("r7"),[["Distance to the marker (depth)",f2(-pose.t[2],2)+"  (true "+f2(TRUE7.D,2)+")"],["Tilt of the marker away from facing the camera",f2(deg(tilt),1)+"°  (true "+f2(deg(TRUE7.tilt),1)+"°)"],["Do the corners fit a square seen by this camera?",verdict],["Orthonormality error (0 is perfect)",f2(oe,3)],["Corners redrawn from the recovered pose are off by",f2(err,1)+" px"]]);
+    $("n7").textContent="The first two columns of K⁻¹H must be perpendicular and of equal length (they are two sides of a square seen at an angle). The error measures how far they are from that. Move one corner a little and it stays small; move it a lot and no square, at any angle, could look like this."}
+  (function(){var svg=$("s7"),cur=-1;
+    svg.addEventListener("pointerdown",function(e){var h=e.target.closest&&e.target.closest("[data-i]");if(!h)return;cur=+h.dataset.i;svg.setPointerCapture(e.pointerId);e.preventDefault()});
+    svg.addEventListener("pointermove",function(e){if(cur<0)return;var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;p=p.matrixTransform(svg.getScreenCTM().inverse());HC[cur]=[clamp(p.x,6,314),clamp(p.y,6,234)];draw7()});
+    var end=function(){cur=-1};svg.addEventListener("pointerup",end);svg.addEventListener("pointercancel",end)})();
+  ["hy","hp","hr","hd"].forEach(function(i){$(i).addEventListener("input",truth7)});$("hreset").addEventListener("click",truth7);truth7();
 })();
 </script>
 <script type="importmap">{"imports":{"three":"../real-world/vendor/three.module.min.js"}}</script>
