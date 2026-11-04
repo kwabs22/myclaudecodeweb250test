@@ -1,0 +1,3137 @@
+{
+  "metadata": {
+    "title": "API Quiz: authentication, free tiers and calling APIs",
+    "version": "1.0.0",
+    "description": "Questions computed from the repository's API documents and from standard-library code (HTTP statuses, URL encoding, JSON, paging and rate-limit arithmetic).",
+    "difficulty_levels": [
+      "beginner",
+      "intermediate",
+      "advanced"
+    ],
+    "question_types": [
+      "multiple_choice"
+    ],
+    "total_questions": 164,
+    "topics": {
+      "apis": 164
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Salesforce API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Bot or JWT token",
+        "Partner only",
+        "Key + secret"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 2,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Telegram Bot API need before you can call it?",
+      "options": [
+        "Bot or JWT token",
+        "No auth",
+        "Partner only",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Bot or JWT token\": to use it you create a bot or sign a token yourself. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 3,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the AWS API need before you can call it?",
+      "options": [
+        "Account login",
+        "API key",
+        "Partner only",
+        "Bot or JWT token"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Account login\": to use it you set up a full cloud or account login with permissions. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 4,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the OpenAI/GPT API need before you can call it?",
+      "options": [
+        "API key",
+        "Bot or JWT token",
+        "Partner only",
+        "OAuth 2.0"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 5,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Apple Music API need before you can call it?",
+      "options": [
+        "Bot or JWT token",
+        "Key optional",
+        "Partner only",
+        "Key + secret"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Bot or JWT token\": to use it you create a bot or sign a token yourself. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 6,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the IQAir API need before you can call it?",
+      "options": [
+        "API key",
+        "Key optional",
+        "Key + secret",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 7,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Twilio API need before you can call it?",
+      "options": [
+        "Key + secret",
+        "Bot or JWT token",
+        "Account login",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Key + secret\": to use it you keep two credentials, one of them secret. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 8,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Azure API need before you can call it?",
+      "options": [
+        "Account login",
+        "API key",
+        "Bot or JWT token",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Account login\": to use it you set up a full cloud or account login with permissions. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 9,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Uber API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "API key",
+        "Partner only",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 10,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Coinbase API need before you can call it?",
+      "options": [
+        "Key + secret",
+        "Key optional",
+        "Account login",
+        "OAuth 2.0"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Key + secret\": to use it you keep two credentials, one of them secret. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 11,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Lichess API need before you can call it?",
+      "options": [
+        "No auth",
+        "Partner only",
+        "API key",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 12,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Google Books API need before you can call it?",
+      "options": [
+        "Key optional",
+        "Account login",
+        "Partner only",
+        "OAuth 2.0"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Key optional\": to use it you call it without a key (a key raises the limit). Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 13,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Spotify API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Key + secret",
+        "Account login",
+        "Bot or JWT token"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 14,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the SoundCloud API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Key + secret",
+        "Account login",
+        "API key"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 15,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the OpenAQ API need before you can call it?",
+      "options": [
+        "No auth",
+        "Account login",
+        "Partner only",
+        "API key"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 16,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Twitch API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Account login",
+        "Key optional",
+        "Key + secret"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 17,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Yelp Fusion API need before you can call it?",
+      "options": [
+        "API key",
+        "Key + secret",
+        "OAuth 2.0",
+        "No auth"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 18,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Steam Web API need before you can call it?",
+      "options": [
+        "API key",
+        "Bot or JWT token",
+        "Key + secret",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 19,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the xeno-canto API need before you can call it?",
+      "options": [
+        "No auth",
+        "API key",
+        "Key optional",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 20,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Open Trivia Database API need before you can call it?",
+      "options": [
+        "No auth",
+        "Key optional",
+        "Account login",
+        "API key"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 21,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the LinkedIn API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "No auth",
+        "Partner only",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 22,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Google Maps API need before you can call it?",
+      "options": [
+        "API key",
+        "Key optional",
+        "Account login",
+        "Bot or JWT token"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 23,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Nager.Date API need before you can call it?",
+      "options": [
+        "No auth",
+        "Key + secret",
+        "Bot or JWT token",
+        "OAuth 2.0"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 24,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the JokeAPI need before you can call it?",
+      "options": [
+        "No auth",
+        "API key",
+        "Key optional",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 25,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Chess.com API need before you can call it?",
+      "options": [
+        "No auth",
+        "Account login",
+        "API key",
+        "Bot or JWT token"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 26,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Harvard Art Museums API need before you can call it?",
+      "options": [
+        "API key",
+        "Account login",
+        "No auth",
+        "OAuth 2.0"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 27,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Grubhub API (Limited) need before you can call it?",
+      "options": [
+        "Partner only",
+        "Bot or JWT token",
+        "OAuth 2.0",
+        "No auth"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Partner only\": to use it you get a partnership agreement (no self-serve sign-up). Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 28,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the CoinMarketCap API need before you can call it?",
+      "options": [
+        "API key",
+        "No auth",
+        "OAuth 2.0",
+        "Bot or JWT token"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 29,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the HubSpot API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Key optional",
+        "API key",
+        "No auth"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 30,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Asana API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "API key",
+        "Key optional",
+        "No auth"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 31,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Firebase API need before you can call it?",
+      "options": [
+        "Account login",
+        "Key optional",
+        "Partner only",
+        "API key"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"Account login\": to use it you set up a full cloud or account login with permissions. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 32,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Discord API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Bot or JWT token",
+        "No auth",
+        "Partner only"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 33,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the PoetryDB API need before you can call it?",
+      "options": [
+        "No auth",
+        "Bot or JWT token",
+        "API key",
+        "Key optional"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 34,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Public Holidays API need before you can call it?",
+      "options": [
+        "No auth",
+        "Key optional",
+        "API key",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"No auth\": to use it you call it straight away. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 35,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Stripe API need before you can call it?",
+      "options": [
+        "API key",
+        "Bot or JWT token",
+        "No auth",
+        "Account login"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"API key\": to use it you register and send a key. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 36,
+      "topic": "apis",
+      "subtopic": "auth_per_api",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, what does the Intercom API need before you can call it?",
+      "options": [
+        "OAuth 2.0",
+        "Key optional",
+        "Account login",
+        "Key + secret"
+      ],
+      "correct_answer": 0,
+      "explanation": "The document marks it \"OAuth 2.0\": to use it you create an app and run an authorisation flow for each user. Providers change their rules, so check the provider's own page before you depend on it.",
+      "hints": [
+        "Work through the auth per api step by step."
+      ]
+    },
+    {
+      "id": 37,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs no sign-up at all? (Amazon Product Advertising API, Fixer.io API, Open Food Facts API, Yelp Fusion API)",
+      "options": [
+        "Open Food Facts API",
+        "Amazon Product Advertising API",
+        "Fixer.io API",
+        "Yelp Fusion API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Open Food Facts API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 38,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs no sign-up at all? (Cat Facts API, Etsy API, Fixer.io API, Google Places API)",
+      "options": [
+        "Cat Facts API",
+        "Etsy API",
+        "Fixer.io API",
+        "Google Places API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Cat Facts API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 39,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs no sign-up at all? (Etsy API, Lyft API, Zoo Animals API, eBay API)",
+      "options": [
+        "Zoo Animals API",
+        "Etsy API",
+        "eBay API",
+        "Lyft API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Zoo Animals API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 40,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs no sign-up at all? (Dropbox API, Edamam Nutrition API, Pinterest API, Zoo Animals API)",
+      "options": [
+        "Zoo Animals API",
+        "Dropbox API",
+        "Edamam Nutrition API",
+        "Pinterest API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Zoo Animals API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 41,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs OAuth 2.0 (an authorisation flow for each user)? (FishWatch API, Harvard Art Museums API, Open Library API, Twitch API)",
+      "options": [
+        "Twitch API",
+        "FishWatch API",
+        "Open Library API",
+        "Harvard Art Museums API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Twitch API is listed as \"OAuth 2.0\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 42,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs OAuth 2.0 (an authorisation flow for each user)? (Cat Facts API, Facebook Graph API (Meta), Open Library API, OpenAQ API)",
+      "options": [
+        "Facebook Graph API (Meta)",
+        "Open Library API",
+        "Cat Facts API",
+        "OpenAQ API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Facebook Graph API (Meta) is listed as \"OAuth 2.0\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 43,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs OAuth 2.0 (an authorisation flow for each user)? (AWS API, Rijksmuseum API, Trello API, Zoo Animals API)",
+      "options": [
+        "Trello API",
+        "Zoo Animals API",
+        "Rijksmuseum API",
+        "AWS API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Trello API is listed as \"OAuth 2.0\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 44,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs OAuth 2.0 (an authorisation flow for each user)? (Calendarific API, Firebase API, Harvard Art Museums API, HubSpot API)",
+      "options": [
+        "HubSpot API",
+        "Harvard Art Museums API",
+        "Calendarific API",
+        "Firebase API"
+      ],
+      "correct_answer": 0,
+      "explanation": "HubSpot API is listed as \"OAuth 2.0\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 45,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs an API key? (Nager.Date API, TheCocktailDB API, WhatsApp Business API, Zoo Animals API)",
+      "options": [
+        "TheCocktailDB API",
+        "Zoo Animals API",
+        "WhatsApp Business API",
+        "Nager.Date API"
+      ],
+      "correct_answer": 0,
+      "explanation": "TheCocktailDB API is listed as \"API key\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 46,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs an API key? (Cat Facts API, DoorDash Drive API, Open Library API, Wizard World API)",
+      "options": [
+        "DoorDash Drive API",
+        "Open Library API",
+        "Cat Facts API",
+        "Wizard World API"
+      ],
+      "correct_answer": 0,
+      "explanation": "DoorDash Drive API is listed as \"API key\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 47,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs an API key? (Metropolitan Museum of Art API, New York Times API, SoundCloud API, Twitch API)",
+      "options": [
+        "New York Times API",
+        "Metropolitan Museum of Art API",
+        "Twitch API",
+        "SoundCloud API"
+      ],
+      "correct_answer": 0,
+      "explanation": "New York Times API is listed as \"API key\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 48,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs needs an API key? (Bible API, IQAir API, Microsoft Teams API, PlayStation Network API (Unofficial))",
+      "options": [
+        "IQAir API",
+        "Microsoft Teams API",
+        "Bible API",
+        "PlayStation Network API (Unofficial)"
+      ],
+      "correct_answer": 0,
+      "explanation": "IQAir API is listed as \"API key\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 49,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs can be called with no key and no account? (Alpha Vantage API, Discord API, Metropolitan Museum of Art API, Zendesk API)",
+      "options": [
+        "Metropolitan Museum of Art API",
+        "Discord API",
+        "Zendesk API",
+        "Alpha Vantage API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Metropolitan Museum of Art API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 50,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs can be called with no key and no account? (AWS API, Europeana API, Open Trivia Database API, Square API)",
+      "options": [
+        "Open Trivia Database API",
+        "AWS API",
+        "Europeana API",
+        "Square API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Open Trivia Database API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 51,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs can be called with no key and no account? (Bhagavad Gita API, New York Times API, YouTube Data API, eBay API)",
+      "options": [
+        "Bhagavad Gita API",
+        "YouTube Data API",
+        "New York Times API",
+        "eBay API"
+      ],
+      "correct_answer": 0,
+      "explanation": "Bhagavad Gita API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 52,
+      "topic": "apis",
+      "subtopic": "auth_which",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "According to this repository's API documents, which of these APIs can be called with no key and no account? (Firebase API, Instagram API (Meta), Merriam-Webster API, UK Carbon Intensity API)",
+      "options": [
+        "UK Carbon Intensity API",
+        "Firebase API",
+        "Merriam-Webster API",
+        "Instagram API (Meta)"
+      ],
+      "correct_answer": 0,
+      "explanation": "UK Carbon Intensity API is listed as \"No auth\"; the other three are listed with a different type.",
+      "hints": [
+        "Work through the auth which step by step."
+      ]
+    },
+    {
+      "id": 53,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "The repository's three API documents list 111 APIs in all. How many need no sign-up at all?",
+      "options": [
+        "33",
+        "38",
+        "39",
+        "27"
+      ],
+      "correct_answer": 0,
+      "explanation": "33 are marked No auth. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 54,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "How many of the APIs in the documents need OAuth 2.0?",
+      "options": [
+        "39",
+        "27",
+        "33",
+        "47"
+      ],
+      "correct_answer": 0,
+      "explanation": "39 are marked OAuth 2.0, the biggest group. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 55,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "How many of the APIs in the documents need an API key (not OAuth, not key + secret)?",
+      "options": [
+        "27",
+        "22",
+        "33",
+        "39"
+      ],
+      "correct_answer": 0,
+      "explanation": "27 are marked API key. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 56,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What share of the 111 APIs need no sign-up, to the nearest whole percent?",
+      "options": [
+        "30%",
+        "40%",
+        "18%",
+        "35%"
+      ],
+      "correct_answer": 0,
+      "explanation": "33 / 111 = 29.7%. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 57,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which sign-up type is the most common among the APIs in the documents?",
+      "options": [
+        "OAuth 2.0",
+        "Account login",
+        "No auth",
+        "API key"
+      ],
+      "correct_answer": 0,
+      "explanation": "OAuth 2.0 has 39, then No auth 33 and API key 27. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 58,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "How many of the APIs need something more demanding than a key or OAuth: an account login, a partnership, or a key plus a secret?",
+      "options": [
+        "9",
+        "13",
+        "6",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "4 key + secret, 4 account login and 1 partner only. (Counted from the documents when this bank was built.)",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 59,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "How many APIs does the repository's popular API document describe?",
+      "options": [
+        "20",
+        "17",
+        "24",
+        "30"
+      ],
+      "correct_answer": 0,
+      "explanation": "The popular document has 20 API entries.",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 60,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "How many APIs does the repository's information API document describe?",
+      "options": [
+        "50",
+        "54",
+        "47",
+        "60"
+      ],
+      "correct_answer": 0,
+      "explanation": "The information document has 50 API entries.",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 61,
+      "topic": "apis",
+      "subtopic": "auth_counts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "How many APIs does the repository's additional API document describe?",
+      "options": [
+        "44",
+        "48",
+        "41",
+        "88"
+      ],
+      "correct_answer": 0,
+      "explanation": "The additional document has 44 API entries.",
+      "hints": [
+        "Work through the auth counts step by step."
+      ]
+    },
+    {
+      "id": 62,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "OpenWeatherMap's free plan allows 1,000 calls a day. Spread evenly, about how many calls is that per hour?",
+      "options": [
+        "41.7",
+        "24,000",
+        "16.7",
+        "83.3"
+      ],
+      "correct_answer": 0,
+      "explanation": "1,000 / 24 = 41.7.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 63,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "With OpenWeatherMap's free allowance of 1,000 calls a day, how many days does it take to make 5,000 calls (counting a partly used day as a day)?",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "10"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈5000 / 1,000⌉ = 5.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 64,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Merriam-Webster's free plan allows 1,000 calls a day. Spread evenly, about how many calls is that per hour?",
+      "options": [
+        "41.7",
+        "24,000",
+        "16.7",
+        "83.3"
+      ],
+      "correct_answer": 0,
+      "explanation": "1,000 / 24 = 41.7.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 65,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "With Merriam-Webster's free allowance of 1,000 calls a day, how many days does it take to make 5,000 calls (counting a partly used day as a day)?",
+      "options": [
+        "5",
+        "83",
+        "4",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈5000 / 1,000⌉ = 5.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 66,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "New York Times's free plan allows 1,000 calls a day. Spread evenly, about how many calls is that per hour?",
+      "options": [
+        "41.7",
+        "24,000",
+        "83.3",
+        "142.9"
+      ],
+      "correct_answer": 0,
+      "explanation": "1,000 / 24 = 41.7.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 67,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "With New York Times's free allowance of 1,000 calls a day, how many days does it take to make 5,000 calls (counting a partly used day as a day)?",
+      "options": [
+        "5",
+        "4",
+        "83",
+        "10"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈5000 / 1,000⌉ = 5.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 68,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Spoonacular's free plan allows 150 calls a day. Spread evenly, about how many calls is that per hour?",
+      "options": [
+        "6.2",
+        "2.5",
+        "3,600",
+        "12.5"
+      ],
+      "correct_answer": 0,
+      "explanation": "150 / 24 = 6.2.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 69,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "With Spoonacular's free allowance of 150 calls a day, how many days does it take to make 5,000 calls (counting a partly used day as a day)?",
+      "options": [
+        "34",
+        "68",
+        "35",
+        "33"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈5000 / 150⌉ = 34.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 70,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Alpha Vantage's free plan allows 5 calls a minute. At the limit, how many minutes do 120 calls take?",
+      "options": [
+        "24",
+        "25",
+        "2",
+        "23"
+      ],
+      "correct_answer": 0,
+      "explanation": "120 / 5 = 24 minutes (waiting out the limit between batches).",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 71,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Alpha Vantage's free plan allows 5 calls a minute. At the limit, how many minutes do 500 calls take?",
+      "options": [
+        "100",
+        "99",
+        "101",
+        "8"
+      ],
+      "correct_answer": 0,
+      "explanation": "500 / 5 = 100 minutes (waiting out the limit between batches).",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 72,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Alpha Vantage's free plan allows 5 calls a minute. At the limit, how many minutes do 1,000 calls take?",
+      "options": [
+        "200",
+        "16",
+        "201",
+        "5000"
+      ],
+      "correct_answer": 0,
+      "explanation": "1,000 / 5 = 200 minutes (waiting out the limit between batches).",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 73,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Fixer.io's free plan allows 100 calls a month. About how many calls a day is that, in a 30-day month?",
+      "options": [
+        "3.3",
+        "3,000",
+        "4.2",
+        "8.3"
+      ],
+      "correct_answer": 0,
+      "explanation": "100 / 30 = 3.3.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 74,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API allows 60 requests a minute. What is the shortest average gap, in seconds, between requests if you stay exactly at the limit?",
+      "options": [
+        "1",
+        "2.0",
+        "0.50",
+        "60"
+      ],
+      "correct_answer": 0,
+      "explanation": "60 seconds / 60 = 1.00 seconds.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 75,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API allows 100 requests a minute. What is the shortest average gap, in seconds, between requests if you stay exactly at the limit?",
+      "options": [
+        "0.6",
+        "1.2",
+        "0.6 minutes",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "60 seconds / 100 = 0.60 seconds.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 76,
+      "topic": "apis",
+      "subtopic": "rate_limits",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API allows 10 requests a minute. What is the shortest average gap, in seconds, between requests if you stay exactly at the limit?",
+      "options": [
+        "6",
+        "12.0",
+        "6.0 minutes",
+        "3.00"
+      ],
+      "correct_answer": 0,
+      "explanation": "60 seconds / 10 = 6.00 seconds.",
+      "hints": [
+        "Work through the rate limits step by step."
+      ]
+    },
+    {
+      "id": 77,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 200 mean?",
+      "options": [
+        "OK",
+        "Not Found",
+        "I'm a Teapot",
+        "Bad Request"
+      ],
+      "correct_answer": 0,
+      "explanation": "200 is \"OK\" in the standard status list (success).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 78,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 201 mean?",
+      "options": [
+        "Created",
+        "Forbidden",
+        "Gone",
+        "Internal Server Error"
+      ],
+      "correct_answer": 0,
+      "explanation": "201 is \"Created\" in the standard status list (success).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 79,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 204 mean?",
+      "options": [
+        "No Content",
+        "Gateway Timeout",
+        "Internal Server Error",
+        "Unauthorized"
+      ],
+      "correct_answer": 0,
+      "explanation": "204 is \"No Content\" in the standard status list (success).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 80,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 301 mean?",
+      "options": [
+        "Moved Permanently",
+        "Bad Gateway",
+        "Created",
+        "Gateway Timeout"
+      ],
+      "correct_answer": 0,
+      "explanation": "301 is \"Moved Permanently\" in the standard status list (redirection).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 81,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 304 mean?",
+      "options": [
+        "Not Modified",
+        "Method Not Allowed",
+        "Not Found",
+        "Created"
+      ],
+      "correct_answer": 0,
+      "explanation": "304 is \"Not Modified\" in the standard status list (redirection).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 82,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 400 mean?",
+      "options": [
+        "Bad Request",
+        "Forbidden",
+        "OK",
+        "Bad Gateway"
+      ],
+      "correct_answer": 0,
+      "explanation": "400 is \"Bad Request\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 83,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 401 mean?",
+      "options": [
+        "Unauthorized",
+        "Created",
+        "OK",
+        "Forbidden"
+      ],
+      "correct_answer": 0,
+      "explanation": "401 is \"Unauthorized\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 84,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 403 mean?",
+      "options": [
+        "Forbidden",
+        "Bad Request",
+        "Unprocessable Entity",
+        "Not Modified"
+      ],
+      "correct_answer": 0,
+      "explanation": "403 is \"Forbidden\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 85,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 404 mean?",
+      "options": [
+        "Not Found",
+        "Gone",
+        "Moved Permanently",
+        "Unprocessable Entity"
+      ],
+      "correct_answer": 0,
+      "explanation": "404 is \"Not Found\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 86,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 405 mean?",
+      "options": [
+        "Method Not Allowed",
+        "Unprocessable Entity",
+        "No Content",
+        "Not Modified"
+      ],
+      "correct_answer": 0,
+      "explanation": "405 is \"Method Not Allowed\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 87,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 409 mean?",
+      "options": [
+        "Conflict",
+        "Gone",
+        "Internal Server Error",
+        "OK"
+      ],
+      "correct_answer": 0,
+      "explanation": "409 is \"Conflict\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 88,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 410 mean?",
+      "options": [
+        "Gone",
+        "Unauthorized",
+        "Unprocessable Entity",
+        "OK"
+      ],
+      "correct_answer": 0,
+      "explanation": "410 is \"Gone\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 89,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 418 mean?",
+      "options": [
+        "I'm a Teapot",
+        "Forbidden",
+        "No Content",
+        "Internal Server Error"
+      ],
+      "correct_answer": 0,
+      "explanation": "418 is \"I'm a Teapot\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 90,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 422 mean?",
+      "options": [
+        "Unprocessable Entity",
+        "Moved Permanently",
+        "Unauthorized",
+        "OK"
+      ],
+      "correct_answer": 0,
+      "explanation": "422 is \"Unprocessable Entity\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 91,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 429 mean?",
+      "options": [
+        "Too Many Requests",
+        "I'm a Teapot",
+        "OK",
+        "Gateway Timeout"
+      ],
+      "correct_answer": 0,
+      "explanation": "429 is \"Too Many Requests\" in the standard status list (client error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 92,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 500 mean?",
+      "options": [
+        "Internal Server Error",
+        "Too Many Requests",
+        "Gone",
+        "Conflict"
+      ],
+      "correct_answer": 0,
+      "explanation": "500 is \"Internal Server Error\" in the standard status list (server error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 93,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 502 mean?",
+      "options": [
+        "Bad Gateway",
+        "Unprocessable Entity",
+        "Gone",
+        "Created"
+      ],
+      "correct_answer": 0,
+      "explanation": "502 is \"Bad Gateway\" in the standard status list (server error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 94,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 503 mean?",
+      "options": [
+        "Service Unavailable",
+        "Internal Server Error",
+        "Not Found",
+        "Bad Gateway"
+      ],
+      "correct_answer": 0,
+      "explanation": "503 is \"Service Unavailable\" in the standard status list (server error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 95,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does the HTTP status code 504 mean?",
+      "options": [
+        "Gateway Timeout",
+        "Gone",
+        "I'm a Teapot",
+        "OK"
+      ],
+      "correct_answer": 0,
+      "explanation": "504 is \"Gateway Timeout\" in the standard status list (server error).",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 96,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 200?",
+      "options": [
+        "Success",
+        "Server error",
+        "Redirection",
+        "Client error"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 200 to 299 are \"Success\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 97,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 204?",
+      "options": [
+        "Success",
+        "Redirection",
+        "Server error",
+        "Client error"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 200 to 299 are \"Success\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 98,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 301?",
+      "options": [
+        "Redirection",
+        "Client error",
+        "Server error",
+        "Success"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 300 to 399 are \"Redirection\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 99,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 404?",
+      "options": [
+        "Client error",
+        "Redirection",
+        "Server error",
+        "Success"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 400 to 499 are \"Client error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 100,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 429?",
+      "options": [
+        "Client error",
+        "Redirection",
+        "Server error",
+        "Success"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 400 to 499 are \"Client error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 101,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 500?",
+      "options": [
+        "Server error",
+        "Client error",
+        "Redirection",
+        "Success"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 500 to 599 are \"Server error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 102,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 503?",
+      "options": [
+        "Server error",
+        "Success",
+        "Redirection",
+        "Client error"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 500 to 599 are \"Server error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 103,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 201?",
+      "options": [
+        "Success",
+        "Client error",
+        "Redirection",
+        "Server error"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 200 to 299 are \"Success\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 104,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 401?",
+      "options": [
+        "Client error",
+        "Redirection",
+        "Server error",
+        "Success"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 400 to 499 are \"Client error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 105,
+      "topic": "apis",
+      "subtopic": "http_status",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which kind of response is HTTP 502?",
+      "options": [
+        "Server error",
+        "Redirection",
+        "Success",
+        "Client error"
+      ],
+      "correct_answer": 0,
+      "explanation": "Codes 500 to 599 are \"Server error\".",
+      "hints": [
+        "Work through the http status step by step."
+      ]
+    },
+    {
+      "id": 106,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Percent-encode the text \"rock & roll\" for use in a URL query value (spaces as %20, nothing left unencoded except letters, digits and - . _ ~).",
+      "options": [
+        "rock%20%26%20roll",
+        "rock+&+roll",
+        "ROCK%20%26%20ROLL",
+        "rock%20&%20roll"
+      ],
+      "correct_answer": 0,
+      "explanation": "quote(\"rock & roll\", safe=\"\") = rock%20%26%20roll. Characters like & = / % + and spaces have meanings in a URL, so they are encoded.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 107,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Percent-encode the text \"a/b test\" for use in a URL query value (spaces as %20, nothing left unencoded except letters, digits and - . _ ~).",
+      "options": [
+        "a%2Fb%20test",
+        "a/b+test",
+        "a/b%20test",
+        "A%2FB%20TEST"
+      ],
+      "correct_answer": 0,
+      "explanation": "quote(\"a/b test\", safe=\"\") = a%2Fb%20test. Characters like & = / % + and spaces have meanings in a URL, so they are encoded.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 108,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Percent-encode the text \"50% off\" for use in a URL query value (spaces as %20, nothing left unencoded except letters, digits and - . _ ~).",
+      "options": [
+        "50%25%20off",
+        "50%25%20OFF",
+        "50%%20off",
+        "50%+off"
+      ],
+      "correct_answer": 0,
+      "explanation": "quote(\"50% off\", safe=\"\") = 50%25%20off. Characters like & = / % + and spaces have meanings in a URL, so they are encoded.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 109,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Percent-encode the text \"C++ tips\" for use in a URL query value (spaces as %20, nothing left unencoded except letters, digits and - . _ ~).",
+      "options": [
+        "C%2B%2B%20tips",
+        "C++%20tips",
+        "C%2B%2B%20TIPS",
+        "C+++tips"
+      ],
+      "correct_answer": 0,
+      "explanation": "quote(\"C++ tips\", safe=\"\") = C%2B%2B%20tips. Characters like & = / % + and spaces have meanings in a URL, so they are encoded.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 110,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which URL calls https://openlibrary.org/search.json with these query parameters, in this order: q='the hobbit', limit=1?",
+      "options": [
+        "https://openlibrary.org/search.json?q=the+hobbit&limit=1",
+        "https://openlibrary.org/search.json/q/the+hobbit/limit/1",
+        "https://openlibrary.org/search.json?q=the+hobbit?limit=1",
+        "https://openlibrary.org/search.json&q=the+hobbit&limit=1"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first parameter follows ?, the others are joined with &: https://openlibrary.org/search.json?q=the+hobbit&limit=1.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 111,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which URL calls https://opentdb.com/api.php with these query parameters, in this order: amount=5, category=9, difficulty='easy'?",
+      "options": [
+        "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy",
+        "https://opentdb.com/api.php&amount=5&category=9&difficulty=easy",
+        "https://opentdb.com/api.php?amount=5?category=9?difficulty=easy",
+        "https://opentdb.com/api.php/amount/5/category/9/difficulty/easy"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first parameter follows ?, the others are joined with &: https://opentdb.com/api.php?amount=5&category=9&difficulty=easy.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 112,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which URL calls https://api.artic.edu/api/v1/artworks with these query parameters, in this order: limit=2, page=3?",
+      "options": [
+        "https://api.artic.edu/api/v1/artworks?limit=2&page=3",
+        "https://api.artic.edu/api/v1/artworks?limit=2,page=3",
+        "https://api.artic.edu/api/v1/artworks/limit/2/page/3",
+        "https://api.artic.edu/api/v1/artworks&limit=2&page=3"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first parameter follows ?, the others are joined with &: https://api.artic.edu/api/v1/artworks?limit=2&page=3.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 113,
+      "topic": "apis",
+      "subtopic": "urls",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which URL calls https://v2.jokeapi.dev/joke/Programming with these query parameters, in this order: safe-mode='', type='single'?",
+      "options": [
+        "https://v2.jokeapi.dev/joke/Programming?safe-mode=&type=single",
+        "https://v2.jokeapi.dev/joke/Programming/safe-mode//type/single",
+        "https://v2.jokeapi.dev/joke/Programming&safe-mode=&type=single",
+        "https://v2.jokeapi.dev/joke/Programming?safe-mode=?type=single"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first parameter follows ?, the others are joined with &: https://v2.jokeapi.dev/joke/Programming?safe-mode=&type=single.",
+      "hints": [
+        "Work through the urls step by step."
+      ]
+    },
+    {
+      "id": 114,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 100 items per page and holds 99 items. How many requests fetch them all?",
+      "options": [
+        "1",
+        "0",
+        "99",
+        "2"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈99 / 100⌉ = 1: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 115,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=20, which offset gives page 2 (counting pages from 1)?",
+      "options": [
+        "20",
+        "40",
+        "21",
+        "22"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 2 starts at (2 − 1) × 20 = 20.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 116,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 20 items per page and holds 87 items. How many requests fetch them all?",
+      "options": [
+        "5",
+        "4",
+        "87",
+        "6"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈87 / 20⌉ = 5: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 117,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=25, which offset gives page 4 (counting pages from 1)?",
+      "options": [
+        "75",
+        "76",
+        "50",
+        "100"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 4 starts at (4 − 1) × 25 = 75.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 118,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 100 items per page and holds 1,000 items. How many requests fetch them all?",
+      "options": [
+        "10",
+        "1000",
+        "11",
+        "9"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈1,000 / 100⌉ = 10: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 119,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=20, which offset gives page 4 (counting pages from 1)?",
+      "options": [
+        "60",
+        "61",
+        "40",
+        "24"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 4 starts at (4 − 1) × 20 = 60.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 120,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 50 items per page and holds 5,000 items. How many requests fetch them all?",
+      "options": [
+        "100",
+        "5000",
+        "101",
+        "99"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈5,000 / 50⌉ = 100: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 121,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=20, which offset gives page 7 (counting pages from 1)?",
+      "options": [
+        "120",
+        "121",
+        "100",
+        "140"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 7 starts at (7 − 1) × 20 = 120.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 122,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 25 items per page and holds 99 items. How many requests fetch them all?",
+      "options": [
+        "4",
+        "5",
+        "99",
+        "3"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈99 / 25⌉ = 4: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 123,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=100, which offset gives page 9 (counting pages from 1)?",
+      "options": [
+        "800",
+        "700",
+        "801",
+        "900"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 9 starts at (9 − 1) × 100 = 800.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 124,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 50 items per page and holds 234 items. How many requests fetch them all?",
+      "options": [
+        "5",
+        "234",
+        "6",
+        "4"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈234 / 50⌉ = 5: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 125,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=20, which offset gives page 9 (counting pages from 1)?",
+      "options": [
+        "160",
+        "180",
+        "29",
+        "140"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 9 starts at (9 − 1) × 20 = 160.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 126,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API returns 20 items per page and holds 1,234 items. How many requests fetch them all?",
+      "options": [
+        "62",
+        "63",
+        "1234",
+        "61"
+      ],
+      "correct_answer": 0,
+      "explanation": "⌈1,234 / 20⌉ = 62: the last page may be partly full.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 127,
+      "topic": "apis",
+      "subtopic": "paging",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "An API pages with offset and limit. With limit=25, which offset gives page 8 (counting pages from 1)?",
+      "options": [
+        "175",
+        "176",
+        "150",
+        "200"
+      ],
+      "correct_answer": 0,
+      "explanation": "The first page starts at offset 0, so page 8 starts at (8 − 1) × 25 = 175.",
+      "hints": [
+        "Work through the paging step by step."
+      ]
+    },
+    {
+      "id": 128,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 1 s before the first retry and doubling the wait each time. How long does it wait before retry number 4?",
+      "options": [
+        "8 s",
+        "16 s",
+        "4 s",
+        "15 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "1 × 2^(4 − 1) = 8 s. The total waited over all 4 retries is 15 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 129,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 2 s before the first retry and doubling the wait each time. How long does it wait before retry number 3?",
+      "options": [
+        "8 s",
+        "4 s",
+        "14 s",
+        "16 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "2 × 2^(3 − 1) = 8 s. The total waited over all 3 retries is 14 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 130,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 1 s before the first retry and doubling the wait each time. How long does it wait before retry number 6?",
+      "options": [
+        "32 s",
+        "16 s",
+        "63 s",
+        "6 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "1 × 2^(6 − 1) = 32 s. The total waited over all 6 retries is 63 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 131,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 0.5 s before the first retry and doubling the wait each time. How long does it wait before retry number 5?",
+      "options": [
+        "8 s",
+        "4 s",
+        "15.5 s",
+        "16 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "0.5 × 2^(5 − 1) = 8 s. The total waited over all 5 retries is 15.5 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 132,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 1 s before the first retry and doubling the wait each time. How long does it wait before retry number 5?",
+      "options": [
+        "16 s",
+        "5 s",
+        "31 s",
+        "8 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "1 × 2^(5 − 1) = 16 s. The total waited over all 5 retries is 31 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 133,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 2 s before the first retry and doubling the wait each time. How long does it wait before retry number 4?",
+      "options": [
+        "16 s",
+        "8 s",
+        "32 s",
+        "30 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "2 × 2^(4 − 1) = 16 s. The total waited over all 4 retries is 30 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 134,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 0.25 s before the first retry and doubling the wait each time. How long does it wait before retry number 6?",
+      "options": [
+        "8 s",
+        "16 s",
+        "15.75 s",
+        "4 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "0.25 × 2^(6 − 1) = 8 s. The total waited over all 6 retries is 15.75 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 135,
+      "topic": "apis",
+      "subtopic": "retries",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A client retries a failed call, waiting 3 s before the first retry and doubling the wait each time. How long does it wait before retry number 3?",
+      "options": [
+        "12 s",
+        "6 s",
+        "21 s",
+        "24 s"
+      ],
+      "correct_answer": 0,
+      "explanation": "3 × 2^(3 − 1) = 12 s. The total waited over all 3 retries is 21 s.",
+      "hints": [
+        "Work through the retries step by step."
+      ]
+    },
+    {
+      "id": 136,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"count\": 2, \"results\": [{\"name\": \"Ada\", \"age\": 36}, {\"name\": \"Grace\", \"age\": 85}]}\n\nWhat does data['results'][1]['name'] give (Python style, indexes start at 0)?",
+      "options": [
+        "Grace",
+        "count",
+        "36",
+        "age"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['results'][1]['name'] = Grace.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 137,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"count\": 2, \"results\": [{\"name\": \"Ada\", \"age\": 36}, {\"name\": \"Grace\", \"age\": 85}]}\n\nWhat does data['results'][0]['age'] give (Python style, indexes start at 0)?",
+      "options": [
+        "36",
+        "results",
+        "count",
+        "Ada"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['results'][0]['age'] = 36.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 138,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"count\": 2, \"results\": [{\"name\": \"Ada\", \"age\": 36}, {\"name\": \"Grace\", \"age\": 85}]}\n\nWhat does data['count'] give (Python style, indexes start at 0)?",
+      "options": [
+        "2",
+        "36",
+        "count",
+        "85"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['count'] = 2.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 139,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"count\": 2, \"results\": [{\"name\": \"Ada\", \"age\": 36}, {\"name\": \"Grace\", \"age\": 85}]}\n\nWhat does len(data['results']) give (Python style, indexes start at 0)?",
+      "options": [
+        "2",
+        "age",
+        "count",
+        "Ada"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: len(data['results']) = 2.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 140,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"status\": \"ok\", \"data\": {\"items\": [{\"id\": 7, \"tags\": [\"a\", \"b\"]}, {\"id\": 9, \"tags\": []}]}}\n\nWhat does data['data']['items'][0]['tags'][1] give (Python style, indexes start at 0)?",
+      "options": [
+        "b",
+        "7",
+        "status",
+        "id"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['data']['items'][0]['tags'][1] = b.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 141,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"status\": \"ok\", \"data\": {\"items\": [{\"id\": 7, \"tags\": [\"a\", \"b\"]}, {\"id\": 9, \"tags\": []}]}}\n\nWhat does data['data']['items'][1]['id'] give (Python style, indexes start at 0)?",
+      "options": [
+        "9",
+        "items",
+        "7",
+        "status"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['data']['items'][1]['id'] = 9.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 142,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"status\": \"ok\", \"data\": {\"items\": [{\"id\": 7, \"tags\": [\"a\", \"b\"]}, {\"id\": 9, \"tags\": []}]}}\n\nWhat does len(data['data']['items'][1]['tags']) give (Python style, indexes start at 0)?",
+      "options": [
+        "0",
+        "b",
+        "items",
+        "ok"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: len(data['data']['items'][1]['tags']) = 0.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 143,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"status\": \"ok\", \"data\": {\"items\": [{\"id\": 7, \"tags\": [\"a\", \"b\"]}, {\"id\": 9, \"tags\": []}]}}\n\nWhat does data['status'] give (Python style, indexes start at 0)?",
+      "options": [
+        "ok",
+        "id",
+        "status",
+        "7"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['status'] = ok.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 144,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"fact\": \"Cats sleep a lot.\", \"length\": 17}\n\nWhat does data['fact'] give (Python style, indexes start at 0)?",
+      "options": [
+        "Cats sleep a lot.",
+        "length",
+        "fact",
+        "17"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['fact'] = Cats sleep a lot..",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 145,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"fact\": \"Cats sleep a lot.\", \"length\": 17}\n\nWhat does data['length'] give (Python style, indexes start at 0)?",
+      "options": [
+        "17",
+        "Cats sleep a lot.",
+        "length",
+        "fact"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['length'] = 17.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 146,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"main\": {\"temp\": 21.5, \"humidity\": 60}, \"weather\": [{\"main\": \"Rain\"}]}\n\nWhat does data['main']['temp'] give (Python style, indexes start at 0)?",
+      "options": [
+        "21.5",
+        "weather",
+        "main",
+        "Rain"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['main']['temp'] = 21.5.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 147,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"main\": {\"temp\": 21.5, \"humidity\": 60}, \"weather\": [{\"main\": \"Rain\"}]}\n\nWhat does data['weather'][0]['main'] give (Python style, indexes start at 0)?",
+      "options": [
+        "Rain",
+        "main",
+        "humidity",
+        "weather"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['weather'][0]['main'] = Rain.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 148,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"main\": {\"temp\": 21.5, \"humidity\": 60}, \"weather\": [{\"main\": \"Rain\"}]}\n\nWhat does data['main']['humidity'] give (Python style, indexes start at 0)?",
+      "options": [
+        "60",
+        "Rain",
+        "weather",
+        "humidity"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['main']['humidity'] = 60.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 149,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"docs\": [{\"title\": \"Dune\", \"year\": 1965}, {\"title\": \"Emma\", \"year\": 1815}, {\"title\": \"Ulysses\", \"year\": 1922}]}\n\nWhat does data['docs'][2]['title'] give (Python style, indexes start at 0)?",
+      "options": [
+        "Ulysses",
+        "Emma",
+        "year",
+        "Dune"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['docs'][2]['title'] = Ulysses.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 150,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"docs\": [{\"title\": \"Dune\", \"year\": 1965}, {\"title\": \"Emma\", \"year\": 1815}, {\"title\": \"Ulysses\", \"year\": 1922}]}\n\nWhat does data['docs'][1]['year'] give (Python style, indexes start at 0)?",
+      "options": [
+        "1815",
+        "1922",
+        "docs",
+        "1965"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: data['docs'][1]['year'] = 1815.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 151,
+      "topic": "apis",
+      "subtopic": "json",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API replies with this JSON:\n\n{\"docs\": [{\"title\": \"Dune\", \"year\": 1965}, {\"title\": \"Emma\", \"year\": 1815}, {\"title\": \"Ulysses\", \"year\": 1922}]}\n\nWhat does len(data['docs']) give (Python style, indexes start at 0)?",
+      "options": [
+        "3",
+        "Dune",
+        "1922",
+        "1965"
+      ],
+      "correct_answer": 0,
+      "explanation": "Follow the path: len(data['docs']) = 3.",
+      "hints": [
+        "Work through the json step by step."
+      ]
+    },
+    {
+      "id": 152,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Why is a no-auth API the easiest to start with?",
+      "options": [
+        "You can call it straight away, with no registration, key or approval",
+        "It has no rate limit",
+        "It always returns more data",
+        "It is always faster"
+      ],
+      "correct_answer": 0,
+      "explanation": "No auth means no sign-up, not no limits: most open APIs still rate-limit by address.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 153,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does OAuth 2.0 let a user do?",
+      "options": [
+        "Allow an app to act for them, with limited permissions, without giving the app their password",
+        "Encrypt the reply",
+        "Skip the rate limit",
+        "Use an API without any key"
+      ],
+      "correct_answer": 0,
+      "explanation": "The user approves the app on the provider's page, and the app receives a token.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 154,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Why must an API key never be put in code that runs in a visitor's browser?",
+      "options": [
+        "Anyone can read it there and use it, and you may be billed or blocked",
+        "Browsers cannot send keys",
+        "Keys expire when the page loads",
+        "Keys only work on servers in the same country"
+      ],
+      "correct_answer": 0,
+      "explanation": "Browser code is public. Keep keys on a server you control, or use an API that needs none.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 155,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A call returns HTTP 429. What is the usual correct response?",
+      "options": [
+        "Wait (the Retry-After header often says how long) and try again more slowly",
+        "Treat it as success",
+        "Switch to a different key every call",
+        "Retry immediately in a loop"
+      ],
+      "correct_answer": 0,
+      "explanation": "429 means too many requests. Back off, with a longer wait each time.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 156,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A browser page calls an API and the console says the request was blocked by CORS. What does that mean?",
+      "options": [
+        "The API did not send a header allowing pages from your site to read its reply",
+        "The reply was too large",
+        "The API is down",
+        "Your key is wrong"
+      ],
+      "correct_answer": 0,
+      "explanation": "CORS is enforced by the browser. A server-side call is not affected, and the browser cannot tell you more than 'blocked'.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 157,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "Which HTTP method is meant for reading data without changing anything?",
+      "options": [
+        "GET",
+        "DELETE",
+        "POST",
+        "PUT"
+      ],
+      "correct_answer": 0,
+      "explanation": "GET is safe and repeatable: calling it twice has the same effect as once.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 158,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Which HTTP methods are idempotent, meaning repeating the call has the same effect as making it once?",
+      "options": [
+        "GET, PUT and DELETE",
+        "GET and POST",
+        "None of them",
+        "POST only"
+      ],
+      "correct_answer": 0,
+      "explanation": "POST usually creates something new each time, so repeating it is not harmless.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 159,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "What does 'Free tier' mean in an API's pricing?",
+      "options": [
+        "A limited amount of use at no charge; going over it is blocked or billed",
+        "No key is needed",
+        "The API is open source",
+        "The provider cannot change it"
+      ],
+      "correct_answer": 0,
+      "explanation": "Limits and terms can change, and some free tiers ask you to credit the data's source.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 160,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Why is the API key sent in a header rather than in the URL, where possible?",
+      "options": [
+        "URLs are logged by servers, proxies and browsers, which could leak the key",
+        "Headers are faster",
+        "URLs cannot carry keys",
+        "Headers are always encrypted by the browser"
+      ],
+      "correct_answer": 0,
+      "explanation": "Keys in query strings end up in logs and history.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 161,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What does JSON look like?",
+      "options": [
+        "Text made of objects {\"key\": value}, lists [..], strings, numbers, true, false and null",
+        "Rows and columns separated by commas",
+        "Tags like <name>text</name>",
+        "Plain sentences"
+      ],
+      "correct_answer": 0,
+      "explanation": "Most web APIs reply in JSON because every language can parse it.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 162,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Why do museum and data APIs often ask you to credit them?",
+      "options": [
+        "Their terms of use require attribution when you show their data",
+        "It is how rate limits are counted",
+        "It makes the call faster",
+        "It is required by HTTP"
+      ],
+      "correct_answer": 0,
+      "explanation": "Always read the terms before using a free API in a product.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 163,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "An API reply is cached for 15 minutes. What is the benefit for a free API with a rate limit?",
+      "options": [
+        "Repeated visitors cause no new calls during that time, so you stay under the limit",
+        "The data is always fresher",
+        "The reply is smaller",
+        "The key is hidden"
+      ],
+      "correct_answer": 0,
+      "explanation": "Caching trades freshness for fewer calls.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 164,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "Why might a 'No auth' entry in a document be out of date?",
+      "options": [
+        "Providers change their rules, for example by starting to require a key, so check the provider's own page",
+        "Documents update themselves",
+        "Auth rules are fixed by HTTP",
+        "No auth entries never change"
+      ],
+      "correct_answer": 0,
+      "explanation": "This repository's documents are a snapshot; the API Explorer page is a way to test which still work.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    }
+  ]
+}

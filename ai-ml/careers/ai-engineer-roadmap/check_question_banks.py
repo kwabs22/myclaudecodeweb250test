@@ -12,7 +12,7 @@ from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).parent
-BANKS = ["phase1-question-bank-full.json", "phase2-question-bank.json", "phase3-question-bank.json"]
+BANKS = ["phase1-question-bank-full.json", "phase2-question-bank.json", "phase3-question-bank.json", "../../../development-tools/apis/quiz/api-question-bank.json"]
 FIELDS = ["id", "topic", "subtopic", "difficulty", "type", "question", "options", "correct_answer", "explanation", "hints"]
 PLACEHOLDER = re.compile(r"\b(lorem|placeholder|TODO|TBD|option [A-D]\b|answer [A-D]\b)", re.I)
 LABEL = re.compile(r"^[A-Za-z][A-Za-z ]*?\s*#?\d+\s*:\s*")

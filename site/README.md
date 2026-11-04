@@ -49,3 +49,15 @@ One-time setup: repository **Settings → Pages → Build and deployment → Sou
 
 - `atlas_bar.py` adds a slim "Session Atlas" bar to every runnable page (Next.js pages get it from a script after load so hydration is not disturbed), and unlocks scrolling on the Expo export.
 - The home map opens in **Overview**: About this repo at the centre, areas around it, each edge labelled with its file count. Clicking an area or folder (or a filter chip) opens its structure. **All files** and **By session** are the other two views.
+
+## Keeping the root README current
+
+The file counts, the quiz totals and the list of runnable pages in the root `README.md` sit between `<!-- generated:... -->` markers and are written by `sync_root_readme.py` from `git ls-files`, `page-types.json`, `demos.json` and the question banks. After adding a page or changing a bank, run:
+
+```bash
+python site/sync_root_readme.py           # rewrite the generated parts
+python site/sync_root_readme.py --check   # exit 1 if they are out of date
+```
+
+Register each new runnable page in `page-types.json` so it appears in the list.
+

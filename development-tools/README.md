@@ -13,7 +13,7 @@ flowchart LR
   subgraph cc[Claude Code]
     Q[Quick reference] --> P[Subagent patterns] --> B[Building new systems] --> M[Multi-agent pipeline]
   end
-  A[APIs: 70+ public APIs and how they authenticate]
+  A[APIs: 114 public APIs, how they authenticate, an explorer and a quiz]
   GR[Gradio: GPU planning interface]
   GIT[Git: branch merging checklist]
   T --> ME
@@ -59,6 +59,8 @@ Items 1 and 2 are short references. Items 4 and 5 are each over 1,300 lines, and
 | [Additional app APIs](apis/additional-popular-app-apis.md) | 44 more |
 | [Authentication analysis](apis/api-authentication-analysis.md) | Which of all 114 need a key, OAuth or nothing |
 | [Free API Explorer](api-explorer/index.html) | Calls the free no-sign-up APIs live from your browser and reports which still work |
+| [API quiz](apis/quiz/index.html) | 164 questions computed from these documents and from standard-library code: sign-up types, free-tier arithmetic, HTTP statuses, URL encoding, paging, retries, reading JSON (see [its README](apis/quiz/README.md)) |
+| [Resource Explorer](resource-explorer/index.html) | One searchable table for 232 repositories from nine of the repository lists, plus the 20 most modded games |
 
 The examples are plain-language search phrases, not working requests. Each API heading is followed by a link to the provider's official documentation. Those links were added in a later pass from memory and have not been re-checked, so a few may have moved; where no page was found the link points to the [public-apis directory](https://github.com/public-apis/public-apis).
 

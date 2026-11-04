@@ -59,4 +59,5 @@ def main():
             f.write("window.APIS = " + json.dumps(apis, ensure_ascii=False, separators=(",", ":")) + ";\n")
 
 
-main()
+if __name__ == "__main__":
+    main()
