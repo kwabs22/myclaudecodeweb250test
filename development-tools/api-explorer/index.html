@@ -29,6 +29,10 @@ button.b{border-radius:8px;padding:6px 14px}button.b:hover,.chips button:hover{b
 .note{font-size:12.5px;color:var(--muted);margin:0}
 .res{font-size:13px}.res pre{margin:6px 0 0;max-height:150px;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;font:12px ui-monospace,monospace;white-space:pre-wrap;word-break:break-word}
 .muted{color:var(--muted);font-size:13px;margin:0}
+.sp h2{margin:0 0 4px;font-size:20px}.sp .row{margin:8px 0}.sp .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:10px}
+.sp .card{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);display:flex;flex-direction:column;gap:4px;min-width:0}.sp .card b{overflow-wrap:anywhere}.sp .card a{color:var(--acc)}
+.sp pre{margin:6px 0 0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;font:12px ui-monospace,monospace;white-space:pre-wrap;overflow:auto}
+.sp .notice{font-size:12.5px;color:var(--muted)}
 code{font-size:.92em}
 </style>
 </head>
@@ -42,6 +46,14 @@ code{font-size:.92em}
   <div class="sum" id="sum"></div>
   <p class="note" style="margin-top:8px">The endpoints were written by hand from each API's own documentation, because the repository documents hold search-term ideas, not URLs. This page is how you find out which still work. A browser reports "blocked" and "offline" the same way, so a failure can mean the API sends no cross-origin permission, is down, or was moved.</p>
 </div>
+<section class="panel sp" id="spaces" aria-labelledby="sp-h">
+  <h2 id="sp-h">Popular Hugging Face Spaces</h2>
+  <p class="lede" style="margin-bottom:6px">A Hugging Face Space is a small app, usually built with Gradio, that someone has put online. A public Gradio Space can also be called as an API, which makes it a free API with a model behind it. The list below is fetched live from the Hub's public API when you press a button, so it is always the current ranking, not a snapshot. See the <a href="../apis/huggingface-spaces-api.html">Spaces API guide</a> for how to call one.</p>
+  <div class="row"><button class="b" id="sp-trend">Trending now</button><button class="b" id="sp-likes">Most liked</button><span class="note" id="sp-status"></span></div>
+  <div class="cards" id="sp-cards"></div>
+  <p class="notice" id="sp-fallback" hidden></p>
+  <p class="notice" style="margin-top:8px"><b>Free, with limits.</b> Listing Spaces and opening a public one costs nothing and needs no token. Running a Space uses its owner's computer, and shared GPU Spaces ("ZeroGPU") give anonymous callers only a small daily quota; more comes with a free account or a paid plan. Never put your own Hugging Face token in a web page. The list is whatever is popular, unfiltered, so a few Spaces may not suit every audience; each card links to its own page.</p>
+</section>
 <div class="chips" id="chips" role="group" aria-label="Filter by sign-up effort"></div>
 <div class="list" id="list"></div>
 </main>
@@ -92,6 +104,39 @@ code{font-size:.92em}
     var active=3;for(var k=0;k<3;k++)worker()});
   $("dl").addEventListener("click",function(){var blob=new Blob([JSON.stringify(Object.keys(results).map(function(u){var r=results[u];return {name:r.name,url:r.url,verdict:r.verdict,status:r.status||null,ms:r.ms==null?null:r.ms,checkedAt:r.checkedAt}}),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="api-explorer-results.json";a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)});
   render();summary();
+})();
+</script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)},esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var KEY="hf-spaces-v1",TTL=10*60*1000,SORTS={trendingScore:"Trending now",likes:"Most liked"},current=null,spaces=[];
+  function sub(s){return s.subdomain||String(s.id).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
+  function cacheGet(sort){try{var c=JSON.parse(sessionStorage.getItem(KEY+sort));if(c&&Date.now()-c.t<TTL)return c.d}catch(e){}return null}
+  function cachePut(sort,d){try{sessionStorage.setItem(KEY+sort,JSON.stringify({t:Date.now(),d:d}))}catch(e){}}
+  function show(sort,list,cached){current=sort;spaces=list;
+    $("sp-status").textContent=SORTS[sort]+": "+list.length+" Spaces"+(cached?" (kept from earlier, refreshed every 10 minutes)":"")+".";$("sp-fallback").hidden=true;
+    $("sp-cards").innerHTML=list.map(function(s,i){var id=esc(s.id),host=esc(sub(s));
+      return '<div class="card"><b>'+id+'</b><span class="note">'+esc(s.sdk||"app")+' · '+(s.likes!=null?Number(s.likes).toLocaleString()+' likes':"likes not shown")+'</span>'
+       +'<span><a href="https://huggingface.co/spaces/'+id+'" rel="noopener">Its page</a>'+(s.sdk==="gradio"?' · <a href="https://'+host+'.hf.space/?view=api" rel="noopener">Use via API</a>':'')+'</span>'
+       +(s.sdk==="gradio"?'<button class="b" data-up="'+i+'">Check it is up</button><div class="res" id="up'+i+'" aria-live="polite"></div>':'<span class="note">Not a Gradio app, so there is no API to check.</span>')
+       +'<button class="b" data-code="'+i+'">Show code</button><div id="code'+i+'"></div></div>'}).join("")}
+  function fail(msg){$("sp-status").textContent="";$("sp-cards").innerHTML="";var f=$("sp-fallback");f.hidden=false;f.innerHTML=esc(msg)+' Open the live lists on Hugging Face instead: <a href="https://huggingface.co/spaces?sort=trending" rel="noopener">trending</a> or <a href="https://huggingface.co/spaces?sort=likes" rel="noopener">most liked</a>.'}
+  function load(sort){
+    var c=cacheGet(sort);if(c){show(sort,c,true);return}
+    $("sp-status").textContent="Asking Hugging Face…";var ctl=new AbortController(),t=setTimeout(function(){ctl.abort()},12000);
+    fetch("https://huggingface.co/api/spaces?sort="+sort+"&direction=-1&limit=12",{signal:ctl.signal,credentials:"omit"}).then(function(r){clearTimeout(t);if(!r.ok)throw {http:r.status};return r.json()})
+    .then(function(d){if(!Array.isArray(d)||!d.length)throw {shape:1};d=d.filter(function(s){return s&&s.id}).map(function(s){return {id:s.id,likes:s.likes,sdk:s.sdk,subdomain:s.subdomain}});cachePut(sort,d);show(sort,d,false)})
+    .catch(function(e){clearTimeout(t);fail(e&&e.http?"The Hub answered with status "+e.http+".":e&&e.shape?"The Hub's reply was not in the expected shape.":e&&e.name==="AbortError"?"The Hub did not answer in 12 seconds.":"The browser could not read the Hub's reply: it is offline, blocked, or the API sends no cross-origin permission.")});
+  }
+  $("sp-trend").addEventListener("click",function(){load("trendingScore")});$("sp-likes").addEventListener("click",function(){load("likes")});
+  $("sp-cards").addEventListener("click",function(e){
+    var up=e.target.closest("[data-up]"),cd=e.target.closest("[data-code]");
+    if(up){var i=+up.dataset.up,s=spaces[i],out=$("up"+i);up.disabled=true;out.textContent="Calling…";var ctl=new AbortController(),t0=performance.now(),tm=setTimeout(function(){ctl.abort()},12000);
+      fetch("https://"+sub(s)+".hf.space/config",{signal:ctl.signal,credentials:"omit"}).then(function(r){clearTimeout(tm);var ms=Math.round(performance.now()-t0);out.innerHTML=r.ok?'<span class="ok"><b>Answers</b></span> · HTTP '+r.status+' · '+ms+' ms':'<span class="warn"><b>Answered, but with an error</b></span> · HTTP '+r.status+' (it may be asleep or restarting)'})
+      .catch(function(er){clearTimeout(tm);out.innerHTML='<span class="bad"><b>'+(er&&er.name==="AbortError"?"Timed out":"Blocked or unreachable")+'</b></span> · the browser cannot say whether it is asleep, down, or not sending cross-origin permission'}).then(function(){up.disabled=false})}
+    if(cd){var j=+cd.dataset.code,sp=spaces[j],el=$("code"+j);if(el.textContent){el.textContent="";return}
+      var py='from gradio_client import Client\nclient = Client("'+sp.id+'")\nclient.view_api()   # prints each endpoint and what it takes\n',js='import { Client } from "@gradio/client";\nconst app = await Client.connect("'+sp.id+'");\nconsole.log(await app.view_api());\n';
+      el.innerHTML='<pre>'+esc(py+"\n"+js)+'</pre><p class="notice">These only list the endpoints. Calling one runs the Space\'s model on its owner\'s computer, within its quota.</p>'}});
 })();
 </script>
 </body>

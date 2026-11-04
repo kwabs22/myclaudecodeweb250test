@@ -1,6 +1,6 @@
 # API quiz
 
-**[Open the quiz](./index.html)**: 164 multiple-choice questions on calling APIs, built from the repository's three API documents and from standard-library code. Filter by topic, with a hint, an explanation and a statistics panel at the end. The right answer is stored first and the page shuffles the options when it loads.
+**[Open the quiz](./index.html)**: 168 multiple-choice questions on calling APIs, built from the repository's three API documents and from standard-library code. Filter by topic, with a hint, an explanation and a statistics panel at the end. The right answer is stored first and the page shuffles the options when it loads.
 
 | Topic | Questions | Where the answers come from |
 |---|---|---|
@@ -13,7 +13,7 @@
 | Paging | 14 | Requests needed to fetch every item, and the offset for a given page |
 | Retries | 8 | Exponential backoff: the wait before retry *n* |
 | JSON | 16 | `json.loads` on a small reply, then a path such as `data['results'][0]['name']` |
-| Concepts | 13 | Written by hand: OAuth, keys in browser code, 429, CORS, idempotent methods, free tiers, caching |
+| Concepts | 17 | Written by hand: OAuth, keys in browser code, 429, CORS, idempotent methods, free tiers, caching, Hugging Face Spaces |
 
 ## Regenerate and check
 

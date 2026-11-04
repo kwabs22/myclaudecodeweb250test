@@ -18,13 +18,13 @@
 | [`ai-ml/`](./ai-ml/README.md) | 71 | 🤖 AI and machine learning: Career roadmap and three quizzes, computer vision (pose, edges, alpha), MCP, marketing agents, NLP |
 | [`creative-media/`](./creative-media/README.md) | 45 | 🎨 Creative media: Memes, music theory and production, social media trends, story generation |
 | [`learning-resources/`](./learning-resources/README.md) | 42 | 📚 Learning resources: Combinatorics, geometry, languages, chess calculator |
-| [`development-tools/`](./development-tools/README.md) | 59 | 🛠️ Development tools: Claude Code guides, API documents with an explorer and quiz, benchmarking, Gradio, git |
+| [`development-tools/`](./development-tools/README.md) | 60 | 🛠️ Development tools: Claude Code guides, API documents with an explorer and quiz, benchmarking, Gradio, git |
 | [`industry-research/`](./industry-research/README.md) | 13 | 🏭 Industry research: Drones, humanoid robots, vending machines, lead generation |
 | [`site/`](https://github.com/kwabs22/myclaudecodeweb250test/blob/main/site/README.md) | 23 | 🌐 The generator for the Session Atlas website (3D map, page for every file, link checks) |
 
-536 files are tracked in all, including 11 at the top level (the merge documents and this README).
+537 files are tracked in all, including 11 at the top level (the merge documents and this README).
 
-The quizzes hold 2,284 questions: AI engineer roadmap Phase 1 1,317, Phase 2 607, Phase 3 96; API quiz 164; combinatorics 100.
+The quizzes hold 2,288 questions: AI engineer roadmap Phase 1 1,317, Phase 2 607, Phase 3 96; API quiz 168; combinatorics 100.
 <!-- /generated:areas -->
 
 ---
@@ -44,12 +44,12 @@ The quizzes hold 2,284 questions: AI engineer roadmap Phase 1 1,317, Phase 2 607
 | [Edge detection](https://kwabs22.github.io/myclaudecodeweb250test/ai-ml/computer-vision/edge-detection/index.html) | Playground | Sobel, Prewitt, Scharr, Roberts, Laplacian and Canny edge detection on a sample, upload or camera snapshot, with a click-a-pixel view of the arithmetic. |
 | [Geometry you can drag](https://kwabs22.github.io/myclaudecodeweb250test/learning-resources/mathematics/geometry/index.html) | Playground | Drag points to see triangle area, segment crossing, point in polygon, the convex hull, 2D transformation matrices, a pinhole camera and the homography of a flat marker, each checked against a slow reference. |
 | [Chess Calculation Tree](https://kwabs22.github.io/myclaudecodeweb250test/learning-resources/chess-calc-app/index.html) | Tool | Set up a chess position and generate the tree of possible moves, 12 deep. |
-| [Free API Explorer](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/api-explorer/index.html) | Tool | The 114 APIs in the repository documents by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work. |
+| [Free API Explorer](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/api-explorer/index.html) | Tool | The 114 APIs in the repository documents by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work, plus a live list of popular Hugging Face Spaces. |
 | [GPU Fit Finder](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/benchmarking/model-explorer/index.html) | Tool | Pick a GPU and see which catalogued open models fit in its memory. |
 | [Resource Explorer](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/resource-explorer/index.html) | Tool | 232 repositories from nine of the session lists, plus the 20 most modded games, in searchable, sortable tables. |
 | [Task Triage](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/benchmarking/task-assessor/index.html) | Tool | Describe a coding task or answer six questions to get a complexity level from 1 to 8. |
 | [AI Engineer Phase 1 Quiz](https://kwabs22.github.io/myclaudecodeweb250test/ai-ml/careers/ai-engineer-roadmap/quiz-app.html) | Quiz | 1,317 questions with computed answers: maths, Python, SQL, algorithms and geometry, with a statistics panel. |
-| [API Quiz](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/apis/quiz/index.html) | Quiz | 164 questions computed from the API documents and standard-library code: sign-up types, free-tier arithmetic, HTTP statuses, URL encoding, paging, retries and reading JSON. |
+| [API Quiz](https://kwabs22.github.io/myclaudecodeweb250test/development-tools/apis/quiz/index.html) | Quiz | 168 questions computed from the API documents and standard-library code: sign-up types, free-tier arithmetic, HTTP statuses, URL encoding, paging, retries and reading JSON. |
 | [Combinatorics Quiz](https://kwabs22.github.io/myclaudecodeweb250test/learning-resources/mathematics/quiz/index.html) | Quiz | 100 combinatorics problems as flashcards, with worked answers checked by brute force. |
 | [Music Theory Quiz](https://kwabs22.github.io/myclaudecodeweb250test/creative-media/music/theory-quiz/index.html) | Quiz | 200 guitar and piano theory questions as flashcards: reveal the answer, mark what you knew, then redo the ones you missed. |
 | [Phase 2: Machine Learning Quiz](https://kwabs22.github.io/myclaudecodeweb250test/ai-ml/careers/ai-engineer-roadmap/phase2-quiz-app.html) | Quiz | 607 machine-learning, deep-learning (including edge detection) and prompt-engineering questions. |

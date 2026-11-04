@@ -11,9 +11,9 @@
     "question_types": [
       "multiple_choice"
     ],
-    "total_questions": 164,
+    "total_questions": 168,
     "topics": {
-      "apis": 164
+      "apis": 168
     }
   },
   "questions": [
@@ -3118,14 +3118,90 @@
       "id": 164,
       "topic": "apis",
       "subtopic": "concepts",
+      "difficulty": "beginner",
+      "type": "multiple_choice",
+      "question": "What is a Hugging Face Space?",
+      "options": [
+        "A small app hosted on Hugging Face, often built with Gradio, that runs a model or a tool",
+        "A dataset file format",
+        "A private chat room for model authors",
+        "A paid cloud server you rent by the hour"
+      ],
+      "correct_answer": 0,
+      "explanation": "A public Gradio Space can also be called from code as an API.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 165,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "Where can you find the exact code for calling a particular Gradio Space?",
+      "options": [
+        "On the Space's own 'Use via API' page, which shows the calls for that Space and its Gradio version",
+        "Nowhere: you have to guess the endpoint names",
+        "In the Hugging Face terms of service",
+        "In the page's cookies"
+      ],
+      "correct_answer": 0,
+      "explanation": "Endpoint names and inputs differ from Space to Space, and `view_api()` in the client lists them too.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 166,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "intermediate",
+      "type": "multiple_choice",
+      "question": "A shared-GPU (ZeroGPU) Space gives anonymous callers only a small amount of GPU time. How do you get more?",
+      "options": [
+        "Call it as a signed-in account with a token (a free account gets more, a paid plan gets more again), keeping the token on a server",
+        "Put your token in the web page's code so it is sent automatically",
+        "Call it from many browser tabs",
+        "Add ?quota=unlimited to the address"
+      ],
+      "correct_answer": 0,
+      "explanation": "The quota follows who makes the request. A token in browser code would be public to every visitor.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 167,
+      "topic": "apis",
+      "subtopic": "concepts",
+      "difficulty": "advanced",
+      "type": "multiple_choice",
+      "question": "You call a public Hugging Face Space from your own code. Who pays for the computer that runs it?",
+      "options": [
+        "The Space's owner, within the limits of the quota given to callers",
+        "Always you, per call",
+        "Nobody: Spaces run for free without limits",
+        "Always Hugging Face's customers at random"
+      ],
+      "correct_answer": 0,
+      "explanation": "Calling a public Space does not bill the caller, but quotas and queues apply, and with a token the usage counts against that account.",
+      "hints": [
+        "Work through the concepts step by step."
+      ]
+    },
+    {
+      "id": 168,
+      "topic": "apis",
+      "subtopic": "concepts",
       "difficulty": "advanced",
       "type": "multiple_choice",
       "question": "Why might a 'No auth' entry in a document be out of date?",
       "options": [
         "Providers change their rules, for example by starting to require a key, so check the provider's own page",
-        "Documents update themselves",
         "Auth rules are fixed by HTTP",
-        "No auth entries never change"
+        "No auth entries never change",
+        "Documents update themselves"
       ],
       "correct_answer": 0,
       "explanation": "This repository's documents are a snapshot; the API Explorer page is a way to test which still work.",
