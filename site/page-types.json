@@ -74,5 +74,9 @@
   "learning-resources/mathematics/geometry/index.html": {
     "type": "Playground",
     "blurb": "Drag points to see triangle area, segment crossing, point in polygon, the convex hull, 2D transformation matrices, a pinhole camera and the homography of a flat marker, each checked against a slow reference."
+  },
+  "development-tools/api-explorer/index.html": {
+    "type": "Tool",
+    "blurb": "The 114 APIs in the repository documents by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work."
   }
 }

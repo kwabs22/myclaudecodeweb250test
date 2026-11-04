@@ -422,3 +422,14 @@ The home page now has four parts, all driven by sample data in `src/data/trendin
 - **Repositories**: unchanged.
 
 `TrendingTopicsWidget` is still in `src/components` for use on other pages.
+
+## Live repositories
+
+The **Repositories** section has a Sample / Live from GitHub switch. Live mode asks GitHub's public search API (`src/lib/github.ts`) for the ten new repositories from the last 7 days with the most stars. It is not GitHub's own Trending list, which uses a different measure.
+
+- **Cost:** nothing. The visitor's browser calls `api.github.com` directly with no key, and there is no server of ours in between, so there is nothing to bill. Never put a GitHub token in this code: client code is public.
+- **Limits:** visitors without a token get 10 searches a minute. The result is kept in `sessionStorage` for 15 minutes, a rate-limit message names the time to try again, and a failure offers "Try again" or "Back to sample data".
+- **Content:** the repositories and descriptions are whatever their authors wrote. Nothing is filtered.
+
+The topics, platforms and hashtags are still sample data: X, TikTok, Reddit and Instagram have no free public trends feed.
+

@@ -15,7 +15,7 @@ export function MockDataBanner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-start gap-3 text-sm text-amber-900 dark:text-amber-100">
         <AlertTriangle className="w-5 h-5 mt-0.5 shrink-0" aria-hidden />
         <p>
-          <strong>Sample data.</strong> Every number, trend line, post and percentage on this page is made up to show what a trends dashboard could look like. Nothing here is pulled from X, TikTok, Reddit or Instagram.{' '}
+          <strong>Sample data.</strong> Every number, trend line, post and percentage on this page is made up to show what a trends dashboard could look like. Nothing here is pulled from X, TikTok, Reddit or Instagram. The repositories section can be switched to live GitHub results.{' '}
           <a href="#real-data" className="underline font-medium">Where to find the real figures</a>
         </p>
       </div>

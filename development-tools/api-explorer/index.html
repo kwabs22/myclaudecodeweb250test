@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free API Explorer</title>
+<meta name="description" content="The 114 APIs from the repository's API documents, by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work.">
+<style>
+:root{--bg:#f7f8fb;--fg:#161a23;--muted:#5b6475;--card:#fff;--line:#dfe3ec;--acc:#3b63e0;--ok:#16794a;--warn:#b45309;--bad:#b91c1c}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10131a;--fg:#e8ebf3;--muted:#9aa3b5;--card:#181c26;--line:#2a3040;--acc:#7b9bff;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+h1{margin:0 0 4px;font-size:clamp(26px,5vw,38px);letter-spacing:-.02em}h3{margin:0;font-size:16px}
+.lede{color:var(--muted);max-width:72ch;margin:0 0 12px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chips button,button.b{font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px 12px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+button.b{border-radius:8px;padding:6px 14px}button.b:hover,.chips button:hover{border-color:var(--acc)}button.b:disabled{opacity:.5;cursor:default}
+.sum{display:flex;flex-wrap:wrap;gap:10px 20px;margin:10px 0 0;font-size:14px}.sum b{font-size:18px}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.api{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.api .meta{font-size:13px;color:var(--muted);margin:0}.api .meta a{color:var(--acc)}
+.badge{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);margin-left:6px;vertical-align:1px}
+.badge.none{color:var(--ok);border-color:var(--ok)}.badge.optional{color:var(--ok);border-color:var(--ok)}.badge.key{color:var(--warn);border-color:var(--warn)}.badge.oauth{color:var(--bad);border-color:var(--bad)}
+.try{display:flex;gap:6px}.try input{flex:1;min-width:0;font:12px ui-monospace,monospace;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.note{font-size:12.5px;color:var(--muted);margin:0}
+.res{font-size:13px}.res pre{margin:6px 0 0;max-height:150px;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;font:12px ui-monospace,monospace;white-space:pre-wrap;word-break:break-word}
+.muted{color:var(--muted);font-size:13px;margin:0}
+code{font-size:.92em}
+</style>
+</head>
+<body>
+<main>
+<h1>Free API Explorer</h1>
+<p class="lede">The 114 APIs described in the repository's <a href="../apis/popular-api-call-examples.html">popular</a>, <a href="../apis/information-api-call-examples.html">information</a> and <a href="../apis/additional-popular-app-apis.html">additional</a> documents, sorted by how much sign-up each needs. For the ones that need none, press <b>Try</b> to call the API live from your own browser and see what comes back.</p>
+<div class="panel">
+  <p class="lede" style="margin-bottom:8px"><b>Free to use.</b> Calls go from your browser straight to each API: there is no key, no account and no server of ours in between, so nothing is billed to anyone. Keyed and OAuth APIs are never called here.</p>
+  <div class="row"><button class="b" id="all">Try all callable APIs</button><button class="b" id="dl" disabled>Download results (JSON)</button><span class="note" id="prog"></span></div>
+  <div class="sum" id="sum"></div>
+  <p class="note" style="margin-top:8px">The endpoints were written by hand from each API's own documentation, because the repository documents hold search-term ideas, not URLs. This page is how you find out which still work. A browser reports "blocked" and "offline" the same way, so a failure can mean the API sends no cross-origin permission, is down, or was moved.</p>
+</div>
+<div class="chips" id="chips" role="group" aria-label="Filter by sign-up effort"></div>
+<div class="list" id="list"></div>
+</main>
+<script src="apis.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)},A=window.APIS||[];
+  var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var LABEL={none:"No auth",optional:"Key optional",key:"API key",oauth:"OAuth",token:"Bot or JWT",keysecret:"Key + secret",account:"Account login",partner:"Partner only"};
+  var results={},filter="all",YEAR=new Date().getFullYear();
+  var withEp=function(a){return a.endpoint&&(a.auth==="none"||a.auth==="optional")};
+  var urlOf=function(a){var el=document.querySelector('[data-u="'+idx(a)+'"]');return (el?el.value:a.endpoint.url).replace("{year}",YEAR)};
+  var idx=function(a){return A.indexOf(a)};
+  var counts={};A.forEach(function(a){counts[a.auth]=(counts[a.auth]||0)+1});
+  var kinds=["all"].concat(Object.keys(LABEL).filter(function(k){return counts[k]}));
+  $("chips").innerHTML=kinds.map(function(k){return '<button type="button" data-k="'+k+'" aria-pressed="'+(k==="all")+'">'+(k==="all"?"All":LABEL[k])+' <small>'+(k==="all"?A.length:counts[k])+'</small></button>'}).join("");
+  function render(){
+    $("list").innerHTML=A.map(function(a,i){if(filter!=="all"&&a.auth!==filter)return"";
+      var ep=a.endpoint,callable=withEp(a),body;
+      if(callable)body='<div class="try"><input data-u="'+i+'" value="'+esc(ep.url)+'" aria-label="URL for '+esc(a.name)+'"><button class="b" data-t="'+i+'">Try</button></div>'+(ep.note?'<p class="note">'+esc(ep.note)+'</p>':"")+'<div class="res" id="r'+i+'" aria-live="polite"></div>';
+      else body='<p class="muted">'+((a.auth==="none"||a.auth==="optional")?"No endpoint written for this one yet, so it is not called here.":"Needs sign-up ("+esc(LABEL[a.auth]||a.auth)+"), so it is never called from this page.")+'</p>';
+      return '<article class="api"><h3>'+esc(a.name)+'<span class="badge '+esc(a.auth)+'">'+esc(LABEL[a.auth]||a.authLabel)+'</span></h3><p class="meta">'+esc(a.category||"")+' · <a href="'+esc(a.docsUrl||"#")+'" rel="noopener">their docs</a> · <a href="../../'+esc(a.doc)+'">in our docs</a></p>'+body+'</article>'}).join("");
+    A.forEach(function(a,i){if(results[a.endpoint&&urlOf(a)])show(i,results[urlOf(a)])});
+  }
+  function verdictClass(r){return r.verdict==="Works"?"ok":r.verdict.indexOf("error")>=0?"warn":"bad"}
+  function show(i,r){var el=$("r"+i);if(!el)return;el.innerHTML='<span class="'+verdictClass(r)+'"><b>'+esc(r.verdict)+'</b></span> '+(r.status?'· HTTP '+r.status+' ':"")+(r.ms!=null?'· '+r.ms+' ms ':"")+(r.bytes!=null?'· '+r.bytes+' bytes':"")+(r.preview?'<pre>'+esc(r.preview)+'</pre>':"")}
+  function call(a){
+    var url=urlOf(a),t0=performance.now(),ctl=new AbortController(),timer=setTimeout(function(){ctl.abort()},12000);
+    var out={name:a.name,url:url,checkedAt:new Date().toISOString()};
+    if(location.protocol==="https:"&&url.indexOf("http://")===0){clearTimeout(timer);out.verdict="Blocked or unreachable";out.preview="A secure page cannot call an http address, so the browser refuses before sending anything.";return Promise.resolve(out)}
+    return fetch(url,{signal:ctl.signal,credentials:"omit"}).then(function(res){out.status=res.status;return res.text().then(function(t){clearTimeout(timer);out.ms=Math.round(performance.now()-t0);out.bytes=t.length;
+      try{out.preview=JSON.stringify(JSON.parse(t),null,1).slice(0,700)}catch(e){out.preview=t.slice(0,300)}
+      out.verdict=res.ok?"Works":"Answered, but with an error";return out})})
+    .catch(function(e){clearTimeout(timer);out.ms=Math.round(performance.now()-t0);out.verdict=e&&e.name==="AbortError"?"Timed out":"Blocked or unreachable";return out});
+  }
+  function summary(){var c={"Works":0,"Answered, but with an error":0,"Blocked or unreachable":0,"Timed out":0},n=0;Object.keys(results).forEach(function(u){c[results[u].verdict]++;n++});
+    var total=new Set(A.filter(withEp).map(function(a){return urlOf(a)})).size;
+    $("sum").innerHTML=n?'<span class="ok"><b>'+c["Works"]+'</b> work</span><span class="warn"><b>'+c["Answered, but with an error"]+'</b> answered with an error</span><span class="bad"><b>'+c["Blocked or unreachable"]+'</b> blocked or unreachable</span><span class="bad"><b>'+c["Timed out"]+'</b> timed out</span><span><b>'+(total-n)+'</b> not tried yet</span>':'<span><b>'+total+'</b> callable APIs, none tried yet</span>';
+    $("dl").disabled=!n}
+  $("list").addEventListener("click",function(e){var b=e.target.closest("button[data-t]");if(!b)return;var i=+b.dataset.t,a=A[i];b.disabled=true;$("r"+i).textContent="Calling…";
+    call(a).then(function(r){results[r.url]=r;show(i,r);summary();b.disabled=false})});
+  $("chips").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filter=b.dataset.k;document.querySelectorAll("#chips button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});render()});
+  $("all").addEventListener("click",function(){
+    var seen={},queue=A.map(function(a,i){return [a,i]}).filter(function(p){if(!withEp(p[0]))return false;var u=urlOf(p[0]);if(seen[u])return false;seen[u]=1;return true});
+    var done=0,total=queue.length;$("all").disabled=true;
+    function worker(){var p=queue.shift();if(!p){if(--active===0){$("all").disabled=false;$("prog").textContent="Finished "+total+" calls."}return}
+      call(p[0]).then(function(r){results[r.url]=r;show(p[1],r);summary();done++;$("prog").textContent=done+" of "+total+" done";worker()})}
+    var active=3;for(var k=0;k<3;k++)worker()});
+  $("dl").addEventListener("click",function(){var blob=new Blob([JSON.stringify(Object.keys(results).map(function(u){var r=results[u];return {name:r.name,url:r.url,verdict:r.verdict,status:r.status||null,ms:r.ms==null?null:r.ms,checkedAt:r.checkedAt}}),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="api-explorer-results.json";a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)});
+  render();summary();
+})();
+</script>
+</body>
+</html>

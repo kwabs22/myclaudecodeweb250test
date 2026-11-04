@@ -57,7 +57,8 @@ Items 1 and 2 are short references. Items 4 and 5 are each over 1,300 lines, and
 | [Popular API examples](apis/popular-api-call-examples.md) | 20 popular public APIs |
 | [Information API examples](apis/information-api-call-examples.md) | 50 data-only APIs |
 | [Additional app APIs](apis/additional-popular-app-apis.md) | 44 more |
-| [Authentication analysis](apis/api-authentication-analysis.md) | Which of the first 70 need a key (the 44 additional ones state it per API) |
+| [Authentication analysis](apis/api-authentication-analysis.md) | Which of all 114 need a key, OAuth or nothing |
+| [Free API Explorer](api-explorer/index.html) | Calls the free no-sign-up APIs live from your browser and reports which still work |
 
 The examples are plain-language search phrases, not working requests. Each API heading is followed by a link to the provider's official documentation. Those links were added in a later pass from memory and have not been re-checked, so a few may have moved; where no page was found the link points to the [public-apis directory](https://github.com/public-apis/public-apis).
 
