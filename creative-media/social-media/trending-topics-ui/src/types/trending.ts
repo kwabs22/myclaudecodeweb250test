@@ -22,6 +22,10 @@ export interface TrendingRepository {
   trending: boolean;
   change: TrendChange;
   starsToday: number;
+  /** Set on repositories fetched live from GitHub. */
+  url?: string;
+  createdAt?: string;
+  live?: boolean;
 }
 
 export interface TrendingFunction {
