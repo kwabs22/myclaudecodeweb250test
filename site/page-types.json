@@ -77,10 +77,10 @@
   },
   "development-tools/api-explorer/index.html": {
     "type": "Tool",
-    "blurb": "The 114 APIs in the repository documents by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work."
+    "blurb": "The 114 APIs in the repository documents by sign-up effort, with a button that calls the free no-sign-up ones live from your browser and reports which still work, plus a live list of popular Hugging Face Spaces."
   },
   "development-tools/apis/quiz/index.html": {
     "type": "Quiz",
-    "blurb": "164 questions computed from the API documents and standard-library code: sign-up types, free-tier arithmetic, HTTP statuses, URL encoding, paging, retries and reading JSON."
+    "blurb": "168 questions computed from the API documents and standard-library code: sign-up types, free-tier arithmetic, HTTP statuses, URL encoding, paging, retries and reading JSON."
   }
 }
